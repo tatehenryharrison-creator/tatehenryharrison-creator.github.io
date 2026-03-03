@@ -109,6 +109,88 @@ footer {
     margin: 6px 0;
     opacity: 0.7;
 }
+
+    .hero {
+    display: flex;
+    align-items: center;
+    min-height: 85vh;
+    position: relative;
+    padding: 0 10%;
+    overflow: hidden;
+}
+
+/* Text panel (premium glass feel) */
+.hero-text-panel {
+    width: 45%;
+    z-index: 2;
+    padding: 40px;
+    border-radius: 16px;
+    backdrop-filter: blur(8px);
+    background: rgba(0,0,0,0.35);
+
+    animation: heroFadeIn 1.2s ease forwards;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.hero-title {
+    font-size: 3.5rem;
+    margin-bottom: 15px;
+}
+
+/* Subtext */
+.subtext p {
+    margin: 6px 0;
+    opacity: 0.7;
+}
+/* Video side */
+.hero-video {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 60%;
+    height: 100%;
+    overflow: hidden;
+}
+
+/* Cinematic video zoom */
+.hero-video video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(1.1);
+    animation: videoZoom 20s linear infinite;
+}
+
+/* Cinematic fade mask */
+.hero-video::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 70%;
+    height: 100%;
+    background: linear-gradient(
+        to right,
+        #0f0f0f 0%,
+        rgba(15,15,15,0.85) 35%,
+        rgba(15,15,15,0) 100%
+    );
+}
+
+/* Animations */
+@keyframes heroFadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes videoZoom {
+    0% { transform: scale(1.1); }
+    50% { transform: scale(1.15); }
+    100% { transform: scale(1.1); }
+}    
 </style>
  
 </head>
@@ -125,13 +207,23 @@ footer {
     </div>
 </nav>
 
-<section class="section">
-    <h1>Videography</h1>
+<section class="hero">
 
-    <div class="subtext">
-        <p>Marketing • Speeches • Interviews</p>
-        <p>Based in Boulder, Colorado</p>
+    <div class="hero-text-panel">
+        <h1 class="hero-title">Videography</h1>
+
+        <div class="subtext">
+            <p>Marketing • Speeches • Interviews</p>
+            <p>Based in Boulder, Colorado</p>
+        </div>
     </div>
+
+    <div class="hero-video">
+        <video autoplay muted loop playsinline>
+            <source src="YOUR_VIDEO_URL.mp4" type="video/mp4">
+        </video>
+    </div>
+
 </section>
 
 <section id="work" class="section">
