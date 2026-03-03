@@ -29,6 +29,31 @@
 .video-grid iframe:hover {
     transform: scale(1.02);
 }
+    .contact-link {
+    color: white;
+    text-decoration: none;
+    position: relative;
+    transition: opacity 0.3s ease;
+}
+
+.contact-link:hover {
+    opacity: 0.7;
+}
+
+.contact-link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    width: 0%;
+    height: 1px;
+    background: white;
+    transition: width 0.3s ease;
+}
+
+.contact-link:hover::after {
+    width: 100%;
+}
 body {
     margin: 0;
     font-family: 'Inter', sans-serif;
@@ -109,12 +134,14 @@ footer {
 
 <section id="contact" class="section cta">
     <h2>Work With Me</h2>
-    
+
     <p style="margin-bottom: 30px; font-weight: 400; letter-spacing: 0.5px;">
-        <a href="tel:303-968-8078" style="color: white; text-decoration: none;">303-968-8078</a>
-        <span style="margin: 0 15px; opacity: 0.4;">&bull;</span>
-        <a href="mailto:Tate@HarrisonMediaLLC.com" style="color: white; text-decoration: none;">Tate@HarrisonMediaLLC.com</a>
-    </p>
+    <a class="contact-link" href="tel:303-968-8078">303-968-8078</a>
+
+    <span style="margin: 0 15px; opacity: 0.4;">&bull;</span>
+
+    <a class="contact-link" href="mailto:Tate@HarrisonMediaLLC.com">Tate@HarrisonMediaLLC.com</a>
+</p>
 
     <p>Tell me about your project below.</p>
 
