@@ -191,6 +191,97 @@ footer {
     50% { transform: scale(1.15); }
     100% { transform: scale(1.1); }
 }    
+.hero {
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-height: 90vh;
+    padding: 0 10%;
+    overflow: hidden;
+}
+
+/* Text Panel */
+.hero-text-panel {
+    position: relative;
+    width: 45%;
+    padding: 50px;
+    border-radius: 20px;
+    background: rgba(0,0,0,0.35);
+    backdrop-filter: blur(10px);
+    z-index: 3;
+
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeUp 1.2s ease forwards;
+}
+
+.hero-title {
+    font-size: 3.8rem;
+    margin-bottom: 20px;
+}
+
+.subtext p {
+    margin: 6px 0;
+    opacity: 0.75;
+}
+
+/* Video */
+.hero-video {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 65%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.hero-video video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(1.15);
+    animation: slowZoom 25s ease-in-out infinite;
+}
+
+/* Cinematic Fade */
+.hero-video::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 75%;
+    height: 100%;
+    background: linear-gradient(
+        to right,
+        #0a0a0a 0%,
+        rgba(10,10,10,0.9) 35%,
+        rgba(10,10,10,0) 100%
+    );
+}
+
+/* Subtle film grain overlay */
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background-image: url("https://www.transparenttextures.com/patterns/asfalt-light.png");
+    opacity: 0.05;
+    z-index: 2;
+    pointer-events: none;
+}
+
+/* Animations */
+@keyframes slowZoom {
+    0% { transform: scale(1.15); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1.15); }
+}
+
+@keyframes fadeUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 </style>
  
 </head>
@@ -209,6 +300,8 @@ footer {
 
 <section class="hero">
 
+    <div class="hero-overlay"></div>
+
     <div class="hero-text-panel">
         <h1 class="hero-title">Videography</h1>
 
@@ -223,6 +316,8 @@ footer {
             <source src="YOUR_VIDEO_URL.mp4" type="video/mp4">
         </video>
     </div>
+
+</section>
 
 </section>
 
@@ -264,6 +359,20 @@ footer {
 <footer>
     © 2026 Tate Harrison. All rights reserved.
 </footer>
+
+<script>
+const heroText = document.querySelector('.hero-text-panel');
+
+<script>
+const heroText = document.querySelector('.hero-text-panel');
+
+document.addEventListener('mousemove', (e) => {
+    const x = (window.innerWidth / 2 - e.clientX) / 50;
+    const y = (window.innerHeight / 2 - e.clientY) / 50;
+
+    heroText.style.transform = `translate(${x}px, ${y}px)`;
+});
+</script>
 
 </body>
 </html>
