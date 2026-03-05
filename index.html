@@ -285,31 +285,35 @@ footer {
 }
 
 /* ========================= */
-/* Cinematic Mobile Version */
+/* Cinematic Mobile Version  */
 /* ========================= */
 
 @media (max-width: 768px) {
 
     nav {
-        padding: 20px 6%;
+        padding: 15px 5%;
         flex-direction: column;
-        gap: 12px;
+        gap: 10px;
     }
 
     nav div:last-child {
         display: flex;
         flex-wrap: wrap;
-        gap: 14px;
+        justify-content: center;
+        gap: 12px;
     }
 
     .hero {
         position: relative;
-        min-height: 100vh;
+        /* Reduced from 100vh to 70vh to show more width/less crop */
+        min-height: 70vh; 
+        max-height: 80vh;
         padding: 0;
         display: flex;
         align-items: center;
         justify-content: center;
         text-align: center;
+        overflow: hidden;
     }
 
     /* Fullscreen Background Video */
@@ -324,56 +328,65 @@ footer {
     .hero-video video {
         width: 100%;
         height: 100%;
+        /* 'cover' ensures no gaps, but 'center' positioning helps */
         object-fit: cover;
-        transform: scale(1.1);
+        object-position: center;
+        /* Removed scale(1.1) to stop the extra zoom/crop */
+        transform: scale(1.0);
         animation: none;
     }
 
-    /* Stronger cinematic fade */
+    /* Cinematic fade - slightly adjusted for shorter height */
     .hero-video::after {
         content: "";
         position: absolute;
         inset: 0;
         background: linear-gradient(
             to bottom,
-            rgba(0,0,0,0.7) 0%,
-            rgba(0,0,0,0.4) 40%,
-            rgba(0,0,0,0.85) 100%
+            rgba(0,0,0,0.6) 0%,
+            rgba(0,0,0,0.3) 50%,
+            rgba(0,0,0,0.8) 100%
         );
     }
 
     /* Centered floating text */
     .hero-text-panel {
         position: relative;
-        width: 85%;
-        padding: 40px 30px;
-        border-radius: 18px;
-        background: rgba(0,0,0,0.25);
-        backdrop-filter: blur(6px);
+        width: 90%;
+        padding: 30px 20px;
+        border-radius: 15px;
+        background: rgba(0,0,0,0.3);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
         z-index: 2;
     }
 
     .hero-title {
-        font-size: 2.6rem;
-        margin-bottom: 16px;
-        letter-spacing: 1px;
+        font-size: 2.2rem;
+        margin-bottom: 12px;
+        letter-spacing: 0.5px;
+        line-height: 1.1;
     }
 
     .subtext p {
-        font-size: 0.95rem;
-        opacity: 0.8;
+        font-size: 0.9rem;
+        opacity: 0.9;
+        line-height: 1.4;
     }
 
     .section {
-        padding: 70px 6%;
+        padding: 50px 6%;
     }
 
     .video-grid {
         grid-template-columns: 1fr;
+        gap: 25px;
     }
 
     iframe {
-        height: 220px;
+        height: 210px;
+        width: 100%;
+        border-radius: 10px;
     }
 }
 </style>
