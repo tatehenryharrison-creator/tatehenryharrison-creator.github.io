@@ -282,53 +282,89 @@ footer {
         transform: translateY(0);
     }
 }
+
 /* ========================= */
-/* Mobile Optimization */
+/* Cinematic Mobile Version */
 /* ========================= */
 
 @media (max-width: 768px) {
 
     nav {
-        padding: 20px 5%;
+        padding: 20px 6%;
         flex-direction: column;
-        gap: 10px;
+        gap: 12px;
     }
 
     nav div:last-child {
         display: flex;
         flex-wrap: wrap;
-        gap: 15px;
+        gap: 14px;
     }
 
     .hero {
-        flex-direction: column;
-        padding: 60px 5%;
-        min-height: auto;
-    }
-
-    .hero-text-panel {
-        width: 100%;
-        padding: 30px;
+        position: relative;
+        min-height: 100vh;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         text-align: center;
     }
 
-    .hero-title {
-        font-size: 2.4rem;
-    }
-
+    /* Fullscreen Background Video */
     .hero-video {
-        position: relative;
+        position: absolute;
+        inset: 0;
         width: 100%;
-        height: 300px;
-        margin-top: 30px;
+        height: 100%;
+        z-index: 1;
     }
 
+    .hero-video video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transform: scale(1.1);
+        animation: none;
+    }
+
+    /* Stronger cinematic fade */
     .hero-video::after {
-        display: none; /* Remove cinematic fade on mobile */
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+            to bottom,
+            rgba(0,0,0,0.7) 0%,
+            rgba(0,0,0,0.4) 40%,
+            rgba(0,0,0,0.85) 100%
+        );
+    }
+
+    /* Centered floating text */
+    .hero-text-panel {
+        position: relative;
+        width: 85%;
+        padding: 40px 30px;
+        border-radius: 18px;
+        background: rgba(0,0,0,0.25);
+        backdrop-filter: blur(6px);
+        z-index: 2;
+    }
+
+    .hero-title {
+        font-size: 2.6rem;
+        margin-bottom: 16px;
+        letter-spacing: 1px;
+    }
+
+    .subtext p {
+        font-size: 0.95rem;
+        opacity: 0.8;
     }
 
     .section {
-        padding: 60px 5%;
+        padding: 70px 6%;
     }
 
     .video-grid {
