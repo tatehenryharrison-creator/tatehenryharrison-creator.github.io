@@ -415,27 +415,6 @@ footer {
     100% { opacity: 1; }
 }
 
-.video-pause-btn {
-    position: absolute;
-    bottom: 14px;
-    right: 14px;
-    background: rgba(0, 0, 0, 0.5);
-    color: white;
-    border: none;
-    border-radius: 50%;
-    width: 38px;
-    height: 38px;
-    font-size: 1rem;
-    cursor: pointer;
-    z-index: 10;
-    backdrop-filter: blur(4px);
-    transition: opacity 0.3s ease;
-}
-
-.video-pause-btn:hover {
-    opacity: 0.8;
-}
-
 /* Mobile */
 @media (max-width: 768px) {
     .services-inner {
@@ -623,7 +602,6 @@ footer {
             <video id="servicesVideo" autoplay muted loop playsinline>
                 <source src="your-video.mp4" type="video/mp4">
             </video>
-        <button id="videoToggle" class="video-pause-btn">⏸</button>
         <div class="photo-gradient-overlay"></div>
         </div>
 
@@ -707,30 +685,7 @@ document.addEventListener('mousemove', (e) => {
 
     heroText.style.transform = `translate(${x}px, ${y}px)`;
 });
-const video = document.getElementById('servicesVideo');
-const btn = document.getElementById('videoToggle');
-let rotations = 0;
 
-video.addEventListener('ended', () => {
-    rotations++;
-    if (rotations >= 3) {
-        video.loop = false;
-        video.pause();
-        btn.textContent = '▶';
-    }
-});
-
-btn.addEventListener('click', () => {
-    if (video.paused) {
-        video.loop = true;
-        video.play();
-        rotations = 0;
-        btn.textContent = '⏸';
-    } else {
-        video.pause();
-        btn.textContent = '▶';
-    }
-});
 </script>
 
 </body>
