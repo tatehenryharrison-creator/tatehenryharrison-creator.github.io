@@ -398,6 +398,17 @@ footer {
     opacity: 1;
 }
 
+.services-photo video {
+    animation: videoFade 6s ease-in-out infinite;
+}
+
+@keyframes videoFade {
+    0%   { opacity: 1; }
+    45%  { opacity: 0; }
+    55%  { opacity: 0; }
+    100% { opacity: 1; }
+}
+
 /* Mobile */
 @media (max-width: 768px) {
     .services-inner {
