@@ -411,6 +411,40 @@ footer {
     animation: videoFade 30s ease-in-out infinite;
 }
 
+.services-video-wrap {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    margin-left: 50px;
+}
+
+.services-play-btn {
+    display: none;
+    position: absolute;
+    bottom: 16px;
+    right: 16px;
+    z-index: 10;
+    background: rgba(33,36,44,0.75);
+    border: 1px solid rgba(242,240,235,0.25);
+    color: #f5f4f0;
+    border-radius: 50px;
+    padding: 8px 18px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    cursor: pointer;
+    backdrop-filter: blur(8px);
+    transition: background 0.2s, opacity 0.3s;
+}
+
+.services-play-btn:hover {
+    background: rgba(55,60,73,0.9);
+}
+
+.services-play-btn.visible {
+    display: block;
+}
+
 @keyframes videoFade {
     0%   { opacity: 1; }
     30%  { opacity: 0; }
@@ -792,10 +826,13 @@ footer {
 
         <!-- Left: Gradient Photo -->
         <div class="services-photo">
-            <video autoplay muted loop playsinline>
-        <source src="hero3.mp4" type="video/mp4">
-             </video>
-        <div class="photo-gradient-overlay"></div>
+            <div class="services-video-wrap">
+                <video id="servicesVideo" autoplay muted playsinline>
+                    <source src="hero3.mp4" type="video/mp4">
+                </video>
+                <button id="servicesPlayBtn" class="services-play-btn" aria-label="Play/Pause">&#9646;&#9646; Pause</button>
+            </div>
+            <div class="photo-gradient-overlay"></div>
         </div>
 
         <!-- Right: Bullet Points -->
@@ -955,6 +992,36 @@ document.addEventListener('mousemove', (e) => {
 
     heroText.style.transform = `translate(${x}px, ${y}px)`;
 });
+</script>
+
+<script>
+(function() {
+    var video = document.getElementById('servicesVideo');
+    var btn = document.getElementById('servicesPlayBtn');
+    var playCount = 0;
+    var PLAYS_BEFORE_SHOW = 5;
+
+    video.addEventListener('ended', function() {
+        playCount++;
+        if (playCount < PLAYS_BEFORE_SHOW) {
+            video.play();
+        } else {
+            // Show button after 5 full plays; video stays paused until user acts
+            btn.classList.add('visible');
+            btn.textContent = '▶ Play';
+        }
+    });
+
+    btn.addEventListener('click', function() {
+        if (video.paused) {
+            video.play();
+            btn.innerHTML = '&#9646;&#9646; Pause';
+        } else {
+            video.pause();
+            btn.textContent = '▶ Play';
+        }
+    });
+})();
 </script>
 
 </body>
