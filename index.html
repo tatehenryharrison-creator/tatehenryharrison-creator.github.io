@@ -833,8 +833,8 @@ footer {
         <!-- Left: Gradient Photo -->
         <div class="services-photo">
             <div class="services-video-wrap">
-                <video id="servicesVideo" autoplay muted playsinline>
-                    <source src="hero3.mp4" type="video/mp4">
+                <video id="servicesVideo" autoplay muted loop playsinline>
+                    <source src="offer-page.mp4" type="video/mp4">
                 </video>
                 <button id="servicesPlayBtn" class="services-play-btn" aria-label="Play/Pause">&#9646;&#9646; Pause</button>
             </div>
@@ -1004,33 +1004,29 @@ document.addEventListener('mousemove', (e) => {
 (function() {
     var video = document.getElementById('servicesVideo');
     var btn = document.getElementById('servicesPlayBtn');
-    var playCount = 0;
-    var PLAYS_BEFORE_SHOW = 5;
-    var buttonShown = false;
+    var loopCount = 0;
+    var LOOPS_BEFORE_SHOW = 5;
+    var loopJustDetected = false;
 
-    // Use loop attribute for reliable autoplay, count via 'ended' event
-    video.loop = true;
-
-    // Track loop completions using the ended event won't work with loop=true
-    // Instead listen for the video looping via currentTime resetting
-    var lastTime = 0;
+    // Detect loops by watching currentTime jump backwards,
+    // with a cooldown flag to avoid counting one jump multiple times.
     video.addEventListener('timeupdate', function() {
-        if (!buttonShown && lastTime > video.currentTime) {
-            // currentTime jumped backwards — a loop occurred
-            playCount++;
-            if (playCount >= PLAYS_BEFORE_SHOW) {
-                buttonShown = true;
-                video.loop = false; // let it end after this final play
+        if (loopJustDetected) return;
+        if (video.currentTime < 0.3 && loopCount < LOOPS_BEFORE_SHOW) {
+            loopJustDetected = true;
+            loopCount++;
+            if (loopCount >= LOOPS_BEFORE_SHOW) {
+                // On the 5th loop start, remove loop so it ends naturally
+                video.loop = false;
             }
+            // Reset cooldown after a short delay
+            setTimeout(function() { loopJustDetected = false; }, 1000);
         }
-        lastTime = video.currentTime;
     });
 
     video.addEventListener('ended', function() {
-        if (buttonShown) {
-            btn.classList.add('visible');
-            btn.textContent = '▶ Play';
-        }
+        btn.classList.add('visible');
+        btn.textContent = '▶ Play';
     });
 
     btn.addEventListener('click', function() {
