@@ -15,7 +15,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tate Harrison | Videography</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Noto+Serif:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 <style>
         html {
     scroll-behavior: smooth;
@@ -30,7 +30,7 @@
     transform: scale(1.02);
 }
     .contact-link {
-    color: white;
+    color: #e2ddd5;
     text-decoration: none;
     position: relative;
     transition: opacity 0.3s ease;
@@ -47,7 +47,7 @@
     bottom: -4px;
     width: 0%;
     height: 1px;
-    background: white;
+    background: #e2ddd5;
     transition: width 0.3s ease;
 }
 
@@ -56,9 +56,18 @@
 }
 body {
     margin: 0;
+    font-family: 'Noto Serif', serif;
+    background: #21242C;
+    color: #f5f4f0;
+}
+h1, h2, h3 {
+    font-family: 'DM Serif Display', serif;
+    font-weight: 400;
+}
+nav, nav a, .nav-dropdown-trigger, .nav-dropdown-menu a,
+.services-eyebrow, .pricing-eyebrow, .pricing-card-label,
+.pricing-cta, footer {
     font-family: 'Inter', sans-serif;
-    background: #0f0f0f;
-    color: white;
 }
 nav {
     padding: 20px 10%;
@@ -66,7 +75,7 @@ nav {
     justify-content: space-between;
 }
 nav a {
-    color: white;
+    color: #e2ddd5;
     text-decoration: none;
     margin-left: 20px;
 }
@@ -78,7 +87,7 @@ h1 {
     margin-bottom: 10px;
 }
 p {
-    opacity: 0.7;
+    color: #a8a49c;
 }
 .video-grid {
     display: grid;
@@ -107,7 +116,7 @@ footer {
 
 .subtext p {
     margin: 6px 0;
-    opacity: 0.7;
+    color: #a8a49c;
 }
 
     .hero {
@@ -125,7 +134,7 @@ footer {
     max-width: 420px;
     padding: 40px 45px;
     border-radius: 20px;
-    background: rgba(0,0,0,0.35);
+    background: rgba(33,36,44,0.55);
     backdrop-filter: blur(10px);
     z-index: 3;
 
@@ -142,7 +151,7 @@ footer {
 /* Subtext */
 .subtext p {
     margin: 6px 0;
-    opacity: 0.7;
+    color: #a8a49c;
 }
 /* Video side */
 .hero-video {
@@ -173,9 +182,9 @@ footer {
     height: 100%;
     background: linear-gradient(
         to right,
-        #0f0f0f 0%,
-        rgba(15,15,15,0.85) 35%,
-        rgba(15,15,15,0) 100%
+        #21242C 0%,
+        rgba(33,36,44,0.85) 35%,
+        rgba(33,36,44,0) 100%
     );
 }
 
@@ -207,7 +216,7 @@ footer {
     width: 45%;
     padding: 50px;
     border-radius: 20px;
-    background: rgba(0,0,0,0.35);
+    background: rgba(33,36,44,0.55);
     backdrop-filter: blur(10px);
     z-index: 3;
 
@@ -223,7 +232,7 @@ footer {
 
 .subtext p {
     margin: 6px 0;
-    opacity: 0.75;
+    color: #a8a49c;
 }
 
 /* Video */
@@ -254,9 +263,9 @@ footer {
     height: 100%;
     background: linear-gradient(
         to right,
-        #0a0a0a 0%,
-        rgba(10,10,10,0.9) 35%,
-        rgba(10,10,10,0) 100%
+        #21242C 0%,
+        rgba(33,36,44,0.9) 35%,
+        rgba(33,36,44,0) 100%
     );
 }
 
@@ -289,7 +298,7 @@ footer {
 /* ===================== */
 
 .services-section {
-    background: linear-gradient(to bottom, #0f0f0f 0%, #ffffff 30%);
+    background: linear-gradient(to bottom, #21242C 0%, #373C49 60%, #373C49 100%);
     padding: 100px 10%;
 }
 
@@ -330,9 +339,9 @@ footer {
     inset: 0;
     background: linear-gradient(
         135deg,
-        rgba(15, 15, 15, 0.45) 0%,
-        rgba(80, 80, 120, 0.2) 50%,
-        rgba(15, 15, 15, 0.1) 100%
+        rgba(33, 36, 44, 0.45) 0%,
+        rgba(92, 92, 88, 0.2) 50%,
+        rgba(33, 36, 44, 0.1) 100%
     );
     border-radius: 16px;
 }
@@ -347,7 +356,7 @@ footer {
     font-size: 0.75rem;
     letter-spacing: 3px;
     text-transform: uppercase;
-    color: #444;
+    color: #a8a49c;
     margin-bottom: 12px;
     opacity: 1;
 }
@@ -357,7 +366,7 @@ footer {
     font-weight: 600;
     line-height: 1.15;
     margin-bottom: 36px;
-    color: #1a1a1a;
+    color: #f5f4f0;
 }
 
 .services-list {
@@ -376,7 +385,7 @@ footer {
 }
 
 .bullet-icon {
-    color: #555;
+    color: #5c5c58;
     font-size: 1rem;
     margin-top: 3px;
     flex-shrink: 0;
@@ -386,13 +395,13 @@ footer {
     display: block;
     font-size: 1rem;
     font-weight: 600;
-    color: #1a1a1a;
+    color: #e2ddd5;
     margin-bottom: 4px;
 }
 
 .services-list p {
     font-size: 0.88rem;
-    color: #555;
+    color: #a8a49c;
     line-height: 1.6;
     margin: 0;
     opacity: 1;
@@ -504,9 +513,9 @@ footer {
         inset: 0;
         background: linear-gradient(
             to bottom,
-            rgba(0,0,0,0.6) 0%,
-            rgba(0,0,0,0.3) 50%,
-            rgba(0,0,0,0.8) 100%
+            rgba(33,36,44,0.7) 0%,
+            rgba(33,36,44,0.35) 50%,
+            rgba(33,36,44,0.85) 100%
         );
     }
 
@@ -516,7 +525,7 @@ footer {
         width: 90%;
         padding: 30px 20px;
         border-radius: 15px;
-        background: rgba(0,0,0,0.3);
+        background: rgba(33,36,44,0.5);
         backdrop-filter: blur(8px);
         -webkit-backdrop-filter: blur(8px);
         z-index: 2;
@@ -531,7 +540,7 @@ footer {
 
     .subtext p {
         font-size: 0.9rem;
-        opacity: 0.9;
+        color: #e2ddd5;
         line-height: 1.4;
     }
 
@@ -550,6 +559,183 @@ footer {
         border-radius: 10px;
     }
 }
+
+/* ===== NAV DROPDOWN ===== */
+.nav-links {
+    display: flex;
+    align-items: center;
+}
+.nav-links > a {
+    color: #e2ddd5;
+    text-decoration: none;
+    margin-left: 20px;
+    transition: opacity 0.3s ease;
+}
+.nav-links > a:hover { opacity: 0.7; }
+.nav-dropdown {
+    position: relative;
+    display: inline-block;
+    margin-left: 20px;
+}
+.nav-dropdown-trigger {
+    color: #e2ddd5;
+    text-decoration: none;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+}
+.nav-dropdown-trigger:hover { opacity: 0.7; }
+.nav-dropdown-menu {
+    display: none;
+    position: absolute;
+    top: calc(100% + 14px);
+    left: 0;
+    background: #2d3140;
+    border: 1px solid rgba(92,92,88,0.3);
+    border-radius: 10px;
+    padding: 6px 0;
+    min-width: 190px;
+    z-index: 100;
+    box-shadow: 0 8px 28px rgba(0,0,0,0.35);
+}
+.nav-dropdown:hover .nav-dropdown-menu { display: block; }
+.nav-dropdown-menu a {
+    display: block;
+    padding: 10px 20px;
+    color: #e2ddd5;
+    text-decoration: none;
+    font-size: 0.88rem;
+    transition: background 0.2s ease;
+    margin-left: 0;
+}
+.nav-dropdown-menu a:hover { background: rgba(168,164,156,0.1); }
+
+/* ===== PRICING SECTION ===== */
+.pricing-section {
+    background: #21242C;
+    padding: 100px 10%;
+    border-top: 1px solid rgba(92,92,88,0.18);
+}
+.pricing-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+.pricing-eyebrow {
+    font-size: 0.75rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #a8a49c;
+    margin: 0 0 12px;
+    opacity: 1;
+}
+.pricing-heading {
+    font-size: 2.4rem;
+    font-weight: 600;
+    color: #f5f4f0;
+    margin: 0 0 14px;
+    line-height: 1.15;
+}
+.pricing-subtext {
+    color: #a8a49c;
+    font-size: 0.93rem;
+    max-width: 440px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+.pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+.pricing-card {
+    background: #373C49;
+    border: 1px solid rgba(92,92,88,0.25);
+    border-radius: 16px;
+    padding: 36px 28px;
+    display: flex;
+    flex-direction: column;
+    transition: border-color 0.3s ease, transform 0.3s ease;
+}
+.pricing-card:hover {
+    border-color: rgba(168,164,156,0.4);
+    transform: translateY(-4px);
+}
+.pricing-card-label {
+    font-size: 0.68rem;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: #5c5c58;
+    margin: 0 0 10px;
+}
+.pricing-card-name {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #f5f4f0;
+    margin: 0 0 6px;
+}
+.pricing-card-price {
+    font-size: 1rem;
+    color: #a8a49c;
+    margin: 0 0 24px;
+}
+.pricing-divider {
+    height: 1px;
+    background: rgba(92,92,88,0.25);
+    margin-bottom: 22px;
+}
+.pricing-features {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 1;
+}
+.pricing-features li {
+    font-size: 0.83rem;
+    color: #a8a49c;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    line-height: 1.45;
+}
+.pricing-features li::before {
+    content: "▸";
+    color: #5c5c58;
+    flex-shrink: 0;
+    font-size: 0.75rem;
+    margin-top: 2px;
+}
+.pricing-cta {
+    display: block;
+    text-align: center;
+    padding: 12px 20px;
+    border-radius: 9px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    text-decoration: none;
+    background: rgba(226,221,213,0.08);
+    border: 1px solid rgba(226,221,213,0.2);
+    color: #e2ddd5;
+    transition: background 0.25s ease, border-color 0.25s ease;
+}
+.pricing-cta:hover {
+    background: rgba(226,221,213,0.14);
+    border-color: rgba(226,221,213,0.4);
+}
+
+@media (max-width: 900px) {
+    .pricing-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 768px) {
+    .nav-links { flex-wrap: wrap; justify-content: center; gap: 8px; }
+    .nav-links > a, .nav-dropdown { margin-left: 0; }
+    .pricing-section { padding: 70px 6%; }
+    .pricing-grid { grid-template-columns: 1fr; max-width: 420px; }
+    .pricing-heading { font-size: 1.8rem; }
+}
 </style>
  
 </head>
@@ -558,7 +744,16 @@ footer {
 
 <nav>
     <div><strong>Tate Harrison</strong></div>
-    <div>
+    <div class="nav-links">
+        <div class="nav-dropdown">
+            <a class="nav-dropdown-trigger">Packages ▾</a>
+            <div class="nav-dropdown-menu">
+                <a href="pricing-photography.html">Photography</a>
+                <a href="pricing-standard.html">Standard</a>
+                <a href="pricing-advanced.html">Advanced</a>
+                <a href="pricing-campaign.html">Campaign</a>
+            </div>
+        </div>
         <a href="#contact">Contact</a>
         <a href="contact.html">Client Waiver</a>
         <a href="schedule.html">Book Now</a>
@@ -642,6 +837,83 @@ footer {
 
     </div>
 
+</section>
+
+<!-- PRICING SECTION -->
+<section id="pricing" class="pricing-section">
+    <div class="pricing-header">
+        <p class="pricing-eyebrow">Investment</p>
+        <h2 class="pricing-heading">Choose Your Package</h2>
+        <p class="pricing-subtext">From single-day photography to full brand campaigns — find the right fit for your project.</p>
+    </div>
+
+    <div class="pricing-grid">
+
+        <!-- Photography -->
+        <div class="pricing-card">
+            <p class="pricing-card-label">Package 01</p>
+            <h3 class="pricing-card-name">Photography</h3>
+            <p class="pricing-card-price">Starting at $XXX</p>
+            <div class="pricing-divider"></div>
+            <ul class="pricing-features">
+                <li>Up to 2-hour session</li>
+                <li>30+ edited photos</li>
+                <li>Color grading & retouching</li>
+                <li>Online gallery delivery</li>
+                <li>Personal & commercial license</li>
+            </ul>
+            <a href="pricing-photography.html" class="pricing-cta">Select Package</a>
+        </div>
+
+        <!-- Standard -->
+        <div class="pricing-card">
+            <p class="pricing-card-label">Package 02</p>
+            <h3 class="pricing-card-name">Standard</h3>
+            <p class="pricing-card-price">Starting at $XXX</p>
+            <div class="pricing-divider"></div>
+            <ul class="pricing-features">
+                <li>Single-camera video setup</li>
+                <li>Up to 2 hours coverage</li>
+                <li>Up to 5-min edited video</li>
+                <li>Color grading included</li>
+                <li>1 round of revisions</li>
+            </ul>
+            <a href="pricing-standard.html" class="pricing-cta">Select Package</a>
+        </div>
+
+        <!-- Advanced -->
+        <div class="pricing-card">
+            <p class="pricing-card-label">Package 03</p>
+            <h3 class="pricing-card-name">Advanced</h3>
+            <p class="pricing-card-price">Starting at $XXX</p>
+            <div class="pricing-divider"></div>
+            <ul class="pricing-features">
+                <li>Multi-camera setup</li>
+                <li>Up to 4 hours coverage</li>
+                <li>Up to 10-min edited video</li>
+                <li>Full color grade + audio mix</li>
+                <li>2 revisions + social cuts</li>
+            </ul>
+            <a href="pricing-advanced.html" class="pricing-cta">Select Package</a>
+        </div>
+
+        <!-- Campaign -->
+        <div class="pricing-card">
+            <p class="pricing-card-label">Package 04</p>
+            <h3 class="pricing-card-name">Campaign</h3>
+            <p class="pricing-card-price">Custom Pricing</p>
+            <div class="pricing-divider"></div>
+            <ul class="pricing-features">
+                <li>Strategy & pre-production</li>
+                <li>Multi-day shoot capability</li>
+                <li>Multiple deliverables</li>
+                <li>Unlimited revisions</li>
+                <li>Full commercial license</li>
+            </ul>
+            <a href="pricing-campaign.html" class="pricing-cta">Select Package</a>
+        </div>
+
+    </div>
 </section>
 
 <section id="contact" class="section cta">
