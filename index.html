@@ -174,7 +174,7 @@ footer {
 /* Subtext */
 .subtext p {
     margin: 6px 0;
-    color: #a8a49c;
+    color: #f5f4f0;
 }
 /* Video side */
 .hero-video {
@@ -256,7 +256,7 @@ footer {
 
 .subtext p {
     margin: 6px 0;
-    color: #a8a49c;
+    color: #f5f4f0;
 }
 
 /* Video */
@@ -793,6 +793,37 @@ footer {
     .pricing-grid { grid-template-columns: 1fr; max-width: 420px; }
     .pricing-heading { font-size: 1.8rem; }
 }
+
+/* ===== SCROLL ARROW ===== */
+.scroll-arrow {
+    position: absolute;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    cursor: pointer;
+    animation: arrowBounce 2s ease-in-out infinite;
+}
+.scroll-arrow svg {
+    width: 36px;
+    height: 36px;
+    stroke: rgba(245,244,240,0.55);
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    filter: drop-shadow(0 2px 6px rgba(0,0,0,0.4));
+    transition: stroke 0.2s ease;
+}
+.scroll-arrow:hover svg { stroke: rgba(245,244,240,0.9); }
+@keyframes arrowBounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50%       { transform: translateX(-50%) translateY(10px); }
+}
 </style>
  
 </head>
@@ -845,10 +876,18 @@ footer {
         </video>
     </div>
 
+    <!-- Scroll down arrow -->
+    <a href="#services" class="scroll-arrow" aria-label="Scroll to next section">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <polyline points="6 5 12 11 18 5"></polyline>
+            <polyline points="6 12 12 18 18 12"></polyline>
+        </svg>
+    </a>
+
 </section>
 
 <!-- SERVICES SECTION -->
-<section class="services-section">
+<section id="services" class="services-section">
 
     <div class="services-inner">
 
