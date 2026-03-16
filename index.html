@@ -665,9 +665,6 @@ footer {
     margin-left: 0;
 }
 .nav-dropdown-menu-inner a:hover { background: rgba(168,164,156,0.1); }
-@media (hover: hover) and (pointer: fine) {
-    .nav-dropdown:hover .nav-dropdown-menu { display: block; }
-}
 
 /* ===== PRICING SECTION ===== */
 .pricing-section {
@@ -1128,36 +1125,28 @@ document.addEventListener('mousemove', (e) => {
     });
 })();
 
-// --- Nav dropdown: CSS hover on desktop, tap-toggle on touch ---
+// --- Nav dropdown (pure JS, no CSS hover) ---
 (function() {
     var dropdown = document.querySelector('.nav-dropdown');
     var trigger  = document.querySelector('.nav-dropdown-trigger');
     var menu     = document.querySelector('.nav-dropdown-menu');
     if (!dropdown || !trigger || !menu) return;
 
-    var isTouch = false;
+    function open()  { menu.style.display = 'block'; }
+    function close() { menu.style.display = 'none';  }
 
-    // First touch anywhere: switch to touch mode and force menu closed
-    window.addEventListener('touchstart', function() {
-        isTouch = true;
-        menu.style.display = 'none'; // inline style overrides CSS :hover
-    }, { once: true, passive: true });
+    // Desktop: mouseenter/mouseleave on the whole dropdown container
+    dropdown.addEventListener('mouseenter', open);
+    dropdown.addEventListener('mouseleave', close);
 
-    // Tap trigger: toggle (touch only; desktop uses CSS :hover)
+    // Mobile: tap trigger toggles; tap outside or link closes
     trigger.addEventListener('click', function(e) {
-        if (!isTouch) return;
         e.stopPropagation();
-        menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
+        menu.style.display === 'block' ? close() : open();
     });
-
-    // Tap outside: close
-    document.addEventListener('click', function() {
-        if (isTouch) menu.style.display = 'none';
-    });
-
-    // Tap a menu link: close
+    document.addEventListener('click', close);
     menu.querySelectorAll('a').forEach(function(a) {
-        a.addEventListener('click', function() { menu.style.display = 'none'; });
+        a.addEventListener('click', close);
     });
 })();
 </script>
