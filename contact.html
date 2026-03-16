@@ -257,18 +257,35 @@
     }
 
     /* ===== MOBILE ===== */
+    /* Nav dropdown */
+    .nav-links { display: flex; align-items: center; }
+    .nav-links > a { color: #e2ddd5; text-decoration: none; margin-left: 20px; transition: opacity 0.3s ease; }
+    .nav-links > a:hover { opacity: 0.7; }
+    .nav-dropdown { position: relative; display: inline-block; margin-left: 20px; }
+    .nav-dropdown-trigger { color: #e2ddd5; text-decoration: none; cursor: pointer; transition: opacity 0.3s ease; }
+    .nav-dropdown-trigger:hover { opacity: 0.7; }
+    .nav-dropdown-menu {
+      display: none; position: absolute; top: calc(100% + 14px); left: 0;
+      background: #2d3140; border: 1px solid rgba(92,92,88,0.3);
+      border-radius: 10px; padding: 6px 0; min-width: 190px;
+      z-index: 100; box-shadow: 0 8px 28px rgba(0,0,0,0.35);
+    }
+    .nav-dropdown:hover .nav-dropdown-menu { display: block; }
+    .nav-dropdown-menu a { display: block; padding: 10px 20px; color: #e2ddd5; text-decoration: none; font-size: 0.88rem; transition: background 0.2s ease; margin-left: 0; }
+    .nav-dropdown-menu a:hover { background: rgba(168,164,156,0.1); }
+
     @media (max-width: 768px) {
       nav {
         padding: 15px 5%;
         flex-direction: column;
         gap: 10px;
       }
-      nav div:last-child {
-        display: flex;
+      .nav-links {
         flex-wrap: wrap;
         justify-content: center;
-        gap: 12px;
+        gap: 8px;
       }
+      .nav-links > a, .nav-dropdown { margin-left: 0; }
       .page-header { padding: 40px 6% 28px; }
       .page-title { font-size: 1.8rem; }
       .steps-wrapper { padding: 24px 6% 40px; }
@@ -285,7 +302,16 @@
 
 <nav>
   <div><strong>Tate Harrison</strong></div>
-  <div>
+  <div class="nav-links">
+    <div class="nav-dropdown">
+      <a class="nav-dropdown-trigger">Packages ▾</a>
+      <div class="nav-dropdown-menu">
+        <a href="pricing-photography.html">Photography</a>
+        <a href="pricing-standard.html">Standard</a>
+        <a href="pricing-advanced.html">Advanced</a>
+        <a href="pricing-campaign.html">Campaign</a>
+      </div>
+    </div>
     <a href="index.html">Home</a>
     <a href="index.html#contact">Contact</a>
     <a href="schedule.html">Book Now</a>
