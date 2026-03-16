@@ -174,7 +174,7 @@ footer {
 /* Subtext */
 .subtext p {
     margin: 6px 0;
-    color: #a8a49c;
+    color: #f5f4f0;
 }
 /* Video side */
 .hero-video {
@@ -256,7 +256,7 @@ footer {
 
 .subtext p {
     margin: 6px 0;
-    color: #a8a49c;
+    color: #f5f4f0;
 }
 
 /* Video */
@@ -665,6 +665,9 @@ footer {
     margin-left: 0;
 }
 .nav-dropdown-menu-inner a:hover { background: rgba(168,164,156,0.1); }
+@media (hover: hover) and (pointer: fine) {
+    .nav-dropdown:hover .nav-dropdown-menu { display: block; }
+}
 
 /* ===== PRICING SECTION ===== */
 .pricing-section {
@@ -793,6 +796,37 @@ footer {
     .pricing-grid { grid-template-columns: 1fr; max-width: 420px; }
     .pricing-heading { font-size: 1.8rem; }
 }
+
+/* ===== SCROLL ARROW ===== */
+.scroll-arrow {
+    position: absolute;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    cursor: pointer;
+    animation: arrowBounce 2s ease-in-out infinite;
+}
+.scroll-arrow svg {
+    width: 36px;
+    height: 36px;
+    stroke: rgba(245,244,240,0.55);
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    filter: drop-shadow(0 2px 6px rgba(0,0,0,0.4));
+    transition: stroke 0.2s ease;
+}
+.scroll-arrow:hover svg { stroke: rgba(245,244,240,0.9); }
+@keyframes arrowBounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50%       { transform: translateX(-50%) translateY(10px); }
+}
 </style>
  
 </head>
@@ -818,7 +852,7 @@ footer {
         </div>
         <a href="#contact">Contact</a>
         <a href="contact.html">Client Waiver</a>
-        <a href="schedule.html">Book Now</a>
+        <a href="schedule.html">Free Consultation</a>
     </div>
 </nav>
 
@@ -833,7 +867,7 @@ footer {
             <p>Speeches • Narratives • Interviews</p>
             <p class="spacer"></p>
             <p>Hi, I'm Tate Harrison — a videographer who loves a good story.</p>
-            <p>Trained in audio production, narrative film, and human psychology.</p>
+            <p>Trained in audio production, narrative film, and human psychology</p>
             <p class="spacer"></p>
             <p>Based in Boulder, Colorado</p>
         </div>
@@ -845,10 +879,18 @@ footer {
         </video>
     </div>
 
+    <!-- Scroll down arrow -->
+    <a href="#services" class="scroll-arrow" aria-label="Scroll to next section">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <polyline points="6 5 12 11 18 5"></polyline>
+            <polyline points="6 12 12 18 18 12"></polyline>
+        </svg>
+    </a>
+
 </section>
 
 <!-- SERVICES SECTION -->
-<section class="services-section">
+<section id="services" class="services-section">
 
     <div class="services-inner">
 
@@ -1086,31 +1128,37 @@ document.addEventListener('mousemove', (e) => {
     });
 })();
 
-// --- Nav dropdown: hover on desktop, tap-toggle on touch ---
+// --- Nav dropdown: CSS hover on desktop, tap-toggle on touch ---
 (function() {
     var dropdown = document.querySelector('.nav-dropdown');
     var trigger  = document.querySelector('.nav-dropdown-trigger');
     var menu     = document.querySelector('.nav-dropdown-menu');
     if (!dropdown || !trigger || !menu) return;
 
-    // Detect true pointer device (mouse). Touch screens report pointer:coarse, hover:none.
-    var canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    var isTouch = false;
 
-    if (canHover) {
-        // Desktop mouse — show/hide on enter/leave
-        dropdown.addEventListener('mouseenter', function() { menu.style.display = 'block'; });
-        dropdown.addEventListener('mouseleave', function() { menu.style.display = 'none'; });
-    } else {
-        // Touch — toggle on tap; close on outside tap or link tap
-        trigger.addEventListener('click', function(e) {
-            e.stopPropagation();
-            menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
-        });
-        document.addEventListener('click', function() { menu.style.display = 'none'; });
-        menu.querySelectorAll('a').forEach(function(a) {
-            a.addEventListener('click', function() { menu.style.display = 'none'; });
-        });
-    }
+    // First touch anywhere: switch to touch mode and force menu closed
+    window.addEventListener('touchstart', function() {
+        isTouch = true;
+        menu.style.display = 'none'; // inline style overrides CSS :hover
+    }, { once: true, passive: true });
+
+    // Tap trigger: toggle (touch only; desktop uses CSS :hover)
+    trigger.addEventListener('click', function(e) {
+        if (!isTouch) return;
+        e.stopPropagation();
+        menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
+    });
+
+    // Tap outside: close
+    document.addEventListener('click', function() {
+        if (isTouch) menu.style.display = 'none';
+    });
+
+    // Tap a menu link: close
+    menu.querySelectorAll('a').forEach(function(a) {
+        a.addEventListener('click', function() { menu.style.display = 'none'; });
+    });
 })();
 </script>
 
