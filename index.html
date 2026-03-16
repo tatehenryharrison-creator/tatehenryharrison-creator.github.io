@@ -665,6 +665,7 @@ footer {
     margin-left: 0;
 }
 .nav-dropdown-menu-inner a:hover { background: rgba(168,164,156,0.1); }
+.nav-dropdown:hover .nav-dropdown-menu { display: block; }
 
 /* ===== PRICING SECTION ===== */
 .pricing-section {
@@ -1125,31 +1126,37 @@ document.addEventListener('mousemove', (e) => {
     });
 })();
 
-// --- Nav dropdown: hover on desktop, tap-toggle on touch ---
+// --- Nav dropdown: CSS hover on desktop, tap-toggle on touch ---
 (function() {
     var dropdown = document.querySelector('.nav-dropdown');
     var trigger  = document.querySelector('.nav-dropdown-trigger');
     var menu     = document.querySelector('.nav-dropdown-menu');
     if (!dropdown || !trigger || !menu) return;
 
-    // Detect true pointer device (mouse). Touch screens report pointer:coarse, hover:none.
-    var canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    var isTouch = false;
 
-    if (canHover) {
-        // Desktop mouse — show/hide on enter/leave
-        dropdown.addEventListener('mouseenter', function() { menu.style.display = 'block'; });
-        dropdown.addEventListener('mouseleave', function() { menu.style.display = 'none'; });
-    } else {
-        // Touch — toggle on tap; close on outside tap or link tap
-        trigger.addEventListener('click', function(e) {
-            e.stopPropagation();
-            menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
-        });
-        document.addEventListener('click', function() { menu.style.display = 'none'; });
-        menu.querySelectorAll('a').forEach(function(a) {
-            a.addEventListener('click', function() { menu.style.display = 'none'; });
-        });
-    }
+    // First touch anywhere: switch to touch mode and force menu closed
+    window.addEventListener('touchstart', function() {
+        isTouch = true;
+        menu.style.display = 'none'; // inline style overrides CSS :hover
+    }, { once: true, passive: true });
+
+    // Tap trigger: toggle (touch only; desktop uses CSS :hover)
+    trigger.addEventListener('click', function(e) {
+        if (!isTouch) return;
+        e.stopPropagation();
+        menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
+    });
+
+    // Tap outside: close
+    document.addEventListener('click', function() {
+        if (isTouch) menu.style.display = 'none';
+    });
+
+    // Tap a menu link: close
+    menu.querySelectorAll('a').forEach(function(a) {
+        a.addEventListener('click', function() { menu.style.display = 'none'; });
+    });
 })();
 </script>
 
