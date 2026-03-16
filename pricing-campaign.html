@@ -15,8 +15,10 @@
     .pkg-eyebrow, .features-eyebrow, .payment-eyebrow,
     .pay-btn, .coming-soon-badge, footer { font-family: 'Inter', sans-serif; }
 
-    nav { padding: 20px 10%; display: flex; justify-content: space-between; align-items: center; }
-    nav > div:first-child a { color: #f5f4f0; text-decoration: none; }
+    nav { padding: 20px 10%; display: flex; justify-content: space-between; align-items: center; background: linear-gradient(to right, rgba(226,221,213,0.18) 0%, rgba(33,36,44,0) 28%); }
+    .nav-logo-link { display: flex; align-items: center; text-decoration: none; flex-shrink: 0; }
+    .nav-logo { height: 48px; width: auto; display: block; transition: opacity 0.25s ease; }
+    .nav-logo:hover { opacity: 0.8; }
     .nav-links { display: flex; align-items: center; }
     .nav-links > a { color: #e2ddd5; text-decoration: none; margin-left: 20px; transition: opacity 0.3s ease; font-size: 0.95rem; }
     .nav-links > a:hover { opacity: 0.7; }
@@ -24,15 +26,19 @@
     .nav-dropdown-trigger { color: #e2ddd5; text-decoration: none; cursor: pointer; transition: opacity 0.3s ease; font-size: 0.95rem; }
     .nav-dropdown-trigger:hover { opacity: 0.7; }
     .nav-dropdown-menu {
-      display: none; position: absolute; top: calc(100% + 14px); left: 0;
+      display: none; position: absolute; top: 100%; left: 0;
+      padding-top: 14px; min-width: 190px;
+      z-index: 100;
+    }
+    .nav-dropdown-menu-inner {
       background: #2d3140; border: 1px solid rgba(92,92,88,0.3);
-      border-radius: 10px; padding: 6px 0; min-width: 190px;
-      z-index: 100; box-shadow: 0 8px 28px rgba(0,0,0,0.35);
+      border-radius: 10px; padding: 6px 0;
+      box-shadow: 0 8px 28px rgba(0,0,0,0.35);
     }
     .nav-dropdown:hover .nav-dropdown-menu { display: block; }
-    .nav-dropdown-menu a { display: block; padding: 10px 20px; color: #e2ddd5; text-decoration: none; font-size: 0.88rem; transition: background 0.2s ease; }
-    .nav-dropdown-menu a:hover { background: rgba(168,164,156,0.1); }
-    .nav-dropdown-menu a.active { color: #f5f4f0; font-weight: 600; }
+    .nav-dropdown-menu-inner a { display: block; padding: 10px 20px; color: #e2ddd5; text-decoration: none; font-size: 0.88rem; transition: background 0.2s ease; }
+    .nav-dropdown-menu-inner a:hover { background: rgba(168,164,156,0.1); }
+    .nav-dropdown-menu-inner a.active { color: #f5f4f0; font-weight: 600; }
 
     .pkg-header { text-align: center; padding: 70px 10% 60px; border-bottom: 1px solid rgba(92,92,88,0.18); }
     .pkg-eyebrow { font-size: 0.72rem; letter-spacing: 3px; text-transform: uppercase; color: #a8a49c; margin: 0 0 14px; }
@@ -96,8 +102,11 @@
 <body>
 
 <nav>
-  <div><strong>Tate Harrison</strong></div>
+  <a href="index.html" class="nav-logo-link">
+    <img src="harrison-media-logo.png" alt="Harrison Media LLC" class="nav-logo">
+  </a>
   <div class="nav-links">
+    <a href="index.html">Home</a>
     <div class="nav-dropdown">
       <a class="nav-dropdown-trigger">Packages ▾</a>
       <div class="nav-dropdown-menu">
