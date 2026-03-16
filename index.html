@@ -447,6 +447,7 @@ footer {
     object-fit: cover;
     display: block;
     border-radius: 16px;
+    transition: opacity 1.5s ease;
 }
 
 .services-play-btn {
@@ -1022,14 +1023,60 @@ document.addEventListener('mousemove', (e) => {
 </script>
 
 <script>
-// --- Services video play/pause button ---
+// --- Services video: 6-cycle autoplay, fade out, button always visible ---
 (function() {
     var video = document.getElementById('servicesVideo');
-    var btn = document.getElementById('servicesPlayBtn');
+    var btn   = document.getElementById('servicesPlayBtn');
     if (!video || !btn) return;
 
+    var TOTAL_PLAYS = 6;   // play through the video this many times
+    var loopCount   = 0;   // number of times video has looped (restarted)
+    var lastTime    = 0;
+    var cooldown    = false;
+    var finished    = false;
+
+    // Reset and kick off a fresh session of TOTAL_PLAYS cycles
+    function startSession() {
+        loopCount = 0;
+        finished  = false;
+        video.loop = true;
+        video.currentTime = 0;
+        video.style.opacity = '1';
+        video.play().catch(function(){});
+        btn.innerHTML = '&#9646;&#9646; Pause';
+    }
+
+    // Called when the 6th play finishes
+    function onFinished() {
+        finished = true;
+        video.style.opacity = '0';
+        btn.textContent = '▶ Play';
+    }
+
+    // Detect each loop: currentTime jumps from near-end back to near-zero
+    video.addEventListener('timeupdate', function() {
+        if (cooldown || finished) return;
+        var t = video.currentTime;
+        if (lastTime > 0.5 && t < 0.3) {
+            cooldown = true;
+            loopCount++;
+            // After 5 loops, the 6th play has begun — let it finish naturally
+            if (loopCount >= TOTAL_PLAYS - 1) {
+                video.loop = false;
+            }
+            setTimeout(function() { cooldown = false; }, 1000);
+        }
+        lastTime = t;
+    });
+
+    // 6th play ends → fade out
+    video.addEventListener('ended', onFinished);
+
+    // Button: pause/resume mid-session, or restart after finished
     btn.addEventListener('click', function() {
-        if (video.paused) {
+        if (finished) {
+            startSession();
+        } else if (video.paused) {
             video.play().catch(function(){});
             btn.innerHTML = '&#9646;&#9646; Pause';
         } else {
