@@ -70,21 +70,20 @@ nav, nav a, .nav-dropdown-trigger, .nav-dropdown-menu a,
     font-family: 'Inter', sans-serif;
 }
 nav {
-    padding: 16px 10%;
+    padding: 0 10% 0 0;
     display: flex;
-    align-items: center;
+    align-items: stretch;
     justify-content: space-between;
-    background: linear-gradient(to right, rgba(226,221,213,0.18) 0%, rgba(33,36,44,0) 28%);
+    background: linear-gradient(to right, rgba(226,221,213,0.22) 0%, rgba(33,36,44,0) 30%);
 }
 .nav-logo-link {
     display: flex;
     align-items: center;
     text-decoration: none;
     flex-shrink: 0;
-    margin-left: -8px;
 }
 .nav-logo {
-    height: 72px;
+    height: 100px;
     width: auto;
     display: block;
     transition: opacity 0.25s ease;
@@ -334,11 +333,6 @@ footer {
     position: relative;
     border-radius: 16px;
     overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: auto;
-    max-height: 540px;
 }
 
 .services-photo img {
@@ -431,25 +425,24 @@ footer {
     opacity: 1;
 }
 
-.services-photo video {
-    animation: videoFade 30s ease-in-out infinite;
-}
-
 .services-video-wrap {
     position: relative;
     width: 100%;
-    margin-left: 50px;
+    aspect-ratio: 4 / 3;
 }
 
 .services-video-wrap video {
+    position: absolute;
+    inset: 0;
     width: 100%;
-    height: auto;
+    height: 100%;
+    object-fit: cover;
     display: block;
     border-radius: 16px;
 }
 
 .services-play-btn {
-    display: none;
+    display: block;
     position: absolute;
     bottom: 16px;
     right: 16px;
@@ -464,22 +457,11 @@ footer {
     letter-spacing: 1px;
     cursor: pointer;
     backdrop-filter: blur(8px);
-    transition: background 0.2s, opacity 0.3s;
+    transition: background 0.2s;
 }
 
 .services-play-btn:hover {
     background: rgba(55,60,73,0.9);
-}
-
-.services-play-btn.visible {
-    display: block;
-}
-
-@keyframes videoFade {
-    0%   { opacity: 1; }
-    30%  { opacity: 0; }
-    80%  { opacity: 0; }
-    100% { opacity: 1; }
 }
 
 /* Mobile */
@@ -664,7 +646,6 @@ footer {
     padding: 6px 0;
     box-shadow: 0 8px 28px rgba(0,0,0,0.35);
 }
-.nav-dropdown:hover .nav-dropdown-menu { display: block; }
 .nav-dropdown-menu-inner a {
     display: block;
     padding: 10px 20px;
@@ -1033,33 +1014,11 @@ document.addEventListener('mousemove', (e) => {
 </script>
 
 <script>
+// --- Services video play/pause button ---
 (function() {
     var video = document.getElementById('servicesVideo');
     var btn = document.getElementById('servicesPlayBtn');
-    var loopCount = 0;
-    var LOOPS_BEFORE_SHOW = 5;
-    var loopJustDetected = false;
-
-    // Detect loops by watching currentTime jump backwards,
-    // with a cooldown flag to avoid counting one jump multiple times.
-    video.addEventListener('timeupdate', function() {
-        if (loopJustDetected) return;
-        if (video.currentTime < 0.3 && loopCount < LOOPS_BEFORE_SHOW) {
-            loopJustDetected = true;
-            loopCount++;
-            if (loopCount >= LOOPS_BEFORE_SHOW) {
-                // On the 5th loop start, remove loop so it ends naturally
-                video.loop = false;
-            }
-            // Reset cooldown after a short delay
-            setTimeout(function() { loopJustDetected = false; }, 1000);
-        }
-    });
-
-    video.addEventListener('ended', function() {
-        btn.classList.add('visible');
-        btn.textContent = '▶ Play';
-    });
+    if (!video || !btn) return;
 
     btn.addEventListener('click', function() {
         if (video.paused) {
@@ -1070,6 +1029,33 @@ document.addEventListener('mousemove', (e) => {
             btn.textContent = '▶ Play';
         }
     });
+})();
+
+// --- Nav dropdown: hover on desktop, tap-toggle on touch ---
+(function() {
+    var dropdown = document.querySelector('.nav-dropdown');
+    var trigger  = document.querySelector('.nav-dropdown-trigger');
+    var menu     = document.querySelector('.nav-dropdown-menu');
+    if (!dropdown || !trigger || !menu) return;
+
+    // Detect true pointer device (mouse). Touch screens report pointer:coarse, hover:none.
+    var canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+    if (canHover) {
+        // Desktop mouse — show/hide on enter/leave
+        dropdown.addEventListener('mouseenter', function() { menu.style.display = 'block'; });
+        dropdown.addEventListener('mouseleave', function() { menu.style.display = 'none'; });
+    } else {
+        // Touch — toggle on tap; close on outside tap or link tap
+        trigger.addEventListener('click', function(e) {
+            e.stopPropagation();
+            menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
+        });
+        document.addEventListener('click', function() { menu.style.display = 'none'; });
+        menu.querySelectorAll('a').forEach(function(a) {
+            a.addEventListener('click', function() { menu.style.display = 'none'; });
+        });
+    }
 })();
 </script>
 
