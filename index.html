@@ -414,8 +414,14 @@ footer {
 .services-video-wrap {
     position: relative;
     width: 100%;
-    height: 100%;
     margin-left: 50px;
+}
+
+.services-video-wrap video {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 16px;
 }
 
 .services-play-btn {
@@ -1000,13 +1006,28 @@ document.addEventListener('mousemove', (e) => {
     var btn = document.getElementById('servicesPlayBtn');
     var playCount = 0;
     var PLAYS_BEFORE_SHOW = 5;
+    var buttonShown = false;
+
+    // Use loop attribute for reliable autoplay, count via 'ended' event
+    video.loop = true;
+
+    // Track loop completions using the ended event won't work with loop=true
+    // Instead listen for the video looping via currentTime resetting
+    var lastTime = 0;
+    video.addEventListener('timeupdate', function() {
+        if (!buttonShown && lastTime > video.currentTime) {
+            // currentTime jumped backwards — a loop occurred
+            playCount++;
+            if (playCount >= PLAYS_BEFORE_SHOW) {
+                buttonShown = true;
+                video.loop = false; // let it end after this final play
+            }
+        }
+        lastTime = video.currentTime;
+    });
 
     video.addEventListener('ended', function() {
-        playCount++;
-        if (playCount < PLAYS_BEFORE_SHOW) {
-            video.play();
-        } else {
-            // Show button after 5 full plays; video stays paused until user acts
+        if (buttonShown) {
             btn.classList.add('visible');
             btn.textContent = '▶ Play';
         }
@@ -1014,7 +1035,7 @@ document.addEventListener('mousemove', (e) => {
 
     btn.addEventListener('click', function() {
         if (video.paused) {
-            video.play();
+            video.play().catch(function(){});
             btn.innerHTML = '&#9646;&#9646; Pause';
         } else {
             video.pause();
