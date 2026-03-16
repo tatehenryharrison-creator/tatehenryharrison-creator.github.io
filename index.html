@@ -431,14 +431,9 @@ footer {
     opacity: 1;
 }
 
-.services-photo video {
-    animation: videoFade 30s ease-in-out infinite;
-}
-
 .services-video-wrap {
     position: relative;
     width: 100%;
-    margin-left: 50px;
 }
 
 .services-video-wrap video {
@@ -449,7 +444,7 @@ footer {
 }
 
 .services-play-btn {
-    display: none;
+    display: block;
     position: absolute;
     bottom: 16px;
     right: 16px;
@@ -464,22 +459,11 @@ footer {
     letter-spacing: 1px;
     cursor: pointer;
     backdrop-filter: blur(8px);
-    transition: background 0.2s, opacity 0.3s;
+    transition: background 0.2s;
 }
 
 .services-play-btn:hover {
     background: rgba(55,60,73,0.9);
-}
-
-.services-play-btn.visible {
-    display: block;
-}
-
-@keyframes videoFade {
-    0%   { opacity: 1; }
-    30%  { opacity: 0; }
-    80%  { opacity: 0; }
-    100% { opacity: 1; }
 }
 
 /* Mobile */
@@ -802,6 +786,9 @@ footer {
     .pricing-section { padding: 70px 6%; }
     .pricing-grid { grid-template-columns: 1fr; max-width: 420px; }
     .pricing-heading { font-size: 1.8rem; }
+    /* On touch devices, disable CSS hover — use JS .open class instead */
+    .nav-dropdown:hover .nav-dropdown-menu { display: none; }
+    .nav-dropdown.open .nav-dropdown-menu { display: block; }
 }
 </style>
  
@@ -1033,33 +1020,11 @@ document.addEventListener('mousemove', (e) => {
 </script>
 
 <script>
+// --- Services video play/pause button ---
 (function() {
     var video = document.getElementById('servicesVideo');
     var btn = document.getElementById('servicesPlayBtn');
-    var loopCount = 0;
-    var LOOPS_BEFORE_SHOW = 5;
-    var loopJustDetected = false;
-
-    // Detect loops by watching currentTime jump backwards,
-    // with a cooldown flag to avoid counting one jump multiple times.
-    video.addEventListener('timeupdate', function() {
-        if (loopJustDetected) return;
-        if (video.currentTime < 0.3 && loopCount < LOOPS_BEFORE_SHOW) {
-            loopJustDetected = true;
-            loopCount++;
-            if (loopCount >= LOOPS_BEFORE_SHOW) {
-                // On the 5th loop start, remove loop so it ends naturally
-                video.loop = false;
-            }
-            // Reset cooldown after a short delay
-            setTimeout(function() { loopJustDetected = false; }, 1000);
-        }
-    });
-
-    video.addEventListener('ended', function() {
-        btn.classList.add('visible');
-        btn.textContent = '▶ Play';
-    });
+    if (!video || !btn) return;
 
     btn.addEventListener('click', function() {
         if (video.paused) {
@@ -1069,6 +1034,31 @@ document.addEventListener('mousemove', (e) => {
             video.pause();
             btn.textContent = '▶ Play';
         }
+    });
+})();
+
+// --- Mobile nav dropdown toggle ---
+(function() {
+    var dropdown = document.querySelector('.nav-dropdown');
+    var trigger = document.querySelector('.nav-dropdown-trigger');
+    if (!dropdown || !trigger) return;
+
+    trigger.addEventListener('click', function(e) {
+        e.stopPropagation();
+        dropdown.classList.toggle('open');
+    });
+
+    // Close when clicking any link inside the menu
+    var menuLinks = dropdown.querySelectorAll('.nav-dropdown-menu a');
+    menuLinks.forEach(function(link) {
+        link.addEventListener('click', function() {
+            dropdown.classList.remove('open');
+        });
+    });
+
+    // Close when clicking anywhere else on the page
+    document.addEventListener('click', function() {
+        dropdown.classList.remove('open');
     });
 })();
 </script>
