@@ -5,28 +5,28 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Standard Package | Tate Harrison</title>
   <link rel="icon" href="/favicon.ico">
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Noto+Serif:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="fonts.css">
   <style>
     * { box-sizing: border-box; }
-    body { margin: 0; font-family: 'Noto Serif', serif; background: #21242C; color: #f5f4f0; }
+    body { margin: 0; font-family: 'IM Fell English', serif; background: #1C1A14; color: #f5f4f0; }
     p { color: #a8a49c; }
-    h1, h2, h3 { font-family: 'DM Serif Display', serif; font-weight: 400; }
+    h1, h2, h3 { font-family: 'Cinzel Decorative', serif; font-weight: 400; }
     nav, nav a, .nav-dropdown-trigger, .nav-dropdown-menu a,
     .pkg-eyebrow, .features-eyebrow, .payment-eyebrow,
-    .pay-btn, .coming-soon-badge, footer { font-family: 'Inter', sans-serif; }
+    .pay-btn, .coming-soon-badge, footer { font-family: 'EB Garamond', serif; }
 
-    nav { padding: 20px 10%; display: flex; justify-content: space-between; align-items: center; background: linear-gradient(to right, rgba(226,221,213,0.18) 0%, rgba(33,36,44,0) 28%); }
+    nav { padding: 20px 10%; display: flex; justify-content: space-between; align-items: center; background: linear-gradient(to right, rgba(226,221,213,0.18) 0%, rgba(28,26,20,0) 28%); }
     .nav-logo-link { display: flex; align-items: center; text-decoration: none; flex-shrink: 0; }
     .nav-logo { height: 48px; width: auto; display: block; transition: opacity 0.25s ease; }
     .nav-logo:hover { opacity: 0.8; }
     .nav-links { display: flex; align-items: center; }
     .nav-links > a {
-      color: #e2ddd5; text-decoration: none; margin-left: 20px;
+      color: #e8e1d4; text-decoration: none; margin-left: 20px;
       transition: opacity 0.3s ease; font-size: 0.95rem;
     }
     .nav-links > a:hover { opacity: 0.7; }
     .nav-dropdown { position: relative; display: inline-block; margin-left: 20px; }
-    .nav-dropdown-trigger { color: #e2ddd5; text-decoration: none; cursor: pointer; transition: opacity 0.3s ease; font-size: 0.95rem; }
+    .nav-dropdown-trigger { color: #e8e1d4; text-decoration: none; cursor: pointer; transition: opacity 0.3s ease; font-size: 0.95rem; }
     .nav-dropdown-trigger:hover { opacity: 0.7; }
     .nav-dropdown-menu {
       display: none; position: absolute; top: 100%; left: 0;
@@ -34,12 +34,12 @@
       z-index: 100;
     }
     .nav-dropdown-menu-inner {
-      background: #2d3140; border: 1px solid rgba(92,92,88,0.3);
+      background: #2A2220; border: 1px solid rgba(92,92,88,0.3);
       border-radius: 10px; padding: 6px 0;
       box-shadow: 0 8px 28px rgba(0,0,0,0.35);
     }
     .nav-dropdown:hover .nav-dropdown-menu { display: block; }
-    .nav-dropdown-menu-inner a { display: block; padding: 10px 20px; color: #e2ddd5; text-decoration: none; font-size: 0.88rem; transition: background 0.2s ease; }
+    .nav-dropdown-menu-inner a { display: block; padding: 10px 20px; color: #e8e1d4; text-decoration: none; font-size: 0.88rem; transition: background 0.2s ease; }
     .nav-dropdown-menu-inner a:hover { background: rgba(168,164,156,0.1); }
     .nav-dropdown-menu-inner a.active { color: #f5f4f0; font-weight: 600; }
 
@@ -47,8 +47,8 @@
     .pkg-eyebrow { font-size: 0.72rem; letter-spacing: 3px; text-transform: uppercase; color: #a8a49c; margin: 0 0 14px; }
     .pkg-title { font-size: 2.8rem; font-weight: 600; color: #f5f4f0; margin: 0 0 18px; line-height: 1.1; }
     .pkg-price-tag {
-      display: inline-block; font-size: 1.6rem; font-weight: 600; color: #e2ddd5;
-      background: rgba(55,60,73,0.8); border: 1px solid rgba(92,92,88,0.35);
+      display: inline-block; font-size: 1.6rem; font-weight: 600; color: #e8e1d4;
+      background: rgba(42,34,32,0.8); border: 1px solid rgba(92,92,88,0.35);
       border-radius: 10px; padding: 10px 28px; margin-bottom: 18px;
     }
     .pkg-tagline { color: #a8a49c; font-size: 0.95rem; max-width: 480px; margin: 0 auto; line-height: 1.6; }
@@ -59,14 +59,14 @@
     .features-list { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
     .features-list li {
       display: flex; align-items: flex-start; gap: 12px;
-      background: #373C49; border: 1px solid rgba(92,92,88,0.2);
+      background: #2A2220; border: 1px solid rgba(92,92,88,0.2);
       border-radius: 10px; padding: 18px 20px;
     }
     .feature-check { color: #a8a49c; font-size: 0.9rem; margin-top: 1px; flex-shrink: 0; }
-    .feature-text { font-size: 0.9rem; color: #e2ddd5; line-height: 1.45; }
+    .feature-text { font-size: 0.9rem; color: #e8e1d4; line-height: 1.45; }
 
     .form-section { padding: 0 10% 80px; max-width: 1100px; margin: 0 auto; }
-    .form-container { background: #373C49; border-radius: 16px; overflow: hidden; border: 1px solid rgba(92,92,88,0.25); }
+    .form-container { background: #2A2220; border-radius: 16px; overflow: hidden; border: 1px solid rgba(92,92,88,0.25); }
     .form-container iframe { display: block; width: 100%; min-height: 700px; border: none; }
 
     .payment-section { padding: 80px 10% 100px; border-top: 1px solid rgba(92,92,88,0.2); }
@@ -76,14 +76,14 @@
     .payment-subtitle { color: #a8a49c; font-size: 0.9rem; max-width: 420px; margin: 0 auto; line-height: 1.6; }
     .payment-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; max-width: 880px; margin: 0 auto; }
     .payment-card {
-      background: #373C49; border: 1px solid rgba(92,92,88,0.25);
+      background: #2A2220; border: 1px solid rgba(92,92,88,0.25);
       border-radius: 16px; padding: 36px 28px; text-align: center;
       transition: border-color 0.3s ease, transform 0.3s ease;
       display: flex; flex-direction: column; align-items: center;
     }
     .payment-card:hover { border-color: rgba(168,164,156,0.4); transform: translateY(-3px); }
     .payment-icon { width: 54px; height: 54px; border-radius: 14px; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; }
-    .payment-card-title { font-size: 1rem; font-weight: 600; color: #e2ddd5; margin: 0 0 8px; }
+    .payment-card-title { font-size: 1rem; font-weight: 600; color: #e8e1d4; margin: 0 0 8px; }
     .payment-card-desc { font-size: 0.83rem; color: #a8a49c; margin: 0 0 24px; line-height: 1.55; flex: 1; }
     .pay-btn { display: inline-block; padding: 12px 30px; border-radius: 9px; font-size: 0.88rem; font-weight: 600; text-decoration: none; transition: opacity 0.2s ease, transform 0.2s ease; width: 100%; }
     .pay-btn:hover { opacity: 0.88; transform: translateY(-1px); }
@@ -93,7 +93,7 @@
     .btn-paypal { background: #003087; color: #FFD140; }
     .icon-stripe { background: rgba(99,91,255,0.12); }
     .btn-stripe { background: #635BFF; color: #fff; opacity: 0.4; pointer-events: none; cursor: not-allowed; }
-    .coming-soon-badge { display: inline-block; font-size: 0.68rem; letter-spacing: 1.5px; text-transform: uppercase; color: #5c5c58; border: 1px solid rgba(92,92,88,0.5); border-radius: 20px; padding: 4px 12px; margin-bottom: 16px; }
+    .coming-soon-badge { display: inline-block; font-size: 0.68rem; letter-spacing: 1.5px; text-transform: uppercase; color: #635f51; border: 1px solid rgba(92,92,88,0.5); border-radius: 20px; padding: 4px 12px; margin-bottom: 16px; }
 
     footer { text-align: center; padding: 40px 0; font-size: 0.85rem; color: #a8a49c; opacity: 0.5; }
 
