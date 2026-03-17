@@ -836,17 +836,7 @@ footer {
     </a>
     <div class="nav-links">
         <a href="index.html">Home</a>
-        <div class="nav-dropdown">
-            <a class="nav-dropdown-trigger">Packages ▾</a>
-            <div class="nav-dropdown-menu">
-                <div class="nav-dropdown-menu-inner">
-                    <a href="pricing-photography.html">Photography</a>
-                    <a href="pricing-standard.html">Standard</a>
-                    <a href="pricing-advanced.html">Advanced</a>
-                    <a href="pricing-campaign.html">Campaign</a>
-                </div>
-            </div>
-        </div>
+        <a href="#pricing">Services</a>
         <a href="#contact">Contact</a>
         <a href="contact.html">Client Waiver</a>
         <a href="schedule.html">Free Consultation</a>
@@ -947,7 +937,7 @@ footer {
 <section id="pricing" class="pricing-section">
     <div class="pricing-header">
         <p class="pricing-eyebrow">Investment</p>
-        <h2 class="pricing-heading">Choose Your Package</h2>
+        <h2 class="pricing-heading">Choose Your Service</h2>
         <p class="pricing-subtext">From single-day photography to full brand campaigns — find the right fit for your project.</p>
     </div>
 
@@ -1125,30 +1115,6 @@ document.addEventListener('mousemove', (e) => {
     });
 })();
 
-// --- Nav dropdown (pure JS, no CSS hover) ---
-(function() {
-    var dropdown = document.querySelector('.nav-dropdown');
-    var trigger  = document.querySelector('.nav-dropdown-trigger');
-    var menu     = document.querySelector('.nav-dropdown-menu');
-    if (!dropdown || !trigger || !menu) return;
-
-    function open()  { menu.style.display = 'block'; }
-    function close() { menu.style.display = 'none';  }
-
-    // Desktop: mouseenter/mouseleave on the whole dropdown container
-    dropdown.addEventListener('mouseenter', open);
-    dropdown.addEventListener('mouseleave', close);
-
-    // Mobile: tap trigger toggles; tap outside or link closes
-    trigger.addEventListener('click', function(e) {
-        e.stopPropagation();
-        menu.style.display === 'block' ? close() : open();
-    });
-    document.addEventListener('click', close);
-    menu.querySelectorAll('a').forEach(function(a) {
-        a.addEventListener('click', close);
-    });
-})();
 </script>
 
 </body>
