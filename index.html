@@ -34,7 +34,7 @@
     transform: scale(1.02);
 }
     .contact-link {
-    color: #e8e1d4;
+    color: #2A2220;
     text-decoration: none;
     position: relative;
     transition: opacity 0.3s ease;
@@ -51,7 +51,7 @@
     bottom: -4px;
     width: 0%;
     height: 1px;
-    background: #e8e1d4;
+    background: #2A2220;
     transition: width 0.3s ease;
 }
 
@@ -61,8 +61,8 @@
 body {
     margin: 0;
     font-family: 'IM Fell English', serif;
-    background: #1C1A14;
-    color: #f5f4f0;
+    background: #f5f4f0;
+    color: #1C1A14;
 }
 h1, h2, h3 {
     font-family: 'Cinzel', serif;
@@ -79,7 +79,8 @@ nav {
     display: flex;
     align-items: stretch;
     justify-content: space-between;
-    background: linear-gradient(to right, rgba(226,221,213,0.22) 0%, rgba(28,26,20,0) 30%);
+    background: linear-gradient(to right, rgba(245,244,240,0.95) 0%, rgba(245,244,240,0.6) 25%, rgba(245,244,240,0) 50%);
+    border-bottom: 1px solid rgba(99,95,81,0.12);
 }
 .nav-logo-link {
     display: flex;
@@ -98,7 +99,7 @@ nav {
 }
 .nav-logo:hover { opacity: 0.8; }
 nav a {
-    color: #e8e1d4;
+    color: #2A2220;
     text-decoration: none;
     margin-left: 20px;
 }
@@ -110,7 +111,7 @@ h1 {
     margin-bottom: 10px;
 }
 p {
-    color: #a8a49c;
+    color: #635f51;
 }
 .video-grid {
     display: grid;
@@ -131,7 +132,8 @@ iframe {
 footer {
     text-align: center;
     padding: 40px 0;
-    opacity: 0.5;
+    color: #a8a49c;
+    border-top: 1px solid rgba(99,95,81,0.12);
 }
     .subtext {
     padding-left: 12px;
@@ -174,7 +176,7 @@ footer {
 /* Subtext */
 .subtext p {
     margin: 6px 0;
-    color: #f5f4f0;
+    color: #635f51;
 }
 /* Video side */
 .hero-video {
@@ -239,8 +241,9 @@ footer {
     width: 48%;
     padding: 50px;
     border-radius: 20px;
-    background: rgba(28,26,20,0.55);
-    backdrop-filter: blur(10px);
+    background: rgba(245,244,240,0.72);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     z-index: 3;
     margin-left: 0;
 
@@ -256,7 +259,7 @@ footer {
 
 .subtext p {
     margin: 6px 0;
-    color: #f5f4f0;
+    color: #635f51;
 }
 
 /* Video */
@@ -283,13 +286,13 @@ footer {
     position: absolute;
     left: 0;
     top: 0;
-    width: 35%;
+    width: 40%;
     height: 100%;
     background: linear-gradient(
         to right,
-        rgba(28,26,20,0.6) 0%,
-        rgba(28,26,20,0.15) 60%,
-        rgba(28,26,20,0) 100%
+        rgba(245,244,240,1) 0%,
+        rgba(245,244,240,0.7) 50%,
+        rgba(245,244,240,0) 100%
     );
 }
 
@@ -568,9 +571,9 @@ footer {
         inset: 0;
         background: linear-gradient(
             to bottom,
-            rgba(28,26,20,0.7) 0%,
-            rgba(28,26,20,0.35) 50%,
-            rgba(28,26,20,0.85) 100%
+            rgba(28,26,20,0.55) 0%,
+            rgba(28,26,20,0.2) 50%,
+            rgba(28,26,20,0.7) 100%
         );
     }
 
@@ -580,10 +583,11 @@ footer {
         width: 90%;
         padding: 30px 20px;
         border-radius: 15px;
-        background: rgba(28,26,20,0.5);
+        background: rgba(245,244,240,0.18);
         backdrop-filter: blur(8px);
         -webkit-backdrop-filter: blur(8px);
         z-index: 2;
+        border: 1px solid rgba(245,244,240,0.25);
     }
 
     .hero-title {
@@ -591,6 +595,7 @@ footer {
         margin-bottom: 12px;
         letter-spacing: 0.5px;
         line-height: 1.1;
+        color: #f5f4f0;
     }
 
     .subtext p {
@@ -621,7 +626,7 @@ footer {
     align-items: center;
 }
 .nav-links > a {
-    color: #e8e1d4;
+    color: #2A2220;
     text-decoration: none;
     margin-left: 20px;
     transition: opacity 0.3s ease;
@@ -668,9 +673,9 @@ footer {
 
 /* ===== PRICING SECTION ===== */
 .pricing-section {
-    background: #1C1A14;
+    background: #e8e1d4;
     padding: 100px 10%;
-    border-top: 1px solid rgba(92,92,88,0.18);
+    border-top: 1px solid rgba(99,95,81,0.15);
 }
 .pricing-header {
     text-align: center;
@@ -680,19 +685,19 @@ footer {
     font-size: 0.75rem;
     letter-spacing: 3px;
     text-transform: uppercase;
-    color: #a8a49c;
+    color: #5C6E82;
     margin: 0 0 12px;
     opacity: 1;
 }
 .pricing-heading {
     font-size: 2.4rem;
     font-weight: 600;
-    color: #f5f4f0;
+    color: #1C1A14;
     margin: 0 0 14px;
     line-height: 1.15;
 }
 .pricing-subtext {
-    color: #a8a49c;
+    color: #635f51;
     font-size: 0.93rem;
     max-width: 440px;
     margin: 0 auto;
@@ -706,39 +711,40 @@ footer {
     margin: 0 auto;
 }
 .pricing-card {
-    background: #2A2220;
-    border: 1px solid rgba(92,92,88,0.25);
+    background: #f5f4f0;
+    border: 1px solid rgba(99,95,81,0.18);
     border-radius: 16px;
     padding: 36px 28px;
     display: flex;
     flex-direction: column;
-    transition: border-color 0.3s ease, transform 0.3s ease;
+    transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
 }
 .pricing-card:hover {
-    border-color: rgba(168,164,156,0.4);
+    border-color: rgba(92,110,130,0.4);
     transform: translateY(-4px);
+    box-shadow: 0 12px 36px rgba(28,26,20,0.08);
 }
 .pricing-card-label {
     font-size: 0.68rem;
     letter-spacing: 2.5px;
     text-transform: uppercase;
-    color: #635f51;
+    color: #a8a49c;
     margin: 0 0 10px;
 }
 .pricing-card-name {
     font-size: 1.2rem;
     font-weight: 600;
-    color: #f5f4f0;
+    color: #1C1A14;
     margin: 0 0 6px;
 }
 .pricing-card-price {
     font-size: 1rem;
-    color: #a8a49c;
+    color: #635f51;
     margin: 0 0 24px;
 }
 .pricing-divider {
     height: 1px;
-    background: rgba(92,110,130,0.35);
+    background: rgba(92,110,130,0.25);
     margin-bottom: 22px;
 }
 .pricing-features {
@@ -752,7 +758,7 @@ footer {
 }
 .pricing-features li {
     font-size: 0.83rem;
-    color: #a8a49c;
+    color: #635f51;
     display: flex;
     align-items: flex-start;
     gap: 8px;
@@ -772,15 +778,15 @@ footer {
     border-radius: 9px;
     font-size: 0.88rem;
     font-weight: 600;
+    letter-spacing: 0.5px;
     text-decoration: none;
-    background: rgba(92,110,130,0.12);
-    border: 1px solid rgba(92,110,130,0.4);
-    color: #e8e1d4;
-    transition: background 0.25s ease, border-color 0.25s ease;
+    background: #5C6E82;
+    border: none;
+    color: #f5f4f0;
+    transition: background 0.25s ease;
 }
 .pricing-cta:hover {
-    background: rgba(92,110,130,0.22);
-    border-color: rgba(92,110,130,0.7);
+    background: #4a5c6e;
 }
 
 @media (max-width: 900px) {
@@ -811,7 +817,7 @@ footer {
 .scroll-arrow svg {
     width: 36px;
     height: 36px;
-    stroke: rgba(245,244,240,0.55);
+    stroke: rgba(28,26,20,0.4);
     fill: none;
     stroke-width: 2;
     stroke-linecap: round;
