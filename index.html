@@ -26,16 +26,6 @@ html, body { margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 body { font-family: 'IM Fell English', serif; background: #f5f4f0; color: #1C1A14; }
 
-/* ===== READING PROGRESS BAR ===== */
-#reading-progress {
-    position: fixed; top: 0; left: 0;
-    height: 3px;
-    background: linear-gradient(to right, #5C6E82, #8da0b0);
-    z-index: 9999; width: 0%;
-    transition: width 0.08s linear;
-    border-radius: 0 2px 2px 0;
-    pointer-events: none;
-}
 
 /* ===== TYPOGRAPHY ===== */
 h1, h2 { font-family: 'Cinzel', serif; font-weight: 400; }
@@ -440,18 +430,18 @@ nav {
     border-radius: 16px; padding: 36px 28px;
     display: flex; flex-direction: column;
     transition: border-color 0.4s ease;
-    transform-style: preserve-3d; will-change: transform;
     position: relative; cursor: pointer; overflow: hidden;
+    /* No transform-style or will-change — avoids GPU subpixel blur */
 }
 .pricing-card:hover { border-color: rgba(92,110,130,0.45); }
-/* Plastic specular shine — no blur, tracks light from bottom-left */
+/* Plastic specular shine — sharp, no blur, tracks bottom-left light source */
 .card-shine {
-    position: absolute; inset: 0; border-radius: 16px;
+    position: absolute; inset: 0;
     pointer-events: none; z-index: 0;
     background: radial-gradient(ellipse 90% 70% at 12% 88%,
-        rgba(255,255,255,0.22) 0%,
-        rgba(255,255,255,0.07) 40%,
-        transparent 70%);
+        rgba(255,255,255,0.38) 0%,
+        rgba(255,255,255,0.13) 38%,
+        transparent 65%);
 }
 /* All direct card children sit above the shine layer */
 .pricing-card > *:not(.card-shine) { position: relative; z-index: 1; }
@@ -649,7 +639,6 @@ footer > * { position: relative; z-index: 1; }
 <body>
 
 <!-- Reading Progress Bar -->
-<div id="reading-progress"></div>
 
 <!-- NAV -->
 <nav>
@@ -1034,13 +1023,6 @@ footer > * { position: relative; z-index: 1; }
 <a href="schedule.html" class="mobile-cta">Book a Free Consultation →</a>
 
 <script>
-/* ===== READING PROGRESS BAR ===== */
-const progressBar = document.getElementById('reading-progress');
-window.addEventListener('scroll', () => {
-    const scrolled = window.scrollY;
-    const total = document.documentElement.scrollHeight - window.innerHeight;
-    if (total > 0) progressBar.style.width = Math.min((scrolled / total) * 100, 100) + '%';
-}, { passive: true });
 
 /* ===== HERO PARALLAX ===== */
 const heroParallax = document.querySelector('.hero-parallax');
@@ -1230,7 +1212,7 @@ function closeLightbox() { lightbox.classList.remove('open'); document.body.styl
 
 /* ===== FOOTER QUICK FORM — Formspree ===== */
 /* Replace YOUR_FORM_ID below with your ID from formspree.io */
-const FORMSPREE_ID = 'YOUR_FORM_ID';
+const FORMSPREE_ID = 'mnjglyzp';
 
 document.getElementById('footerForm').addEventListener('submit', async function(e) {
     e.preventDefault();
