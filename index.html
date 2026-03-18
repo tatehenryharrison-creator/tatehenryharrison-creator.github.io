@@ -421,9 +421,35 @@ nav {
 }
 .pricing-heading { font-size: 2.4rem; font-weight: 600; color: #1C1A14; margin: 0 0 14px; line-height: 1.15; }
 .pricing-subtext { color: #635f51; font-size: 0.93rem; max-width: 440px; margin: 0 auto; line-height: 1.6; }
+/* Pricing tab switcher */
+.pricing-tabs {
+    display: flex; justify-content: center; gap: 8px;
+    margin-bottom: 52px;
+}
+.pricing-tab {
+    font-family: 'EB Garamond', serif; font-size: 0.88rem;
+    letter-spacing: 1.8px; text-transform: uppercase;
+    padding: 10px 32px; border-radius: 50px;
+    border: 1px solid rgba(99,95,81,0.3);
+    background: transparent; color: #635f51;
+    cursor: pointer; transition: background 0.25s, color 0.25s, border-color 0.25s;
+}
+.pricing-tab.active {
+    background: #5C6E82; color: #f5f4f0; border-color: #5C6E82;
+}
+.pricing-tab:hover:not(.active) { border-color: #5C6E82; color: #5C6E82; }
+
+/* Card groups */
+.pricing-group { display: block; }
+.pricing-group.hidden { display: none; }
+
 .pricing-grid {
     display: grid; grid-template-columns: repeat(4, 1fr);
     gap: 20px; max-width: 1100px; margin: 0 auto 44px;
+}
+.pricing-grid--2 {
+    grid-template-columns: repeat(2, minmax(0, 380px));
+    max-width: 800px; justify-content: center;
 }
 .pricing-card {
     background: #f5f4f0; border: 1px solid rgba(99,95,81,0.18);
@@ -585,6 +611,7 @@ footer > * { position: relative; z-index: 1; }
 /* ===== RESPONSIVE ===== */
 @media (max-width: 900px) {
     .pricing-grid { grid-template-columns: repeat(2, 1fr); }
+    .pricing-grid--2 { grid-template-columns: repeat(2, 1fr); max-width: 100%; }
     .portfolio-grid { columns: 2; }
 }
 @media (max-width: 768px) {
@@ -852,100 +879,170 @@ footer > * { position: relative; z-index: 1; }
         <p class="pricing-subtext anim-fade">From single-day photography to full brand campaigns — find the right fit for your project.</p>
     </div>
 
-    <div class="pricing-grid">
-        <div class="pricing-card">
-            <div class="card-shine"></div>
-            <p class="pricing-card-label">Package 01</p>
-            <h3 class="pricing-card-name">Photography</h3>
-            <p class="pricing-card-price">Starting at $XXX</p>
-            <div class="pricing-divider"></div>
-            <ul class="pricing-features">
-                <li>Up to 2-hour session</li>
-                <li>30+ edited photos</li>
-                <li>Color grading &amp; retouching</li>
-                <li>Online gallery delivery</li>
-                <li>Personal &amp; commercial license</li>
-            </ul>
-            <a href="pricing-photography.html" class="pricing-cta">Select Package</a>
+    <!-- Tab switcher -->
+    <div class="pricing-tabs">
+        <button class="pricing-tab" data-target="video" id="tab-video">Videography</button>
+        <button class="pricing-tab" data-target="photo" id="tab-photo">Photography</button>
+    </div>
+
+    <!-- VIDEOGRAPHY GROUP (default) -->
+    <div class="pricing-group" id="pricing-video">
+        <div class="pricing-grid">
+            <div class="pricing-card">
+                <div class="card-shine"></div>
+                <p class="pricing-card-label">Video 01</p>
+                <h3 class="pricing-card-name">Chapter</h3>
+                <p class="pricing-card-price" style="font-style:italic;color:#635f51;font-size:0.85rem;margin:-8px 0 18px;">Half-Day</p>
+                <div class="pricing-divider"></div>
+                <ul class="pricing-features">
+                    <li>Single-camera setup</li>
+                    <li>Up to 4 hours coverage</li>
+                    <li>Up to 5-min edited video</li>
+                    <li>Color grading included</li>
+                    <li>1 round of revisions</li>
+                </ul>
+                <a href="pricing-standard.html" class="pricing-cta">Select Package</a>
+            </div>
+
+            <div class="pricing-card popular">
+                <div class="card-shine"></div>
+                <span class="popular-badge">Most Popular</span>
+                <p class="pricing-card-label">Video 02</p>
+                <h3 class="pricing-card-name">Novel</h3>
+                <p class="pricing-card-price" style="font-style:italic;color:#635f51;font-size:0.85rem;margin:-8px 0 18px;">Full-Day</p>
+                <div class="pricing-divider"></div>
+                <ul class="pricing-features">
+                    <li>Multi-camera setup</li>
+                    <li>Up to 8 hours coverage</li>
+                    <li>Up to 10-min edited video</li>
+                    <li>Full color grade + audio mix</li>
+                    <li>2 revisions + social cuts</li>
+                </ul>
+                <a href="pricing-advanced.html" class="pricing-cta">Select Package</a>
+            </div>
+
+            <div class="pricing-card">
+                <div class="card-shine"></div>
+                <p class="pricing-card-label">Video 03</p>
+                <h3 class="pricing-card-name">Epic</h3>
+                <p class="pricing-card-price" style="font-style:italic;color:#635f51;font-size:0.85rem;margin:-8px 0 18px;">2 Days</p>
+                <div class="pricing-divider"></div>
+                <ul class="pricing-features">
+                    <li>Multi-camera, 2-day shoot</li>
+                    <li>Up to 20-min edited video</li>
+                    <li>Full color grade + audio mix</li>
+                    <li>Unlimited revisions</li>
+                    <li>Full commercial license</li>
+                </ul>
+                <a href="pricing-campaign.html" class="pricing-cta">Select Package</a>
+            </div>
+
+            <div class="pricing-card">
+                <div class="card-shine"></div>
+                <p class="pricing-card-label">Video 04</p>
+                <h3 class="pricing-card-name">Custom</h3>
+                <p class="pricing-card-price" style="font-style:italic;color:#635f51;font-size:0.85rem;margin:-8px 0 18px;">3+ Days</p>
+                <div class="pricing-divider"></div>
+                <ul class="pricing-features">
+                    <li>Strategy &amp; pre-production</li>
+                    <li>Multi-day shoot (3+ days)</li>
+                    <li>Multiple deliverables</li>
+                    <li>Unlimited revisions</li>
+                    <li>Full commercial license</li>
+                </ul>
+                <a href="pricing-campaign.html" class="pricing-cta">Let's Talk</a>
+            </div>
         </div>
 
-        <div class="pricing-card popular">
-            <div class="card-shine"></div>
-            <span class="popular-badge">Most Popular</span>
-            <p class="pricing-card-label">Package 02</p>
-            <h3 class="pricing-card-name">Standard</h3>
-            <p class="pricing-card-price">Starting at $XXX</p>
-            <div class="pricing-divider"></div>
-            <ul class="pricing-features">
-                <li>Single-camera video setup</li>
-                <li>Up to 2 hours coverage</li>
-                <li>Up to 5-min edited video</li>
-                <li>Color grading included</li>
-                <li>1 round of revisions</li>
-            </ul>
-            <a href="pricing-standard.html" class="pricing-cta">Select Package</a>
-        </div>
-
-        <div class="pricing-card">
-            <div class="card-shine"></div>
-            <p class="pricing-card-label">Package 03</p>
-            <h3 class="pricing-card-name">Advanced</h3>
-            <p class="pricing-card-price">Starting at $XXX</p>
-            <div class="pricing-divider"></div>
-            <ul class="pricing-features">
-                <li>Multi-camera setup</li>
-                <li>Up to 4 hours coverage</li>
-                <li>Up to 10-min edited video</li>
-                <li>Full color grade + audio mix</li>
-                <li>2 revisions + social cuts</li>
-            </ul>
-            <a href="pricing-advanced.html" class="pricing-cta">Select Package</a>
-        </div>
-
-        <div class="pricing-card">
-            <div class="card-shine"></div>
-            <p class="pricing-card-label">Package 04</p>
-            <h3 class="pricing-card-name">Campaign</h3>
-            <p class="pricing-card-price">Custom Pricing</p>
-            <div class="pricing-divider"></div>
-            <ul class="pricing-features">
-                <li>Strategy &amp; pre-production</li>
-                <li>Multi-day shoot capability</li>
-                <li>Multiple deliverables</li>
-                <li>Unlimited revisions</li>
-                <li>Full commercial license</li>
-            </ul>
-            <a href="pricing-campaign.html" class="pricing-cta">Select Package</a>
+        <!-- Video comparison table -->
+        <div class="compare-toggle-wrap">
+            <button class="compare-toggle-btn" id="compareToggleVideo">Show Full Comparison ▾</button>
+            <div class="compare-table-wrap" id="compareTableVideo">
+                <table class="compare-table">
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th>Chapter</th>
+                            <th>Novel</th>
+                            <th>Epic</th>
+                            <th>Custom</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Coverage</td><td class="check">4 hrs</td><td class="check">8 hrs</td><td class="check">2 days</td><td class="check">3+ days</td></tr>
+                        <tr><td>Camera setup</td><td class="check">Single</td><td class="check">Multi</td><td class="check">Multi</td><td class="check">Multi</td></tr>
+                        <tr><td>Edited video</td><td class="check">Up to 5 min</td><td class="check">Up to 10 min</td><td class="check">Up to 20 min</td><td class="check">Custom</td></tr>
+                        <tr><td>Color grading</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
+                        <tr><td>Audio mix</td><td class="dash">—</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
+                        <tr><td>Social cuts</td><td class="dash">—</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
+                        <tr><td>Revisions</td><td class="check">1</td><td class="check">2</td><td class="check">Unlimited</td><td class="check">Unlimited</td></tr>
+                        <tr><td>Commercial license</td><td class="dash">—</td><td class="dash">—</td><td class="check">✓</td><td class="check">✓</td></tr>
+                        <tr><td>Strategy session</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="check">✓</td></tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 
-    <!-- Comparison Table Toggle -->
-    <div class="compare-toggle-wrap">
-        <button class="compare-toggle-btn" id="compareToggle">Show Full Comparison ▾</button>
-        <div class="compare-table-wrap" id="compareTableWrap">
-            <table class="compare-table">
-                <thead>
-                    <tr>
-                        <th>Feature</th>
-                        <th>Photography</th>
-                        <th>Standard</th>
-                        <th>Advanced</th>
-                        <th>Campaign</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td>Photos included</td><td class="check">30+</td><td class="dash">—</td><td class="dash">—</td><td class="check">✓</td></tr>
-                    <tr><td>Video editing</td><td class="dash">—</td><td class="check">Up to 5 min</td><td class="check">Up to 10 min</td><td class="check">Unlimited</td></tr>
-                    <tr><td>Camera setup</td><td class="check">Photo only</td><td class="check">Single</td><td class="check">Multi</td><td class="check">Multi-day</td></tr>
-                    <tr><td>Coverage hours</td><td class="check">2 hrs</td><td class="check">2 hrs</td><td class="check">4 hrs</td><td class="check">Custom</td></tr>
-                    <tr><td>Color grading</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
-                    <tr><td>Audio mix</td><td class="dash">—</td><td class="dash">—</td><td class="check">✓</td><td class="check">✓</td></tr>
-                    <tr><td>Revisions</td><td class="check">1</td><td class="check">1</td><td class="check">2</td><td class="check">Unlimited</td></tr>
-                    <tr><td>Social cuts</td><td class="dash">—</td><td class="dash">—</td><td class="check">✓</td><td class="check">✓</td></tr>
-                    <tr><td>Commercial license</td><td class="check">✓</td><td class="dash">—</td><td class="dash">—</td><td class="check">✓</td></tr>
-                    <tr><td>Strategy session</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="check">✓</td></tr>
-                </tbody>
-            </table>
+    <!-- PHOTOGRAPHY GROUP (hidden by default) -->
+    <div class="pricing-group hidden" id="pricing-photo">
+        <div class="pricing-grid pricing-grid--2">
+            <div class="pricing-card">
+                <div class="card-shine"></div>
+                <p class="pricing-card-label">Photo 01</p>
+                <h3 class="pricing-card-name">Half-Day</h3>
+                <p class="pricing-card-price">Starting at $XXX</p>
+                <div class="pricing-divider"></div>
+                <ul class="pricing-features">
+                    <li>Up to 4-hour session</li>
+                    <li>50+ edited photos</li>
+                    <li>Color grading &amp; retouching</li>
+                    <li>Online gallery delivery</li>
+                    <li>Personal &amp; commercial license</li>
+                </ul>
+                <a href="pricing-photography.html" class="pricing-cta">Select Package</a>
+            </div>
+
+            <div class="pricing-card">
+                <div class="card-shine"></div>
+                <p class="pricing-card-label">Photo 02</p>
+                <h3 class="pricing-card-name">Full-Day</h3>
+                <p class="pricing-card-price">Starting at $XXX</p>
+                <div class="pricing-divider"></div>
+                <ul class="pricing-features">
+                    <li>Up to 8-hour session</li>
+                    <li>100+ edited photos</li>
+                    <li>Color grading &amp; retouching</li>
+                    <li>Same-day selects preview</li>
+                    <li>Personal &amp; commercial license</li>
+                </ul>
+                <a href="pricing-photography.html" class="pricing-cta">Select Package</a>
+            </div>
+        </div>
+
+        <!-- Photo comparison table -->
+        <div class="compare-toggle-wrap">
+            <button class="compare-toggle-btn" id="compareTogglePhoto">Show Full Comparison ▾</button>
+            <div class="compare-table-wrap" id="compareTablePhoto">
+                <table class="compare-table">
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th>Half-Day</th>
+                            <th>Full-Day</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Session length</td><td class="check">Up to 4 hrs</td><td class="check">Up to 8 hrs</td></tr>
+                        <tr><td>Edited photos</td><td class="check">50+</td><td class="check">100+</td></tr>
+                        <tr><td>Color grading</td><td class="check">✓</td><td class="check">✓</td></tr>
+                        <tr><td>Retouching</td><td class="check">✓</td><td class="check">✓</td></tr>
+                        <tr><td>Online gallery</td><td class="check">✓</td><td class="check">✓</td></tr>
+                        <tr><td>Same-day selects</td><td class="dash">—</td><td class="check">✓</td></tr>
+                        <tr><td>Commercial license</td><td class="check">✓</td><td class="check">✓</td></tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </section>
@@ -1119,12 +1216,27 @@ document.querySelectorAll('.pricing-card').forEach(card => {
     });
 });
 
-/* ===== COMPARISON TABLE TOGGLE ===== */
-const compareBtn  = document.getElementById('compareToggle');
-const compareWrap = document.getElementById('compareTableWrap');
-compareBtn.addEventListener('click', () => {
-    const open = compareWrap.classList.toggle('open');
-    compareBtn.textContent = open ? 'Hide Comparison ▴' : 'Show Full Comparison ▾';
+/* ===== PRICING TABS ===== */
+(function() {
+    const tabs   = document.querySelectorAll('.pricing-tab');
+    const groups = document.querySelectorAll('.pricing-group');
+
+    function activate(target) {
+        tabs.forEach(t => t.classList.toggle('active', t.dataset.target === target));
+        groups.forEach(g => g.classList.toggle('hidden', g.id !== 'pricing-' + target));
+    }
+    activate('video'); /* default to videography */
+    tabs.forEach(tab => tab.addEventListener('click', () => activate(tab.dataset.target)));
+})();
+
+/* ===== COMPARISON TABLE TOGGLES ===== */
+[['compareToggleVideo','compareTableVideo'],['compareTogglePhoto','compareTablePhoto']].forEach(([btnId, wrapId]) => {
+    const btn  = document.getElementById(btnId);
+    const wrap = document.getElementById(wrapId);
+    if (btn && wrap) btn.addEventListener('click', () => {
+        const open = wrap.classList.toggle('open');
+        btn.textContent = open ? 'Hide Comparison ▴' : 'Show Full Comparison ▾';
+    });
 });
 
 /* ===== BEFORE / AFTER SLIDER ===== */
