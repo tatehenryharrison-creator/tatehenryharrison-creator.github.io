@@ -439,20 +439,29 @@ nav {
     background: #f5f4f0; border: 1px solid rgba(99,95,81,0.18);
     border-radius: 16px; padding: 36px 28px;
     display: flex; flex-direction: column;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    transition: border-color 0.4s ease;
     transform-style: preserve-3d; will-change: transform;
-    position: relative;
+    position: relative; cursor: pointer; overflow: hidden;
 }
-.pricing-card:hover {
-    border-color: rgba(92,110,130,0.4);
-    box-shadow: 0 12px 36px rgba(28,26,20,0.09);
+.pricing-card:hover { border-color: rgba(92,110,130,0.45); }
+/* Plastic specular shine — no blur, tracks light from bottom-left */
+.card-shine {
+    position: absolute; inset: 0; border-radius: 16px;
+    pointer-events: none; z-index: 0;
+    background: radial-gradient(ellipse 90% 70% at 12% 88%,
+        rgba(255,255,255,0.22) 0%,
+        rgba(255,255,255,0.07) 40%,
+        transparent 70%);
 }
+/* All direct card children sit above the shine layer */
+.pricing-card > *:not(.card-shine) { position: relative; z-index: 1; }
 .popular-badge {
-    position: absolute; top: -13px; left: 50%; transform: translateX(-50%);
+    display: block; text-align: center;
     background: #5C6E82; color: #f5f4f0;
     font-family: 'EB Garamond', serif; font-size: 0.66rem;
     letter-spacing: 2px; text-transform: uppercase;
     padding: 4px 14px; border-radius: 50px; white-space: nowrap;
+    margin: -36px -28px 20px; border-radius: 16px 16px 0 0;
 }
 .pricing-card-label { font-size: 0.68rem; letter-spacing: 2.5px; text-transform: uppercase; color: #a8a49c; margin: 0 0 10px; }
 .pricing-card-name { font-size: 1.2rem; font-weight: 600; color: #1C1A14; margin: 0 0 6px; }
@@ -856,6 +865,7 @@ footer > * { position: relative; z-index: 1; }
 
     <div class="pricing-grid">
         <div class="pricing-card">
+            <div class="card-shine"></div>
             <p class="pricing-card-label">Package 01</p>
             <h3 class="pricing-card-name">Photography</h3>
             <p class="pricing-card-price">Starting at $XXX</p>
@@ -871,6 +881,7 @@ footer > * { position: relative; z-index: 1; }
         </div>
 
         <div class="pricing-card popular">
+            <div class="card-shine"></div>
             <span class="popular-badge">Most Popular</span>
             <p class="pricing-card-label">Package 02</p>
             <h3 class="pricing-card-name">Standard</h3>
@@ -887,6 +898,7 @@ footer > * { position: relative; z-index: 1; }
         </div>
 
         <div class="pricing-card">
+            <div class="card-shine"></div>
             <p class="pricing-card-label">Package 03</p>
             <h3 class="pricing-card-name">Advanced</h3>
             <p class="pricing-card-price">Starting at $XXX</p>
@@ -902,6 +914,7 @@ footer > * { position: relative; z-index: 1; }
         </div>
 
         <div class="pricing-card">
+            <div class="card-shine"></div>
             <p class="pricing-card-label">Package 04</p>
             <h3 class="pricing-card-name">Campaign</h3>
             <p class="pricing-card-price">Custom Pricing</p>
@@ -1056,18 +1069,69 @@ const revealObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.15 });
 animEls.forEach(el => revealObserver.observe(el));
 
-/* ===== PRICING CARD TILT ===== */
+/* ===== PRICING CARD TILT — gradual lerp attack, plastic shine from bottom-left ===== */
 document.querySelectorAll('.pricing-card').forEach(card => {
+    const shine   = card.querySelector('.card-shine');
+    const ctaHref = card.querySelector('.pricing-cta')?.getAttribute('href');
+    let tX = 0, tY = 0, cX = 0, cY = 0;
+    let hovering = false, rafId = null;
+
+    /* Click anywhere on card navigates to the package page */
+    card.addEventListener('click', e => {
+        if (!e.target.closest('.pricing-cta') && ctaHref) window.location.href = ctaHref;
+    });
+
+    function lerp(a, b, t) { return a + (b - a) * t; }
+
+    function tick() {
+        /* Slow attack (t≈0.055), quicker return (t≈0.11) */
+        const t = hovering ? 0.055 : 0.11;
+        cX = lerp(cX, hovering ? tX : 0, t);
+        cY = lerp(cY, hovering ? tY : 0, t);
+
+        card.style.transform =
+            `perspective(720px) rotateY(${cX * 10}deg) rotateX(${-cY * 10}deg) translateY(-5px)`;
+        card.style.boxShadow =
+            `${-cX * 18}px ${(-cY + 0.4) * 14}px 36px rgba(28,26,20,0.13)`;
+
+        /* Plastic shine — light source fixed at bottom-left.
+           Highlight position shifts as card tilts (reflection geometry). */
+        if (shine) {
+            const shX  = 12 + cX * 38;           /* base 12 % from left  */
+            const shY  = 88 - cY * 42;           /* base 88 % from top   */
+            const mag  = Math.sqrt(cX*cX + cY*cY);
+            const opaq = (0.20 + mag * 0.45).toFixed(2);
+            const soft = (0.06 + mag * 0.15).toFixed(2);
+            shine.style.background =
+                `radial-gradient(ellipse 88% 68% at ${shX.toFixed(1)}% ${shY.toFixed(1)}%,` +
+                `rgba(255,255,255,${opaq}) 0%,` +
+                `rgba(255,255,255,${soft}) 38%,` +
+                `transparent 68%)`;
+        }
+
+        /* Stop RAF when settled at rest */
+        if (!hovering && Math.abs(cX) < 0.0008 && Math.abs(cY) < 0.0008) {
+            cX = cY = 0;
+            card.style.transform = '';
+            card.style.boxShadow = '';
+            if (shine) shine.style.background = '';
+            rafId = null;
+            return;
+        }
+        rafId = requestAnimationFrame(tick);
+    }
+
+    card.addEventListener('mouseenter', () => {
+        hovering = true;
+        if (!rafId) rafId = requestAnimationFrame(tick);
+    });
     card.addEventListener('mousemove', e => {
-        const rect = card.getBoundingClientRect();
-        const x = (e.clientX - rect.left) / rect.width  - 0.5;
-        const y = (e.clientY - rect.top)  / rect.height - 0.5;
-        card.style.transform = `perspective(700px) rotateY(${x * 9}deg) rotateX(${-y * 9}deg) translateY(-4px)`;
-        card.style.boxShadow = `${-x * 14}px ${-y * 10}px 30px rgba(28,26,20,0.1)`;
+        const r = card.getBoundingClientRect();
+        tX = (e.clientX - r.left) / r.width  - 0.5;
+        tY = (e.clientY - r.top)  / r.height - 0.5;
     });
     card.addEventListener('mouseleave', () => {
-        card.style.transform = '';
-        card.style.boxShadow = '';
+        hovering = false;
     });
 });
 
