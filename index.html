@@ -983,7 +983,9 @@ footer > * { position: relative; z-index: 1; }
     <div class="footer-form-section">
         <span class="footer-form-label">Quick Message</span>
         <p class="footer-form-sub">Prefer a quick note? Send one here.</p>
+        <!-- Formspree: replace YOUR_FORM_ID with your ID from formspree.io -->
         <form class="footer-form" id="footerForm">
+            <input type="hidden" name="_subject" value="New message from harrisonmediallc.com">
             <input type="text" name="name" placeholder="Your name" required>
             <input type="email" name="email" placeholder="Your email" required>
             <textarea name="message" placeholder="Tell me about your project…" required></textarea>
@@ -1226,14 +1228,41 @@ function closeLightbox() { lightbox.classList.remove('open'); document.body.styl
     });
 })();
 
-/* ===== FOOTER QUICK FORM ===== */
-document.getElementById('footerForm').addEventListener('submit', function(e) {
+/* ===== FOOTER QUICK FORM — Formspree ===== */
+/* Replace YOUR_FORM_ID below with your ID from formspree.io */
+const FORMSPREE_ID = 'YOUR_FORM_ID';
+
+document.getElementById('footerForm').addEventListener('submit', async function(e) {
     e.preventDefault();
-    const btn = this.querySelector('.footer-form-btn');
-    btn.textContent = 'Sent ✓';
-    btn.style.background = '#4a7a5e';
-    this.reset();
-    setTimeout(() => { btn.textContent = 'Send →'; btn.style.background = ''; }, 3000);
+    const btn  = this.querySelector('.footer-form-btn');
+    const data = new FormData(this);
+    btn.textContent = 'Sending…';
+    btn.disabled = true;
+    try {
+        const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+            method: 'POST',
+            body: data,
+            headers: { 'Accept': 'application/json' }
+        });
+        if (res.ok) {
+            btn.textContent = 'Sent ✓';
+            btn.style.background = '#4a7a5e';
+            this.reset();
+            setTimeout(() => {
+                btn.textContent = 'Send →';
+                btn.style.background = '';
+                btn.disabled = false;
+            }, 3500);
+        } else {
+            btn.textContent = 'Try again';
+            btn.style.background = '#8b4a4a';
+            btn.disabled = false;
+        }
+    } catch {
+        btn.textContent = 'Try again';
+        btn.style.background = '#8b4a4a';
+        btn.disabled = false;
+    }
 });
 </script>
 
