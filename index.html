@@ -107,28 +107,22 @@ nav {
 }
 /* Text Panel */
 .hero-text-panel {
-    position: relative; width: 100%; max-width: 960px;
-    padding: 60px 50px; border-radius: 20px;
+    position: relative; width: 100%; max-width: 860px;
+    padding: 52px 40px; border-radius: 20px;
     background: rgba(245,244,240,0.78);
     backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
     z-index: 3;
     opacity: 0; transform: translateY(30px);
     animation: fadeUp 1.2s ease forwards;
 }
-.hero-title { font-size: 3.8rem; margin-bottom: 20px; white-space: nowrap; }
+.hero-title {
+    font-size: clamp(1.8rem, 4vw, 3.4rem);
+    margin-bottom: 20px;
+    white-space: nowrap;
+    line-height: 1.15;
+}
 .subtext { padding-left: 12px; }
 .subtext p { margin: 6px 0; color: #a8a49c; }
-/* Blinking cursor */
-.cursor {
-    display: inline-block; width: 2px; height: 0.9em;
-    background: #5C6E82; margin-left: 3px;
-    vertical-align: middle; border-radius: 1px;
-    animation: cursorBlink 1.1s step-end infinite;
-}
-@keyframes cursorBlink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0; }
-}
 @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
 
 /* Scroll arrow */
@@ -251,48 +245,66 @@ nav {
 
 /* ===== SERVICES SECTION ===== */
 .services-section {
-    background: linear-gradient(to bottom, #e8e1d4 0%, #f5f4f0 50%, #e8e1d4 100%);
-    padding: 100px 10%;
+    position: relative; overflow: hidden;
+    padding: 130px 10%;
+    text-align: center;
+    background: #1C1A14;
 }
-.services-inner {
-    display: flex; align-items: center; gap: 60px;
-    max-width: 1100px; margin: auto;
+/* Video background */
+.services-video-bg {
+    position: absolute; inset: 0; z-index: 0;
 }
-.services-photo {
-    flex: 1; min-width: 0;
-    position: relative; border-radius: 16px; overflow: hidden;
+.services-video-bg video {
+    width: 100%; height: 100%;
+    object-fit: cover; display: block;
+    transition: opacity 1.5s ease;
 }
-.photo-gradient-overlay {
+/* Dark haze overlay */
+.services-video-bg::after {
+    content: '';
     position: absolute; inset: 0;
-    background: linear-gradient(135deg, rgba(226,221,213,0.35) 0%, rgba(168,164,156,0.15) 50%, rgba(245,244,240,0.05) 100%);
-    border-radius: 16px;
+    background: rgba(20,18,14,0.72);
 }
-.services-content { flex: 1; min-width: 0; }
+/* Play/Pause button */
+.services-play-btn {
+    position: absolute; bottom: 24px; right: 28px; z-index: 10;
+    background: rgba(245,244,240,0.12); border: 1px solid rgba(245,244,240,0.2);
+    color: #f5f4f0; border-radius: 50px; padding: 8px 18px;
+    font-family: 'EB Garamond', serif; font-size: 0.8rem; letter-spacing: 1px;
+    cursor: pointer; backdrop-filter: blur(8px); transition: background 0.2s;
+}
+.services-play-btn:hover { background: rgba(245,244,240,0.22); }
+/* Centered content */
+.services-inner {
+    position: relative; z-index: 2;
+    max-width: 760px; margin: 0 auto;
+}
 .services-eyebrow {
     font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase;
-    color: #635f51; margin-bottom: 12px;
+    color: #a8a49c; margin-bottom: 12px;
 }
 .services-heading {
     font-size: 2.6rem; font-weight: 600; line-height: 1.15;
-    margin-bottom: 36px; color: #1C1A14;
+    margin-bottom: 44px; color: #f5f4f0;
 }
 .services-list {
     list-style: none; padding: 0; margin: 0;
     display: flex; flex-direction: column; gap: 14px;
+    text-align: left;
 }
 .services-list li {
     display: flex; align-items: flex-start; gap: 16px;
-    padding: 14px 18px; border-radius: 10px;
-    background: rgba(92,92,88,0.07);
-    border: 1px solid rgba(92,92,88,0.15);
+    padding: 16px 20px; border-radius: 10px;
+    background: rgba(245,244,240,0.07);
+    border: 1px solid rgba(245,244,240,0.1);
     transition: background 0.25s, border-color 0.25s, transform 0.25s, box-shadow 0.25s;
     cursor: default;
 }
 .services-list li:hover {
-    background: rgba(92,110,130,0.1);
-    border-color: rgba(92,110,130,0.35);
+    background: rgba(92,110,130,0.18);
+    border-color: rgba(92,110,130,0.4);
     transform: translateX(6px);
-    box-shadow: 0 4px 18px rgba(28,26,20,0.07);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
 }
 .bullet-icon {
     color: #5C6E82; font-size: 1rem;
@@ -302,23 +314,9 @@ nav {
 .services-list li:hover .bullet-icon { transform: translateX(3px); }
 .services-list strong {
     display: block; font-size: 1.05rem;
-    font-weight: 600; color: #2A2220; margin-bottom: 4px;
+    font-weight: 600; color: #e8e1d4; margin-bottom: 4px;
 }
-.services-list p { font-size: 0.88rem; color: #635f51; line-height: 1.6; margin: 0; }
-.services-video-wrap { position: relative; width: 100%; aspect-ratio: 4 / 3; }
-.services-video-wrap video {
-    position: absolute; inset: 0; width: 100%; height: 100%;
-    object-fit: cover; display: block;
-    border-radius: 16px; transition: opacity 1.5s ease;
-}
-.services-play-btn {
-    display: block; position: absolute; bottom: 16px; right: 16px; z-index: 10;
-    background: rgba(28,26,20,0.75); border: 1px solid rgba(242,240,235,0.25);
-    color: #f5f4f0; border-radius: 50px; padding: 8px 18px;
-    font-family: 'EB Garamond', serif; font-size: 0.8rem; letter-spacing: 1px;
-    cursor: pointer; backdrop-filter: blur(8px); transition: background 0.2s;
-}
-.services-play-btn:hover { background: rgba(42,34,32,0.9); }
+.services-list p { font-size: 0.88rem; color: #a8a49c; line-height: 1.6; margin: 0; }
 
 /* ===== PULL QUOTE ===== */
 .pull-quote {
@@ -606,10 +604,8 @@ footer > * { position: relative; z-index: 1; }
     .pull-quote { padding: 60px 8%; }
     .pull-quote p { font-size: 1.3rem; }
 
-    .services-inner { flex-direction: column; gap: 36px; }
-    .services-photo { display: none; }
+    .services-section { padding: 80px 6%; }
     .services-heading { font-size: 1.9rem; }
-    .services-section { padding: 70px 6%; }
 
     .portfolio-grid { columns: 1; }
     .portfolio-section { padding: 70px 6%; }
@@ -675,7 +671,7 @@ footer > * { position: relative; z-index: 1; }
             <p>Hi, I'm Tate Harrison — a photographer and videographer who loves a good story.</p>
             <p>Trained in audio production, narrative film, and human psychology</p>
             <p class="spacer"></p>
-            <p>Based in Boulder, Colorado<span class="cursor" aria-hidden="true"></span></p>
+            <p>Based in Boulder, Colorado</p>
         </div>
     </div>
 
@@ -734,21 +730,22 @@ footer > * { position: relative; z-index: 1; }
 
 <!-- SERVICES -->
 <section id="services" class="services-section">
-    <div class="services-inner">
-        <div class="services-photo">
-            <div class="services-video-wrap">
-                <video id="servicesVideo" autoplay muted loop playsinline>
-                    <source src="herodemoted.mp4" type="video/mp4">
-                </video>
-                <button id="servicesPlayBtn" class="services-play-btn" aria-label="Play/Pause">&#9646;&#9646; Pause</button>
-            </div>
-            <div class="photo-gradient-overlay"></div>
-        </div>
 
-        <div class="services-content">
-            <p class="services-eyebrow anim-fade">What I Offer</p>
-            <h2 class="services-heading anim-fade">Built for Stories<br>That Stick</h2>
-            <ul class="services-list">
+    <!-- Video Background -->
+    <div class="services-video-bg">
+        <video id="servicesVideo" autoplay muted loop playsinline>
+            <source src="herodemoted.mp4" type="video/mp4">
+        </video>
+    </div>
+
+    <!-- Play/Pause -->
+    <button id="servicesPlayBtn" class="services-play-btn" aria-label="Play/Pause">&#9646;&#9646; Pause</button>
+
+    <!-- Centered Content -->
+    <div class="services-inner">
+        <p class="services-eyebrow anim-fade">What I Offer</p>
+        <h2 class="services-heading anim-fade">Built for Stories<br>That Stick</h2>
+        <ul class="services-list">
                 <li>
                     <span class="bullet-icon">▸</span>
                     <div>
@@ -777,9 +774,9 @@ footer > * { position: relative; z-index: 1; }
                         <p>Studio-grade sound design and mixing — because great video starts with great audio.</p>
                     </div>
                 </li>
-            </ul>
-        </div>
+        </ul>
     </div>
+
 </section>
 
 <!-- PULL QUOTE -->
