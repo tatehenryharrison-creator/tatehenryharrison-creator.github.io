@@ -2,19 +2,21 @@
 <html lang="en">
 <head>
     
-<meta name="description" content="Harrison Media LLC provides documentary-style videography for interviews, speeches, and promotional content in Colorado.">
+<meta name="description" content="Harrison Media LLC provides documentary-style videography for individuals, narratives, and brands in Colorado and the Western US.">
 <meta name="keywords" content="Boulder videographer, Colorado videography, interview video production, documentary style video">
 <meta name="author" content="Tate Harrison">
 
-<meta property="og:title" content="Tate Harrison | Harrison Media LLC">
-<meta property="og:description" content="Documentary-style videography for interviews, speeches, and promotional storytelling.">
+<meta property="og:title" content="Tate Harrison Media">
+<meta property="og:description" content="Harrison Media LLC provides documentary-style videography for individuals, narratives, and brands in Colorado and the Western US.">
 <meta property="og:type" content="website">
-    
-<link rel="icon" type="image/x-icon" href="/favicon.ico">
-    
+
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="apple-touch-icon" href="favicon.png">
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tate Harrison | Videography</title>
+<title>Tate Harrison Media</title>
 <link rel="stylesheet" href="fonts.css">
 <style>
         html, body {
@@ -230,22 +232,31 @@ footer {
     position: relative;
     display: flex;
     align-items: center;
+    justify-content: center;
+    text-align: center;
     min-height: 90vh;
     padding: 0 6%;
     overflow: hidden;
+    /* ── HERO BACKGROUND PHOTO ──────────────────────────────
+       Replace the line below with your photo:
+       background-image: url('your-photo.jpg');
+       background-size: cover;
+       background-position: center;
+       ──────────────────────────────────────────────────── */
+    background-color: #e8e1d4;
 }
 
 /* Text Panel */
 .hero-text-panel {
     position: relative;
-    width: 48%;
-    padding: 50px;
+    width: 100%;
+    max-width: 960px;
+    padding: 60px 50px;
     border-radius: 20px;
-    background: rgba(245,244,240,0.72);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    background: rgba(245,244,240,0.78);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
     z-index: 3;
-    margin-left: 0;
 
     opacity: 0;
     transform: translateY(30px);
@@ -255,62 +266,12 @@ footer {
 .hero-title {
     font-size: 3.8rem;
     margin-bottom: 20px;
+    white-space: nowrap;
 }
 
 .subtext p {
     margin: 6px 0;
     color: #635f51;
-}
-
-/* Video */
-.hero-video {
-    position: absolute;
-    right: 0;
-    top: 0;
-    width: 65%;
-    height: 100%;
-    overflow: hidden;
-}
-
-.hero-video video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transform: scale(1.15);
-    animation: slowZoom 25s ease-in-out infinite;
-}
-
-/* Cinematic Fade */
-.hero-video::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 40%;
-    height: 100%;
-    background: linear-gradient(
-        to right,
-        rgba(245,244,240,1) 0%,
-        rgba(245,244,240,0.7) 50%,
-        rgba(245,244,240,0) 100%
-    );
-}
-
-/* Subtle film grain overlay */
-.hero-overlay {
-    position: absolute;
-    inset: 0;
-    background-image: url("https://www.transparenttextures.com/patterns/asfalt-light.png");
-    opacity: 0.05;
-    z-index: 2;
-    pointer-events: none;
-}
-
-/* Animations */
-@keyframes slowZoom {
-    0% { transform: scale(1.15); }
-    50% { transform: scale(1.2); }
-    100% { transform: scale(1.15); }
 }
 
 @keyframes fadeUp {
@@ -532,76 +493,26 @@ footer {
     }
 
     .hero {
-        position: relative;
-        /* Reduced from 100vh to 70vh to show more width/less crop */
-        min-height: 70vh; 
-        max-height: 80vh;
-        padding: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        overflow: hidden;
+        min-height: 70vh;
+        padding: 40px 5%;
     }
 
-    /* Fullscreen Background Video */
-    .hero-video {
-        position: absolute;
-        inset: 0;
-        width: 100%;
-        height: 100%;
-        z-index: 1;
-    }
-
-    .hero-video video {
-        width: 100%;
-        height: 100%;
-        /* 'cover' ensures no gaps, but 'center' positioning helps */
-        object-fit: cover;
-        object-position: center;
-        /* Removed scale(1.1) to stop the extra zoom/crop */
-        transform: scale(1.0);
-        animation: none;
-    }
-
-    /* Cinematic fade - slightly adjusted for shorter height */
-    .hero-video::after {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(
-            to bottom,
-            rgba(28,26,20,0.55) 0%,
-            rgba(28,26,20,0.2) 50%,
-            rgba(28,26,20,0.7) 100%
-        );
-    }
-
-    /* Centered floating text */
     .hero-text-panel {
-        position: relative;
-        width: 90%;
-        padding: 30px 20px;
-        border-radius: 15px;
-        background: rgba(245,244,240,0.18);
-        backdrop-filter: blur(8px);
-        -webkit-backdrop-filter: blur(8px);
-        z-index: 2;
-        border: 1px solid rgba(245,244,240,0.25);
+        width: 100%;
+        padding: 36px 24px;
+        background: rgba(245,244,240,0.85);
     }
 
     .hero-title {
-        font-size: 2.2rem;
+        font-size: 1.6rem;
+        white-space: normal;
         margin-bottom: 12px;
-        letter-spacing: 0.5px;
-        line-height: 1.1;
-        color: #f5f4f0;
+        line-height: 1.2;
     }
 
     .subtext p {
         font-size: 0.9rem;
-        color: #e8e1d4;
-        line-height: 1.4;
+        line-height: 1.5;
     }
 
     .section {
@@ -851,8 +762,6 @@ footer {
 
 <section class="hero">
 
-    <div class="hero-overlay"></div>
-
     <div class="hero-text-panel">
         <h1 class="hero-title">Photography &amp; Videography</h1>
 
@@ -864,12 +773,6 @@ footer {
             <p class="spacer"></p>
             <p>Based in Boulder, Colorado</p>
         </div>
-    </div>
-
-    <div class="hero-video">
-        <video autoplay muted loop playsinline>
-            <source src="herodemoted.mp4" type="video/mp4">
-        </video>
     </div>
 
     <!-- Scroll down arrow -->
