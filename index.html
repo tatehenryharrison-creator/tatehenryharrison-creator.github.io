@@ -101,17 +101,18 @@ nav {
     padding: 52px 40px; border-radius: 20px;
     background: rgba(245,244,240,0.78);
     backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
-    z-index: 3;
+    z-index: 3; text-align: center;
     opacity: 0; transform: translateY(30px);
     animation: fadeUp 1.2s ease forwards;
 }
 .hero-title {
     font-size: clamp(1.8rem, 4vw, 3.4rem);
-    margin-bottom: 20px;
+    margin: 0 auto 20px;
     white-space: nowrap;
     line-height: 1.15;
+    text-align: center;
 }
-.subtext { padding-left: 12px; }
+.subtext { padding: 0; text-align: center; }
 .subtext p { margin: 6px 0; color: #a8a49c; }
 @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
 
@@ -423,21 +424,41 @@ nav {
 .pricing-subtext { color: #635f51; font-size: 0.93rem; max-width: 440px; margin: 0 auto; line-height: 1.6; }
 /* Pricing tab switcher */
 .pricing-tabs {
-    display: flex; justify-content: center; gap: 8px;
-    margin-bottom: 52px;
+    display: flex; justify-content: center; gap: 12px;
+    margin-bottom: 20px;
 }
 .pricing-tab {
-    font-family: 'EB Garamond', serif; font-size: 0.88rem;
-    letter-spacing: 1.8px; text-transform: uppercase;
-    padding: 10px 32px; border-radius: 50px;
-    border: 1px solid rgba(99,95,81,0.3);
-    background: transparent; color: #635f51;
-    cursor: pointer; transition: background 0.25s, color 0.25s, border-color 0.25s;
+    font-family: 'EB Garamond', serif; font-size: 1.05rem;
+    letter-spacing: 2px; text-transform: uppercase;
+    padding: 14px 44px; border-radius: 50px;
+    border: 2px solid rgba(99,95,81,0.35);
+    background: #f5f4f0; color: #635f51;
+    cursor: pointer; transition: background 0.25s, color 0.25s, border-color 0.25s, box-shadow 0.25s;
+    box-shadow: 0 2px 8px rgba(28,26,20,0.06);
 }
 .pricing-tab.active {
     background: #5C6E82; color: #f5f4f0; border-color: #5C6E82;
+    box-shadow: 0 4px 18px rgba(92,110,130,0.28);
 }
-.pricing-tab:hover:not(.active) { border-color: #5C6E82; color: #5C6E82; }
+.pricing-tab:hover:not(.active) {
+    border-color: #5C6E82; color: #5C6E82;
+    box-shadow: 0 4px 14px rgba(92,110,130,0.15);
+}
+/* Arrow hint below tabs */
+.pricing-tab-hint {
+    text-align: center; margin-bottom: 44px;
+    color: #a8a49c; font-family: 'EB Garamond', serif;
+    font-size: 0.8rem; letter-spacing: 1.5px; text-transform: uppercase;
+    display: flex; flex-direction: column; align-items: center; gap: 4px;
+}
+.pricing-tab-hint-arrow {
+    display: block; font-size: 1.1rem; color: #5C6E82;
+    animation: hintBounce 1.6s ease-in-out infinite;
+}
+@keyframes hintBounce {
+    0%, 100% { transform: translateY(0); opacity: 0.5; }
+    50%       { transform: translateY(5px); opacity: 1; }
+}
 
 /* Card groups */
 .pricing-group { display: block; }
@@ -479,8 +500,8 @@ nav {
     padding: 4px 14px; border-radius: 50px; white-space: nowrap;
     margin: -36px -28px 20px; border-radius: 16px 16px 0 0;
 }
-.pricing-card-label { font-size: 0.68rem; letter-spacing: 2.5px; text-transform: uppercase; color: #a8a49c; margin: 0 0 10px; }
-.pricing-card-name { font-size: 1.2rem; font-weight: 600; color: #1C1A14; margin: 0 0 6px; }
+.pricing-card-label { display: none; }
+.pricing-card-name { font-size: 1.65rem; font-weight: 600; color: #1C1A14; margin: 0 0 6px; font-family: 'Cinzel', serif; }
 .pricing-card-price { font-size: 1rem; color: #635f51; margin: 0 0 24px; }
 .pricing-divider { height: 1px; background: rgba(92,110,130,0.25); margin-bottom: 22px; }
 .pricing-features { list-style: none; padding: 0; margin: 0 0 32px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
@@ -884,6 +905,10 @@ footer > * { position: relative; z-index: 1; }
         <button class="pricing-tab" data-target="video" id="tab-video">Videography</button>
         <button class="pricing-tab" data-target="photo" id="tab-photo">Photography</button>
     </div>
+    <div class="pricing-tab-hint">
+        <span>Select a category</span>
+        <span class="pricing-tab-hint-arrow">↓</span>
+    </div>
 
     <!-- VIDEOGRAPHY GROUP (default) -->
     <div class="pricing-group" id="pricing-video">
@@ -1069,9 +1094,11 @@ footer > * { position: relative; z-index: 1; }
     <div class="footer-form-section">
         <span class="footer-form-label">Quick Message</span>
         <p class="footer-form-sub">Prefer a quick note? Send one here.</p>
-        <!-- Formspree: replace YOUR_FORM_ID with your ID from formspree.io -->
-        <form class="footer-form" id="footerForm">
+        <form class="footer-form" id="footerForm"
+              action="https://formspree.io/f/maqpazao"
+              method="POST">
             <input type="hidden" name="_subject" value="New message from harrisonmediallc.com">
+            <input type="hidden" name="_next" value="https://tatehenryharrison-creator.github.io/#contact">
             <input type="text" name="name" placeholder="Your name" required>
             <input type="email" name="email" placeholder="Your email" required>
             <textarea name="message" placeholder="Tell me about your project…" required></textarea>
@@ -1324,7 +1351,7 @@ function closeLightbox() { lightbox.classList.remove('open'); document.body.styl
 
 /* ===== FOOTER QUICK FORM — Formspree ===== */
 /* Replace YOUR_FORM_ID below with your ID from formspree.io */
-const FORMSPREE_ID = 'mnjglyzp';
+const FORMSPREE_ID = 'maqpazao';
 
 document.getElementById('footerForm').addEventListener('submit', async function(e) {
     e.preventDefault();
