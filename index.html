@@ -101,17 +101,18 @@ nav {
     padding: 52px 40px; border-radius: 20px;
     background: rgba(245,244,240,0.78);
     backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
-    z-index: 3;
+    z-index: 3; text-align: center;
     opacity: 0; transform: translateY(30px);
     animation: fadeUp 1.2s ease forwards;
 }
 .hero-title {
     font-size: clamp(1.8rem, 4vw, 3.4rem);
-    margin-bottom: 20px;
+    margin: 0 auto 20px;
     white-space: nowrap;
     line-height: 1.15;
+    text-align: center;
 }
-.subtext { padding-left: 12px; }
+.subtext { padding: 0; text-align: center; }
 .subtext p { margin: 6px 0; color: #a8a49c; }
 @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
 
