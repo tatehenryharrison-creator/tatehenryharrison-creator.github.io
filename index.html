@@ -86,12 +86,7 @@ nav {
 }
 .hero-bg {
     position: absolute; inset: 0;
-    /* ── HERO BACKGROUND PHOTO ────────────────────────────
-       Replace the line below with your photo:
-       background-image: url('your-photo.jpg');
-       background-size: cover; background-position: center;
-       ─────────────────────────────────────────────────── */
-    background-color: #e8e1d4;
+    background-image: url('HeroBackground.jpg');
     background-size: cover; background-position: center;
     animation: kenBurns 24s ease-in-out infinite alternate;
 }
@@ -755,12 +750,9 @@ footer > * { position: relative; z-index: 1; }
 }
 .about-photo { flex: 0 0 360px; }
 .about-photo-placeholder {
-    width: 100%; aspect-ratio: 3/4; background: #e8e1d4; border-radius: 16px;
-    /* ── YOUR HEADSHOT ──────────────────────────────────────────
-       Replace background-color with:
-       background-image: url('your-headshot.jpg');
-       background-size: cover; background-position: center top;
-       ─────────────────────────────────────────────────────── */
+    width: 100%; aspect-ratio: 3/4; border-radius: 16px;
+    background-image: url('Me.jpg');
+    background-size: cover; background-position: center top;
 }
 .about-content { flex: 1; }
 .about-eyebrow {
@@ -923,6 +915,26 @@ footer > * { position: relative; z-index: 1; }
     </a>
 </section>
 
+<!-- CLIENT MARQUEE -->
+<div class="marquee-section">
+    <p class="marquee-label">Trusted By</p>
+    <div class="marquee-track">
+        <div class="marquee-inner">
+            <span>Starpower Coaching</span>
+            <span>Sarah Fitzpatrick Clothing</span>
+            <span>1000 Voices Project</span>
+            <span>The Sober Network</span>
+            <span>CU Breaking &amp; Hip-Hop</span>
+            <!-- Duplicate for seamless loop -->
+            <span>Starpower Coaching</span>
+            <span>Sarah Fitzpatrick Clothing</span>
+            <span>1000 Voices Project</span>
+            <span>The Sober Network</span>
+            <span>CU Breaking &amp; Hip-Hop</span>
+        </div>
+    </div>
+</div>
+
 <!-- BEFORE / AFTER SLIDER -->
 <section class="ba-section">
     <p class="ba-label-top">The Difference</p>
@@ -942,31 +954,10 @@ footer > * { position: relative; z-index: 1; }
     <p class="ba-caption">Drag to compare — raw capture vs. color-graded &amp; edited output.</p>
 </section>
 
-<!-- CLIENT MARQUEE -->
-<div class="marquee-section">
-    <p class="marquee-label">Trusted By</p>
-    <div class="marquee-track">
-        <div class="marquee-inner">
-            <span>Boulder Ventures</span>
-            <span>Rocky Mountain Media</span>
-            <span>Summit Creative</span>
-            <span>Western Narratives</span>
-            <span>Altitude Brand Co.</span>
-            <span>Front Range Films</span>
-            <span>Colorado Collective</span>
-            <span>Peak Story Studio</span>
-            <!-- Duplicate for seamless loop -->
-            <span>Boulder Ventures</span>
-            <span>Rocky Mountain Media</span>
-            <span>Summit Creative</span>
-            <span>Western Narratives</span>
-            <span>Altitude Brand Co.</span>
-            <span>Front Range Films</span>
-            <span>Colorado Collective</span>
-            <span>Peak Story Studio</span>
-        </div>
-    </div>
-</div>
+<!-- PULL QUOTE -->
+<blockquote class="pull-quote">
+    <p>"I started with an iPhone. I realized that it wasn't enough to create my vision. I learned the right skills, and acquired the necessary equipment."</p>
+</blockquote>
 
 <!-- SERVICES -->
 <section id="services" class="services-section">
@@ -1018,12 +1009,6 @@ footer > * { position: relative; z-index: 1; }
     </div>
 
 </section>
-
-<!-- PULL QUOTE -->
-<blockquote class="pull-quote">
-    <p>"I started with an iPhone. I realized that it wasn't enough to create my vision. I learned the right skills, and acquired the necessary equipment."</p>
-    <cite>— Tate Harrison</cite>
-</blockquote>
 
 <!-- ABOUT -->
 <section id="about" class="about-section">
