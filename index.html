@@ -427,7 +427,7 @@ nav {
 /* Pricing tab switcher */
 .pricing-tabs {
     display: flex; justify-content: center; gap: 12px;
-    margin-bottom: 20px;
+    margin-bottom: 44px;
 }
 .pricing-tab {
     font-family: 'EB Garamond', serif; font-size: 1.05rem;
@@ -446,20 +446,23 @@ nav {
     border-color: #5C6E82; color: #5C6E82;
     box-shadow: 0 4px 14px rgba(92,110,130,0.15);
 }
-/* Arrow hint below tabs */
-.pricing-tab-hint {
-    text-align: center; margin-bottom: 44px;
-    color: #a8a49c; font-family: 'EB Garamond', serif;
-    font-size: 0.8rem; letter-spacing: 1.5px; text-transform: uppercase;
-    display: flex; flex-direction: column; align-items: center; gap: 4px;
+/* Per-tab floating arrows */
+.pricing-tabs {
+    align-items: flex-end;
 }
-.pricing-tab-hint-arrow {
-    display: block; font-size: 1.1rem; color: #5C6E82;
+.pricing-tab-wrap {
+    display: inline-flex; flex-direction: column; align-items: center; gap: 8px;
+}
+.tab-arrow {
+    font-size: 1.3rem; color: #5C6E82; line-height: 1;
     animation: hintBounce 1.6s ease-in-out infinite;
 }
+.pricing-tab-wrap:nth-child(2) .tab-arrow {
+    animation-delay: 0.35s;
+}
 @keyframes hintBounce {
-    0%, 100% { transform: translateY(0); opacity: 0.5; }
-    50%       { transform: translateY(5px); opacity: 1; }
+    0%, 100% { transform: translateY(0); opacity: 0.45; }
+    50%       { transform: translateY(6px); opacity: 1; }
 }
 
 /* Card groups */
@@ -595,6 +598,27 @@ footer > * { position: relative; z-index: 1; }
     transition: background 0.2s; align-self: flex-end;
 }
 .footer-form-btn:hover { background: #4a5c6e; }
+.footer-form-success {
+    display: none; flex-direction: column; align-items: center;
+    justify-content: center; gap: 14px; padding: 36px 20px;
+    text-align: center;
+    animation: fadeUp 0.6s ease forwards;
+}
+.footer-form-success-icon {
+    width: 52px; height: 52px; border-radius: 50%;
+    background: rgba(92,110,130,0.12);
+    border: 2px solid rgba(92,110,130,0.35);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem; color: #5C6E82;
+}
+.footer-form-success-title {
+    font-family: 'Cinzel', serif; font-size: 1rem; font-weight: 400;
+    letter-spacing: 1.5px; color: #1C1A14; margin: 0;
+}
+.footer-form-success-sub {
+    font-family: 'EB Garamond', serif; font-size: 0.85rem;
+    color: #a8a49c; font-style: italic; margin: 0;
+}
 .footer-divider { height: 1px; background: rgba(99,95,81,0.12); margin: 0 auto 36px; max-width: 440px; }
 
 /* Social icons with tooltips */
@@ -741,6 +765,15 @@ footer > * { position: relative; z-index: 1; }
     cursor: pointer; transition: background 0.25s, border-color 0.25s; padding: 0;
 }
 .t-dot.active { background: #5C6E82; border-color: #5C6E82; }
+.testimonial-stars {
+    display: flex; justify-content: center; gap: 4px;
+    margin-bottom: 18px;
+}
+.testimonial-stars span {
+    font-size: 1.15rem;
+    color: #C9A84C;
+    text-shadow: 0 1px 4px rgba(201,168,76,0.45);
+}
 
 /* ===== ABOUT SECTION ===== */
 .about-section { background: #f5f4f0; padding: 110px 10%; }
@@ -1017,10 +1050,11 @@ footer > * { position: relative; z-index: 1; }
             <div class="about-photo-placeholder"></div>
         </div>
         <div class="about-content">
-            <p class="about-eyebrow anim-fade">About</p>
-            <h2 class="about-heading anim-fade">The Person Behind the Lens</h2>
-            <p class="about-body anim-fade">I'm Tate Harrison — a Boulder-based photographer and videographer with a background in audio production, narrative film, and human psychology. I believe the best creative work comes from understanding people, not just equipment.</p>
-            <p class="about-body anim-fade">Whether I'm capturing a keynote on a main stage or following a subject through their daily life, my job is to make the frame feel honest. I started with an iPhone. I've since invested in the skills and tools to do the work justice.</p>
+            <p class="about-eyebrow anim-fade">Your Documentarian</p>
+            <h2 class="about-heading anim-fade">About Me</h2>
+            <p class="about-body anim-fade">I'm Tate Harrison — a Boulder-based photographer and videographer with a background in audio production, narrative film, and human psychology. I believe the best creative work comes from understanding people and the stories they bring.</p>
+            <p class="about-body anim-fade">I want to launch your story into the online world through the most effective form of artistic communication: video and sound.</p>
+            <p class="about-body anim-fade">My job is to make the frame feel genuine. I started with an iPhone. I've since invested in the skills and tools to do the work justice.</p>
             <a href="schedule.html" class="about-cta anim-fade">Work With Me →</a>
         </div>
     </div>
@@ -1137,18 +1171,20 @@ footer > * { position: relative; z-index: 1; }
 <!-- TESTIMONIALS -->
 <section class="testimonials-section">
     <div class="testimonials-inner">
-        <p class="testimonials-eyebrow anim-fade">Kind Words</p>
         <h2 class="testimonials-heading anim-fade">What Clients Say</h2>
         <div class="testimonials-track" id="testimonialsTrack">
             <div class="testimonial-card active">
-                <p class="testimonial-text">"Add your first client testimonial here. A single sentence about the experience goes a long way toward building trust."</p>
-                <cite class="testimonial-cite">— Client Name, Company</cite>
+                <div class="testimonial-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+                <p class="testimonial-text">"Tate is very kind, curious, and likes to experiment and tell meaningful stories with his photography. The long exposure water picture Tate took turned out truly beautiful. It really got the essence of the clothing piece we were capturing."</p>
+                <cite class="testimonial-cite">— Sarah Fitzpatrick, Sarah Fitzpatrick Clothing</cite>
             </div>
             <div class="testimonial-card">
+                <div class="testimonial-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
                 <p class="testimonial-text">"Tate made the entire process feel effortless. The final video exceeded everything we had envisioned for our brand."</p>
                 <cite class="testimonial-cite">— Client Name, Company</cite>
             </div>
             <div class="testimonial-card">
+                <div class="testimonial-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
                 <p class="testimonial-text">"Professional, creative, and deeply thoughtful. I'd recommend Tate to anyone who takes their story seriously."</p>
                 <cite class="testimonial-cite">— Client Name, Company</cite>
             </div>
@@ -1176,12 +1212,14 @@ footer > * { position: relative; z-index: 1; }
 
     <!-- Tab switcher -->
     <div class="pricing-tabs">
-        <button class="pricing-tab" data-target="video" id="tab-video">Videography</button>
-        <button class="pricing-tab" data-target="photo" id="tab-photo">Photography</button>
-    </div>
-    <div class="pricing-tab-hint">
-        <span>Select a category</span>
-        <span class="pricing-tab-hint-arrow">↓</span>
+        <div class="pricing-tab-wrap">
+            <span class="tab-arrow">↓</span>
+            <button class="pricing-tab" data-target="video" id="tab-video">Videography</button>
+        </div>
+        <div class="pricing-tab-wrap">
+            <span class="tab-arrow">↓</span>
+            <button class="pricing-tab" data-target="photo" id="tab-photo">Photography</button>
+        </div>
     </div>
 
     <!-- VIDEOGRAPHY GROUP (default) -->
@@ -1255,8 +1293,8 @@ footer > * { position: relative; z-index: 1; }
 
         <!-- Video comparison table -->
         <div class="compare-toggle-wrap">
-            <button class="compare-toggle-btn" id="compareToggleVideo">Show Full Comparison ▾</button>
-            <div class="compare-table-wrap" id="compareTableVideo">
+            <button class="compare-toggle-btn" id="compareToggleVideo">Hide Comparison ▴</button>
+            <div class="compare-table-wrap open" id="compareTableVideo">
                 <table class="compare-table">
                     <thead>
                         <tr>
@@ -1321,8 +1359,8 @@ footer > * { position: relative; z-index: 1; }
 
         <!-- Photo comparison table -->
         <div class="compare-toggle-wrap">
-            <button class="compare-toggle-btn" id="compareTogglePhoto">Show Full Comparison ▾</button>
-            <div class="compare-table-wrap" id="compareTablePhoto">
+            <button class="compare-toggle-btn" id="compareTogglePhoto">Hide Comparison ▴</button>
+            <div class="compare-table-wrap open" id="compareTablePhoto">
                 <table class="compare-table">
                     <thead>
                         <tr>
@@ -1349,8 +1387,8 @@ footer > * { position: relative; z-index: 1; }
 <!-- FAQ -->
 <section class="faq-section">
     <div class="faq-inner">
-        <p class="faq-eyebrow anim-fade">Common Questions</p>
-        <h2 class="faq-heading anim-fade">Before You Reach Out</h2>
+        <p class="faq-eyebrow anim-fade">Frequently Asked Questions</p>
+        <h2 class="faq-heading anim-fade">FAQ's</h2>
         <div class="faq-list">
             <div class="faq-item">
                 <button class="faq-q">How long does editing take? <span class="faq-arrow">↓</span></button>
@@ -1399,7 +1437,7 @@ footer > * { position: relative; z-index: 1; }
 
 <!-- FOOTER -->
 <footer>
-    <div class="footer-form-section">
+    <div class="footer-form-section" id="footerFormSection">
         <span class="footer-form-label">Quick Message</span>
         <p class="footer-form-sub">Prefer a quick note? Send one here.</p>
         <form class="footer-form" id="footerForm"
@@ -1412,6 +1450,11 @@ footer > * { position: relative; z-index: 1; }
             <textarea name="message" placeholder="Tell me about your project…" required></textarea>
             <button type="submit" class="footer-form-btn">Send →</button>
         </form>
+        <div class="footer-form-success" id="footerFormSuccess">
+            <div class="footer-form-success-icon">✓</div>
+            <p class="footer-form-success-title">All Done!</p>
+            <p class="footer-form-success-sub">Message received — I'll be in touch soon.</p>
+        </div>
     </div>
 
     <div class="footer-divider"></div>
@@ -1476,11 +1519,12 @@ const revealObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.15 });
 animEls.forEach(el => revealObserver.observe(el));
 
-/* ===== PRICING CARD TILT — gradual lerp attack, plastic shine from bottom-left ===== */
+/* ===== PRICING CARD TILT — velocity-aware lerp, plastic shine from bottom-left ===== */
 document.querySelectorAll('.pricing-card').forEach(card => {
     const shine   = card.querySelector('.card-shine');
     const ctaHref = card.querySelector('.pricing-cta')?.getAttribute('href');
     let tX = 0, tY = 0, cX = 0, cY = 0;
+    let prevTX = 0, prevTY = 0;
     let hovering = false, rafId = null;
 
     /* Click anywhere on card navigates to the package page */
@@ -1491,8 +1535,13 @@ document.querySelectorAll('.pricing-card').forEach(card => {
     function lerp(a, b, t) { return a + (b - a) * t; }
 
     function tick() {
-        /* Slow attack (t≈0.055), quicker return (t≈0.11) */
-        const t = hovering ? 0.055 : 0.11;
+        /* Velocity-aware lerp: fast when cursor is moving, gradual when still.
+           Attack: 0.08 idle → up to 0.22 at full speed. Return: 0.13. */
+        const velX = Math.abs(tX - prevTX);
+        const velY = Math.abs(tY - prevTY);
+        const vel  = Math.min(velX + velY, 0.14) / 0.14; /* 0–1 */
+        prevTX = tX; prevTY = tY;
+        const t = hovering ? (0.08 + vel * 0.14) : 0.13;
         cX = lerp(cX, hovering ? tX : 0, t);
         cY = lerp(cY, hovering ? tY : 0, t);
 
@@ -1682,30 +1731,34 @@ document.querySelectorAll('.faq-item').forEach(item => {
 })();
 
 /* ===== FOOTER QUICK FORM — Formspree ===== */
-/* Replace YOUR_FORM_ID below with your ID from formspree.io */
 const FORMSPREE_ID = 'maqpazao';
 
 document.getElementById('footerForm').addEventListener('submit', async function(e) {
     e.preventDefault();
-    const btn  = this.querySelector('.footer-form-btn');
-    const data = new FormData(this);
+    const btn     = this.querySelector('.footer-form-btn');
+    const form    = this;
+    const success = document.getElementById('footerFormSuccess');
+    const data    = new FormData(this);
     btn.textContent = 'Sending…';
     btn.disabled = true;
     try {
         const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
-            method: 'POST',
-            body: data,
-            headers: { 'Accept': 'application/json' }
+            method: 'POST', body: data, headers: { 'Accept': 'application/json' }
         });
         if (res.ok) {
-            btn.textContent = 'Sent ✓';
-            btn.style.background = '#4a7a5e';
-            this.reset();
+            /* Fade out the form labels + form, reveal success state */
+            form.style.transition = 'opacity 0.4s ease';
+            form.style.opacity = '0';
+            const label = document.querySelector('#footerFormSection .footer-form-label');
+            const sub   = document.querySelector('#footerFormSection .footer-form-sub');
+            if (label) { label.style.transition = 'opacity 0.4s ease'; label.style.opacity = '0'; }
+            if (sub)   { sub.style.transition   = 'opacity 0.4s ease'; sub.style.opacity   = '0'; }
             setTimeout(() => {
-                btn.textContent = 'Send →';
-                btn.style.background = '';
-                btn.disabled = false;
-            }, 3500);
+                form.style.display  = 'none';
+                if (label) label.style.display = 'none';
+                if (sub)   sub.style.display   = 'none';
+                success.style.display = 'flex';
+            }, 420);
         } else {
             btn.textContent = 'Try again';
             btn.style.background = '#8b4a4a';
