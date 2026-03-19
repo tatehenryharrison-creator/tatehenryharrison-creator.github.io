@@ -9,6 +9,12 @@
 <meta property="og:title" content="Tate Harrison Media">
 <meta property="og:description" content="Harrison Media LLC provides documentary-style videography for individuals, narratives, and brands in Colorado and the Western US.">
 <meta property="og:type" content="website">
+<meta property="og:url" content="https://tatehenryharrison-creator.github.io/">
+<!-- ── OG IMAGE ────────────────────────────────────────────────────────
+     Add a 1200×630px preview image so link shares show a thumbnail.
+     Drop 'og-image.jpg' in the repo root, then uncomment the line below:
+<meta property="og:image" content="https://tatehenryharrison-creator.github.io/og-image.jpg">
+     ──────────────────────────────────────────────────────────────── -->
 
 <link rel="icon" type="image/png" href="favicon.png">
 <link rel="icon" type="image/x-icon" href="favicon.ico">
@@ -97,16 +103,17 @@ nav {
 }
 /* Text Panel */
 .hero-text-panel {
-    position: relative; width: 100%; max-width: 860px;
-    padding: 52px 40px; border-radius: 20px;
+    position: relative; width: auto;
+    padding: 52px 56px; border-radius: 20px;
     background: rgba(245,244,240,0.78);
     backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
     z-index: 3; text-align: center;
     opacity: 0; transform: translateY(30px);
     animation: fadeUp 1.2s ease forwards;
+    margin: 0 auto;
 }
 .hero-title {
-    font-size: clamp(1.8rem, 4vw, 3.4rem);
+    font-size: clamp(1.8rem, 3.6vw, 3.4rem);
     margin: 0 auto 20px;
     white-space: nowrap;
     line-height: 1.15;
@@ -681,6 +688,193 @@ footer > * { position: relative; z-index: 1; }
     .ba-wrap { height: 170px; }
     .marquee-inner span { padding: 0 22px; font-size: 0.68rem; }
 }
+
+/* ===== AVAILABILITY BADGE ===== */
+.availability-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(92,110,130,0.1); border: 1px solid rgba(92,110,130,0.28);
+    padding: 7px 18px; border-radius: 50px;
+    font-family: 'EB Garamond', serif; font-size: 0.82rem; letter-spacing: 1px;
+    color: #5C6E82; margin-bottom: 28px;
+}
+.avail-dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: #5C6E82; flex-shrink: 0;
+    animation: availPulse 2.2s ease-in-out infinite;
+}
+@keyframes availPulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.45; transform: scale(1.35); }
+}
+
+/* ===== TESTIMONIALS ===== */
+.testimonials-section {
+    background: #1C1A14; padding: 110px 10%; text-align: center;
+}
+.testimonials-eyebrow {
+    font-family: 'EB Garamond', serif;
+    font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase;
+    color: #635f51; margin-bottom: 12px;
+}
+.testimonials-heading { font-size: 2.2rem; color: #f5f4f0; margin: 0 0 56px; }
+.testimonials-inner { max-width: 740px; margin: 0 auto; }
+.testimonials-track { position: relative; min-height: 180px; margin-bottom: 36px; }
+.testimonial-card {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    opacity: 0; transform: translateY(14px);
+    transition: opacity 0.55s ease, transform 0.55s ease;
+    pointer-events: none;
+}
+.testimonial-card.active {
+    opacity: 1; transform: translateY(0);
+    position: relative; pointer-events: auto;
+}
+.testimonial-text {
+    font-family: 'IM Fell English', serif; font-style: italic;
+    font-size: 1.22rem; color: #e8e1d4; line-height: 1.7;
+    margin: 0 0 22px;
+}
+.testimonial-cite {
+    font-family: 'EB Garamond', serif; font-size: 0.78rem;
+    letter-spacing: 2.5px; text-transform: uppercase; color: #635f51; font-style: normal;
+}
+.testimonials-dots { display: flex; justify-content: center; gap: 10px; }
+.t-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    border: 1px solid rgba(99,95,81,0.4); background: transparent;
+    cursor: pointer; transition: background 0.25s, border-color 0.25s; padding: 0;
+}
+.t-dot.active { background: #5C6E82; border-color: #5C6E82; }
+
+/* ===== ABOUT SECTION ===== */
+.about-section { background: #f5f4f0; padding: 110px 10%; }
+.about-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: flex; align-items: center; gap: 80px;
+}
+.about-photo { flex: 0 0 360px; }
+.about-photo-placeholder {
+    width: 100%; aspect-ratio: 3/4; background: #e8e1d4; border-radius: 16px;
+    /* ── YOUR HEADSHOT ──────────────────────────────────────────
+       Replace background-color with:
+       background-image: url('your-headshot.jpg');
+       background-size: cover; background-position: center top;
+       ─────────────────────────────────────────────────────── */
+}
+.about-content { flex: 1; }
+.about-eyebrow {
+    font-family: 'EB Garamond', serif;
+    font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase;
+    color: #635f51; margin-bottom: 12px;
+}
+.about-heading { font-size: 2.2rem; color: #1C1A14; margin: 0 0 28px; line-height: 1.2; }
+.about-body { font-size: 1rem; color: #635f51; line-height: 1.8; margin: 0 0 16px; }
+.about-cta {
+    display: inline-block; margin-top: 14px;
+    font-family: 'EB Garamond', serif; font-size: 0.88rem;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    color: #5C6E82; text-decoration: none;
+    border-bottom: 1px solid rgba(92,110,130,0.35);
+    padding-bottom: 2px; transition: color 0.2s, border-color 0.2s;
+}
+.about-cta:hover { color: #4a5c6e; border-color: #4a5c6e; }
+
+/* ===== PROCESS SECTION ===== */
+.process-section { background: #e8e1d4; padding: 110px 10%; }
+.process-inner { max-width: 1100px; margin: 0 auto; text-align: center; }
+.process-eyebrow {
+    font-family: 'EB Garamond', serif;
+    font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase;
+    color: #635f51; margin-bottom: 12px;
+}
+.process-heading { font-size: 2.2rem; color: #1C1A14; margin: 0 0 64px; }
+.process-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; }
+.process-step { text-align: center; }
+.step-num {
+    display: block; font-family: 'Cinzel', serif;
+    font-size: 0.68rem; letter-spacing: 3px; color: #5C6E82; margin-bottom: 16px;
+}
+.step-title {
+    font-family: 'Cinzel', serif; font-size: 1.05rem;
+    font-weight: 400; color: #1C1A14; margin: 0 0 12px;
+}
+.step-desc { font-size: 0.88rem; color: #635f51; line-height: 1.7; margin: 0; }
+.process-divider {
+    width: 1px; background: rgba(99,95,81,0.2);
+    align-self: stretch; margin-top: 10px;
+}
+
+/* ===== FAQ SECTION ===== */
+.faq-section { background: #f5f4f0; padding: 110px 10%; }
+.faq-inner { max-width: 760px; margin: 0 auto; }
+.faq-eyebrow {
+    font-family: 'EB Garamond', serif;
+    font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase;
+    color: #635f51; margin-bottom: 12px; text-align: center;
+}
+.faq-heading { font-size: 2.2rem; color: #1C1A14; margin: 0 0 50px; text-align: center; }
+.faq-item { border-bottom: 1px solid rgba(99,95,81,0.15); }
+.faq-item:first-of-type { border-top: 1px solid rgba(99,95,81,0.15); }
+.faq-q {
+    display: flex; justify-content: space-between; align-items: center;
+    width: 100%; background: none; border: none;
+    font-family: 'EB Garamond', serif; font-size: 1.05rem;
+    color: #1C1A14; text-align: left; cursor: pointer;
+    padding: 20px 0; gap: 16px; transition: color 0.2s;
+}
+.faq-q:hover { color: #5C6E82; }
+.faq-arrow {
+    flex-shrink: 0; font-size: 1rem; color: #5C6E82;
+    transition: transform 0.3s ease; display: inline-block;
+}
+.faq-item.open .faq-arrow { transform: rotate(180deg); }
+.faq-a { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+.faq-item.open .faq-a { max-height: 300px; }
+.faq-a p { font-size: 0.92rem; color: #635f51; line-height: 1.75; margin: 0; padding-bottom: 22px; }
+
+/* ===== REEL SECTION ===== */
+.reel-section { background: #1C1A14; padding: 80px 10%; text-align: center; }
+.reel-eyebrow {
+    font-family: 'EB Garamond', serif;
+    font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase;
+    color: #635f51; margin-bottom: 12px;
+}
+.reel-heading { font-size: 2rem; color: #f5f4f0; margin: 0 0 36px; }
+.reel-embed {
+    max-width: 900px; margin: 0 auto;
+    aspect-ratio: 16/9; border-radius: 12px; overflow: hidden;
+    background: #2A2220; position: relative;
+}
+.reel-embed iframe { width: 100%; height: 100%; border: none; display: block; }
+.reel-placeholder {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    color: #635f51; font-family: 'EB Garamond', serif; font-style: italic; gap: 10px;
+}
+.reel-placeholder-icon { font-size: 2.5rem; opacity: 0.4; }
+
+/* ===== RESPONSIVE — NEW SECTIONS ===== */
+@media (max-width: 900px) {
+    .process-steps { grid-template-columns: repeat(2, 1fr); gap: 32px; }
+    .about-inner { flex-direction: column; gap: 44px; }
+    .about-photo { flex: none; width: 100%; max-width: 340px; margin: 0 auto; }
+}
+@media (max-width: 768px) {
+    .testimonials-section { padding: 72px 6%; }
+    .about-section { padding: 72px 6%; }
+    .process-section { padding: 72px 6%; }
+    .faq-section { padding: 72px 6%; }
+    .reel-section { padding: 60px 6%; }
+    .testimonial-text { font-size: 1.05rem; }
+    .about-heading { font-size: 1.7rem; }
+    .process-heading { font-size: 1.7rem; }
+    .faq-heading { font-size: 1.7rem; }
+    .testimonials-heading { font-size: 1.7rem; }
+}
+@media (max-width: 480px) {
+    .process-steps { grid-template-columns: 1fr; gap: 28px; }
+}
 </style>
 </head>
 
@@ -831,6 +1025,69 @@ footer > * { position: relative; z-index: 1; }
     <cite>— Tate Harrison</cite>
 </blockquote>
 
+<!-- ABOUT -->
+<section id="about" class="about-section">
+    <div class="about-inner">
+        <div class="about-photo">
+            <div class="about-photo-placeholder"></div>
+        </div>
+        <div class="about-content">
+            <p class="about-eyebrow anim-fade">About</p>
+            <h2 class="about-heading anim-fade">The Person Behind the Lens</h2>
+            <p class="about-body anim-fade">I'm Tate Harrison — a Boulder-based photographer and videographer with a background in audio production, narrative film, and human psychology. I believe the best creative work comes from understanding people, not just equipment.</p>
+            <p class="about-body anim-fade">Whether I'm capturing a keynote on a main stage or following a subject through their daily life, my job is to make the frame feel honest. I started with an iPhone. I've since invested in the skills and tools to do the work justice.</p>
+            <a href="schedule.html" class="about-cta anim-fade">Work With Me →</a>
+        </div>
+    </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process-section">
+    <div class="process-inner">
+        <p class="process-eyebrow anim-fade">How It Works</p>
+        <h2 class="process-heading anim-fade">From Idea to Deliverable</h2>
+        <div class="process-steps">
+            <div class="process-step anim-fade">
+                <span class="step-num">01</span>
+                <h3 class="step-title">Consult</h3>
+                <p class="step-desc">We talk through your vision, timeline, and goals. No obligation — just a real conversation about what you need.</p>
+            </div>
+            <div class="process-step anim-fade">
+                <span class="step-num">02</span>
+                <h3 class="step-title">Shoot</h3>
+                <p class="step-desc">I arrive prepared, move efficiently, and keep the energy on set calm, focused, and professional.</p>
+            </div>
+            <div class="process-step anim-fade">
+                <span class="step-num">03</span>
+                <h3 class="step-title">Edit</h3>
+                <p class="step-desc">Color grading, audio mixing, and careful sequencing — every frame is considered before it reaches you.</p>
+            </div>
+            <div class="process-step anim-fade">
+                <span class="step-num">04</span>
+                <h3 class="step-title">Deliver</h3>
+                <p class="step-desc">Final files in the formats you need, on time. Revisions handled with care and without friction.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- REEL -->
+<section class="reel-section">
+    <p class="reel-eyebrow">Showreel</p>
+    <h2 class="reel-heading anim-fade">The Work, In Motion</h2>
+    <div class="reel-embed">
+        <!-- ── DROP YOUR REEL HERE ────────────────────────────────────────
+             Replace this placeholder with your Vimeo or YouTube embed:
+             <iframe src="https://player.vimeo.com/video/YOUR_VIDEO_ID?autoplay=1&muted=1&loop=1"
+                     allow="autoplay; fullscreen" allowfullscreen></iframe>
+             ─────────────────────────────────────────────────────────── -->
+        <div class="reel-placeholder">
+            <span class="reel-placeholder-icon">▶</span>
+            <span style="font-size:0.85rem;letter-spacing:1.5px;text-transform:uppercase;">Reel coming soon</span>
+        </div>
+    </div>
+</section>
+
 <!-- PORTFOLIO / WORK -->
 <section id="work" class="portfolio-section">
     <div class="portfolio-header">
@@ -892,12 +1149,44 @@ footer > * { position: relative; z-index: 1; }
     </div>
 </section>
 
+<!-- TESTIMONIALS -->
+<section class="testimonials-section">
+    <div class="testimonials-inner">
+        <p class="testimonials-eyebrow anim-fade">Kind Words</p>
+        <h2 class="testimonials-heading anim-fade">What Clients Say</h2>
+        <div class="testimonials-track" id="testimonialsTrack">
+            <div class="testimonial-card active">
+                <p class="testimonial-text">"Add your first client testimonial here. A single sentence about the experience goes a long way toward building trust."</p>
+                <cite class="testimonial-cite">— Client Name, Company</cite>
+            </div>
+            <div class="testimonial-card">
+                <p class="testimonial-text">"Tate made the entire process feel effortless. The final video exceeded everything we had envisioned for our brand."</p>
+                <cite class="testimonial-cite">— Client Name, Company</cite>
+            </div>
+            <div class="testimonial-card">
+                <p class="testimonial-text">"Professional, creative, and deeply thoughtful. I'd recommend Tate to anyone who takes their story seriously."</p>
+                <cite class="testimonial-cite">— Client Name, Company</cite>
+            </div>
+        </div>
+        <div class="testimonials-dots" id="testimonialsDots">
+            <button class="t-dot active" data-index="0" aria-label="Testimonial 1"></button>
+            <button class="t-dot" data-index="1" aria-label="Testimonial 2"></button>
+            <button class="t-dot" data-index="2" aria-label="Testimonial 3"></button>
+        </div>
+    </div>
+</section>
+
 <!-- PRICING -->
 <section id="pricing" class="pricing-section">
     <div class="pricing-header">
         <p class="pricing-eyebrow anim-fade">Investment</p>
         <h2 class="pricing-heading anim-fade">Choose Your Service</h2>
         <p class="pricing-subtext anim-fade">From single-day photography to full brand campaigns — find the right fit for your project.</p>
+        <div style="margin-top:28px;">
+            <span class="availability-badge">
+                <span class="avail-dot"></span> Currently booking April &amp; May 2026
+            </span>
+        </div>
     </div>
 
     <!-- Tab switcher -->
@@ -1072,6 +1361,40 @@ footer > * { position: relative; z-index: 1; }
     </div>
 </section>
 
+<!-- FAQ -->
+<section class="faq-section">
+    <div class="faq-inner">
+        <p class="faq-eyebrow anim-fade">Common Questions</p>
+        <h2 class="faq-heading anim-fade">Before You Reach Out</h2>
+        <div class="faq-list">
+            <div class="faq-item">
+                <button class="faq-q">How long does editing take? <span class="faq-arrow">↓</span></button>
+                <div class="faq-a"><p>Typical turnaround is 7–14 business days for video, and 5–7 days for photography. Complex projects or tight deadlines can be discussed during the consultation — I'll always be upfront about timing.</p></div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-q">Do you travel outside Boulder / Colorado? <span class="faq-arrow">↓</span></button>
+                <div class="faq-a"><p>Yes. I work throughout the Western US regularly. Travel fees may apply depending on location and duration — we'll sort that out clearly upfront, no surprises.</p></div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-q">What formats do you deliver? <span class="faq-arrow">↓</span></button>
+                <div class="faq-a"><p>Video is delivered as H.264 MP4 (web-ready) and ProRes (archive quality) unless you specify otherwise. Photos are delivered as full-resolution JPGs via online gallery. Raw files available upon request.</p></div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-q">How does the deposit and payment work? <span class="faq-arrow">↓</span></button>
+                <div class="faq-a"><p>A 50% deposit secures your date. The remainder is due upon delivery of the final files. I accept card, Venmo, and PayPal.</p></div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-q">Can I request revisions after delivery? <span class="faq-arrow">↓</span></button>
+                <div class="faq-a"><p>Absolutely. Each package includes a set number of revision rounds. Additional rounds can be added at a flat rate — no surprise fees, no pressure.</p></div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-q">Do you do photography and video together in one shoot? <span class="faq-arrow">↓</span></button>
+                <div class="faq-a"><p>Yes — hybrid shoots are available. We can discuss combining coverage types during the consultation. Pricing reflects the scope of work.</p></div>
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- CONTACT -->
 <section id="contact" class="section cta">
     <h2>Work With Me</h2>
@@ -1154,16 +1477,7 @@ window.addEventListener('scroll', () => {
     if (heroParallax) heroParallax.style.transform = `translateY(${window.scrollY * 0.35}px)`;
 }, { passive: true });
 
-/* ===== HERO TEXT MOUSE DRIFT ===== */
-const heroText = document.querySelector('.hero-text-panel');
-setTimeout(() => {
-    document.addEventListener('mousemove', (e) => {
-        if (!heroText) return;
-        const x = (window.innerWidth  / 2 - e.clientX) / 55;
-        const y = (window.innerHeight / 2 - e.clientY) / 55;
-        heroText.style.transform = `translate(${x}px, ${y}px)`;
-    });
-}, 1300);
+/* Hero mouse drift removed — CSS centering handles positioning */
 
 /* ===== STAGGERED HEADING OBSERVER ===== */
 const animEls = document.querySelectorAll('.anim-fade');
@@ -1198,7 +1512,7 @@ document.querySelectorAll('.pricing-card').forEach(card => {
         cY = lerp(cY, hovering ? tY : 0, t);
 
         card.style.transform =
-            `perspective(720px) rotateY(${cX * 10}deg) rotateX(${-cY * 10}deg) translateY(-5px)`;
+            `perspective(1600px) rotateY(${cX * 5}deg) rotateX(${-cY * 5}deg) translateY(-5px)`;
         card.style.boxShadow =
             `${-cX * 18}px ${(-cY + 0.4) * 14}px 36px rgba(28,26,20,0.13)`;
 
@@ -1317,6 +1631,39 @@ lightboxClose.addEventListener('click', closeLightbox);
 lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
 function closeLightbox() { lightbox.classList.remove('open'); document.body.style.overflow = ''; }
+
+/* ===== FAQ ACCORDION ===== */
+document.querySelectorAll('.faq-item').forEach(item => {
+    item.querySelector('.faq-q').addEventListener('click', () => {
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+        if (!isOpen) item.classList.add('open');
+    });
+});
+
+/* ===== TESTIMONIALS CAROUSEL ===== */
+(function() {
+    const cards = document.querySelectorAll('.testimonial-card');
+    const dots  = document.querySelectorAll('.t-dot');
+    let current = 0, timer;
+
+    function goTo(idx) {
+        cards[current].classList.remove('active');
+        dots[current].classList.remove('active');
+        current = idx;
+        cards[current].classList.add('active');
+        dots[current].classList.add('active');
+    }
+    function next() { goTo((current + 1) % cards.length); }
+
+    dots.forEach(dot => dot.addEventListener('click', () => {
+        clearInterval(timer);
+        goTo(parseInt(dot.dataset.index));
+        timer = setInterval(next, 5000);
+    }));
+
+    timer = setInterval(next, 5000);
+})();
 
 /* ===== SERVICES VIDEO ===== */
 (function() {
