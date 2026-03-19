@@ -1518,11 +1518,12 @@ const revealObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.15 });
 animEls.forEach(el => revealObserver.observe(el));
 
-/* ===== PRICING CARD TILT — gradual lerp attack, plastic shine from bottom-left ===== */
+/* ===== PRICING CARD TILT — velocity-aware lerp, plastic shine from bottom-left ===== */
 document.querySelectorAll('.pricing-card').forEach(card => {
     const shine   = card.querySelector('.card-shine');
     const ctaHref = card.querySelector('.pricing-cta')?.getAttribute('href');
     let tX = 0, tY = 0, cX = 0, cY = 0;
+    let prevTX = 0, prevTY = 0;
     let hovering = false, rafId = null;
 
     /* Click anywhere on card navigates to the package page */
@@ -1533,8 +1534,13 @@ document.querySelectorAll('.pricing-card').forEach(card => {
     function lerp(a, b, t) { return a + (b - a) * t; }
 
     function tick() {
-        /* Slow attack (t≈0.055), quicker return (t≈0.11) */
-        const t = hovering ? 0.055 : 0.11;
+        /* Velocity-aware lerp: fast when cursor is moving, gradual when still.
+           Attack: 0.08 idle → up to 0.22 at full speed. Return: 0.13. */
+        const velX = Math.abs(tX - prevTX);
+        const velY = Math.abs(tY - prevTY);
+        const vel  = Math.min(velX + velY, 0.14) / 0.14; /* 0–1 */
+        prevTX = tX; prevTY = tY;
+        const t = hovering ? (0.08 + vel * 0.14) : 0.13;
         cX = lerp(cX, hovering ? tX : 0, t);
         cY = lerp(cY, hovering ? tY : 0, t);
 
