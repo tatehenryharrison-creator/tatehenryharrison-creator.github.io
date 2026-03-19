@@ -741,6 +741,15 @@ footer > * { position: relative; z-index: 1; }
     cursor: pointer; transition: background 0.25s, border-color 0.25s; padding: 0;
 }
 .t-dot.active { background: #5C6E82; border-color: #5C6E82; }
+.testimonial-stars {
+    display: flex; justify-content: center; gap: 4px;
+    margin-bottom: 18px;
+}
+.testimonial-stars span {
+    font-size: 1.15rem;
+    color: #C9A84C;
+    text-shadow: 0 1px 4px rgba(201,168,76,0.45);
+}
 
 /* ===== ABOUT SECTION ===== */
 .about-section { background: #f5f4f0; padding: 110px 10%; }
@@ -1137,18 +1146,20 @@ footer > * { position: relative; z-index: 1; }
 <!-- TESTIMONIALS -->
 <section class="testimonials-section">
     <div class="testimonials-inner">
-        <p class="testimonials-eyebrow anim-fade">Kind Words</p>
         <h2 class="testimonials-heading anim-fade">What Clients Say</h2>
         <div class="testimonials-track" id="testimonialsTrack">
             <div class="testimonial-card active">
-                <p class="testimonial-text">"Add your first client testimonial here. A single sentence about the experience goes a long way toward building trust."</p>
-                <cite class="testimonial-cite">— Client Name, Company</cite>
+                <div class="testimonial-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+                <p class="testimonial-text">"Tate is very kind, curious, and likes to experiment and tell meaningful stories with his photography. The long exposure water picture Tate took turned out truly beautiful. It really got the essence of the clothing piece we were capturing."</p>
+                <cite class="testimonial-cite">— Sarah Fitzpatrick, Sarah Fitzpatrick Clothing</cite>
             </div>
             <div class="testimonial-card">
+                <div class="testimonial-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
                 <p class="testimonial-text">"Tate made the entire process feel effortless. The final video exceeded everything we had envisioned for our brand."</p>
                 <cite class="testimonial-cite">— Client Name, Company</cite>
             </div>
             <div class="testimonial-card">
+                <div class="testimonial-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
                 <p class="testimonial-text">"Professional, creative, and deeply thoughtful. I'd recommend Tate to anyone who takes their story seriously."</p>
                 <cite class="testimonial-cite">— Client Name, Company</cite>
             </div>
