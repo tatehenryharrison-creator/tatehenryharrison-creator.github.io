@@ -598,6 +598,27 @@ footer > * { position: relative; z-index: 1; }
     transition: background 0.2s; align-self: flex-end;
 }
 .footer-form-btn:hover { background: #4a5c6e; }
+.footer-form-success {
+    display: none; flex-direction: column; align-items: center;
+    justify-content: center; gap: 14px; padding: 36px 20px;
+    text-align: center;
+    animation: fadeUp 0.6s ease forwards;
+}
+.footer-form-success-icon {
+    width: 52px; height: 52px; border-radius: 50%;
+    background: rgba(92,110,130,0.12);
+    border: 2px solid rgba(92,110,130,0.35);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem; color: #5C6E82;
+}
+.footer-form-success-title {
+    font-family: 'Cinzel', serif; font-size: 1rem; font-weight: 400;
+    letter-spacing: 1.5px; color: #1C1A14; margin: 0;
+}
+.footer-form-success-sub {
+    font-family: 'EB Garamond', serif; font-size: 0.85rem;
+    color: #a8a49c; font-style: italic; margin: 0;
+}
 .footer-divider { height: 1px; background: rgba(99,95,81,0.12); margin: 0 auto 36px; max-width: 440px; }
 
 /* Social icons with tooltips */
@@ -1415,7 +1436,7 @@ footer > * { position: relative; z-index: 1; }
 
 <!-- FOOTER -->
 <footer>
-    <div class="footer-form-section">
+    <div class="footer-form-section" id="footerFormSection">
         <span class="footer-form-label">Quick Message</span>
         <p class="footer-form-sub">Prefer a quick note? Send one here.</p>
         <form class="footer-form" id="footerForm"
@@ -1428,6 +1449,11 @@ footer > * { position: relative; z-index: 1; }
             <textarea name="message" placeholder="Tell me about your project…" required></textarea>
             <button type="submit" class="footer-form-btn">Send →</button>
         </form>
+        <div class="footer-form-success" id="footerFormSuccess">
+            <div class="footer-form-success-icon">✓</div>
+            <p class="footer-form-success-title">All Done!</p>
+            <p class="footer-form-success-sub">Message received — I'll be in touch soon.</p>
+        </div>
     </div>
 
     <div class="footer-divider"></div>
@@ -1698,30 +1724,34 @@ document.querySelectorAll('.faq-item').forEach(item => {
 })();
 
 /* ===== FOOTER QUICK FORM — Formspree ===== */
-/* Replace YOUR_FORM_ID below with your ID from formspree.io */
 const FORMSPREE_ID = 'maqpazao';
 
 document.getElementById('footerForm').addEventListener('submit', async function(e) {
     e.preventDefault();
-    const btn  = this.querySelector('.footer-form-btn');
-    const data = new FormData(this);
+    const btn     = this.querySelector('.footer-form-btn');
+    const form    = this;
+    const success = document.getElementById('footerFormSuccess');
+    const data    = new FormData(this);
     btn.textContent = 'Sending…';
     btn.disabled = true;
     try {
         const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
-            method: 'POST',
-            body: data,
-            headers: { 'Accept': 'application/json' }
+            method: 'POST', body: data, headers: { 'Accept': 'application/json' }
         });
         if (res.ok) {
-            btn.textContent = 'Sent ✓';
-            btn.style.background = '#4a7a5e';
-            this.reset();
+            /* Fade out the form labels + form, reveal success state */
+            form.style.transition = 'opacity 0.4s ease';
+            form.style.opacity = '0';
+            const label = document.querySelector('#footerFormSection .footer-form-label');
+            const sub   = document.querySelector('#footerFormSection .footer-form-sub');
+            if (label) { label.style.transition = 'opacity 0.4s ease'; label.style.opacity = '0'; }
+            if (sub)   { sub.style.transition   = 'opacity 0.4s ease'; sub.style.opacity   = '0'; }
             setTimeout(() => {
-                btn.textContent = 'Send →';
-                btn.style.background = '';
-                btn.disabled = false;
-            }, 3500);
+                form.style.display  = 'none';
+                if (label) label.style.display = 'none';
+                if (sub)   sub.style.display   = 'none';
+                success.style.display = 'flex';
+            }, 420);
         } else {
             btn.textContent = 'Try again';
             btn.style.background = '#8b4a4a';
