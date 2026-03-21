@@ -1939,14 +1939,16 @@ document.querySelectorAll('.pricing-card').forEach(card => {
         dragging = false;
         wrap.style.cursor = 'grab';
     });
-    wrap.addEventListener('touchstart',  e => {
+    wrap.addEventListener('touchstart', e => {
         dragging = true;
         setPos(e.touches[0].clientX);
     }, { passive: true });
-    window.addEventListener('touchmove', e => {
-        if (dragging) setPos(e.touches[0].clientX);
-    }, { passive: true });
-    window.addEventListener('touchend',  () => { dragging = false; });
+    wrap.addEventListener('touchmove', e => {
+        if (!dragging) return;
+        e.preventDefault(); /* block page scroll while sliding */
+        setPos(e.touches[0].clientX);
+    }, { passive: false });
+    window.addEventListener('touchend', () => { dragging = false; });
 })();
 
 /* ===== PORTFOLIO FILTER ===== */
@@ -2009,7 +2011,27 @@ document.querySelectorAll('.faq-item').forEach(item => {
         timer = setInterval(next, 6500);
     }));
 
-    timer = setInterval(next, 5000);
+    /* Swipe support for mobile */
+    const track = document.getElementById('testimonialsTrack');
+    let swipeStartX = null;
+    track.addEventListener('touchstart', e => {
+        swipeStartX = e.touches[0].clientX;
+    }, { passive: true });
+    track.addEventListener('touchend', e => {
+        if (swipeStartX === null) return;
+        const delta = e.changedTouches[0].clientX - swipeStartX;
+        swipeStartX = null;
+        if (Math.abs(delta) < 40) return; /* too short, ignore */
+        clearInterval(timer);
+        if (delta < 0) {
+            goTo((current + 1) % cards.length);          /* swipe left → next */
+        } else {
+            goTo((current - 1 + cards.length) % cards.length); /* swipe right → prev */
+        }
+        timer = setInterval(next, 6500);
+    }, { passive: true });
+
+    timer = setInterval(next, 6500);
 })();
 
 /* ===== SERVICES VIDEO ===== */
