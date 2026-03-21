@@ -786,7 +786,7 @@ footer > * { position: relative; z-index: 1; }
     position: relative; pointer-events: auto;
 }
 .testimonial-text {
-    font-family: 'IM Fell English', serif; font-style: italic;
+    font-family: 'EB Garamond', serif; font-style: italic;
     font-size: 1.22rem; color: #e8e1d4; line-height: 1.7;
     margin: 0 0 22px;
 }
@@ -2006,7 +2006,7 @@ document.querySelectorAll('.faq-item').forEach(item => {
     dots.forEach(dot => dot.addEventListener('click', () => {
         clearInterval(timer);
         goTo(parseInt(dot.dataset.index));
-        timer = setInterval(next, 5000);
+        timer = setInterval(next, 6500);
     }));
 
     timer = setInterval(next, 5000);
