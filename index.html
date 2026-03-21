@@ -149,7 +149,8 @@ nav {
     color: #635f51; margin-bottom: 18px;
 }
 .ba-wrap {
-    position: relative; max-width: 920px; height: 420px;
+    position: relative; max-width: 1400px; width: 100%;
+    aspect-ratio: 1920 / 876;
     margin: 0 auto; overflow: hidden;
     cursor: grab; border-radius: 12px; user-select: none;
 }
@@ -160,7 +161,7 @@ nav {
 .ba-before video, .ba-after video {
     position: absolute; inset: 0;
     width: 100%; height: 100%;
-    object-fit: cover; display: block; pointer-events: none;
+    object-fit: fill; display: block; pointer-events: none;
 }
 .ba-before {
     background: #2c2926;
@@ -776,7 +777,7 @@ footer > * { position: relative; z-index: 1; }
     .subtext p { font-size: 0.88rem; line-height: 1.5; }
 
     /* SLIDER */
-    .ba-wrap { height: auto; aspect-ratio: 16/9; }
+    .ba-wrap { height: auto; } /* aspect-ratio inherited from base rule (1920/876) */
     .ba-section { padding: 40px 0 28px; }
     .ba-handle { width: 38px; height: 38px; }
 
