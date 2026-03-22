@@ -1199,8 +1199,72 @@ footer > * { position: relative; z-index: 1; }
 .faq-item.open .faq-a { max-height: 300px; }
 .faq-a p { font-size: 0.92rem; color: #635f51; line-height: 1.75; margin: 0; padding-bottom: 22px; }
 
+/* ===== AUDIO SECTION ===== */
+.audio-section {
+    background: #1a1814; padding: 100px 10%;
+    text-align: center;
+    border-top: 1px solid rgba(99,95,81,0.12);
+}
+.audio-eyebrow {
+    font-family: 'EB Garamond', serif;
+    font-size: 0.72rem; letter-spacing: 3px; text-transform: uppercase;
+    color: #635f51; margin-bottom: 12px;
+}
+.audio-heading { font-size: 2.2rem; color: #f5f4f0; margin: 0 0 56px; }
+.audio-grid {
+    max-width: 820px; margin: 0 auto;
+    display: flex; flex-direction: column; gap: 20px;
+}
+.audio-card {
+    background: rgba(245,244,240,0.04);
+    border: 1px solid rgba(245,244,240,0.09);
+    border-radius: 12px; padding: 24px 28px;
+    display: flex; align-items: center; gap: 22px;
+    text-align: left; transition: background 0.25s, border-color 0.25s;
+}
+.audio-card:hover {
+    background: rgba(92,110,130,0.1);
+    border-color: rgba(92,110,130,0.3);
+}
+.audio-play-btn {
+    flex-shrink: 0; width: 46px; height: 46px; border-radius: 50%;
+    background: rgba(92,110,130,0.18); border: 1px solid rgba(92,110,130,0.4);
+    color: #5C6E82; cursor: pointer; display: flex; align-items: center;
+    justify-content: center; transition: background 0.2s, transform 0.15s;
+    font-size: 0; /* hide text */
+}
+.audio-play-btn:hover { background: rgba(92,110,130,0.32); transform: scale(1.07); }
+.audio-play-btn svg { width: 18px; height: 18px; fill: #5C6E82; flex-shrink: 0; }
+.audio-play-btn.playing svg.icon-play { display: none; }
+.audio-play-btn:not(.playing) svg.icon-pause { display: none; }
+.audio-meta { flex: 1; min-width: 0; }
+.audio-title {
+    font-family: 'EB Garamond', serif; font-size: 1.05rem;
+    color: #f5f4f0; margin: 0 0 4px; font-weight: 600;
+}
+.audio-desc {
+    font-size: 0.78rem; color: #635f51; letter-spacing: 0.5px; margin: 0 0 12px;
+}
+.audio-progress-wrap {
+    position: relative; height: 3px; background: rgba(245,244,240,0.1);
+    border-radius: 3px; cursor: pointer; margin-bottom: 6px;
+}
+.audio-progress-bar {
+    height: 100%; width: 0%; background: #5C6E82; border-radius: 3px;
+    transition: width 0.1s linear; pointer-events: none;
+}
+.audio-time {
+    font-size: 0.7rem; color: #a8a49c; letter-spacing: 0.5px;
+    display: flex; justify-content: space-between;
+}
+@media (max-width: 600px) {
+    .audio-section { padding: 72px 6%; }
+    .audio-card { padding: 18px 16px; gap: 14px; }
+    .audio-play-btn { width: 40px; height: 40px; }
+}
+
 /* ===== REEL SECTION ===== */
-.reel-section { background: #1C1A14; padding: 80px 10%; text-align: center; }
+.reel-section { position: relative; overflow: hidden; background: #1C1A14; padding: 80px 10%; text-align: center; }
 .reel-eyebrow {
     font-family: 'EB Garamond', serif;
     font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase;
@@ -1339,7 +1403,6 @@ footer > * { position: relative; z-index: 1; }
             <h2 class="about-heading anim-fade">About Me</h2>
             <p class="about-body anim-fade">I'm Tate Harrison — a Boulder-based photographer and videographer with a background in audio production, narrative film, and human psychology. I believe the best creative work comes from understanding people and the stories they bring.</p>
             <p class="about-body anim-fade">I want to launch your story into the online world through the most effective form of artistic communication: video and sound.</p>
-            <p class="about-body anim-fade">My job is to make the frame feel genuine. I started with an iPhone in 2018. I've since invested in the skills and tools to do the work justice.</p>
             <p class="about-body anim-fade" style="font-style:italic; color:#635f51; font-size:0.92rem; margin-top:4px;">Tate has a B.A. in Psychology, and is a former photography instructor at Boulder Valley School District. Tate is training for his FAA Part 107 Drone Pilot License.</p>
             <a href="schedule.html" class="about-cta anim-fade">Work With Me →</a>
         </div>
@@ -1700,8 +1763,8 @@ footer > * { position: relative; z-index: 1; }
     </div>
 </div>
 
-<!-- SERVICES -->
-<section id="services" class="services-section">
+<!-- REEL -->
+<section class="reel-section">
 
     <!-- Video Background -->
     <div class="services-video-bg">
@@ -1713,7 +1776,87 @@ footer > * { position: relative; z-index: 1; }
     <!-- Play/Pause -->
     <button id="servicesPlayBtn" class="services-play-btn" aria-label="Play/Pause">&#9646;&#9646; Pause</button>
 
-    <!-- Centered Content -->
+    <!-- Content -->
+    <div class="services-inner">
+        <p class="reel-eyebrow">Showreel</p>
+        <h2 class="reel-heading anim-fade">The Work, In Motion</h2>
+        <div class="reel-embed">
+            <!-- ── DROP YOUR REEL HERE ────────────────────────────────────────
+                 Replace this placeholder with your Vimeo or YouTube embed:
+                 <iframe src="https://player.vimeo.com/video/YOUR_VIDEO_ID?autoplay=1&muted=1&loop=1"
+                         allow="autoplay; fullscreen" allowfullscreen></iframe>
+                 ─────────────────────────────────────────────────────────── -->
+            <div class="reel-placeholder">
+                <span class="reel-placeholder-icon">▶</span>
+                <span style="font-size:0.85rem;letter-spacing:1.5px;text-transform:uppercase;">Reel coming soon</span>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<!-- AUDIO -->
+<section class="audio-section" id="audio">
+    <p class="audio-eyebrow anim-fade">Listen</p>
+    <h2 class="audio-heading anim-fade">Audio</h2>
+    <div class="audio-grid">
+
+        <!-- Card 1 -->
+        <div class="audio-card anim-fade">
+            <button class="audio-play-btn" aria-label="Play/Pause">
+                <svg class="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                <svg class="icon-pause" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+            </button>
+            <div class="audio-meta">
+                <p class="audio-title">Track Title</p>
+                <p class="audio-desc">Description / project context</p>
+                <div class="audio-progress-wrap">
+                    <div class="audio-progress-bar"></div>
+                </div>
+                <div class="audio-time"><span class="audio-current">0:00</span><span class="audio-duration">0:00</span></div>
+            </div>
+            <audio src="" preload="metadata"></audio>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="audio-card anim-fade">
+            <button class="audio-play-btn" aria-label="Play/Pause">
+                <svg class="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                <svg class="icon-pause" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+            </button>
+            <div class="audio-meta">
+                <p class="audio-title">Track Title</p>
+                <p class="audio-desc">Description / project context</p>
+                <div class="audio-progress-wrap">
+                    <div class="audio-progress-bar"></div>
+                </div>
+                <div class="audio-time"><span class="audio-current">0:00</span><span class="audio-duration">0:00</span></div>
+            </div>
+            <audio src="" preload="metadata"></audio>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="audio-card anim-fade">
+            <button class="audio-play-btn" aria-label="Play/Pause">
+                <svg class="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                <svg class="icon-pause" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+            </button>
+            <div class="audio-meta">
+                <p class="audio-title">Track Title</p>
+                <p class="audio-desc">Description / project context</p>
+                <div class="audio-progress-wrap">
+                    <div class="audio-progress-bar"></div>
+                </div>
+                <div class="audio-time"><span class="audio-current">0:00</span><span class="audio-duration">0:00</span></div>
+            </div>
+            <audio src="" preload="metadata"></audio>
+        </div>
+
+    </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services" class="services-section">
     <div class="services-inner">
         <p class="services-eyebrow anim-fade">What I Offer</p>
         <h2 class="services-heading anim-fade">Built for Stories<br>That Stick</h2>
@@ -1747,24 +1890,6 @@ footer > * { position: relative; z-index: 1; }
                     </div>
                 </li>
         </ul>
-    </div>
-
-</section>
-
-<!-- REEL -->
-<section class="reel-section">
-    <p class="reel-eyebrow">Showreel</p>
-    <h2 class="reel-heading anim-fade">The Work, In Motion</h2>
-    <div class="reel-embed">
-        <!-- ── DROP YOUR REEL HERE ────────────────────────────────────────
-             Replace this placeholder with your Vimeo or YouTube embed:
-             <iframe src="https://player.vimeo.com/video/YOUR_VIDEO_ID?autoplay=1&muted=1&loop=1"
-                     allow="autoplay; fullscreen" allowfullscreen></iframe>
-             ─────────────────────────────────────────────────────────── -->
-        <div class="reel-placeholder">
-            <span class="reel-placeholder-icon">▶</span>
-            <span style="font-size:0.85rem;letter-spacing:1.5px;text-transform:uppercase;">Reel coming soon</span>
-        </div>
     </div>
 </section>
 
@@ -2244,6 +2369,50 @@ document.querySelectorAll('.faq-item').forEach(item => {
         if (finished) { startSession(); }
         else if (video.paused) { video.play().catch(function(){}); btn.innerHTML = '&#9646;&#9646; Pause'; }
         else { video.pause(); btn.textContent = '▶ Play'; }
+    });
+})();
+
+/* ===== AUDIO PLAYERS ===== */
+(function() {
+    function fmt(s) {
+        s = Math.floor(s || 0);
+        return Math.floor(s / 60) + ':' + ('0' + (s % 60)).slice(-2);
+    }
+    document.querySelectorAll('.audio-card').forEach(function(card) {
+        var btn      = card.querySelector('.audio-play-btn');
+        var audio    = card.querySelector('audio');
+        var bar      = card.querySelector('.audio-progress-bar');
+        var wrap     = card.querySelector('.audio-progress-wrap');
+        var current  = card.querySelector('.audio-current');
+        var duration = card.querySelector('.audio-duration');
+        if (!audio) return;
+
+        audio.addEventListener('loadedmetadata', function() {
+            duration.textContent = fmt(audio.duration);
+        });
+        audio.addEventListener('timeupdate', function() {
+            current.textContent = fmt(audio.currentTime);
+            var pct = audio.duration ? (audio.currentTime / audio.duration) * 100 : 0;
+            bar.style.width = pct + '%';
+        });
+        audio.addEventListener('ended', function() {
+            btn.classList.remove('playing');
+            bar.style.width = '0%';
+            current.textContent = '0:00';
+        });
+        btn.addEventListener('click', function() {
+            // Pause all other players
+            document.querySelectorAll('.audio-card audio').forEach(function(a) {
+                if (a !== audio) { a.pause(); a.closest('.audio-card').querySelector('.audio-play-btn').classList.remove('playing'); }
+            });
+            if (audio.paused) { audio.play(); btn.classList.add('playing'); }
+            else { audio.pause(); btn.classList.remove('playing'); }
+        });
+        wrap.addEventListener('click', function(e) {
+            if (!audio.duration) return;
+            var rect = wrap.getBoundingClientRect();
+            audio.currentTime = ((e.clientX - rect.left) / rect.width) * audio.duration;
+        });
     });
 })();
 
