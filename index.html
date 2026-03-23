@@ -2910,6 +2910,24 @@ document.getElementById('footerForm').addEventListener('submit', async function(
     document.addEventListener('click', e => { if (!btn.contains(e.target) && !panel.contains(e.target)) closeMenu(); });
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
 })();
+
+/* ===== MOBILE: DEFAULT SCROLL TO NOVEL CARD ===== */
+(function() {
+    if (window.innerWidth > 767) return; /* desktop — no action needed */
+    /* Each visible pricing-grid (videography shown by default) */
+    document.querySelectorAll('#pricing-video .pricing-grid').forEach(grid => {
+        const cards = grid.querySelectorAll('.pricing-card');
+        const novelCard = cards[1]; /* Novel is the 2nd card (index 1) */
+        if (!novelCard) return;
+        /* After layout settles, scroll Novel into center */
+        requestAnimationFrame(() => {
+            const gridRect  = grid.getBoundingClientRect();
+            const cardRect  = novelCard.getBoundingClientRect();
+            const offset    = cardRect.left - gridRect.left - (grid.offsetWidth - novelCard.offsetWidth) / 2;
+            grid.scrollLeft = offset;
+        });
+    });
+})();
 </script>
 
 </body>
