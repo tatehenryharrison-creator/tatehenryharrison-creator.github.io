@@ -72,6 +72,46 @@ nav {
 }
 .nav-links > a:hover { opacity: 0.7; }
 
+/* ===== FLOATING MENU ===== */
+.float-menu-btn {
+    position: fixed; top: 24px; right: 28px; z-index: 600;
+    width: 42px; height: 42px; border-radius: 50%;
+    background: rgba(28,26,20,0.88);
+    border: 1px solid rgba(99,95,81,0.28);
+    cursor: pointer; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 0; padding: 0;
+    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 2px 18px rgba(0,0,0,0.38);
+    transition: background 0.25s, border-color 0.25s, transform 0.2s, opacity 0.3s;
+    opacity: 0; pointer-events: none;
+}
+.float-menu-btn.visible { opacity: 1; pointer-events: auto; }
+.float-menu-btn:hover { background: rgba(40,36,30,0.97); border-color: rgba(201,168,76,0.4); transform: scale(1.07); }
+.float-menu-btn .hb { display: block; width: 17px; height: 1.5px; background: #e8e1d4; border-radius: 2px; margin: 2.5px 0; transition: transform 0.3s ease, opacity 0.3s ease; }
+.float-menu-btn.open .hb:nth-child(1) { transform: translateY(5.5px) rotate(45deg); }
+.float-menu-btn.open .hb:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.float-menu-btn.open .hb:nth-child(3) { transform: translateY(-5.5px) rotate(-45deg); }
+
+.float-menu-panel {
+    position: fixed; top: 76px; right: 28px; z-index: 599;
+    background: rgba(22,19,13,0.96);
+    border: 1px solid rgba(99,95,81,0.2);
+    border-radius: 14px; padding: 10px 0; min-width: 190px;
+    backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+    box-shadow: 0 10px 44px rgba(0,0,0,0.55);
+    opacity: 0; transform: translateY(-6px) scale(0.97);
+    pointer-events: none; transition: opacity 0.22s ease, transform 0.22s ease;
+}
+.float-menu-panel.open { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
+.float-menu-panel a {
+    display: block; font-family: 'EB Garamond', serif; font-size: 1.05rem;
+    color: #e8e1d4; text-decoration: none; padding: 10px 22px;
+    letter-spacing: 0.3px; transition: color 0.2s, background 0.2s;
+}
+.float-menu-panel a:hover { color: #C9A84C; background: rgba(201,168,76,0.06); }
+.float-menu-panel .fmp-divider { height: 1px; background: rgba(99,95,81,0.15); margin: 6px 16px; }
+.float-menu-panel .fmp-cta { color: #C9A84C !important; font-style: italic; }
+
 /* ===== HERO ===== */
 .hero {
     position: relative; display: flex;
@@ -1403,6 +1443,23 @@ footer > * { position: relative; z-index: 1; }
             <a href="schedule.html">Free Consultation</a>
         </nav>
     </div>
+</div>
+
+<!-- FLOATING MENU -->
+<button class="float-menu-btn" id="floatMenuBtn" aria-label="Menu" aria-expanded="false">
+    <span class="hb"></span>
+    <span class="hb"></span>
+    <span class="hb"></span>
+</button>
+<div class="float-menu-panel" id="floatMenuPanel" aria-hidden="true">
+    <a href="#about">About</a>
+    <a href="#work">Work</a>
+    <a href="#audio">Audio</a>
+    <a href="#analog">Vintage &amp; Film</a>
+    <a href="#pricing">Investment</a>
+    <a href="#contact">Contact</a>
+    <div class="fmp-divider"></div>
+    <a href="schedule.html" class="fmp-cta">Book a Call →</a>
 </div>
 
 <!-- HERO -->
@@ -2797,6 +2854,30 @@ document.getElementById('footerForm').addEventListener('submit', async function(
     /* ---- Init ---- */
     drawLines();
     window.addEventListener('resize', drawLines);
+})();
+
+/* ===== FLOATING MENU ===== */
+(function() {
+    const btn   = document.getElementById('floatMenuBtn');
+    const panel = document.getElementById('floatMenuPanel');
+    if (!btn || !panel) return;
+
+    /* Show button after scrolling 120px past the nav */
+    function onScroll() {
+        btn.classList.toggle('visible', window.scrollY > 120);
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    function openMenu()  { btn.classList.add('open'); panel.classList.add('open'); btn.setAttribute('aria-expanded','true'); panel.setAttribute('aria-hidden','false'); }
+    function closeMenu() { btn.classList.remove('open'); panel.classList.remove('open'); btn.setAttribute('aria-expanded','false'); panel.setAttribute('aria-hidden','true'); }
+
+    btn.addEventListener('click', () => btn.classList.contains('open') ? closeMenu() : openMenu());
+
+    /* Close on link click, outside click, or Escape */
+    panel.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+    document.addEventListener('click', e => { if (!btn.contains(e.target) && !panel.contains(e.target)) closeMenu(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
 })();
 </script>
 
