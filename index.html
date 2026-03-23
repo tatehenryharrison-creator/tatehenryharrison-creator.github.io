@@ -72,6 +72,46 @@ nav {
 }
 .nav-links > a:hover { opacity: 0.7; }
 
+/* ===== FLOATING MENU ===== */
+.float-menu-btn {
+    position: fixed; top: 24px; right: 28px; z-index: 600;
+    width: 42px; height: 42px; border-radius: 50%;
+    background: rgba(28,26,20,0.88);
+    border: 1px solid rgba(99,95,81,0.28);
+    cursor: pointer; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 0; padding: 0;
+    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 2px 18px rgba(0,0,0,0.38);
+    transition: background 0.25s, border-color 0.25s, transform 0.2s, opacity 0.3s;
+    opacity: 0; pointer-events: none;
+}
+.float-menu-btn.visible { opacity: 1; pointer-events: auto; }
+.float-menu-btn:hover { background: rgba(40,36,30,0.97); border-color: rgba(201,168,76,0.4); transform: scale(1.07); }
+.float-menu-btn .hb { display: block; width: 17px; height: 1.5px; background: #e8e1d4; border-radius: 2px; margin: 2.5px 0; transition: transform 0.3s ease, opacity 0.3s ease; }
+.float-menu-btn.open .hb:nth-child(1) { transform: translateY(5.5px) rotate(45deg); }
+.float-menu-btn.open .hb:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.float-menu-btn.open .hb:nth-child(3) { transform: translateY(-5.5px) rotate(-45deg); }
+
+.float-menu-panel {
+    position: fixed; top: 76px; right: 28px; z-index: 599;
+    background: rgba(22,19,13,0.96);
+    border: 1px solid rgba(99,95,81,0.2);
+    border-radius: 14px; padding: 10px 0; min-width: 190px;
+    backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+    box-shadow: 0 10px 44px rgba(0,0,0,0.55);
+    opacity: 0; transform: translateY(-6px) scale(0.97);
+    pointer-events: none; transition: opacity 0.22s ease, transform 0.22s ease;
+}
+.float-menu-panel.open { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
+.float-menu-panel a {
+    display: block; font-family: 'EB Garamond', serif; font-size: 1.05rem;
+    color: #e8e1d4; text-decoration: none; padding: 10px 22px;
+    letter-spacing: 0.3px; transition: color 0.2s, background 0.2s;
+}
+.float-menu-panel a:hover { color: #C9A84C; background: rgba(201,168,76,0.06); }
+.float-menu-panel .fmp-divider { height: 1px; background: rgba(99,95,81,0.15); margin: 6px 16px; }
+.float-menu-panel .fmp-cta { color: #C9A84C !important; font-style: italic; }
+
 /* ===== HERO ===== */
 .hero {
     position: relative; display: flex;
@@ -453,7 +493,7 @@ nav {
 
 /* ===== PRICING SECTION ===== */
 .pricing-section {
-    background: #e8e1d4; padding: 100px 10%;
+    background: #e8e1d4; padding: 100px 10% 56px;
     border-top: 1px solid rgba(99,95,81,0.15);
 }
 .pricing-header { text-align: center; margin-bottom: 60px; }
@@ -562,14 +602,17 @@ nav {
 /* Comparison Table */
 .compare-toggle-wrap { max-width: 1100px; margin: 0 auto; text-align: center; }
 .compare-toggle-btn {
-    font-family: 'EB Garamond', serif; font-size: 0.78rem; letter-spacing: 0.5px;
-    background: none; border: none;
-    color: rgba(99,95,81,0.5); padding: 8px 4px;
-    cursor: pointer; transition: color 0.2s;
-    text-decoration: underline; text-decoration-color: rgba(99,95,81,0.2);
-    text-underline-offset: 3px;
+    font-family: 'EB Garamond', serif; font-size: 0.9rem; letter-spacing: 0.5px;
+    background: none; border: 1px solid rgba(99,95,81,0.35);
+    color: rgba(99,95,81,0.8); padding: 8px 22px;
+    border-radius: 50px; cursor: pointer;
+    transition: color 0.25s, border-color 0.25s, background 0.25s;
+    text-decoration: none;
 }
-.compare-toggle-btn:hover { color: #5C6E82; text-decoration-color: #5C6E82; }
+.compare-toggle-btn:hover {
+    color: #5C6E82; border-color: #5C6E82;
+    background: rgba(92,110,130,0.07);
+}
 .compare-table-wrap { max-height: 0; overflow: hidden; transition: max-height 0.5s ease; }
 .compare-table-wrap.open { max-height: 700px; }
 .compare-table { width: 100%; border-collapse: collapse; margin-top: 30px; font-family: 'EB Garamond', serif; font-size: 0.88rem; }
@@ -801,7 +844,7 @@ footer > * { position: relative; z-index: 1; }
     .testimonials-track { min-height: 0; }
 
     /* PRICING */
-    .pricing-section { padding: 64px 0 64px; }
+    .pricing-section { padding: 64px 0 36px; }
     .pricing-header { padding: 0 5%; }
     .pricing-heading { font-size: 1.8rem; }
     .pricing-subtext { font-size: 0.9rem; }
@@ -823,7 +866,7 @@ footer > * { position: relative; z-index: 1; }
     .compare-table { min-width: 420px; font-size: 0.78rem; }
 
     /* PROCESS */
-    .process-section { padding: 64px 5% 72px; }
+    .process-section { padding: 32px 5% 64px; }
     .process-heading { font-size: 1.8rem; }
     .process-subhead { margin-bottom: 44px; }
     .process-journey {
@@ -1005,7 +1048,7 @@ footer > * { position: relative; z-index: 1; }
 .about-cta:hover { color: #4a5c6e; border-color: #4a5c6e; }
 
 /* ===== PROCESS SECTION ===== */
-.process-section { background: #e8e1d4; padding: 110px 10% 120px; }
+.process-section { background: #e8e1d4; padding: 48px 10% 100px; border-top: 1px solid rgba(99,95,81,0.1); }
 .process-inner { max-width: 1100px; margin: 0 auto; text-align: center; }
 .process-eyebrow {
     font-family: 'EB Garamond', serif;
@@ -1400,6 +1443,23 @@ footer > * { position: relative; z-index: 1; }
             <a href="schedule.html">Free Consultation</a>
         </nav>
     </div>
+</div>
+
+<!-- FLOATING MENU -->
+<button class="float-menu-btn" id="floatMenuBtn" aria-label="Menu" aria-expanded="false">
+    <span class="hb"></span>
+    <span class="hb"></span>
+    <span class="hb"></span>
+</button>
+<div class="float-menu-panel" id="floatMenuPanel" aria-hidden="true">
+    <a href="#about">About</a>
+    <a href="#work">Work</a>
+    <a href="#audio">Audio</a>
+    <a href="#analog">Vintage &amp; Film</a>
+    <a href="#pricing">Investment</a>
+    <a href="#contact">Contact</a>
+    <div class="fmp-divider"></div>
+    <a href="schedule.html" class="fmp-cta">Book a Call →</a>
 </div>
 
 <!-- HERO -->
@@ -2440,9 +2500,11 @@ document.querySelectorAll('.faq-item').forEach(item => {
 
 /* ===== TESTIMONIALS CAROUSEL ===== */
 (function() {
-    const cards = document.querySelectorAll('.testimonial-card');
-    const dots  = document.querySelectorAll('.t-dot');
-    let current = 0, timer;
+    const CYCLE = 3250; /* half of original 6500ms */
+    const cards   = document.querySelectorAll('.testimonial-card');
+    const dots    = document.querySelectorAll('.t-dot');
+    const section = document.querySelector('.testimonials-section');
+    let current = 0, timer, paused = false;
 
     function goTo(idx) {
         cards[current].classList.remove('active');
@@ -2453,10 +2515,24 @@ document.querySelectorAll('.faq-item').forEach(item => {
     }
     function next() { goTo((current + 1) % cards.length); }
 
-    dots.forEach(dot => dot.addEventListener('click', () => {
+    function startTimer() {
         clearInterval(timer);
+        if (!paused) timer = setInterval(next, CYCLE);
+    }
+
+    /* Pause on hover anywhere in the section */
+    section.addEventListener('mouseenter', () => {
+        paused = true;
+        clearInterval(timer);
+    });
+    section.addEventListener('mouseleave', () => {
+        paused = false;
+        startTimer();
+    });
+
+    dots.forEach(dot => dot.addEventListener('click', () => {
         goTo(parseInt(dot.dataset.index));
-        timer = setInterval(next, 6500);
+        startTimer();
     }));
 
     /* Swipe support for mobile */
@@ -2469,17 +2545,16 @@ document.querySelectorAll('.faq-item').forEach(item => {
         if (swipeStartX === null) return;
         const delta = e.changedTouches[0].clientX - swipeStartX;
         swipeStartX = null;
-        if (Math.abs(delta) < 40) return; /* too short, ignore */
-        clearInterval(timer);
+        if (Math.abs(delta) < 40) return;
         if (delta < 0) {
-            goTo((current + 1) % cards.length);          /* swipe left → next */
+            goTo((current + 1) % cards.length);
         } else {
-            goTo((current - 1 + cards.length) % cards.length); /* swipe right → prev */
+            goTo((current - 1 + cards.length) % cards.length);
         }
-        timer = setInterval(next, 6500);
+        startTimer();
     }, { passive: true });
 
-    timer = setInterval(next, 6500);
+    startTimer();
 })();
 
 /* ===== SERVICES VIDEO ===== */
@@ -2779,6 +2854,30 @@ document.getElementById('footerForm').addEventListener('submit', async function(
     /* ---- Init ---- */
     drawLines();
     window.addEventListener('resize', drawLines);
+})();
+
+/* ===== FLOATING MENU ===== */
+(function() {
+    const btn   = document.getElementById('floatMenuBtn');
+    const panel = document.getElementById('floatMenuPanel');
+    if (!btn || !panel) return;
+
+    /* Show button after scrolling 120px past the nav */
+    function onScroll() {
+        btn.classList.toggle('visible', window.scrollY > 120);
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    function openMenu()  { btn.classList.add('open'); panel.classList.add('open'); btn.setAttribute('aria-expanded','true'); panel.setAttribute('aria-hidden','false'); }
+    function closeMenu() { btn.classList.remove('open'); panel.classList.remove('open'); btn.setAttribute('aria-expanded','false'); panel.setAttribute('aria-hidden','true'); }
+
+    btn.addEventListener('click', () => btn.classList.contains('open') ? closeMenu() : openMenu());
+
+    /* Close on link click, outside click, or Escape */
+    panel.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+    document.addEventListener('click', e => { if (!btn.contains(e.target) && !panel.contains(e.target)) closeMenu(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
 })();
 </script>
 
