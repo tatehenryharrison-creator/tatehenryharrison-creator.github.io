@@ -2520,14 +2520,29 @@ document.querySelectorAll('.faq-item').forEach(item => {
         if (!paused) timer = setInterval(next, CYCLE);
     }
 
-    /* Pause on hover anywhere in the section */
-    section.addEventListener('mouseenter', () => {
-        paused = true;
-        clearInterval(timer);
-    });
+    /* Pause only when cursor is within 28px of the active quote text or cite */
+    const RADIUS = 28;
+    function nearActiveQuote(mx, my) {
+        const activeCard = cards[current];
+        const els = activeCard.querySelectorAll('.testimonial-text, .testimonial-cite');
+        for (const el of els) {
+            const r = el.getBoundingClientRect();
+            const cx = Math.max(r.left, Math.min(mx, r.right));
+            const cy = Math.max(r.top,  Math.min(my, r.bottom));
+            const dist = Math.hypot(mx - cx, my - cy);
+            if (dist <= RADIUS) return true;
+        }
+        return false;
+    }
+    section.addEventListener('mousemove', e => {
+        if (nearActiveQuote(e.clientX, e.clientY)) {
+            if (!paused) { paused = true; clearInterval(timer); }
+        } else {
+            if (paused) { paused = false; startTimer(); }
+        }
+    }, { passive: true });
     section.addEventListener('mouseleave', () => {
-        paused = false;
-        startTimer();
+        if (paused) { paused = false; startTimer(); }
     });
 
     dots.forEach(dot => dot.addEventListener('click', () => {
