@@ -111,6 +111,8 @@ nav {
 .float-menu-panel a:hover { color: #C9A84C; background: rgba(201,168,76,0.06); }
 .float-menu-panel .fmp-divider { height: 1px; background: rgba(99,95,81,0.15); margin: 6px 16px; }
 .float-menu-panel .fmp-cta { color: #C9A84C !important; font-style: italic; }
+.float-menu-panel .fmp-home { display: flex; align-items: center; gap: 9px; }
+.fmp-favicon { width: 18px; height: 18px; border-radius: 3px; object-fit: contain; flex-shrink: 0; }
 
 /* ===== HERO ===== */
 .hero {
@@ -1421,7 +1423,7 @@ footer > * { position: relative; z-index: 1; }
     </a>
     <div class="nav-links">
         <a href="index.html">Home</a>
-        <a href="#work">Work</a>
+        <a href="#work">Portfolio</a>
         <a href="#pricing">Services</a>
         <a href="#contact">Contact</a>
         <a href="schedule.html">Free Consultation</a>
@@ -1438,7 +1440,7 @@ footer > * { position: relative; z-index: 1; }
         <button class="nav-drawer-close" id="navDrawerClose" aria-label="Close menu">✕</button>
         <nav class="nav-drawer-links">
             <a href="index.html">Home</a>
-            <a href="#work">Work</a>
+            <a href="#work">Portfolio</a>
             <a href="#pricing">Services</a>
             <a href="#contact">Contact</a>
             <a href="schedule.html">Free Consultation</a>
@@ -1453,8 +1455,10 @@ footer > * { position: relative; z-index: 1; }
     <span class="hb"></span>
 </button>
 <div class="float-menu-panel" id="floatMenuPanel" aria-hidden="true">
+    <a href="#" class="fmp-home"><img src="favicon.ico" class="fmp-favicon" alt="logo"> Home</a>
+    <div class="fmp-divider"></div>
     <a href="#about">About</a>
-    <a href="#work">Work</a>
+    <a href="#work">Portfolio</a>
     <a href="#audio">Audio</a>
     <a href="#analog">Vintage &amp; Film</a>
     <a href="#pricing">Investment</a>
