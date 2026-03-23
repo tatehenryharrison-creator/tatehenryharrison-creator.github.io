@@ -190,7 +190,7 @@ nav {
 }
 .ba-wrap {
     position: relative; max-width: 1120px; width: 88%;
-    aspect-ratio: 1920 / 876;
+    aspect-ratio: 16 / 9;
     margin: 0 auto; overflow: hidden;
     cursor: grab; border-radius: 10px; user-select: none;
     border: 1px solid rgba(255,255,255,0.12);
@@ -218,11 +218,11 @@ nav {
     z-index: 2;
 }
 .ba-tag {
-    font-family: 'EB Garamond', serif; font-size: 0.7rem;
+    font-family: 'EB Garamond', serif; font-size: 0.82rem;
     letter-spacing: 2px; text-transform: uppercase;
-    color: rgba(245,244,240,0.82);
-    background: rgba(28,26,20,0.6); padding: 5px 12px;
-    border-radius: 4px; backdrop-filter: blur(8px);
+    color: rgba(245,244,240,0.92);
+    background: rgba(28,26,20,0.68); padding: 7px 18px;
+    border-radius: 5px; backdrop-filter: blur(8px);
     pointer-events: none; position: relative; z-index: 3;
 }
 /* Divider line */
@@ -280,7 +280,8 @@ nav {
 }
 .ba-caption {
     font-family: 'EB Garamond', serif; font-style: italic;
-    font-size: 0.82rem; color: #635f51; margin-top: 14px;
+    font-size: 1.05rem; color: #a8a49c; margin-top: 16px;
+    letter-spacing: 0.3px;
 }
 
 /* ===== CLIENT MARQUEE ===== */
@@ -822,7 +823,7 @@ footer > * { position: relative; z-index: 1; }
     .subtext p { font-size: 0.88rem; line-height: 1.5; }
 
     /* SLIDER */
-    .ba-wrap { height: auto; } /* aspect-ratio inherited from base rule (1920/876) */
+    .ba-wrap { height: auto; } /* aspect-ratio inherited from base rule (16/9) */
     .ba-section { padding: 40px 0 28px; }
     .ba-handle { width: 38px; height: 38px; }
 
@@ -848,9 +849,9 @@ footer > * { position: relative; z-index: 1; }
     .pricing-header { padding: 0 5%; }
     .pricing-heading { font-size: 1.8rem; }
     .pricing-subtext { font-size: 0.9rem; }
-    .pricing-tabs { gap: 10px; padding: 0 5%; flex-wrap: wrap; }
-    .pricing-tab { padding: 11px 26px; font-size: 0.95rem; }
-    .pricing-tab-wrap { gap: 5px; }
+    .pricing-tabs { gap: 10px; padding: 0 5%; flex-wrap: nowrap; }
+    .pricing-tab-wrap { gap: 5px; flex: 1; }
+    .pricing-tab { padding: 11px 12px; font-size: 0.92rem; width: 100%; }
     .tab-arrow { font-size: 1.1rem; }
     .pricing-grid {
         display: flex; overflow-x: auto; scrollbar-width: none;
@@ -1416,7 +1417,7 @@ footer > * { position: relative; z-index: 1; }
 <!-- NAV -->
 <nav>
     <a href="index.html" class="nav-logo-link">
-        <img src="logo_primary.png" alt="Harrison Media LLC" class="nav-logo">
+        <img src="logo_primary.jpg" alt="Harrison Media LLC" class="nav-logo">
     </a>
     <div class="nav-links">
         <a href="index.html">Home</a>
@@ -1521,14 +1522,14 @@ footer > * { position: relative; z-index: 1; }
             <video autoplay muted loop playsinline preload="auto">
                 <source src="XH2S Comparison.mp4" type="video/mp4">
             </video>
-            <span class="ba-tag">X-H2S</span>
+            <span class="ba-tag">Mirrorless Camera</span>
         </div>
         <div class="ba-divider" id="baDivider">
             <div class="ba-handle"></div>
             <span class="ba-drag-hint">drag</span>
         </div>
     </div>
-    <p class="ba-caption">Drag to compare — Fujifilm X-H2S color graded by Tate vs. iPhone 11 Pro Max, 4k 24p</p>
+    <p class="ba-caption">Drag to compare — Fujifilm X-H2S mirrorless camera footage color graded by Tate vs. iPhone 11 Pro Max footage, 4k downscaled to fit web</p>
 </section>
 
 <!-- ABOUT -->
@@ -2520,14 +2521,29 @@ document.querySelectorAll('.faq-item').forEach(item => {
         if (!paused) timer = setInterval(next, CYCLE);
     }
 
-    /* Pause on hover anywhere in the section */
-    section.addEventListener('mouseenter', () => {
-        paused = true;
-        clearInterval(timer);
-    });
+    /* Pause only when cursor is within 28px of the active quote text or cite */
+    const RADIUS = 28;
+    function nearActiveQuote(mx, my) {
+        const activeCard = cards[current];
+        const els = activeCard.querySelectorAll('.testimonial-text, .testimonial-cite');
+        for (const el of els) {
+            const r = el.getBoundingClientRect();
+            const cx = Math.max(r.left, Math.min(mx, r.right));
+            const cy = Math.max(r.top,  Math.min(my, r.bottom));
+            const dist = Math.hypot(mx - cx, my - cy);
+            if (dist <= RADIUS) return true;
+        }
+        return false;
+    }
+    section.addEventListener('mousemove', e => {
+        if (nearActiveQuote(e.clientX, e.clientY)) {
+            if (!paused) { paused = true; clearInterval(timer); }
+        } else {
+            if (paused) { paused = false; startTimer(); }
+        }
+    }, { passive: true });
     section.addEventListener('mouseleave', () => {
-        paused = false;
-        startTimer();
+        if (paused) { paused = false; startTimer(); }
     });
 
     dots.forEach(dot => dot.addEventListener('click', () => {
@@ -2535,9 +2551,25 @@ document.querySelectorAll('.faq-item').forEach(item => {
         startTimer();
     }));
 
-    /* Swipe support for mobile */
+    /* Swipe + touch-hold support for mobile */
     const track = document.getElementById('testimonialsTrack');
     let swipeStartX = null;
+
+    /* Pause as soon as a finger touches anywhere in the section */
+    section.addEventListener('touchstart', () => {
+        paused = true;
+        clearInterval(timer);
+    }, { passive: true });
+
+    /* Resume when finger lifts or is cancelled */
+    function onTouchEnd() {
+        paused = false;
+        startTimer();
+    }
+    section.addEventListener('touchend',    onTouchEnd, { passive: true });
+    section.addEventListener('touchcancel', onTouchEnd, { passive: true });
+
+    /* Swipe direction detection */
     track.addEventListener('touchstart', e => {
         swipeStartX = e.touches[0].clientX;
     }, { passive: true });
@@ -2551,7 +2583,7 @@ document.querySelectorAll('.faq-item').forEach(item => {
         } else {
             goTo((current - 1 + cards.length) % cards.length);
         }
-        startTimer();
+        /* section's touchend will call startTimer() via bubbling */
     }, { passive: true });
 
     startTimer();
@@ -2878,6 +2910,24 @@ document.getElementById('footerForm').addEventListener('submit', async function(
     panel.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
     document.addEventListener('click', e => { if (!btn.contains(e.target) && !panel.contains(e.target)) closeMenu(); });
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
+})();
+
+/* ===== MOBILE: DEFAULT SCROLL TO NOVEL CARD ===== */
+(function() {
+    if (window.innerWidth > 767) return; /* desktop — no action needed */
+    /* Each visible pricing-grid (videography shown by default) */
+    document.querySelectorAll('#pricing-video .pricing-grid').forEach(grid => {
+        const cards = grid.querySelectorAll('.pricing-card');
+        const novelCard = cards[1]; /* Novel is the 2nd card (index 1) */
+        if (!novelCard) return;
+        /* After layout settles, scroll Novel into center */
+        requestAnimationFrame(() => {
+            const gridRect  = grid.getBoundingClientRect();
+            const cardRect  = novelCard.getBoundingClientRect();
+            const offset    = cardRect.left - gridRect.left - (grid.offsetWidth - novelCard.offsetWidth) / 2;
+            grid.scrollLeft = offset;
+        });
+    });
 })();
 </script>
 
