@@ -453,7 +453,7 @@ nav {
 
 /* ===== PRICING SECTION ===== */
 .pricing-section {
-    background: #e8e1d4; padding: 100px 10%;
+    background: #e8e1d4; padding: 100px 10% 56px;
     border-top: 1px solid rgba(99,95,81,0.15);
 }
 .pricing-header { text-align: center; margin-bottom: 60px; }
@@ -562,14 +562,17 @@ nav {
 /* Comparison Table */
 .compare-toggle-wrap { max-width: 1100px; margin: 0 auto; text-align: center; }
 .compare-toggle-btn {
-    font-family: 'EB Garamond', serif; font-size: 0.78rem; letter-spacing: 0.5px;
-    background: none; border: none;
-    color: rgba(99,95,81,0.5); padding: 8px 4px;
-    cursor: pointer; transition: color 0.2s;
-    text-decoration: underline; text-decoration-color: rgba(99,95,81,0.2);
-    text-underline-offset: 3px;
+    font-family: 'EB Garamond', serif; font-size: 0.9rem; letter-spacing: 0.5px;
+    background: none; border: 1px solid rgba(99,95,81,0.35);
+    color: rgba(99,95,81,0.8); padding: 8px 22px;
+    border-radius: 50px; cursor: pointer;
+    transition: color 0.25s, border-color 0.25s, background 0.25s;
+    text-decoration: none;
 }
-.compare-toggle-btn:hover { color: #5C6E82; text-decoration-color: #5C6E82; }
+.compare-toggle-btn:hover {
+    color: #5C6E82; border-color: #5C6E82;
+    background: rgba(92,110,130,0.07);
+}
 .compare-table-wrap { max-height: 0; overflow: hidden; transition: max-height 0.5s ease; }
 .compare-table-wrap.open { max-height: 700px; }
 .compare-table { width: 100%; border-collapse: collapse; margin-top: 30px; font-family: 'EB Garamond', serif; font-size: 0.88rem; }
@@ -801,7 +804,7 @@ footer > * { position: relative; z-index: 1; }
     .testimonials-track { min-height: 0; }
 
     /* PRICING */
-    .pricing-section { padding: 64px 0 64px; }
+    .pricing-section { padding: 64px 0 36px; }
     .pricing-header { padding: 0 5%; }
     .pricing-heading { font-size: 1.8rem; }
     .pricing-subtext { font-size: 0.9rem; }
@@ -823,7 +826,7 @@ footer > * { position: relative; z-index: 1; }
     .compare-table { min-width: 420px; font-size: 0.78rem; }
 
     /* PROCESS */
-    .process-section { padding: 64px 5% 72px; }
+    .process-section { padding: 32px 5% 64px; }
     .process-heading { font-size: 1.8rem; }
     .process-subhead { margin-bottom: 44px; }
     .process-journey {
@@ -1005,7 +1008,7 @@ footer > * { position: relative; z-index: 1; }
 .about-cta:hover { color: #4a5c6e; border-color: #4a5c6e; }
 
 /* ===== PROCESS SECTION ===== */
-.process-section { background: #e8e1d4; padding: 110px 10% 120px; }
+.process-section { background: #e8e1d4; padding: 48px 10% 100px; border-top: 1px solid rgba(99,95,81,0.1); }
 .process-inner { max-width: 1100px; margin: 0 auto; text-align: center; }
 .process-eyebrow {
     font-family: 'EB Garamond', serif;
