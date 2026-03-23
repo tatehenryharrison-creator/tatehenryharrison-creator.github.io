@@ -2440,9 +2440,11 @@ document.querySelectorAll('.faq-item').forEach(item => {
 
 /* ===== TESTIMONIALS CAROUSEL ===== */
 (function() {
-    const cards = document.querySelectorAll('.testimonial-card');
-    const dots  = document.querySelectorAll('.t-dot');
-    let current = 0, timer;
+    const CYCLE = 3250; /* half of original 6500ms */
+    const cards   = document.querySelectorAll('.testimonial-card');
+    const dots    = document.querySelectorAll('.t-dot');
+    const section = document.querySelector('.testimonials-section');
+    let current = 0, timer, paused = false;
 
     function goTo(idx) {
         cards[current].classList.remove('active');
@@ -2453,10 +2455,24 @@ document.querySelectorAll('.faq-item').forEach(item => {
     }
     function next() { goTo((current + 1) % cards.length); }
 
-    dots.forEach(dot => dot.addEventListener('click', () => {
+    function startTimer() {
         clearInterval(timer);
+        if (!paused) timer = setInterval(next, CYCLE);
+    }
+
+    /* Pause on hover anywhere in the section */
+    section.addEventListener('mouseenter', () => {
+        paused = true;
+        clearInterval(timer);
+    });
+    section.addEventListener('mouseleave', () => {
+        paused = false;
+        startTimer();
+    });
+
+    dots.forEach(dot => dot.addEventListener('click', () => {
         goTo(parseInt(dot.dataset.index));
-        timer = setInterval(next, 6500);
+        startTimer();
     }));
 
     /* Swipe support for mobile */
@@ -2469,17 +2485,16 @@ document.querySelectorAll('.faq-item').forEach(item => {
         if (swipeStartX === null) return;
         const delta = e.changedTouches[0].clientX - swipeStartX;
         swipeStartX = null;
-        if (Math.abs(delta) < 40) return; /* too short, ignore */
-        clearInterval(timer);
+        if (Math.abs(delta) < 40) return;
         if (delta < 0) {
-            goTo((current + 1) % cards.length);          /* swipe left → next */
+            goTo((current + 1) % cards.length);
         } else {
-            goTo((current - 1 + cards.length) % cards.length); /* swipe right → prev */
+            goTo((current - 1 + cards.length) % cards.length);
         }
-        timer = setInterval(next, 6500);
+        startTimer();
     }, { passive: true });
 
-    timer = setInterval(next, 6500);
+    startTimer();
 })();
 
 /* ===== SERVICES VIDEO ===== */
