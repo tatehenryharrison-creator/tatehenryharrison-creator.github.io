@@ -1199,6 +1199,85 @@ footer > * { position: relative; z-index: 1; }
 .faq-item.open .faq-a { max-height: 300px; }
 .faq-a p { font-size: 0.92rem; color: #635f51; line-height: 1.75; margin: 0; padding-bottom: 22px; }
 
+/* ===== VINTAGE / FILM SECTION ===== */
+.film-section {
+    background: #18150f;
+    padding: 110px 10%;
+    position: relative;
+    overflow: hidden;
+}
+.film-section::before {
+    content: '';
+    position: absolute;
+    inset: -50%;
+    width: 200%; height: 200%;
+    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+    opacity: 0.045;
+    pointer-events: none;
+    animation: grainShift 0.6s steps(2) infinite;
+}
+@keyframes grainShift {
+    0%   { transform: translate(0,0); }
+    25%  { transform: translate(-2%,-1%); }
+    50%  { transform: translate(1%,2%); }
+    75%  { transform: translate(-1%,1%); }
+    100% { transform: translate(2%,-2%); }
+}
+.film-inner { max-width: 1100px; margin: 0 auto; text-align: center; position: relative; z-index: 1; }
+.film-eyebrow {
+    font-family: 'EB Garamond', serif;
+    font-size: 0.72rem; letter-spacing: 3px; text-transform: uppercase;
+    color: #C9A84C; margin-bottom: 16px;
+}
+.film-heading {
+    font-family: 'Cinzel', serif;
+    font-size: 2.4rem; color: #f5f4f0; margin: 0 0 20px;
+}
+.film-subtext {
+    font-family: 'EB Garamond', serif;
+    font-size: 1.12rem; color: #a8a49c; line-height: 1.75;
+    max-width: 640px; margin: 0 auto 64px;
+}
+.film-cards {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 32px; text-align: left;
+}
+.film-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 16px; padding: 40px 36px;
+    transition: border-color 0.35s ease, background 0.35s ease;
+}
+.film-card:hover {
+    border-color: rgba(201,168,76,0.5);
+    background: rgba(201,168,76,0.04);
+}
+.film-card-icon { width: 52px; height: 52px; margin-bottom: 24px; display: block; }
+.film-card-title {
+    font-family: 'Cinzel', serif;
+    font-size: 1.15rem; color: #f5f4f0;
+    margin: 0 0 14px; letter-spacing: 0.5px;
+}
+.film-card-desc {
+    font-family: 'EB Garamond', serif;
+    font-size: 1.05rem; color: #a8a49c;
+    line-height: 1.8; margin: 0 0 28px;
+}
+.film-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.film-tag {
+    font-family: 'EB Garamond', serif;
+    font-size: 0.82rem; letter-spacing: 0.8px;
+    color: #C9A84C; border: 1px solid rgba(201,168,76,0.35);
+    border-radius: 50px; padding: 4px 14px;
+    background: rgba(201,168,76,0.06);
+}
+@media (max-width: 768px) {
+    .film-section { padding: 72px 6%; }
+    .film-cards { grid-template-columns: 1fr; gap: 24px; }
+    .film-heading { font-size: 1.7rem; }
+    .film-card { padding: 30px 24px; }
+}
+
 /* ===== AUDIO SECTION ===== */
 .audio-section {
     background: #1a1814; padding: 100px 10%;
@@ -1294,7 +1373,7 @@ footer > * { position: relative; z-index: 1; }
 <!-- NAV -->
 <nav>
     <a href="index.html" class="nav-logo-link">
-        <img src="harrison-media-logo.png" alt="Harrison Media LLC" class="nav-logo">
+        <img src="logo_primary.png" alt="Harrison Media LLC" class="nav-logo">
     </a>
     <div class="nav-links">
         <a href="index.html">Home</a>
@@ -1890,6 +1969,68 @@ footer > * { position: relative; z-index: 1; }
                     </div>
                 </li>
         </ul>
+    </div>
+</section>
+
+<!-- VINTAGE / FILM -->
+<section class="film-section" id="analog">
+    <div class="film-inner">
+        <p class="film-eyebrow anim-fade">The Analog Touch</p>
+        <h2 class="film-heading anim-fade">Vintage Glass &amp; Film</h2>
+        <p class="film-subtext anim-fade">Some stories deserve a softer edge. I shoot with adapted vintage lenses and 35mm film for clients who want something that feels less like content — and more like a document.</p>
+        <div class="film-cards">
+
+            <!-- Lenses card -->
+            <div class="film-card anim-fade">
+                <svg class="film-card-icon" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="26" cy="26" r="23" stroke="#C9A84C" stroke-width="1.5"/>
+                    <circle cx="26" cy="26" r="14.5" stroke="#C9A84C" stroke-width="1" opacity="0.45"/>
+                    <circle cx="26" cy="26" r="7" stroke="#C9A84C" stroke-width="1.5"/>
+                    <line x1="26" y1="11.5" x2="26" y2="5" stroke="#C9A84C" stroke-width="1.2" stroke-linecap="round"/>
+                    <line x1="26" y1="47" x2="26" y2="40.5" stroke="#C9A84C" stroke-width="1.2" stroke-linecap="round"/>
+                    <line x1="40.5" y1="26" x2="47" y2="26" stroke="#C9A84C" stroke-width="1.2" stroke-linecap="round"/>
+                    <line x1="5" y1="26" x2="11.5" y2="26" stroke="#C9A84C" stroke-width="1.2" stroke-linecap="round"/>
+                    <line x1="35.6" y1="16.4" x2="40.1" y2="11.9" stroke="#C9A84C" stroke-width="1.2" stroke-linecap="round"/>
+                    <line x1="11.9" y1="40.1" x2="16.4" y2="35.6" stroke="#C9A84C" stroke-width="1.2" stroke-linecap="round"/>
+                    <line x1="16.4" y1="16.4" x2="11.9" y2="11.9" stroke="#C9A84C" stroke-width="1.2" stroke-linecap="round"/>
+                    <line x1="40.1" y1="40.1" x2="35.6" y2="35.6" stroke="#C9A84C" stroke-width="1.2" stroke-linecap="round"/>
+                </svg>
+                <h3 class="film-card-title">Vintage Glass</h3>
+                <p class="film-card-desc">Adapted lenses from the 1960s–80s render with a character modern optics can't replicate — organic bokeh, gentle flares, and a warmth that feels lived-in rather than manufactured.</p>
+                <div class="film-tags">
+                    <span class="film-tag">Helios 44-2 58mm</span>
+                    <span class="film-tag">Super Takumar 50mm</span>
+                    <span class="film-tag">Meyer-Optik 35mm</span>
+                    <span class="film-tag">Adapted to Fuji X</span>
+                </div>
+            </div>
+
+            <!-- Film card -->
+            <div class="film-card anim-fade">
+                <svg class="film-card-icon" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="10" y="9" width="32" height="34" rx="3.5" stroke="#C9A84C" stroke-width="1.5"/>
+                    <rect x="15" y="4" width="22" height="6" rx="2" stroke="#C9A84C" stroke-width="1.5"/>
+                    <rect x="15" y="42" width="22" height="6" rx="2" stroke="#C9A84C" stroke-width="1.5"/>
+                    <rect x="12" y="16" width="4" height="5" rx="1" fill="#C9A84C" opacity="0.5"/>
+                    <rect x="12" y="24" width="4" height="5" rx="1" fill="#C9A84C" opacity="0.5"/>
+                    <rect x="12" y="32" width="4" height="5" rx="1" fill="#C9A84C" opacity="0.5"/>
+                    <rect x="36" y="16" width="4" height="5" rx="1" fill="#C9A84C" opacity="0.5"/>
+                    <rect x="36" y="24" width="4" height="5" rx="1" fill="#C9A84C" opacity="0.5"/>
+                    <rect x="36" y="32" width="4" height="5" rx="1" fill="#C9A84C" opacity="0.5"/>
+                    <rect x="19" y="16" width="14" height="20" rx="2" stroke="#C9A84C" stroke-width="1" opacity="0.65"/>
+                    <circle cx="26" cy="26" r="4" stroke="#C9A84C" stroke-width="1" opacity="0.5"/>
+                </svg>
+                <h3 class="film-card-title">35mm Film</h3>
+                <p class="film-card-desc">For portraits, events, and personal projects where grain is a feature, not a flaw. Film slows the process down in the best way — every frame is deliberate before the shutter fires.</p>
+                <div class="film-tags">
+                    <span class="film-tag">Kodak Portra 400</span>
+                    <span class="film-tag">Kodak Gold 200</span>
+                    <span class="film-tag">Ilford HP5</span>
+                    <span class="film-tag">Fuji Superia 400</span>
+                </div>
+            </div>
+
+        </div>
     </div>
 </section>
 
