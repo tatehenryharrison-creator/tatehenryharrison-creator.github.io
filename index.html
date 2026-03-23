@@ -2550,9 +2550,25 @@ document.querySelectorAll('.faq-item').forEach(item => {
         startTimer();
     }));
 
-    /* Swipe support for mobile */
+    /* Swipe + touch-hold support for mobile */
     const track = document.getElementById('testimonialsTrack');
     let swipeStartX = null;
+
+    /* Pause as soon as a finger touches anywhere in the section */
+    section.addEventListener('touchstart', () => {
+        paused = true;
+        clearInterval(timer);
+    }, { passive: true });
+
+    /* Resume when finger lifts or is cancelled */
+    function onTouchEnd() {
+        paused = false;
+        startTimer();
+    }
+    section.addEventListener('touchend',    onTouchEnd, { passive: true });
+    section.addEventListener('touchcancel', onTouchEnd, { passive: true });
+
+    /* Swipe direction detection */
     track.addEventListener('touchstart', e => {
         swipeStartX = e.touches[0].clientX;
     }, { passive: true });
@@ -2566,7 +2582,7 @@ document.querySelectorAll('.faq-item').forEach(item => {
         } else {
             goTo((current - 1 + cards.length) % cards.length);
         }
-        startTimer();
+        /* section's touchend will call startTimer() via bubbling */
     }, { passive: true });
 
     startTimer();
