@@ -160,9 +160,20 @@ nav {
 .subtext p { margin: 6px 0; color: #a8a49c; }
 @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
 
+/* Trusted By pinned inside hero */
+.hero .marquee-section {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    background: rgba(28,26,20,0.52); backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(245,244,240,0.08);
+    padding: 14px 0; z-index: 5;
+}
+.hero .marquee-label { color: rgba(168,164,156,0.7); margin-bottom: 10px; }
+.hero .marquee-inner span { color: rgba(245,244,240,0.65); }
+
 /* Scroll arrow */
 .scroll-arrow {
-    position: absolute; bottom: 32px; left: 50%;
+    position: absolute; bottom: 88px; left: 50%;
     transform: translateX(-50%); z-index: 10;
     display: flex; flex-direction: column; align-items: center;
     text-decoration: none; cursor: pointer;
@@ -1490,27 +1501,27 @@ footer > * { position: relative; z-index: 1; }
             <polyline points="6 12 12 18 18 12"></polyline>
         </svg>
     </a>
-</section>
 
-<!-- CLIENT MARQUEE -->
-<div class="marquee-section">
-    <p class="marquee-label">Trusted By</p>
-    <div class="marquee-track">
-        <div class="marquee-inner">
-            <span>Starpower Coaching</span>
-            <span>Sarah Fitzpatrick Clothing</span>
-            <span>1000 Voices Project</span>
-            <span>The Sober Network</span>
-            <span>CU Breaking &amp; Hip-Hop</span>
-            <!-- Duplicate for seamless loop -->
-            <span>Starpower Coaching</span>
-            <span>Sarah Fitzpatrick Clothing</span>
-            <span>1000 Voices Project</span>
-            <span>The Sober Network</span>
-            <span>CU Breaking &amp; Hip-Hop</span>
+    <!-- CLIENT MARQUEE — pinned to hero bottom -->
+    <div class="marquee-section">
+        <p class="marquee-label">Trusted By</p>
+        <div class="marquee-track">
+            <div class="marquee-inner">
+                <span>Starpower Coaching</span>
+                <span>Sarah Fitzpatrick Clothing</span>
+                <span>1000 Voices Project</span>
+                <span>The Sober Network</span>
+                <span>CU Breaking &amp; Hip-Hop</span>
+                <!-- Duplicate for seamless loop -->
+                <span>Starpower Coaching</span>
+                <span>Sarah Fitzpatrick Clothing</span>
+                <span>1000 Voices Project</span>
+                <span>The Sober Network</span>
+                <span>CU Breaking &amp; Hip-Hop</span>
+            </div>
         </div>
     </div>
-</div>
+</section>
 
 <!-- BEFORE / AFTER SLIDER -->
 <section class="ba-section" id="difference">
