@@ -160,20 +160,9 @@ nav {
 .subtext p { margin: 6px 0; color: #a8a49c; }
 @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
 
-/* Trusted By pinned inside hero */
-.hero .marquee-section {
-    position: absolute; bottom: 0; left: 0; right: 0;
-    background: rgba(245,244,240,0.88); backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-top: 1px solid rgba(99,95,81,0.12);
-    padding: 14px 0; z-index: 5;
-}
-.hero .marquee-label { color: #a8a49c; margin-bottom: 10px; }
-.hero .marquee-inner span { color: #635f51; }
-
 /* Scroll arrow */
 .scroll-arrow {
-    position: absolute; bottom: 88px; left: 50%;
+    position: absolute; bottom: 32px; left: 50%;
     transform: translateX(-50%); z-index: 10;
     display: flex; flex-direction: column; align-items: center;
     text-decoration: none; cursor: pointer;
@@ -430,7 +419,7 @@ nav {
     color: #635f51; margin-bottom: 12px;
 }
 .portfolio-heading { font-size: 2.4rem; color: #1C1A14; margin: 0 0 30px; }
-.portfolio-filters { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+.portfolio-filters { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-bottom: 48px; }
 .filter-btn {
     font-family: 'EB Garamond', serif; font-size: 0.82rem;
     letter-spacing: 1.5px; text-transform: uppercase;
@@ -443,38 +432,53 @@ nav {
 }
 .portfolio-grid {
     columns: 3; column-gap: 18px;
-    max-width: 1100px; margin: 0 auto;
+    max-width: 1200px; margin: 0 auto;
 }
 .portfolio-item {
-    break-inside: avoid; margin-bottom: 18px;
-    border-radius: 10px; overflow: hidden;
+    break-inside: avoid; margin-bottom: 24px;
     cursor: pointer; position: relative;
+}
+.portfolio-item.hidden { display: none; }
+.portfolio-img-wrap {
+    border-radius: 8px; overflow: hidden; position: relative;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-.portfolio-item:hover { transform: scale(1.02); box-shadow: 0 10px 32px rgba(28,26,20,0.12); }
-.portfolio-item.hidden { display: none; }
+.portfolio-item:hover .portfolio-img-wrap {
+    transform: scale(1.02);
+    box-shadow: 0 10px 32px rgba(28,26,20,0.14);
+}
 .portfolio-thumb {
     width: 100%; display: block;
-    aspect-ratio: var(--aspect, 4/3);
-    background: var(--color, #e8e1d4);
     object-fit: cover;
 }
+/* Slightly-larger display for medium-res source images (1000–1200px wide) */
+.portfolio-item--medium .portfolio-img-wrap { transform-origin: top center; }
 .portfolio-overlay {
     position: absolute; inset: 0;
     background: rgba(28,26,20,0);
-    display: flex; align-items: flex-end; padding: 18px;
-    transition: background 0.3s;
+    display: flex; align-items: flex-end; padding: 14px;
+    transition: background 0.3s; border-radius: 8px;
 }
-.portfolio-item:hover .portfolio-overlay { background: rgba(28,26,20,0.55); }
-.portfolio-meta { opacity: 0; transform: translateY(6px); transition: opacity 0.3s, transform 0.3s; }
+.portfolio-item:hover .portfolio-overlay { background: rgba(28,26,20,0.45); }
+.portfolio-meta { opacity: 0; transform: translateY(5px); transition: opacity 0.3s, transform 0.3s; }
 .portfolio-item:hover .portfolio-meta { opacity: 1; transform: translateY(0); }
-.portfolio-meta-title {
-    font-family: 'Cinzel', serif; font-size: 0.85rem;
-    color: #f5f4f0; font-weight: 400; margin: 0 0 3px;
-}
 .portfolio-meta-cat {
-    font-family: 'EB Garamond', serif; font-size: 0.7rem;
-    letter-spacing: 2px; text-transform: uppercase; color: #a8a49c; margin: 0;
+    font-family: 'EB Garamond', serif; font-size: 0.68rem;
+    letter-spacing: 2px; text-transform: uppercase; color: #d0ccc4; margin: 0;
+}
+/* Caption below image */
+.portfolio-caption {
+    padding: 7px 2px 0;
+}
+.caption-title {
+    display: block;
+    font-family: 'EB Garamond', serif; font-size: 0.9rem;
+    color: #2A2220; font-style: italic; line-height: 1.3;
+}
+.caption-gear {
+    display: block;
+    font-family: 'EB Garamond', serif; font-size: 0.68rem;
+    color: #a8a49c; margin-top: 2px; letter-spacing: 0.3px;
 }
 /* Lightbox */
 #lightbox {
@@ -1495,33 +1499,33 @@ footer > * { position: relative; z-index: 1; }
         </div>
     </div>
 
-    <a href="#difference" class="scroll-arrow" aria-label="Scroll to The Difference section">
+    <a href="#trusted" class="scroll-arrow" aria-label="Scroll to next section">
         <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <polyline points="6 5 12 11 18 5"></polyline>
             <polyline points="6 12 12 18 18 12"></polyline>
         </svg>
     </a>
+</section>
 
-    <!-- CLIENT MARQUEE — pinned to hero bottom -->
-    <div class="marquee-section">
-        <p class="marquee-label">Trusted By</p>
-        <div class="marquee-track">
-            <div class="marquee-inner">
-                <span>Starpower Coaching</span>
-                <span>Sarah Fitzpatrick Clothing</span>
-                <span>1000 Voices Project</span>
-                <span>The Sober Network</span>
-                <span>CU Breaking &amp; Hip-Hop</span>
-                <!-- Duplicate for seamless loop -->
-                <span>Starpower Coaching</span>
-                <span>Sarah Fitzpatrick Clothing</span>
-                <span>1000 Voices Project</span>
-                <span>The Sober Network</span>
-                <span>CU Breaking &amp; Hip-Hop</span>
-            </div>
+<!-- CLIENT MARQUEE -->
+<div class="marquee-section" id="trusted">
+    <p class="marquee-label">Trusted By</p>
+    <div class="marquee-track">
+        <div class="marquee-inner">
+            <span>Starpower Coaching</span>
+            <span>Sarah Fitzpatrick Clothing</span>
+            <span>1000 Voices Project</span>
+            <span>The Sober Network</span>
+            <span>CU Breaking &amp; Hip-Hop</span>
+            <!-- Duplicate for seamless loop -->
+            <span>Starpower Coaching</span>
+            <span>Sarah Fitzpatrick Clothing</span>
+            <span>1000 Voices Project</span>
+            <span>The Sober Network</span>
+            <span>CU Breaking &amp; Hip-Hop</span>
         </div>
     </div>
-</section>
+</div>
 
 <!-- BEFORE / AFTER SLIDER -->
 <section class="ba-section" id="difference">
@@ -2113,63 +2117,401 @@ footer > * { position: relative; z-index: 1; }
 </section>
 
 <!-- PORTFOLIO / WORK -->
+<!-- ┌─────────────────────────────────────────────────────────────────────────┐
+     │  AUTO-UPDATE INSTRUCTIONS                                               │
+     │  To add new photos:                                                     │
+     │  1. Add the image pair to the correct subfolder in /portfolio/          │
+     │     Small thumb (~800px): filename.jpg                                  │
+     │     Large full (~2560px): filename_2.jpg  (or filename-2.jpg)           │
+     │  2. Ask Claude to refresh the portfolio section — it will read          │
+     │     the folder, extract EXIF, and rebuild the HTML automatically.       │
+     └─────────────────────────────────────────────────────────────────────────┘ -->
 <section id="work" class="portfolio-section">
     <div class="portfolio-header">
         <p class="portfolio-eyebrow anim-fade">Selected Work</p>
-        <h2 class="portfolio-heading anim-fade">The Portfolio</h2>
-        <div class="portfolio-filters">
+        <h2 class="portfolio-heading anim-fade">Portfolio</h2>
+        <div class="portfolio-filters anim-fade">
             <button class="filter-btn active" data-filter="all">All</button>
-            <button class="filter-btn" data-filter="documentary">Documentary</button>
-            <button class="filter-btn" data-filter="brand">Brand</button>
-            <button class="filter-btn" data-filter="events">Events</button>
+            <button class="filter-btn" data-filter="portraits">Portraits</button>
+            <button class="filter-btn" data-filter="street">Street</button>
+            <button class="filter-btn" data-filter="wildlife">Wildlife</button>
+            <button class="filter-btn" data-filter="closeups">Close-Ups</button>
+            <button class="filter-btn" data-filter="vintage">Vintage &amp; Film</button>
+            <button class="filter-btn" data-filter="dance">Dance</button>
         </div>
     </div>
 
     <div class="portfolio-grid" id="portfolioGrid">
-        <!-- Replace .portfolio-thumb divs with <img src="..."> when you have photos.
-             Set data-lightbox-src to the full-size image URL for the lightbox. -->
-        <div class="portfolio-item" data-category="documentary" data-title="The Interview" data-lightbox-src="">
-            <div class="portfolio-thumb" style="--color:#c4bdb4; --aspect:4/3;"></div>
-            <div class="portfolio-overlay"><div class="portfolio-meta">
-                <p class="portfolio-meta-title">The Interview</p>
-                <p class="portfolio-meta-cat">Documentary</p>
-            </div></div>
+
+        <!-- ── PORTRAITS ──────────────────────────────────────── -->
+        <div class="portfolio-item" data-category="portraits" data-lightbox-src="portfolio/Portraits/Kader_Fujifilm X-H2_Jupiter9, 85mm.jpg">
+            <div class="portfolio-img-wrap">
+                <img class="portfolio-thumb" src="portfolio/Portraits/Kader_Fujifilm X-H2_Jupiter9, 85mm_2.jpg" alt="Kader" loading="lazy">
+                <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Portraits</p></div></div>
+            </div>
+            <div class="portfolio-caption">
+                <span class="caption-title">Kader</span>
+                <span class="caption-gear">Fujifilm X-H2 · Jupiter-9 85mm</span>
+            </div>
         </div>
-        <div class="portfolio-item" data-category="brand" data-title="Brand Launch" data-lightbox-src="">
-            <div class="portfolio-thumb" style="--color:#b4c0ca; --aspect:16/9;"></div>
-            <div class="portfolio-overlay"><div class="portfolio-meta">
-                <p class="portfolio-meta-title">Brand Launch</p>
-                <p class="portfolio-meta-cat">Brand</p>
-            </div></div>
+
+        <div class="portfolio-item" data-category="portraits" data-lightbox-src="portfolio/Portraits/Sarah_Fujifilm X-H2_Jupiter9, 85mm.jpg">
+            <div class="portfolio-img-wrap">
+                <img class="portfolio-thumb" src="portfolio/Portraits/Sarah_Fujifilm X-H2_Jupiter9, 85mm_2.jpg" alt="Sarah" loading="lazy">
+                <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Portraits</p></div></div>
+            </div>
+            <div class="portfolio-caption">
+                <span class="caption-title">Sarah</span>
+                <span class="caption-gear">Fujifilm X-H2 · Jupiter-9 85mm</span>
+            </div>
         </div>
-        <div class="portfolio-item" data-category="events" data-title="The Keynote" data-lightbox-src="">
-            <div class="portfolio-thumb" style="--color:#d0c8c0; --aspect:3/4;"></div>
-            <div class="portfolio-overlay"><div class="portfolio-meta">
-                <p class="portfolio-meta-title">The Keynote</p>
-                <p class="portfolio-meta-cat">Events</p>
-            </div></div>
+
+        <div class="portfolio-item" data-category="portraits" data-lightbox-src="portfolio/Portraits/WaterSarah_Fujifilm X-H2S_XF 16-55mm f2.8_2.jpg">
+            <div class="portfolio-img-wrap">
+                <img class="portfolio-thumb" src="portfolio/Portraits/WaterSarah_Fujifilm X-H2S_XF 16-55mm f2.8.jpg" alt="Sarah by the Water" loading="lazy">
+                <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Portraits</p></div></div>
+            </div>
+            <div class="portfolio-caption">
+                <span class="caption-title">Sarah by the Water</span>
+                <span class="caption-gear">Fujifilm X-H2S · XF 16-55mm f/2.8</span>
+            </div>
         </div>
-        <div class="portfolio-item" data-category="documentary" data-title="Human Stories" data-lightbox-src="">
-            <div class="portfolio-thumb" style="--color:#a8b4bc; --aspect:16/9;"></div>
-            <div class="portfolio-overlay"><div class="portfolio-meta">
-                <p class="portfolio-meta-title">Human Stories</p>
-                <p class="portfolio-meta-cat">Documentary</p>
-            </div></div>
+
+        <div class="portfolio-item" data-category="portraits" data-lightbox-src="portfolio/Portraits/Yanja_CanonEos6D_28-70mm f4_2.jpg">
+            <div class="portfolio-img-wrap">
+                <img class="portfolio-thumb" src="portfolio/Portraits/Yanja_CanonEos6D_28-70mm f4.jpg" alt="Yanja" loading="lazy">
+                <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Portraits</p></div></div>
+            </div>
+            <div class="portfolio-caption">
+                <span class="caption-title">Yanja</span>
+                <span class="caption-gear">Canon EOS 6D Mk II · EF 24-105mm f/3.5-5.6 IS STM</span>
+            </div>
         </div>
-        <div class="portfolio-item" data-category="brand" data-title="Product Film" data-lightbox-src="">
-            <div class="portfolio-thumb" style="--color:#c0bbb4; --aspect:4/3;"></div>
-            <div class="portfolio-overlay"><div class="portfolio-meta">
-                <p class="portfolio-meta-title">Product Film</p>
-                <p class="portfolio-meta-cat">Brand</p>
-            </div></div>
+
+        <div class="portfolio-item" data-category="portraits" data-lightbox-src="portfolio/Portraits/Old Friends (Portrait)_FilmFujicolorSuperia400_PentaxSMCTakumar55mm.jpg">
+            <div class="portfolio-img-wrap">
+                <img class="portfolio-thumb" src="portfolio/Portraits/Old Friends (Portrait)_FilmFujicolorSuperia400_PentaxSMCTakumar55mm_2.jpg" alt="Old Friends" loading="lazy">
+                <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Portraits</p></div></div>
+            </div>
+            <div class="portfolio-caption">
+                <span class="caption-title">Old Friends</span>
+                <span class="caption-gear">Film · Fujicolor Superia 400 · SMC Takumar 55mm</span>
+            </div>
         </div>
-        <div class="portfolio-item" data-category="events" data-title="Ceremony" data-lightbox-src="">
-            <div class="portfolio-thumb" style="--color:#b0bcac; --aspect:3/2;"></div>
-            <div class="portfolio-overlay"><div class="portfolio-meta">
-                <p class="portfolio-meta-title">Ceremony</p>
-                <p class="portfolio-meta-cat">Events</p>
-            </div></div>
+
+        <div class="portfolio-item" data-category="portraits" data-lightbox-src="portfolio/Portraits/MikeyJ_Fujifilm X-H2_SMCTakumar55mm_2.jpg">
+            <div class="portfolio-img-wrap">
+                <img class="portfolio-thumb" src="portfolio/Portraits/MikeyJ_Fujifilm X-H2_SMCTakumar55mm_2.jpg" alt="Mikey J" loading="lazy">
+                <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Portraits</p></div></div>
+            </div>
+            <div class="portfolio-caption">
+                <span class="caption-title">Mikey J</span>
+                <span class="caption-gear">Fujifilm X-H2 · SMC Takumar 55mm</span>
+            </div>
         </div>
+
+        <div class="portfolio-item" data-category="portraits" data-lightbox-src="portfolio/Portraits/MikeyJ_Fujifilm X-H2_SMCTakumar55mm, 85mm_2.jpg">
+            <div class="portfolio-img-wrap">
+                <img class="portfolio-thumb" src="portfolio/Portraits/MikeyJ_Fujifilm X-H2_SMCTakumar55mm, 85mm_2.jpg" alt="Mikey J II" loading="lazy">
+                <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Portraits</p></div></div>
+            </div>
+            <div class="portfolio-caption">
+                <span class="caption-title">Mikey J II</span>
+                <span class="caption-gear">Fujifilm X-H2 · SMC Takumar / Jupiter-9</span>
+            </div>
+        </div>
+
+        <!-- ── STREET ──────────────────────────────────────────── -->
+        <div class="portfolio-item" data-category="street" data-lightbox-src="portfolio/Street/Pearl Street Protest.jpg">
+            <div class="portfolio-img-wrap">
+                <img class="portfolio-thumb" src="portfolio/Street/Pearl Street Protest2.jpg" alt="Pearl Street Protest" loading="lazy">
+                <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Street</p></div></div>
+            </div>
+            <div class="portfolio-caption">
+                <span class="caption-title">Pearl Street Protest</span>
+                <span class="caption-gear">Fujifilm X-H2S · XF 16-55mm f/2.8 II</span>
+            </div>
+        </div>
+
+        <div class="portfolio-item" data-category="street" data-lightbox-src="portfolio/Street/Fair Life.jpg">
+            <div class="portfolio-img-wrap">
+                <img class="portfolio-thumb" src="portfolio/Street/Fair Life2.jpg" alt="Fair Life" loading="lazy">
+                <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Street</p></div></div>
+            </div>
+            <div class="portfolio-caption">
+                <span class="caption-title">Fair Life</span>
+                <span class="caption-gear">Fujifilm X-H2 · XF 16-55mm f/2.8</span>
+            </div>
+        </div>
+
+        <div class="portfolio-item portfolio-item--medium" data-category="street" data-lightbox-src="portfolio/Street/Blue Truck at Night2.jpg">
+            <div class="portfolio-img-wrap">
+                <img class="portfolio-thumb" src="portfolio/Street/Blue Truck at Night.jpg" alt="Blue Truck at Night" loading="lazy">
+                <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Street</p></div></div>
+            </div>
+            <div class="portfolio-caption">
+                <span class="caption-title">Blue Truck at Night</span>
+                <span class="caption-gear">Fujifilm X-H2 · XF 16-55mm f/2.8</span>
+            </div>
+        </div>
+
+        <div class="portfolio-item portfolio-item--medium" data-category="street" data-lightbox-src="portfolio/Street/Pizza Shop2.jpg">
+            <div class="portfolio-img-wrap">
+                <img class="portfolio-thumb" src="portfolio/Street/Pizza Shop.jpg" alt="Pizza Shop" loading="lazy">
+                <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Street</p></div></div>
+            </div>
+            <div class="portfolio-caption">
+                <span class="caption-title">Pizza Shop</span>
+                <span class="caption-gear">Fujifilm X-H2S · XF 16-55mm f/2.8 II</span>
+            </div>
+        </div>
+
+        <div class="portfolio-item" data-category="street" data-lightbox-src="portfolio/Street/DSCF3353-2.jpg">
+            <div class="portfolio-img-wrap">
+                <img class="portfolio-thumb" src="portfolio/Street/DSCF3353.jpg" alt="Street Study" loading="lazy">
+                <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Street</p></div></div>
+            </div>
+            <div class="portfolio-caption">
+                <span class="caption-title">Street Study</span>
+                <span class="caption-gear">Fujifilm X-H2 · XF 16-55mm f/2.8</span>
+            </div>
+        </div>
+
+        <!-- ── WILDLIFE ────────────────────────────────────────── -->
+        <div class="portfolio-item" data-category="wildlife" data-lightbox-src="portfolio/Wildlife/Eastern Tiger Swallowtail.jpg">
+            <div class="portfolio-img-wrap">
+                <img class="portfolio-thumb" src="portfolio/Wildlife/Eastern Tiger Swallowtail_2.jpg" alt="Eastern Tiger Swallowtail" loading="lazy">
+                <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Wildlife</p></div></div>
+            </div>
+            <div class="portfolio-caption">
+                <span class="caption-title">Eastern Tiger Swallowtail</span>
+                <span class="caption-gear">Fujifilm X-H2 · XF 150-600mm + 1.4× TC</span>
+            </div>
+        </div>
+
+        <div class="portfolio-item" data-category="wildlife" data-lightbox-src="portfolio/Wildlife/Gecko Big Island.jpg">
+            <div class="portfolio-img-wrap">
+                <img class="portfolio-thumb" src="portfolio/Wildlife/Gecko Big Island2.jpg" alt="Gecko, Big Island" loading="lazy">
+                <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Wildlife</p></div></div>
+            </div>
+            <div class="portfolio-caption">
+                <span class="caption-title">Gecko, Big Island</span>
+                <span class="caption-gear">Fujifilm X-H2 · XF 150-600mm</span>
+            </div>
+        </div>
+
+        <div class="portfolio-item" data-category="wildlife" data-lightbox-src="portfolio/Wildlife/Spider's Trap_Fujifilm X-H2_Laowa Dreamer Macro 65mm.jpg">
+            <div class="portfolio-img-wrap">
+                <img class="portfolio-thumb" src="portfolio/Wildlife/Spider's Trap_Fujifilm X-H2_Laowa Dreamer Macro 65mm_2.jpg" alt="Spider's Trap" loading="lazy">
+                <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Wildlife</p></div></div>
+            </div>
+            <div class="portfolio-caption">
+                <span class="caption-title">Spider's Trap</span>
+                <span class="caption-gear">Fujifilm X-H2 · Laowa 65mm Macro</span>
+            </div>
+        </div>
+
+        <div class="portfolio-item" data-category="wildlife" data-lightbox-src="portfolio/Wildlife/Spider's Den.jpg">
+            <div class="portfolio-img-wrap">
+                <img class="portfolio-thumb" src="portfolio/Wildlife/Spider's Den2.jpg" alt="Spider's Den" loading="lazy">
+                <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Wildlife</p></div></div>
+            </div>
+            <div class="portfolio-caption">
+                <span class="caption-title">Spider's Den</span>
+                <span class="caption-gear">Fujifilm X-H2 · Laowa 65mm Macro</span>
+            </div>
+        </div>
+
+        <div class="portfolio-item" data-category="wildlife" data-lightbox-src="portfolio/Wildlife/Capitol Peak Bald Eagle_2.jpg">
+            <div class="portfolio-img-wrap">
+                <img class="portfolio-thumb" src="portfolio/Wildlife/Capitol Peak Bald Eagle.jpg" alt="Capitol Peak Bald Eagle" loading="lazy">
+                <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Wildlife</p></div></div>
+            </div>
+            <div class="portfolio-caption">
+                <span class="caption-title">Capitol Peak Bald Eagle</span>
+                <span class="caption-gear">Fujifilm X-H2 · XF 150-600mm + 1.4× TC</span>
+            </div>
+        </div>
+
+        <div class="portfolio-item" data-category="wildlife" data-lightbox-src="portfolio/Wildlife/Young Buck (Snowmass).jpg">
+            <div class="portfolio-img-wrap">
+                <img class="portfolio-thumb" src="portfolio/Wildlife/Young Buck (Snowmass) 2.jpg" alt="Young Buck, Snowmass" loading="lazy">
+                <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Wildlife</p></div></div>
+            </div>
+            <div class="portfolio-caption">
+                <span class="caption-title">Young Buck, Snowmass</span>
+                <span class="caption-gear">Fujifilm X-H2 · XF 150-600mm + 1.4× TC</span>
+            </div>
+        </div>
+
+        <div class="portfolio-item" data-category="wildlife" data-lightbox-src="portfolio/Wildlife/Mountain Goat Over Interstate 70_2.jpg">
+            <div class="portfolio-img-wrap">
+                <img class="portfolio-thumb" src="portfolio/Wildlife/Mountain Goat Over Interstate 70.jpg" alt="Mountain Goat Over I-70" loading="lazy">
+                <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Wildlife</p></div></div>
+            </div>
+            <div class="portfolio-caption">
+                <span class="caption-title">Mountain Goat, I-70</span>
+                <span class="caption-gear">Fujifilm X-H2 · XF 150-600mm + 1.4× TC</span>
+            </div>
+        </div>
+
+        <div class="portfolio-item portfolio-item--medium" data-category="wildlife" data-lightbox-src="portfolio/Wildlife/Pearl-Crescent Butterflies_2.jpg">
+            <div class="portfolio-img-wrap">
+                <img class="portfolio-thumb" src="portfolio/Wildlife/Pearl-Crescent Butterflies.jpg" alt="Pearl-Crescent Butterflies" loading="lazy">
+                <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Wildlife</p></div></div>
+            </div>
+            <div class="portfolio-caption">
+                <span class="caption-title">Pearl-Crescent Butterflies</span>
+                <span class="caption-gear">Fujifilm X-H2 · XF 150-600mm + 1.4× TC</span>
+            </div>
+        </div>
+
+        <div class="portfolio-item" data-category="wildlife" data-lightbox-src="portfolio/Wildlife/Marmot2.jpg">
+            <div class="portfolio-img-wrap">
+                <img class="portfolio-thumb" src="portfolio/Wildlife/Marmot.jpg" alt="Marmot" loading="lazy">
+                <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Wildlife</p></div></div>
+            </div>
+            <div class="portfolio-caption">
+                <span class="caption-title">Marmot</span>
+                <span class="caption-gear">Fujifilm X-H2 · XF 150-600mm + 1.4× TC</span>
+            </div>
+        </div>
+
+        <!-- ── CLOSE-UPS ───────────────────────────────────────── -->
+        <div class="portfolio-item" data-category="closeups" data-lightbox-src="portfolio/Close-ups/DSCF9729.jpg">
+            <div class="portfolio-img-wrap">
+                <img class="portfolio-thumb" src="portfolio/Close-ups/DSCF9729-2.jpg" alt="Macro Study I" loading="lazy">
+                <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Close-Ups</p></div></div>
+            </div>
+            <div class="portfolio-caption">
+                <span class="caption-title">Macro Study I</span>
+                <span class="caption-gear">Fujifilm X-H2 · Laowa 65mm Macro</span>
+            </div>
+        </div>
+
+        <div class="portfolio-item" data-category="closeups" data-lightbox-src="portfolio/Close-ups/DSCF4215-2.jpg">
+            <div class="portfolio-img-wrap">
+                <img class="portfolio-thumb" src="portfolio/Close-ups/DSCF4215.jpg" alt="Macro Study II" loading="lazy">
+                <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Close-Ups</p></div></div>
+            </div>
+            <div class="portfolio-caption">
+                <span class="caption-title">Macro Study II</span>
+                <span class="caption-gear">Fujifilm X-H2 · Laowa 65mm Macro</span>
+            </div>
+        </div>
+
+        <div class="portfolio-item" data-category="closeups" data-lightbox-src="portfolio/Close-ups/DSCF9175.jpg">
+            <div class="portfolio-img-wrap">
+                <img class="portfolio-thumb" src="portfolio/Close-ups/DSCF9175-2.jpg" alt="Close Study" loading="lazy">
+                <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Close-Ups</p></div></div>
+            </div>
+            <div class="portfolio-caption">
+                <span class="caption-title">Close Study</span>
+                <span class="caption-gear">Fujifilm X-H2 · XF 16-55mm f/2.8</span>
+            </div>
+        </div>
+
+        <div class="portfolio-item" data-category="closeups" data-lightbox-src="portfolio/Close-ups/Encyclopedia.jpg">
+            <div class="portfolio-img-wrap">
+                <img class="portfolio-thumb" src="portfolio/Close-ups/Encyclopedia2.jpg" alt="Encyclopedia" loading="lazy">
+                <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Close-Ups</p></div></div>
+            </div>
+            <div class="portfolio-caption">
+                <span class="caption-title">Encyclopedia</span>
+                <span class="caption-gear">Fujifilm X-H2 · XF 21mm</span>
+            </div>
+        </div>
+
+        <div class="portfolio-item" data-category="closeups" data-lightbox-src="portfolio/Close-ups/Farm & Garden Club2.jpg">
+            <div class="portfolio-img-wrap">
+                <img class="portfolio-thumb" src="portfolio/Close-ups/Farm & Garden Club.jpg" alt="Farm &amp; Garden Club" loading="lazy">
+                <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Close-Ups</p></div></div>
+            </div>
+            <div class="portfolio-caption">
+                <span class="caption-title">Farm &amp; Garden Club</span>
+                <span class="caption-gear">Fujifilm X-H2 · XF 16-55mm f/2.8</span>
+            </div>
+        </div>
+
+        <!-- ── VINTAGE GLASS & ANALOGUE FILM ──────────────────── -->
+        <div class="portfolio-item" data-category="vintage" data-lightbox-src="portfolio/vintage-film/EJ on Set-1.jpg">
+            <div class="portfolio-img-wrap">
+                <img class="portfolio-thumb" src="portfolio/vintage-film/EJ on Set-1-2.jpg" alt="EJ on Set" loading="lazy">
+                <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Vintage &amp; Film</p></div></div>
+            </div>
+            <div class="portfolio-caption">
+                <span class="caption-title">EJ on Set</span>
+                <span class="caption-gear">Fujifilm X-H2 · SMC Takumar 55mm</span>
+            </div>
+        </div>
+
+        <div class="portfolio-item" data-category="vintage" data-lightbox-src="portfolio/vintage-film/Atlas_FilmFujicolorSuperia400_PentaxSMCTakumar55mm.jpg">
+            <div class="portfolio-img-wrap">
+                <img class="portfolio-thumb" src="portfolio/vintage-film/Atlas_FilmFujicolorSuperia400_PentaxSMCTakumar55mm_2.jpg" alt="Atlas" loading="lazy">
+                <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Vintage &amp; Film</p></div></div>
+            </div>
+            <div class="portfolio-caption">
+                <span class="caption-title">Atlas</span>
+                <span class="caption-gear">Film · Fujicolor Superia 400 · SMC Takumar 55mm</span>
+            </div>
+        </div>
+
+        <div class="portfolio-item" data-category="vintage" data-lightbox-src="portfolio/vintage-film/Boat_FilmKodakEktachrome_Jupiter9, 85mm.jpg">
+            <div class="portfolio-img-wrap">
+                <img class="portfolio-thumb" src="portfolio/vintage-film/Boat_FilmKodakEktachrome_Jupiter9, 85mm_2.jpg" alt="Boat" loading="lazy">
+                <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Vintage &amp; Film</p></div></div>
+            </div>
+            <div class="portfolio-caption">
+                <span class="caption-title">Boat</span>
+                <span class="caption-gear">Film · Kodak Ektachrome · Jupiter-9 85mm</span>
+            </div>
+        </div>
+
+        <div class="portfolio-item" data-category="vintage" data-lightbox-src="portfolio/vintage-film/Fan_Ilford 400_SMCTakumar55mm_2.jpg">
+            <div class="portfolio-img-wrap">
+                <img class="portfolio-thumb" src="portfolio/vintage-film/Fan_Ilford 400_SMCTakumar55mm.jpg" alt="Fan" loading="lazy">
+                <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Vintage &amp; Film</p></div></div>
+            </div>
+            <div class="portfolio-caption">
+                <span class="caption-title">Fan</span>
+                <span class="caption-gear">Film · Ilford 400 · SMC Takumar 55mm</span>
+            </div>
+        </div>
+
+        <div class="portfolio-item" data-category="vintage" data-lightbox-src="portfolio/vintage-film/Old Friends (Portrait)_FilmFujicolorSuperia400_PentaxSMCTakumar55mm.jpg">
+            <div class="portfolio-img-wrap">
+                <img class="portfolio-thumb" src="portfolio/vintage-film/Old Friends (Portrait)_FilmFujicolorSuperia400_PentaxSMCTakumar55mm_2.jpg" alt="Old Friends" loading="lazy">
+                <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Vintage &amp; Film</p></div></div>
+            </div>
+            <div class="portfolio-caption">
+                <span class="caption-title">Old Friends</span>
+                <span class="caption-gear">Film · Fujicolor Superia 400 · SMC Takumar 55mm</span>
+            </div>
+        </div>
+
+        <!-- ── DANCE ───────────────────────────────────────────── -->
+        <div class="portfolio-item" data-category="dance" data-lightbox-src="portfolio/Break Club.jpg">
+            <div class="portfolio-img-wrap">
+                <img class="portfolio-thumb" src="portfolio/Break Club 2.jpg" alt="Break Club" loading="lazy">
+                <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Dance</p></div></div>
+            </div>
+            <div class="portfolio-caption">
+                <span class="caption-title">Break Club</span>
+                <span class="caption-gear">Fujifilm X-H2 · XF 16-55mm f/2.8</span>
+            </div>
+        </div>
+
+        <div class="portfolio-item" data-category="dance" data-lightbox-src="portfolio/DSCF0379-2.jpg">
+            <div class="portfolio-img-wrap">
+                <img class="portfolio-thumb" src="portfolio/DSCF0379.jpg" alt="Break Club II" loading="lazy">
+                <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Dance</p></div></div>
+            </div>
+            <div class="portfolio-caption">
+                <span class="caption-title">Break Club II</span>
+                <span class="caption-gear">Fujifilm X-H2 · XF 16-55mm f/2.8</span>
+            </div>
+        </div>
+
     </div>
 </section>
 
