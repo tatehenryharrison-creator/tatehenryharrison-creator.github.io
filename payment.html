@@ -22,19 +22,21 @@
     .nav-links > a:hover { opacity: 0.7; }
 
     /* Page header */
+    .back-link-wrap {
+      padding: 16px 10% 0;
+    }
     .page-header {
       text-align: center;
-      padding: 72px 10% 56px;
+      padding: 28px 10% 56px;
       border-bottom: 1px solid rgba(99,95,81,0.12);
     }
     .back-link {
-      display: inline-flex; align-items: center; gap: 6px;
-      font-family: 'EB Garamond', serif; font-size: 0.82rem;
-      letter-spacing: 1.5px; text-transform: uppercase;
-      color: #5C6E82; text-decoration: none;
-      margin-bottom: 28px; transition: opacity 0.2s ease;
+      display: inline-flex; align-items: center; gap: 5px;
+      font-family: 'EB Garamond', serif; font-size: 0.78rem;
+      color: #b8b4ac; text-decoration: none;
+      transition: color 0.2s ease;
     }
-    .back-link:hover { opacity: 0.7; }
+    .back-link:hover { color: #635f51; }
     .payment-eyebrow { font-size: 0.72rem; letter-spacing: 3px; text-transform: uppercase; color: #5C6E82; margin: 0 0 14px; }
     .page-title { font-size: 2.8rem; font-weight: 600; color: #1C1A14; margin: 0 0 16px; line-height: 1.1; }
     .page-subtitle { color: #635f51; font-size: 0.95rem; max-width: 480px; margin: 0 auto; line-height: 1.65; }
@@ -148,8 +150,11 @@
   </div>
 </nav>
 
+<div class="back-link-wrap">
+  <a href="index.html#pricing" class="back-link">← Packages</a>
+</div>
+
 <div class="page-header">
-  <a href="index.html#pricing" class="back-link">← Back to Packages</a>
   <p class="payment-eyebrow">Step 2 — Deposit</p>
   <h1 class="page-title">Pay Your Deposit</h1>
   <p class="page-subtitle">A 50% deposit is required to secure your date. Choose your preferred payment method below and include your name &amp; package in the memo.</p>
