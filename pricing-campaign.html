@@ -67,7 +67,7 @@
     .payment-eyebrow { font-size: 0.72rem; letter-spacing: 3px; text-transform: uppercase; color: #5C6E82; margin: 0 0 12px; }
     .payment-title { font-size: 1.9rem; font-weight: 600; color: #f5f4f0; margin: 0 0 12px; }
     .payment-subtitle { color: #a8a49c; font-size: 0.9rem; max-width: 420px; margin: 0 auto; line-height: 1.6; }
-    .payment-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; max-width: 880px; margin: 0 auto; }
+    .payment-cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; max-width: 1100px; margin: 0 auto; }
     .payment-card { background: #f5f4f0; border: 1px solid rgba(99,95,81,0.18); border-radius: 16px; padding: 36px 28px; text-align: center; transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease; display: flex; flex-direction: column; align-items: center; }
     .payment-card:hover { border-color: rgba(92,110,130,0.4); transform: translateY(-3px); box-shadow: 0 8px 28px rgba(28,26,20,0.08); }
     .payment-icon { width: 54px; height: 54px; border-radius: 14px; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; }
@@ -81,6 +81,25 @@
     .btn-paypal { background: #003087; color: #FFD140; }
     .icon-stripe { background: rgba(99,91,255,0.12); }
     .btn-stripe { background: #635BFF; color: #fff; opacity: 0.4; pointer-events: none; cursor: not-allowed; }
+    .icon-zelle { background: rgba(109,30,212,0.1); }
+    .zelle-handle {
+      font-family: 'EB Garamond', serif;
+      font-size: 0.92rem; color: #1C1A14;
+      background: rgba(109,30,212,0.07);
+      border: 1px solid rgba(109,30,212,0.18);
+      border-radius: 8px; padding: 10px 16px;
+      margin-bottom: 16px; width: 100%;
+      letter-spacing: 0.2px; line-height: 1.5;
+    }
+    .zelle-handle strong { display: block; font-size: 0.75rem; letter-spacing: 1.5px; text-transform: uppercase; color: #6D1ED4; margin-bottom: 4px; }
+    .copy-btn {
+      display: inline-block; width: 100%; padding: 12px 30px;
+      border-radius: 9px; font-size: 0.88rem; font-weight: 600;
+      font-family: 'EB Garamond', serif;
+      background: #6D1ED4; color: #fff; border: none;
+      cursor: pointer; transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+    .copy-btn:hover { opacity: 0.88; transform: translateY(-1px); }
     .coming-soon-badge { display: inline-block; font-size: 0.68rem; letter-spacing: 1.5px; text-transform: uppercase; color: #635f51; border: 1px solid rgba(92,92,88,0.5); border-radius: 20px; padding: 4px 12px; margin-bottom: 16px; }
 
     footer { text-align: center; padding: 40px 0; font-size: 0.85rem; color: #a8a49c;  }
@@ -97,7 +116,7 @@
       .form-container { border-radius: 0; }
       .form-container iframe { min-height: 900px; }
       .payment-section { padding: 60px 6% 80px; }
-      .payment-cards { grid-template-columns: 1fr; max-width: 420px; }
+      .payment-cards { grid-template-columns: repeat(2, 1fr); max-width: 640px; }
     }
   
 .social-links {
@@ -202,6 +221,24 @@
       <h3 class="payment-card-title">PayPal</h3>
       <p class="payment-card-desc">Secure payment with built-in buyer protection through PayPal.</p>
       <a href="https://paypal.me/harrisonmediallc" target="_blank" rel="noopener" class="pay-btn btn-paypal">Pay via PayPal</a>
+    </div>
+    <div class="payment-card">
+      <div class="payment-icon icon-zelle">
+        <svg width="26" height="26" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+          <text x="50%" y="54%" dominant-baseline="middle" text-anchor="middle" font-family="Arial, sans-serif" font-weight="800" font-size="30" fill="#6D1ED4">Z</text>
+        </svg>
+      </div>
+      <h3 class="payment-card-title">Zelle</h3>
+      <p class="payment-card-desc">Send directly through your bank app — no fees, instant transfer.</p>
+      <div class="zelle-handle">
+        <strong>Phone</strong>
+        (303) 968-8078
+      </div>
+      <div class="zelle-handle" style="margin-top:-8px;">
+        <strong>or Email</strong>
+        tatehenryharrison@gmail.com
+      </div>
+      <button class="copy-btn" onclick="navigator.clipboard.writeText('3039688078').then(() => { this.textContent = 'Copied!'; setTimeout(() => this.textContent = 'Copy Number', 2000); })">Copy Number</button>
     </div>
     <div class="payment-card">
       <div class="payment-icon icon-stripe">
