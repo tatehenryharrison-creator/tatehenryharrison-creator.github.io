@@ -67,7 +67,7 @@
     .payment-eyebrow { font-size: 0.72rem; letter-spacing: 3px; text-transform: uppercase; color: #5C6E82; margin: 0 0 12px; }
     .payment-title { font-size: 1.9rem; font-weight: 600; color: #f5f4f0; margin: 0 0 12px; }
     .payment-subtitle { color: #a8a49c; font-size: 0.9rem; max-width: 420px; margin: 0 auto; line-height: 1.6; }
-    .payment-cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; max-width: 1100px; margin: 0 auto; }
+    .payment-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; max-width: 840px; margin: 0 auto; }
     .payment-card { background: #f5f4f0; border: 1px solid rgba(99,95,81,0.18); border-radius: 16px; padding: 36px 28px; text-align: center; transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease; display: flex; flex-direction: column; align-items: center; }
     .payment-card:hover { border-color: rgba(92,110,130,0.4); transform: translateY(-3px); box-shadow: 0 8px 28px rgba(28,26,20,0.08); }
     .payment-icon { width: 54px; height: 54px; border-radius: 14px; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; }
@@ -116,7 +116,7 @@
       .form-container { border-radius: 0; }
       .form-container iframe { min-height: 900px; }
       .payment-section { padding: 60px 6% 80px; }
-      .payment-cards { grid-template-columns: repeat(2, 1fr); max-width: 640px; }
+      .payment-cards { grid-template-columns: 1fr; }
     }
   
 .social-links {
@@ -202,7 +202,7 @@
     <p class="payment-subtitle">A deposit is required to hold your booking. Choose your preferred payment method below.</p>
   </div>
   <div class="payment-cards">
-    <div class="payment-card">
+    <div class="payment-card card-venmo">
       <div class="payment-icon icon-venmo">
         <svg width="26" height="26" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#008CFF">
           <path d="M19.45 2c.65 1.19.93 2.41.93 3.97 0 4.9-4.2 11.2-7.61 15.03H5.65L2.5 3.31l6.27-.59 1.65 12.14c1.54-2.6 3.42-6.78 3.42-9.6 0-1.5-.28-2.54-.72-3.39L19.45 2Z"/>
@@ -218,7 +218,7 @@
       <a href="https://venmo.com/u/Tatai" target="_blank" rel="noopener" class="pay-btn btn-venmo">Pay via Venmo</a>
       <p style="font-family:'EB Garamond',serif; font-size:0.75rem; color:#a8a49c; margin:12px 0 0; line-height:1.5;">Last four digits of Venmo phone&nbsp;# &mdash; 8078</p>
     </div>
-    <div class="payment-card">
+    <div class="payment-card card-paypal">
       <div class="payment-icon icon-paypal">
         <svg width="26" height="26" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944.901C5.026.382 5.474 0 5.998 0h7.46c2.57 0 4.578.543 5.69 1.81 1.01 1.15 1.304 2.42 1.012 4.287-.023.143-.047.288-.077.437-.983 5.05-4.349 6.797-8.647 6.797h-2.19c-.524 0-.968.382-1.05.9l-1.12 7.106zm14.146-14.42a3.35 3.35 0 0 0-.607-.541c-.013.076-.026.175-.041.254-.93 4.778-4.005 7.201-9.138 7.201h-2.19a.563.563 0 0 0-.556.479l-1.187 7.527h-.506l-.24 1.516a.56.56 0 0 0 .554.647h3.882c.46 0 .85-.334.922-.788.06-.26.76-4.852.816-5.09a.932.932 0 0 1 .923-.788h.58c3.76 0 6.705-1.528 7.565-5.946.36-1.847.174-3.388-.777-4.471z" fill="#FFD140"/>
@@ -228,7 +228,7 @@
       <p class="payment-card-desc">Secure payment with built-in buyer protection through PayPal.</p>
       <a href="https://paypal.me/harrisonmediallc" target="_blank" rel="noopener" class="pay-btn btn-paypal">Pay via PayPal</a>
     </div>
-    <div class="payment-card">
+    <div class="payment-card card-zelle">
       <div class="payment-icon icon-zelle">
         <svg width="26" height="26" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
           <text x="50%" y="54%" dominant-baseline="middle" text-anchor="middle" font-family="Arial, sans-serif" font-weight="800" font-size="30" fill="#6D1ED4">Z</text>
@@ -246,7 +246,7 @@
       </div>
       <button class="copy-btn" onclick="navigator.clipboard.writeText('3039688078').then(() => { this.textContent = 'Copied!'; setTimeout(() => this.textContent = 'Copy Number', 2000); })">Copy Number</button>
     </div>
-    <div class="payment-card">
+    <div class="payment-card card-stripe">
       <div class="payment-icon icon-stripe">
         <svg width="26" height="26" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#635BFF">
           <path d="M13.976 9.15c-2.172-.806-3.356-1.426-3.356-2.409 0-.831.683-1.305 1.901-1.305 2.227 0 4.515.858 6.09 1.631l.89-5.494C18.252.975 15.697 0 12.165 0 9.667 0 7.589.654 6.104 1.872 4.56 3.147 3.757 4.992 3.757 7.218c0 4.039 2.467 5.76 6.476 7.219 2.585.92 3.445 1.574 3.445 2.583 0 .98-.84 1.545-2.354 1.545-1.875 0-4.965-.921-6.99-2.109l-.9 5.555C5.175 22.99 8.385 24 11.714 24c2.641 0 4.843-.624 6.328-1.813 1.664-1.305 2.525-3.236 2.525-5.732 0-4.128-2.524-5.851-6.591-7.305z"/>
