@@ -490,11 +490,10 @@ nav {
 #lightbox.open { display: flex; }
 #lightbox-content { position: relative; max-width: 90vw; max-height: 85vh; }
 #lightbox-inner {
-    min-width: 420px; min-height: 300px;
-    background: #2A2220; border-radius: 12px;
+    min-width: 80px; min-height: 80px;
     display: flex; align-items: center; justify-content: center;
-    color: #635f51; font-family: 'EB Garamond', serif; font-style: italic;
 }
+@keyframes lb-spin { to { transform: rotate(360deg); } }
 #lightbox-close {
     position: absolute; top: -14px; right: -14px;
     width: 32px; height: 32px; border-radius: 50%;
@@ -2629,7 +2628,7 @@ footer > * { position: relative; z-index: 1; }
 <div id="lightbox" role="dialog" aria-modal="true" aria-label="Portfolio preview">
     <div id="lightbox-content">
         <button id="lightbox-close" aria-label="Close preview">✕</button>
-        <div id="lightbox-inner">Add your portfolio images to see them here.</div>
+        <div id="lightbox-inner"></div>
         <div id="lightbox-caption"></div>
     </div>
 </div>
@@ -2842,20 +2841,43 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
 /* ===== LIGHTBOX ===== */
 const lightbox        = document.getElementById('lightbox');
 const lightboxClose   = document.getElementById('lightbox-close');
+const lightboxInner   = document.getElementById('lightbox-inner');
 const lightboxCaption = document.getElementById('lightbox-caption');
+
 document.querySelectorAll('.portfolio-item').forEach(item => {
     item.addEventListener('click', () => {
-        const title = item.dataset.title;
-        const cat   = item.dataset.category;
-        lightboxCaption.textContent = title + ' — ' + cat.charAt(0).toUpperCase() + cat.slice(1);
+        const src   = item.dataset.lightboxSrc;
+        const title = item.querySelector('.caption-title')?.textContent || '';
+        const gear  = item.querySelector('.caption-gear')?.textContent || '';
+        const cat   = item.dataset.category || '';
+
+        // Build image
+        lightboxInner.innerHTML = '<div style="width:60px;height:60px;border:2px solid rgba(232,225,212,0.2);border-top-color:#e8e1d4;border-radius:50%;animation:lb-spin 0.7s linear infinite;margin:auto;"></div>';
+        const img = new Image();
+        img.src = src;
+        img.alt = title;
+        img.style.cssText = 'max-width:90vw;max-height:80vh;object-fit:contain;border-radius:6px;display:block;';
+        img.onload = () => { lightboxInner.innerHTML = ''; lightboxInner.appendChild(img); };
+        img.onerror = () => { lightboxInner.innerHTML = '<p style="color:#a8a49c;font-family:\'EB Garamond\',serif;">Image could not be loaded.</p>'; };
+
+        // Caption
+        lightboxCaption.innerHTML = title
+            ? `<strong style="color:#e8e1d4;">${title}</strong>${gear ? ' <span style="color:#635f51;margin-left:8px;">· ' + gear + '</span>' : ''}`
+            : '';
+
         lightbox.classList.add('open');
         document.body.style.overflow = 'hidden';
     });
 });
+
 lightboxClose.addEventListener('click', closeLightbox);
 lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
-function closeLightbox() { lightbox.classList.remove('open'); document.body.style.overflow = ''; }
+function closeLightbox() {
+    lightbox.classList.remove('open');
+    document.body.style.overflow = '';
+    lightboxInner.innerHTML = '';
+}
 
 /* ===== FAQ ACCORDION ===== */
 document.querySelectorAll('.faq-item').forEach(item => {
