@@ -578,11 +578,10 @@ nav {
     background: #f5f4f0; border: 1px solid rgba(99,95,81,0.18);
     border-radius: 16px; padding: 36px 28px;
     display: flex; flex-direction: column;
-    transition: border-color 0.4s ease;
+    transition: border-color 0.45s cubic-bezier(0.22,1,0.36,1), transform 0.45s cubic-bezier(0.22,1,0.36,1), box-shadow 0.45s cubic-bezier(0.22,1,0.36,1);
     position: relative; cursor: pointer; overflow: hidden;
-    /* No transform-style or will-change — avoids GPU subpixel blur */
 }
-.pricing-card:hover { border-color: rgba(92,110,130,0.45); }
+.pricing-card:hover { border-color: rgba(92,110,130,0.45); transform: translateY(-4px); box-shadow: 0 18px 48px rgba(28,26,20,0.10); }
 /* Plastic specular shine — sharp, no blur, tracks bottom-left light source */
 .card-shine {
     position: absolute; inset: 0;
@@ -1639,7 +1638,7 @@ footer > * { position: relative; z-index: 1; }
                     <li>Color grading included</li>
                     <li>1 round of revisions</li>
                 </ul>
-                <a href="pricing-standard.html" class="pricing-cta">Select Package</a>
+                <a href="pricing-standard.html" class="pricing-cta">Learn More</a>
             </div>
 
             <div class="pricing-card popular">
@@ -1656,7 +1655,7 @@ footer > * { position: relative; z-index: 1; }
                     <li>Full color grade + audio mix</li>
                     <li>2 revisions + social cuts</li>
                 </ul>
-                <a href="pricing-advanced.html" class="pricing-cta">Select Package</a>
+                <a href="pricing-advanced.html" class="pricing-cta">Learn More</a>
             </div>
 
             <div class="pricing-card">
@@ -1672,7 +1671,7 @@ footer > * { position: relative; z-index: 1; }
                     <li>Unlimited revisions</li>
                     <li>Full commercial license</li>
                 </ul>
-                <a href="pricing-campaign.html" class="pricing-cta">Select Package</a>
+                <a href="pricing-campaign.html" class="pricing-cta">Learn More</a>
             </div>
 
             <div class="pricing-card">
@@ -1738,7 +1737,7 @@ footer > * { position: relative; z-index: 1; }
                     <li>Online gallery delivery</li>
                     <li>Personal &amp; commercial license</li>
                 </ul>
-                <a href="pricing-photography.html" class="pricing-cta">Select Package</a>
+                <a href="pricing-photography.html" class="pricing-cta">Learn More</a>
             </div>
 
             <div class="pricing-card">
@@ -1754,7 +1753,7 @@ footer > * { position: relative; z-index: 1; }
                     <li>Same-day selects preview</li>
                     <li>Personal &amp; commercial license</li>
                 </ul>
-                <a href="pricing-photography.html" class="pricing-cta">Select Package</a>
+                <a href="pricing-photography.html" class="pricing-cta">Learn More</a>
             </div>
         </div>
 
