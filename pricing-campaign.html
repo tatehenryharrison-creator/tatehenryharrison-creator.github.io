@@ -4,7 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Campaign Package | Tate Harrison</title>
-  <link rel="icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
   <link rel="stylesheet" href="fonts.css">
   <style>
     * { box-sizing: border-box; }
@@ -17,7 +19,7 @@
     /* ── NAV ── */
     nav { padding: 20px 10%; display: flex; justify-content: space-between; align-items: center; background: #f5f4f0; border-bottom: 1px solid rgba(99,95,81,0.12); position: sticky; top: 0; z-index: 100; }
     .nav-logo-link { display: flex; align-items: center; text-decoration: none; flex-shrink: 0; }
-    .nav-logo { height: 48px; width: auto; display: block; transition: opacity 0.25s ease; }
+    .nav-logo { height: 120px; width: auto; display: block; transition: opacity 0.25s ease; }
     .nav-logo:hover { opacity: 0.8; }
     .nav-links { display: flex; align-items: center; gap: 20px; }
     .nav-links > a { color: #2A2220; text-decoration: none; transition: opacity 0.3s ease; font-size: 0.95rem; }
@@ -35,54 +37,59 @@
     }
     .pkg-tagline { color: #635f51; font-size: 1rem; max-width: 500px; margin: 0 auto; line-height: 1.65; font-family: 'EB Garamond', serif; }
 
-    /* ── ACCORDION SECTION (DARK) ── */
-    .acc-section {
-      background: #151310;
-      padding: 80px 0;
-    }
+    /* ── WHAT'S INCLUDED – full-width photo bars ── */
+    .acc-section { background: #151310; }
     .acc-inner {
       max-width: 820px;
       margin: 0 auto;
-      padding: 0 8%;
+      padding: 80px 8% 52px;
     }
     .acc-eyebrow { font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase; color: #5C6E82; margin: 0 0 12px; }
-    .acc-heading { font-size: 1.8rem; font-weight: 600; color: #e8e1d4; margin: 0 0 48px; letter-spacing: -0.2px; }
+    .acc-heading { font-size: 1.8rem; font-weight: 600; color: #e8e1d4; margin: 0; letter-spacing: -0.2px; }
 
     .acc-item {
-      border: 1px solid rgba(232,225,212,0.1);
-      border-radius: 14px;
-      margin-bottom: 12px;
+      position: relative;
       overflow: hidden;
-      transition: border-color 0.3s ease;
       cursor: pointer;
+      border-bottom: 1px solid rgba(232,225,212,0.06);
     }
-    .acc-item:hover { border-color: rgba(232,225,212,0.22); }
-    .acc-item.open { border-color: rgba(92,110,130,0.5); }
+    .acc-item:last-child { border-bottom: none; }
 
     .acc-bar {
+      position: relative;
+      min-height: 130px;
       display: flex; align-items: center; justify-content: space-between;
-      padding: 22px 28px;
-      background: #1e1b17;
-      transition: background 0.25s ease;
+      padding: 36px 8%;
+      background-image: var(--acc-bg, none);
+      background-size: cover;
+      background-position: center;
+      background-color: #1e1b17;
       user-select: none;
     }
-    .acc-item:hover .acc-bar { background: #231f1a; }
-    .acc-item.open .acc-bar { background: #1a1714; }
+    .acc-bar::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: rgba(18,15,12,0.62);
+      transition: background 0.35s ease;
+      pointer-events: none;
+    }
+    .acc-item:hover .acc-bar::before { background: rgba(18,15,12,0.48); }
+    .acc-item.open  .acc-bar::before { background: rgba(18,15,12,0.72); }
 
-    .acc-left { display: flex; align-items: center; gap: 18px; }
+    .acc-left { display: flex; align-items: center; gap: 20px; position: relative; z-index: 1; }
     .acc-icon { display: flex; align-items: center; flex-shrink: 0; opacity: 0.9; }
     .acc-num {
       font-family: 'Cinzel', serif; font-size: 0.72rem; letter-spacing: 2px;
-      color: rgba(232,225,212,0.25); font-weight: 600; min-width: 24px;
+      color: rgba(232,225,212,0.3); font-weight: 600; min-width: 24px;
     }
     .acc-title {
-      font-family: 'Cinzel', serif; font-size: 1rem; font-weight: 600;
-      color: #e8e1d4; letter-spacing: 0.5px;
+      font-family: 'Cinzel', serif; font-size: 1.45rem; font-weight: 600;
+      color: #e8e1d4; letter-spacing: 0.8px;
     }
     .acc-chevron {
-      font-size: 1.4rem; font-weight: 300; color: rgba(232,225,212,0.4);
+      font-size: 1.6rem; font-weight: 300; color: rgba(232,225,212,0.5);
       line-height: 1; transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1), color 0.25s ease;
-      font-family: monospace;
+      font-family: monospace; position: relative; z-index: 1;
     }
     .acc-item.open .acc-chevron { transform: rotate(45deg); color: #5C6E82; }
 
@@ -93,17 +100,17 @@
       background: #181512;
     }
     .acc-body ul {
-      margin: 0; padding: 28px 28px 28px 52px;
+      margin: 0; padding: 32px 8%;
       list-style: none;
     }
     .acc-body ul li {
-      font-family: 'EB Garamond', serif; font-size: 1rem;
-      color: #b8b09e; line-height: 1.65; padding: 5px 0;
+      font-family: 'EB Garamond', serif; font-size: 1.05rem;
+      color: #b8b09e; line-height: 1.65; padding: 5px 0 5px 26px;
       position: relative;
     }
     .acc-body ul li::before {
       content: '—';
-      position: absolute; left: -22px;
+      position: absolute; left: 0;
       color: rgba(92,110,130,0.5); font-size: 0.9rem;
     }
 
@@ -226,10 +233,10 @@
       .nav-links { flex-wrap: wrap; justify-content: center; }
       .pkg-header { padding: 52px 6% 48px; }
       .pkg-title { font-size: 2.2rem; }
-      .acc-inner { padding: 0 5%; }
-      .acc-heading { font-size: 1.5rem; }
-      .acc-bar { padding: 18px 20px; }
-      .acc-title { font-size: 0.9rem; }
+      .acc-bar { padding: 28px 5%; min-height: 100px; }
+      .acc-title { font-size: 1.1rem; }
+      .acc-body ul { padding: 24px 5%; }
+      .acc-inner { padding: 60px 5% 40px; }
       .steps-arrow { flex-direction: column; align-items: center; gap: 10px; }
       .step-section { padding: 0 0 60px; }
       .form-container { border-radius: 0; }
@@ -243,7 +250,7 @@
 
 <nav>
   <a href="index.html" class="nav-logo-link">
-    <img src="logo_primary.jpg" alt="Harrison Media LLC" class="nav-logo">
+    <img src="logo_transparent.png" alt="Harrison Media LLC" class="nav-logo">
   </a>
   <div class="nav-links">
     <a href="index.html">Home</a>
@@ -266,10 +273,11 @@
   <div class="acc-inner">
     <p class="acc-eyebrow">What's Included</p>
     <h2 class="acc-heading">Inside This Package</h2>
-        <div class="acc-item" onclick="toggleAcc(this)">
+  </div>
+        <div class="acc-item" style="--acc-bg: url('assets/acc-video.jpg')" onclick="toggleAcc(this)">
           <div class="acc-bar">
             <div class="acc-left">
-              <span class="acc-icon" style="color:#5C6E82;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="14" height="14" rx="2"/><path d="m16 10 5-3v10l-5-3"/></svg></span>
+              <span class="acc-icon" style="color:#5C6E82;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="14" height="14" rx="2"/><path d="m16 10 5-3v10l-5-3"/></svg></span>
               <span class="acc-num">01</span>
               <span class="acc-title">Video</span>
             </div>
@@ -285,10 +293,10 @@
             </ul>
           </div>
         </div>
-        <div class="acc-item" onclick="toggleAcc(this)">
+        <div class="acc-item" style="--acc-bg: url('assets/acc-audio.jpg')" onclick="toggleAcc(this)">
           <div class="acc-bar">
             <div class="acc-left">
-              <span class="acc-icon" style="color:#7a6e5a;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 1 3 3v7a3 3 0 0 1-6 0V5a3 3 0 0 1 3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg></span>
+              <span class="acc-icon" style="color:#7a6e5a;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 1 3 3v7a3 3 0 0 1-6 0V5a3 3 0 0 1 3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg></span>
               <span class="acc-num">02</span>
               <span class="acc-title">Audio</span>
             </div>
@@ -303,10 +311,10 @@
             </ul>
           </div>
         </div>
-        <div class="acc-item" onclick="toggleAcc(this)">
+        <div class="acc-item" style="--acc-bg: url('assets/acc-lighting.jpg')" onclick="toggleAcc(this)">
           <div class="acc-bar">
             <div class="acc-left">
-              <span class="acc-icon" style="color:#6e7a5c;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></span>
+              <span class="acc-icon" style="color:#6e7a5c;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></span>
               <span class="acc-num">03</span>
               <span class="acc-title">Lighting & Color</span>
             </div>
@@ -321,10 +329,10 @@
             </ul>
           </div>
         </div>
-        <div class="acc-item" onclick="toggleAcc(this)">
+        <div class="acc-item" style="--acc-bg: url('assets/acc-extras.jpg')" onclick="toggleAcc(this)">
           <div class="acc-bar">
             <div class="acc-left">
-              <span class="acc-icon" style="color:#82785c;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+              <span class="acc-icon" style="color:#82785c;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
               <span class="acc-num">04</span>
               <span class="acc-title">Extras</span>
             </div>
@@ -339,7 +347,6 @@
             </ul>
           </div>
         </div>
-  </div>
 </section>
 
 <!-- Steps Divider -->
