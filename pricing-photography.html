@@ -10,6 +10,22 @@
   <link rel="stylesheet" href="fonts.css">
   <style>
     * { box-sizing: border-box; }
+    /* ── GOLD PULSE BORDER ── */
+    @keyframes gold-pulse {
+      0%, 100% { opacity: 0.18; }
+      50%       { opacity: 0.55; }
+    }
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+      border: 1.5px solid #c9a052;
+      border-radius: 0;
+      animation: gold-pulse 3s ease-in-out infinite;
+    }
+
     body { margin: 0; font-family: 'IM Fell English', serif; background: #f5f4f0; color: #1C1A14; }
     p { color: #a8a49c; }
     h1, h2, h3 { font-family: 'Cinzel', serif; font-weight: 400; }
