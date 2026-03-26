@@ -17,9 +17,9 @@
     .pay-btn, .coming-soon-badge, footer { font-family: 'EB Garamond', serif; }
 
     /* ── NAV ── */
-    nav { padding: 20px 10%; display: flex; justify-content: space-between; align-items: center; background: #f5f4f0; border-bottom: 1px solid rgba(99,95,81,0.12); position: sticky; top: 0; z-index: 100; }
-    .nav-logo-link { display: flex; align-items: center; text-decoration: none; flex-shrink: 0; }
-    .nav-logo { height: 120px; width: auto; display: block; transition: opacity 0.25s ease; }
+    nav { padding: 0 10% 0 0; display: flex; justify-content: space-between; align-items: stretch; background: #f5f4f0; border-bottom: 1px solid rgba(99,95,81,0.12); position: sticky; top: 0; z-index: 100; transition: transform 0.35s ease; }
+    .nav-logo-link { display: flex; align-items: center; text-decoration: none; flex-shrink: 0; padding: 0; margin: 0; line-height: 0; }
+    .nav-logo { height: 160px; width: auto; display: block; transition: opacity 0.25s ease; }
     .nav-logo:hover { opacity: 0.8; }
     .nav-links { display: flex; align-items: center; gap: 20px; }
     .nav-links > a { color: #2A2220; text-decoration: none; transition: opacity 0.3s ease; font-size: 0.95rem; }
@@ -229,7 +229,7 @@
     .social-link svg { width: 16px; height: 16px; fill: currentColor; }
 
     @media (max-width: 768px) {
-      nav { padding: 15px 5%; flex-direction: column; gap: 10px; }
+      nav { padding: 0 5% 0 0; }
       .nav-links { flex-wrap: wrap; justify-content: center; }
       .pkg-header { padding: 52px 6% 48px; }
       .pkg-title { font-size: 2.2rem; }
@@ -476,5 +476,18 @@ window.addEventListener('DOMContentLoaded', () => {
   if (first) toggleAcc(first);
 });
 </script>
+
+    <script>
+    (function(){
+      var nav = document.querySelector('nav');
+      var lastY = 0;
+      window.addEventListener('scroll', function(){
+        var y = window.scrollY;
+        if(y > lastY && y > 80){ nav.style.transform = 'translateY(-100%)'; }
+        else { nav.style.transform = ''; }
+        lastY = y;
+      }, {passive:true});
+    })();
+    </script>
 </body>
 </html>
