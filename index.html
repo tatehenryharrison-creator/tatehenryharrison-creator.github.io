@@ -490,11 +490,10 @@ nav {
 #lightbox.open { display: flex; }
 #lightbox-content { position: relative; max-width: 90vw; max-height: 85vh; }
 #lightbox-inner {
-    min-width: 420px; min-height: 300px;
-    background: #2A2220; border-radius: 12px;
+    min-width: 80px; min-height: 80px;
     display: flex; align-items: center; justify-content: center;
-    color: #635f51; font-family: 'EB Garamond', serif; font-style: italic;
 }
+@keyframes lb-spin { to { transform: rotate(360deg); } }
 #lightbox-close {
     position: absolute; top: -14px; right: -14px;
     width: 32px; height: 32px; border-radius: 50%;
@@ -1799,7 +1798,7 @@ footer > * { position: relative; z-index: 1; }
             letter-spacing:0.5px;
             transition:opacity 0.2s ease, transform 0.2s ease;
         " onmouseover="this.style.opacity='0.82';this.style.transform='translateY(-2px)'" onmouseout="this.style.opacity='1';this.style.transform='translateY(0)'">
-            Pay Your Deposit &rarr;
+            Pay for Your Package &rarr;
         </a>
     </div>
 </section>
@@ -2153,10 +2152,9 @@ footer > * { position: relative; z-index: 1; }
             <button class="filter-btn active" data-filter="all">All</button>
             <button class="filter-btn" data-filter="portraits">Portraits</button>
             <button class="filter-btn" data-filter="street">Street</button>
-            <button class="filter-btn" data-filter="wildlife">Wildlife</button>
-            <button class="filter-btn" data-filter="closeups">Close-Ups</button>
+            <button class="filter-btn" data-filter="nature">Nature</button>
+            <button class="filter-btn" data-filter="product-brand">Product / Brand</button>
             <button class="filter-btn" data-filter="vintage">Vintage &amp; Film</button>
-            <button class="filter-btn" data-filter="dance">Dance</button>
         </div>
     </div>
 
@@ -2185,16 +2183,6 @@ footer > * { position: relative; z-index: 1; }
             </div>
         </div>
 
-        <div class="portfolio-item" data-category="portraits" data-lightbox-src="portfolio/Portraits/WaterSarah_Fujifilm X-H2S_XF 16-55mm f2.8_2.jpg">
-            <div class="portfolio-img-wrap">
-                <img class="portfolio-thumb" src="portfolio/Portraits/WaterSarah_Fujifilm X-H2S_XF 16-55mm f2.8.jpg" alt="Sarah by the Water" loading="lazy">
-                <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Portraits</p></div></div>
-            </div>
-            <div class="portfolio-caption">
-                <span class="caption-title">Sarah by the Water</span>
-                <span class="caption-gear">Fujifilm X-H2S · XF 16-55mm f/2.8</span>
-            </div>
-        </div>
 
         <div class="portfolio-item" data-category="portraits" data-lightbox-src="portfolio/Portraits/Yanja_CanonEos6D_28-70mm f4_2.jpg">
             <div class="portfolio-img-wrap">
@@ -2237,6 +2225,18 @@ footer > * { position: relative; z-index: 1; }
             <div class="portfolio-caption">
                 <span class="caption-title">Mikey J II</span>
                 <span class="caption-gear">Fujifilm X-H2 · SMC Takumar / Jupiter-9</span>
+            </div>
+        </div>
+
+
+        <div class="portfolio-item" data-category="portraits" data-lightbox-src="portfolio/Portraits/Cara_2_SMCTakumar55mm.jpg">
+            <div class="portfolio-img-wrap">
+                <img class="portfolio-thumb" src="portfolio/Portraits/Cara_SMCTakumar55mm.jpg" alt="Cara" loading="lazy">
+                <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Portraits</p></div></div>
+            </div>
+            <div class="portfolio-caption">
+                <span class="caption-title">Cara</span>
+                <span class="caption-gear">Fujifilm X-H2 · SMC Takumar 55mm</span>
             </div>
         </div>
 
@@ -2297,9 +2297,9 @@ footer > * { position: relative; z-index: 1; }
         </div>
 
         <!-- ── WILDLIFE ────────────────────────────────────────── -->
-        <div class="portfolio-item" data-category="wildlife" data-lightbox-src="portfolio/Wildlife/Eastern Tiger Swallowtail.jpg">
+        <div class="portfolio-item" data-category="nature" data-lightbox-src="portfolio/Nature/Eastern Tiger Swallowtail.jpg">
             <div class="portfolio-img-wrap">
-                <img class="portfolio-thumb" src="portfolio/Wildlife/Eastern Tiger Swallowtail_2.jpg" alt="Eastern Tiger Swallowtail" loading="lazy">
+                <img class="portfolio-thumb" src="portfolio/Nature/Eastern Tiger Swallowtail_2.jpg" alt="Eastern Tiger Swallowtail" loading="lazy">
                 <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Wildlife</p></div></div>
             </div>
             <div class="portfolio-caption">
@@ -2308,9 +2308,9 @@ footer > * { position: relative; z-index: 1; }
             </div>
         </div>
 
-        <div class="portfolio-item" data-category="wildlife" data-lightbox-src="portfolio/Wildlife/Gecko Big Island.jpg">
+        <div class="portfolio-item" data-category="nature" data-lightbox-src="portfolio/Nature/Gecko Big Island.jpg">
             <div class="portfolio-img-wrap">
-                <img class="portfolio-thumb" src="portfolio/Wildlife/Gecko Big Island2.jpg" alt="Gecko, Big Island" loading="lazy">
+                <img class="portfolio-thumb" src="portfolio/Nature/Gecko Big Island2.jpg" alt="Gecko, Big Island" loading="lazy">
                 <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Wildlife</p></div></div>
             </div>
             <div class="portfolio-caption">
@@ -2319,9 +2319,9 @@ footer > * { position: relative; z-index: 1; }
             </div>
         </div>
 
-        <div class="portfolio-item" data-category="wildlife" data-lightbox-src="portfolio/Wildlife/Spider's Trap_Fujifilm X-H2_Laowa Dreamer Macro 65mm.jpg">
+        <div class="portfolio-item" data-category="nature" data-lightbox-src="portfolio/Nature/Spider's Trap_Fujifilm X-H2_Laowa Dreamer Macro 65mm.jpg">
             <div class="portfolio-img-wrap">
-                <img class="portfolio-thumb" src="portfolio/Wildlife/Spider's Trap_Fujifilm X-H2_Laowa Dreamer Macro 65mm_2.jpg" alt="Spider's Trap" loading="lazy">
+                <img class="portfolio-thumb" src="portfolio/Nature/Spider's Trap_Fujifilm X-H2_Laowa Dreamer Macro 65mm_2.jpg" alt="Spider's Trap" loading="lazy">
                 <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Wildlife</p></div></div>
             </div>
             <div class="portfolio-caption">
@@ -2330,9 +2330,9 @@ footer > * { position: relative; z-index: 1; }
             </div>
         </div>
 
-        <div class="portfolio-item" data-category="wildlife" data-lightbox-src="portfolio/Wildlife/Spider's Den.jpg">
+        <div class="portfolio-item" data-category="nature" data-lightbox-src="portfolio/Nature/Spider's Den.jpg">
             <div class="portfolio-img-wrap">
-                <img class="portfolio-thumb" src="portfolio/Wildlife/Spider's Den2.jpg" alt="Spider's Den" loading="lazy">
+                <img class="portfolio-thumb" src="portfolio/Nature/Spider's Den2.jpg" alt="Spider's Den" loading="lazy">
                 <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Wildlife</p></div></div>
             </div>
             <div class="portfolio-caption">
@@ -2341,9 +2341,9 @@ footer > * { position: relative; z-index: 1; }
             </div>
         </div>
 
-        <div class="portfolio-item" data-category="wildlife" data-lightbox-src="portfolio/Wildlife/Capitol Peak Bald Eagle_2.jpg">
+        <div class="portfolio-item" data-category="nature" data-lightbox-src="portfolio/Nature/Capitol Peak Bald Eagle_2.jpg">
             <div class="portfolio-img-wrap">
-                <img class="portfolio-thumb" src="portfolio/Wildlife/Capitol Peak Bald Eagle.jpg" alt="Capitol Peak Bald Eagle" loading="lazy">
+                <img class="portfolio-thumb" src="portfolio/Nature/Capitol Peak Bald Eagle.jpg" alt="Capitol Peak Bald Eagle" loading="lazy">
                 <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Wildlife</p></div></div>
             </div>
             <div class="portfolio-caption">
@@ -2352,20 +2352,10 @@ footer > * { position: relative; z-index: 1; }
             </div>
         </div>
 
-        <div class="portfolio-item" data-category="wildlife" data-lightbox-src="portfolio/Wildlife/Young Buck (Snowmass).jpg">
-            <div class="portfolio-img-wrap">
-                <img class="portfolio-thumb" src="portfolio/Wildlife/Young Buck (Snowmass) 2.jpg" alt="Young Buck, Snowmass" loading="lazy">
-                <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Wildlife</p></div></div>
-            </div>
-            <div class="portfolio-caption">
-                <span class="caption-title">Young Buck, Snowmass</span>
-                <span class="caption-gear">Fujifilm X-H2 · XF 150-600mm + 1.4× TC</span>
-            </div>
-        </div>
 
-        <div class="portfolio-item" data-category="wildlife" data-lightbox-src="portfolio/Wildlife/Mountain Goat Over Interstate 70_2.jpg">
+        <div class="portfolio-item" data-category="nature" data-lightbox-src="portfolio/Nature/Mountain Goat Over Interstate 70_2.jpg">
             <div class="portfolio-img-wrap">
-                <img class="portfolio-thumb" src="portfolio/Wildlife/Mountain Goat Over Interstate 70.jpg" alt="Mountain Goat Over I-70" loading="lazy">
+                <img class="portfolio-thumb" src="portfolio/Nature/Mountain Goat Over Interstate 70.jpg" alt="Mountain Goat Over I-70" loading="lazy">
                 <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Wildlife</p></div></div>
             </div>
             <div class="portfolio-caption">
@@ -2374,9 +2364,9 @@ footer > * { position: relative; z-index: 1; }
             </div>
         </div>
 
-        <div class="portfolio-item portfolio-item--medium" data-category="wildlife" data-lightbox-src="portfolio/Wildlife/Pearl-Crescent Butterflies_2.jpg">
+        <div class="portfolio-item portfolio-item--medium" data-category="nature" data-lightbox-src="portfolio/Nature/Pearl-Crescent Butterflies_2.jpg">
             <div class="portfolio-img-wrap">
-                <img class="portfolio-thumb" src="portfolio/Wildlife/Pearl-Crescent Butterflies.jpg" alt="Pearl-Crescent Butterflies" loading="lazy">
+                <img class="portfolio-thumb" src="portfolio/Nature/Pearl-Crescent Butterflies.jpg" alt="Pearl-Crescent Butterflies" loading="lazy">
                 <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Wildlife</p></div></div>
             </div>
             <div class="portfolio-caption">
@@ -2385,9 +2375,9 @@ footer > * { position: relative; z-index: 1; }
             </div>
         </div>
 
-        <div class="portfolio-item" data-category="wildlife" data-lightbox-src="portfolio/Wildlife/Marmot2.jpg">
+        <div class="portfolio-item" data-category="nature" data-lightbox-src="portfolio/Nature/Marmot.jpg">
             <div class="portfolio-img-wrap">
-                <img class="portfolio-thumb" src="portfolio/Wildlife/Marmot.jpg" alt="Marmot" loading="lazy">
+                <img class="portfolio-thumb" src="portfolio/Nature/Marmot2.jpg" alt="Marmot" loading="lazy">
                 <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Wildlife</p></div></div>
             </div>
             <div class="portfolio-caption">
@@ -2396,11 +2386,21 @@ footer > * { position: relative; z-index: 1; }
             </div>
         </div>
 
-        <!-- ── CLOSE-UPS ───────────────────────────────────────── -->
-        <div class="portfolio-item" data-category="closeups" data-lightbox-src="portfolio/Close-ups/Cherry Blossoms.jpg">
+        <div class="portfolio-item" data-category="nature" data-lightbox-src="portfolio/Nature/Rainbow Mountain_2.jpg">
             <div class="portfolio-img-wrap">
-                <img class="portfolio-thumb" src="portfolio/Close-ups/Cherry Blossoms_2.jpg" alt="Cherry Blossoms" loading="lazy">
-                <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Close-Ups</p></div></div>
+                <img class="portfolio-thumb" src="portfolio/Nature/Rainbow Mountain.jpg" alt="Rainbow Mountain" loading="lazy">
+                <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Nature</p></div></div>
+            </div>
+            <div class="portfolio-caption">
+                <span class="caption-title">Rainbow Mountain</span>
+                <span class="caption-gear">Fujifilm X-H2 · XF 16-55mm f/2.8</span>
+            </div>
+        </div>
+
+        <div class="portfolio-item" data-category="nature" data-lightbox-src="portfolio/Nature/Cherry Blossoms.jpg">
+            <div class="portfolio-img-wrap">
+                <img class="portfolio-thumb" src="portfolio/Nature/Cherry Blossoms_2.jpg" alt="Cherry Blossoms" loading="lazy">
+                <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Nature</p></div></div>
             </div>
             <div class="portfolio-caption">
                 <span class="caption-title">Cherry Blossoms</span>
@@ -2408,10 +2408,23 @@ footer > * { position: relative; z-index: 1; }
             </div>
         </div>
 
-        <div class="portfolio-item" data-category="closeups" data-lightbox-src="portfolio/Close-ups/Market Booth (Shitake Mushrooms).jpg">
+        <div class="portfolio-item" data-category="nature" data-lightbox-src="portfolio/Nature/Log Layers.jpg">
             <div class="portfolio-img-wrap">
-                <img class="portfolio-thumb" src="portfolio/Close-ups/Market Booth (Shitake Mushrooms)_2.jpg" alt="Market Booth" loading="lazy">
-                <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Close-Ups</p></div></div>
+                <img class="portfolio-thumb" src="portfolio/Nature/Log Layers_2.jpg" alt="Log Layers" loading="lazy">
+                <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Nature</p></div></div>
+            </div>
+            <div class="portfolio-caption">
+                <span class="caption-title">Log Layers</span>
+                <span class="caption-gear">Fujifilm X-H2 · XF 16-55mm f/2.8</span>
+            </div>
+        </div>
+
+        <!-- ── PRODUCT / BRAND ─────────────────────────────────── -->
+
+        <div class="portfolio-item" data-category="product-brand" data-lightbox-src="portfolio/product-brand-work/Market Booth (Shitake Mushrooms).jpg">
+            <div class="portfolio-img-wrap">
+                <img class="portfolio-thumb" src="portfolio/product-brand-work/Market Booth (Shitake Mushrooms)_2.jpg" alt="Market Booth" loading="lazy">
+                <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Product / Brand</p></div></div>
             </div>
             <div class="portfolio-caption">
                 <span class="caption-title">Market Booth</span>
@@ -2419,10 +2432,10 @@ footer > * { position: relative; z-index: 1; }
             </div>
         </div>
 
-        <div class="portfolio-item" data-category="closeups" data-lightbox-src="portfolio/Close-ups/Pentax K1000_2.jpg">
+        <div class="portfolio-item" data-category="product-brand" data-lightbox-src="portfolio/product-brand-work/Pentax K1000_2.jpg">
             <div class="portfolio-img-wrap">
-                <img class="portfolio-thumb" src="portfolio/Close-ups/Pentax K1000.jpg" alt="Pentax K1000" loading="lazy">
-                <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Close-Ups</p></div></div>
+                <img class="portfolio-thumb" src="portfolio/product-brand-work/Pentax K1000.jpg" alt="Pentax K1000" loading="lazy">
+                <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Product / Brand</p></div></div>
             </div>
             <div class="portfolio-caption">
                 <span class="caption-title">Pentax K1000</span>
@@ -2430,10 +2443,10 @@ footer > * { position: relative; z-index: 1; }
             </div>
         </div>
 
-        <div class="portfolio-item" data-category="closeups" data-lightbox-src="portfolio/Close-ups/Encyclopedia.jpg">
+        <div class="portfolio-item" data-category="product-brand" data-lightbox-src="portfolio/product-brand-work/Encyclopedia.jpg">
             <div class="portfolio-img-wrap">
-                <img class="portfolio-thumb" src="portfolio/Close-ups/Encyclopedia2.jpg" alt="Encyclopedia" loading="lazy">
-                <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Close-Ups</p></div></div>
+                <img class="portfolio-thumb" src="portfolio/product-brand-work/Encyclopedia2.jpg" alt="Encyclopedia" loading="lazy">
+                <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Product / Brand</p></div></div>
             </div>
             <div class="portfolio-caption">
                 <span class="caption-title">Encyclopedia</span>
@@ -2441,14 +2454,26 @@ footer > * { position: relative; z-index: 1; }
             </div>
         </div>
 
-        <div class="portfolio-item" data-category="closeups" data-lightbox-src="portfolio/Close-ups/Farm & Garden Club2.jpg">
+        <div class="portfolio-item" data-category="product-brand" data-lightbox-src="portfolio/product-brand-work/Farm & Garden Club2.jpg">
             <div class="portfolio-img-wrap">
-                <img class="portfolio-thumb" src="portfolio/Close-ups/Farm & Garden Club.jpg" alt="Farm &amp; Garden Club" loading="lazy">
-                <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Close-Ups</p></div></div>
+                <img class="portfolio-thumb" src="portfolio/product-brand-work/Farm & Garden Club.jpg" alt="Farm &amp; Garden Club" loading="lazy">
+                <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Product / Brand</p></div></div>
             </div>
             <div class="portfolio-caption">
                 <span class="caption-title">Farm &amp; Garden Club</span>
                 <span class="caption-gear">Fujifilm X-H2 · XF 16-55mm f/2.8</span>
+            </div>
+        </div>
+
+
+        <div class="portfolio-item" data-category="product-brand" data-lightbox-src="portfolio/product-brand-work/Silver Necklaces on Display_2.jpg">
+            <div class="portfolio-img-wrap">
+                <img class="portfolio-thumb" src="portfolio/product-brand-work/Silver Necklaces on Display.jpg" alt="Silver Necklaces on Display" loading="lazy">
+                <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Product / Brand</p></div></div>
+            </div>
+            <div class="portfolio-caption">
+                <span class="caption-title">Silver Necklaces on Display</span>
+                <span class="caption-gear">Fujifilm X-H2 · SMC Takumar 55mm</span>
             </div>
         </div>
 
@@ -2498,10 +2523,10 @@ footer > * { position: relative; z-index: 1; }
         </div>
 
         <!-- ── DANCE ───────────────────────────────────────────── -->
-        <div class="portfolio-item" data-category="dance" data-lightbox-src="portfolio/Break Club.jpg">
+        <div class="portfolio-item" data-category="street" data-lightbox-src="portfolio/Street/Break Club.jpg">
             <div class="portfolio-img-wrap">
-                <img class="portfolio-thumb" src="portfolio/Break Club 2.jpg" alt="Break Club" loading="lazy">
-                <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Dance</p></div></div>
+                <img class="portfolio-thumb" src="portfolio/Street/Break Club 2.jpg" alt="Break Club" loading="lazy">
+                <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Street</p></div></div>
             </div>
             <div class="portfolio-caption">
                 <span class="caption-title">Break Club</span>
@@ -2509,16 +2534,6 @@ footer > * { position: relative; z-index: 1; }
             </div>
         </div>
 
-        <div class="portfolio-item" data-category="dance" data-lightbox-src="portfolio/DSCF0379-2.jpg">
-            <div class="portfolio-img-wrap">
-                <img class="portfolio-thumb" src="portfolio/DSCF0379.jpg" alt="Break Club II" loading="lazy">
-                <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Dance</p></div></div>
-            </div>
-            <div class="portfolio-caption">
-                <span class="caption-title">Break Club II</span>
-                <span class="caption-gear">Fujifilm X-H2 · XF 16-55mm f/2.8</span>
-            </div>
-        </div>
 
     </div>
 </section>
@@ -2629,7 +2644,7 @@ footer > * { position: relative; z-index: 1; }
 <div id="lightbox" role="dialog" aria-modal="true" aria-label="Portfolio preview">
     <div id="lightbox-content">
         <button id="lightbox-close" aria-label="Close preview">✕</button>
-        <div id="lightbox-inner">Add your portfolio images to see them here.</div>
+        <div id="lightbox-inner"></div>
         <div id="lightbox-caption"></div>
     </div>
 </div>
@@ -2842,20 +2857,43 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
 /* ===== LIGHTBOX ===== */
 const lightbox        = document.getElementById('lightbox');
 const lightboxClose   = document.getElementById('lightbox-close');
+const lightboxInner   = document.getElementById('lightbox-inner');
 const lightboxCaption = document.getElementById('lightbox-caption');
+
 document.querySelectorAll('.portfolio-item').forEach(item => {
     item.addEventListener('click', () => {
-        const title = item.dataset.title;
-        const cat   = item.dataset.category;
-        lightboxCaption.textContent = title + ' — ' + cat.charAt(0).toUpperCase() + cat.slice(1);
+        const src   = item.dataset.lightboxSrc;
+        const title = item.querySelector('.caption-title')?.textContent || '';
+        const gear  = item.querySelector('.caption-gear')?.textContent || '';
+        const cat   = item.dataset.category || '';
+
+        // Build image
+        lightboxInner.innerHTML = '<div style="width:60px;height:60px;border:2px solid rgba(232,225,212,0.2);border-top-color:#e8e1d4;border-radius:50%;animation:lb-spin 0.7s linear infinite;margin:auto;"></div>';
+        const img = new Image();
+        img.src = src;
+        img.alt = title;
+        img.style.cssText = 'max-width:90vw;max-height:80vh;object-fit:contain;border-radius:6px;display:block;';
+        img.onload = () => { lightboxInner.innerHTML = ''; lightboxInner.appendChild(img); };
+        img.onerror = () => { lightboxInner.innerHTML = '<p style="color:#a8a49c;font-family:\'EB Garamond\',serif;">Image could not be loaded.</p>'; };
+
+        // Caption
+        lightboxCaption.innerHTML = title
+            ? `<strong style="color:#e8e1d4;">${title}</strong>${gear ? ' <span style="color:#635f51;margin-left:8px;">· ' + gear + '</span>' : ''}`
+            : '';
+
         lightbox.classList.add('open');
         document.body.style.overflow = 'hidden';
     });
 });
+
 lightboxClose.addEventListener('click', closeLightbox);
 lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
-function closeLightbox() { lightbox.classList.remove('open'); document.body.style.overflow = ''; }
+function closeLightbox() {
+    lightbox.classList.remove('open');
+    document.body.style.overflow = '';
+    lightboxInner.innerHTML = '';
+}
 
 /* ===== FAQ ACCORDION ===== */
 document.querySelectorAll('.faq-item').forEach(item => {
