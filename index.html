@@ -54,15 +54,15 @@ nav, nav a, .services-eyebrow, .pricing-eyebrow, .pricing-card-label, .pricing-c
 nav {
     padding: 0 10% 0 0; margin: 0;
     display: flex; align-items: stretch; justify-content: space-between;
-    background: linear-gradient(to right, rgba(245,244,240,0.95) 0%, rgba(245,244,240,0.6) 25%, rgba(245,244,240,0) 50%);
-    border-bottom: 1px solid rgba(99,95,81,0.12);
+    background: #e8e1d4;
+    border-bottom: 1px solid rgba(99,95,81,0.18);
     position: relative; z-index: 100;
 }
 .nav-logo-link {
     display: flex; align-items: center; text-decoration: none;
     flex-shrink: 0; padding: 0; margin: 0; line-height: 0;
 }
-.nav-logo { height: 160px; width: auto; display: block; transition: opacity 0.25s ease; }
+.nav-logo { height: 100px; width: auto; display: block; transition: opacity 0.25s ease; }
 .nav-logo:hover { opacity: 0.8; }
 .nav-links { display: flex; align-items: center; }
 .nav-links > a {
@@ -821,10 +821,10 @@ footer > * { position: relative; z-index: 1; }
 
     /* NAV */
     nav { padding: 0 5% 0 0; position: sticky; top: 0; z-index: 200;
-          background: rgba(245,244,240,0.97); backdrop-filter: blur(10px); }
+          background: #e8e1d4; }
     .nav-links { display: none; }
     .nav-hamburger { display: flex; }
-    .nav-logo { height: 116px; }
+    .nav-logo { height: 72px; }
 
     /* HERO */
     .hero { min-height: 620px; padding: 0 5%; } /* fixed px — no reflow when browser chrome shows/hides */
@@ -950,7 +950,7 @@ footer > * { position: relative; z-index: 1; }
 }
 
 @media (max-width: 480px) {
-    .nav-logo { height: 90px; }
+    .nav-logo { height: 58px; }
     .hero-title { font-size: 1.4rem; }
     .hero-text-panel { padding: 28px 18px; border-radius: 14px; }
     .ba-handle { width: 34px; height: 34px; }
@@ -1052,7 +1052,7 @@ footer > * { position: relative; z-index: 1; }
     color: #635f51; margin-bottom: 12px;
 }
 .about-heading { font-size: 2.2rem; color: #1C1A14; margin: 0 0 28px; line-height: 1.2; }
-.about-body { font-size: 1rem; color: #635f51; line-height: 1.8; margin: 0 0 16px; }
+.about-body { font-size: 1rem; color: #4e4a41; line-height: 1.8; margin: 0 0 16px; }
 .about-cta {
     display: inline-block; margin-top: 14px;
     font-family: 'EB Garamond', serif; font-size: 0.88rem;
@@ -1944,34 +1944,13 @@ footer > * { position: relative; z-index: 1; }
 
 <!-- REEL -->
 <section class="reel-section">
-
-    <!-- Video Background -->
-    <div class="services-video-bg">
-        <video id="servicesVideo" autoplay muted loop playsinline>
+    <p class="reel-eyebrow">Showreel</p>
+    <h2 class="reel-heading anim-fade">The Work, In Motion</h2>
+    <div class="reel-embed">
+        <video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;display:block;">
             <source src="herodemoted.mp4" type="video/mp4">
         </video>
     </div>
-
-    <!-- Play/Pause -->
-    <button id="servicesPlayBtn" class="services-play-btn" aria-label="Play/Pause">&#9646;&#9646; Pause</button>
-
-    <!-- Content -->
-    <div class="services-inner">
-        <p class="reel-eyebrow">Showreel</p>
-        <h2 class="reel-heading anim-fade">The Work, In Motion</h2>
-        <div class="reel-embed">
-            <!-- ── DROP YOUR REEL HERE ────────────────────────────────────────
-                 Replace this placeholder with your Vimeo or YouTube embed:
-                 <iframe src="https://player.vimeo.com/video/YOUR_VIDEO_ID?autoplay=1&muted=1&loop=1"
-                         allow="autoplay; fullscreen" allowfullscreen></iframe>
-                 ─────────────────────────────────────────────────────────── -->
-            <div class="reel-placeholder">
-                <span class="reel-placeholder-icon">▶</span>
-                <span style="font-size:0.85rem;letter-spacing:1.5px;text-transform:uppercase;">Reel coming soon</span>
-            </div>
-        </div>
-    </div>
-
 </section>
 
 <!-- AUDIO -->
