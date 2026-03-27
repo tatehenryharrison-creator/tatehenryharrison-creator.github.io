@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Get a Quote — Harrison Media LLC</title>
+<meta name="description" content="Tell us about your project and we'll send you a custom quote.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+<!-- intl-tel-input for phone flag picker -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/css/intlTelInput.css">
+<script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/intlTelInput.min.js"></script>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: 'IM Fell English', serif;
+    background: #f5f4f0;
+    color: #1C1A14;
+    min-height: 100vh;
+}
+
+h1, h2 { font-family: 'Cinzel', serif; font-weight: 400; }
+h3 { font-family: 'EB Garamond', serif; }
+
+/* ── NAV ── */
+nav {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 10%; background: #e8e1d4;
+    border-bottom: 1px solid rgba(99,95,81,0.18);
+    position: sticky; top: 0; z-index: 100;
+    transition: transform 0.35s cubic-bezier(0.22,1,0.36,1);
+}
+nav.nav-hidden { transform: translateY(-100%); }
+.nav-logo { height: 100px; width: auto; display: block; transition: opacity 0.25s ease; }
+.nav-logo:hover { opacity: 0.8; }
+.nav-links { display: flex; align-items: center; gap: 28px; }
+.nav-links a {
+    font-family: 'EB Garamond', serif; font-size: 0.95rem;
+    color: #2A2220; text-decoration: none;
+    letter-spacing: 0.03em; transition: opacity 0.2s;
+}
+.nav-links a:hover { opacity: 0.55; }
+
+/* ── HERO STRIP ── */
+.quote-hero {
+    background: #1C1A14;
+    padding: 72px 10% 56px;
+    text-align: center;
+}
+.quote-eyebrow {
+    font-family: 'EB Garamond', serif; font-size: 0.72rem;
+    letter-spacing: 3px; text-transform: uppercase;
+    color: #5C6E82; margin-bottom: 18px;
+}
+.quote-hero h1 {
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    color: #e8e1d4; letter-spacing: -0.5px;
+    margin-bottom: 16px;
+}
+.quote-hero p {
+    font-family: 'EB Garamond', serif; font-style: italic;
+    font-size: 1.15rem; color: rgba(232,225,212,0.65);
+    max-width: 520px; margin: 0 auto;
+}
+
+/* ── FORM CARD ── */
+.quote-wrap {
+    max-width: 680px; margin: 0 auto;
+    padding: 64px 24px 100px;
+}
+
+.quote-card {
+    background: #fff;
+    border: 1px solid rgba(99,95,81,0.14);
+    border-radius: 18px;
+    padding: 52px 52px 48px;
+    box-shadow: 0 8px 40px rgba(28,26,20,0.07);
+}
+
+.form-row {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+    margin-bottom: 20px;
+}
+.form-group { display: flex; flex-direction: column; gap: 7px; }
+.form-group.full { grid-column: 1 / -1; }
+
+label {
+    font-family: 'EB Garamond', serif; font-size: 0.88rem;
+    letter-spacing: 0.04em; color: #635f51;
+    display: flex; align-items: center; gap: 4px;
+}
+.req { color: #5C6E82; font-size: 0.75rem; }
+
+input[type="text"],
+input[type="email"],
+input[type="date"],
+select,
+textarea {
+    width: 100%; padding: 13px 16px;
+    background: #faf9f6; border: 1px solid rgba(99,95,81,0.2);
+    border-radius: 10px; font-family: 'IM Fell English', serif;
+    font-size: 1rem; color: #1C1A14;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    outline: none; appearance: none;
+}
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="date"]:focus,
+select:focus,
+textarea:focus {
+    border-color: #5C6E82;
+    box-shadow: 0 0 0 3px rgba(92,110,130,0.12);
+}
+input::placeholder, textarea::placeholder { color: #a8a39a; font-style: italic; }
+
+select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23635f51' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 36px; cursor: pointer;
+}
+
+textarea { resize: vertical; min-height: 110px; }
+
+/* phone input override */
+.iti { width: 100%; }
+.iti__flag-container { border-right: 1px solid rgba(99,95,81,0.2); }
+.iti input {
+    width: 100%; padding: 13px 16px 13px 54px;
+    background: #faf9f6; border: 1px solid rgba(99,95,81,0.2);
+    border-radius: 10px; font-family: 'IM Fell English', serif;
+    font-size: 1rem; color: #1C1A14; outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+.iti input:focus {
+    border-color: #5C6E82;
+    box-shadow: 0 0 0 3px rgba(92,110,130,0.12);
+}
+
+/* divider */
+.form-divider {
+    border: none; border-top: 1px solid rgba(99,95,81,0.12);
+    margin: 28px 0;
+}
+
+/* submit */
+.submit-btn {
+    width: 100%; padding: 17px;
+    background: #5C6E82; color: #f5f4f0;
+    border: none; border-radius: 50px;
+    font-family: 'Cinzel', serif; font-size: 1rem; letter-spacing: 1px;
+    cursor: pointer; transition: background 0.25s, transform 0.2s, box-shadow 0.25s;
+    margin-top: 8px;
+}
+.submit-btn:hover {
+    background: #4a5a6a;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(92,110,130,0.25);
+}
+.submit-btn:active { transform: translateY(0); }
+
+/* success state */
+.success-msg {
+    display: none; text-align: center; padding: 40px 0 12px;
+}
+.success-msg .check {
+    font-size: 2.4rem; margin-bottom: 16px;
+}
+.success-msg h2 { font-size: 1.5rem; color: #1C1A14; margin-bottom: 10px; }
+.success-msg p {
+    font-family: 'EB Garamond', serif; font-style: italic;
+    color: #635f51; font-size: 1.1rem;
+}
+
+/* bottom note */
+.quote-note {
+    text-align: center; margin-top: 28px;
+    font-family: 'EB Garamond', serif; font-style: italic;
+    font-size: 0.95rem; color: #8a8578;
+}
+.quote-note a { color: #5C6E82; text-decoration: none; }
+.quote-note a:hover { text-decoration: underline; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 600px) {
+    nav { padding: 0 5%; }
+    .nav-logo { height: 72px; }
+    .quote-hero { padding: 52px 8% 40px; }
+    .quote-wrap { padding: 36px 16px 72px; }
+    .quote-card { padding: 32px 24px 36px; }
+    .form-row { grid-template-columns: 1fr; }
+    .form-group.full { grid-column: 1; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="mainNav">
+    <a href="index.html">
+        <img src="logo_transparent.png" alt="Harrison Media LLC" class="nav-logo">
+    </a>
+    <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="index.html#about">About Me</a>
+        <a href="index.html#pricing">Services</a>
+        <a href="index.html#work">Portfolio</a>
+        <a href="index.html#contact">Contact</a>
+        <a href="schedule.html">Free Consultation</a>
+    </div>
+</nav>
+
+<!-- HERO -->
+<div class="quote-hero">
+    <p class="quote-eyebrow">Harrison Media LLC</p>
+    <h1>Where can we send your quote?</h1>
+    <p>Tell us a little about your project and we'll get back to you within 24 hours.</p>
+</div>
+
+<!-- FORM -->
+<div class="quote-wrap">
+    <div class="quote-card">
+
+        <form id="quoteForm" action="https://formspree.io/f/maqpazao" method="POST">
+            <!-- hidden redirect -->
+            <input type="hidden" name="_subject" value="New Quote Request — Harrison Media LLC">
+
+            <!-- Name row -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="firstName">First name <span class="req">*</span></label>
+                    <input type="text" id="firstName" name="first_name" placeholder="Jane" required>
+                </div>
+                <div class="form-group">
+                    <label for="lastName">Last name <span class="req">*</span></label>
+                    <input type="text" id="lastName" name="last_name" placeholder="Smith" required>
+                </div>
+            </div>
+
+            <!-- Email -->
+            <div class="form-row">
+                <div class="form-group full">
+                    <label for="email">Email <span class="req">*</span></label>
+                    <input type="email" id="email" name="email" placeholder="jane@example.com" required>
+                </div>
+            </div>
+
+            <!-- Phone -->
+            <div class="form-row">
+                <div class="form-group full">
+                    <label for="phone">Phone number</label>
+                    <input type="tel" id="phone" name="phone" placeholder="">
+                </div>
+            </div>
+
+            <hr class="form-divider">
+
+            <!-- Service + Date -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="service">Service type <span class="req">*</span></label>
+                    <select id="service" name="service" required>
+                        <option value="" disabled selected>Select a service…</option>
+                        <option>Video — Standard</option>
+                        <option>Video — Advanced</option>
+                        <option>Video — Campaign</option>
+                        <option>Photography — Half-Day</option>
+                        <option>Photography — Full-Day</option>
+                        <option>Not sure yet</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="eventDate">Event / shoot date</label>
+                    <input type="date" id="eventDate" name="event_date">
+                </div>
+            </div>
+
+            <!-- Location -->
+            <div class="form-row">
+                <div class="form-group full">
+                    <label for="location">Location</label>
+                    <input type="text" id="location" name="location" placeholder="City, State or venue name">
+                </div>
+            </div>
+
+            <!-- Notes -->
+            <div class="form-row">
+                <div class="form-group full">
+                    <label for="notes">Tell me about your project <span style="font-style:italic;font-weight:400;">(optional)</span></label>
+                    <textarea id="notes" name="notes" placeholder="E.g. wedding reception for 120 guests, looking for highlight film + full edit…"></textarea>
+                </div>
+            </div>
+
+            <button type="submit" class="submit-btn">Send My Request →</button>
+        </form>
+
+        <!-- Success -->
+        <div class="success-msg" id="successMsg">
+            <div class="check">✦</div>
+            <h2>Request sent!</h2>
+            <p>Thanks — I'll be in touch within 24 hours.</p>
+        </div>
+
+    </div>
+
+    <p class="quote-note">
+        Prefer to talk first? <a href="schedule.html">Book a free consultation →</a>
+    </p>
+</div>
+
+<script>
+// Nav hide on scroll
+(function(){
+    const nav = document.getElementById('mainNav');
+    let last = 0;
+    window.addEventListener('scroll', () => {
+        const y = window.scrollY;
+        nav.classList.toggle('nav-hidden', y > last && y > 80);
+        last = y;
+    }, { passive: true });
+})();
+
+// intl-tel-input
+window.addEventListener('DOMContentLoaded', () => {
+    const phoneInput = document.getElementById('phone');
+    const iti = window.intlTelInput(phoneInput, {
+        initialCountry: 'us',
+        separateDialCode: false,
+        preferredCountries: ['us', 'ca', 'gb'],
+        utilsScript: 'https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/utils.js'
+    });
+
+    // Formspree AJAX submit
+    const form = document.getElementById('quoteForm');
+    const success = document.getElementById('successMsg');
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const btn = form.querySelector('.submit-btn');
+        btn.textContent = 'Sending…';
+        btn.disabled = true;
+
+        // Inject full phone number
+        phoneInput.name = '';
+        const hiddenPhone = document.createElement('input');
+        hiddenPhone.type = 'hidden';
+        hiddenPhone.name = 'phone';
+        hiddenPhone.value = iti.getNumber();
+        form.appendChild(hiddenPhone);
+
+        try {
+            const res = await fetch(form.action, {
+                method: 'POST',
+                body: new FormData(form),
+                headers: { 'Accept': 'application/json' }
+            });
+            if (res.ok) {
+                form.style.display = 'none';
+                success.style.display = 'block';
+            } else {
+                btn.textContent = 'Something went wrong — try again';
+                btn.disabled = false;
+            }
+        } catch {
+            btn.textContent = 'Network error — try again';
+            btn.disabled = false;
+        }
+    });
+});
+</script>
+
+</body>
+</html>
