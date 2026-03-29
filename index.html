@@ -508,6 +508,61 @@ nav {
     font-family: 'EB Garamond', serif; font-size: 0.88rem; color: #a8a49c;
 }
 
+/* ===== SERVICE CATEGORY TILES ===== */
+.service-tiles-wrap {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 20px; padding: 0 10%;
+}
+.service-tile {
+    display: block; text-decoration: none;
+    background: #1C1A14;
+    border: 1px solid rgba(232,225,212,0.1);
+    border-radius: 20px; padding: 64px 52px;
+    transition: border-color 0.45s cubic-bezier(0.22,1,0.36,1),
+                transform 0.45s cubic-bezier(0.22,1,0.36,1),
+                box-shadow 0.45s cubic-bezier(0.22,1,0.36,1);
+}
+.service-tile:hover {
+    border-color: rgba(201,168,76,0.35);
+    transform: translateY(-5px);
+    box-shadow: 0 24px 64px rgba(28,26,20,0.3);
+}
+.service-tile-eyebrow {
+    font-family: 'EB Garamond', serif; font-size: 0.72rem;
+    letter-spacing: 3px; text-transform: uppercase;
+    color: #5C6E82; margin: 0 0 18px;
+}
+.service-tile-title {
+    font-family: 'Cinzel', serif; font-weight: 400;
+    font-size: 2.6rem; color: #e8e1d4; margin: 0 0 20px; line-height: 1.1;
+}
+.service-tile-desc {
+    font-family: 'EB Garamond', serif; font-size: 1.05rem;
+    color: #a8a49c; line-height: 1.65; margin: 0 0 40px;
+}
+.service-tile-cta {
+    font-family: 'EB Garamond', serif; font-size: 0.88rem;
+    letter-spacing: 1.5px; text-transform: uppercase; color: #C9A84C;
+}
+.service-tile-custom {
+    display: block; text-decoration: none;
+    background: #f5f4f0;
+    border: 1px solid rgba(99,95,81,0.22);
+    border-radius: 20px; padding: 40px 52px;
+    margin-top: 20px;
+    transition: border-color 0.45s cubic-bezier(0.22,1,0.36,1),
+                transform 0.45s cubic-bezier(0.22,1,0.36,1),
+                box-shadow 0.45s cubic-bezier(0.22,1,0.36,1);
+}
+.service-tile-custom:hover {
+    border-color: rgba(92,110,130,0.4);
+    transform: translateY(-3px);
+    box-shadow: 0 16px 44px rgba(28,26,20,0.10);
+}
+.service-tile-custom-body {
+    display: flex; align-items: center; justify-content: space-between; gap: 48px;
+}
+
 /* ===== PRICING SECTION ===== */
 .pricing-section {
     background: #e8e1d4; padding: 100px 10% 56px;
@@ -880,6 +935,13 @@ footer > * { position: relative; z-index: 1; }
     .compare-toggle-wrap { padding: 0 5%; }
     .compare-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
     .compare-table { min-width: 420px; font-size: 0.78rem; }
+
+    /* SERVICE TILES */
+    .service-tiles-wrap { grid-template-columns: 1fr; padding: 0 5%; gap: 14px; }
+    .service-tile { padding: 44px 32px; }
+    .service-tile-title { font-size: 2rem; }
+    .service-tile-custom { padding: 32px 28px; }
+    .service-tile-custom-body { flex-direction: column; align-items: flex-start; gap: 20px; }
 
     /* PROCESS */
     .process-section { padding: 32px 5% 64px; }
@@ -1615,177 +1677,32 @@ footer > * { position: relative; z-index: 1; }
         </div>
     </div>
 
-    <!-- Tab switcher -->
-    <div class="pricing-tabs">
-        <div class="pricing-tab-wrap">
-            <span class="tab-arrow">↓</span>
-            <button class="pricing-tab" data-target="video" id="tab-video">Videography</button>
-        </div>
-        <div class="pricing-tab-wrap">
-            <span class="tab-arrow">↓</span>
-            <button class="pricing-tab" data-target="photo" id="tab-photo">Photography</button>
-        </div>
+    <!-- Service Category Tiles -->
+    <div class="service-tiles-wrap">
+        <a href="pricing-videography.html" class="service-tile">
+            <p class="service-tile-eyebrow">01 — Video Production</p>
+            <h3 class="service-tile-title">Videography</h3>
+            <p class="service-tile-desc">Documentary-style video from half-day shoots to full brand campaigns. Color graded, mixed, and delivered for every screen.</p>
+            <span class="service-tile-cta">View Packages →</span>
+        </a>
+        <a href="pricing-photography.html" class="service-tile">
+            <p class="service-tile-eyebrow">02 — Still Photography</p>
+            <h3 class="service-tile-title">Photography</h3>
+            <p class="service-tile-desc">Half-day and full-day sessions with professional color grading, retouching, and online gallery delivery.</p>
+            <span class="service-tile-cta">View Packages →</span>
+        </a>
     </div>
-
-    <!-- VIDEOGRAPHY GROUP (default) -->
-    <div class="pricing-group" id="pricing-video">
-        <div class="pricing-grid">
-            <div class="pricing-card">
-                <div class="card-shine"></div>
-                <p class="pricing-card-label">Video 01</p>
-                <h3 class="pricing-card-name">Chapter</h3>
-                <p class="pricing-card-price" style="font-style:italic;color:#635f51;font-size:0.85rem;margin:-8px 0 18px;">Half-Day</p>
-                <div class="pricing-divider"></div>
-                <ul class="pricing-features">
-                    <li>Single-camera setup</li>
-                    <li>Up to 4 hours coverage</li>
-                    <li>Up to 5-min edited video</li>
-                    <li>Color grading included</li>
-                    <li>1 round of revisions</li>
-                </ul>
-                <a href="pricing-standard.html" class="pricing-cta">Learn More</a>
+    <div style="padding: 0 10%;">
+        <a href="pricing-custom.html" class="service-tile-custom">
+            <div class="service-tile-custom-body">
+                <div>
+                    <p class="service-tile-eyebrow" style="color:#635f51;">03 — Tailored</p>
+                    <h3 class="service-tile-title" style="color:#1C1A14; font-size:1.8rem; margin-bottom:8px;">Custom</h3>
+                    <p class="service-tile-desc" style="color:#635f51; margin:0;">Something unique? Let's build around your vision — multi-day, hybrid, or large-scale production.</p>
+                </div>
+                <span class="service-tile-cta" style="color:#5C6E82; white-space:nowrap; flex-shrink:0;">Get a Quote →</span>
             </div>
-
-            <div class="pricing-card popular">
-                <div class="card-shine"></div>
-                <span class="popular-badge">Most Popular</span>
-                <p class="pricing-card-label">Video 02</p>
-                <h3 class="pricing-card-name">Novel</h3>
-                <p class="pricing-card-price" style="font-style:italic;color:#635f51;font-size:0.85rem;margin:-8px 0 18px;">Full-Day</p>
-                <div class="pricing-divider"></div>
-                <ul class="pricing-features">
-                    <li>Multi-camera setup</li>
-                    <li>Up to 8 hours coverage</li>
-                    <li>Up to 10-min edited video</li>
-                    <li>Full color grade + audio mix</li>
-                    <li>2 revisions + social cuts</li>
-                </ul>
-                <a href="pricing-advanced.html" class="pricing-cta">Learn More</a>
-            </div>
-
-            <div class="pricing-card">
-                <div class="card-shine"></div>
-                <p class="pricing-card-label">Video 03</p>
-                <h3 class="pricing-card-name">Epic</h3>
-                <p class="pricing-card-price" style="font-style:italic;color:#635f51;font-size:0.85rem;margin:-8px 0 18px;">2 Days</p>
-                <div class="pricing-divider"></div>
-                <ul class="pricing-features">
-                    <li>Multi-camera, 2-day shoot</li>
-                    <li>Up to 20-min edited video</li>
-                    <li>Full color grade + audio mix</li>
-                    <li>Unlimited revisions</li>
-                    <li>Full commercial license</li>
-                </ul>
-                <a href="pricing-campaign.html" class="pricing-cta">Learn More</a>
-            </div>
-
-            <div class="pricing-card">
-                <div class="card-shine"></div>
-                <p class="pricing-card-label">Video 04</p>
-                <h3 class="pricing-card-name">Custom</h3>
-                <p class="pricing-card-price" style="font-style:italic;color:#635f51;font-size:0.85rem;margin:-8px 0 18px;">3+ Days</p>
-                <div class="pricing-divider"></div>
-                <ul class="pricing-features">
-                    <li>Strategy &amp; pre-production</li>
-                    <li>Multi-day shoot (3+ days)</li>
-                    <li>Multiple deliverables</li>
-                    <li>Unlimited revisions</li>
-                    <li>Full commercial license</li>
-                </ul>
-                <a href="pricing-campaign.html" class="pricing-cta">Let's Talk</a>
-            </div>
-        </div>
-
-        <!-- Video comparison table -->
-        <div class="compare-toggle-wrap">
-            <button class="compare-toggle-btn" id="compareToggleVideo">Show Full Comparison ▾</button>
-            <div class="compare-table-wrap" id="compareTableVideo">
-                <table class="compare-table">
-                    <thead>
-                        <tr>
-                            <th>Feature</th>
-                            <th>Chapter</th>
-                            <th>Novel</th>
-                            <th>Epic</th>
-                            <th>Custom</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr><td>Coverage</td><td class="check">4 hrs</td><td class="check">8 hrs</td><td class="check">2 days</td><td class="check">3+ days</td></tr>
-                        <tr><td>Camera setup</td><td class="check">Single</td><td class="check">Multi</td><td class="check">Multi</td><td class="check">Multi</td></tr>
-                        <tr><td>Edited video</td><td class="check">Up to 5 min</td><td class="check">Up to 10 min</td><td class="check">Up to 20 min</td><td class="check">Custom</td></tr>
-                        <tr><td>Color grading</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
-                        <tr><td>Audio mix</td><td class="dash">—</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
-                        <tr><td>Social cuts</td><td class="dash">—</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
-                        <tr><td>Revisions</td><td class="check">1</td><td class="check">2</td><td class="check">Unlimited</td><td class="check">Unlimited</td></tr>
-                        <tr><td>Commercial license</td><td class="dash">—</td><td class="dash">—</td><td class="check">✓</td><td class="check">✓</td></tr>
-                        <tr><td>Strategy session</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="check">✓</td></tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-
-    <!-- PHOTOGRAPHY GROUP (hidden by default) -->
-    <div class="pricing-group hidden" id="pricing-photo">
-        <div class="pricing-grid pricing-grid--2">
-            <div class="pricing-card">
-                <div class="card-shine"></div>
-                <p class="pricing-card-label">Photo 01</p>
-                <h3 class="pricing-card-name">Half-Day</h3>
-                <p class="pricing-card-price">Starting at $XXX</p>
-                <div class="pricing-divider"></div>
-                <ul class="pricing-features">
-                    <li>Up to 4-hour session</li>
-                    <li>50+ edited photos</li>
-                    <li>Color grading &amp; retouching</li>
-                    <li>Online gallery delivery</li>
-                    <li>Personal &amp; commercial license</li>
-                </ul>
-                <a href="pricing-photography.html" class="pricing-cta">Learn More</a>
-            </div>
-
-            <div class="pricing-card">
-                <div class="card-shine"></div>
-                <p class="pricing-card-label">Photo 02</p>
-                <h3 class="pricing-card-name">Full-Day</h3>
-                <p class="pricing-card-price">Starting at $XXX</p>
-                <div class="pricing-divider"></div>
-                <ul class="pricing-features">
-                    <li>Up to 8-hour session</li>
-                    <li>100+ edited photos</li>
-                    <li>Color grading &amp; retouching</li>
-                    <li>Same-day selects preview</li>
-                    <li>Personal &amp; commercial license</li>
-                </ul>
-                <a href="pricing-photography.html" class="pricing-cta">Learn More</a>
-            </div>
-        </div>
-
-        <!-- Photo comparison table -->
-        <div class="compare-toggle-wrap">
-            <button class="compare-toggle-btn" id="compareTogglePhoto">Show Full Comparison ▾</button>
-            <div class="compare-table-wrap" id="compareTablePhoto">
-                <table class="compare-table">
-                    <thead>
-                        <tr>
-                            <th>Feature</th>
-                            <th>Half-Day</th>
-                            <th>Full-Day</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr><td>Session length</td><td class="check">Up to 4 hrs</td><td class="check">Up to 8 hrs</td></tr>
-                        <tr><td>Edited photos</td><td class="check">50+</td><td class="check">100+</td></tr>
-                        <tr><td>Color grading</td><td class="check">✓</td><td class="check">✓</td></tr>
-                        <tr><td>Retouching</td><td class="check">✓</td><td class="check">✓</td></tr>
-                        <tr><td>Online gallery</td><td class="check">✓</td><td class="check">✓</td></tr>
-                        <tr><td>Same-day selects</td><td class="dash">—</td><td class="check">✓</td></tr>
-                        <tr><td>Commercial license</td><td class="check">✓</td><td class="check">✓</td></tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
+        </a>
     </div>
 
     <div style="text-align:center; padding: 40px 0 12px;">
