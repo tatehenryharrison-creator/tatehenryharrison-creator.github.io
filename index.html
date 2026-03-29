@@ -54,7 +54,7 @@ nav, nav a, .services-eyebrow, .pricing-eyebrow, .pricing-card-label, .pricing-c
 nav {
     padding: 0 10% 0 0; margin: 0;
     display: flex; align-items: stretch; justify-content: space-between;
-    background: #e8e1d4;
+    background: #f5f4f0;
     border-bottom: 1px solid rgba(99,95,81,0.18);
     position: relative; z-index: 100;
 }
@@ -152,7 +152,7 @@ nav {
 .hero-title {
     font-size: clamp(1.8rem, 3.6vw, 3.4rem);
     margin: 0 auto 20px;
-    white-space: nowrap;
+    white-space: nowrap; /* overridden to normal below 768px */
     line-height: 1.15;
     text-align: center;
 }
@@ -288,7 +288,7 @@ nav {
 
 /* ===== CLIENT MARQUEE ===== */
 .marquee-section {
-    background: #f5f4f0; padding: 24px 0;
+    background: #f5f4f0; padding: 4px 0 16px;
     border-top: 1px solid rgba(99,95,81,0.1);
     border-bottom: 1px solid rgba(99,95,81,0.1);
     overflow: hidden;
@@ -296,7 +296,7 @@ nav {
 .marquee-label {
     font-family: 'EB Garamond', serif;
     font-size: 0.66rem; letter-spacing: 3px; text-transform: uppercase;
-    color: #a8a49c; text-align: center; margin-bottom: 14px;
+    color: #a8a49c; text-align: center; margin-bottom: 6px;
 }
 .marquee-track { overflow: hidden; white-space: nowrap; }
 .marquee-inner {
@@ -824,7 +824,7 @@ footer > * { position: relative; z-index: 1; }
           background: #e8e1d4; }
     .nav-links { display: none; }
     .nav-hamburger { display: flex; }
-    .nav-logo { height: 72px; }
+    .nav-logo { height: 106px; }
 
     /* HERO */
     .hero { min-height: 620px; padding: 0 5%; } /* fixed px — no reflow when browser chrome shows/hides */
@@ -923,8 +923,13 @@ footer > * { position: relative; z-index: 1; }
     .reel-section { padding: 60px 5%; }
 
     /* PORTFOLIO */
-    .portfolio-grid { columns: 1; gap: 12px; }
-    .portfolio-section { padding: 64px 5%; }
+    .portfolio-grid { columns: 2; column-gap: 8px; }
+    .portfolio-item { margin-bottom: 8px; }
+    .portfolio-section { padding: 64px 3% 48px; }
+    .portfolio-header { margin-bottom: 32px; }
+    .portfolio-filters { gap: 6px; margin-bottom: 28px; }
+    .filter-btn { font-size: 0.72rem; padding: 6px 14px; }
+    .caption-gear { display: none; } /* too small to read in 2-col, hide gear line */
 
     /* FAQ */
     .faq-section { padding: 64px 5%; }
@@ -950,7 +955,7 @@ footer > * { position: relative; z-index: 1; }
 }
 
 @media (max-width: 480px) {
-    .nav-logo { height: 58px; }
+    .nav-logo { height: 90px; }
     .hero-title { font-size: 1.4rem; }
     .hero-text-panel { padding: 28px 18px; border-radius: 14px; }
     .ba-handle { width: 34px; height: 34px; }
@@ -1034,7 +1039,7 @@ footer > * { position: relative; z-index: 1; }
 }
 
 /* ===== ABOUT SECTION ===== */
-.about-section { background: #f5f4f0; padding: 110px 10%; }
+.about-section { background: #e8e1d4; padding: 110px 10%; }
 .about-inner {
     max-width: 1100px; margin: 0 auto;
     display: flex; align-items: center; gap: 80px;
@@ -1441,6 +1446,7 @@ footer > * { position: relative; z-index: 1; }
         <a href="#work">Portfolio</a>
         <a href="#contact">Contact</a>
         <a href="schedule.html">Free Consultation</a>
+        <a href="quote.html" style="background:#5C6E82;color:#f5f4f0;padding:8px 20px;border-radius:50px;font-size:0.88rem;letter-spacing:0.05em;">Get a Quote</a>
     </div>
     <button class="nav-hamburger" id="navHamburger" aria-label="Open menu" aria-expanded="false">
         <span></span><span></span><span></span>
@@ -1541,14 +1547,14 @@ footer > * { position: relative; z-index: 1; }
             <video autoplay muted loop playsinline preload="auto">
                 <source src="XH2S Comparison.mp4" type="video/mp4">
             </video>
-            <span class="ba-tag">Mirrorless Camera<br><span style="font-size:0.65em;font-style:italic;opacity:0.85;font-weight:400;">(Professionally Color Graded)</span></span>
+            <span class="ba-tag">Mirrorless Camera<br><span style="font-size:0.65em;font-style:italic;opacity:0.85;font-weight:400;">(Professionally Color Graded by Tate)</span></span>
         </div>
         <div class="ba-divider" id="baDivider">
             <div class="ba-handle"></div>
             <span class="ba-drag-hint">drag</span>
         </div>
     </div>
-    <p class="ba-caption">Drag to compare — Fujifilm X-H2S mirrorless camera footage color graded by Tate vs. 4K iPhone footage</p>
+    <p class="ba-caption">Drag to compare — mirrorless camera footage professionally color graded vs. 4K iPhone footage</p>
 </section>
 
 <!-- ABOUT -->

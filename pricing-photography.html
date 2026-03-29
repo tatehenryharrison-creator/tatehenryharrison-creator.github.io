@@ -10,6 +10,22 @@
   <link rel="stylesheet" href="fonts.css">
   <style>
     * { box-sizing: border-box; }
+    /* ── GOLD PULSE BORDER ── */
+    @keyframes gold-pulse {
+      0%, 100% { opacity: 0.18; }
+      50%       { opacity: 0.55; }
+    }
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+      border: 1.5px solid #c9a052;
+      border-radius: 0;
+      animation: gold-pulse 3s ease-in-out infinite;
+    }
+
     body { margin: 0; font-family: 'IM Fell English', serif; background: #f5f4f0; color: #1C1A14; }
     p { color: #a8a49c; }
     h1, h2, h3 { font-family: 'Cinzel', serif; font-weight: 400; }
@@ -17,9 +33,9 @@
     .pay-btn, .coming-soon-badge, footer { font-family: 'EB Garamond', serif; }
 
     /* ── NAV ── */
-    nav { padding: 20px 10%; display: flex; justify-content: space-between; align-items: center; background: #f5f4f0; border-bottom: 1px solid rgba(99,95,81,0.12); position: sticky; top: 0; z-index: 100; }
-    .nav-logo-link { display: flex; align-items: center; text-decoration: none; flex-shrink: 0; }
-    .nav-logo { height: 120px; width: auto; display: block; transition: opacity 0.25s ease; }
+    nav { padding: 0 10% 0 0; display: flex; justify-content: space-between; align-items: stretch; background: #f5f4f0; border-bottom: 1px solid rgba(99,95,81,0.12); position: sticky; top: 0; z-index: 100; transition: transform 0.35s ease; }
+    .nav-logo-link { display: flex; align-items: center; text-decoration: none; flex-shrink: 0; padding: 0; margin: 0; line-height: 0; }
+    .nav-logo { height: 160px; width: auto; display: block; transition: opacity 0.25s ease; }
     .nav-logo:hover { opacity: 0.8; }
     .nav-links { display: flex; align-items: center; gap: 20px; }
     .nav-links > a { color: #2A2220; text-decoration: none; transition: opacity 0.3s ease; font-size: 0.95rem; }
@@ -229,7 +245,7 @@
     .social-link svg { width: 16px; height: 16px; fill: currentColor; }
 
     @media (max-width: 768px) {
-      nav { padding: 15px 5%; flex-direction: column; gap: 10px; }
+      nav { padding: 0 5% 0 0; }
       .nav-links { flex-wrap: wrap; justify-content: center; }
       .pkg-header { padding: 52px 6% 48px; }
       .pkg-title { font-size: 2.2rem; }
@@ -257,6 +273,7 @@
     <a href="index.html#pricing">Packages</a>
     <a href="index.html#contact">Contact</a>
     <a href="schedule.html">Free Consultation</a>
+    <a href="quote.html" style="background:#5C6E82;color:#f5f4f0;padding:8px 20px;border-radius:50px;font-size:0.88rem;letter-spacing:0.05em;">Get a Quote</a>
   </div>
 </nav>
 
@@ -473,5 +490,18 @@ window.addEventListener('DOMContentLoaded', () => {
   if (first) toggleAcc(first);
 });
 </script>
+
+    <script>
+    (function(){
+      var nav = document.querySelector('nav');
+      var lastY = 0;
+      window.addEventListener('scroll', function(){
+        var y = window.scrollY;
+        if(y > lastY && y > 80){ nav.style.transform = 'translateY(-100%)'; }
+        else { nav.style.transform = ''; }
+        lastY = y;
+      }, {passive:true});
+    })();
+    </script>
 </body>
 </html>
