@@ -302,7 +302,28 @@
       .form-container iframe { min-height: 900px; }
       .payment-section { padding: 60px 5% 80px; }
       .payment-cards { grid-template-columns: 1fr; }
-      .pkg-tiers { grid-template-columns: 1fr; padding: 0 5% 60px; }
+      /* ── MOBILE PACKAGE TIERS ── */
+      .pkg-header { padding: 32px 5% 28px; }
+      .pkg-title  { font-size: 1.75rem; margin-bottom: 12px; }
+      .pkg-tagline { font-size: 0.88rem; }
+      .pkg-tiers {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        padding: 0 4% 48px;
+      }
+      /* Center 3rd card when it's the last of 3 */
+      .pkg-tier:nth-child(3):last-child {
+        grid-column: 1 / -1;
+        max-width: calc(50% - 5px);
+        justify-self: center;
+        width: 100%;
+      }
+      .pkg-tier          { padding: 16px 14px; }
+      .tier-label        { font-size: 0.6rem; letter-spacing: 2px; margin: 0 0 5px; }
+      .tier-name         { font-size: 1.15rem; margin: 0 0 12px; }
+      .tier-badge        { font-size: 0.58rem; padding: 2px 9px; margin-bottom: 10px; }
+      .tier-features     { padding-top: 12px; }
+      .tier-features li  { font-size: 0.82rem; padding: 4px 0 4px 16px; line-height: 1.35; }
     }
   </style>
 </head>

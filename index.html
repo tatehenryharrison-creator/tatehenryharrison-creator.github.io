@@ -209,23 +209,24 @@ nav {
 }
 .ba-before {
     background: #2c2926;
-    display: flex; align-items: flex-end; justify-content: flex-end; padding: 16px 20px;
+    display: flex; align-items: flex-end; justify-content: flex-end; padding: 10px 12px;
     z-index: 1;
 }
 .ba-after {
     background: #1a2530;
     /* Initial position: 4/7 ≈ 57.14% from left → right clip = 42.86% */
     clip-path: inset(0 42.86% 0 0);
-    display: flex; align-items: flex-end; padding: 16px 20px;
+    display: flex; align-items: flex-end; padding: 10px 12px;
     z-index: 2;
 }
 .ba-tag {
-    font-family: 'EB Garamond', serif; font-size: 0.82rem;
-    letter-spacing: 2px; text-transform: uppercase;
-    color: rgba(245,244,240,0.92);
-    background: rgba(28,26,20,0.68); padding: 7px 18px;
-    border-radius: 5px; backdrop-filter: blur(8px);
+    font-family: 'EB Garamond', serif; font-size: 0.62rem;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    color: rgba(245,244,240,0.82);
+    background: rgba(28,26,20,0.55); padding: 4px 9px;
+    border-radius: 4px; backdrop-filter: blur(8px);
     pointer-events: none; position: relative; z-index: 3;
+    line-height: 1.4;
 }
 /* Divider line */
 .ba-divider {
@@ -832,52 +833,74 @@ footer > * { position: relative; z-index: 1; }
     display: none; flex-direction: column; gap: 5px;
     width: 40px; height: 40px; align-items: center; justify-content: center;
     background: none; border: none; cursor: pointer; padding: 6px;
-    z-index: 310; margin: auto 0; flex-shrink: 0;
+    z-index: 310; margin: auto 0; flex-shrink: 0; position: relative;
 }
 .nav-hamburger span {
-    display: block; width: 22px; height: 1.5px;
+    display: block; width: 20px; height: 1.5px;
     background: #1C1A14; border-radius: 2px;
-    transition: transform 0.3s ease, opacity 0.3s ease;
+    transition: transform 0.4s cubic-bezier(0.22,1,0.36,1), opacity 0.25s ease, width 0.3s ease;
 }
-.nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.nav-hamburger span:nth-child(3) { width: 13px; align-self: flex-start; margin-left: 3px; }
+.nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); width: 20px; }
 .nav-hamburger.open span:nth-child(2) { opacity: 0; }
-.nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+.nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); width: 20px; margin-left: 0; }
 
-.nav-drawer { display: none; position: fixed; inset: 0; z-index: 500; }
-.nav-drawer.open { display: block; }
+/* Floating dropdown — replaces heavy side panel */
+.nav-drawer {
+    position: fixed; inset: 0; z-index: 500;
+    pointer-events: none;
+}
+.nav-drawer.open { pointer-events: all; }
 .nav-drawer-backdrop {
     position: absolute; inset: 0;
-    background: rgba(28,26,20,0.5); backdrop-filter: blur(4px);
-    opacity: 0; transition: opacity 0.3s ease;
+    background: rgba(28,26,20,0.18);
+    opacity: 0; transition: opacity 0.35s ease;
 }
 .nav-drawer.open .nav-drawer-backdrop { opacity: 1; }
 .nav-drawer-panel {
-    position: absolute; top: 0; right: 0; bottom: 0;
-    width: 74%; max-width: 300px; background: #f5f4f0;
-    padding: 28px 28px 40px; display: flex; flex-direction: column;
-    transform: translateX(100%);
-    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: -12px 0 48px rgba(28,26,20,0.18);
+    position: absolute; top: 14px; right: 14px;
+    width: 210px;
+    background: rgba(245,244,240,0.97);
+    backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(99,95,81,0.14);
+    border-radius: 18px;
+    padding: 10px 0 14px;
+    box-shadow: 0 12px 48px rgba(28,26,20,0.14), 0 2px 8px rgba(28,26,20,0.06);
+    transform: scale(0.93) translateY(-10px);
+    opacity: 0;
+    transition: transform 0.38s cubic-bezier(0.22,1,0.36,1),
+                opacity 0.28s ease;
+    transform-origin: top right;
+    pointer-events: none;
 }
-.nav-drawer.open .nav-drawer-panel { transform: translateX(0); }
+.nav-drawer.open .nav-drawer-panel {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+    pointer-events: all;
+}
 .nav-drawer-close {
-    align-self: flex-end; background: none; border: none;
-    font-size: 1.1rem; color: #635f51; cursor: pointer;
-    padding: 4px 8px; margin-bottom: 32px; transition: color 0.2s;
+    display: flex; align-items: center; justify-content: flex-end;
+    background: none; border: none; width: 100%;
+    padding: 6px 16px 8px; cursor: pointer;
+    font-size: 0.75rem; color: #a8a49c;
+    font-family: 'EB Garamond', serif; letter-spacing: 1px;
+    text-transform: uppercase; transition: color 0.2s;
 }
-.nav-drawer-close:hover { color: #1C1A14; }
+.nav-drawer-close:hover { color: #635f51; }
 .nav-drawer-links { display: flex; flex-direction: column; }
 .nav-drawer-links a {
-    font-family: 'EB Garamond', serif; font-size: 1.35rem;
-    color: #1C1A14; text-decoration: none; padding: 14px 0;
-    border-bottom: 1px solid rgba(99,95,81,0.12);
-    transition: color 0.2s, padding-left 0.2s; letter-spacing: 0.3px;
+    font-family: 'EB Garamond', serif; font-size: 1.15rem;
+    color: #2A2220; text-decoration: none;
+    padding: 10px 20px;
+    transition: color 0.2s ease, background 0.2s ease;
+    letter-spacing: 0.2px; line-height: 1;
 }
+.nav-drawer-links a:hover { color: #5C6E82; background: rgba(92,110,130,0.06); }
 .nav-drawer-links a:last-child {
-    border-bottom: none; color: #5C6E82; margin-top: 20px;
-    font-size: 1rem; letter-spacing: 2px; text-transform: uppercase;
+    color: #5C6E82; font-size: 0.82rem; letter-spacing: 2px;
+    text-transform: uppercase; margin-top: 6px;
+    border-top: 1px solid rgba(99,95,81,0.1); padding-top: 14px;
 }
-.nav-drawer-links a:hover { color: #5C6E82; padding-left: 6px; }
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 900px) {
@@ -1002,8 +1025,16 @@ footer > * { position: relative; z-index: 1; }
     .reel-section { padding: 60px 5%; }
 
     /* PORTFOLIO */
-    .portfolio-grid { columns: 2; column-gap: 8px; }
-    .portfolio-item { margin-bottom: 8px; }
+    /* Fixed grid on mobile — no masonry reflow as images load */
+    .portfolio-grid {
+        columns: unset;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+    }
+    .portfolio-item { break-inside: unset; margin-bottom: 0; }
+    .portfolio-img-wrap { aspect-ratio: 1 / 1; }
+    .portfolio-thumb { width: 100%; height: 100%; object-fit: cover; }
     .portfolio-section { padding: 64px 3% 48px; }
     .portfolio-header { margin-bottom: 32px; }
     .portfolio-filters { gap: 6px; margin-bottom: 28px; }
@@ -1148,7 +1179,7 @@ footer > * { position: relative; z-index: 1; }
 .about-cta:hover { color: #4a5c6e; border-color: #4a5c6e; }
 
 /* ===== PROCESS SECTION ===== */
-.process-section { background: #e8e1d4; padding: 48px 10% 100px; border-top: 1px solid rgba(99,95,81,0.1); }
+.process-section { background: #e8e1d4; padding: 48px 10% 120px; border-top: 1px solid rgba(99,95,81,0.1); overflow: hidden; }
 .process-inner { max-width: 1100px; margin: 0 auto; text-align: center; }
 .process-eyebrow {
     font-family: 'EB Garamond', serif;
@@ -1162,7 +1193,7 @@ footer > * { position: relative; z-index: 1; }
 .process-journey {
     position: relative;
     width: 100%;
-    height: 500px;
+    height: 580px;
 }
 .process-svg-layer {
     position: absolute; inset: 0;
@@ -1191,10 +1222,10 @@ footer > * { position: relative; z-index: 1; }
     cursor: pointer; z-index: 2;
     --orb-size: 116px;
 }
-.process-orb-wrap[data-step="1"] { left: 9%;  top: 80%; }
-.process-orb-wrap[data-step="2"] { left: 34%; top: 59%; }
-.process-orb-wrap[data-step="3"] { left: 61%; top: 39%; }
-.process-orb-wrap[data-step="4"] { left: 87%; top: 17%; }
+.process-orb-wrap[data-step="1"] { left: 9%;  top: 74%; }
+.process-orb-wrap[data-step="2"] { left: 34%; top: 55%; }
+.process-orb-wrap[data-step="3"] { left: 61%; top: 36%; }
+.process-orb-wrap[data-step="4"] { left: 87%; top: 16%; }
 
 .process-orb {
     width: var(--orb-size); height: var(--orb-size);
@@ -1626,7 +1657,7 @@ footer > * { position: relative; z-index: 1; }
             <video autoplay muted loop playsinline preload="auto">
                 <source src="XH2S Comparison.mp4" type="video/mp4">
             </video>
-            <span class="ba-tag">Mirrorless Camera<br><span style="font-size:0.65em;font-style:italic;opacity:0.85;font-weight:400;">(Professionally Color Graded by Tate)</span></span>
+            <span class="ba-tag">Mirrorless Camera<br><span style="font-size:0.85em;font-style:italic;opacity:0.75;font-weight:400;letter-spacing:0.5px;text-transform:none;">(Professionally Color Graded by Tate)</span></span>
         </div>
         <div class="ba-divider" id="baDivider">
             <div class="ba-handle"></div>
@@ -2112,7 +2143,7 @@ footer > * { position: relative; z-index: 1; }
         <!-- ── PORTRAITS ──────────────────────────────────────── -->
         <div class="portfolio-item" data-category="portraits" data-lightbox-src="portfolio/Portraits/Keder_Fujifilm X-H2_Jupiter9, 85mm.jpg">
             <div class="portfolio-img-wrap">
-                <img class="portfolio-thumb" src="portfolio/Portraits/Keder_Fujifilm X-H2_Jupiter9, 85mm_2.jpg" alt="Keder" loading="lazy">
+                <img class="portfolio-thumb" src="portfolio/Portraits/Keder_Fujifilm X-H2_Jupiter9, 85mm_2.jpg" alt="Keder" loading="eager">
                 <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Portraits</p></div></div>
             </div>
             <div class="portfolio-caption">
@@ -2123,7 +2154,7 @@ footer > * { position: relative; z-index: 1; }
 
         <div class="portfolio-item" data-category="portraits" data-lightbox-src="portfolio/Portraits/Sarah_Fujifilm X-H2_Jupiter9, 85mm.jpg">
             <div class="portfolio-img-wrap">
-                <img class="portfolio-thumb" src="portfolio/Portraits/Sarah_Fujifilm X-H2_Jupiter9, 85mm_2.jpg" alt="Sarah" loading="lazy">
+                <img class="portfolio-thumb" src="portfolio/Portraits/Sarah_Fujifilm X-H2_Jupiter9, 85mm_2.jpg" alt="Sarah" loading="eager">
                 <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Portraits</p></div></div>
             </div>
             <div class="portfolio-caption">
@@ -2135,7 +2166,7 @@ footer > * { position: relative; z-index: 1; }
 
         <div class="portfolio-item" data-category="portraits" data-lightbox-src="portfolio/Portraits/Yanja_CanonEos6D_28-70mm f4_2.jpg">
             <div class="portfolio-img-wrap">
-                <img class="portfolio-thumb" src="portfolio/Portraits/Yanja_CanonEos6D_28-70mm f4.jpg" alt="Yanja" loading="lazy">
+                <img class="portfolio-thumb" src="portfolio/Portraits/Yanja_CanonEos6D_28-70mm f4.jpg" alt="Yanja" loading="eager">
                 <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Portraits</p></div></div>
             </div>
             <div class="portfolio-caption">
@@ -2146,7 +2177,7 @@ footer > * { position: relative; z-index: 1; }
 
         <div class="portfolio-item" data-category="portraits" data-lightbox-src="portfolio/Portraits/Old Friends (Portrait)_FilmFujicolorSuperia400_PentaxSMCTakumar55mm.jpg">
             <div class="portfolio-img-wrap">
-                <img class="portfolio-thumb" src="portfolio/Portraits/Old Friends (Portrait)_FilmFujicolorSuperia400_PentaxSMCTakumar55mm_2.jpg" alt="Old Friends" loading="lazy">
+                <img class="portfolio-thumb" src="portfolio/Portraits/Old Friends (Portrait)_FilmFujicolorSuperia400_PentaxSMCTakumar55mm_2.jpg" alt="Old Friends" loading="eager">
                 <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Portraits</p></div></div>
             </div>
             <div class="portfolio-caption">
@@ -2157,7 +2188,7 @@ footer > * { position: relative; z-index: 1; }
 
         <div class="portfolio-item" data-category="portraits" data-lightbox-src="portfolio/Portraits/MikeyJ_Fujifilm X-H2_SMCTakumar55mm_2.jpg">
             <div class="portfolio-img-wrap">
-                <img class="portfolio-thumb" src="portfolio/Portraits/MikeyJ_Fujifilm X-H2_SMCTakumar55mm_2.jpg" alt="Mikey J" loading="lazy">
+                <img class="portfolio-thumb" src="portfolio/Portraits/MikeyJ_Fujifilm X-H2_SMCTakumar55mm_2.jpg" alt="Mikey J" loading="eager">
                 <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Portraits</p></div></div>
             </div>
             <div class="portfolio-caption">
@@ -2168,7 +2199,7 @@ footer > * { position: relative; z-index: 1; }
 
         <div class="portfolio-item" data-category="portraits" data-lightbox-src="portfolio/Portraits/MikeyJ_Fujifilm X-H2_SMCTakumar55mm, 85mm_2.jpg">
             <div class="portfolio-img-wrap">
-                <img class="portfolio-thumb" src="portfolio/Portraits/MikeyJ_Fujifilm X-H2_SMCTakumar55mm, 85mm_2.jpg" alt="Mikey J II" loading="lazy">
+                <img class="portfolio-thumb" src="portfolio/Portraits/MikeyJ_Fujifilm X-H2_SMCTakumar55mm, 85mm_2.jpg" alt="Mikey J II" loading="eager">
                 <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Portraits</p></div></div>
             </div>
             <div class="portfolio-caption">
@@ -2616,14 +2647,12 @@ footer > * { position: relative; z-index: 1; }
         btn.classList.add('open');
         btn.setAttribute('aria-expanded', 'true');
         drawer.setAttribute('aria-hidden', 'false');
-        document.body.style.overflow = 'hidden';
     }
     function closeDrawer() {
         drawer.classList.remove('open');
         btn.classList.remove('open');
         btn.setAttribute('aria-expanded', 'false');
         drawer.setAttribute('aria-hidden', 'true');
-        document.body.style.overflow = '';
     }
 
     btn.addEventListener('click', () => drawer.classList.contains('open') ? closeDrawer() : openDrawer());
@@ -3163,8 +3192,11 @@ document.getElementById('footerForm').addEventListener('submit', async function(
         segments = [];
         const jRect = journey.getBoundingClientRect();
         for (let i = 0; i < orbWraps.length - 1; i++) {
-            const a = orbWraps[i].getBoundingClientRect();
-            const b = orbWraps[i + 1].getBoundingClientRect();
+            /* Use the orb circle itself — not the full wrap — so lines don't cut through labels */
+            const orbA = orbWraps[i].querySelector('.process-orb');
+            const orbB = orbWraps[i + 1].querySelector('.process-orb');
+            const a = (orbA || orbWraps[i]).getBoundingClientRect();
+            const b = (orbB || orbWraps[i + 1]).getBoundingClientRect();
             const x1 = a.left + a.width  / 2 - jRect.left;
             const y1 = a.top  + a.height / 2 - jRect.top;
             const x2 = b.left + b.width  / 2 - jRect.left;
