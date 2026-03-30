@@ -514,7 +514,7 @@ nav {
     gap: 20px; padding: 0 10%;
 }
 .service-tile {
-    display: block; text-decoration: none;
+    display: block; text-decoration: none; cursor: pointer;
     background: #1C1A14;
     border: 1px solid rgba(232,225,212,0.1);
     border-radius: 20px; padding: 64px 52px;
@@ -534,7 +534,24 @@ nav {
 }
 .service-tile-title {
     font-family: 'Cinzel', serif; font-weight: 400;
-    font-size: 2.6rem; color: #e8e1d4; margin: 0 0 20px; line-height: 1.1;
+    font-size: 2.6rem; color: #e8e1d4; margin: 0 0 14px; line-height: 1.1;
+}
+.service-tile-quote-btn {
+    display: inline-block;
+    font-family: 'EB Garamond', serif; font-size: 0.85rem;
+    letter-spacing: 1px; text-transform: uppercase;
+    color: #C9A84C;
+    border: 1px solid rgba(201,168,76,0.45);
+    border-radius: 30px;
+    padding: 7px 18px;
+    text-decoration: none;
+    margin-bottom: 22px;
+    transition: background 0.2s ease, color 0.2s ease;
+    position: relative; z-index: 2;
+}
+.service-tile-quote-btn:hover {
+    background: rgba(201,168,76,0.12);
+    color: #e8cb7a;
 }
 .service-tile-desc {
     font-family: 'EB Garamond', serif; font-size: 1.05rem;
@@ -1679,21 +1696,23 @@ footer > * { position: relative; z-index: 1; }
 
     <!-- Service Category Tiles -->
     <div class="service-tiles-wrap">
-        <a href="pricing-videography.html" class="service-tile">
+        <div class="service-tile" onclick="window.location.href='pricing-videography.html'">
             <p class="service-tile-eyebrow">01 — Video Production</p>
             <h3 class="service-tile-title">Videography</h3>
+            <a href="quote.html" class="service-tile-quote-btn" onclick="event.stopPropagation();">Get a Quote →</a>
             <p class="service-tile-desc">Documentary-style video from half-day shoots to full brand campaigns. Color graded, mixed, and delivered for every screen.</p>
             <span class="service-tile-cta">View Packages →</span>
-        </a>
-        <a href="pricing-photography.html" class="service-tile">
+        </div>
+        <div class="service-tile" onclick="window.location.href='pricing-photography.html'">
             <p class="service-tile-eyebrow">02 — Still Photography</p>
             <h3 class="service-tile-title">Photography</h3>
+            <a href="quote.html" class="service-tile-quote-btn" onclick="event.stopPropagation();">Get a Quote →</a>
             <p class="service-tile-desc">Half-day and full-day sessions with professional color grading, retouching, and online gallery delivery.</p>
             <span class="service-tile-cta">View Packages →</span>
-        </a>
+        </div>
     </div>
     <div style="padding: 0 10%;">
-        <a href="pricing-custom.html" class="service-tile-custom">
+        <a href="quote.html" class="service-tile-custom">
             <div class="service-tile-custom-body">
                 <div>
                     <p class="service-tile-eyebrow" style="color:#635f51;">03 — Tailored</p>
@@ -1705,9 +1724,9 @@ footer > * { position: relative; z-index: 1; }
         </a>
     </div>
 
-    <div style="text-align:center; padding: 40px 0 12px;">
-        <p style="font-family:'EB Garamond',serif; font-size:0.82rem; letter-spacing:1.5px; text-transform:uppercase; color:#a8a49c; margin:0 0 14px;">Already chosen your package?</p>
-        <a href="payment.html" style="
+    <div style="text-align:center; padding: 40px 0 12px; display:flex; flex-direction:column; align-items:center; gap:14px;">
+        <p style="font-family:'EB Garamond',serif; font-size:0.82rem; letter-spacing:1.5px; text-transform:uppercase; color:#a8a49c; margin:0;">Ready to book?</p>
+        <a href="payment-reserve.html" style="
             display:inline-block;
             font-family:'EB Garamond',serif;
             font-size:1rem;
@@ -1720,8 +1739,36 @@ footer > * { position: relative; z-index: 1; }
             text-decoration:none;
             letter-spacing:0.5px;
             transition:opacity 0.2s ease, transform 0.2s ease;
+            width:fit-content;
         " onmouseover="this.style.opacity='0.82';this.style.transform='translateY(-2px)'" onmouseout="this.style.opacity='1';this.style.transform='translateY(0)'">
-            Pay for Your Package &rarr;
+            Pay to Reserve &rarr;
+        </a>
+        <a href="payment-final.html" style="
+            display:inline-block;
+            font-family:'EB Garamond',serif;
+            font-size:0.95rem;
+            font-weight:600;
+            color:#2A2220;
+            background:transparent;
+            border:1px solid rgba(42,34,28,0.25);
+            border-radius:10px;
+            padding:13px 36px;
+            text-decoration:none;
+            letter-spacing:0.5px;
+            transition:opacity 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+            width:fit-content;
+        " onmouseover="this.style.opacity='0.7';this.style.transform='translateY(-2px)'" onmouseout="this.style.opacity='1';this.style.transform='translateY(0)'">
+            Pay for Final Deliverables &rarr;
+        </a>
+        <a href="quote.html" style="
+            font-family:'EB Garamond',serif;
+            font-size:0.85rem;
+            color:#5C6E82;
+            text-decoration:none;
+            letter-spacing:0.3px;
+            transition:opacity 0.2s ease;
+        " onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">
+            Not sure yet? Get a free quote →
         </a>
     </div>
 </section>
