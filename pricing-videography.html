@@ -69,10 +69,12 @@
         box-shadow: 0 8px 32px rgba(92,110,130,0.12);
     }
     .tier-badge {
-        display: inline-block; font-family: 'EB Garamond', serif;
+        position: absolute; top: 14px; right: 18px;
+        font-family: 'EB Garamond', serif;
         font-size: 0.68rem; letter-spacing: 2px; text-transform: uppercase;
         color: #5C6E82; border: 1px solid rgba(92,110,130,0.3);
-        border-radius: 20px; padding: 3px 12px; margin-bottom: 16px;
+        border-radius: 20px; padding: 3px 12px; margin: 0;
+        white-space: nowrap;
     }
     .tier-label {
         font-family: 'EB Garamond', serif; font-size: 0.72rem;
@@ -95,6 +97,23 @@
         content: '—'; position: absolute; left: 0;
         color: rgba(92,110,130,0.4); font-size: 0.85rem;
     }
+
+    /* ── SELECTABLE TIERS ── */
+    .pkg-tier { cursor: pointer; }
+    .pkg-tier.selected {
+        border-color: #5C6E82;
+        box-shadow: 0 0 0 3px rgba(92,110,130,0.18), 0 12px 40px rgba(92,110,130,0.14);
+        transform: translateY(-4px);
+    }
+    .tier-select-arrow {
+        display: none; text-align: center; margin-top: 16px;
+        font-size: 1.5rem; line-height: 1; color: #5C6E82;
+        transition: opacity 0.2s ease;
+    }
+    .pkg-tier.selected .tier-select-arrow { display: block; }
+    /* Per-tier accordion groups */
+    .acc-content { display: none; }
+    .acc-content.active { display: block; }
 
     /* ── WHAT'S INCLUDED – full-width photo bars ── */
     .acc-section { background: #151310; }
@@ -368,7 +387,7 @@
 
 <!-- Package Tiers -->
 <div class="pkg-tiers">
-    <div class="pkg-tier">
+    <div class="pkg-tier" data-tier="chapter" onclick="selectTier(this)">
         <p class="tier-label">Chapter — Half Day</p>
         <h3 class="tier-name">Chapter</h3>
         <ul class="tier-features">
@@ -378,8 +397,9 @@
             <li>Color grading included</li>
             <li>1 round of revisions</li>
         </ul>
+        <div class="tier-select-arrow">▾</div>
     </div>
-    <div class="pkg-tier pkg-tier--popular">
+    <div class="pkg-tier pkg-tier--popular" data-tier="novel" onclick="selectTier(this)">
         <span class="tier-badge">Most Popular</span>
         <p class="tier-label">Novel — Full Day</p>
         <h3 class="tier-name">Novel</h3>
@@ -390,8 +410,9 @@
             <li>Full color grade + audio mix</li>
             <li>2 revisions + social cuts</li>
         </ul>
+        <div class="tier-select-arrow">▾</div>
     </div>
-    <div class="pkg-tier">
+    <div class="pkg-tier" data-tier="epic" onclick="selectTier(this)">
         <p class="tier-label">Epic — 2 Days</p>
         <h3 class="tier-name">Epic</h3>
         <ul class="tier-features">
@@ -401,6 +422,7 @@
             <li>Unlimited revisions</li>
             <li>Full commercial license</li>
         </ul>
+        <div class="tier-select-arrow">▾</div>
     </div>
 </div>
 
@@ -408,80 +430,73 @@
 <section class="acc-section">
   <div class="acc-inner">
     <p class="acc-eyebrow">What's Included</p>
-    <h2 class="acc-heading">Inside This Package</h2>
+    <h2 class="acc-heading" id="acc-heading">Inside the <span id="acc-tier-label">Novel</span> Package</h2>
   </div>
-        <div class="acc-item" style="--acc-bg: url('assets/acc-video.jpg')" onclick="toggleAcc(this)">
-          <div class="acc-bar">
-            <div class="acc-left">
-              <span class="acc-icon" style="color:#5C6E82;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="14" height="14" rx="2"/><path d="m16 10 5-3v10l-5-3"/></svg></span>
-              <span class="acc-num">01</span>
-              <span class="acc-title">Video</span>
-            </div>
-            <span class="acc-chevron">+</span>
-          </div>
-          <div class="acc-body">
-            <ul>
-              <li>Multi-camera Fujifilm X-H2S setup</li>
-              <li>Up to 4 hours of on-location coverage</li>
-              <li>Up to 10-minute professionally edited final cut</li>
-              <li>B-roll & cutaway coverage included</li>
-              <li>Drone footage available (add-on)</li>
-            </ul>
-          </div>
+
+  <!-- Chapter -->
+  <div class="acc-content" data-acc="chapter">
+    <div class="acc-item" style="--acc-bg: url('assets/acc-video.jpg')" onclick="toggleAcc(this)">
+      <div class="acc-bar">
+        <div class="acc-left">
+          <span class="acc-icon" style="color:#5C6E82;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="14" height="14" rx="2"/><path d="m16 10 5-3v10l-5-3"/></svg></span>
+          <span class="acc-num">01</span>
+          <span class="acc-title">Video</span>
         </div>
-        <div class="acc-item" style="--acc-bg: url('assets/acc-audio.jpg')" onclick="toggleAcc(this)">
-          <div class="acc-bar">
-            <div class="acc-left">
-              <span class="acc-icon" style="color:#7a6e5a;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 1 3 3v7a3 3 0 0 1-6 0V5a3 3 0 0 1 3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg></span>
-              <span class="acc-num">02</span>
-              <span class="acc-title">Audio</span>
-            </div>
-            <span class="acc-chevron">+</span>
-          </div>
-          <div class="acc-body">
-            <ul>
-              <li>Lavalier + boom microphone setup</li>
-              <li>Studio-quality audio mix & sound design</li>
-              <li>Licensed music bed available</li>
-              <li>Voice-over recording capable</li>
-            </ul>
-          </div>
+        <span class="acc-chevron">+</span>
+      </div>
+      <div class="acc-body"><ul>
+        <li>Single-camera Fujifilm X-H2S setup</li>
+        <li>Up to 4 hours of on-location coverage</li>
+        <li>Up to 5-minute professionally edited final cut</li>
+        <li>B-roll & cutaway coverage included</li>
+      </ul></div>
+    </div>
+    <div class="acc-item" style="--acc-bg: url('assets/acc-audio.jpg')" onclick="toggleAcc(this)">
+      <div class="acc-bar">
+        <div class="acc-left">
+          <span class="acc-icon" style="color:#7a6e5a;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 1 3 3v7a3 3 0 0 1-6 0V5a3 3 0 0 1 3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg></span>
+          <span class="acc-num">02</span>
+          <span class="acc-title">Audio</span>
         </div>
-        <div class="acc-item" style="--acc-bg: url('assets/acc-lighting.jpg')" onclick="toggleAcc(this)">
-          <div class="acc-bar">
-            <div class="acc-left">
-              <span class="acc-icon" style="color:#6e7a5c;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></span>
-              <span class="acc-num">03</span>
-              <span class="acc-title">Lighting & Color</span>
-            </div>
-            <span class="acc-chevron">+</span>
-          </div>
-          <div class="acc-body">
-            <ul>
-              <li>LED fill lighting package included</li>
-              <li>Advanced cinematic color grade</li>
-              <li>Scene-matched consistency across edit</li>
-              <li>HDR processing available</li>
-            </ul>
-          </div>
+        <span class="acc-chevron">+</span>
+      </div>
+      <div class="acc-body"><ul>
+        <li>Wireless lapel mic for primary subject</li>
+        <li>Ambient audio capture</li>
+        <li>Basic audio mix & cleanup</li>
+      </ul></div>
+    </div>
+    <div class="acc-item" style="--acc-bg: url('assets/acc-lighting.jpg')" onclick="toggleAcc(this)">
+      <div class="acc-bar">
+        <div class="acc-left">
+          <span class="acc-icon" style="color:#6e7a5c;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></span>
+          <span class="acc-num">03</span>
+          <span class="acc-title">Lighting & Color</span>
         </div>
-        <div class="acc-item" style="--acc-bg: url('assets/acc-extras.jpg')" onclick="toggleAcc(this)">
-          <div class="acc-bar">
-            <div class="acc-left">
-              <span class="acc-icon" style="color:#82785c;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
-              <span class="acc-num">04</span>
-              <span class="acc-title">Extras</span>
-            </div>
-            <span class="acc-chevron">+</span>
-          </div>
-          <div class="acc-body">
-            <ul>
-              <li>2 rounds of revisions included</li>
-              <li>Short-form social media cuts included</li>
-              <li>Commercial use license</li>
-              <li>Digital delivery via download link</li>
-            </ul>
-            <div class="extras-vintage">
+        <span class="acc-chevron">+</span>
+      </div>
+      <div class="acc-body"><ul>
+        <li>Natural light preferred, portable fill available</li>
+        <li>Professional color grading included</li>
+        <li>Basic tone & exposure correction</li>
+      </ul></div>
+    </div>
+    <div class="acc-item" style="--acc-bg: url('assets/acc-extras.jpg')" onclick="toggleAcc(this)">
+      <div class="acc-bar">
+        <div class="acc-left">
+          <span class="acc-icon" style="color:#82785c;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+          <span class="acc-num">04</span>
+          <span class="acc-title">Extras</span>
+        </div>
+        <span class="acc-chevron">+</span>
+      </div>
+      <div class="acc-body"><ul>
+        <li>1 round of revisions</li>
+        <li>5–7 business-day delivery</li>
+        <li>Personal use license</li>
+        <li>Vintage glass add-on available</li>
+      </ul>
+      <div class="extras-vintage">
               <p class="extras-vintage-eyebrow">Add-On Available</p>
               <h4 class="extras-vintage-heading">Vintage Glass &amp; Film</h4>
               <p class="extras-vintage-desc">Some stories deserve a softer edge. I shoot with adapted vintage lenses and 35mm film for clients who want something that feels less like content — and more like a document.</p>
@@ -533,8 +548,255 @@
                 </div>
               </div>
             </div>
-          </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Novel -->
+  <div class="acc-content" data-acc="novel">
+    <div class="acc-item" style="--acc-bg: url('assets/acc-video.jpg')" onclick="toggleAcc(this)">
+      <div class="acc-bar">
+        <div class="acc-left">
+          <span class="acc-icon" style="color:#5C6E82;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="14" height="14" rx="2"/><path d="m16 10 5-3v10l-5-3"/></svg></span>
+          <span class="acc-num">01</span>
+          <span class="acc-title">Video</span>
         </div>
+        <span class="acc-chevron">+</span>
+      </div>
+      <div class="acc-body"><ul>
+        <li>Multi-camera Fujifilm X-H2S setup</li>
+        <li>Up to 8 hours of on-location coverage</li>
+        <li>Up to 10-minute professionally edited final cut</li>
+        <li>B-roll & cutaway coverage included</li>
+        <li>Drone footage available (add-on)</li>
+      </ul></div>
+    </div>
+    <div class="acc-item" style="--acc-bg: url('assets/acc-audio.jpg')" onclick="toggleAcc(this)">
+      <div class="acc-bar">
+        <div class="acc-left">
+          <span class="acc-icon" style="color:#7a6e5a;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 1 3 3v7a3 3 0 0 1-6 0V5a3 3 0 0 1 3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg></span>
+          <span class="acc-num">02</span>
+          <span class="acc-title">Audio</span>
+        </div>
+        <span class="acc-chevron">+</span>
+      </div>
+      <div class="acc-body"><ul>
+        <li>Wireless lapel + boom mic setup</li>
+        <li>Full audio mix & noise reduction</li>
+        <li>Music licensing included</li>
+        <li>Multi-source audio balance</li>
+      </ul></div>
+    </div>
+    <div class="acc-item" style="--acc-bg: url('assets/acc-lighting.jpg')" onclick="toggleAcc(this)">
+      <div class="acc-bar">
+        <div class="acc-left">
+          <span class="acc-icon" style="color:#6e7a5c;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></span>
+          <span class="acc-num">03</span>
+          <span class="acc-title">Lighting & Color</span>
+        </div>
+        <span class="acc-chevron">+</span>
+      </div>
+      <div class="acc-body"><ul>
+        <li>Professional lighting setup available</li>
+        <li>Full color grade + custom LUT</li>
+        <li>Multi-source audio visual balance</li>
+        <li>Consistent visual style throughout</li>
+      </ul></div>
+    </div>
+    <div class="acc-item" style="--acc-bg: url('assets/acc-extras.jpg')" onclick="toggleAcc(this)">
+      <div class="acc-bar">
+        <div class="acc-left">
+          <span class="acc-icon" style="color:#82785c;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+          <span class="acc-num">04</span>
+          <span class="acc-title">Extras</span>
+        </div>
+        <span class="acc-chevron">+</span>
+      </div>
+      <div class="acc-body"><ul>
+        <li>2 rounds of revisions</li>
+        <li>Social media cuts included</li>
+        <li>5–7 business-day delivery</li>
+        <li>Personal & commercial use license</li>
+        <li>Vintage glass & drone add-ons available</li>
+      </ul>
+      <div class="extras-vintage">
+              <p class="extras-vintage-eyebrow">Add-On Available</p>
+              <h4 class="extras-vintage-heading">Vintage Glass &amp; Film</h4>
+              <p class="extras-vintage-desc">Some stories deserve a softer edge. I shoot with adapted vintage lenses and 35mm film for clients who want something that feels less like content — and more like a document.</p>
+              <div class="extras-vintage-cards">
+                <div class="extras-vintage-card">
+                  <svg class="extras-vintage-icon" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="26" cy="26" r="23" stroke="#C9A84C" stroke-width="1.5"/>
+                    <circle cx="26" cy="26" r="14.5" stroke="#C9A84C" stroke-width="1" opacity="0.45"/>
+                    <circle cx="26" cy="26" r="7" stroke="#C9A84C" stroke-width="1.5"/>
+                    <line x1="26" y1="11.5" x2="26" y2="5" stroke="#C9A84C" stroke-width="1.2" stroke-linecap="round"/>
+                    <line x1="26" y1="47" x2="26" y2="40.5" stroke="#C9A84C" stroke-width="1.2" stroke-linecap="round"/>
+                    <line x1="40.5" y1="26" x2="47" y2="26" stroke="#C9A84C" stroke-width="1.2" stroke-linecap="round"/>
+                    <line x1="5" y1="26" x2="11.5" y2="26" stroke="#C9A84C" stroke-width="1.2" stroke-linecap="round"/>
+                    <line x1="35.6" y1="16.4" x2="40.1" y2="11.9" stroke="#C9A84C" stroke-width="1.2" stroke-linecap="round"/>
+                    <line x1="11.9" y1="40.1" x2="16.4" y2="35.6" stroke="#C9A84C" stroke-width="1.2" stroke-linecap="round"/>
+                    <line x1="16.4" y1="16.4" x2="11.9" y2="11.9" stroke="#C9A84C" stroke-width="1.2" stroke-linecap="round"/>
+                    <line x1="40.1" y1="40.1" x2="35.6" y2="35.6" stroke="#C9A84C" stroke-width="1.2" stroke-linecap="round"/>
+                  </svg>
+                  <h5 class="extras-vintage-card-title">Vintage Glass</h5>
+                  <p class="extras-vintage-card-desc">Adapted lenses from the 1960s–80s — organic bokeh, gentle flares, and warmth modern optics can't replicate.</p>
+                  <div class="extras-vintage-tags">
+                    <span class="extras-vintage-tag">SMC Takumar 55mm</span>
+                    <span class="extras-vintage-tag">Юпитер (Jupiter) 9</span>
+                    <span class="extras-vintage-tag">Vivitar Series 1</span>
+                  </div>
+                </div>
+                <div class="extras-vintage-card">
+                  <svg class="extras-vintage-icon" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="10" y="9" width="32" height="34" rx="3.5" stroke="#C9A84C" stroke-width="1.5"/>
+                    <rect x="15" y="4" width="22" height="6" rx="2" stroke="#C9A84C" stroke-width="1.5"/>
+                    <rect x="15" y="42" width="22" height="6" rx="2" stroke="#C9A84C" stroke-width="1.5"/>
+                    <rect x="12" y="16" width="4" height="5" rx="1" fill="#C9A84C" opacity="0.5"/>
+                    <rect x="12" y="24" width="4" height="5" rx="1" fill="#C9A84C" opacity="0.5"/>
+                    <rect x="12" y="32" width="4" height="5" rx="1" fill="#C9A84C" opacity="0.5"/>
+                    <rect x="36" y="16" width="4" height="5" rx="1" fill="#C9A84C" opacity="0.5"/>
+                    <rect x="36" y="24" width="4" height="5" rx="1" fill="#C9A84C" opacity="0.5"/>
+                    <rect x="36" y="32" width="4" height="5" rx="1" fill="#C9A84C" opacity="0.5"/>
+                    <rect x="19" y="16" width="14" height="20" rx="2" stroke="#C9A84C" stroke-width="1" opacity="0.65"/>
+                    <circle cx="26" cy="26" r="4" stroke="#C9A84C" stroke-width="1" opacity="0.5"/>
+                  </svg>
+                  <h5 class="extras-vintage-card-title">35mm Film</h5>
+                  <p class="extras-vintage-card-desc">Grain as a feature, not a flaw. Film slows the process down — every frame is deliberate before the shutter fires.</p>
+                  <div class="extras-vintage-tags">
+                    <span class="extras-vintage-tag">Kodak Portra 400</span>
+                    <span class="extras-vintage-tag">Kodak Gold 200</span>
+                    <span class="extras-vintage-tag">Ilford HP5</span>
+                    <span class="extras-vintage-tag">Fuji Superia 400</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Epic -->
+  <div class="acc-content" data-acc="epic">
+    <div class="acc-item" style="--acc-bg: url('assets/acc-video.jpg')" onclick="toggleAcc(this)">
+      <div class="acc-bar">
+        <div class="acc-left">
+          <span class="acc-icon" style="color:#5C6E82;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="14" height="14" rx="2"/><path d="m16 10 5-3v10l-5-3"/></svg></span>
+          <span class="acc-num">01</span>
+          <span class="acc-title">Video</span>
+        </div>
+        <span class="acc-chevron">+</span>
+      </div>
+      <div class="acc-body"><ul>
+        <li>Multi-camera, 2-day production shoot</li>
+        <li>Up to 20-minute professionally edited final cut</li>
+        <li>B-roll, cutaway & drone footage included</li>
+        <li>Full cinematic post-production</li>
+      </ul></div>
+    </div>
+    <div class="acc-item" style="--acc-bg: url('assets/acc-audio.jpg')" onclick="toggleAcc(this)">
+      <div class="acc-bar">
+        <div class="acc-left">
+          <span class="acc-icon" style="color:#7a6e5a;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 1 3 3v7a3 3 0 0 1-6 0V5a3 3 0 0 1 3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg></span>
+          <span class="acc-num">02</span>
+          <span class="acc-title">Audio</span>
+        </div>
+        <span class="acc-chevron">+</span>
+      </div>
+      <div class="acc-body"><ul>
+        <li>Full wireless audio crew setup</li>
+        <li>Multi-track sync recording</li>
+        <li>Professional audio mix & mastering</li>
+        <li>Music licensing included</li>
+      </ul></div>
+    </div>
+    <div class="acc-item" style="--acc-bg: url('assets/acc-lighting.jpg')" onclick="toggleAcc(this)">
+      <div class="acc-bar">
+        <div class="acc-left">
+          <span class="acc-icon" style="color:#6e7a5c;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></span>
+          <span class="acc-num">03</span>
+          <span class="acc-title">Lighting & Color</span>
+        </div>
+        <span class="acc-chevron">+</span>
+      </div>
+      <div class="acc-body"><ul>
+        <li>Full production lighting kit on set</li>
+        <li>Multi-pass cinematic color grade</li>
+        <li>Custom LUT + visual consistency across both days</li>
+        <li>Skin-tone calibration & retouching</li>
+      </ul></div>
+    </div>
+    <div class="acc-item" style="--acc-bg: url('assets/acc-extras.jpg')" onclick="toggleAcc(this)">
+      <div class="acc-bar">
+        <div class="acc-left">
+          <span class="acc-icon" style="color:#82785c;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+          <span class="acc-num">04</span>
+          <span class="acc-title">Extras</span>
+        </div>
+        <span class="acc-chevron">+</span>
+      </div>
+      <div class="acc-body"><ul>
+        <li>Unlimited revisions</li>
+        <li>Full commercial license</li>
+        <li>Social media cuts included</li>
+        <li>5–7 business-day delivery</li>
+        <li>Drone footage & vintage glass included</li>
+      </ul>
+      <div class="extras-vintage">
+              <p class="extras-vintage-eyebrow">Add-On Available</p>
+              <h4 class="extras-vintage-heading">Vintage Glass &amp; Film</h4>
+              <p class="extras-vintage-desc">Some stories deserve a softer edge. I shoot with adapted vintage lenses and 35mm film for clients who want something that feels less like content — and more like a document.</p>
+              <div class="extras-vintage-cards">
+                <div class="extras-vintage-card">
+                  <svg class="extras-vintage-icon" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="26" cy="26" r="23" stroke="#C9A84C" stroke-width="1.5"/>
+                    <circle cx="26" cy="26" r="14.5" stroke="#C9A84C" stroke-width="1" opacity="0.45"/>
+                    <circle cx="26" cy="26" r="7" stroke="#C9A84C" stroke-width="1.5"/>
+                    <line x1="26" y1="11.5" x2="26" y2="5" stroke="#C9A84C" stroke-width="1.2" stroke-linecap="round"/>
+                    <line x1="26" y1="47" x2="26" y2="40.5" stroke="#C9A84C" stroke-width="1.2" stroke-linecap="round"/>
+                    <line x1="40.5" y1="26" x2="47" y2="26" stroke="#C9A84C" stroke-width="1.2" stroke-linecap="round"/>
+                    <line x1="5" y1="26" x2="11.5" y2="26" stroke="#C9A84C" stroke-width="1.2" stroke-linecap="round"/>
+                    <line x1="35.6" y1="16.4" x2="40.1" y2="11.9" stroke="#C9A84C" stroke-width="1.2" stroke-linecap="round"/>
+                    <line x1="11.9" y1="40.1" x2="16.4" y2="35.6" stroke="#C9A84C" stroke-width="1.2" stroke-linecap="round"/>
+                    <line x1="16.4" y1="16.4" x2="11.9" y2="11.9" stroke="#C9A84C" stroke-width="1.2" stroke-linecap="round"/>
+                    <line x1="40.1" y1="40.1" x2="35.6" y2="35.6" stroke="#C9A84C" stroke-width="1.2" stroke-linecap="round"/>
+                  </svg>
+                  <h5 class="extras-vintage-card-title">Vintage Glass</h5>
+                  <p class="extras-vintage-card-desc">Adapted lenses from the 1960s–80s — organic bokeh, gentle flares, and warmth modern optics can't replicate.</p>
+                  <div class="extras-vintage-tags">
+                    <span class="extras-vintage-tag">SMC Takumar 55mm</span>
+                    <span class="extras-vintage-tag">Юпитер (Jupiter) 9</span>
+                    <span class="extras-vintage-tag">Vivitar Series 1</span>
+                  </div>
+                </div>
+                <div class="extras-vintage-card">
+                  <svg class="extras-vintage-icon" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="10" y="9" width="32" height="34" rx="3.5" stroke="#C9A84C" stroke-width="1.5"/>
+                    <rect x="15" y="4" width="22" height="6" rx="2" stroke="#C9A84C" stroke-width="1.5"/>
+                    <rect x="15" y="42" width="22" height="6" rx="2" stroke="#C9A84C" stroke-width="1.5"/>
+                    <rect x="12" y="16" width="4" height="5" rx="1" fill="#C9A84C" opacity="0.5"/>
+                    <rect x="12" y="24" width="4" height="5" rx="1" fill="#C9A84C" opacity="0.5"/>
+                    <rect x="12" y="32" width="4" height="5" rx="1" fill="#C9A84C" opacity="0.5"/>
+                    <rect x="36" y="16" width="4" height="5" rx="1" fill="#C9A84C" opacity="0.5"/>
+                    <rect x="36" y="24" width="4" height="5" rx="1" fill="#C9A84C" opacity="0.5"/>
+                    <rect x="36" y="32" width="4" height="5" rx="1" fill="#C9A84C" opacity="0.5"/>
+                    <rect x="19" y="16" width="14" height="20" rx="2" stroke="#C9A84C" stroke-width="1" opacity="0.65"/>
+                    <circle cx="26" cy="26" r="4" stroke="#C9A84C" stroke-width="1" opacity="0.5"/>
+                  </svg>
+                  <h5 class="extras-vintage-card-title">35mm Film</h5>
+                  <p class="extras-vintage-card-desc">Grain as a feature, not a flaw. Film slows the process down — every frame is deliberate before the shutter fires.</p>
+                  <div class="extras-vintage-tags">
+                    <span class="extras-vintage-tag">Kodak Portra 400</span>
+                    <span class="extras-vintage-tag">Kodak Gold 200</span>
+                    <span class="extras-vintage-tag">Ilford HP5</span>
+                    <span class="extras-vintage-tag">Fuji Superia 400</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+      </div>
+    </div>
+  </div>
+
 </section>
 
 <!-- Steps Divider -->
@@ -647,21 +909,50 @@
 
 <script>
 function toggleAcc(el) {
+  const parent = el.closest('.acc-content');
   const isOpen = el.classList.contains('open');
-  document.querySelectorAll('.acc-item.open').forEach(item => {
-    item.classList.remove('open');
-    item.querySelector('.acc-body').style.maxHeight = '0';
-  });
+  if (parent) {
+    parent.querySelectorAll('.acc-item.open').forEach(item => {
+      item.classList.remove('open');
+      item.querySelector('.acc-body').style.maxHeight = '0';
+    });
+  }
   if (!isOpen) {
     el.classList.add('open');
     const body = el.querySelector('.acc-body');
     body.style.maxHeight = body.scrollHeight + 'px';
   }
 }
-// Open first item by default
+
+function selectTier(el) {
+  document.querySelectorAll('.pkg-tier').forEach(t => t.classList.remove('selected'));
+  el.classList.add('selected');
+  const tier = el.dataset.tier;
+  // Update heading label
+  const label = document.getElementById('acc-tier-label');
+  if (label) {
+    const names = { chapter: 'Chapter', novel: 'Novel', epic: 'Epic' };
+    label.textContent = names[tier] || tier;
+  }
+  // Show/hide accordion content
+  document.querySelectorAll('.acc-content').forEach(c => {
+    const isActive = c.dataset.acc === tier;
+    c.classList.toggle('active', isActive);
+    if (isActive) {
+      // Open first item
+      const first = c.querySelector('.acc-item');
+      if (first) toggleAcc(first);
+    }
+  });
+  // Scroll to accordion
+  const acc = document.querySelector('.acc-section');
+  if (acc) acc.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
 window.addEventListener('DOMContentLoaded', () => {
-  const first = document.querySelector('.acc-item');
-  if (first) toggleAcc(first);
+  // Auto-select "novel" (most popular)
+  const popular = document.querySelector('.pkg-tier--popular');
+  if (popular) selectTier(popular);
 });
 </script>
 
