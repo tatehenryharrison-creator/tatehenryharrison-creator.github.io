@@ -191,7 +191,7 @@
     .acc-body {
       max-height: 0;
       overflow: hidden;
-      transition: max-height 0.45s cubic-bezier(0.22,1,0.36,1);
+      transition: max-height 1.15s cubic-bezier(0.22,1,0.36,1);
       background: #181512;
     }
     .acc-body ul {
@@ -1044,6 +1044,24 @@ function toggleAcc(el) {
   }
 }
 
+/* Custom eased scroll — much gentler than native 'smooth' */
+function smoothScrollTo(targetY, duration) {
+  const startY = window.scrollY;
+  const dist = targetY - startY;
+  let startTime = null;
+  function ease(t) {
+    /* easeInOutQuart — slow start, slow finish, lingers in the middle */
+    return t < 0.5 ? 8 * t * t * t * t : 1 - Math.pow(-2 * t + 2, 4) / 2;
+  }
+  function step(now) {
+    if (!startTime) startTime = now;
+    const p = Math.min((now - startTime) / duration, 1);
+    window.scrollTo(0, startY + dist * ease(p));
+    if (p < 1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+
 function selectTier(el) {
   document.querySelectorAll('.pkg-tier').forEach(t => t.classList.remove('selected'));
   el.classList.add('selected');
@@ -1064,12 +1082,14 @@ function selectTier(el) {
       if (first) toggleAcc(first);
     }
   });
-  // Float gently to ~60% into the What's Included section
-  const acc = document.querySelector('.acc-section');
-  if (acc) {
-    const top = window.scrollY + acc.getBoundingClientRect().top + acc.offsetHeight * 0.6 - window.innerHeight * 0.5;
-    window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
-  }
+  // Float gently to ~60% into the What's Included section after a brief pause
+  setTimeout(() => {
+    const acc = document.querySelector('.acc-section');
+    if (acc) {
+      const top = window.scrollY + acc.getBoundingClientRect().top + acc.offsetHeight * 0.6 - window.innerHeight * 0.5;
+      smoothScrollTo(Math.max(0, top), 1500); /* 1.5 s gentle float */
+    }
+  }, 80); /* small delay lets the DOM swap settle before measuring */
 }
 
 window.addEventListener('DOMContentLoaded', () => {
