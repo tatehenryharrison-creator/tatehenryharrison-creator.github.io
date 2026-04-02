@@ -73,9 +73,9 @@
 
     .acc-bar {
       position: relative;
-      min-height: 130px;
+      min-height: 100px;
       display: flex; align-items: center; justify-content: space-between;
-      padding: 36px 8%;
+      padding: 24px 8%;
       background-image: var(--acc-bg, none);
       background-size: cover;
       background-position: center;
@@ -89,8 +89,18 @@
       transition: background 0.35s ease;
       pointer-events: none;
     }
+    .acc-bar::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 75% 85% at center, rgba(0,0,0,0.60) 0%, transparent 100%);
+      opacity: 0;
+      transition: opacity 0.55s ease;
+      pointer-events: none;
+      z-index: 0;
+    }
     .acc-item:hover .acc-bar::before { background: rgba(18,15,12,0.48); }
-    .acc-item.open  .acc-bar::before { background: rgba(18,15,12,0.72); }
+    .acc-item.open  .acc-bar::before { background: rgba(18,15,12,0.55); }
+    .acc-item.open  .acc-bar::after  { opacity: 1; }
 
     .acc-left { display: flex; align-items: center; gap: 20px; position: relative; z-index: 1; }
     .acc-icon { display: flex; align-items: center; flex-shrink: 0; opacity: 0.9; }
@@ -100,7 +110,7 @@
     }
     .acc-title {
       font-family: 'Cinzel', serif; font-size: 1.45rem; font-weight: 600;
-      color: #e8e1d4; letter-spacing: 0.8px;
+      color: #e8e1d4; letter-spacing: 0.8px; word-break: break-word;
     }
     .acc-chevron {
       font-size: 2rem; font-weight: 300; color: #e8e1d4;
@@ -282,6 +292,12 @@
       .tier-features     { padding-top: 12px; }
       .tier-features li  { font-size: 0.82rem; padding: 4px 0 4px 16px; line-height: 1.35; }
     }
+
+    @media (max-width: 480px) {
+      .pkg-price-tag { font-size: 1.2rem; padding: 8px 22px; }
+      .acc-item.open .acc-bar { min-height: 130px; padding-bottom: 12px; }
+      .acc-item.open .acc-title { font-size: 1.6rem; letter-spacing: 1.5px; }
+    }
   
     /* Extras — Vintage Glass & Film block */
     .extras-vintage { padding: 28px 32px 20px; border-top: 1px solid rgba(201,168,76,0.18); margin-top: 4px; }
@@ -310,8 +326,8 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      min-height: 200px;
-      padding-bottom: 28px;
+      min-height: 160px;
+      padding-bottom: 16px;
     }
     .acc-item .acc-left {
       transition: justify-content 0.0s, width 0.0s;
