@@ -122,8 +122,8 @@
       margin: 0 auto;
       padding: 80px 8% 52px;
     }
-    .acc-eyebrow { font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase; color: #5C6E82; margin: 0 0 12px; }
-    .acc-heading { font-size: 1.8rem; font-weight: 600; color: #e8e1d4; margin: 0; letter-spacing: -0.2px; }
+    .acc-eyebrow { font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase; color: #5C6E82; margin: 0 0 12px; text-align: center; }
+    .acc-heading { font-size: 1.8rem; font-weight: 600; color: #e8e1d4; margin: 0; letter-spacing: -0.2px; text-align: center; }
 
     .acc-item {
       position: relative;
@@ -1029,9 +1029,12 @@ function selectTier(el) {
       if (first) toggleAcc(first);
     }
   });
-  // Scroll to accordion
+  // Float gently to ~60% into the What's Included section
   const acc = document.querySelector('.acc-section');
-  if (acc) acc.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  if (acc) {
+    const top = window.scrollY + acc.getBoundingClientRect().top + acc.offsetHeight * 0.6 - window.innerHeight * 0.5;
+    window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+  }
 }
 
 window.addEventListener('DOMContentLoaded', () => {
