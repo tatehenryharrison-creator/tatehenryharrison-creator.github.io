@@ -361,6 +361,72 @@
       .extras-vintage { padding: 20px 16px; }
       .extras-vintage-cards { grid-template-columns: 1fr; gap: 14px; }
     }
+
+    /* ── AUDIO BAR: slide-to-center animation ── */
+    .acc-item--audio .acc-bar {
+      flex-wrap: wrap;
+      align-content: flex-start;
+      transition: min-height 0.45s cubic-bezier(0.22,1,0.36,1), padding 0.45s cubic-bezier(0.22,1,0.36,1);
+    }
+    .acc-item--audio.open .acc-bar {
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 200px;
+      padding-bottom: 28px;
+    }
+    .acc-item--audio .acc-left {
+      transition: justify-content 0.0s, width 0.0s;
+      flex: 1;
+    }
+    .acc-item--audio.open .acc-left {
+      width: 100%;
+      flex: none;
+      justify-content: center;
+    }
+    .acc-item--audio .acc-icon,
+    .acc-item--audio .acc-num {
+      transition: opacity 0.3s ease, max-width 0.35s ease, margin 0.35s ease;
+      overflow: hidden;
+      max-width: 80px;
+    }
+    .acc-item--audio.open .acc-icon,
+    .acc-item--audio.open .acc-num {
+      opacity: 0; max-width: 0; margin: 0;
+    }
+    .acc-item--audio .acc-title {
+      transition: font-size 0.45s cubic-bezier(0.22,1,0.36,1), letter-spacing 0.45s ease;
+    }
+    .acc-item--audio.open .acc-title {
+      font-size: 2.2rem; letter-spacing: 2px;
+    }
+    .acc-item--audio.open .acc-chevron {
+      position: absolute; top: 18px; right: 8%;
+    }
+    /* Tagline inside the bar */
+    .acc-audio-tagline {
+      width: 100%;
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      text-align: center;
+      pointer-events: none;
+      transition: max-height 0.5s cubic-bezier(0.22,1,0.36,1), opacity 0.35s ease 0.15s;
+      position: relative; z-index: 1;
+    }
+    .acc-item--audio.open .acc-audio-tagline {
+      max-height: 160px; opacity: 1; pointer-events: auto;
+    }
+    .acc-audio-subtitle {
+      font-family: 'Cinzel', serif; font-size: 0.88rem;
+      color: #e8e1d4; letter-spacing: 1.5px; margin: 10px 0 10px;
+      text-transform: none;
+    }
+    .acc-audio-desc {
+      font-family: 'EB Garamond', serif; font-size: 0.92rem;
+      color: rgba(232,225,212,0.5); line-height: 1.65;
+      max-width: 520px; margin: 0 auto;
+    }
   </style>
 </head>
 <body>
@@ -451,7 +517,7 @@
         <li>B-roll & cutaway coverage included</li>
       </ul></div>
     </div>
-    <div class="acc-item" style="--acc-bg: url('assets/acc-audio.jpg')" onclick="toggleAcc(this)">
+    <div class="acc-item acc-item--audio" style="--acc-bg: url('assets/acc-audio.jpg')" onclick="toggleAcc(this)">
       <div class="acc-bar">
         <div class="acc-left">
           <span class="acc-icon" style="color:#7a6e5a;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 1 3 3v7a3 3 0 0 1-6 0V5a3 3 0 0 1 3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg></span>
@@ -459,6 +525,10 @@
           <span class="acc-title">Audio</span>
         </div>
         <span class="acc-chevron">+</span>
+        <div class="acc-audio-tagline">
+          <p class="acc-audio-subtitle">Don&rsquo;t Settle for Stock Songs Online</p>
+          <p class="acc-audio-desc">My competitors use stock audio over their videos. I record real ambient sound on location, and turn it into a cinematic soundtrack.</p>
+        </div>
       </div>
       <div class="acc-body"><ul>
         <li>Wireless lapel mic for primary subject</li>
@@ -571,7 +641,7 @@
         <li>Drone footage available (add-on)</li>
       </ul></div>
     </div>
-    <div class="acc-item" style="--acc-bg: url('assets/acc-audio.jpg')" onclick="toggleAcc(this)">
+    <div class="acc-item acc-item--audio" style="--acc-bg: url('assets/acc-audio.jpg')" onclick="toggleAcc(this)">
       <div class="acc-bar">
         <div class="acc-left">
           <span class="acc-icon" style="color:#7a6e5a;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 1 3 3v7a3 3 0 0 1-6 0V5a3 3 0 0 1 3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg></span>
@@ -579,6 +649,10 @@
           <span class="acc-title">Audio</span>
         </div>
         <span class="acc-chevron">+</span>
+        <div class="acc-audio-tagline">
+          <p class="acc-audio-subtitle">Don&rsquo;t Settle for Stock Songs Online</p>
+          <p class="acc-audio-desc">My competitors use stock audio over their videos. I record real ambient sound on location, and turn it into a cinematic soundtrack.</p>
+        </div>
       </div>
       <div class="acc-body"><ul>
         <li>Wireless lapel + boom mic setup</li>
@@ -693,7 +767,7 @@
         <li>Full cinematic post-production</li>
       </ul></div>
     </div>
-    <div class="acc-item" style="--acc-bg: url('assets/acc-audio.jpg')" onclick="toggleAcc(this)">
+    <div class="acc-item acc-item--audio" style="--acc-bg: url('assets/acc-audio.jpg')" onclick="toggleAcc(this)">
       <div class="acc-bar">
         <div class="acc-left">
           <span class="acc-icon" style="color:#7a6e5a;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 1 3 3v7a3 3 0 0 1-6 0V5a3 3 0 0 1 3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg></span>
@@ -701,6 +775,10 @@
           <span class="acc-title">Audio</span>
         </div>
         <span class="acc-chevron">+</span>
+        <div class="acc-audio-tagline">
+          <p class="acc-audio-subtitle">Don&rsquo;t Settle for Stock Songs Online</p>
+          <p class="acc-audio-desc">My competitors use stock audio over their videos. I record real ambient sound on location, and turn it into a cinematic soundtrack.</p>
+        </div>
       </div>
       <div class="acc-body"><ul>
         <li>Full wireless audio crew setup</li>
