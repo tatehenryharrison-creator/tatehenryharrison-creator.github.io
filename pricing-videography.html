@@ -165,11 +165,18 @@
       color: #e8e1d4; letter-spacing: 0.8px;
     }
     .acc-chevron {
-      font-size: 1.6rem; font-weight: 300; color: rgba(232,225,212,0.5);
-      line-height: 1; transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1), color 0.25s ease;
-      font-family: monospace; position: relative; z-index: 1;
+      font-size: 2rem; font-weight: 300; color: #e8e1d4;
+      line-height: 1; font-family: monospace; position: relative; z-index: 1;
+      width: 46px; height: 46px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      border: 1.5px solid rgba(201,168,76,0.55);
+      border-radius: 50%;
+      background: rgba(0,0,0,0.28);
+      transition: transform 0.85s cubic-bezier(0.34,1.56,0.64,1),
+                  color 0.3s ease, border-color 0.3s ease, background 0.3s ease;
     }
-    .acc-item.open .acc-chevron { transform: rotate(45deg); color: #5C6E82; }
+    .acc-item:hover .acc-chevron { border-color: rgba(201,168,76,0.85); }
+    .acc-item.open .acc-chevron { transform: rotate(45deg); color: #C9A84C; border-color: #C9A84C; background: rgba(201,168,76,0.1); }
 
     .acc-body {
       max-height: 0;
