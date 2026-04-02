@@ -363,44 +363,44 @@
     }
 
     /* ── AUDIO BAR: slide-to-center animation ── */
-    .acc-item--audio .acc-bar {
+    .acc-item .acc-bar {
       flex-wrap: wrap;
       align-content: flex-start;
       transition: min-height 0.45s cubic-bezier(0.22,1,0.36,1), padding 0.45s cubic-bezier(0.22,1,0.36,1);
     }
-    .acc-item--audio.open .acc-bar {
+    .acc-item.open .acc-bar {
       flex-direction: column;
       align-items: center;
       justify-content: center;
       min-height: 200px;
       padding-bottom: 28px;
     }
-    .acc-item--audio .acc-left {
+    .acc-item .acc-left {
       transition: justify-content 0.0s, width 0.0s;
       flex: 1;
     }
-    .acc-item--audio.open .acc-left {
+    .acc-item.open .acc-left {
       width: 100%;
       flex: none;
       justify-content: center;
     }
-    .acc-item--audio .acc-icon,
-    .acc-item--audio .acc-num {
+    .acc-item .acc-icon,
+    .acc-item .acc-num {
       transition: opacity 0.3s ease, max-width 0.35s ease, margin 0.35s ease;
       overflow: hidden;
       max-width: 80px;
     }
-    .acc-item--audio.open .acc-icon,
-    .acc-item--audio.open .acc-num {
+    .acc-item.open .acc-icon,
+    .acc-item.open .acc-num {
       opacity: 0; max-width: 0; margin: 0;
     }
-    .acc-item--audio .acc-title {
+    .acc-item .acc-title {
       transition: font-size 0.45s cubic-bezier(0.22,1,0.36,1), letter-spacing 0.45s ease;
     }
-    .acc-item--audio.open .acc-title {
+    .acc-item.open .acc-title {
       font-size: 2.2rem; letter-spacing: 2px;
     }
-    .acc-item--audio.open .acc-chevron {
+    .acc-item.open .acc-chevron {
       position: absolute; top: 18px; right: 8%;
     }
     /* Tagline inside the bar */
