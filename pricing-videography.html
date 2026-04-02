@@ -122,8 +122,8 @@
       margin: 0 auto;
       padding: 80px 8% 52px;
     }
-    .acc-eyebrow { font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase; color: #5C6E82; margin: 0 0 12px; }
-    .acc-heading { font-size: 1.8rem; font-weight: 600; color: #e8e1d4; margin: 0; letter-spacing: -0.2px; }
+    .acc-eyebrow { font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase; color: #5C6E82; margin: 0 0 12px; text-align: center; }
+    .acc-heading { font-size: 1.8rem; font-weight: 600; color: #e8e1d4; margin: 0; letter-spacing: -0.2px; text-align: center; }
 
     .acc-item {
       position: relative;
@@ -135,9 +135,9 @@
 
     .acc-bar {
       position: relative;
-      min-height: 130px;
+      min-height: 100px;
       display: flex; align-items: center; justify-content: space-between;
-      padding: 36px 8%;
+      padding: 24px 8%;
       background-image: var(--acc-bg, none);
       background-size: cover;
       background-position: center;
@@ -151,8 +151,18 @@
       transition: background 0.35s ease;
       pointer-events: none;
     }
+    .acc-bar::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 75% 85% at center, rgba(0,0,0,0.60) 0%, transparent 100%);
+      opacity: 0;
+      transition: opacity 0.55s ease;
+      pointer-events: none;
+      z-index: 0;
+    }
     .acc-item:hover .acc-bar::before { background: rgba(18,15,12,0.48); }
-    .acc-item.open  .acc-bar::before { background: rgba(18,15,12,0.72); }
+    .acc-item.open  .acc-bar::before { background: rgba(18,15,12,0.55); }
+    .acc-item.open  .acc-bar::after  { opacity: 1; }
 
     .acc-left { display: flex; align-items: center; gap: 20px; position: relative; z-index: 1; }
     .acc-icon { display: flex; align-items: center; flex-shrink: 0; opacity: 0.9; }
@@ -162,14 +172,21 @@
     }
     .acc-title {
       font-family: 'Cinzel', serif; font-size: 1.45rem; font-weight: 600;
-      color: #e8e1d4; letter-spacing: 0.8px;
+      color: #e8e1d4; letter-spacing: 0.8px; word-break: break-word;
     }
     .acc-chevron {
-      font-size: 1.6rem; font-weight: 300; color: rgba(232,225,212,0.5);
-      line-height: 1; transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1), color 0.25s ease;
-      font-family: monospace; position: relative; z-index: 1;
+      font-size: 2rem; font-weight: 300; color: #e8e1d4;
+      line-height: 1; font-family: monospace; position: relative; z-index: 1;
+      width: 46px; height: 46px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      border: 1.5px solid rgba(201,168,76,0.55);
+      border-radius: 50%;
+      background: rgba(0,0,0,0.28);
+      transition: transform 0.85s cubic-bezier(0.34,1.56,0.64,1),
+                  color 0.3s ease, border-color 0.3s ease, background 0.3s ease;
     }
-    .acc-item.open .acc-chevron { transform: rotate(45deg); color: #5C6E82; }
+    .acc-item:hover .acc-chevron { border-color: rgba(201,168,76,0.85); }
+    .acc-item.open .acc-chevron { transform: rotate(45deg); color: #C9A84C; border-color: #C9A84C; background: rgba(201,168,76,0.1); }
 
     .acc-body {
       max-height: 0;
@@ -344,6 +361,24 @@
       .tier-features     { padding-top: 12px; }
       .tier-features li  { font-size: 0.82rem; padding: 4px 0 4px 16px; line-height: 1.35; }
     }
+
+    @media (max-width: 480px) {
+      /* Single-column tiers on small phones */
+      .pkg-tiers {
+        grid-template-columns: 1fr;
+        padding: 0 5% 40px;
+        gap: 12px;
+      }
+      /* Override the "center 3rd card" rule — full-width in 1-col layout */
+      .pkg-tier:nth-child(3):last-child {
+        grid-column: unset;
+        max-width: 100%;
+        justify-self: stretch;
+      }
+      /* Reduce open accordion bar height and title size to prevent overflow */
+      .acc-item.open .acc-bar { min-height: 130px; padding-bottom: 12px; }
+      .acc-item.open .acc-title { font-size: 1.6rem; letter-spacing: 1.5px; }
+    }
   
     /* Extras — Vintage Glass & Film block */
     .extras-vintage { padding: 28px 32px 20px; border-top: 1px solid rgba(201,168,76,0.18); margin-top: 4px; }
@@ -372,8 +407,8 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      min-height: 200px;
-      padding-bottom: 28px;
+      min-height: 160px;
+      padding-bottom: 16px;
     }
     .acc-item .acc-left {
       transition: justify-content 0.0s, width 0.0s;
@@ -1029,9 +1064,12 @@ function selectTier(el) {
       if (first) toggleAcc(first);
     }
   });
-  // Scroll to accordion
+  // Float gently to ~60% into the What's Included section
   const acc = document.querySelector('.acc-section');
-  if (acc) acc.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  if (acc) {
+    const top = window.scrollY + acc.getBoundingClientRect().top + acc.offsetHeight * 0.6 - window.innerHeight * 0.5;
+    window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+  }
 }
 
 window.addEventListener('DOMContentLoaded', () => {
