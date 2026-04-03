@@ -52,25 +52,54 @@ nav, nav a, .services-eyebrow, .pricing-eyebrow, .pricing-card-label, .pricing-c
     font-family: 'EB Garamond', serif;
 }
 nav {
-    padding: 0 10% 0 0; margin: 0;
+    padding: 0; margin: 0;
     display: flex; align-items: stretch; justify-content: space-between;
     background: #f5f4f0;
     border-bottom: 1px solid rgba(99,95,81,0.18);
     position: relative; z-index: 100;
 }
+.nav-left { display: flex; align-items: center; flex-shrink: 0; }
 .nav-logo-link {
     display: flex; align-items: center; text-decoration: none;
     flex-shrink: 0; padding: 0; margin: 0; line-height: 0;
 }
 .nav-logo { height: 100px; width: auto; display: block; transition: opacity 0.25s ease; }
 .nav-logo:hover { opacity: 0.8; }
-.nav-links { display: flex; align-items: center; }
-.nav-links > a {
-    font-family: 'EB Garamond', serif;
-    color: #2A2220; text-decoration: none;
-    margin-left: 20px; transition: opacity 0.3s ease;
+.nav-home {
+    font-family: 'EB Garamond', serif; font-size: 0.95rem; color: #2A2220;
+    text-decoration: none; padding: 0 22px; transition: opacity 0.3s ease;
+    border-left: 1px solid rgba(99,95,81,0.12); height: 100%;
+    display: flex; align-items: center;
 }
-.nav-links > a:hover { opacity: 0.7; }
+.nav-home:hover { opacity: 0.6; }
+.nav-right { display: flex; align-items: center; padding: 0 6% 0 0; position: relative; }
+.nav-toc-btn {
+    font-family: 'EB Garamond', serif; font-size: 0.95rem; color: #2A2220;
+    background: none; border: 1px solid rgba(99,95,81,0.22); border-radius: 6px;
+    padding: 8px 16px; cursor: pointer; display: flex; align-items: center; gap: 8px;
+    transition: border-color 0.2s ease, background 0.2s ease;
+}
+.nav-toc-btn:hover { border-color: rgba(201,168,76,0.5); background: rgba(201,168,76,0.04); }
+.nav-toc-btn.open { border-color: #C9A84C; color: #C9A84C; }
+.nav-toc-arrow { font-size: 0.7rem; transition: transform 0.3s ease; display: inline-block; }
+.nav-toc-btn.open .nav-toc-arrow { transform: rotate(180deg); }
+.nav-toc-panel {
+    position: absolute; top: calc(100% + 6px); right: 0;
+    background: #f5f4f0; border: 1px solid rgba(99,95,81,0.14);
+    border-radius: 10px; box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+    min-width: 210px; padding: 8px 0;
+    opacity: 0; pointer-events: none; transform: translateY(-6px);
+    transition: opacity 0.22s ease, transform 0.22s ease;
+    z-index: 200;
+}
+.nav-toc-panel.open { opacity: 1; pointer-events: auto; transform: translateY(0); }
+.nav-toc-panel a {
+    display: block; font-family: 'EB Garamond', serif; font-size: 0.9rem;
+    color: #2A2220; text-decoration: none; padding: 9px 20px;
+    transition: background 0.15s ease, color 0.15s ease;
+}
+.nav-toc-panel a:hover { background: rgba(201,168,76,0.06); color: #C9A84C; }
+.nav-links { display: none; }
 
 /* ===== FLOATING MENU ===== */
 .float-menu-btn {
@@ -1556,22 +1585,26 @@ footer > * { position: relative; z-index: 1; }
 
 <!-- NAV -->
 <nav>
-    <a href="index.html" class="nav-logo-link">
-        <img src="logo_transparent.png" alt="Harrison Media LLC" class="nav-logo">
-    </a>
-    <div class="nav-links">
-        <a href="index.html">Home</a>
-        <a href="#about">About Me</a>
-        <a href="#pricing">Services</a>
-        <a href="#work">Portfolio</a>
-        <a href="#contact">Contact</a>
-        <a href="distribution-guide.html">Video Guide</a>
-        <a href="schedule.html">Free Consultation</a>
-        <a href="quote.html" style="background:#5C6E82;color:#f5f4f0;padding:8px 20px;border-radius:50px;font-size:0.88rem;letter-spacing:0.05em;">Get a Quote</a>
+    <div class="nav-left">
+        <a href="index.html" class="nav-logo-link">
+            <img src="logo_transparent.png" alt="Harrison Media LLC" class="nav-logo">
+        </a>
+        <a href="index.html" class="nav-home">Home</a>
     </div>
-    <button class="nav-hamburger" id="navHamburger" aria-label="Open menu" aria-expanded="false">
-        <span></span><span></span><span></span>
-    </button>
+    <div class="nav-right">
+        <button class="nav-toc-btn" id="navTocBtn" aria-expanded="false">
+            Contents <span class="nav-toc-arrow">▾</span>
+        </button>
+        <div class="nav-toc-panel" id="navTocPanel">
+            <a href="#about">About Me</a>
+            <a href="#pricing">Services</a>
+            <a href="#work">Portfolio</a>
+            <a href="#contact">Contact</a>
+            <a href="distribution-guide.html">Video Guide</a>
+            <a href="schedule.html">Free Consultation</a>
+            <a href="quote.html">Get a Quote</a>
+        </div>
+    </div>
 </nav>
 
 <!-- Mobile Nav Drawer -->
@@ -2611,6 +2644,31 @@ footer > * { position: relative; z-index: 1; }
 <a href="schedule.html" class="mobile-cta">Book a Free Consultation →</a>
 
 <script>
+
+/* ===== CONTENTS DROPDOWN ===== */
+(function() {
+    var tocBtn   = document.getElementById('navTocBtn');
+    var tocPanel = document.getElementById('navTocPanel');
+    if (!tocBtn || !tocPanel) return;
+    tocBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        var open = tocPanel.classList.toggle('open');
+        tocBtn.classList.toggle('open', open);
+        tocBtn.setAttribute('aria-expanded', open);
+    });
+    document.addEventListener('click', function() {
+        tocPanel.classList.remove('open');
+        tocBtn.classList.remove('open');
+        tocBtn.setAttribute('aria-expanded', false);
+    });
+    tocPanel.addEventListener('click', function(e) { e.stopPropagation(); });
+    tocPanel.querySelectorAll('a').forEach(function(a) {
+        a.addEventListener('click', function() {
+            tocPanel.classList.remove('open');
+            tocBtn.classList.remove('open');
+        });
+    });
+})();
 
 /* ===== HAMBURGER NAV ===== */
 (function() {
