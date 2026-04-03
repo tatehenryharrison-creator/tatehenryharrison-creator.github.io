@@ -308,6 +308,8 @@
       btn.textContent = 'Sending…';
 
       const params = {
+        to_email   : 'tate@harrisonmediallc.com',
+        reply_to   : document.getElementById('email').value.trim(),
         first_name : document.getElementById('first_name').value.trim(),
         last_name  : document.getElementById('last_name').value.trim(),
         email      : document.getElementById('email').value.trim(),
