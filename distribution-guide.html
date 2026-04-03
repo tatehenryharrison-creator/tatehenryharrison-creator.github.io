@@ -269,6 +269,86 @@
     .fmt-badge--gold { background: rgba(201,168,76,0.1); color: #C9A84C; border: 1px solid rgba(201,168,76,0.2); }
     .fmt-badge--blue { background: rgba(106,173,203,0.1); color: #6AADCB; border: 1px solid rgba(106,173,203,0.2); }
 
+    /* ── STORYTELLING WRAP-UP ── */
+    .story-section {
+      padding: 100px 10%;
+      background: #f5f4f0;
+      text-align: center;
+    }
+    .story-intro {
+      max-width: 660px; margin: 0 auto 70px;
+    }
+    .story-intro .section-eyebrow { margin-bottom: 18px; }
+    .story-intro .section-heading { font-size: clamp(1.9rem, 3.5vw, 2.6rem); margin-bottom: 22px; }
+    .story-intro-body {
+      font-family: 'EB Garamond', serif; font-size: 1.05rem;
+      color: rgba(60,55,45,0.72); line-height: 1.75; margin: 0;
+    }
+
+    .story-pillars {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 2px; margin: 0 auto 80px; max-width: 980px;
+      border: 1px solid rgba(99,95,81,0.1); border-radius: 14px; overflow: hidden;
+    }
+    .story-pillar {
+      padding: 44px 36px 40px;
+      background: #fff;
+      position: relative;
+      text-align: left;
+      transition: background 0.25s ease;
+    }
+    .story-pillar:hover { background: #faf9f6; }
+    .story-pillar::before {
+      content: '';
+      position: absolute; top: 0; left: 36px; right: 36px; height: 2px;
+      background: linear-gradient(90deg, #C9A84C, rgba(201,168,76,0));
+    }
+    .story-pillar-num {
+      font-family: 'Cinzel', serif; font-size: 0.65rem; letter-spacing: 3px;
+      color: rgba(201,168,76,0.5); margin: 0 0 20px; text-transform: uppercase;
+    }
+    .story-pillar-title {
+      font-family: 'Cinzel', serif; font-size: 1.05rem; font-weight: 400;
+      color: #1C1A14; margin: 0 0 14px; line-height: 1.3; letter-spacing: 0.2px;
+    }
+    .story-pillar-desc {
+      font-family: 'EB Garamond', serif; font-size: 0.95rem;
+      color: rgba(60,55,45,0.65); line-height: 1.7; margin: 0;
+    }
+
+    .story-pullquote {
+      max-width: 720px; margin: 0 auto;
+      padding: 52px 10% 0;
+      border-top: 1px solid rgba(99,95,81,0.1);
+      position: relative;
+    }
+    .story-pullquote::before {
+      content: '\201C';
+      font-family: 'EB Garamond', serif; font-size: 7rem; line-height: 0;
+      color: rgba(201,168,76,0.15);
+      position: absolute; top: 72px; left: calc(10% - 18px);
+    }
+    .story-quote-text {
+      font-family: 'EB Garamond', serif; font-style: italic;
+      font-size: clamp(1.25rem, 2.2vw, 1.6rem);
+      color: #1C1A14; line-height: 1.55; margin: 0 0 24px;
+      letter-spacing: 0.1px;
+    }
+    .story-quote-attr {
+      font-family: 'Cinzel', serif; font-size: 0.72rem; letter-spacing: 2.5px;
+      text-transform: uppercase; color: #C9A84C; opacity: 0.8;
+    }
+
+    @media (max-width: 900px) {
+      .story-pillars { grid-template-columns: 1fr; }
+      .story-pillar { padding: 34px 28px 30px; }
+      .story-pullquote { padding: 40px 0 0; }
+      .story-pullquote::before { display: none; }
+    }
+    @media (max-width: 600px) {
+      .story-section { padding: 70px 6%; }
+    }
+
     /* ── CTA BANNER ── */
     .guide-cta {
       background: #1C1A14; padding: 90px 10%;
@@ -746,6 +826,44 @@
     </div>
 
   </div>
+</section>
+
+<!-- Storytelling Wrap-Up -->
+<section class="story-section">
+
+  <div class="story-intro">
+    <p class="section-eyebrow">Where It All Starts</p>
+    <h2 class="section-heading">Distribution Is Only as Powerful as What You're Distributing</h2>
+    <p class="story-intro-body">Every platform in this guide is a delivery mechanism. They can amplify reach, target audiences, and extend shelf life — but none of them can manufacture meaning. The content itself has to do that work. That's where storytelling comes in, and it's the part of this equation that most people underestimate.</p>
+  </div>
+
+  <div class="story-pillars">
+
+    <div class="story-pillar">
+      <p class="story-pillar-num">I</p>
+      <h3 class="story-pillar-title">Content That Holds Attention</h3>
+      <p class="story-pillar-desc">Algorithms don't reward posts — they reward watch time. A video that pulls people in and keeps them watching gets pushed further than any boosted post ever could. That kind of retention isn't a production trick. It comes from a story with a reason to exist, told in a way that respects the viewer's time.</p>
+    </div>
+
+    <div class="story-pillar">
+      <p class="story-pillar-num">II</p>
+      <h3 class="story-pillar-title">Stories That Transfer Across Formats</h3>
+      <p class="story-pillar-desc">A well-structured narrative doesn't belong to one platform. The same throughline — the tension, the character, the resolution — translates from a three-minute brand film to a thirty-second Reel to a six-second bumper ad. When the foundation is strong, repurposing becomes effortless instead of a compromise.</p>
+    </div>
+
+    <div class="story-pillar">
+      <p class="story-pillar-num">III</p>
+      <h3 class="story-pillar-title">Work That Compounds Over Time</h3>
+      <p class="story-pillar-desc">A properly made film doesn't expire. It earns search traffic years after posting, lives on your website as a permanent first impression, and continues to build trust with every new viewer who finds it. Content made to fill a calendar disappears. Content made to say something stays.</p>
+    </div>
+
+  </div>
+
+  <div class="story-pullquote">
+    <p class="story-quote-text">I don't approach a shoot thinking about views or engagement. I think about whether the person watching it will feel something — and whether that feeling moves them closer to whoever hired me. If it does that, the distribution takes care of itself.</p>
+    <span class="story-quote-attr">— Tate Harrison, Harrison Media LLC</span>
+  </div>
+
 </section>
 
 <!-- CTA -->
