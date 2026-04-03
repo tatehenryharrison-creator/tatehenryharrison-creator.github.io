@@ -33,13 +33,23 @@
     .pay-btn, .coming-soon-badge, footer { font-family: 'EB Garamond', serif; }
 
     /* ── NAV ── */
-    nav { padding: 0 10% 0 0; display: flex; justify-content: space-between; align-items: stretch; background: #f5f4f0; border-bottom: 1px solid rgba(99,95,81,0.12); position: sticky; top: 0; z-index: 100; transition: transform 0.35s ease; }
+    nav { padding: 0; display: flex; justify-content: space-between; align-items: stretch; background: #f5f4f0; border-bottom: 1px solid rgba(99,95,81,0.12); position: sticky; top: 0; z-index: 200; transition: transform 0.35s ease; }
+    .nav-left { display: flex; align-items: center; flex-shrink: 0; }
     .nav-logo-link { display: flex; align-items: center; text-decoration: none; flex-shrink: 0; padding: 0; margin: 0; line-height: 0; }
     .nav-logo { height: 160px; width: auto; display: block; transition: opacity 0.25s ease; }
     .nav-logo:hover { opacity: 0.8; }
-    .nav-links { display: flex; align-items: center; gap: 20px; }
-    .nav-links > a { color: #2A2220; text-decoration: none; transition: opacity 0.3s ease; font-size: 0.95rem; }
-    .nav-links > a:hover { opacity: 0.7; }
+    .nav-home { font-family: 'EB Garamond', serif; font-size: 0.95rem; color: #2A2220; text-decoration: none; padding: 0 22px; transition: opacity 0.3s ease; border-left: 1px solid rgba(99,95,81,0.12); height: 100%; display: flex; align-items: center; }
+    .nav-home:hover { opacity: 0.6; }
+    .nav-right { display: flex; align-items: center; padding: 0 6% 0 0; position: relative; }
+    .nav-toc-btn { font-family: 'EB Garamond', serif; font-size: 0.95rem; color: #2A2220; background: none; border: 1px solid rgba(99,95,81,0.22); border-radius: 6px; padding: 8px 16px; cursor: pointer; display: flex; align-items: center; gap: 8px; transition: border-color 0.2s ease, background 0.2s ease; }
+    .nav-toc-btn:hover { border-color: rgba(201,168,76,0.5); background: rgba(201,168,76,0.04); }
+    .nav-toc-btn.open { border-color: #C9A84C; color: #C9A84C; }
+    .nav-toc-arrow { font-size: 0.7rem; transition: transform 0.3s ease; display: inline-block; }
+    .nav-toc-btn.open .nav-toc-arrow { transform: rotate(180deg); }
+    .nav-toc-panel { position: absolute; top: calc(100% + 6px); right: 0; background: #f5f4f0; border: 1px solid rgba(99,95,81,0.14); border-radius: 10px; box-shadow: 0 8px 32px rgba(0,0,0,0.1); min-width: 210px; padding: 8px 0; opacity: 0; pointer-events: none; transform: translateY(-6px); transition: opacity 0.22s ease, transform 0.22s ease; }
+    .nav-toc-panel.open { opacity: 1; pointer-events: auto; transform: translateY(0); }
+    .nav-toc-panel a { display: block; font-family: 'EB Garamond', serif; font-size: 0.9rem; color: #2A2220; text-decoration: none; padding: 9px 20px; transition: background 0.15s ease, color 0.15s ease; }
+    .nav-toc-panel a:hover { background: rgba(201,168,76,0.06); color: #C9A84C; }
 
     /* ── PKG HEADER ── */
     .pkg-header { text-align: center; padding: 80px 10% 70px; }
@@ -386,17 +396,24 @@
 </head>
 <body>
 
-<nav>
-  <a href="index.html" class="nav-logo-link">
-    <img src="logo_transparent.png" alt="Harrison Media LLC" class="nav-logo">
-  </a>
-  <div class="nav-links">
-    <a href="index.html">Home</a>
-    <a href="index.html#pricing">Packages</a>
-    <a href="index.html#contact">Contact</a>
-    <a href="distribution-guide.html">Video Guide</a>
-    <a href="schedule.html">Free Consultation</a>
-    <a href="quote.html" style="background:#5C6E82;color:#f5f4f0;padding:8px 20px;border-radius:50px;font-size:0.88rem;letter-spacing:0.05em;">Get a Quote</a>
+<nav id="main-nav">
+  <div class="nav-left">
+    <a href="index.html" class="nav-logo-link">
+      <img src="logo_transparent.png" alt="Harrison Media LLC" class="nav-logo">
+    </a>
+    <a href="index.html" class="nav-home">Home</a>
+  </div>
+  <div class="nav-right">
+    <button class="nav-toc-btn" id="navTocBtn" aria-expanded="false">
+      Contents <span class="nav-toc-arrow">▾</span>
+    </button>
+    <div class="nav-toc-panel" id="navTocPanel">
+      <a href="index.html#pricing">Packages</a>
+      <a href="distribution-guide.html">Video Guide</a>
+      <a href="index.html#contact">Contact</a>
+      <a href="schedule.html">Free Consultation</a>
+      <a href="quote.html">Get a Quote</a>
+    </div>
   </div>
 </nav>
 
@@ -414,12 +431,12 @@
     <p class="acc-eyebrow">What's Included</p>
     <h2 class="acc-heading">Inside This Package</h2>
   </div>
-        <div class="acc-item" style="--acc-bg: url('assets/acc-video.jpg')" onclick="toggleAcc(this)">
+        <div class="acc-item" onclick="toggleAcc(this)">
           <div class="acc-bar">
             <div class="acc-left">
-              <span class="acc-icon" style="color:#5C6E82;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="14" height="14" rx="2"/><path d="m16 10 5-3v10l-5-3"/></svg></span>
+              <span class="acc-icon" style="color:#5C6E82;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="0.5" fill="currentColor"/></svg></span>
               <span class="acc-num">01</span>
-              <span class="acc-title">Video</span>
+              <span class="acc-title">Photo</span>
             </div>
             <span class="acc-chevron">+</span>
           </div>
@@ -673,7 +690,21 @@ window.addEventListener('DOMContentLoaded', () => {
 
     <script>
     (function(){
-      var nav = document.querySelector('nav');
+      var btn = document.getElementById('navTocBtn');
+      var panel = document.getElementById('navTocPanel');
+      btn.addEventListener('click', function(e){
+        e.stopPropagation();
+        var open = panel.classList.toggle('open');
+        btn.classList.toggle('open', open);
+        btn.setAttribute('aria-expanded', open);
+      });
+      document.addEventListener('click', function(){
+        panel.classList.remove('open'); btn.classList.remove('open');
+      });
+      panel.addEventListener('click', function(e){ e.stopPropagation(); });
+    })();
+    (function(){
+      var nav = document.getElementById('main-nav');
       var lastY = 0;
       window.addEventListener('scroll', function(){
         var y = window.scrollY;

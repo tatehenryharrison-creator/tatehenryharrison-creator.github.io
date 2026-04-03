@@ -17,16 +17,50 @@
     nav, nav a, footer { font-family: 'EB Garamond', serif; }
 
     /* ── NAV ── */
-    nav { padding: 0 10% 0 0; display: flex; justify-content: space-between; align-items: stretch;
+    nav { padding: 0; display: flex; justify-content: space-between; align-items: stretch;
           background: #f5f4f0; border-bottom: 1px solid rgba(99,95,81,0.12);
-          position: sticky; top: 0; z-index: 100; transition: transform 0.35s ease; }
+          position: sticky; top: 0; z-index: 200; transition: transform 0.35s ease; }
+    .nav-left { display: flex; align-items: center; flex-shrink: 0; }
     .nav-logo-link { display: flex; align-items: center; text-decoration: none; flex-shrink: 0; padding: 0; margin: 0; line-height: 0; }
     .nav-logo { height: 160px; width: auto; display: block; transition: opacity 0.25s ease; }
     .nav-logo:hover { opacity: 0.8; }
-    .nav-links { display: flex; align-items: center; gap: 20px; }
-    .nav-links > a { color: #2A2220; text-decoration: none; transition: opacity 0.3s ease; font-size: 0.95rem; }
-    .nav-links > a:hover { opacity: 0.7; }
-    .nav-links > a.active { color: #C9A84C; }
+    .nav-home { font-family: 'EB Garamond', serif; font-size: 0.95rem; color: #2A2220;
+                text-decoration: none; padding: 0 22px; transition: opacity 0.3s ease;
+                border-left: 1px solid rgba(99,95,81,0.12); height: 100%;
+                display: flex; align-items: center; }
+    .nav-home:hover { opacity: 0.6; }
+    .nav-right { display: flex; align-items: center; padding: 0 6% 0 0; position: relative; }
+    .nav-toc-btn {
+      font-family: 'EB Garamond', serif; font-size: 0.95rem; color: #2A2220;
+      background: none; border: 1px solid rgba(99,95,81,0.22); border-radius: 6px;
+      padding: 8px 16px; cursor: pointer; display: flex; align-items: center; gap: 8px;
+      transition: border-color 0.2s ease, background 0.2s ease;
+    }
+    .nav-toc-btn:hover { border-color: rgba(201,168,76,0.5); background: rgba(201,168,76,0.04); }
+    .nav-toc-btn.open { border-color: #C9A84C; color: #C9A84C; }
+    .nav-toc-arrow { font-size: 0.7rem; transition: transform 0.3s ease; display: inline-block; }
+    .nav-toc-btn.open .nav-toc-arrow { transform: rotate(180deg); }
+    .nav-toc-panel {
+      position: absolute; top: calc(100% + 6px); right: 0;
+      background: #f5f4f0; border: 1px solid rgba(99,95,81,0.14);
+      border-radius: 10px; box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+      min-width: 230px; padding: 8px 0;
+      opacity: 0; pointer-events: none; transform: translateY(-6px);
+      transition: opacity 0.22s ease, transform 0.22s ease;
+    }
+    .nav-toc-panel.open { opacity: 1; pointer-events: auto; transform: translateY(0); }
+    .nav-toc-panel a {
+      display: block; font-family: 'EB Garamond', serif; font-size: 0.9rem;
+      color: #2A2220; text-decoration: none; padding: 9px 20px;
+      transition: background 0.15s ease, color 0.15s ease;
+    }
+    .nav-toc-panel a:hover { background: rgba(201,168,76,0.06); color: #C9A84C; }
+    .nav-toc-panel a.active { color: #C9A84C; }
+    .nav-toc-divider { height: 1px; background: rgba(99,95,81,0.1); margin: 6px 0; }
+    .nav-toc-section-label {
+      font-family: 'EB Garamond', serif; font-size: 0.65rem; letter-spacing: 2px;
+      text-transform: uppercase; color: #a8a49c; padding: 8px 20px 4px;
+    }
 
     /* ── HERO ── */
     .guide-hero {
@@ -269,6 +303,86 @@
     .fmt-badge--gold { background: rgba(201,168,76,0.1); color: #C9A84C; border: 1px solid rgba(201,168,76,0.2); }
     .fmt-badge--blue { background: rgba(106,173,203,0.1); color: #6AADCB; border: 1px solid rgba(106,173,203,0.2); }
 
+    /* ── STORYTELLING WRAP-UP ── */
+    .story-section {
+      padding: 100px 10%;
+      background: #f5f4f0;
+      text-align: center;
+    }
+    .story-intro {
+      max-width: 660px; margin: 0 auto 70px;
+    }
+    .story-intro .section-eyebrow { margin-bottom: 18px; }
+    .story-intro .section-heading { font-size: clamp(1.9rem, 3.5vw, 2.6rem); margin-bottom: 22px; }
+    .story-intro-body {
+      font-family: 'EB Garamond', serif; font-size: 1.05rem;
+      color: rgba(60,55,45,0.72); line-height: 1.75; margin: 0;
+    }
+
+    .story-pillars {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 2px; margin: 0 auto 80px; max-width: 980px;
+      border: 1px solid rgba(99,95,81,0.1); border-radius: 14px; overflow: hidden;
+    }
+    .story-pillar {
+      padding: 44px 36px 40px;
+      background: #fff;
+      position: relative;
+      text-align: left;
+      transition: background 0.25s ease;
+    }
+    .story-pillar:hover { background: #faf9f6; }
+    .story-pillar::before {
+      content: '';
+      position: absolute; top: 0; left: 36px; right: 36px; height: 2px;
+      background: linear-gradient(90deg, #C9A84C, rgba(201,168,76,0));
+    }
+    .story-pillar-num {
+      font-family: 'Cinzel', serif; font-size: 0.65rem; letter-spacing: 3px;
+      color: rgba(201,168,76,0.5); margin: 0 0 20px; text-transform: uppercase;
+    }
+    .story-pillar-title {
+      font-family: 'Cinzel', serif; font-size: 1.05rem; font-weight: 400;
+      color: #1C1A14; margin: 0 0 14px; line-height: 1.3; letter-spacing: 0.2px;
+    }
+    .story-pillar-desc {
+      font-family: 'EB Garamond', serif; font-size: 0.95rem;
+      color: rgba(60,55,45,0.65); line-height: 1.7; margin: 0;
+    }
+
+    .story-pullquote {
+      max-width: 720px; margin: 0 auto;
+      padding: 52px 10% 0;
+      border-top: 1px solid rgba(99,95,81,0.1);
+      position: relative;
+    }
+    .story-pullquote::before {
+      content: '\201C';
+      font-family: 'EB Garamond', serif; font-size: 7rem; line-height: 0;
+      color: rgba(201,168,76,0.15);
+      position: absolute; top: 72px; left: calc(10% - 18px);
+    }
+    .story-quote-text {
+      font-family: 'EB Garamond', serif; font-style: italic;
+      font-size: clamp(1.25rem, 2.2vw, 1.6rem);
+      color: #1C1A14; line-height: 1.55; margin: 0 0 24px;
+      letter-spacing: 0.1px;
+    }
+    .story-quote-attr {
+      font-family: 'Cinzel', serif; font-size: 0.72rem; letter-spacing: 2.5px;
+      text-transform: uppercase; color: #C9A84C; opacity: 0.8;
+    }
+
+    @media (max-width: 900px) {
+      .story-pillars { grid-template-columns: 1fr; }
+      .story-pillar { padding: 34px 28px 30px; }
+      .story-pullquote { padding: 40px 0 0; }
+      .story-pullquote::before { display: none; }
+    }
+    @media (max-width: 600px) {
+      .story-section { padding: 70px 6%; }
+    }
+
     /* ── CTA BANNER ── */
     .guide-cta {
       background: #1C1A14; padding: 90px 10%;
@@ -324,23 +438,39 @@
       .platform-grid, .owned-grid, .ads-grid, .tips-grid { grid-template-columns: 1fr; }
       .guide-hero { padding: 70px 6% 60px; }
       .guide-cta { padding: 70px 6%; }
-      .nav-links { display: none; }
+      .nav-right { padding-right: 4%; }
     }
   </style>
 </head>
 <body>
 
-<nav>
-  <a href="index.html" class="nav-logo-link">
-    <img src="logo_transparent.png" alt="Harrison Media LLC" class="nav-logo">
-  </a>
-  <div class="nav-links">
-    <a href="index.html">Home</a>
-    <a href="index.html#pricing">Packages</a>
-    <a href="distribution-guide.html" class="active">Video Guide</a>
-    <a href="index.html#contact">Contact</a>
-    <a href="schedule.html">Free Consultation</a>
-    <a href="quote.html" style="background:#5C6E82;color:#f5f4f0;padding:8px 20px;border-radius:50px;font-size:0.88rem;letter-spacing:0.05em;">Get a Quote</a>
+<nav id="main-nav">
+  <div class="nav-left">
+    <a href="index.html" class="nav-logo-link">
+      <img src="logo_transparent.png" alt="Harrison Media LLC" class="nav-logo">
+    </a>
+    <a href="index.html" class="nav-home">Home</a>
+  </div>
+  <div class="nav-right">
+    <button class="nav-toc-btn" id="navTocBtn" aria-expanded="false" aria-controls="navTocPanel">
+      Contents <span class="nav-toc-arrow">▾</span>
+    </button>
+    <div class="nav-toc-panel" id="navTocPanel" role="menu">
+      <p class="nav-toc-section-label">On This Page</p>
+      <a href="#social">Where to Post</a>
+      <a href="#owned">Your Own Channels</a>
+      <a href="#paid">Paid Distribution</a>
+      <a href="#formats">Format Cheat Sheet</a>
+      <a href="#tips">Best Practices</a>
+      <a href="#story">The Foundation</a>
+      <div class="nav-toc-divider"></div>
+      <p class="nav-toc-section-label">Site</p>
+      <a href="index.html#pricing">Packages</a>
+      <a href="distribution-guide.html" class="active">Video Guide</a>
+      <a href="index.html#contact">Contact</a>
+      <a href="schedule.html">Free Consultation</a>
+      <a href="quote.html">Get a Quote</a>
+    </div>
   </div>
 </nav>
 
@@ -356,10 +486,10 @@
 </div>
 
 <!-- Social Platforms -->
-<section class="guide-section">
+<section class="guide-section" id="social">
   <p class="section-eyebrow">Where to Post</p>
   <h2 class="section-heading">Social Media Platforms</h2>
-  <p class="section-sub">Each platform has its own culture, format, and audience. Post natively — don't just cross-post the same file everywhere.</p>
+  <p class="section-sub">Each platform has its own culture, format, and audience. Post natively. What does this mean? Post the original media file I give you to each platform separately. Do not share video links across platforms.</p>
 
   <div class="platform-grid">
 
@@ -478,7 +608,7 @@
 </section>
 
 <!-- Owned Channels -->
-<section class="guide-section guide-section--alt">
+<section class="guide-section guide-section--alt" id="owned">
   <p class="section-eyebrow">Own Your Audience</p>
   <h2 class="section-heading">Your Own Channels</h2>
   <p class="section-sub">Social platforms can change their algorithms or disappear overnight. These channels are assets you own.</p>
@@ -547,7 +677,7 @@
 </section>
 
 <!-- Paid Distribution -->
-<section class="guide-section guide-section--dark">
+<section class="guide-section guide-section--dark" id="paid">
   <p class="section-eyebrow" style="color:rgba(201,168,76,0.7);">Amplify with Budget</p>
   <h2 class="section-heading section-heading--light">Paid Distribution</h2>
   <p class="section-sub section-sub--light">Even a small budget can put your video in front of a highly targeted audience. These platforms offer the best ROI for video ads.</p>
@@ -611,7 +741,7 @@
 </section>
 
 <!-- Format Reference Table -->
-<section class="guide-section guide-section--alt">
+<section class="guide-section guide-section--alt" id="formats">
   <p class="section-eyebrow">Quick Reference</p>
   <h2 class="section-heading">Format Cheat Sheet</h2>
   <p class="section-sub">Native format matters. Uploading the wrong ratio gets cropped or penalized by the algorithm.</p>
@@ -690,7 +820,7 @@
 </section>
 
 <!-- Tips -->
-<section class="guide-section guide-section--dark">
+<section class="guide-section guide-section--dark" id="tips">
   <p class="section-eyebrow" style="color:rgba(201,168,76,0.7);">Best Practices</p>
   <h2 class="section-heading section-heading--light">6 Rules for Maximum Reach</h2>
   <p class="section-sub section-sub--light">The difference between a video that disappears and one that compounds over time.</p>
@@ -748,6 +878,44 @@
   </div>
 </section>
 
+<!-- Storytelling Wrap-Up -->
+<section class="story-section" id="story">
+
+  <div class="story-intro">
+    <p class="section-eyebrow">Where It All Starts</p>
+    <h2 class="section-heading">Distribution Is Only as Powerful as What You're Distributing</h2>
+    <p class="story-intro-body">Every platform in this guide is a delivery mechanism. They can amplify reach, target audiences, and extend shelf life — but none of them can manufacture meaning. The content itself has to do that work. That's where storytelling comes in, and it's the part of this equation that most people underestimate.</p>
+  </div>
+
+  <div class="story-pillars">
+
+    <div class="story-pillar">
+      <p class="story-pillar-num">I</p>
+      <h3 class="story-pillar-title">Content That Holds Attention</h3>
+      <p class="story-pillar-desc">Algorithms don't reward posts — they reward watch time. A video that pulls people in and keeps them watching gets pushed further than any boosted post ever could. That kind of retention isn't a production trick. It comes from a story with a reason to exist, told in a way that respects the viewer's time.</p>
+    </div>
+
+    <div class="story-pillar">
+      <p class="story-pillar-num">II</p>
+      <h3 class="story-pillar-title">Stories That Transfer Across Formats</h3>
+      <p class="story-pillar-desc">A well-structured narrative doesn't belong to one platform. The same throughline — the tension, the character, the resolution — translates from a three-minute brand film to a thirty-second Reel to a six-second bumper ad. When the foundation is strong, repurposing becomes effortless instead of a compromise.</p>
+    </div>
+
+    <div class="story-pillar">
+      <p class="story-pillar-num">III</p>
+      <h3 class="story-pillar-title">Work That Compounds Over Time</h3>
+      <p class="story-pillar-desc">A properly made film doesn't expire. It earns search traffic years after posting, lives on your website as a permanent first impression, and continues to build trust with every new viewer who finds it. Content made to fill a calendar disappears. Content made to say something stays.</p>
+    </div>
+
+  </div>
+
+  <div class="story-pullquote">
+    <p class="story-quote-text">I don't approach a shoot thinking about views or engagement. I think about whether the person watching it will feel something — and whether that feeling moves them closer to whoever hired me. If it does that, the distribution takes care of itself.</p>
+    <span class="story-quote-attr">— Tate Harrison, Harrison Media LLC</span>
+  </div>
+
+</section>
+
 <!-- CTA -->
 <div class="guide-cta">
   <p class="guide-cta-eyebrow">Ready for Your Next Piece?</p>
@@ -787,9 +955,32 @@
 </footer>
 
 <script>
+  // TOC dropdown toggle
+  const tocBtn   = document.getElementById('navTocBtn');
+  const tocPanel = document.getElementById('navTocPanel');
+  tocBtn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    const open = tocPanel.classList.toggle('open');
+    tocBtn.classList.toggle('open', open);
+    tocBtn.setAttribute('aria-expanded', open);
+  });
+  document.addEventListener('click', function() {
+    tocPanel.classList.remove('open');
+    tocBtn.classList.remove('open');
+    tocBtn.setAttribute('aria-expanded', false);
+  });
+  tocPanel.addEventListener('click', function(e) { e.stopPropagation(); });
+  // Close panel on link click
+  tocPanel.querySelectorAll('a').forEach(function(a) {
+    a.addEventListener('click', function() {
+      tocPanel.classList.remove('open');
+      tocBtn.classList.remove('open');
+    });
+  });
+
   // Hide nav on scroll down, show on scroll up
   (function(){
-    var nav = document.querySelector('nav');
+    var nav = document.getElementById('main-nav');
     var lastY = 0;
     window.addEventListener('scroll', function(){
       var y = window.scrollY;
