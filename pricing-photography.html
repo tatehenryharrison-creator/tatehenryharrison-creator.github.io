@@ -40,12 +40,19 @@
     .nav-logo:hover { opacity: 0.8; }
     .nav-home { font-family: 'EB Garamond', serif; font-size: 0.95rem; color: #2A2220; text-decoration: none; padding: 0 22px; transition: opacity 0.3s ease; border-left: 1px solid rgba(99,95,81,0.12); height: 100%; display: flex; align-items: center; }
     .nav-home:hover { opacity: 0.6; }
-    .nav-right { display: flex; align-items: center; padding: 0 6% 0 0; position: relative; }
-    .nav-toc-btn { font-family: 'EB Garamond', serif; font-size: 0.95rem; color: #2A2220; background: none; border: 1px solid rgba(99,95,81,0.22); border-radius: 6px; padding: 8px 16px; cursor: pointer; display: flex; align-items: center; gap: 8px; transition: border-color 0.2s ease, background 0.2s ease; }
-    .nav-toc-btn:hover { border-color: rgba(201,168,76,0.5); background: rgba(201,168,76,0.04); }
-    .nav-toc-btn.open { border-color: #C9A84C; color: #C9A84C; }
-    .nav-toc-arrow { font-size: 0.7rem; transition: transform 0.3s ease; display: inline-block; }
-    .nav-toc-btn.open .nav-toc-arrow { transform: rotate(180deg); }
+    .nav-right { display: flex; align-items: center; gap: 22px; padding: 0 6% 0 0; position: relative; }
+    .nav-exposed { font-family: 'EB Garamond', serif; font-size: 0.95rem; color: #2A2220; text-decoration: none; transition: opacity 0.25s ease; white-space: nowrap; }
+    .nav-exposed:hover { opacity: 0.6; }
+    .nav-exposed--cta { background: #5C6E82; color: #f5f4f0 !important; padding: 8px 20px; border-radius: 50px; font-size: 0.88rem; letter-spacing: 0.05em; transition: opacity 0.2s ease !important; }
+    .nav-exposed--cta:hover { opacity: 0.85 !important; }
+    .nav-toc-btn { background: none; border: none; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; padding: 8px 4px; position: relative; }
+    .nav-bar { display: block; width: 22px; height: 1.8px; background: #2A2220; border-radius: 2px; transition: background 0.2s ease, transform 0.3s ease, opacity 0.3s ease; }
+    .nav-toc-btn:hover .nav-bar { background: #C9A84C; }
+    .nav-toc-btn.open .nav-bar { background: #C9A84C; }
+    .nav-toc-btn.open .nav-bar:nth-child(1) { transform: translateY(6.8px) rotate(45deg); }
+    .nav-toc-btn.open .nav-bar:nth-child(2) { opacity: 0; }
+    .nav-toc-btn.open .nav-bar:nth-child(3) { transform: translateY(-6.8px) rotate(-45deg); }
+    @media (max-width: 600px) { .nav-exposed { display: none; } .nav-right { gap: 0; padding-right: 4%; } }
     .nav-toc-panel { position: absolute; top: calc(100% + 6px); right: 0; background: #f5f4f0; border: 1px solid rgba(99,95,81,0.14); border-radius: 10px; box-shadow: 0 8px 32px rgba(0,0,0,0.1); min-width: 210px; padding: 8px 0; opacity: 0; pointer-events: none; transform: translateY(-6px); transition: opacity 0.22s ease, transform 0.22s ease; }
     .nav-toc-panel.open { opacity: 1; pointer-events: auto; transform: translateY(0); }
     .nav-toc-panel a { display: block; font-family: 'EB Garamond', serif; font-size: 0.9rem; color: #2A2220; text-decoration: none; padding: 9px 20px; transition: background 0.15s ease, color 0.15s ease; }
@@ -404,15 +411,18 @@
     <a href="index.html" class="nav-home">Home</a>
   </div>
   <div class="nav-right">
+    <a href="index.html#about" class="nav-exposed">About Me</a>
+    <a href="index.html#pricing" class="nav-exposed">Services</a>
+    <a href="quote.html" class="nav-exposed nav-exposed--cta">Get a Quote</a>
     <button class="nav-toc-btn" id="navTocBtn" aria-expanded="false">
-      Contents <span class="nav-toc-arrow">▾</span>
+      <span class="nav-bar"></span>
+      <span class="nav-bar"></span>
+      <span class="nav-bar"></span>
     </button>
     <div class="nav-toc-panel" id="navTocPanel">
-      <a href="index.html#pricing">Packages</a>
       <a href="distribution-guide.html">Video Guide</a>
       <a href="index.html#contact">Contact</a>
       <a href="schedule.html">Free Consultation</a>
-      <a href="quote.html">Get a Quote</a>
     </div>
   </div>
 </nav>
