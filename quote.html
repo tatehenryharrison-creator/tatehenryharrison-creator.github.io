@@ -92,6 +92,27 @@
 
     textarea { resize: vertical; min-height: 130px; line-height: 1.6; }
 
+    /* Date mode toggle */
+    .date-toggle {
+      display: inline-flex; border: 1px solid rgba(99,95,81,0.22);
+      border-radius: 8px; overflow: hidden; margin-bottom: 10px;
+    }
+    .date-toggle-btn {
+      background: none; border: none; cursor: pointer;
+      font-family: 'EB Garamond', serif; font-size: 0.88rem;
+      color: #635f51; padding: 7px 18px;
+      transition: background 0.18s ease, color 0.18s ease;
+    }
+    .date-toggle-btn.active {
+      background: #5C6E82; color: #f5f4f0;
+    }
+    .date-range-row { display: flex; gap: 12px; }
+    .date-range-field { flex: 1; display: flex; flex-direction: column; gap: 4px; }
+    .date-range-label {
+      font-family: 'EB Garamond', serif; font-size: 0.78rem;
+      letter-spacing: 1px; text-transform: uppercase; color: #a8a49c;
+    }
+
     /* intl-tel-input overrides */
     .iti { width: 100%; }
     .iti__tel-input {
@@ -210,25 +231,48 @@
         <label for="service">Service <span class="req">*</span></label>
         <div class="select-wrap">
           <select id="service" name="service" required>
-            <option value="" disabled selected>Select a package…</option>
-            <option>Standard Video Package</option>
-            <option>Advanced Video Package</option>
-            <option>Campaign / Brand Package</option>
-            <option>Photography Package</option>
-            <option>Not sure yet — let's talk</option>
+            <option value="" disabled selected>Select a service…</option>
+            <optgroup label="Videography">
+              <option value="Videography — Half Day">Videography — Half Day</option>
+              <option value="Videography — Full Day">Videography — Full Day</option>
+              <option value="Videography — 2+ Days">Videography — 2+ Days</option>
+            </optgroup>
+            <optgroup label="Photography">
+              <option value="Photography — Half Day">Photography — Half Day</option>
+              <option value="Photography — Full Day">Photography — Full Day</option>
+              <option value="Photography — 2+ Days">Photography — 2+ Days</option>
+            </optgroup>
+            <optgroup label="Custom">
+              <option value="Custom (Hybrid, Large-Scale, etc.)">Custom (Hybrid, Large-Scale, etc.)</option>
+            </optgroup>
           </select>
         </div>
       </div>
 
-      <div class="field-row">
-        <div class="field-group">
-          <label for="event_date">Event / shoot date</label>
+      <div class="field-group">
+        <label>Shoot date</label>
+        <div class="date-toggle">
+          <button type="button" class="date-toggle-btn active" id="dateModeSingle" onclick="setDateMode('single')">Single Day</button>
+          <button type="button" class="date-toggle-btn" id="dateModeRange" onclick="setDateMode('range')">Date Range</button>
+        </div>
+        <div class="date-inputs" id="dateSingleWrap">
           <input type="date" id="event_date" name="event_date">
         </div>
-        <div class="field-group">
-          <label for="location">Location</label>
-          <input type="text" id="location" name="location" placeholder="Boulder, CO">
+        <div class="date-inputs date-range-row" id="dateRangeWrap" style="display:none;">
+          <div class="date-range-field">
+            <span class="date-range-label">From</span>
+            <input type="date" id="event_date_start" name="event_date_start">
+          </div>
+          <div class="date-range-field">
+            <span class="date-range-label">To</span>
+            <input type="date" id="event_date_end" name="event_date_end">
+          </div>
         </div>
+      </div>
+
+      <div class="field-group">
+        <label for="location">Location</label>
+        <input type="text" id="location" name="location" placeholder="Boulder, CO">
       </div>
 
       <div class="field-group">
@@ -268,6 +312,16 @@
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <script>
     emailjs.init('dqCe2PDLYoRL9_9Tb');
+
+    // Date mode toggle
+    let dateMode = 'single';
+    function setDateMode(mode) {
+      dateMode = mode;
+      document.getElementById('dateSingleWrap').style.display = mode === 'single' ? '' : 'none';
+      document.getElementById('dateRangeWrap').style.display  = mode === 'range'  ? '' : 'none';
+      document.getElementById('dateModeSingle').classList.toggle('active', mode === 'single');
+      document.getElementById('dateModeRange').classList.toggle('active', mode === 'range');
+    }
 
     // Hide nav on scroll down
     (function() {
@@ -320,7 +374,16 @@
         email      : document.getElementById('email').value.trim(),
         phone      : iti.getNumber(),
         service    : document.getElementById('service').value,
-        event_date : document.getElementById('event_date').value || 'Not specified',
+        event_date : (function() {
+          if (dateMode === 'range') {
+            const s = document.getElementById('event_date_start').value;
+            const e = document.getElementById('event_date_end').value;
+            if (s && e) return s + ' → ' + e;
+            if (s)      return s + ' → (end TBD)';
+            return 'Not specified';
+          }
+          return document.getElementById('event_date').value || 'Not specified';
+        })(),
         location   : document.getElementById('location').value.trim() || 'Not specified',
         notes      : document.getElementById('notes').value.trim() || 'None',
       };
