@@ -608,9 +608,15 @@ nav {
     font-family: 'EB Garamond', serif; font-size: 1.05rem;
     color: #a8a49c; line-height: 1.65; margin: 0 0 40px;
 }
+@keyframes arrow-drift {
+    0%, 100% { transform: translateX(0); opacity: 1; }
+    50%       { transform: translateX(4px); opacity: 0.7; }
+}
 .service-tile-cta {
     font-family: 'EB Garamond', serif; font-size: 0.88rem;
     letter-spacing: 1.5px; text-transform: uppercase; color: #C9A84C;
+    display: inline-block;
+    animation: arrow-drift 2s ease-in-out infinite;
 }
 .service-tile-custom {
     display: block; text-decoration: none;
@@ -1140,6 +1146,17 @@ footer > * { position: relative; z-index: 1; }
     .testimonial-text { font-size: 1.02rem; }
 }
 
+/* ===== PRICING CTA BUTTON ===== */
+.pricing-cta-btn {
+    display: inline-block;
+    font-family: 'EB Garamond', serif; font-size: 0.95rem; letter-spacing: 0.04em;
+    color: #f5f4f0; background: #5C6E82;
+    padding: 12px 32px; border-radius: 50px;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+}
+.pricing-cta-btn:hover { opacity: 0.85; }
+
 /* ===== AVAILABILITY BADGE ===== */
 .availability-badge {
     display: inline-flex; align-items: center; gap: 8px;
@@ -1622,7 +1639,6 @@ footer > * { position: relative; z-index: 1; }
         </button>
         <div class="nav-toc-panel" id="navTocPanel">
             <a href="#work">Portfolio</a>
-            <a href="#contact">Contact</a>
             <a href="distribution-guide.html">Video Guide</a>
             <a href="schedule.html">Free Consultation</a>
         </div>
@@ -1639,7 +1655,6 @@ footer > * { position: relative; z-index: 1; }
             <a href="#about">About Me</a>
             <a href="#pricing">Services</a>
             <a href="#work">Portfolio</a>
-            <a href="#contact">Contact</a>
             <a href="schedule.html">Free Consultation</a>
         </nav>
     </div>
@@ -1796,6 +1811,9 @@ footer > * { position: relative; z-index: 1; }
                 <span class="avail-dot"></span> Currently booking April &amp; May 2026
             </span>
         </div>
+        <div style="margin-top:22px;">
+            <a href="quote.html" class="pricing-cta-btn">Get a Quote →</a>
+        </div>
     </div>
 
     <!-- Service Category Tiles -->
@@ -1803,14 +1821,12 @@ footer > * { position: relative; z-index: 1; }
         <div class="service-tile" onclick="window.location.href='pricing-videography.html'">
             <p class="service-tile-eyebrow">01 — Video Production</p>
             <h3 class="service-tile-title">Videography</h3>
-            <a href="quote.html" class="service-tile-quote-btn" onclick="event.stopPropagation();">Get a Quote →</a>
             <p class="service-tile-desc">Documentary-style video from half-day shoots to full brand campaigns. Color graded, mixed, and delivered for every screen.</p>
             <span class="service-tile-cta">Learn More →</span>
         </div>
         <div class="service-tile" onclick="window.location.href='pricing-photography.html'">
             <p class="service-tile-eyebrow">02 — Still Photography</p>
             <h3 class="service-tile-title">Photography</h3>
-            <a href="quote.html" class="service-tile-quote-btn" onclick="event.stopPropagation();">Get a Quote →</a>
             <p class="service-tile-desc">Half-day and full-day sessions with professional color grading, retouching, and online gallery delivery.</p>
             <span class="service-tile-cta">Learn More →</span>
         </div>
@@ -2951,12 +2967,15 @@ document.querySelectorAll('.faq-item').forEach(item => {
     const section = document.querySelector('.testimonials-section');
     let current = 0, timer, paused = false;
 
+    // Only one review — nothing to cycle
+    if (cards.length <= 1) return;
+
     function goTo(idx) {
         cards[current].classList.remove('active');
-        dots[current].classList.remove('active');
+        if (dots[current]) dots[current].classList.remove('active');
         current = idx;
         cards[current].classList.add('active');
-        dots[current].classList.add('active');
+        if (dots[current]) dots[current].classList.add('active');
     }
     function next() { goTo((current + 1) % cards.length); }
 
