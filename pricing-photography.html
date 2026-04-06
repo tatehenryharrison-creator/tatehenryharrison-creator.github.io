@@ -619,9 +619,11 @@
         </svg>
       </div>
       <h3 class="payment-card-title">Credit Card</h3>
-      <span class="coming-soon-badge">Coming Soon</span>
-      <p class="payment-card-desc">Secure card payments via Stripe — available shortly.</p>
-      <a href="#" class="pay-btn btn-stripe">Pay by Card</a>
+      <p class="payment-card-desc">Secure card payment via Stripe.</p>
+      <stripe-buy-button
+        buy-button-id="buy_btn_1TJHdSFX8shIAlLheKO19M40"
+        publishable-key="pk_test_51TBczgFX8shIAlLhtMF6Gu87aqdowt2cnAxoSu7yUiYdS3XAtlOPBHsHsA2WBpDbcqJvFgdBzmsp6KIF5bbTHpJS00Rj08qghV"
+      ></stripe-buy-button>
     </div>
   </div>
   <p style="font-family:'EB Garamond',serif;font-size:0.82rem;color:#a8a49c;text-align:center;margin-top:22px;line-height:1.7;">
@@ -702,5 +704,6 @@ window.addEventListener('DOMContentLoaded', () => {
       }, {passive:true});
     })();
     </script>
+  <script async src="https://js.stripe.com/v3/buy-button.js"></script>
 </body>
 </html>
