@@ -32,13 +32,30 @@
     nav, nav a, .pkg-eyebrow, footer { font-family: 'EB Garamond', serif; }
 
     /* ── NAV ── */
-    nav { padding: 0 10% 0 0; display: flex; justify-content: space-between; align-items: stretch; background: #f5f4f0; border-bottom: 1px solid rgba(99,95,81,0.12); position: sticky; top: 0; z-index: 100; transition: transform 0.35s ease; }
+    nav { padding: 0; display: flex; justify-content: space-between; align-items: stretch; background: #f5f4f0; border-bottom: 1px solid rgba(99,95,81,0.12); position: sticky; top: 0; z-index: 200; transition: transform 0.35s ease; }
+    .nav-left { display: flex; align-items: center; flex-shrink: 0; }
     .nav-logo-link { display: flex; align-items: center; text-decoration: none; flex-shrink: 0; padding: 0; margin: 0; line-height: 0; }
     .nav-logo { height: 160px; width: auto; display: block; transition: opacity 0.25s ease; }
     .nav-logo:hover { opacity: 0.8; }
-    .nav-links { display: flex; align-items: center; gap: 20px; }
-    .nav-links > a { color: #2A2220; text-decoration: none; transition: opacity 0.3s ease; font-size: 0.95rem; }
-    .nav-links > a:hover { opacity: 0.7; }
+    .nav-home { font-family: 'EB Garamond', serif; font-size: 0.95rem; color: #2A2220; text-decoration: none; padding: 0 22px; transition: opacity 0.3s ease; border-left: 1px solid rgba(99,95,81,0.12); height: 100%; display: flex; align-items: center; }
+    .nav-home:hover { opacity: 0.6; }
+    .nav-right { display: flex; align-items: center; gap: 22px; padding: 0 6% 0 0; position: relative; }
+    .nav-exposed { font-family: 'EB Garamond', serif; font-size: 0.95rem; color: #2A2220; text-decoration: none; transition: opacity 0.25s ease; white-space: nowrap; }
+    .nav-exposed:hover { opacity: 0.6; }
+    .nav-exposed--cta { background: #5C6E82; color: #f5f4f0 !important; padding: 8px 20px; border-radius: 50px; font-size: 0.88rem; letter-spacing: 0.05em; transition: opacity 0.2s ease !important; }
+    .nav-exposed--cta:hover { opacity: 0.85 !important; }
+    .nav-toc-btn { background: none; border: none; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; padding: 8px 4px; position: relative; }
+    .nav-bar { display: block; width: 22px; height: 1.8px; background: #2A2220; border-radius: 2px; transition: background 0.2s ease, transform 0.3s ease, opacity 0.3s ease; }
+    .nav-toc-btn:hover .nav-bar { background: #C9A84C; }
+    .nav-toc-btn.open .nav-bar { background: #C9A84C; }
+    .nav-toc-btn.open .nav-bar:nth-child(1) { transform: translateY(6.8px) rotate(45deg); }
+    .nav-toc-btn.open .nav-bar:nth-child(2) { opacity: 0; }
+    .nav-toc-btn.open .nav-bar:nth-child(3) { transform: translateY(-6.8px) rotate(-45deg); }
+    .nav-toc-panel { position: absolute; top: calc(100% + 6px); right: 0; background: #f5f4f0; border: 1px solid rgba(99,95,81,0.14); border-radius: 10px; box-shadow: 0 8px 32px rgba(0,0,0,0.1); min-width: 210px; padding: 8px 0; opacity: 0; pointer-events: none; transform: translateY(-6px); transition: opacity 0.22s ease, transform 0.22s ease; }
+    .nav-toc-panel.open { opacity: 1; pointer-events: auto; transform: translateY(0); }
+    .nav-toc-panel a { display: block; font-family: 'EB Garamond', serif; font-size: 0.9rem; color: #2A2220; text-decoration: none; padding: 9px 20px; transition: background 0.15s ease, color 0.15s ease; }
+    .nav-toc-panel a:hover { background: rgba(201,168,76,0.06); color: #C9A84C; }
+    @media (max-width: 600px) { .nav-exposed { display: none; } .nav-right { gap: 0; padding-right: 4%; } }
 
     /* ── PKG HEADER ── */
     .pkg-header { text-align: center; padding: 80px 10% 70px; }
@@ -109,8 +126,7 @@
     .social-link svg { width: 16px; height: 16px; fill: currentColor; }
 
     @media (max-width: 768px) {
-      nav { padding: 0 5% 0 0; }
-      .nav-links { flex-wrap: wrap; justify-content: center; }
+      nav { padding: 0; }
       .pkg-header { padding: 52px 6% 48px; }
       .pkg-title { font-size: 2.2rem; }
       .steps-arrow { flex-direction: column; align-items: center; gap: 10px; }
@@ -188,15 +204,26 @@
 <body>
 
 <nav>
-  <a href="index.html" class="nav-logo-link">
-    <img src="logo_transparent.png" alt="Harrison Media LLC" class="nav-logo">
-  </a>
-  <div class="nav-links">
-    <a href="index.html">Home</a>
-    <a href="index.html#pricing">Packages</a>
-    <a href="index.html#contact">Contact</a>
-    <a href="schedule.html">Free Consultation</a>
-    <a href="quote.html" style="background:#5C6E82;color:#f5f4f0;padding:8px 20px;border-radius:50px;font-size:0.88rem;letter-spacing:0.05em;">Get a Quote</a>
+  <div class="nav-left">
+    <a href="index.html" class="nav-logo-link">
+      <img src="logo_transparent.png" alt="Harrison Media LLC" class="nav-logo">
+    </a>
+    <a href="index.html" class="nav-home">Home</a>
+  </div>
+  <div class="nav-right">
+    <a href="index.html#about" class="nav-exposed">About Me</a>
+    <a href="index.html#pricing" class="nav-exposed">Services</a>
+    <a href="quote.html" class="nav-exposed nav-exposed--cta">Get a Quote</a>
+    <button class="nav-toc-btn" id="navTocBtn" aria-expanded="false">
+      <span class="nav-bar"></span>
+      <span class="nav-bar"></span>
+      <span class="nav-bar"></span>
+    </button>
+    <div class="nav-toc-panel" id="navTocPanel">
+      <a href="distribution-guide.html">Video Guide</a>
+      <a href="index.html#contact">Contact</a>
+      <a href="schedule.html">Free Consultation</a>
+    </div>
   </div>
 </nav>
 
@@ -281,6 +308,7 @@
 </footer>
 
     <script>
+    // Hide nav on scroll down
     (function(){
       var nav = document.querySelector('nav');
       var lastY = 0;
@@ -291,6 +319,30 @@
         lastY = y;
       }, {passive:true});
     })();
+
+    // Hamburger menu
+    const tocBtn   = document.getElementById('navTocBtn');
+    const tocPanel = document.getElementById('navTocPanel');
+    tocBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      const open = tocPanel.classList.toggle('open');
+      tocBtn.classList.toggle('open', open);
+      tocBtn.setAttribute('aria-expanded', open);
+    });
+    document.addEventListener('click', function(e) {
+      if (!tocPanel.contains(e.target) && !tocBtn.contains(e.target)) {
+        tocPanel.classList.remove('open');
+        tocBtn.classList.remove('open');
+        tocBtn.setAttribute('aria-expanded', 'false');
+      }
+    });
+    tocPanel.querySelectorAll('a').forEach(function(a) {
+      a.addEventListener('click', function() {
+        tocPanel.classList.remove('open');
+        tocBtn.classList.remove('open');
+        tocBtn.setAttribute('aria-expanded', 'false');
+      });
+    });
     </script>
 </body>
 </html>
