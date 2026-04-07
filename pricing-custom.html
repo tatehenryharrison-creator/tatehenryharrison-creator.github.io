@@ -244,6 +244,27 @@
     .step-badge { display: inline-flex; align-items: center; gap: 10px; font-family: 'EB Garamond', serif; font-size: 0.82rem; letter-spacing: 1.5px; text-transform: uppercase; color: #f5f4f0; background: #1C1A14; border-radius: 30px; padding: 8px 20px; }
     .step-badge-num { width: 22px; height: 22px; border-radius: 50%; background: #5C6E82; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; font-weight: 700; color: #fff; flex-shrink: 0; }
     .steps-down-arrow { margin-top: 20px; color: rgba(99,95,81,0.35); font-size: 1.4rem; }
+    .consult-btn {
+      display: inline-block; font-family: 'EB Garamond', serif; font-size: 0.88rem;
+      letter-spacing: 0.04em; color: #5C6E82;
+      border: 1px solid rgba(92,110,130,0.45); border-radius: 50px;
+      padding: 10px 28px; text-decoration: none;
+      transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+      margin-top: 20px;
+    }
+    .consult-btn:hover { background: #5C6E82; color: #f5f4f0; border-color: #5C6E82; }
+    .pay-divider { margin-top: 44px; padding-top: 36px; border-top: 1px solid rgba(99,95,81,0.12); }
+    .pay-divider-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 16px; }
+    .pay-action-btn {
+      display: inline-block; font-family: 'EB Garamond', serif; font-size: 0.88rem;
+      letter-spacing: 0.04em; text-decoration: none;
+      padding: 10px 24px; border-radius: 50px;
+      transition: opacity 0.2s ease;
+    }
+    .pay-action-btn--reserve { background: #1C1A14; color: #f5f4f0; }
+    .pay-action-btn--reserve:hover { opacity: 0.8; }
+    .pay-action-btn--final { background: transparent; color: #1C1A14; border: 1px solid rgba(42,34,32,0.35); }
+    .pay-action-btn--final:hover { background: rgba(42,34,32,0.06); }
 
     /* ── STEP 1 FORM ── */
     .step-section { padding: 0 10% 80px; max-width: 1100px; margin: 0 auto; }
@@ -627,11 +648,19 @@
   <span class="steps-divider-label">Ready to Book?</span>
   <h2>Complete the steps below</h2>
   <p>Sign the client agreement, then send your deposit to secure your date.</p>
+  <a href="schedule.html" class="consult-btn">Book a Free Consultation →</a>
   <div class="steps-arrow">
     <span class="step-badge"><span class="step-badge-num">1</span> Client Agreement</span>
     <span class="step-badge"><span class="step-badge-num">2</span> Deposit</span>
   </div>
   <div class="steps-down-arrow">↓</div>
+  <div class="pay-divider">
+    <span class="steps-divider-label">Ready to Pay?</span>
+    <div class="pay-divider-btns">
+      <a href="payment-reserve.html" class="pay-action-btn pay-action-btn--reserve">Pay to Reserve</a>
+      <a href="payment-final.html" class="pay-action-btn pay-action-btn--final">Pay for Final Deliverables</a>
+    </div>
+  </div>
 </div>
 
 <!-- Step 1 -->
