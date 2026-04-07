@@ -52,7 +52,8 @@
     .nav-toc-btn.open .nav-bar:nth-child(1) { transform: translateY(6.8px) rotate(45deg); }
     .nav-toc-btn.open .nav-bar:nth-child(2) { opacity: 0; }
     .nav-toc-btn.open .nav-bar:nth-child(3) { transform: translateY(-6.8px) rotate(-45deg); }
-    @media (max-width: 600px) { .nav-exposed { display: none; } .nav-right { gap: 0; padding-right: 4%; } }
+    @media (max-width: 600px) { .nav-exposed { display: none; } .nav-right { gap: 0; padding-right: 4%; } .nav-logo { height: 80px; } }
+    html, body { overflow-x: hidden; }
     .nav-toc-panel { position: absolute; top: calc(100% + 6px); right: 0; background: #f5f4f0; border: 1px solid rgba(99,95,81,0.14); border-radius: 10px; box-shadow: 0 8px 32px rgba(0,0,0,0.1); min-width: 210px; padding: 8px 0; opacity: 0; pointer-events: none; transform: translateY(-6px); transition: opacity 0.22s ease, transform 0.22s ease; }
     .nav-toc-panel.open { opacity: 1; pointer-events: auto; transform: translateY(0); }
     .nav-toc-panel a { display: block; font-family: 'EB Garamond', serif; font-size: 0.9rem; color: #2A2220; text-decoration: none; padding: 9px 20px; transition: background 0.15s ease, color 0.15s ease; }
@@ -342,6 +343,7 @@
 
     @media (max-width: 768px) {
       nav { padding: 0 5% 0 0; }
+      .nav-logo { height: 80px; }
       .nav-links { flex-wrap: wrap; justify-content: center; }
       .pkg-header { padding: 52px 6% 48px; }
       .pkg-title { font-size: 2.2rem; }
@@ -380,6 +382,10 @@
     }
 
     @media (max-width: 480px) {
+      .nav-logo { height: 70px; }
+      .pkg-title { font-size: 1.45rem; }
+      .pkg-price-tag { font-size: 1.1rem; padding: 8px 18px; max-width: 100%; }
+      .pkg-eyebrow { font-size: 0.62rem; letter-spacing: 2px; }
       /* Single-column tiers on small phones */
       .pkg-tiers {
         grid-template-columns: 1fr;
@@ -395,6 +401,7 @@
       /* Reduce open accordion bar height and title size to prevent overflow */
       .acc-item.open .acc-bar { min-height: 130px; padding-bottom: 12px; }
       .acc-item.open .acc-title { font-size: 1.6rem; letter-spacing: 1.5px; }
+      .extras-vintage-cards, .extras-macro-cards { grid-template-columns: 1fr; gap: 12px; }
     }
   
     /* Extras — Vintage Glass & Film block */
