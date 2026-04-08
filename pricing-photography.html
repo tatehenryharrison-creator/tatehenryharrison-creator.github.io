@@ -109,6 +109,18 @@
     .addon-subtitle { font-family: 'EB Garamond', serif; font-size: 0.98rem; color: #635f51; text-align: center; margin: 0 auto 44px; line-height: 1.6; max-width: 500px; }
 
     .addon-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .addon-stepper { display: inline-flex; align-items: center; gap: 0; border: 1px solid rgba(201,168,76,0.35); border-radius: 50px; overflow: hidden; margin-bottom: 16px; }
+    .addon-stepper-btn { background: none; border: none; color: #C9A84C; font-size: 1.1rem; padding: 6px 16px; cursor: pointer; transition: background 0.2s; font-family: 'EB Garamond', serif; }
+    .addon-stepper-btn:hover { background: rgba(201,168,76,0.12); }
+    .addon-stepper-count { font-family: 'Cinzel', serif; font-size: 0.95rem; color: #e8e1d4; min-width: 32px; text-align: center; }
+    .addon-stepper-label { font-family: 'EB Garamond', serif; font-size: 0.82rem; color: rgba(232,225,212,0.45); margin-bottom: 16px; display: block; }
+    .addon-qty-wrap { display: inline-flex; align-items: center; gap: 6px; font-family: 'EB Garamond', serif; font-size: 0.88rem; color: #635f51; border: 1px solid rgba(99,95,81,0.25); border-radius: 50px; padding: 4px 8px 4px 14px; }
+    .addon-qty-wrap.addon-toggle--active { background: #1C1A14; border-color: #1C1A14; color: #e8e1d4; }
+    .addon-qty-wrap .aq-label { pointer-events: none; }
+    .addon-qty-wrap .aq-price { font-size: 0.78rem; opacity: 0.6; }
+    .aq-btn { background: none; border: none; color: inherit; cursor: pointer; font-size: 1rem; line-height: 1; padding: 0 4px; opacity: 0.7; }
+    .aq-btn:hover { opacity: 1; }
+    .aq-count { min-width: 18px; text-align: center; font-family: 'Cinzel', serif; font-size: 0.82rem; }
     .addon-fold-btn { display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 22px 16px 20px; background: linear-gradient(155deg, #1e1b17 0%, #2d2720 60%, #1a1714 100%); border: 1px solid rgba(201,168,76,0.18); border-radius: 14px; cursor: pointer; transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.25s ease; text-align: center; color: #e8e1d4; }
     .addon-fold-btn:hover { border-color: rgba(201,168,76,0.45); box-shadow: 0 8px 28px rgba(0,0,0,0.25); transform: translateY(-2px); }
     .addon-fold-btn.active { border-color: #C9A84C; box-shadow: 0 0 0 2px rgba(201,168,76,0.2), 0 8px 28px rgba(0,0,0,0.25); }
@@ -470,6 +482,105 @@
         </div>
       </div>
 
+      <!-- Lighting Package -->
+      <div>
+        <button class="addon-fold-btn" data-key="lighting" onclick="toggleAddonPanel('lighting')">
+          <svg class="addon-fold-icon" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="26" cy="20" r="9" stroke="#C9A84C" stroke-width="1.5"/>
+            <line x1="26" y1="5" x2="26" y2="9" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="26" y1="31" x2="26" y2="35" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="11" y1="20" x2="15" y2="20" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="37" y1="20" x2="41" y2="20" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="15.5" y1="9.5" x2="18.5" y2="12.5" stroke="#C9A84C" stroke-width="1.2" stroke-linecap="round"/>
+            <line x1="36.5" y1="9.5" x2="33.5" y2="12.5" stroke="#C9A84C" stroke-width="1.2" stroke-linecap="round"/>
+            <line x1="22" y1="35" x2="30" y2="35" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="23" y1="38.5" x2="29" y2="38.5" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="24.5" y1="42" x2="27.5" y2="42" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+          <span class="addon-fold-name">Lighting</span>
+          <span class="addon-fold-price">+$200</span>
+          <span class="addon-fold-arrow">▾</span>
+        </button>
+        <div class="addon-panel" id="addon-panel-lighting">
+          <div class="addon-panel-inner">
+            <h4 class="addon-panel-head">Lighting Package</h4>
+            <p class="addon-panel-desc">Professional studio-grade lighting for controlled, commercial-quality results. Transforms any environment into a polished set — ideal for portraits, products, and brand shoots.</p>
+            <ul class="addon-panel-list">
+              <li>Aputure 600D key light</li>
+              <li>Softbox + reflector kit</li>
+              <li>Practical accent lights</li>
+              <li>Full setup + breakdown</li>
+            </ul>
+            <button class="addon-add-btn" id="btn-lighting" onclick="toggleAddon('lighting'); updateAddonBtn('lighting')">Add to Order — +$200</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Extra Retouching (qty) -->
+      <div>
+        <button class="addon-fold-btn" data-key="extra-retouching" onclick="toggleAddonPanel('extra-retouching')">
+          <svg class="addon-fold-icon" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M14 38l6-6 18-18a2 2 0 0 0-3-3L17 29l-6 6 3 3z" stroke="#C9A84C" stroke-width="1.5" stroke-linejoin="round"/>
+            <path d="M32 12l3 3" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/>
+            <circle cx="13" cy="39" r="4" stroke="#C9A84C" stroke-width="1" opacity="0.4"/>
+          </svg>
+          <span class="addon-fold-name">Extra Retouching</span>
+          <span class="addon-fold-price">+$50/5 photos</span>
+          <span class="addon-fold-arrow">▾</span>
+        </button>
+        <div class="addon-panel" id="addon-panel-extra-retouching">
+          <div class="addon-panel-inner">
+            <h4 class="addon-panel-head">Extra Retouching</h4>
+            <p class="addon-panel-desc">Deeper skin retouching, background cleanup, or composite work beyond the standard edit. Priced per set of 5 photos — for when perfection is the brief.</p>
+            <ul class="addon-panel-list">
+              <li>Per 5-photo set</li>
+              <li>Skin, background, or object work</li>
+              <li>Stacks with any package</li>
+            </ul>
+            <div class="addon-stepper">
+              <button class="addon-stepper-btn" onclick="setAddonQty('extra-retouching', -1)">−</button>
+              <span class="addon-stepper-count" id="qty-extra-retouching">0</span>
+              <button class="addon-stepper-btn" onclick="setAddonQty('extra-retouching', 1)">+</button>
+            </div>
+            <span class="addon-stepper-label">sets of 5 photos × $50 each</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- +5 Pristine Selects (qty) -->
+      <div>
+        <button class="addon-fold-btn" data-key="plus-5selects" onclick="toggleAddonPanel('plus-5selects')">
+          <svg class="addon-fold-icon" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="8" y="10" width="16" height="20" rx="2" stroke="#C9A84C" stroke-width="1.5"/>
+            <rect x="28" y="10" width="16" height="20" rx="2" stroke="#C9A84C" stroke-width="1.5"/>
+            <rect x="18" y="34" width="16" height="9" rx="2" stroke="#C9A84C" stroke-width="1.5"/>
+            <line x1="16" y1="34" x2="20" y2="30" stroke="#C9A84C" stroke-width="1" stroke-linecap="round" opacity="0.5"/>
+            <line x1="36" y1="34" x2="32" y2="30" stroke="#C9A84C" stroke-width="1" stroke-linecap="round" opacity="0.5"/>
+            <path d="M13 22l3 3 5-6" stroke="#C9A84C" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+          </svg>
+          <span class="addon-fold-name">+5 Selects</span>
+          <span class="addon-fold-price">+$75/set</span>
+          <span class="addon-fold-arrow">▾</span>
+        </button>
+        <div class="addon-panel" id="addon-panel-plus-5selects">
+          <div class="addon-panel-inner">
+            <h4 class="addon-panel-head">+5 Pristine Selects</h4>
+            <p class="addon-panel-desc">Expand your final gallery with additional fully-edited, hand-selected images. Each set of 5 is culled and color-graded to the same standard as the rest of your gallery.</p>
+            <ul class="addon-panel-list">
+              <li>Per set of 5 images</li>
+              <li>Hand-selected + fully edited</li>
+              <li>Matched to gallery style</li>
+            </ul>
+            <div class="addon-stepper">
+              <button class="addon-stepper-btn" onclick="setAddonQty('plus-5selects', -1)">−</button>
+              <span class="addon-stepper-count" id="qty-plus-5selects">0</span>
+              <button class="addon-stepper-btn" onclick="setAddonQty('plus-5selects', 1)">+</button>
+            </div>
+            <span class="addon-stepper-label">sets of 5 photos × $75 each</span>
+          </div>
+        </div>
+      </div>
+
     </div><!-- /addon-grid -->
   </div><!-- /addon-btn-wrap -->
 </section>
@@ -514,6 +625,10 @@
       <div class="cg-val">Add-on</div>
 
       <div class="cg-label">35mm Film</div>
+      <div class="cg-val">Add-on</div>
+      <div class="cg-val">Add-on</div>
+
+      <div class="cg-label">Lighting Package</div>
       <div class="cg-val">Add-on</div>
       <div class="cg-val">Add-on</div>
 
@@ -562,15 +677,24 @@
 
   <p class="cart-addons-title">Add-Ons</p>
   <div class="addon-toggles">
-    <button class="addon-toggle" data-addon="vintage-glass" onclick="toggleAddon('vintage-glass')">
-      Vintage Glass <span class="addon-toggle-price">+$150</span>
-    </button>
-    <button class="addon-toggle" data-addon="film-35mm" onclick="toggleAddon('film-35mm')">
-      35mm Film <span class="addon-toggle-price">+$200</span>
-    </button>
-    <button class="addon-toggle" data-addon="macro" onclick="toggleAddon('macro')">
-      Macro <span class="addon-toggle-price">+$100</span>
-    </button>
+    <button class="addon-toggle" data-addon="vintage-glass" onclick="toggleAddon('vintage-glass')">Vintage Glass <span class="addon-toggle-price">+$150</span></button>
+    <button class="addon-toggle" data-addon="film-35mm" onclick="toggleAddon('film-35mm')">35mm Film <span class="addon-toggle-price">+$200</span></button>
+    <button class="addon-toggle" data-addon="macro" onclick="toggleAddon('macro')">Macro <span class="addon-toggle-price">+$100</span></button>
+    <button class="addon-toggle" data-addon="lighting" onclick="toggleAddon('lighting')">Lighting <span class="addon-toggle-price">+$200</span></button>
+    <span class="addon-qty-wrap" data-addon="extra-retouching">
+      <span class="aq-label">Extra Retouching</span>
+      <span class="aq-price">+$50/5 photos</span>
+      <button class="aq-btn" onclick="setAddonQty('extra-retouching', -1)">−</button>
+      <span class="aq-count cart-qty-display" data-addon="extra-retouching">0</span>
+      <button class="aq-btn" onclick="setAddonQty('extra-retouching', 1)">+</button>
+    </span>
+    <span class="addon-qty-wrap" data-addon="plus-5selects">
+      <span class="aq-label">+5 Selects</span>
+      <span class="aq-price">+$75/set</span>
+      <button class="aq-btn" onclick="setAddonQty('plus-5selects', -1)">−</button>
+      <span class="aq-count cart-qty-display" data-addon="plus-5selects">0</span>
+      <button class="aq-btn" onclick="setAddonQty('plus-5selects', 1)">+</button>
+    </span>
   </div>
 
   <p style="font-family:'EB Garamond',serif;font-size:0.85rem;color:#a8a49c;text-align:center;margin-top:24px;line-height:1.6;">
@@ -622,11 +746,11 @@
 function updateAddonBtn(key) {
   const btn = document.getElementById('btn-' + key);
   if (!btn) return;
-  if (cart.addons.has(key)) {
+  if ((cart.addons[key] || 0) > 0) {
     btn.textContent = 'Added ✓';
     btn.classList.add('added');
   } else {
-    const prices = { 'vintage-glass': 150, 'film-35mm': 200, 'macro': 100 };
+    const prices = { 'vintage-glass': 150, 'film-35mm': 200, 'macro': 100, 'lighting': 200 };
     btn.textContent = `Add to Order — +$${prices[key]}`;
     btn.classList.remove('added');
   }
