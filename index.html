@@ -1866,6 +1866,7 @@ footer > * { position: relative; z-index: 1; }
     <!-- Service Category Tiles -->
     <div class="service-tiles-wrap">
         <div class="service-tile" onclick="window.location.href='pricing-videography.html'">
+            <img src="videography logo.png" alt="Videography" style="height:64px;width:auto;display:block;margin-bottom:20px;opacity:0.92;">
             <p class="service-tile-eyebrow">01 — Video Production</p>
             <h3 class="service-tile-title">Videography</h3>
             <p class="service-tile-desc">Documentary-style video from half-day shoots to full brand campaigns. Color graded, mixed, and delivered for every screen.</p>
@@ -2269,9 +2270,19 @@ footer > * { position: relative; z-index: 1; }
             <button class="filter-btn filter-btn--sub" data-filter="vintage">Vintage &amp; Film</button>
         </div>
     </div>
-    <!-- Videography empty state -->
-    <div class="portfolio-empty" id="portfolioEmpty">
-        <p>Videography work coming soon.</p>
+    <!-- Videography section -->
+    <div class="portfolio-empty" id="portfolioEmpty" style="padding:40px 5% 60px;">
+      <div style="max-width:900px;margin:0 auto;">
+        <p style="font-family:'EB Garamond',serif;font-size:0.7rem;letter-spacing:3px;text-transform:uppercase;color:#5C6E82;margin:0 0 14px;text-align:center;">Featured Film</p>
+        <h3 style="font-family:'Cinzel',serif;font-weight:400;font-size:1.8rem;color:#1C1A14;margin:0 0 24px;text-align:center;">Belonging</h3>
+        <div style="position:relative;width:100%;border-radius:16px;overflow:hidden;background:#1C1A14;box-shadow:0 20px 60px rgba(28,26,20,0.18);">
+          <video controls preload="metadata" style="width:100%;display:block;max-height:560px;object-fit:contain;background:#111009;">
+            <source src="portfolio/Videography/Belonging.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+        <p style="font-family:'EB Garamond',serif;font-size:0.92rem;color:#a8a49c;text-align:center;margin:20px 0 0;line-height:1.6;">More videography work in progress — <a href="pricing-videography.html" style="color:#5C6E82;">see packages →</a></p>
+      </div>
     </div>
 
     <div class="portfolio-grid" id="portfolioGrid">
