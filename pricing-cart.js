@@ -11,7 +11,14 @@ const PRICES = {
     'film-35mm': 200,
     'macro': 100,
     'drone': 300,
-    'audio': 250
+    'audio': 250,
+    'lighting': 200,
+    'longform': 300,
+    'broll': 150,
+    'extra-revision': 75,
+    'plus-3min': 150,
+    'extra-retouching': 50,
+    'plus-5selects': 75
   }
 };
 
@@ -37,15 +44,25 @@ const ADDON_LABELS = {
   'film-35mm': '35mm Film',
   'macro': 'Macro',
   'drone': 'Drone',
-  'audio': 'Audio'
+  'audio': 'Audio',
+  'lighting': 'Lighting',
+  'longform': 'Long-Form Video',
+  'broll': 'B-Roll',
+  'extra-revision': 'Extra Revision',
+  'plus-3min': '+3 Min Edit',
+  'extra-retouching': 'Extra Retouching',
+  'plus-5selects': '+5 Selects'
 };
 
-let cart = { package: null, addons: new Set() };
+// addons is now a plain object: { key: quantity }
+let cart = { package: null, addons: {} };
 
 function calcTotal() {
   if (!cart.package) return 0;
   let t = PRICES.packages[cart.package] || 0;
-  cart.addons.forEach(a => { t += PRICES.addons[a] || 0; });
+  Object.entries(cart.addons).forEach(([key, qty]) => {
+    if (qty > 0) t += (PRICES.addons[key] || 0) * qty;
+  });
   return t;
 }
 
@@ -66,11 +83,10 @@ function renderBar() {
   if (pkgDisplay) pkgDisplay.textContent = PACKAGE_LABELS[cart.package] || cart.package;
 
   if (addonsDisplay) {
-    if (cart.addons.size === 0) {
-      addonsDisplay.textContent = 'No add-ons';
-    } else {
-      addonsDisplay.textContent = [...cart.addons].map(a => ADDON_LABELS[a] || a).join(', ');
-    }
+    const active = Object.entries(cart.addons)
+      .filter(([, qty]) => qty > 0)
+      .map(([key, qty]) => qty > 1 ? `${ADDON_LABELS[key] || key} ×${qty}` : (ADDON_LABELS[key] || key));
+    addonsDisplay.textContent = active.length ? active.join(', ') : 'No add-ons';
   }
 
   const total = calcTotal();
@@ -80,8 +96,11 @@ function renderBar() {
     proceedBtn.onclick = () => {
       const page = PAYMENT_PAGES[cart.package];
       if (!page) return;
-      const addonsStr = [...cart.addons].join(',');
-      window.location.href = `${page}?package=${cart.package}&addons=${addonsStr}&total=${total}`;
+      // Encode addons as key:qty pairs, omit zero-qty
+      const addonsArr = Object.entries(cart.addons)
+        .filter(([, qty]) => qty > 0)
+        .map(([key, qty]) => qty > 1 ? `${key}:${qty}` : key);
+      window.location.href = `${page}?package=${cart.package}&addons=${addonsArr.join(',')}&total=${total}`;
     };
   }
 
@@ -90,9 +109,16 @@ function renderBar() {
     t.classList.toggle('selected', t.dataset.tier === cart.package);
   });
 
-  // Sync addon toggles
+  // Sync addon toggle buttons
   document.querySelectorAll('.addon-toggle[data-addon]').forEach(btn => {
-    btn.classList.toggle('addon-toggle--active', cart.addons.has(btn.dataset.addon));
+    const key = btn.dataset.addon;
+    const qty = cart.addons[key] || 0;
+    btn.classList.toggle('addon-toggle--active', qty > 0);
+  });
+
+  // Sync qty displays in bottom cart
+  document.querySelectorAll('.cart-qty-display[data-addon]').forEach(el => {
+    el.textContent = cart.addons[el.dataset.addon] || 0;
   });
 }
 
@@ -101,13 +127,45 @@ function selectPackage(tier) {
   renderBar();
 }
 
+// For toggle-style addons (qty 0 or 1)
 function toggleAddon(addonKey) {
-  if (cart.addons.has(addonKey)) {
-    cart.addons.delete(addonKey);
-  } else {
-    cart.addons.add(addonKey);
-  }
+  cart.addons[addonKey] = (cart.addons[addonKey] || 0) > 0 ? 0 : 1;
   renderBar();
+}
+
+// For quantity-based addons — delta is +1 or -1
+function setAddonQty(key, delta) {
+  const current = cart.addons[key] || 0;
+  const next = Math.max(0, current + delta);
+  cart.addons[key] = next;
+  // Update qty displays inside panels
+  const panelQty = document.getElementById('qty-' + key);
+  if (panelQty) panelQty.textContent = next;
+  // Update the fold-out button state
+  const foldBtn = document.querySelector(`.addon-fold-btn[data-key="${key}"]`);
+  if (foldBtn) foldBtn.classList.toggle('active', next > 0);
+  // Update add-btn label if present
+  updateAddonQtyBtn(key, next);
+  renderBar();
+}
+
+function updateAddonQtyBtn(key, qty) {
+  const btn = document.getElementById('btn-' + key);
+  if (!btn) return;
+  if (qty > 0) {
+    btn.textContent = `Added ×${qty} ✓`;
+    btn.classList.add('added');
+  } else {
+    const price = PRICES.addons[key] || 0;
+    const labels = {
+      'extra-revision': `Add Revisions — +$${price}/round`,
+      'plus-3min': `Add Length — +$${price}/3 min`,
+      'extra-retouching': `Add Retouching — +$${price}/5 photos`,
+      'plus-5selects': `Add Selects — +$${price}/5 photos`
+    };
+    btn.textContent = labels[key] || `Add to Order — +$${price}`;
+    btn.classList.remove('added');
+  }
 }
 
 // Scroll-reveal via IntersectionObserver
@@ -154,6 +212,8 @@ function toggleAddonPanel(key) {
     panel.style.maxHeight = panel.scrollHeight + 'px';
     const btn = document.querySelector(`.addon-fold-btn[data-key="${key}"]`);
     if (btn) btn.classList.add('active');
+    // If a qty add-on is already active, re-apply active state
+    if ((cart.addons[key] || 0) > 0 && btn) btn.classList.add('active');
   }
 }
 
