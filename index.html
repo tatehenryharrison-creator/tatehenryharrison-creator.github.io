@@ -1300,7 +1300,7 @@ footer > * { position: relative; z-index: 1; }
 .about-cta:hover { color: #4a5c6e; border-color: #4a5c6e; }
 
 /* ===== PROCESS SECTION ===== */
-.process-section { background: #e8e1d4; padding: 48px 10% 120px; border-top: 1px solid rgba(99,95,81,0.1); overflow: hidden; }
+.process-section { background: #e8e1d4; padding: 48px 10% 120px; border-top: 1px solid rgba(99,95,81,0.1); }
 .process-inner { max-width: 1100px; margin: 0 auto; text-align: center; }
 .process-eyebrow {
     font-family: 'EB Garamond', serif;
@@ -3441,7 +3441,8 @@ document.getElementById('footerForm').addEventListener('submit', async function(
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
     /* ---- Init ---- */
-    drawLines();
+    /* Defer until after layout/paint so getBoundingClientRect returns real values */
+    requestAnimationFrame(() => requestAnimationFrame(drawLines));
     window.addEventListener('resize', drawLines);
 })();
 
