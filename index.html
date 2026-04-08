@@ -476,7 +476,17 @@ html, body { overflow-x: hidden; }
     color: #635f51; margin-bottom: 12px;
 }
 .portfolio-heading { font-size: 2.4rem; color: #1C1A14; margin: 0 0 30px; }
-.portfolio-filters { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-bottom: 48px; }
+.portfolio-filters { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-bottom: 12px; }
+.portfolio-subfilters {
+    display: flex; justify-content: center; gap: 8px; flex-wrap: wrap;
+    margin-bottom: 40px;
+    max-height: 0; overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.35s ease, opacity 0.3s ease, margin-bottom 0.35s ease;
+}
+.portfolio-subfilters.open {
+    max-height: 120px; opacity: 1; margin-bottom: 40px;
+}
 .filter-btn {
     font-family: 'EB Garamond', serif; font-size: 0.82rem;
     letter-spacing: 1.5px; text-transform: uppercase;
@@ -486,6 +496,20 @@ html, body { overflow-x: hidden; }
 }
 .filter-btn:hover, .filter-btn.active {
     background: #5C6E82; border-color: #5C6E82; color: #f5f4f0;
+}
+.filter-btn--sub {
+    font-size: 0.74rem; padding: 6px 16px;
+    border-color: rgba(99,95,81,0.18); color: #8c8880;
+}
+.filter-btn--sub:hover, .filter-btn--sub.active {
+    background: #5C6E82; border-color: #5C6E82; color: #f5f4f0;
+}
+.portfolio-empty {
+    text-align: center; padding: 80px 20px 60px; display: none;
+}
+.portfolio-empty p {
+    font-family: 'EB Garamond', serif; font-size: 1.1rem;
+    color: #a8a49c; letter-spacing: 0.02em;
 }
 .portfolio-grid {
     columns: 3; column-gap: 18px;
@@ -2230,13 +2254,24 @@ footer > * { position: relative; z-index: 1; }
     <div class="portfolio-header">
         <p class="portfolio-eyebrow anim-fade">Selected Work</p>
         <h2 class="portfolio-heading anim-fade">Portfolio</h2>
+        <!-- Top-level filters -->
         <div class="portfolio-filters anim-fade">
-            <button class="filter-btn active" data-filter="all">All</button>
-            <button class="filter-btn" data-filter="portraits">Portraits</button>
-            <button class="filter-btn" data-filter="nature-street">Nature &amp; Street</button>
-            <button class="filter-btn" data-filter="product-photography">Product Photography</button>
-            <button class="filter-btn" data-filter="vintage">Vintage &amp; Film</button>
+            <button class="filter-btn active" data-top="all">All</button>
+            <button class="filter-btn" data-top="photography">Photography</button>
+            <button class="filter-btn" data-top="videography">Videography</button>
         </div>
+        <!-- Photography sub-filters (hidden until Photography is active) -->
+        <div class="portfolio-subfilters" id="portfolioSubfilters">
+            <button class="filter-btn filter-btn--sub active" data-filter="all-photo">All Photography</button>
+            <button class="filter-btn filter-btn--sub" data-filter="portraits">Portraits</button>
+            <button class="filter-btn filter-btn--sub" data-filter="nature-street">Nature &amp; Street</button>
+            <button class="filter-btn filter-btn--sub" data-filter="product-photography">Product Photography</button>
+            <button class="filter-btn filter-btn--sub" data-filter="vintage">Vintage &amp; Film</button>
+        </div>
+    </div>
+    <!-- Videography empty state -->
+    <div class="portfolio-empty" id="portfolioEmpty">
+        <p>Videography work coming soon.</p>
     </div>
 
     <div class="portfolio-grid" id="portfolioGrid">
@@ -2903,16 +2938,67 @@ document.querySelectorAll('.pricing-card').forEach(card => {
 })();
 
 /* ===== PORTFOLIO FILTER ===== */
-document.querySelectorAll('.filter-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+(function () {
+    const topBtns    = document.querySelectorAll('[data-top]');
+    const subBtns    = document.querySelectorAll('[data-filter]');
+    const subRow     = document.getElementById('portfolioSubfilters');
+    const grid       = document.getElementById('portfolioGrid');
+    const empty      = document.getElementById('portfolioEmpty');
+    const items      = document.querySelectorAll('.portfolio-item');
+
+    /* photo categories shown in this portfolio */
+    const photoCats  = ['portraits','nature-street','product-photography','vintage'];
+
+    function showItems(filter) {
+        items.forEach(item => {
+            let show;
+            if (filter === 'all' || filter === 'all-photo') {
+                show = true;
+            } else {
+                show = item.dataset.category === filter;
+            }
+            item.classList.toggle('hidden', !show);
+        });
+    }
+
+    function setSubActive(btn) {
+        subBtns.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
-        const filter = btn.dataset.filter;
-        document.querySelectorAll('.portfolio-item').forEach(item => {
-            item.classList.toggle('hidden', filter !== 'all' && item.dataset.category !== filter);
+    }
+
+    topBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            topBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            const top = btn.dataset.top;
+
+            if (top === 'all') {
+                subRow.classList.remove('open');
+                grid.style.display = '';
+                empty.style.display = 'none';
+                showItems('all');
+            } else if (top === 'photography') {
+                subRow.classList.add('open');
+                grid.style.display = '';
+                empty.style.display = 'none';
+                /* restore whichever sub-filter was last active */
+                const activeSub = subRow.querySelector('.filter-btn--sub.active');
+                showItems(activeSub ? activeSub.dataset.filter : 'all-photo');
+            } else if (top === 'videography') {
+                subRow.classList.remove('open');
+                grid.style.display = 'none';
+                empty.style.display = 'block';
+            }
         });
     });
-});
+
+    subBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            setSubActive(btn);
+            showItems(btn.dataset.filter);
+        });
+    });
+})();
 
 /* ===== LIGHTBOX ===== */
 const lightbox        = document.getElementById('lightbox');
