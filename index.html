@@ -56,7 +56,11 @@ nav {
     display: flex; align-items: stretch; justify-content: space-between;
     background: #f5f4f0;
     border-bottom: 1px solid rgba(99,95,81,0.18);
-    position: relative; z-index: 100;
+    position: sticky; top: 0; z-index: 300;
+    transition: box-shadow 0.3s ease;
+}
+nav.nav-scrolled {
+    box-shadow: 0 2px 16px rgba(28,26,20,0.10);
 }
 .nav-left { display: flex; align-items: center; flex-shrink: 0; }
 .nav-logo-link {
@@ -1655,6 +1659,8 @@ footer > * { position: relative; z-index: 1; }
         </button>
         <div class="nav-toc-panel" id="navTocPanel">
             <a href="index.html">Home</a>
+            <a href="#about">About Me</a>
+            <a href="#pricing">Services</a>
             <a href="#work">Portfolio</a>
             <a href="distribution-guide.html">Video Guide</a>
             <a href="schedule.html">Free Consultation</a>
@@ -3351,6 +3357,17 @@ document.getElementById('footerForm').addEventListener('submit', async function(
     /* ---- Init ---- */
     drawLines();
     window.addEventListener('resize', drawLines);
+})();
+
+/* ===== STICKY NAV SHADOW ===== */
+(function() {
+    const nav = document.querySelector('nav');
+    if (!nav) return;
+    function onNavScroll() {
+        nav.classList.toggle('nav-scrolled', window.scrollY > 10);
+    }
+    window.addEventListener('scroll', onNavScroll, { passive: true });
+    onNavScroll();
 })();
 
 /* ===== FLOATING MENU ===== */
