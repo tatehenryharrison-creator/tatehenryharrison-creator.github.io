@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payment — Custom Package | Tate Harrison</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
+  <link rel="stylesheet" href="fonts.css">
+  <style>
+    *{box-sizing:border-box} @keyframes gold-pulse{0%,100%{opacity:.18}50%{opacity:.55}}
+    body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;border:1.5px solid #c9a052;animation:gold-pulse 3s ease-in-out infinite}
+    body{margin:0;font-family:'IM Fell English',serif;background:#f5f4f0;color:#1C1A14;min-height:100vh}
+    h1,h2,h3{font-family:'Cinzel',serif;font-weight:400} p{color:#a8a49c}
+    nav{display:flex;justify-content:space-between;align-items:stretch;background:#f5f4f0;border-bottom:1px solid rgba(99,95,81,0.12);position:sticky;top:0;z-index:300}
+    .nav-logo-link{display:flex;align-items:center;text-decoration:none;line-height:0} .nav-logo{height:100px;width:auto;display:block}
+    .nav-right{display:flex;align-items:center;padding:0 6%;gap:20px}
+    .nav-link{font-family:'EB Garamond',serif;font-size:0.92rem;color:#5C6E82;text-decoration:none;transition:opacity .2s}
+    .pay-header{text-align:center;padding:64px 10% 48px;border-bottom:1px solid rgba(99,95,81,0.1)}
+    .pay-eyebrow{font-family:'EB Garamond',serif;font-size:0.7rem;letter-spacing:3px;text-transform:uppercase;color:#5C6E82;margin:0 0 14px}
+    .pay-title{font-family:'Cinzel',serif;font-size:2.6rem;font-weight:400;color:#1C1A14;margin:0 0 10px}
+    .pay-subtitle{font-family:'EB Garamond',serif;font-size:1rem;color:#635f51;margin:0;line-height:1.6}
+    .summary-section{max-width:640px;margin:0 auto;padding:48px 6% 0}
+    .summary-card{background:#fff;border:1px solid rgba(99,95,81,0.14);border-radius:16px;padding:32px 36px;margin-bottom:32px}
+    .summary-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(99,95,81,0.08)} .summary-row:last-child{border-bottom:none}
+    .summary-label{font-family:'EB Garamond',serif;font-size:0.92rem;color:#635f51} .summary-value{font-family:'EB Garamond',serif;font-size:0.92rem;color:#1C1A14}
+    .summary-total-row{display:flex;justify-content:space-between;padding:16px 0 0;margin-top:8px;border-top:1.5px solid rgba(99,95,81,0.15)}
+    .summary-total-label{font-family:'Cinzel',serif;font-size:1rem;color:#1C1A14} .summary-total-val{font-family:'Cinzel',serif;font-size:1.5rem;color:#C9A84C}
+    .methods-section{max-width:640px;margin:0 auto;padding:0 6% 80px}
+    .methods-eyebrow{font-family:'EB Garamond',serif;font-size:0.7rem;letter-spacing:3px;text-transform:uppercase;color:#a8a49c;margin:0 0 20px}
+    .methods-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px}
+    .method-card{background:#fff;border:1.5px solid rgba(99,95,81,0.14);border-radius:14px;padding:24px 20px;text-align:center;transition:border-color .25s,box-shadow .25s,transform .25s}
+    .method-card:hover{border-color:rgba(92,110,130,.35);box-shadow:0 8px 28px rgba(28,26,20,.08);transform:translateY(-2px)}
+    .method-name{font-family:'Cinzel',serif;font-size:1rem;font-weight:400;color:#1C1A14;margin:0 0 6px}
+    .method-desc{font-family:'EB Garamond',serif;font-size:0.85rem;color:#a8a49c;margin:0 0 14px;line-height:1.5}
+    .method-btn{display:inline-block;font-family:'EB Garamond',serif;font-size:0.88rem;color:#f5f4f0;background:#1C1A14;border:none;border-radius:50px;padding:9px 22px;text-decoration:none;cursor:pointer;transition:opacity .2s}
+    .method-btn:hover{opacity:.8} .method-btn--venmo{background:#008CFF} .method-btn--paypal{background:#0070BA}
+    .zelle-detail{font-family:'EB Garamond',serif;font-size:0.82rem;color:#635f51;margin:6px 0 0;line-height:1.5}
+    .copy-btn{display:inline-block;font-family:'EB Garamond',serif;font-size:0.82rem;color:#5C6E82;border:1px solid rgba(92,110,130,.35);border-radius:20px;padding:4px 14px;cursor:pointer;background:none;margin-top:8px;transition:background .2s,color .2s}
+    .copy-btn:hover{background:#5C6E82;color:#fff}
+    .stripe-wrap{background:#fff;border:1.5px solid rgba(99,95,81,0.14);border-radius:14px;padding:32px;text-align:center;margin-bottom:24px}
+    .stripe-coming{font-family:'EB Garamond',serif;font-size:0.72rem;letter-spacing:2px;text-transform:uppercase;color:#a8a49c;border:1px solid rgba(92,92,88,.35);border-radius:20px;padding:4px 14px;display:inline-block;margin-bottom:14px}
+    .stripe-title{font-family:'Cinzel',serif;font-size:1.1rem;color:#1C1A14;margin:0 0 8px}
+    .stripe-desc{font-family:'EB Garamond',serif;font-size:0.9rem;color:#a8a49c;margin:0;line-height:1.6}
+    footer{text-align:center;padding:32px 0;font-family:'EB Garamond',serif;font-size:0.85rem;color:#a8a49c;border-top:1px solid rgba(99,95,81,0.1)}
+    @media(max-width:600px){.methods-grid{grid-template-columns:1fr}.pay-title{font-size:2rem}.summary-card{padding:24px 20px}.nav-logo{height:70px}}
+  </style>
+</head>
+<body>
+<nav><a href="index.html" class="nav-logo-link"><img src="logo_transparent.png" alt="Harrison Media LLC" class="nav-logo"></a><div class="nav-right"><a href="pricing-custom.html" class="nav-link">← Back to Packages</a></div></nav>
+<div class="pay-header">
+  <p class="pay-eyebrow">Payment — Custom Production</p>
+  <h1 class="pay-title" id="pay-title">Custom Package</h1>
+  <p class="pay-subtitle">Multi-day video &amp; photography · Full color grade · Commercial license</p>
+</div>
+<div class="summary-section">
+  <div class="summary-card">
+    <div class="summary-row"><span class="summary-label">Package</span><span class="summary-value" id="pkg-display">Custom</span></div>
+    <div id="addon-rows"></div>
+    <div class="summary-total-row"><span class="summary-total-label">Total</span><span class="summary-total-val" id="total-display">—</span></div>
+  </div>
+</div>
+<div class="methods-section">
+  <p class="methods-eyebrow">Choose Your Payment Method</p>
+  <div class="stripe-wrap"><span class="stripe-coming">Coming Soon</span><h3 class="stripe-title">Credit Card via Stripe</h3><p class="stripe-desc">Card payments are being configured. Please use one of the methods below in the meantime.</p></div>
+  <div class="methods-grid">
+    <div class="method-card"><h3 class="method-name">Venmo</h3><p class="method-desc">Send to @Tatai on Venmo.</p><img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&margin=6&data=https%3A%2F%2Fvenmo.com%2Fu%2FTatai" alt="Venmo QR" style="width:90px;height:90px;border-radius:8px;display:block;margin:0 auto 12px;" loading="lazy"><a href="https://venmo.com/u/Tatai" target="_blank" rel="noopener" class="method-btn method-btn--venmo">Pay via Venmo</a><p style="font-family:'EB Garamond',serif;font-size:0.75rem;color:#a8a49c;margin:8px 0 0;">Last 4 digits: 8078</p></div>
+    <div class="method-card"><h3 class="method-name">PayPal</h3><p class="method-desc">Secure payment with buyer protection.</p><a href="https://paypal.me/harrisonmediallc" target="_blank" rel="noopener" class="method-btn method-btn--paypal">Pay via PayPal</a></div>
+    <div class="method-card"><h3 class="method-name">Zelle</h3><p class="method-desc">Instant bank transfer, no fees.</p><p class="zelle-detail"><strong>Phone:</strong> (303) 968-8078</p><p class="zelle-detail"><strong>Email:</strong> tatehenryharrison@gmail.com</p><button class="copy-btn" onclick="navigator.clipboard.writeText('3039688078').then(()=>{this.textContent='Copied!';setTimeout(()=>this.textContent='Copy Number',2000)})">Copy Number</button></div>
+    <div class="method-card" style="display:flex;flex-direction:column;justify-content:center;align-items:center;background:#faf9f6;"><h3 class="method-name" style="margin-bottom:10px;">Check</h3><p class="method-desc" style="margin:0;">Make out to <em>Harrison Media LLC</em><br>7732 Jade Ct, Boulder CO 80303</p></div>
+  </div>
+  <p style="font-family:'EB Garamond',serif;font-size:0.85rem;color:#a8a49c;text-align:center;line-height:1.6;">Questions? <a href="mailto:tatehenryharrison@gmail.com" style="color:#5C6E82;">tatehenryharrison@gmail.com</a></p>
+</div>
+<footer>© 2026 Tate Harrison · Harrison Media LLC</footer>
+<script>
+(function(){
+  const params=new URLSearchParams(window.location.search);
+  const pkg=params.get('package')||'';
+  const addonsStr=params.get('addons')||'';
+  const total=params.get('total');
+  const PKG_NAMES={hybrid:'Hybrid',multiday:'Multi-Day',campaign:'Campaign'};
+  const PKG_PRICES={hybrid:1200,multiday:2200,campaign:3800};
+  const LABELS={'vintage-glass':'Vintage Glass','film-35mm':'35mm Film','drone':'Drone','audio':'Audio Package','macro':'Macro'};
+  const PRICES={'vintage-glass':150,'film-35mm':200,'drone':300,'audio':250,'macro':100};
+  if(pkg){
+    const name=PKG_NAMES[pkg]||pkg;
+    const price=PKG_PRICES[pkg]||0;
+    document.getElementById('pay-title').textContent=name+' Package';
+    document.getElementById('pkg-display').textContent=name+' — $'+price.toLocaleString();
+  }
+  const rows=document.getElementById('addon-rows');
+  if(addonsStr){addonsStr.split(',').filter(Boolean).forEach(k=>{const d=document.createElement('div');d.className='summary-row';d.innerHTML=`<span class="summary-label">+ ${LABELS[k]||k}</span><span class="summary-value">+$${PRICES[k]||0}</span>`;rows.appendChild(d);});}
+  if(total){document.getElementById('total-display').textContent='$'+parseInt(total).toLocaleString();}
+})();
+</script>
+</body>
+</html>
