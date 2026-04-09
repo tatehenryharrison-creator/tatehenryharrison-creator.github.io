@@ -1089,10 +1089,6 @@ function updateAddonBtn(key) {
   document.addEventListener('click', function(){ panel.classList.remove('open'); btn.classList.remove('open'); });
   panel.addEventListener('click', function(e){ e.stopPropagation(); });
 })();
-(function(){
-  var nav = document.getElementById('main-nav'); var lastY = 0;
-  window.addEventListener('scroll', function(){ var y = window.scrollY; if(y > lastY && y > 80){ nav.style.transform = 'translateY(-100%)'; } else { nav.style.transform = ''; } lastY = y; }, {passive:true});
-})();
 
 /* ===== HOW IT WORKS — JOURNEY MAP ===== */
 (function () {

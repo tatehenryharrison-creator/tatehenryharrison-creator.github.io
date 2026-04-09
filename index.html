@@ -682,6 +682,15 @@ html, body { overflow-x: hidden; }
     animation: hands-shimmer 4.5s ease-in-out infinite;
     mix-blend-mode: screen;
 }
+.service-tile-photo-logo {
+    height: 72px; width: auto; flex-shrink: 0;
+    pointer-events: none; user-select: none;
+    animation: hands-shimmer 4.5s ease-in-out 2.25s infinite;
+    mix-blend-mode: screen;
+}
+.service-tile-cta-row {
+    display: flex; align-items: center; justify-content: space-between;
+}
 .service-tile-custom-body {
     display: flex; align-items: center; justify-content: space-between; gap: 40px;
     position: relative; z-index: 1;
@@ -1866,7 +1875,7 @@ footer > * { position: relative; z-index: 1; }
             <p class="service-tile-eyebrow">01 — Video Production</p>
             <h3 class="service-tile-title">Videography</h3>
             <p class="service-tile-desc">Documentary-style video from half-day shoots to full brand campaigns. Color graded, mixed, and delivered for every screen.</p>
-            <div style="display:flex; align-items:center; justify-content:space-between;">
+            <div class="service-tile-cta-row">
                 <span class="service-tile-cta">Learn More →</span>
                 <img src="videography logo.png" alt="" class="service-tile-video-logo" aria-hidden="true">
             </div>
@@ -1875,7 +1884,10 @@ footer > * { position: relative; z-index: 1; }
             <p class="service-tile-eyebrow">02 — Still Photography</p>
             <h3 class="service-tile-title">Photography</h3>
             <p class="service-tile-desc">Half-day and full-day sessions with professional color grading, retouching, and online gallery delivery.</p>
-            <span class="service-tile-cta">Learn More →</span>
+            <div class="service-tile-cta-row">
+                <span class="service-tile-cta">Learn More →</span>
+                <img src="Photography_logo_transparent.png" alt="" class="service-tile-photo-logo" aria-hidden="true">
+            </div>
         </div>
     </div>
     <div style="padding: 0 10%;">
