@@ -1252,7 +1252,7 @@ footer > * { position: relative; z-index: 1; }
 .testimonial-text {
     font-family: 'EB Garamond', serif; font-style: italic;
     font-size: 1.22rem; color: #e8e1d4; line-height: 1.7;
-    margin: 0 0 22px;
+    margin: 0 0 22px; text-align: center;
 }
 .testimonial-cite {
     font-family: 'EB Garamond', serif; font-size: 0.78rem;
@@ -1858,15 +1858,6 @@ footer > * { position: relative; z-index: 1; }
     <div class="pricing-header">
         <p class="pricing-eyebrow anim-fade">Investment</p>
         <h2 class="pricing-heading anim-fade">Choose Your Service</h2>
-        <p class="pricing-subtext anim-fade">From single-day photography to full brand campaigns — find the right fit for your project.</p>
-        <div style="margin-top:28px;">
-            <span class="availability-badge">
-                <span class="avail-dot"></span> Currently booking April &amp; May 2026
-            </span>
-        </div>
-        <div style="margin-top:22px;">
-            <a href="quote.html" class="pricing-cta-btn">Get a Quote →</a>
-        </div>
     </div>
 
     <!-- Service Category Tiles -->
@@ -1899,6 +1890,12 @@ footer > * { position: relative; z-index: 1; }
                 <img src="hands_logo_transparent_clean.png" alt="" class="service-tile-custom-hands" aria-hidden="true">
             </div>
         </a>
+    </div>
+
+    <div style="text-align:center; padding: 28px 0 0;">
+        <span class="availability-badge">
+            <span class="avail-dot"></span> Currently booking April &amp; May 2026
+        </span>
     </div>
 
     <div style="text-align:center; padding: 40px 0 12px; display:flex; flex-direction:column; align-items:center; gap:14px;">
@@ -3035,6 +3032,13 @@ document.querySelectorAll('.pricing-card').forEach(card => {
             showItems(btn.dataset.filter);
         });
     });
+
+    /* Auto-activate tab from URL param: ?tab=videography */
+    const urlTab = new URLSearchParams(window.location.search).get('tab');
+    if (urlTab) {
+        const matchBtn = Array.from(topBtns).find(b => b.dataset.top === urlTab);
+        if (matchBtn) matchBtn.click();
+    }
 })();
 
 /* ===== LIGHTBOX ===== */
