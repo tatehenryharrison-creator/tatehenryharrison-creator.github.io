@@ -231,58 +231,43 @@
       .wi-text { padding: 40px 6% 40px; }
       .compare-grid { grid-template-columns: 1.2fr 1fr 1fr; }
     }
-/* ===== PROCESS SECTION ===== */
-.process-section { background: #e8e1d4; padding: 64px 10% 100px; border-top: 1px solid rgba(99,95,81,0.1); border-bottom: 1px solid rgba(99,95,81,0.1); }
-.process-inner { max-width: 1100px; margin: 0 auto; text-align: center; }
-.process-eyebrow { font-family: 'EB Garamond', serif; font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase; color: #635f51; margin-bottom: 12px; }
-.process-heading { font-family: 'Cinzel', serif; font-weight: 400; font-size: 2.2rem; color: #1C1A14; margin: 0 0 16px; }
-.process-subhead { font-family: 'EB Garamond', serif; font-style: italic; font-size: 1rem; color: rgba(99,95,81,0.7); margin: 0 0 64px; }
-.process-journey { position: relative; width: 100%; height: 580px; }
-.process-svg-layer { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; overflow: visible; }
-.journey-seg { fill: none; stroke: rgba(92,110,130,0.3); stroke-width: 1.8; stroke-dasharray: 7 6; stroke-linecap: round; transition: stroke 0.5s ease, stroke-dasharray 0.5s ease, stroke-opacity 0.4s ease; }
-.journey-seg.solid { stroke: #5C6E82; stroke-dasharray: none; stroke-opacity: 1; }
-.process-orb-wrap { position: absolute; transform: translate(-50%, -50%); display: flex; flex-direction: column; align-items: center; cursor: pointer; z-index: 2; --orb-size: 116px; }
-.process-orb-wrap[data-step="1"] { left: 9%;  top: 74%; }
-.process-orb-wrap[data-step="2"] { left: 34%; top: 55%; }
-.process-orb-wrap[data-step="3"] { left: 61%; top: 36%; }
-.process-orb-wrap[data-step="4"] { left: 87%; top: 16%; }
-.process-orb { width: var(--orb-size); height: var(--orb-size); border-radius: 50%; background: radial-gradient(circle at 36% 36%, #e8e3db, #c8c2b8); border: 2px solid rgba(255,255,255,0.65); display: flex; align-items: center; justify-content: center; transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s ease, background 0.3s ease; box-shadow: 0 6px 28px rgba(28,26,20,0.16), inset 0 1px 0 rgba(255,255,255,0.55); position: relative; }
-.process-orb-wrap:hover .process-orb { transform: scale(1.1); box-shadow: 0 16px 48px rgba(28,26,20,0.2), inset 0 1px 0 rgba(255,255,255,0.65); background: radial-gradient(circle at 36% 36%, #f0ece5, #d6d0c7); }
-.process-orb-wrap.active .process-orb { background: radial-gradient(circle at 36% 36%, #f0ece5, #d6d0c7); box-shadow: 0 12px 40px rgba(92,110,130,0.28), inset 0 1px 0 rgba(255,255,255,0.65); transform: scale(1.05); }
-.process-orb::after { content: ''; position: absolute; inset: -10px; border-radius: 50%; border: 1.5px dashed rgba(92,110,130,0.4); animation: orbHint 2.8s ease-in-out infinite; pointer-events: none; }
-@keyframes orbHint { 0%, 100% { opacity: 0.65; transform: scale(1); } 50% { opacity: 0.1; transform: scale(1.15); } }
-.process-orb-wrap.active .process-orb::after, .process-orb-wrap:hover .process-orb::after { animation: none; opacity: 0; }
-.orb-label-wrap { margin-top: 16px; text-align: center; pointer-events: none; }
-.orb-step-num { font-family: 'Cinzel', serif; font-size: 0.6rem; letter-spacing: 3px; color: #5C6E82; text-transform: uppercase; display: block; margin-bottom: 4px; }
-.orb-title { font-family: 'Cinzel', serif; font-weight: 400; font-size: 0.78rem; letter-spacing: 1.5px; color: #1C1A14; white-space: nowrap; display: block; }
-.orb-hint { font-family: 'EB Garamond', serif; font-style: italic; font-size: 0.73rem; color: rgba(99,95,81,0.5); display: block; margin-top: 3px; }
-/* Process modal */
-.process-modal-overlay { position: fixed; inset: 0; background: rgba(28,26,20,0.54); backdrop-filter: blur(7px); -webkit-backdrop-filter: blur(7px); z-index: 2000; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
-.process-modal-overlay.open { opacity: 1; pointer-events: all; }
-.process-modal { background: #f5f4f0; border-radius: 22px; max-width: 530px; width: 90%; padding: 54px 50px 50px; position: relative; transform: translateY(30px) scale(0.96); transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1); box-shadow: 0 36px 90px rgba(28,26,20,0.24), 0 2px 0 rgba(255,255,255,0.5) inset; }
-.process-modal-overlay.open .process-modal { transform: translateY(0) scale(1); }
-.modal-close-btn { position: absolute; top: 18px; left: 20px; width: 34px; height: 34px; background: rgba(99,95,81,0.1); border: none; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; color: #635f51; font-size: 1.05rem; transition: background 0.2s, color 0.2s; line-height: 1; padding: 0; }
-.modal-close-btn:hover { background: rgba(99,95,81,0.22); color: #1C1A14; }
-.modal-icon-wrap { display: flex; justify-content: center; margin-bottom: 26px; }
-.modal-step-label { font-family: 'Cinzel', serif; font-size: 0.62rem; letter-spacing: 3.5px; text-transform: uppercase; color: #5C6E82; text-align: center; display: block; margin-bottom: 10px; }
-.modal-title { font-family: 'Cinzel', serif; font-weight: 400; font-size: 1.55rem; color: #1C1A14; margin: 0 0 22px; text-align: center; }
-.modal-body { font-family: 'EB Garamond', serif; font-size: 1.1rem; color: #635f51; line-height: 1.8; text-align: center; margin: 0 0 40px; }
-.modal-footer { display: flex; justify-content: center; }
-.modal-next-btn { font-family: 'Cinzel', serif; font-size: 0.72rem; letter-spacing: 2.5px; text-transform: uppercase; color: #f5f4f0; background: #5C6E82; border: none; border-radius: 10px; padding: 15px 34px; cursor: pointer; transition: background 0.2s, transform 0.2s; }
-.modal-next-btn:hover { background: #4a5c6e; transform: translateY(-2px); }
-.modal-next-btn:disabled { opacity: 0.38; cursor: default; transform: none; }
-/* Process responsive */
-@media (max-width: 700px) {
-  .process-journey { height: auto; display: flex; flex-direction: column; align-items: center; gap: 0; padding: 0; position: relative; }
-  .process-journey::before { content: ''; position: absolute; top: 58px; bottom: 58px; left: 50%; width: 1.5px; background: linear-gradient(to bottom, transparent, rgba(92,110,130,0.25) 15%, rgba(92,110,130,0.25) 85%, transparent); z-index: 0; }
-  .process-svg-layer { display: none; }
-  .process-orb-wrap, .process-orb-wrap[data-step="1"], .process-orb-wrap[data-step="2"], .process-orb-wrap[data-step="3"], .process-orb-wrap[data-step="4"] { position: static !important; left: auto !important; top: auto !important; transform: none !important; margin-bottom: 28px; z-index: 1; }
-  .process-orb-wrap:last-child { margin-bottom: 0; }
-  .orb-title { font-size: 0.82rem; white-space: normal; max-width: 140px; }
-  .orb-label-wrap { max-width: 160px; }
-  .process-modal-overlay { align-items: flex-end; }
-  .process-modal { max-width: 100%; width: 100%; border-radius: 24px 24px 0 0; padding: 44px 24px 40px; max-height: 88vh; overflow-y: auto; }
-  .process-subhead { margin-bottom: 44px; }
+/* ── JOURNEY SECTION ── */
+.journey-section { background: #e8e1d4; padding: 80px 0 120px; border-top: 1px solid rgba(99,95,81,0.1); border-bottom: 1px solid rgba(99,95,81,0.1); }
+.journey-header { text-align: center; padding: 0 10% 72px; }
+.journey-header-eyebrow { font-family: 'EB Garamond', serif; font-size: 0.7rem; letter-spacing: 3.5px; text-transform: uppercase; color: #5C6E82; margin: 0 0 14px; }
+.journey-header-title { font-family: 'Cinzel', serif; font-size: 2.2rem; font-weight: 400; color: #1C1A14; margin: 0 0 14px; line-height: 1.15; }
+.journey-header-sub { font-family: 'EB Garamond', serif; font-style: italic; font-size: 1.05rem; color: rgba(99,95,81,0.75); margin: 0; }
+.journey-body { max-width: 960px; margin: 0 auto; padding: 0 8%; position: relative; }
+.journey-svg-layer { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; overflow: visible; }
+.journey-path-ghost { fill: none; stroke: rgba(99,95,81,0.22); stroke-width: 2; stroke-dasharray: 5 9; stroke-linecap: round; }
+.journey-path-fill { fill: none; stroke: #C9A84C; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+.journey-stop { display: grid; grid-template-columns: 1fr 56px 1fr; column-gap: 28px; align-items: center; padding: 44px 0; }
+.journey-stop[data-side="left"] > .journey-card { grid-column: 1; grid-row: 1; }
+.journey-stop[data-side="left"] > .journey-node-col { grid-column: 2; grid-row: 1; }
+.journey-stop[data-side="right"] > .journey-node-col { grid-column: 2; grid-row: 1; }
+.journey-stop[data-side="right"] > .journey-card { grid-column: 3; grid-row: 1; }
+.journey-node-col { display: flex; justify-content: center; align-items: center; }
+.journey-node { width: 13px; height: 13px; border-radius: 50%; background: rgba(99,95,81,0.3); border: 2px solid rgba(99,95,81,0.35); box-shadow: 0 0 0 5px transparent; transition: background 0.4s ease, border-color 0.4s ease, box-shadow 0.45s ease, transform 0.4s cubic-bezier(0.34,1.56,0.64,1); position: relative; z-index: 1; }
+.journey-node.is-lit { background: #C9A84C; border-color: #b8912e; box-shadow: 0 0 0 7px rgba(201,168,76,0.18), 0 0 20px rgba(201,168,76,0.28); transform: scale(1.55); }
+.journey-card { background: #1C1A14; border: 1px solid rgba(232,225,212,0.09); border-radius: 16px; padding: 36px 40px; opacity: 0; transform: translateY(32px); transition: opacity 0.85s cubic-bezier(0.22,1,0.36,1), transform 0.85s cubic-bezier(0.22,1,0.36,1), border-color 0.3s ease; }
+.journey-card.is-visible { opacity: 1; transform: translateY(0); }
+.journey-card:hover { border-color: rgba(201,168,76,0.22); }
+.journey-card-num { font-family: 'Cinzel', serif; font-size: 0.58rem; letter-spacing: 3.5px; text-transform: uppercase; color: #5C6E82; display: block; margin-bottom: 8px; }
+.journey-card-eyebrow { font-family: 'EB Garamond', serif; font-size: 0.68rem; letter-spacing: 3px; text-transform: uppercase; color: rgba(232,225,212,0.35); display: block; margin-bottom: 10px; }
+.journey-card-title { font-family: 'Cinzel', serif; font-size: 1.52rem; font-weight: 400; color: #e8e1d4; margin: 0 0 14px; line-height: 1.2; }
+.journey-card-body { font-family: 'EB Garamond', serif; font-size: 1.0rem; color: rgba(232,225,212,0.55); line-height: 1.75; margin: 0 0 18px; }
+.journey-card-list { list-style: none; margin: 0; padding: 0; }
+.journey-card-list li { font-family: 'EB Garamond', serif; font-size: 0.92rem; color: rgba(232,225,212,0.4); padding: 3px 0 3px 18px; position: relative; line-height: 1.5; }
+.journey-card-list li::before { content: '—'; position: absolute; left: 0; color: rgba(92,110,130,0.38); font-size: 0.8rem; }
+@media (max-width: 720px) {
+  .journey-stop { grid-template-columns: 28px 1fr; column-gap: 16px; }
+  .journey-stop[data-side="left"] > .journey-card,
+  .journey-stop[data-side="right"] > .journey-card { grid-column: 2; grid-row: 1; }
+  .journey-stop[data-side="left"] > .journey-node-col,
+  .journey-stop[data-side="right"] > .journey-node-col { grid-column: 1; grid-row: 1; }
+  .journey-header-title { font-size: 1.7rem; }
+  .journey-card { padding: 26px 24px; }
+  .journey-card-title { font-size: 1.25rem; }
 }
   </style>
 </head>
@@ -434,106 +419,71 @@
   </div>
 </section>
 
-<!-- From Idea to Deliverable -->
-<section class="process-section">
-  <div class="process-inner">
-    <p class="process-eyebrow">How It Works</p>
-    <h2 class="process-heading">From Idea to Deliverable</h2>
-    <p class="process-subhead">Click any step to explore the journey</p>
+<!-- How It Works — Journey Timeline -->
+<section class="journey-section">
+  <div class="journey-header">
+    <p class="journey-header-eyebrow">How It Works</p>
+    <h2 class="journey-header-title">From Session to Gallery</h2>
+    <p class="journey-header-sub">Every element of the shoot, in the order it matters</p>
+  </div>
+  <div class="journey-body">
+    <svg class="journey-svg-layer" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path class="journey-path-ghost" d=""/>
+      <path class="journey-path-fill" d=""/>
+    </svg>
 
-    <div class="process-journey">
-      <svg class="process-svg-layer" xmlns="http://www.w3.org/2000/svg"></svg>
-
-      <!-- Step 1: Strategize & Brainstorm -->
-      <div class="process-orb-wrap" data-step="1">
-        <div class="process-orb">
-          <svg width="52" height="52" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M25 7C18.37 7 13 12.37 13 19c0 4.42 2.3 8.3 5.75 10.55V32a1.5 1.5 0 001.5 1.5h9.5a1.5 1.5 0 001.5-1.5v-2.45C34.7 27.3 37 23.42 37 19c0-6.63-5.37-12-12-12z" stroke="rgba(42,34,28,0.8)" stroke-width="1.8" fill="rgba(255,220,90,0.1)"/>
-            <line x1="19.5" y1="35.5" x2="30.5" y2="35.5" stroke="rgba(42,34,28,0.65)" stroke-width="1.6" stroke-linecap="round"/>
-            <line x1="21" y1="38.8" x2="29" y2="38.8" stroke="rgba(42,34,28,0.45)" stroke-width="1.4" stroke-linecap="round"/>
-            <path d="M22 19.5 L25 23.5 L28 19.5" stroke="#C9A020" stroke-width="1.9" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-            <line x1="25" y1="23.5" x2="25" y2="27" stroke="#C9A020" stroke-width="1.9" stroke-linecap="round"/>
-            <line x1="25" y1="11" x2="25" y2="13.5" stroke="#C9A020" stroke-width="1.5" stroke-linecap="round"/>
-            <line x1="16.5" y1="14.5" x2="18.2" y2="16.2" stroke="#C9A020" stroke-width="1.4" stroke-linecap="round"/>
-            <line x1="33.5" y1="14.5" x2="31.8" y2="16.2" stroke="#C9A020" stroke-width="1.4" stroke-linecap="round"/>
-            <line x1="13.5" y1="19" x2="16" y2="19" stroke="#C9A020" stroke-width="1.3" stroke-linecap="round"/>
-            <line x1="34" y1="19" x2="36.5" y2="19" stroke="#C9A020" stroke-width="1.3" stroke-linecap="round"/>
-          </svg>
-        </div>
-        <div class="orb-label-wrap">
-          <span class="orb-step-num">01</span>
-          <span class="orb-title">Strategize &amp; Brainstorm</span>
-          <span class="orb-hint">tap to explore →</span>
-        </div>
+    <!-- Stop 1 — left -->
+    <div class="journey-stop" data-side="left">
+      <div class="journey-card">
+        <span class="journey-card-num">01</span>
+        <span class="journey-card-eyebrow">The Camera</span>
+        <h3 class="journey-card-title">Fujifilm Mirrorless System</h3>
+        <p class="journey-card-body">The Fujifilm X-H2S is a mirrorless camera built around exceptional color science and film simulation modes. Every image has a quality of light that sets it apart from conventional digital photography.</p>
+        <ul class="journey-card-list">
+          <li>Fujifilm X-H2S with professional lens selection</li>
+          <li>Vintage glass available for organic character</li>
+          <li>RAW + JPEG capture for maximum flexibility</li>
+          <li>Macro and close-up detail lens work</li>
+        </ul>
       </div>
+      <div class="journey-node-col"><div class="journey-node"></div></div>
+    </div>
 
-      <!-- Step 2: Story Unfolds -->
-      <div class="process-orb-wrap" data-step="2">
-        <div class="process-orb">
-          <svg width="52" height="52" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="17" y="10" width="9" height="8" rx="1.5" stroke="rgba(42,34,28,0.75)" stroke-width="1.7" fill="rgba(92,110,130,0.15)"/>
-            <rect x="10" y="17" width="27" height="19" rx="3" stroke="rgba(42,34,28,0.8)" stroke-width="1.8" fill="rgba(92,110,130,0.1)"/>
-            <circle cx="23" cy="26.5" r="6.5" stroke="rgba(42,34,28,0.75)" stroke-width="1.7" fill="rgba(92,110,130,0.12)"/>
-            <circle cx="23" cy="26.5" r="3.5" stroke="rgba(42,34,28,0.5)" stroke-width="1.2" fill="rgba(92,110,130,0.4)"/>
-            <rect x="37" y="20" width="4" height="11" rx="2" stroke="rgba(42,34,28,0.65)" stroke-width="1.5" fill="rgba(92,110,130,0.1)"/>
-            <rect x="29" y="19.5" width="5.5" height="4" rx="1" stroke="rgba(42,34,28,0.55)" stroke-width="1.4" fill="rgba(92,110,130,0.08)"/>
-            <circle cx="13.5" cy="23" r="1.3" fill="rgba(42,34,28,0.4)"/>
-            <circle cx="13.5" cy="30" r="1.3" fill="rgba(42,34,28,0.4)"/>
-          </svg>
-        </div>
-        <div class="orb-label-wrap">
-          <span class="orb-step-num">02</span>
-          <span class="orb-title">Story Unfolds</span>
-          <span class="orb-hint">tap to explore →</span>
-        </div>
+    <!-- Stop 2 — right -->
+    <div class="journey-stop" data-side="right">
+      <div class="journey-node-col"><div class="journey-node"></div></div>
+      <div class="journey-card">
+        <span class="journey-card-num">02</span>
+        <span class="journey-card-eyebrow">The Light</span>
+        <h3 class="journey-card-title">Natural Light &amp; Color</h3>
+        <p class="journey-card-body">I prefer natural light because it is honest. When needed, I bring portable flash and diffusers — but always with the goal of light that looks found, not forced. Every gallery is color-processed with a consistent, film-inspired aesthetic.</p>
+        <ul class="journey-card-list">
+          <li>Natural light preferred, portable flash available</li>
+          <li>Film-inspired color processing included</li>
+          <li>Consistent visual style across the full gallery</li>
+          <li>Skin-tone correction and exposure refinement</li>
+        </ul>
       </div>
+    </div>
 
-      <!-- Step 3: Edits -->
-      <div class="process-orb-wrap" data-step="3">
-        <div class="process-orb">
-          <svg width="52" height="52" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M13 25c0-6.63 5.37-12 12-12 5.85 0 10.74 4.18 11.83 9.72C37.4 25.3 35.84 26.5 34 26.5h-1.8c-1.77 0-3.2 1.43-3.2 3.2 0 1 .46 1.9 1.18 2.5C28.5 33.35 26.78 33.5 25 33.5c-6.63 0-12-3.8-12-8.5z" stroke="rgba(42,34,28,0.7)" stroke-width="1.8" fill="rgba(255,255,255,0.3)"/>
-            <circle cx="31.5" cy="28.8" r="3" stroke="rgba(42,34,28,0.5)" stroke-width="1.4" fill="rgba(28,26,20,0.18)"/>
-            <circle cx="19" cy="18.5" r="3.1" fill="#C4687A"/>
-            <circle cx="25" cy="15.5" r="3.1" fill="#5A9E82"/>
-            <circle cx="31" cy="18.5" r="3.1" fill="#5C8DBF"/>
-            <circle cx="33.5" cy="25" r="3.1" fill="#C07840"/>
-            <circle cx="29.5" cy="31" r="3.1" fill="#8870B8"/>
-          </svg>
-        </div>
-        <div class="orb-label-wrap">
-          <span class="orb-step-num">03</span>
-          <span class="orb-title">Edits</span>
-          <span class="orb-hint">tap to explore →</span>
-        </div>
+    <!-- Stop 3 — left -->
+    <div class="journey-stop" data-side="left">
+      <div class="journey-card">
+        <span class="journey-card-num">03</span>
+        <span class="journey-card-eyebrow">The Gallery</span>
+        <h3 class="journey-card-title">Delivery &amp; Licensing</h3>
+        <p class="journey-card-body">Your images are delivered through a private online gallery — fully edited, color-graded, and ready for print or screen. Clear licensing means you always know exactly how you can use your photographs.</p>
+        <ul class="journey-card-list">
+          <li>30+ final edited images (Portraiture)</li>
+          <li>High-resolution files, ready for print</li>
+          <li>Online gallery delivery within 5–7 business days</li>
+          <li>Commercial license included with Product/Brand</li>
+        </ul>
       </div>
-
-      <!-- Step 4: Polished Piece -->
-      <div class="process-orb-wrap" data-step="4">
-        <div class="process-orb">
-          <svg width="52" height="52" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M25 13 L12 17.5 L12 38 L25 33.5 Z" stroke="#A07820" stroke-width="1.9" fill="rgba(201,168,76,0.22)" stroke-linejoin="round"/>
-            <path d="M25 13 L38 17.5 L38 38 L25 33.5 Z" stroke="#A07820" stroke-width="1.9" fill="rgba(201,168,76,0.3)" stroke-linejoin="round"/>
-            <line x1="25" y1="13" x2="25" y2="33.5" stroke="#A07820" stroke-width="2.5" stroke-linecap="round"/>
-            <line x1="25" y1="13" x2="25" y2="33.5" stroke="rgba(255,210,80,0.6)" stroke-width="0.9" stroke-linecap="round"/>
-            <line x1="15" y1="23.5" x2="22.5" y2="21.5" stroke="rgba(120,90,15,0.65)" stroke-width="1.2" stroke-linecap="round"/>
-            <line x1="15" y1="27.5" x2="22.5" y2="25.5" stroke="rgba(120,90,15,0.65)" stroke-width="1.2" stroke-linecap="round"/>
-            <line x1="15" y1="31.5" x2="22.5" y2="29.5" stroke="rgba(120,90,15,0.65)" stroke-width="1.2" stroke-linecap="round"/>
-            <line x1="27.5" y1="21.5" x2="35" y2="23.5" stroke="rgba(120,90,15,0.65)" stroke-width="1.2" stroke-linecap="round"/>
-            <line x1="27.5" y1="25.5" x2="35" y2="27.5" stroke="rgba(120,90,15,0.65)" stroke-width="1.2" stroke-linecap="round"/>
-            <line x1="27.5" y1="29.5" x2="35" y2="31.5" stroke="rgba(120,90,15,0.65)" stroke-width="1.2" stroke-linecap="round"/>
-          </svg>
-        </div>
-        <div class="orb-label-wrap">
-          <span class="orb-step-num">04</span>
-          <span class="orb-title">Polished Piece</span>
-          <span class="orb-hint">tap to explore →</span>
-        </div>
-      </div>
-    </div><!-- /process-journey -->
+      <div class="journey-node-col"><div class="journey-node"></div></div>
+    </div>
   </div>
 </section>
-
 <!-- Add-On Gradient Buttons -->
 <section class="addon-section">
   <p class="addon-eyebrow">Creative Add-Ons</p>
@@ -881,19 +831,6 @@
   <button class="cb-proceed-btn" id="cb-proceed">Proceed to Payment →</button>
 </div>
 
-<!-- Process Modal -->
-<div class="process-modal-overlay" id="processModalOverlay">
-  <div class="process-modal">
-    <button class="modal-close-btn" id="modalCloseBtn" aria-label="Close">✕</button>
-    <div class="modal-icon-wrap" id="modalIconWrap"></div>
-    <span class="modal-step-label" id="modalStepLabel"></span>
-    <h3 class="modal-title" id="modalTitle"></h3>
-    <p class="modal-body" id="modalBody"></p>
-    <div class="modal-footer">
-      <button class="modal-next-btn" id="modalNextBtn">Next Step →</button>
-    </div>
-  </div>
-</div>
 
 <footer>
   <div class="social-links">
@@ -933,128 +870,85 @@ function updateAddonBtn(key) {
 })();
 
 
-/* ===== HOW IT WORKS — JOURNEY MAP ===== */
-(function () {
-  const STEPS = [
-    {
-      num: 'Step 01',
-      title: 'Strategize & Brainstorm',
-      body: 'Every great story starts with a clear vision. We sit down — virtually or in person — to map out your goals, audience, tone, and timeline. No templates, no guesswork. Just a focused conversation that turns your idea into a concrete creative direction.',
-      icon: 'lightbulb'
-    },
-    {
-      num: 'Step 02',
-      title: 'Story Unfolds',
-      body: 'Camera rolling. I arrive fully prepared — gear tested, shot lists crafted, energy locked in. Whether it\'s a quiet portrait session or a full production day, I move with purpose and create space for genuine moments to emerge naturally.',
-      icon: 'camera'
-    },
-    {
-      num: 'Step 03',
-      title: 'Edits',
-      body: 'The cutting room is where the story truly comes alive. Color grading, retouching, pacing, music — every choice is intentional. I work through revisions with care, keeping you in the loop until the result feels exactly right.',
-      icon: 'palette'
-    },
-    {
-      num: 'Step 04',
-      title: 'Polished Piece',
-      body: 'Your finished work, ready to move the world. Delivered in broadcast-ready formats, optimized for every platform you need — with the confidence that every frame is something you\'re proud to put your name on.',
-      icon: 'book'
-    }
-  ];
+/* ===== JOURNEY TIMELINE — scroll-fill path ===== */
+(function() {
+  var section  = document.querySelector('.journey-section');
+  var bodyEl   = document.querySelector('.journey-body');
+  var ghost    = document.querySelector('.journey-path-ghost');
+  var fill     = document.querySelector('.journey-path-fill');
+  var nodeCols = Array.from(document.querySelectorAll('.journey-node-col'));
+  var nodes    = Array.from(document.querySelectorAll('.journey-node'));
+  var cards    = Array.from(document.querySelectorAll('.journey-card'));
+  if (!section || !bodyEl || !ghost || !fill || !nodeCols.length) return;
 
-  const ICONS = {
-    lightbulb: `<svg width="72" height="72" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="36" cy="36" r="35" fill="rgba(92,110,130,0.07)" stroke="rgba(92,110,130,0.18)" stroke-width="1.2"/><path d="M36 12C26.06 12 18 20.06 18 30c0 6.18 3.15 11.63 7.95 14.84V48a2 2 0 002 2h16a2 2 0 002-2v-3.16C50.85 41.63 54 36.18 54 30c0-9.94-8.06-18-18-18z" stroke="#1C1A14" stroke-width="1.5" fill="rgba(201,168,76,0.06)"/><line x1="28" y1="52" x2="44" y2="52" stroke="#635f51" stroke-width="1.4" stroke-linecap="round"/><line x1="30" y1="56" x2="42" y2="56" stroke="#635f51" stroke-width="1.3" stroke-linecap="round"/><path d="M32 30 L36 35 L40 30" stroke="#C9A84C" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1="36" y1="35" x2="36" y2="40" stroke="#C9A84C" stroke-width="1.8" stroke-linecap="round"/><line x1="36" y1="16" x2="36" y2="19.5" stroke="rgba(201,168,76,0.6)" stroke-width="1.4" stroke-linecap="round"/><line x1="24" y1="20" x2="26.4" y2="22.4" stroke="rgba(201,168,76,0.6)" stroke-width="1.4" stroke-linecap="round"/><line x1="48" y1="20" x2="45.6" y2="22.4" stroke="rgba(201,168,76,0.6)" stroke-width="1.4" stroke-linecap="round"/><line x1="20" y1="30" x2="23.5" y2="30" stroke="rgba(201,168,76,0.5)" stroke-width="1.3" stroke-linecap="round"/><line x1="48.5" y1="30" x2="52" y2="30" stroke="rgba(201,168,76,0.5)" stroke-width="1.3" stroke-linecap="round"/></svg>`,
-    camera: `<svg width="72" height="72" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="36" cy="36" r="35" fill="rgba(92,110,130,0.07)" stroke="rgba(92,110,130,0.18)" stroke-width="1.2"/><rect x="24" y="15" width="14" height="11" rx="2" stroke="#1C1A14" stroke-width="1.5" fill="rgba(92,110,130,0.06)"/><rect x="14" y="24" width="38" height="27" rx="4" stroke="#1C1A14" stroke-width="1.6" fill="rgba(92,110,130,0.06)"/><circle cx="33" cy="37.5" r="9" stroke="#1C1A14" stroke-width="1.5" fill="rgba(92,110,130,0.05)"/><circle cx="33" cy="37.5" r="5" stroke="rgba(92,110,130,0.5)" stroke-width="1.2" fill="rgba(92,110,130,0.15)"/><rect x="52" y="28" width="6" height="15" rx="3" stroke="#635f51" stroke-width="1.4" fill="rgba(92,110,130,0.06)"/><rect x="42" y="27" width="7" height="5.5" rx="1.5" stroke="#635f51" stroke-width="1.3" fill="rgba(92,110,130,0.04)"/><circle cx="18.5" cy="33" r="1.8" fill="rgba(99,95,81,0.4)"/><circle cx="18.5" cy="43" r="1.8" fill="rgba(99,95,81,0.4)"/></svg>`,
-    palette: `<svg width="72" height="72" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="36" cy="36" r="35" fill="rgba(92,110,130,0.07)" stroke="rgba(92,110,130,0.18)" stroke-width="1.2"/><path d="M18 36c0-9.94 8.06-18 18-18 8.64 0 15.9 5.84 17.82 13.73C54.6 34.8 52.54 36.5 50.14 36.5H47.5c-2.49 0-4.5 2.01-4.5 4.5 0 1.41.65 2.67 1.66 3.5C42.48 46.1 39.3 46.5 36 46.5c-9.94 0-18-5.82-18-10.5z" stroke="#1C1A14" stroke-width="1.5" fill="rgba(245,244,240,0.5)"/><circle cx="45" cy="42.3" r="4.2" stroke="#635f51" stroke-width="1.4" fill="rgba(28,26,20,0.12)"/><circle cx="27" cy="26" r="4" fill="#C9A0A8" opacity="0.95"/><circle cx="36" cy="21.5" r="4" fill="#94BBA8" opacity="0.95"/><circle cx="45" cy="26" r="4" fill="#96AED0" opacity="0.95"/><circle cx="48.5" cy="35" r="4" fill="#D2B89A" opacity="0.95"/><circle cx="43" cy="44" r="4" fill="#B8A8CC" opacity="0.95"/></svg>`,
-    book: `<svg width="72" height="72" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="36" cy="36" r="35" fill="rgba(92,110,130,0.07)" stroke="rgba(92,110,130,0.18)" stroke-width="1.2"/><path d="M36 17 L17 23.5 L17 55 L36 48.5 Z" stroke="#C9A84C" stroke-width="1.6" fill="rgba(201,168,76,0.07)" stroke-linejoin="round"/><path d="M36 17 L55 23.5 L55 55 L36 48.5 Z" stroke="#C9A84C" stroke-width="1.6" fill="rgba(201,168,76,0.12)" stroke-linejoin="round"/><line x1="36" y1="17" x2="36" y2="48.5" stroke="#C9A84C" stroke-width="2.2" stroke-linecap="round"/><line x1="36" y1="17" x2="36" y2="48.5" stroke="rgba(255,232,140,0.5)" stroke-width="0.8" stroke-linecap="round"/><line x1="21" y1="33" x2="33" y2="30" stroke="rgba(201,168,76,0.5)" stroke-width="1.1" stroke-linecap="round"/><line x1="21" y1="39" x2="33" y2="36" stroke="rgba(201,168,76,0.5)" stroke-width="1.1" stroke-linecap="round"/><line x1="21" y1="45" x2="33" y2="42" stroke="rgba(201,168,76,0.5)" stroke-width="1.1" stroke-linecap="round"/><line x1="39" y1="30" x2="51" y2="33" stroke="rgba(201,168,76,0.5)" stroke-width="1.1" stroke-linecap="round"/><line x1="39" y1="36" x2="51" y2="39" stroke="rgba(201,168,76,0.5)" stroke-width="1.1" stroke-linecap="round"/><line x1="39" y1="42" x2="51" y2="45" stroke="rgba(201,168,76,0.5)" stroke-width="1.1" stroke-linecap="round"/></svg>`
-  };
+  var pathLen = 0;
+  var pts = [];
 
-  const overlay   = document.getElementById('processModalOverlay');
-  if (!overlay) return;
-  const closeBtn  = document.getElementById('modalCloseBtn');
-  const iconWrap  = document.getElementById('modalIconWrap');
-  const stepLabel = document.getElementById('modalStepLabel');
-  const titleEl   = document.getElementById('modalTitle');
-  const bodyEl    = document.getElementById('modalBody');
-  const nextBtn   = document.getElementById('modalNextBtn');
-  const svgLayer  = document.querySelector('.process-svg-layer');
-  const journey   = document.querySelector('.process-journey');
-  const orbWraps  = Array.from(document.querySelectorAll('.process-orb-wrap'));
-
-  let segments   = [];
-  let activeStep = -1;
-
-  function drawLines() {
-    if (!svgLayer || !journey) return;
-    while (svgLayer.firstChild) svgLayer.removeChild(svgLayer.firstChild);
-    segments = [];
-    const jRect = journey.getBoundingClientRect();
-    for (let i = 0; i < orbWraps.length - 1; i++) {
-      const orbA = orbWraps[i].querySelector('.process-orb');
-      const orbB = orbWraps[i + 1].querySelector('.process-orb');
-      const a = (orbA || orbWraps[i]).getBoundingClientRect();
-      const b = (orbB || orbWraps[i + 1]).getBoundingClientRect();
-      const x1 = a.left + a.width  / 2 - jRect.left;
-      const y1 = a.top  + a.height / 2 - jRect.top;
-      const x2 = b.left + b.width  / 2 - jRect.left;
-      const y2 = b.top  + b.height / 2 - jRect.top;
-      const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-      line.setAttribute('x1', x1); line.setAttribute('y1', y1);
-      line.setAttribute('x2', x2); line.setAttribute('y2', y2);
-      line.classList.add('journey-seg');
-      svgLayer.appendChild(line);
-      segments.push(line);
-    }
-    solidifyUpTo(activeStep);
-  }
-
-  function solidifyUpTo(stepIdx) {
-    segments.forEach((seg, i) => seg.classList.toggle('solid', i < stepIdx));
-  }
-
-  function openModal(idx) {
-    activeStep = idx;
-    const s = STEPS[idx];
-    iconWrap.innerHTML  = ICONS[s.icon] || '';
-    stepLabel.textContent = s.num;
-    titleEl.textContent   = s.title;
-    bodyEl.textContent    = s.body;
-    if (idx >= STEPS.length - 1) {
-      nextBtn.textContent = 'Book a Consultation →';
-      nextBtn.onclick = function () {
-        closeModal();
-        window.location.href = 'schedule.html';
+  function buildPath() {
+    var bRect = bodyEl.getBoundingClientRect();
+    var stops = Array.from(document.querySelectorAll('.journey-stop'));
+    pts = nodeCols.map(function(nc) {
+      var r = nc.getBoundingClientRect();
+      return {
+        x: r.left + r.width / 2 - bRect.left,
+        y: r.top + r.height / 2 - bRect.top
       };
-    } else {
-      nextBtn.textContent = 'Next Step →';
-      nextBtn.onclick = function () { openModal(idx + 1); };
+    });
+    if (!pts.length) return;
+    var swing = bRect.width * 0.38;
+    function sideOf(i) {
+      return stops[i] && stops[i].dataset.side === 'right' ? 1 : -1;
     }
-    orbWraps.forEach((o, i) => o.classList.toggle('active', i === idx));
-    solidifyUpTo(idx);
-    overlay.classList.add('open');
-    document.body.style.overflow = 'hidden';
+    var cx = pts[0].x;
+    var d = 'M ' + cx.toFixed(1) + ',' + (pts[0].y - 60).toFixed(1);
+    d += ' L ' + cx.toFixed(1) + ',' + pts[0].y.toFixed(1);
+    for (var i = 0; i < pts.length - 1; i++) {
+      var a = pts[i], b = pts[i + 1];
+      var exitDir  = sideOf(i);
+      var entryDir = sideOf(i + 1);
+      var q1y = a.y + (b.y - a.y) * 0.45;
+      var q2y = a.y + (b.y - a.y) * 0.55;
+      d += ' C ' + (a.x + exitDir  * swing).toFixed(1) + ',' + q1y.toFixed(1)
+         + ' '   + (b.x + entryDir * swing).toFixed(1) + ',' + q2y.toFixed(1)
+         + ' '   + b.x.toFixed(1) + ',' + b.y.toFixed(1);
+    }
+    var last = pts[pts.length - 1];
+    d += ' L ' + last.x.toFixed(1) + ',' + (last.y + 60).toFixed(1);
+    ghost.setAttribute('d', d);
+    fill.setAttribute('d', d);
+    pathLen = fill.getTotalLength();
+    fill.style.strokeDasharray = pathLen;
+    fill.style.strokeDashoffset = pathLen;
   }
 
-  function closeModal() {
-    overlay.classList.remove('open');
-    document.body.style.overflow = '';
-    orbWraps.forEach(o => o.classList.remove('active'));
-    solidifyUpTo(0);
-    activeStep = -1;
+  function onScroll() {
+    if (!pathLen || !section) return;
+    var sRect = section.getBoundingClientRect();
+    var vh = window.innerHeight;
+    /* Start filling when section top enters viewport, finish when section bottom leaves */
+    var progress = Math.max(0, Math.min(1, (vh - sRect.top) / (sRect.height + vh * 0.4)));
+    fill.style.strokeDashoffset = (pathLen * (1 - progress)).toFixed(1);
+    /* Light up nodes as line reaches each one */
+    var bRect = bodyEl.getBoundingClientRect();
+    pts.forEach(function(pt, i) {
+      var absY = bRect.top + pt.y;
+      nodes[i].classList.toggle('is-lit', absY < vh * 0.7);
+    });
+    /* Reveal cards on scroll */
+    cards.forEach(function(card) {
+      var r = card.getBoundingClientRect();
+      if (r.top < vh * 0.88) card.classList.add('is-visible');
+    });
   }
 
-  orbWraps.forEach((wrap, i) => {
-    wrap.addEventListener('click', () => openModal(i));
-    wrap.addEventListener('mouseenter', () => { if (activeStep === -1) solidifyUpTo(i); });
-    wrap.addEventListener('mouseleave', () => { if (activeStep === -1) solidifyUpTo(0); });
-  });
+  function init() {
+    buildPath();
+    onScroll();
+  }
 
-  closeBtn.addEventListener('click', closeModal);
-  overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
-
-  requestAnimationFrame(() => requestAnimationFrame(drawLines));
-  window.addEventListener('resize', drawLines);
+  requestAnimationFrame(function() { requestAnimationFrame(init); });
+  window.addEventListener('resize', function() { init(); });
+  window.addEventListener('scroll', onScroll, { passive: true });
 })();
 </script>
 </body>

@@ -238,8 +238,20 @@ html, body { overflow-x: hidden; }
 
 /* ===== BEFORE / AFTER SLIDER ===== */
 .ba-section {
-    background: #1C1A14; padding: 50px 0 36px; text-align: center;
+    background: #1C1A14; padding: 50px 0 48px; text-align: center;
 }
+.ba-scroll-arrow {
+    display: inline-flex; flex-direction: column; align-items: center;
+    text-decoration: none; margin-top: 28px;
+    animation: arrowBounce 2s ease-in-out infinite;
+}
+.ba-scroll-arrow svg {
+    width: 32px; height: 32px;
+    stroke: rgba(232,225,212,0.3); fill: none;
+    stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+    transition: stroke 0.2s ease;
+}
+.ba-scroll-arrow:hover svg { stroke: rgba(232,225,212,0.75); }
 .ba-label-top {
     font-family: 'EB Garamond', serif;
     font-size: 0.72rem; letter-spacing: 3px; text-transform: uppercase;
@@ -1053,6 +1065,7 @@ footer > * { position: relative; z-index: 1; }
     .ba-handle { width: 38px; height: 38px; }
     .ba-tag { display: none; }
     .ba-mobile-labels { display: flex; }
+    .ba-scroll-arrow { display: none; }
     .ba-mobile-label {
         flex: 1; text-align: center; padding: 8px 6px;
         font-family: 'EB Garamond', serif; font-size: 0.72rem;
@@ -1812,6 +1825,12 @@ footer > * { position: relative; z-index: 1; }
         <div class="ba-mobile-label">iPhone (4K)</div>
     </div>
     <p class="ba-caption">Drag to compare — mirrorless camera footage professionally color graded vs. 4K iPhone footage</p>
+    <a href="#about" class="ba-scroll-arrow" aria-label="Scroll to About section">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <polyline points="6 5 12 11 18 5"></polyline>
+            <polyline points="6 12 12 18 18 12"></polyline>
+        </svg>
+    </a>
 </section>
 
 <!-- ABOUT -->
