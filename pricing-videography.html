@@ -1193,17 +1193,6 @@ function updateAddonBtn(key) {
   panel.addEventListener('click', function(e){ e.stopPropagation(); });
 })();
 
-// Hide nav on scroll down
-(function(){
-  var nav = document.getElementById('main-nav');
-  var lastY = 0;
-  window.addEventListener('scroll', function(){
-    var y = window.scrollY;
-    if(y > lastY && y > 80){ nav.style.transform = 'translateY(-100%)'; }
-    else { nav.style.transform = ''; }
-    lastY = y;
-  }, {passive:true});
-})();
 
 /* ===== HOW IT WORKS — JOURNEY MAP ===== */
 (function () {
