@@ -2970,6 +2970,75 @@ document.querySelectorAll('.pricing-card').forEach(card => {
     });
 });
 
+/* ===== COMPARISON VIDEO AUTOPLAY ===== */
+(function() {
+    var section = document.getElementById('difference');
+    var videos  = section ? Array.from(section.querySelectorAll('video')) : [];
+    if (!videos.length) return;
+
+    /* Ensure every attribute is set for maximum browser compatibility */
+    videos.forEach(function(v) {
+        v.muted      = true;
+        v.loop       = true;
+        v.playsInline = true;
+        v.setAttribute('playsinline', '');
+        v.setAttribute('webkit-playsinline', '');
+        v.removeAttribute('controls');
+    });
+
+    function tryPlay() {
+        videos.forEach(function(v) {
+            var p = v.play();
+            if (p !== undefined) {
+                p.catch(function() {
+                    /* Autoplay blocked — show tap-to-play overlay */
+                    showOverlay();
+                });
+            }
+        });
+    }
+
+    function syncVideos() {
+        /* Keep both videos frame-locked to video[0] */
+        if (videos.length < 2) return;
+        var diff = Math.abs(videos[0].currentTime - videos[1].currentTime);
+        if (diff > 0.15) videos[1].currentTime = videos[0].currentTime;
+    }
+
+    /* Show overlay once if autoplay is blocked */
+    var overlayShown = false;
+    function showOverlay() {
+        if (overlayShown) return;
+        overlayShown = true;
+        var wrap = document.getElementById('baWrap');
+        if (!wrap) return;
+        var overlay = document.createElement('div');
+        overlay.style.cssText = 'position:absolute;inset:0;z-index:50;display:flex;align-items:center;justify-content:center;background:rgba(28,26,20,0.55);cursor:pointer;border-radius:10px;';
+        overlay.innerHTML = '<div style="width:64px;height:64px;border-radius:50%;background:rgba(201,168,76,0.92);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 24px rgba(0,0,0,0.4);"><svg viewBox="0 0 24 24" fill="#1C1A14" width="28" height="28"><polygon points="6,4 20,12 6,20"/></svg></div>';
+        wrap.appendChild(overlay);
+        overlay.addEventListener('click', function() {
+            videos.forEach(function(v) { v.play().catch(function(){}); });
+            overlay.remove();
+        });
+    }
+
+    /* Attempt play on intersection */
+    if ('IntersectionObserver' in window) {
+        var io = new IntersectionObserver(function(entries) {
+            entries.forEach(function(e) {
+                if (e.isIntersecting) { tryPlay(); }
+                else { videos.forEach(function(v) { v.pause(); }); }
+            });
+        }, { threshold: 0.25 });
+        io.observe(section);
+    } else {
+        tryPlay();
+    }
+
+    /* Sync loop */
+    setInterval(syncVideos, 500);
+})();
+
 /* ===== BEFORE / AFTER SLIDER ===== */
 (function() {
     const wrap    = document.getElementById('baWrap');
