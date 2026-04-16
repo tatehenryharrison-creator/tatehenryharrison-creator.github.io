@@ -335,11 +335,11 @@
 
     // Phone flag picker
     const phoneInput = document.getElementById('phone');
-    const iti = window.intlTelInput(phoneInput, {
+    const iti = phoneInput ? window.intlTelInput(phoneInput, {
       initialCountry: 'us',
       preferredCountries: ['us', 'ca', 'gb'],
       utilsScript: 'https://cdn.jsdelivr.net/npm/intl-tel-input@23/build/js/utils.js'
-    });
+    }) : null;
 
     // Submit
     document.getElementById('quote-form').addEventListener('submit', async function(e) {
@@ -353,6 +353,7 @@
       let valid = true;
       required.forEach(id => {
         const el = document.getElementById(id);
+        if (!el) return;
         if (!el.value.trim()) {
           el.style.borderColor = 'rgba(180,80,60,0.5)';
           valid = false;
