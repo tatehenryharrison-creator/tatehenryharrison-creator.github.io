@@ -159,7 +159,8 @@
     .icon-paypal { background: rgba(0,48,135,0.18); }
     .btn-paypal { background: #003087; color: #FFD140; }
     .icon-stripe { background: rgba(99,91,255,0.12); }
-    .btn-stripe { background: #635BFF; color: #fff; opacity: 0.38; pointer-events: none; cursor: not-allowed; }
+    .btn-stripe { background: #635BFF; color: #fff; }
+    .btn-stripe:hover { opacity: 0.88; transform: translateY(-1px); }
     .icon-check { background: rgba(74,124,89,0.12); }
     .check-address {
       font-family: 'EB Garamond', serif;
@@ -296,9 +297,12 @@
         </svg>
       </div>
       <h3 class="payment-card-title">Credit Card</h3>
-      <span class="coming-soon-badge">Coming Soon</span>
-      <p class="payment-card-desc">Secure card payments via Stripe — available shortly.</p>
-      <a href="#" class="pay-btn btn-stripe">Pay by Card</a>
+      <p class="payment-card-desc">All major cards accepted. Secure checkout powered by Stripe.</p>
+      <form action="/create-checkout-session" method="POST" style="width:100%">
+        <input type="hidden" name="success_url" value="/payment-success.html">
+        <input type="hidden" name="cancel_url" value="/payment-reserve.html">
+        <button type="submit" class="pay-btn btn-stripe">Pay by Card</button>
+      </form>
     </div>
 
     <!-- Check -->
