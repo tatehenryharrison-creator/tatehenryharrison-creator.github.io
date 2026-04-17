@@ -385,6 +385,47 @@
 .audio-progress-bar { height: 100%; width: 0%; background: #5C6E82; border-radius: 3px; transition: width 0.1s linear; pointer-events: none; }
 .audio-time { font-size: 0.7rem; color: #a8a49c; letter-spacing: 0.5px; display: flex; justify-content: space-between; }
 @media (max-width: 600px) { .audio-section { padding: 72px 6%; } .audio-card { padding: 18px 16px; gap: 14px; } .audio-play-btn { width: 40px; height: 40px; } }
+
+    /* ── Merged What's Included + Journey overlay ── */
+    .wi-section { position: relative; }
+    .wi-journey-body { position: relative; }
+    .wi-panel { position: relative; }
+    .wi-journey-svg {
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      pointer-events: none; overflow: visible; z-index: 1;
+    }
+    .wi-journey-path-ghost {
+      fill: none; stroke: rgba(201,168,76,0.09); stroke-width: 1.8; stroke-dasharray: 5 5;
+    }
+    .wi-journey-path-fill {
+      fill: none; stroke: #C9A84C; stroke-width: 1.8; stroke-dasharray: 5 5;
+    }
+    .wi-node-col {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      z-index: 2; display: flex; flex-direction: column; align-items: center;
+    }
+    .wi-panel[data-side="left"]  .wi-node-col { left:  2.5%; }
+    .wi-panel[data-side="right"] .wi-node-col { right: 2.5%; }
+    .wi-journey-node {
+      width: 13px; height: 13px; border-radius: 50%;
+      background: rgba(201,168,76,0.2); border: 1.5px solid rgba(201,168,76,0.35);
+      transition: background 0.5s, border-color 0.5s, box-shadow 0.5s, transform 0.5s;
+    }
+    .wi-journey-node.is-lit {
+      background: #C9A84C; border-color: #D4B055;
+      box-shadow: 0 0 14px rgba(201,168,76,0.55); transform: scale(1.18);
+    }
+    .wi-node-label {
+      display: block; margin-top: 7px;
+      font-family: 'EB Garamond', serif; font-size: 0.57rem;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      color: rgba(201,168,76,0.45); text-align: center; white-space: nowrap;
+    }
+    .wi-journey-phase {
+      font-family: 'EB Garamond', serif; font-size: 0.6rem;
+      letter-spacing: 2.5px; text-transform: uppercase;
+      color: rgba(201,168,76,0.65); margin: 0 0 10px;
+    }
   </style>
 </head>
 <body>
@@ -421,21 +462,28 @@
 </div>
 
 <!-- What's Included — Scroll-Reveal Panels -->
-<section class="wi-section">
+<section class="wi-section wi-journey-merged">
   <div class="wi-header">
-    <p class="wi-eyebrow">What's Included</p>
-    <h2 class="wi-title">Everything that goes into the work</h2>
-    <p class="wi-intro">Not a package of deliverables — a complete production experience, handled with care from first call to final cut.</p>
+    <p class="wi-eyebrow">What's Included · How It Works</p>
+    <h2 class="wi-title">From Idea to Deliverable</h2>
+    <p class="wi-intro">Four phases of production woven into every project — each element of the craft, handled with intention from first call to final cut.</p>
   </div>
+  <div class="wi-journey-body">
+  <svg class="wi-journey-svg" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path class="wi-journey-path-ghost" d=""/>
+    <path class="wi-journey-path-fill" d=""/>
+  </svg>
 
-  <!-- Panel 1 — Cinema-Grade Video -->
-  <div class="wi-panel">
+  <!-- Panel 1 — Cinema-Grade Video / Strategize & Brainstorm -->
+  <div class="wi-panel" data-side="left">
+    <div class="wi-node-col"><div class="wi-journey-node"></div><span class="wi-node-label">Step 01</span></div>
     <div class="wi-visual">
       <div class="wi-visual-bg" style="background: linear-gradient(135deg, #0d1a2e 0%, #1a2d45 40%, #0a1220 100%);"></div>
       <div class="wi-visual-overlay"></div>
       <div class="wi-visual-num">01</div>
     </div>
     <div class="wi-text">
+      <p class="wi-journey-phase">Strategize &amp; Brainstorm</p>
       <p class="wi-panel-eyebrow">The Camera</p>
       <h3 class="wi-panel-title">Cinema-Grade Video</h3>
       <p class="wi-panel-body">I shoot on the Fujifilm X-H2S — a mirrorless system renowned for its exceptional color science and film simulation modes. The result is footage that feels intentional, warm, and alive.</p>
@@ -448,14 +496,16 @@
     </div>
   </div>
 
-  <!-- Panel 2 — Location Audio -->
-  <div class="wi-panel wi-panel--alt">
+  <!-- Panel 2 — Location Audio / Story Unfolds -->
+  <div class="wi-panel wi-panel--alt" data-side="right">
+    <div class="wi-node-col"><div class="wi-journey-node"></div><span class="wi-node-label">Step 02</span></div>
     <div class="wi-visual">
       <div class="wi-visual-bg" style="background: linear-gradient(135deg, #1a1208 0%, #2d2010 40%, #120e06 100%);"></div>
       <div class="wi-visual-overlay"></div>
       <div class="wi-visual-num">02</div>
     </div>
     <div class="wi-text">
+      <p class="wi-journey-phase">Story Unfolds</p>
       <p class="wi-panel-eyebrow">The Sound</p>
       <h3 class="wi-panel-title">Location Audio</h3>
       <p class="wi-panel-body">My competitors use stock audio over their videos. I record real ambient sound on location and turn it into a cinematic soundtrack. Audio is not an afterthought — it is half the story.</p>
@@ -468,14 +518,16 @@
     </div>
   </div>
 
-  <!-- Panel 3 — Color & Light -->
-  <div class="wi-panel">
+  <!-- Panel 3 — Color & Light / Edits -->
+  <div class="wi-panel" data-side="left">
+    <div class="wi-node-col"><div class="wi-journey-node"></div><span class="wi-node-label">Step 03</span></div>
     <div class="wi-visual">
       <div class="wi-visual-bg" style="background: linear-gradient(135deg, #0e1a0e 0%, #1a2e1a 40%, #0a150a 100%);"></div>
       <div class="wi-visual-overlay"></div>
       <div class="wi-visual-num">03</div>
     </div>
     <div class="wi-text">
+      <p class="wi-journey-phase">Edits</p>
       <p class="wi-panel-eyebrow">The Grade</p>
       <h3 class="wi-panel-title">Color &amp; Light</h3>
       <p class="wi-panel-body">Color grading is the difference between footage and film. Every project receives a carefully considered grade that serves the mood and story — not just the exposure.</p>
@@ -488,14 +540,16 @@
     </div>
   </div>
 
-  <!-- Panel 4 — Delivery & Rights -->
-  <div class="wi-panel wi-panel--alt">
+  <!-- Panel 4 — Delivery & Rights / Polished Piece -->
+  <div class="wi-panel wi-panel--alt" data-side="right">
+    <div class="wi-node-col"><div class="wi-journey-node"></div><span class="wi-node-label">Step 04</span></div>
     <div class="wi-visual">
       <div class="wi-visual-bg" style="background: linear-gradient(135deg, #1a1520 0%, #2a2035 40%, #100d18 100%);"></div>
       <div class="wi-visual-overlay"></div>
       <div class="wi-visual-num">04</div>
     </div>
     <div class="wi-text">
+      <p class="wi-journey-phase">Polished Piece</p>
       <p class="wi-panel-eyebrow">The Finish</p>
       <h3 class="wi-panel-title">Delivery &amp; Rights</h3>
       <p class="wi-panel-body">Clean file delivery, clear licensing, and revision rounds that respect your timeline. You get the final product ready for every screen — from Instagram to broadcast.</p>
@@ -508,6 +562,7 @@
     </div>
   </div>
 
+  </div><!-- /wi-journey-body -->
   <!-- Portfolio CTA inside dark section -->
   <div class="wi-portfolio-cta">
     <a href="index.html?tab=videography#work" class="wi-portfolio-link">View Videography Portfolio →</a>
@@ -537,72 +592,6 @@
   </div>
 </section>
 
-<!-- How It Works — Journey Timeline -->
-<section class="journey-section">
-  <div class="journey-header">
-    <p class="journey-header-eyebrow">How It Works</p>
-    <h2 class="journey-header-title">From Idea to Deliverable</h2>
-    <p class="journey-header-sub">Four steps, one complete creative experience</p>
-  </div>
-  <div class="journey-body">
-    <svg class="journey-svg-layer" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <path class="journey-path-ghost" d=""/>
-      <path class="journey-path-fill" d=""/>
-    </svg>
-
-    <!-- Stop 1 — left -->
-    <div class="journey-stop" data-side="left">
-      <div class="journey-node-col">
-        <div class="journey-node"></div>
-        <span class="journey-node-label">Step 01</span>
-      </div>
-      <div class="journey-segment-content">
-        <span class="journey-card-num">01</span>
-        <h3 class="journey-card-title">Strategize &amp; Brainstorm</h3>
-        <p class="journey-card-body">We start with a conversation — your goals, your audience, and the story only you can tell. This discovery session shapes every creative decision that follows.</p>
-      </div>
-    </div>
-
-    <!-- Stop 2 — right -->
-    <div class="journey-stop" data-side="right">
-      <div class="journey-node-col">
-        <div class="journey-node"></div>
-        <span class="journey-node-label">Step 02</span>
-      </div>
-      <div class="journey-segment-content">
-        <span class="journey-card-num">02</span>
-        <h3 class="journey-card-title">Story Unfolds</h3>
-        <p class="journey-card-body">Shoot day. Intentional light, professional audio, and cinema glass — built around your location, your energy, and the moments that make the frame come alive.</p>
-      </div>
-    </div>
-
-    <!-- Stop 3 — left -->
-    <div class="journey-stop" data-side="left">
-      <div class="journey-node-col">
-        <div class="journey-node"></div>
-        <span class="journey-node-label">Step 03</span>
-      </div>
-      <div class="journey-segment-content">
-        <span class="journey-card-num">03</span>
-        <h3 class="journey-card-title">Edits</h3>
-        <p class="journey-card-body">The cut that serves the story. Color-graded, audio-mixed, and paced for impact — with revision rounds built in to make sure it's exactly right.</p>
-      </div>
-    </div>
-
-    <!-- Stop 4 — right -->
-    <div class="journey-stop" data-side="right">
-      <div class="journey-node-col">
-        <div class="journey-node"></div>
-        <span class="journey-node-label">Step 04</span>
-      </div>
-      <div class="journey-segment-content">
-        <span class="journey-card-num">04</span>
-        <h3 class="journey-card-title">Polished Piece</h3>
-        <p class="journey-card-body">Delivered in every format you need. Clean files, full commercial license, and platform-ready cuts — the final piece, done right.</p>
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- Add-On Gradient Buttons -->
 <section class="addon-section">
@@ -1171,15 +1160,15 @@ function updateAddonBtn(key) {
 })();
 
 
-/* ===== JOURNEY TIMELINE — scroll-fill path ===== */
+/* ===== WI + JOURNEY MERGED — scroll-fill path ===== */
 (function() {
-  var section  = document.querySelector('.journey-section');
-  var bodyEl   = document.querySelector('.journey-body');
-  var ghost    = document.querySelector('.journey-path-ghost');
-  var fill     = document.querySelector('.journey-path-fill');
-  var nodeCols = Array.from(document.querySelectorAll('.journey-node-col'));
-  var nodes    = Array.from(document.querySelectorAll('.journey-node'));
-  var contents = Array.from(document.querySelectorAll('.journey-segment-content'));
+  var section  = document.querySelector('.wi-journey-merged');
+  var bodyEl   = document.querySelector('.wi-journey-body');
+  var ghost    = document.querySelector('.wi-journey-path-ghost');
+  var fill     = document.querySelector('.wi-journey-path-fill');
+  var nodeCols = Array.from(document.querySelectorAll('.wi-node-col'));
+  var nodes    = Array.from(document.querySelectorAll('.wi-journey-node'));
+  var panels   = Array.from(document.querySelectorAll('.wi-panel'));
   if (!section || !bodyEl || !ghost || !fill || !nodeCols.length) return;
 
   var pathLen = 0;
@@ -1193,12 +1182,10 @@ function updateAddonBtn(key) {
     });
     if (!pts.length) return;
     var cx = bRect.width / 2;
-    /* Entry: top-center curves down to first node */
     var d = 'M ' + cx.toFixed(1) + ',' + (pts[0].y - 80).toFixed(1);
     d += ' C ' + cx.toFixed(1) + ',' + (pts[0].y - 20).toFixed(1)
        + ' '   + pts[0].x.toFixed(1) + ',' + (pts[0].y - 20).toFixed(1)
        + ' '   + pts[0].x.toFixed(1) + ',' + pts[0].y.toFixed(1);
-    /* S-curves: CP1 shares x with node A, CP2 shares x with node B, both at midY */
     for (var i = 0; i < pts.length - 1; i++) {
       var a = pts[i], b = pts[i + 1];
       var midY = (a.y + b.y) / 2;
@@ -1206,7 +1193,6 @@ function updateAddonBtn(key) {
          + ' '   + b.x.toFixed(1) + ',' + midY.toFixed(1)
          + ' '   + b.x.toFixed(1) + ',' + b.y.toFixed(1);
     }
-    /* Exit: last node curves back to bottom-center */
     var last = pts[pts.length - 1];
     d += ' C ' + last.x.toFixed(1) + ',' + (last.y + 20).toFixed(1)
        + ' '   + cx.toFixed(1) + ',' + (last.y + 20).toFixed(1)
@@ -1229,9 +1215,9 @@ function updateAddonBtn(key) {
       var absY = bRect.top + pt.y;
       nodes[i].classList.toggle('is-lit', absY < vh * 0.7);
     });
-    contents.forEach(function(c) {
-      var r = c.getBoundingClientRect();
-      if (r.top < vh * 0.88) c.classList.add('is-visible');
+    panels.forEach(function(p) {
+      var r = p.getBoundingClientRect();
+      if (r.top < vh * 0.88) p.classList.add('is-visible');
     });
   }
 
