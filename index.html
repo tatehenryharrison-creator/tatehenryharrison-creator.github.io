@@ -557,6 +557,15 @@ html, body { overflow-x: hidden; }
 .portfolio-item:hover .portfolio-overlay { background: rgba(28,26,20,0.45); }
 .portfolio-meta { opacity: 0; transform: translateY(5px); transition: opacity 0.3s, transform 0.3s; }
 .portfolio-item:hover .portfolio-meta { opacity: 1; transform: translateY(0); }
+.portfolio-video-play {
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%) scale(0.85);
+    opacity: 0; transition: opacity 0.3s, transform 0.3s;
+    background: rgba(28,26,20,0.6); border-radius: 50%;
+    width: 60px; height: 60px;
+    display: flex; align-items: center; justify-content: center;
+}
+.portfolio-item--video:hover .portfolio-video-play { opacity: 1; transform: translate(-50%, -50%) scale(1); }
 .portfolio-meta-cat {
     font-family: 'EB Garamond', serif; font-size: 0.68rem;
     letter-spacing: 2px; text-transform: uppercase; color: #d0ccc4; margin: 0;
@@ -1307,9 +1316,12 @@ footer > * { position: relative; z-index: 1; }
 }
 .about-photo { flex: 0 0 360px; }
 .about-photo-placeholder {
-    width: 100%; aspect-ratio: 3/4; border-radius: 16px;
-    background-image: url('Me.jpg');
-    background-size: cover; background-position: center top;
+    width: 100%; aspect-ratio: 3/4;
+    display: flex; align-items: flex-end; justify-content: center;
+}
+.about-photo-placeholder img {
+    width: 100%; height: 100%; object-fit: contain; object-position: bottom;
+    display: block;
 }
 .about-content { flex: 1; }
 .about-eyebrow {
@@ -1839,7 +1851,9 @@ footer > * { position: relative; z-index: 1; }
 <section id="about" class="about-section">
     <div class="about-inner">
         <div class="about-photo">
-            <div class="about-photo-placeholder"></div>
+            <div class="about-photo-placeholder">
+                <img src="Me Transparent 5.png" alt="Tate Harrison">
+            </div>
         </div>
         <div class="about-content">
             <p class="about-eyebrow anim-fade">Your Documentarian</p>
@@ -2055,6 +2069,49 @@ footer > * { position: relative; z-index: 1; }
     </div>
 
     <div class="portfolio-grid" id="portfolioGrid">
+
+        <!-- ── VIDEOGRAPHY ───────────────────────────────────────── -->
+        <div class="portfolio-item portfolio-item--video" data-category="videography" data-video-src="portfolio/Videography/Belonging.mp4" data-video-title="Belonging">
+            <div class="portfolio-img-wrap">
+                <img class="portfolio-thumb" src="portfolio/Videography/Belonging_thumb.jpg" alt="Belonging" loading="eager">
+                <div class="portfolio-overlay">
+                    <div class="portfolio-video-play"><svg viewBox="0 0 24 24" fill="#f5f4f0" width="40" height="40"><path d="M8 5v14l11-7z"/></svg></div>
+                    <div class="portfolio-meta"><p class="portfolio-meta-cat">Videography</p></div>
+                </div>
+            </div>
+            <div class="portfolio-caption">
+                <span class="caption-title">Belonging</span>
+                <span class="caption-gear">Short Film</span>
+            </div>
+        </div>
+
+        <div class="portfolio-item portfolio-item--video" data-category="videography" data-video-src="portfolio/Videography/Harrison Media Boundaries.mp4" data-video-title="Star Power Coaching">
+            <div class="portfolio-img-wrap">
+                <img class="portfolio-thumb" src="portfolio/Videography/Boundaries_thumb.jpg" alt="Star Power Coaching" loading="lazy">
+                <div class="portfolio-overlay">
+                    <div class="portfolio-video-play"><svg viewBox="0 0 24 24" fill="#f5f4f0" width="40" height="40"><path d="M8 5v14l11-7z"/></svg></div>
+                    <div class="portfolio-meta"><p class="portfolio-meta-cat">Videography</p></div>
+                </div>
+            </div>
+            <div class="portfolio-caption">
+                <span class="caption-title">Star Power Coaching</span>
+                <span class="caption-gear">Brand Film</span>
+            </div>
+        </div>
+
+        <div class="portfolio-item portfolio-item--video" data-category="videography" data-video-src="portfolio/Videography/Shi Om_1.mp4" data-video-title="Shi Om">
+            <div class="portfolio-img-wrap">
+                <img class="portfolio-thumb" src="portfolio/Videography/ShiOm_thumb.jpg" alt="Shi Om" loading="lazy">
+                <div class="portfolio-overlay">
+                    <div class="portfolio-video-play"><svg viewBox="0 0 24 24" fill="#f5f4f0" width="40" height="40"><path d="M8 5v14l11-7z"/></svg></div>
+                    <div class="portfolio-meta"><p class="portfolio-meta-cat">Videography</p></div>
+                </div>
+            </div>
+            <div class="portfolio-caption">
+                <span class="caption-title">Shi Om</span>
+                <span class="caption-gear">Short Film</span>
+            </div>
+        </div>
 
         <!-- ── PORTRAITS ──────────────────────────────────────── -->
         <div class="portfolio-item" data-category="portraits" data-lightbox-src="portfolio/Portraits/Keder_Fujifilm X-H2_Jupiter9, 85mm.jpg">
@@ -2836,8 +2893,9 @@ document.querySelectorAll('.pricing-card').forEach(card => {
                 showItems(activeSub ? activeSub.dataset.filter : 'all-photo');
             } else if (top === 'videography') {
                 subRow.classList.remove('open');
-                grid.style.display = 'none';
-                empty.style.display = 'block';
+                grid.style.display = '';
+                empty.style.display = 'none';
+                showItems('videography');
             }
         });
     });
@@ -2865,19 +2923,29 @@ const lightboxCaption = document.getElementById('lightbox-caption');
 
 document.querySelectorAll('.portfolio-item').forEach(item => {
     item.addEventListener('click', () => {
-        const src   = item.dataset.lightboxSrc;
         const title = item.querySelector('.caption-title')?.textContent || '';
         const gear  = item.querySelector('.caption-gear')?.textContent || '';
-        const cat   = item.dataset.category || '';
 
-        // Build image
-        lightboxInner.innerHTML = '<div style="width:60px;height:60px;border:2px solid rgba(232,225,212,0.2);border-top-color:#e8e1d4;border-radius:50%;animation:lb-spin 0.7s linear infinite;margin:auto;"></div>';
-        const img = new Image();
-        img.src = src;
-        img.alt = title;
-        img.style.cssText = 'max-width:90vw;max-height:80vh;object-fit:contain;border-radius:6px;display:block;';
-        img.onload = () => { lightboxInner.innerHTML = ''; lightboxInner.appendChild(img); };
-        img.onerror = () => { lightboxInner.innerHTML = '<p style="color:#a8a49c;font-family:\'EB Garamond\',serif;">Image could not be loaded.</p>'; };
+        if (item.dataset.videoSrc) {
+            // Video item — embed a native video player
+            const vid = document.createElement('video');
+            vid.src = item.dataset.videoSrc;
+            vid.controls = true;
+            vid.autoplay = true;
+            vid.style.cssText = 'max-width:90vw;max-height:80vh;width:100%;border-radius:6px;display:block;background:#111;';
+            lightboxInner.innerHTML = '';
+            lightboxInner.appendChild(vid);
+        } else {
+            // Photo item — load image
+            const src = item.dataset.lightboxSrc;
+            lightboxInner.innerHTML = '<div style="width:60px;height:60px;border:2px solid rgba(232,225,212,0.2);border-top-color:#e8e1d4;border-radius:50%;animation:lb-spin 0.7s linear infinite;margin:auto;"></div>';
+            const img = new Image();
+            img.src = src;
+            img.alt = title;
+            img.style.cssText = 'max-width:90vw;max-height:80vh;object-fit:contain;border-radius:6px;display:block;';
+            img.onload = () => { lightboxInner.innerHTML = ''; lightboxInner.appendChild(img); };
+            img.onerror = () => { lightboxInner.innerHTML = '<p style="color:#a8a49c;font-family:\'EB Garamond\',serif;">Image could not be loaded.</p>'; };
+        }
 
         // Caption
         lightboxCaption.innerHTML = title
@@ -2895,6 +2963,9 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbo
 function closeLightbox() {
     lightbox.classList.remove('open');
     document.body.style.overflow = '';
+    // Pause any playing video before clearing
+    const vid = lightboxInner.querySelector('video');
+    if (vid) { vid.pause(); }
     lightboxInner.innerHTML = '';
 }
 
