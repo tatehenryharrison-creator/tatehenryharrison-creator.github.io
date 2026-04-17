@@ -279,6 +279,47 @@
 .audio-progress-bar { height: 100%; width: 0%; background: #5C6E82; border-radius: 3px; transition: width 0.1s linear; pointer-events: none; }
 .audio-time { font-size: 0.7rem; color: #a8a49c; letter-spacing: 0.5px; display: flex; justify-content: space-between; }
 @media (max-width: 600px) { .audio-section { padding: 72px 6%; } .audio-card { padding: 18px 16px; gap: 14px; } .audio-play-btn { width: 40px; height: 40px; } }
+
+    /* ── Merged What's Included + Journey overlay ── */
+    .wi-section { position: relative; }
+    .wi-journey-body { position: relative; }
+    .wi-panel { position: relative; }
+    .wi-journey-svg {
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      pointer-events: none; overflow: visible; z-index: 1;
+    }
+    .wi-journey-path-ghost {
+      fill: none; stroke: rgba(201,168,76,0.09); stroke-width: 1.8; stroke-dasharray: 5 5;
+    }
+    .wi-journey-path-fill {
+      fill: none; stroke: #C9A84C; stroke-width: 1.8; stroke-dasharray: 5 5;
+    }
+    .wi-node-col {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      z-index: 2; display: flex; flex-direction: column; align-items: center;
+    }
+    .wi-panel[data-side="left"]  .wi-node-col { left:  2.5%; }
+    .wi-panel[data-side="right"] .wi-node-col { right: 2.5%; }
+    .wi-journey-node {
+      width: 13px; height: 13px; border-radius: 50%;
+      background: rgba(201,168,76,0.2); border: 1.5px solid rgba(201,168,76,0.35);
+      transition: background 0.5s, border-color 0.5s, box-shadow 0.5s, transform 0.5s;
+    }
+    .wi-journey-node.is-lit {
+      background: #C9A84C; border-color: #D4B055;
+      box-shadow: 0 0 14px rgba(201,168,76,0.55); transform: scale(1.18);
+    }
+    .wi-node-label {
+      display: block; margin-top: 7px;
+      font-family: 'EB Garamond', serif; font-size: 0.57rem;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      color: rgba(201,168,76,0.45); text-align: center; white-space: nowrap;
+    }
+    .wi-journey-phase {
+      font-family: 'EB Garamond', serif; font-size: 0.6rem;
+      letter-spacing: 2.5px; text-transform: uppercase;
+      color: rgba(201,168,76,0.65); margin: 0 0 10px;
+    }
   </style>
 </head>
 <body>
@@ -314,22 +355,29 @@
   <p class="pkg-subtitle">For multi-day campaigns, hybrid video and photography, and projects that don't fit a single category. Built around what you actually need.</p>
 </div>
 
-<!-- What's Included -->
-<section class="wi-section">
+<!-- What's Included — Merged with Journey -->
+<section class="wi-section wi-journey-merged">
   <div class="wi-header">
-    <p class="wi-eyebrow">What's Included</p>
-    <h2 class="wi-title">Full-service production, tailored to your project</h2>
-    <p class="wi-intro">Custom packages combine video and photography with the flexibility to scale across multiple days, locations, and deliverables.</p>
+    <p class="wi-eyebrow">What's Included · How It Works</p>
+    <h2 class="wi-title">From Brief to Campaign</h2>
+    <p class="wi-intro">Four phases woven through every production — from first creative call to final campaign delivery, each step is intentional.</p>
   </div>
+  <div class="wi-journey-body">
+  <svg class="wi-journey-svg" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path class="wi-journey-path-ghost" d=""/>
+    <path class="wi-journey-path-fill" d=""/>
+  </svg>
 
-  <!-- Panel 1 — Multi-Media Production -->
-  <div class="wi-panel">
+  <!-- Panel 1 — Multi-Media Production / Strategize & Brainstorm -->
+  <div class="wi-panel" data-side="left">
+    <div class="wi-node-col"><div class="wi-journey-node"></div><span class="wi-node-label">Step 01</span></div>
     <div class="wi-visual">
       <div class="wi-visual-bg" style="background: linear-gradient(135deg, #0d1a2e 0%, #1a2d45 40%, #0a1220 100%);"></div>
       <div class="wi-visual-overlay"></div>
       <div class="wi-visual-num">01</div>
     </div>
     <div class="wi-text">
+      <p class="wi-journey-phase">Strategize &amp; Brainstorm</p>
       <p class="wi-panel-eyebrow">The Production</p>
       <h3 class="wi-panel-title">Multi-Media Coverage</h3>
       <p class="wi-panel-body">Custom packages combine Fujifilm video and photography into one cohesive production. One director, one vision — both mediums handled with the same care and intentionality.</p>
@@ -342,14 +390,16 @@
     </div>
   </div>
 
-  <!-- Panel 2 — Audio & Light -->
-  <div class="wi-panel wi-panel--alt">
+  <!-- Panel 2 — Audio & Light / Story Unfolds -->
+  <div class="wi-panel wi-panel--alt" data-side="right">
+    <div class="wi-node-col"><div class="wi-journey-node"></div><span class="wi-node-label">Step 02</span></div>
     <div class="wi-visual">
       <div class="wi-visual-bg" style="background: linear-gradient(135deg, #1a1208 0%, #2d2010 40%, #120e06 100%);"></div>
       <div class="wi-visual-overlay"></div>
       <div class="wi-visual-num">02</div>
     </div>
     <div class="wi-text">
+      <p class="wi-journey-phase">Story Unfolds</p>
       <p class="wi-panel-eyebrow">The Craft</p>
       <h3 class="wi-panel-title">Audio, Light &amp; Color</h3>
       <p class="wi-panel-body">Every deliverable — whether video or still — is color-graded and finished to the same standard. Audio is captured live on location, not added after from a stock library.</p>
@@ -362,14 +412,16 @@
     </div>
   </div>
 
-  <!-- Panel 3 — Campaign Delivery -->
-  <div class="wi-panel">
+  <!-- Panel 3 — Campaign Delivery / Polished Piece -->
+  <div class="wi-panel" data-side="left">
+    <div class="wi-node-col"><div class="wi-journey-node"></div><span class="wi-node-label">Step 03</span></div>
     <div class="wi-visual">
       <div class="wi-visual-bg" style="background: linear-gradient(135deg, #0e1a0e 0%, #1a2e1a 40%, #0a150a 100%);"></div>
       <div class="wi-visual-overlay"></div>
       <div class="wi-visual-num">03</div>
     </div>
     <div class="wi-text">
+      <p class="wi-journey-phase">Campaign Delivery</p>
       <p class="wi-panel-eyebrow">The Finish</p>
       <h3 class="wi-panel-title">Campaign Delivery</h3>
       <p class="wi-panel-body">Multi-day shoots produce a lot. I organize, edit, and deliver everything in a structured package — ready for your website, social channels, and press materials.</p>
@@ -382,6 +434,7 @@
     </div>
   </div>
 
+  </div><!-- /wi-journey-body -->
   <!-- Portfolio CTA -->
   <div class="wi-portfolio-cta">
     <a href="index.html#work" class="wi-portfolio-link">View All Portfolio Work →</a>
@@ -452,72 +505,6 @@
   </div>
 </section>
 
-<!-- How It Works — Journey Timeline -->
-<section class="journey-section">
-  <div class="journey-header">
-    <p class="journey-header-eyebrow">How It Works</p>
-    <h2 class="journey-header-title">From Brief to Campaign</h2>
-    <p class="journey-header-sub">Four steps, one complete creative experience</p>
-  </div>
-  <div class="journey-body">
-    <svg class="journey-svg-layer" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <path class="journey-path-ghost" d=""/>
-      <path class="journey-path-fill" d=""/>
-    </svg>
-
-    <!-- Stop 1 — left -->
-    <div class="journey-stop" data-side="left">
-      <div class="journey-node-col">
-        <div class="journey-node"></div>
-        <span class="journey-node-label">Step 01</span>
-      </div>
-      <div class="journey-segment-content">
-        <span class="journey-card-num">01</span>
-        <h3 class="journey-card-title">Strategize &amp; Brainstorm</h3>
-        <p class="journey-card-body">A pre-production session to align on goals, platforms, and creative direction. We define the scope, the story, and the deliverables before a single frame is shot.</p>
-      </div>
-    </div>
-
-    <!-- Stop 2 — right -->
-    <div class="journey-stop" data-side="right">
-      <div class="journey-node-col">
-        <div class="journey-node"></div>
-        <span class="journey-node-label">Step 02</span>
-      </div>
-      <div class="journey-segment-content">
-        <span class="journey-card-num">02</span>
-        <h3 class="journey-card-title">Story Unfolds</h3>
-        <p class="journey-card-body">Production day — or days. Fujifilm video and photography working as one cohesive unit. Live audio, intentional light, and multiple scenes covered under a single creative vision.</p>
-      </div>
-    </div>
-
-    <!-- Stop 3 — left -->
-    <div class="journey-stop" data-side="left">
-      <div class="journey-node-col">
-        <div class="journey-node"></div>
-        <span class="journey-node-label">Step 03</span>
-      </div>
-      <div class="journey-segment-content">
-        <span class="journey-card-num">03</span>
-        <h3 class="journey-card-title">Edits</h3>
-        <p class="journey-card-body">Every deliverable — video and stills — color-graded and finished to the same standard. Revisions are included so the final product reflects your vision exactly.</p>
-      </div>
-    </div>
-
-    <!-- Stop 4 — right -->
-    <div class="journey-stop" data-side="right">
-      <div class="journey-node-col">
-        <div class="journey-node"></div>
-        <span class="journey-node-label">Step 04</span>
-      </div>
-      <div class="journey-segment-content">
-        <span class="journey-card-num">04</span>
-        <h3 class="journey-card-title">Polished Piece</h3>
-        <p class="journey-card-body">The full campaign package — video cuts, photo gallery, social formats, and full commercial license. Everything organized and ready for your channels, website, and press materials.</p>
-      </div>
-    </div>
-  </div>
-</section>
 <!-- Add-On Buttons — All 5 -->
 <section class="addon-section">
   <p class="addon-eyebrow">Creative Add-Ons</p>
@@ -1066,15 +1053,14 @@ function updateAddonBtn(key) {
   panel.addEventListener('click', function(e){ e.stopPropagation(); });
 })();
 
-/* ===== JOURNEY TIMELINE — scroll-fill path ===== */
+/* ===== JOURNEY OVERLAY — scroll-fill path on wi-panels ===== */
 (function() {
-  var section  = document.querySelector('.journey-section');
-  var bodyEl   = document.querySelector('.journey-body');
-  var ghost    = document.querySelector('.journey-path-ghost');
-  var fill     = document.querySelector('.journey-path-fill');
-  var nodeCols = Array.from(document.querySelectorAll('.journey-node-col'));
-  var nodes    = Array.from(document.querySelectorAll('.journey-node'));
-  var contents = Array.from(document.querySelectorAll('.journey-segment-content'));
+  var section  = document.querySelector('.wi-journey-merged');
+  var bodyEl   = document.querySelector('.wi-journey-body');
+  var ghost    = document.querySelector('.wi-journey-path-ghost');
+  var fill     = document.querySelector('.wi-journey-path-fill');
+  var nodeCols = Array.from(document.querySelectorAll('.wi-node-col'));
+  var nodes    = Array.from(document.querySelectorAll('.wi-journey-node'));
   if (!section || !bodyEl || !ghost || !fill || !nodeCols.length) return;
 
   var pathLen = 0;
@@ -1120,10 +1106,6 @@ function updateAddonBtn(key) {
     pts.forEach(function(pt, i) {
       var absY = bRect.top + pt.y;
       nodes[i].classList.toggle('is-lit', absY < vh * 0.7);
-    });
-    contents.forEach(function(c) {
-      var r = c.getBoundingClientRect();
-      if (r.top < vh * 0.88) c.classList.add('is-visible');
     });
   }
 
