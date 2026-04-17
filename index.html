@@ -1316,9 +1316,12 @@ footer > * { position: relative; z-index: 1; }
 }
 .about-photo { flex: 0 0 360px; }
 .about-photo-placeholder {
-    width: 100%; aspect-ratio: 3/4; border-radius: 16px;
-    background-image: url('Me.jpg');
-    background-size: cover; background-position: center top;
+    width: 100%; aspect-ratio: 3/4;
+    display: flex; align-items: flex-end; justify-content: center;
+}
+.about-photo-placeholder img {
+    width: 100%; height: 100%; object-fit: contain; object-position: bottom;
+    display: block;
 }
 .about-content { flex: 1; }
 .about-eyebrow {
@@ -1848,7 +1851,9 @@ footer > * { position: relative; z-index: 1; }
 <section id="about" class="about-section">
     <div class="about-inner">
         <div class="about-photo">
-            <div class="about-photo-placeholder"></div>
+            <div class="about-photo-placeholder">
+                <img src="Me Transparent 3.png" alt="Tate Harrison">
+            </div>
         </div>
         <div class="about-content">
             <p class="about-eyebrow anim-fade">Your Documentarian</p>
