@@ -259,6 +259,8 @@ html, body { overflow-x: hidden; }
 }
 .ba-wrap {
     position: relative; max-width: 1120px; width: 88%;
+    padding-bottom: 49.5%; /* 16:9 fallback for old browsers */
+    height: 0;
     aspect-ratio: 16 / 9;
     margin: 0 auto; overflow: hidden;
     cursor: grab; border-radius: 10px; user-select: none;
@@ -1060,7 +1062,7 @@ footer > * { position: relative; z-index: 1; }
     .subtext p { font-size: 0.88rem; line-height: 1.5; }
 
     /* SLIDER */
-    .ba-wrap { height: auto; } /* aspect-ratio inherited from base rule (16/9) */
+    .ba-wrap { height: auto; padding-bottom: 49.5%; } /* aspect-ratio inherited from base rule (16/9) */
     .ba-section { padding: 40px 0 28px; }
     .ba-handle { width: 38px; height: 38px; }
     .ba-tag { display: none; }
@@ -1890,7 +1892,7 @@ footer > * { position: relative; z-index: 1; }
 
     <!-- Service Category Tiles -->
     <div class="service-tiles-wrap">
-        <div class="service-tile" onclick="window.location.href='pricing-videography.html'">
+        <a class="service-tile" href="pricing-videography.html">
             <p class="service-tile-eyebrow">01 — Video Production</p>
             <h3 class="service-tile-title">Videography</h3>
             <p class="service-tile-desc">Documentary-style video from half-day shoots to full brand campaigns. Color graded, mixed, and delivered for every screen.</p>
@@ -1898,8 +1900,8 @@ footer > * { position: relative; z-index: 1; }
                 <span class="service-tile-cta">Learn More →</span>
                 <img src="videography logo.png" alt="" class="service-tile-video-logo" aria-hidden="true">
             </div>
-        </div>
-        <div class="service-tile" onclick="window.location.href='pricing-photography.html'">
+        </a>
+        <a class="service-tile" href="pricing-photography.html">
             <p class="service-tile-eyebrow">02 — Still Photography</p>
             <h3 class="service-tile-title">Photography</h3>
             <p class="service-tile-desc">Half-day and full-day sessions with professional color grading, retouching, and online gallery delivery.</p>
@@ -1907,7 +1909,7 @@ footer > * { position: relative; z-index: 1; }
                 <span class="service-tile-cta">Learn More →</span>
                 <img src="Photography_logo_transparent.png" alt="" class="service-tile-photo-logo" aria-hidden="true">
             </div>
-        </div>
+        </a>
     </div>
     <div style="padding: 0 10%;">
         <a href="pricing-custom.html" class="service-tile-custom">
@@ -1979,304 +1981,6 @@ footer > * { position: relative; z-index: 1; }
 </section>
 
 
-<!-- PROCESS -->
-<section class="process-section">
-    <div class="process-inner">
-        <p class="process-eyebrow anim-fade">How It Works</p>
-        <h2 class="process-heading anim-fade">From Idea to Deliverable</h2>
-        <p class="process-subhead anim-fade">Click any step to explore the journey</p>
-
-        <div class="process-journey">
-            <!-- SVG connector lines — drawn by JS -->
-            <svg class="process-svg-layer" xmlns="http://www.w3.org/2000/svg"></svg>
-
-            <!-- Step 1: Strategize & Brainstorm -->
-            <div class="process-orb-wrap" data-step="1">
-                <div class="process-orb">
-                    <!-- Lightbulb -->
-                    <svg width="52" height="52" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M25 7C18.37 7 13 12.37 13 19c0 4.42 2.3 8.3 5.75 10.55V32a1.5 1.5 0 001.5 1.5h9.5a1.5 1.5 0 001.5-1.5v-2.45C34.7 27.3 37 23.42 37 19c0-6.63-5.37-12-12-12z" stroke="rgba(42,34,28,0.8)" stroke-width="1.8" fill="rgba(255,220,90,0.1)"/>
-                        <line x1="19.5" y1="35.5" x2="30.5" y2="35.5" stroke="rgba(42,34,28,0.65)" stroke-width="1.6" stroke-linecap="round"/>
-                        <line x1="21" y1="38.8" x2="29" y2="38.8" stroke="rgba(42,34,28,0.45)" stroke-width="1.4" stroke-linecap="round"/>
-                        <path d="M22 19.5 L25 23.5 L28 19.5" stroke="#C9A020" stroke-width="1.9" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-                        <line x1="25" y1="23.5" x2="25" y2="27" stroke="#C9A020" stroke-width="1.9" stroke-linecap="round"/>
-                        <line x1="25" y1="11" x2="25" y2="13.5" stroke="#C9A020" stroke-width="1.5" stroke-linecap="round"/>
-                        <line x1="16.5" y1="14.5" x2="18.2" y2="16.2" stroke="#C9A020" stroke-width="1.4" stroke-linecap="round"/>
-                        <line x1="33.5" y1="14.5" x2="31.8" y2="16.2" stroke="#C9A020" stroke-width="1.4" stroke-linecap="round"/>
-                        <line x1="13.5" y1="19" x2="16" y2="19" stroke="#C9A020" stroke-width="1.3" stroke-linecap="round"/>
-                        <line x1="34" y1="19" x2="36.5" y2="19" stroke="#C9A020" stroke-width="1.3" stroke-linecap="round"/>
-                    </svg>
-                </div>
-                <div class="orb-label-wrap">
-                    <span class="orb-step-num">01</span>
-                    <span class="orb-title">Strategize &amp; Brainstorm</span>
-                    <span class="orb-hint">tap to explore →</span>
-                </div>
-            </div>
-
-            <!-- Step 2: Story Unfolds -->
-            <div class="process-orb-wrap" data-step="2">
-                <div class="process-orb">
-                    <!-- Cinema Camera -->
-                    <svg width="52" height="52" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <!-- Magazine top -->
-                        <rect x="17" y="10" width="9" height="8" rx="1.5" stroke="rgba(42,34,28,0.75)" stroke-width="1.7" fill="rgba(92,110,130,0.15)"/>
-                        <!-- Body -->
-                        <rect x="10" y="17" width="27" height="19" rx="3" stroke="rgba(42,34,28,0.8)" stroke-width="1.8" fill="rgba(92,110,130,0.1)"/>
-                        <!-- Lens outer -->
-                        <circle cx="23" cy="26.5" r="6.5" stroke="rgba(42,34,28,0.75)" stroke-width="1.7" fill="rgba(92,110,130,0.12)"/>
-                        <!-- Lens inner -->
-                        <circle cx="23" cy="26.5" r="3.5" stroke="rgba(42,34,28,0.5)" stroke-width="1.2" fill="rgba(92,110,130,0.4)"/>
-                        <!-- Crank arm right -->
-                        <rect x="37" y="20" width="4" height="11" rx="2" stroke="rgba(42,34,28,0.65)" stroke-width="1.5" fill="rgba(92,110,130,0.1)"/>
-                        <!-- Viewfinder -->
-                        <rect x="29" y="19.5" width="5.5" height="4" rx="1" stroke="rgba(42,34,28,0.55)" stroke-width="1.4" fill="rgba(92,110,130,0.08)"/>
-                        <!-- Sprocket dots -->
-                        <circle cx="13.5" cy="23" r="1.3" fill="rgba(42,34,28,0.4)"/>
-                        <circle cx="13.5" cy="30" r="1.3" fill="rgba(42,34,28,0.4)"/>
-                    </svg>
-                </div>
-                <div class="orb-label-wrap">
-                    <span class="orb-step-num">02</span>
-                    <span class="orb-title">Story Unfolds</span>
-                    <span class="orb-hint">tap to explore →</span>
-                </div>
-            </div>
-
-            <!-- Step 3: Edits -->
-            <div class="process-orb-wrap" data-step="3">
-                <div class="process-orb">
-                    <!-- Artist Palette — pastel blobs that pop -->
-                    <svg width="52" height="52" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <!-- Palette body -->
-                        <path d="M13 25c0-6.63 5.37-12 12-12 5.85 0 10.74 4.18 11.83 9.72C37.4 25.3 35.84 26.5 34 26.5h-1.8c-1.77 0-3.2 1.43-3.2 3.2 0 1 .46 1.9 1.18 2.5C28.5 33.35 26.78 33.5 25 33.5c-6.63 0-12-3.8-12-8.5z" stroke="rgba(42,34,28,0.7)" stroke-width="1.8" fill="rgba(255,255,255,0.3)"/>
-                        <!-- Thumb hole -->
-                        <circle cx="31.5" cy="28.8" r="3" stroke="rgba(42,34,28,0.5)" stroke-width="1.4" fill="rgba(28,26,20,0.18)"/>
-                        <!-- Paint blobs — bumped saturation to pop on light orb -->
-                        <circle cx="19" cy="18.5" r="3.1" fill="#C4687A"/><!-- deep rose -->
-                        <circle cx="25" cy="15.5" r="3.1" fill="#5A9E82"/><!-- forest sage -->
-                        <circle cx="31" cy="18.5" r="3.1" fill="#5C8DBF"/><!-- cornflower -->
-                        <circle cx="33.5" cy="25" r="3.1" fill="#C07840"/><!-- burnt peach -->
-                        <circle cx="29.5" cy="31" r="3.1" fill="#8870B8"/><!-- violet -->
-                    </svg>
-                </div>
-                <div class="orb-label-wrap">
-                    <span class="orb-step-num">03</span>
-                    <span class="orb-title">Edits</span>
-                    <span class="orb-hint">tap to explore →</span>
-                </div>
-            </div>
-
-            <!-- Step 4: Polished Piece -->
-            <div class="process-orb-wrap" data-step="4">
-                <div class="process-orb">
-                    <!-- Open Book — gold outline -->
-                    <svg width="52" height="52" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <!-- Left page -->
-                        <path d="M25 13 L12 17.5 L12 38 L25 33.5 Z" stroke="#A07820" stroke-width="1.9" fill="rgba(201,168,76,0.22)" stroke-linejoin="round"/>
-                        <!-- Right page -->
-                        <path d="M25 13 L38 17.5 L38 38 L25 33.5 Z" stroke="#A07820" stroke-width="1.9" fill="rgba(201,168,76,0.3)" stroke-linejoin="round"/>
-                        <!-- Spine -->
-                        <line x1="25" y1="13" x2="25" y2="33.5" stroke="#A07820" stroke-width="2.5" stroke-linecap="round"/>
-                        <!-- Spine shimmer -->
-                        <line x1="25" y1="13" x2="25" y2="33.5" stroke="rgba(255,210,80,0.6)" stroke-width="0.9" stroke-linecap="round"/>
-                        <!-- Left page lines -->
-                        <line x1="15" y1="23.5" x2="22.5" y2="21.5" stroke="rgba(120,90,15,0.65)" stroke-width="1.2" stroke-linecap="round"/>
-                        <line x1="15" y1="27.5" x2="22.5" y2="25.5" stroke="rgba(120,90,15,0.65)" stroke-width="1.2" stroke-linecap="round"/>
-                        <line x1="15" y1="31.5" x2="22.5" y2="29.5" stroke="rgba(120,90,15,0.65)" stroke-width="1.2" stroke-linecap="round"/>
-                        <!-- Right page lines -->
-                        <line x1="27.5" y1="21.5" x2="35" y2="23.5" stroke="rgba(120,90,15,0.65)" stroke-width="1.2" stroke-linecap="round"/>
-                        <line x1="27.5" y1="25.5" x2="35" y2="27.5" stroke="rgba(120,90,15,0.65)" stroke-width="1.2" stroke-linecap="round"/>
-                        <line x1="27.5" y1="29.5" x2="35" y2="31.5" stroke="rgba(120,90,15,0.65)" stroke-width="1.2" stroke-linecap="round"/>
-                        <!-- Gold corner flourish -->
-                        <path d="M12 17.5 Q11 14 14 13" stroke="rgba(160,120,32,0.55)" stroke-width="1.1" fill="none" stroke-linecap="round"/>
-                        <path d="M38 17.5 Q39 14 36 13" stroke="rgba(160,120,32,0.55)" stroke-width="1.1" fill="none" stroke-linecap="round"/>
-                    </svg>
-                </div>
-                <div class="orb-label-wrap">
-                    <span class="orb-step-num">04</span>
-                    <span class="orb-title">Polished Piece</span>
-                    <span class="orb-hint">tap to explore →</span>
-                </div>
-            </div>
-        </div><!-- /process-journey -->
-    </div>
-</section>
-
-<!-- PROCESS MODAL -->
-<div class="process-modal-overlay" id="processModalOverlay">
-    <div class="process-modal">
-        <button class="modal-close-btn" id="modalCloseBtn" aria-label="Close">✕</button>
-        <div class="modal-icon-wrap" id="modalIconWrap"></div>
-        <span class="modal-step-label" id="modalStepLabel"></span>
-        <h3 class="modal-title" id="modalTitle"></h3>
-        <p class="modal-body" id="modalBody"></p>
-        <div class="modal-footer">
-            <button class="modal-next-btn" id="modalNextBtn">Next Step →</button>
-        </div>
-    </div>
-</div>
-
-<!-- REEL -->
-<!-- AUDIO -->
-<section class="audio-section" id="audio">
-    <p class="audio-eyebrow anim-fade">Listen</p>
-    <h2 class="audio-heading anim-fade">Audio</h2>
-    <div class="audio-grid">
-
-        <!-- Card 1 -->
-        <div class="audio-card anim-fade">
-            <button class="audio-play-btn" aria-label="Play/Pause">
-                <svg class="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                <svg class="icon-pause" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
-            </button>
-            <div class="audio-meta">
-                <p class="audio-title">Track Title</p>
-                <p class="audio-desc">Description / project context</p>
-                <div class="audio-progress-wrap">
-                    <div class="audio-progress-bar"></div>
-                </div>
-                <div class="audio-time"><span class="audio-current">0:00</span><span class="audio-duration">0:00</span></div>
-            </div>
-            <audio src="" preload="metadata"></audio>
-        </div>
-
-        <!-- Card 2 -->
-        <div class="audio-card anim-fade">
-            <button class="audio-play-btn" aria-label="Play/Pause">
-                <svg class="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                <svg class="icon-pause" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
-            </button>
-            <div class="audio-meta">
-                <p class="audio-title">Track Title</p>
-                <p class="audio-desc">Description / project context</p>
-                <div class="audio-progress-wrap">
-                    <div class="audio-progress-bar"></div>
-                </div>
-                <div class="audio-time"><span class="audio-current">0:00</span><span class="audio-duration">0:00</span></div>
-            </div>
-            <audio src="" preload="metadata"></audio>
-        </div>
-
-        <!-- Card 3 -->
-        <div class="audio-card anim-fade">
-            <button class="audio-play-btn" aria-label="Play/Pause">
-                <svg class="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                <svg class="icon-pause" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
-            </button>
-            <div class="audio-meta">
-                <p class="audio-title">Track Title</p>
-                <p class="audio-desc">Description / project context</p>
-                <div class="audio-progress-wrap">
-                    <div class="audio-progress-bar"></div>
-                </div>
-                <div class="audio-time"><span class="audio-current">0:00</span><span class="audio-duration">0:00</span></div>
-            </div>
-            <audio src="" preload="metadata"></audio>
-        </div>
-
-    </div>
-</section>
-
-<!-- SERVICES -->
-<section id="services" class="services-section">
-    <div class="services-inner">
-        <p class="services-eyebrow anim-fade">What I Offer</p>
-        <h2 class="services-heading anim-fade">Built for Stories<br>That Stick</h2>
-        <ul class="services-list">
-                <li>
-                    <span class="bullet-icon">▸</span>
-                    <div>
-                        <strong>Interview &amp; Documentary</strong>
-                        <p>Cinematic single and multi-camera setups that make your subject feel at ease and look exceptional.</p>
-                    </div>
-                </li>
-                <li>
-                    <span class="bullet-icon">▸</span>
-                    <div>
-                        <strong>Speeches &amp; Live Events</strong>
-                        <p>Clean, broadcast-quality coverage of keynotes, panels, and ceremonies.</p>
-                    </div>
-                </li>
-                <li>
-                    <span class="bullet-icon">▸</span>
-                    <div>
-                        <strong>Brand &amp; Marketing Video</strong>
-                        <p>Promotional content that communicates your value with clarity and style.</p>
-                    </div>
-                </li>
-                <li>
-                    <span class="bullet-icon">▸</span>
-                    <div>
-                        <strong>Audio Production</strong>
-                        <p>Studio-grade sound design and mixing — because great video starts with great audio.</p>
-                    </div>
-                </li>
-        </ul>
-    </div>
-</section>
-
-<!-- VINTAGE / FILM -->
-<section class="film-section" id="analog">
-    <div class="film-inner">
-        <p class="film-eyebrow anim-fade">The Analog Touch</p>
-        <h2 class="film-heading anim-fade">Vintage Glass &amp; Film</h2>
-        <p class="film-subtext anim-fade">Some stories deserve a softer edge. I shoot with adapted vintage lenses and 35mm film for clients who want something that feels less like content — and more like a document.</p>
-        <div class="film-cards">
-
-            <!-- Lenses card -->
-            <div class="film-card anim-fade">
-                <svg class="film-card-icon" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="26" cy="26" r="23" stroke="#C9A84C" stroke-width="1.5"/>
-                    <circle cx="26" cy="26" r="14.5" stroke="#C9A84C" stroke-width="1" opacity="0.45"/>
-                    <circle cx="26" cy="26" r="7" stroke="#C9A84C" stroke-width="1.5"/>
-                    <line x1="26" y1="11.5" x2="26" y2="5" stroke="#C9A84C" stroke-width="1.2" stroke-linecap="round"/>
-                    <line x1="26" y1="47" x2="26" y2="40.5" stroke="#C9A84C" stroke-width="1.2" stroke-linecap="round"/>
-                    <line x1="40.5" y1="26" x2="47" y2="26" stroke="#C9A84C" stroke-width="1.2" stroke-linecap="round"/>
-                    <line x1="5" y1="26" x2="11.5" y2="26" stroke="#C9A84C" stroke-width="1.2" stroke-linecap="round"/>
-                    <line x1="35.6" y1="16.4" x2="40.1" y2="11.9" stroke="#C9A84C" stroke-width="1.2" stroke-linecap="round"/>
-                    <line x1="11.9" y1="40.1" x2="16.4" y2="35.6" stroke="#C9A84C" stroke-width="1.2" stroke-linecap="round"/>
-                    <line x1="16.4" y1="16.4" x2="11.9" y2="11.9" stroke="#C9A84C" stroke-width="1.2" stroke-linecap="round"/>
-                    <line x1="40.1" y1="40.1" x2="35.6" y2="35.6" stroke="#C9A84C" stroke-width="1.2" stroke-linecap="round"/>
-                </svg>
-                <h3 class="film-card-title">Vintage Glass</h3>
-                <p class="film-card-desc">Adapted lenses from the 1960s–80s are imbued with organic bokeh, legendary flares, and gentle warmth modern optics can't replicate.</p>
-                <div class="film-tags">
-                    <span class="film-tag">SMC Takumar 55mm</span>
-                    <span class="film-tag">Юпитер (Jupiter) 9</span>
-                    <span class="film-tag">Vivitar Series 1</span>
-                </div>
-            </div>
-
-            <!-- Film card -->
-            <div class="film-card anim-fade">
-                <svg class="film-card-icon" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect x="10" y="9" width="32" height="34" rx="3.5" stroke="#C9A84C" stroke-width="1.5"/>
-                    <rect x="15" y="4" width="22" height="6" rx="2" stroke="#C9A84C" stroke-width="1.5"/>
-                    <rect x="15" y="42" width="22" height="6" rx="2" stroke="#C9A84C" stroke-width="1.5"/>
-                    <rect x="12" y="16" width="4" height="5" rx="1" fill="#C9A84C" opacity="0.5"/>
-                    <rect x="12" y="24" width="4" height="5" rx="1" fill="#C9A84C" opacity="0.5"/>
-                    <rect x="12" y="32" width="4" height="5" rx="1" fill="#C9A84C" opacity="0.5"/>
-                    <rect x="36" y="16" width="4" height="5" rx="1" fill="#C9A84C" opacity="0.5"/>
-                    <rect x="36" y="24" width="4" height="5" rx="1" fill="#C9A84C" opacity="0.5"/>
-                    <rect x="36" y="32" width="4" height="5" rx="1" fill="#C9A84C" opacity="0.5"/>
-                    <rect x="19" y="16" width="14" height="20" rx="2" stroke="#C9A84C" stroke-width="1" opacity="0.65"/>
-                    <circle cx="26" cy="26" r="4" stroke="#C9A84C" stroke-width="1" opacity="0.5"/>
-                </svg>
-                <h3 class="film-card-title">35mm Film</h3>
-                <p class="film-card-desc">For portraits, events, and personal projects where grain is a feature, not a flaw. Film slows the process down in the best way — every frame is deliberate before the shutter fires.</p>
-                <div class="film-tags">
-                    <span class="film-tag">Kodak Portra 400</span>
-                    <span class="film-tag">Kodak Gold 200</span>
-                    <span class="film-tag">Ilford HP5</span>
-                    <span class="film-tag">Fuji Superia 400</span>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</section>
-
 <!-- PORTFOLIO / WORK -->
 <!-- ┌─────────────────────────────────────────────────────────────────────────┐
      │  AUTO-UPDATE INSTRUCTIONS                                               │
@@ -2316,7 +2020,7 @@ footer > * { position: relative; z-index: 1; }
           <div>
             <h3 style="font-family:'Cinzel',serif;font-weight:400;font-size:1.2rem;color:#1C1A14;margin:0 0 14px;">Belonging</h3>
             <div style="border-radius:14px;overflow:hidden;background:#1C1A14;box-shadow:0 12px 40px rgba(28,26,20,0.14);">
-              <video controls preload="metadata" style="width:100%;display:block;max-height:420px;object-fit:contain;background:#111009;">
+              <video controls preload="metadata" poster="portfolio/Videography/Belonging_thumb.jpg" style="width:100%;display:block;max-height:420px;object-fit:contain;background:#111009;">
                 <source src="portfolio/Videography/Belonging.mp4" type="video/mp4">
                 Your browser does not support the video tag.
               </video>
@@ -2329,6 +2033,17 @@ footer > * { position: relative; z-index: 1; }
             <div style="border-radius:14px;overflow:hidden;background:#1C1A14;box-shadow:0 12px 40px rgba(28,26,20,0.14);">
               <video controls preload="metadata" style="width:100%;display:block;max-height:420px;object-fit:contain;background:#111009;">
                 <source src="portfolio/Videography/Harrison Media Boundaries.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+          </div>
+
+          <!-- Film 3 -->
+          <div>
+            <h3 style="font-family:'Cinzel',serif;font-weight:400;font-size:1.2rem;color:#1C1A14;margin:0 0 14px;">Shi Om</h3>
+            <div style="border-radius:14px;overflow:hidden;background:#1C1A14;box-shadow:0 12px 40px rgba(28,26,20,0.14);">
+              <video controls preload="metadata" style="width:100%;display:block;max-height:420px;object-fit:contain;background:#111009;">
+                <source src="portfolio/Videography/Shi Om_1.mp4" type="video/mp4">
                 Your browser does not support the video tag.
               </video>
             </div>
@@ -2959,6 +2674,76 @@ document.querySelectorAll('.pricing-card').forEach(card => {
     });
 });
 
+/* ===== COMPARISON VIDEO AUTOPLAY ===== */
+(function() {
+    var section = document.getElementById('difference');
+    var videos  = section ? Array.from(section.querySelectorAll('video')) : [];
+    if (!videos.length) return;
+
+    /* Ensure every attribute is set for maximum browser compatibility */
+    videos.forEach(function(v) {
+        v.muted      = true;
+        v.loop       = true;
+        v.playsInline = true;
+        v.setAttribute('playsinline', '');
+        v.setAttribute('webkit-playsinline', '');
+        v.removeAttribute('controls');
+    });
+
+    function tryPlay() {
+        videos.forEach(function(v) {
+            var p = v.play();
+            if (p !== undefined) {
+                p.catch(function() {
+                    /* Autoplay blocked — show tap-to-play overlay */
+                    showOverlay();
+                });
+            }
+        });
+    }
+
+    function syncVideos() {
+        /* Keep both videos frame-locked to video[0] */
+        if (videos.length < 2) return;
+        var diff = Math.abs(videos[0].currentTime - videos[1].currentTime);
+        if (diff > 0.15) videos[1].currentTime = videos[0].currentTime;
+    }
+
+    /* Show overlay once if autoplay is blocked */
+    var overlayShown = false;
+    function showOverlay() {
+        if (overlayShown) return;
+        overlayShown = true;
+        var wrap = document.getElementById('baWrap');
+        if (!wrap) return;
+        var overlay = document.createElement('div');
+        overlay.style.cssText = 'position:absolute;inset:0;z-index:50;display:flex;align-items:center;justify-content:center;background:rgba(28,26,20,0.55);cursor:pointer;border-radius:10px;';
+        overlay.innerHTML = '<div style="width:64px;height:64px;border-radius:50%;background:rgba(201,168,76,0.92);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 24px rgba(0,0,0,0.4);"><svg viewBox="0 0 24 24" fill="#1C1A14" width="28" height="28"><polygon points="6,4 20,12 6,20"/></svg></div>';
+        wrap.appendChild(overlay);
+        overlay.addEventListener('click', function() {
+            videos.forEach(function(v) { v.play().catch(function(){}); });
+            overlay.remove();
+        });
+    }
+
+    /* Attempt play on intersection */
+    if ('IntersectionObserver' in window) {
+        var io = new IntersectionObserver(function(entries) {
+            entries.forEach(function(e) {
+                if (e.isIntersecting) { tryPlay(); }
+                else { videos.forEach(function(v) { v.pause(); }); }
+            });
+        }, { threshold: 0.25 });
+        io.observe(section);
+    } else {
+        tryPlay();
+    }
+
+    /* Sync loop — cleared when comparison section leaves the page */
+    var syncId = setInterval(syncVideos, 500);
+    window.addEventListener('beforeunload', function() { clearInterval(syncId); });
+})();
+
 /* ===== BEFORE / AFTER SLIDER ===== */
 (function() {
     const wrap    = document.getElementById('baWrap');
@@ -3279,8 +3064,10 @@ document.querySelectorAll('.faq-item').forEach(item => {
             document.querySelectorAll('.audio-card audio').forEach(function(a) {
                 if (a !== audio) { a.pause(); a.closest('.audio-card').querySelector('.audio-play-btn').classList.remove('playing'); }
             });
-            if (audio.paused) { audio.play(); btn.classList.add('playing'); }
-            else { audio.pause(); btn.classList.remove('playing'); }
+            if (audio.paused) {
+                audio.play().catch(function() { btn.classList.remove('playing'); });
+                btn.classList.add('playing');
+            } else { audio.pause(); btn.classList.remove('playing'); }
         });
         wrap.addEventListener('click', function(e) {
             if (!audio.duration) return;
@@ -3293,14 +3080,14 @@ document.querySelectorAll('.faq-item').forEach(item => {
 /* ===== FOOTER QUICK FORM — Formspree ===== */
 const FORMSPREE_ID = 'maqpazao';
 
-document.getElementById('footerForm').addEventListener('submit', async function(e) {
+const _footerForm = document.getElementById('footerForm');
+if (_footerForm) _footerForm.addEventListener('submit', async function(e) {
     e.preventDefault();
     const btn     = this.querySelector('.footer-form-btn');
     const form    = this;
     const success = document.getElementById('footerFormSuccess');
     const data    = new FormData(this);
-    btn.textContent = 'Sending…';
-    btn.disabled = true;
+    if (btn) { btn.textContent = 'Sending…'; btn.disabled = true; }
     try {
         const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
             method: 'POST', body: data, headers: { 'Accept': 'application/json' }
@@ -3551,6 +3338,44 @@ document.getElementById('footerForm').addEventListener('submit', async function(
     panel.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
     document.addEventListener('click', e => { if (!btn.contains(e.target) && !panel.contains(e.target)) closeMenu(); });
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
+})();
+
+/* ===== PORTFOLIO SOFT STOP ===== */
+(function() {
+    var section   = document.getElementById('work');
+    if (!section) return;
+
+    var locked    = false;   // true while the pause is active
+    var triggered = false;   // prevent re-firing mid-pause
+    var lastY     = window.scrollY;
+    var HOLD_MS   = 550;     // pause duration
+    var THRESHOLD = 80;      // px above section top that triggers the stop
+
+    window.addEventListener('scroll', function() {
+        var y         = window.scrollY;
+        var scrollingDown = y > lastY;
+        lastY         = y;
+
+        if (locked || !scrollingDown) return;
+
+        var sectionTop = section.getBoundingClientRect().top + window.scrollY;
+        var distanceTo = sectionTop - y;
+
+        // Trigger when the section top is within THRESHOLD px below viewport top
+        if (distanceTo > -20 && distanceTo < THRESHOLD && !triggered) {
+            triggered = true;
+            locked    = true;
+
+            var snapY = sectionTop;
+            window.scrollTo({ top: snapY, behavior: 'smooth' });
+
+            setTimeout(function() {
+                locked = false;
+                // Reset triggered once the user scrolls away so it can fire again on re-entry
+                setTimeout(function() { triggered = false; }, 1200);
+            }, HOLD_MS);
+        }
+    }, { passive: true });
 })();
 
 /* ===== MOBILE: DEFAULT SCROLL TO NOVEL CARD ===== */

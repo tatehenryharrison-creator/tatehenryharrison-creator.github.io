@@ -237,37 +237,33 @@
 .journey-header-eyebrow { font-family: 'EB Garamond', serif; font-size: 0.7rem; letter-spacing: 3.5px; text-transform: uppercase; color: #5C6E82; margin: 0 0 14px; }
 .journey-header-title { font-family: 'Cinzel', serif; font-size: 2.2rem; font-weight: 400; color: #1C1A14; margin: 0 0 14px; line-height: 1.15; }
 .journey-header-sub { font-family: 'EB Garamond', serif; font-style: italic; font-size: 1.05rem; color: rgba(99,95,81,0.75); margin: 0; }
-.journey-body { max-width: 960px; margin: 0 auto; padding: 0 8%; position: relative; }
-.journey-svg-layer { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; overflow: visible; }
-.journey-path-ghost { fill: none; stroke: rgba(99,95,81,0.22); stroke-width: 2; stroke-dasharray: 5 9; stroke-linecap: round; }
-.journey-path-fill { fill: none; stroke: #C9A84C; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
-.journey-stop { display: grid; grid-template-columns: 1fr 56px 1fr; column-gap: 28px; align-items: center; padding: 44px 0; }
-.journey-stop[data-side="left"] > .journey-card { grid-column: 1; grid-row: 1; }
-.journey-stop[data-side="left"] > .journey-node-col { grid-column: 2; grid-row: 1; }
-.journey-stop[data-side="right"] > .journey-node-col { grid-column: 2; grid-row: 1; }
-.journey-stop[data-side="right"] > .journey-card { grid-column: 3; grid-row: 1; }
-.journey-node-col { display: flex; justify-content: center; align-items: center; }
-.journey-node { width: 13px; height: 13px; border-radius: 50%; background: rgba(99,95,81,0.3); border: 2px solid rgba(99,95,81,0.35); box-shadow: 0 0 0 5px transparent; transition: background 0.4s ease, border-color 0.4s ease, box-shadow 0.45s ease, transform 0.4s cubic-bezier(0.34,1.56,0.64,1); position: relative; z-index: 1; }
-.journey-node.is-lit { background: #C9A84C; border-color: #b8912e; box-shadow: 0 0 0 7px rgba(201,168,76,0.18), 0 0 20px rgba(201,168,76,0.28); transform: scale(1.55); }
-.journey-card { background: #1C1A14; border: 1px solid rgba(232,225,212,0.09); border-radius: 16px; padding: 36px 40px; opacity: 0; transform: translateY(32px); transition: opacity 0.85s cubic-bezier(0.22,1,0.36,1), transform 0.85s cubic-bezier(0.22,1,0.36,1), border-color 0.3s ease; }
-.journey-card.is-visible { opacity: 1; transform: translateY(0); }
-.journey-card:hover { border-color: rgba(201,168,76,0.22); }
+.journey-body { position: relative; width: 100%; overflow: visible; }
+.journey-svg-layer { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; overflow: visible; z-index: 0; }
+.journey-path-ghost { fill: none; stroke: rgba(99,95,81,0.25); stroke-width: 2; stroke-dasharray: 6 10; stroke-linecap: round; }
+.journey-path-fill { fill: none; stroke: #C9A84C; stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
+.journey-stop { position: relative; display: flex; align-items: center; min-height: 260px; padding: 60px 6%; border-bottom: 1px solid rgba(99,95,81,0.08); z-index: 1; }
+.journey-stop:last-child { border-bottom: none; }
+.journey-node-col { position: absolute; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; align-items: center; z-index: 2; }
+.journey-stop[data-side="left"] .journey-node-col { left: 5%; }
+.journey-stop[data-side="right"] .journey-node-col { right: 5%; }
+.journey-node { width: 18px; height: 18px; border-radius: 50%; background: rgba(99,95,81,0.3); border: 2px solid rgba(99,95,81,0.35); box-shadow: 0 0 0 5px transparent; transition: background 0.4s ease, border-color 0.4s ease, box-shadow 0.45s ease, transform 0.4s cubic-bezier(0.34,1.56,0.64,1); position: relative; z-index: 1; }
+.journey-node.is-lit { background: #C9A84C; border-color: #b8912e; box-shadow: 0 0 0 8px rgba(201,168,76,0.18), 0 0 24px rgba(201,168,76,0.28); transform: scale(1.6); }
+.journey-node-label { font-family: 'EB Garamond', serif; font-size: 0.6rem; letter-spacing: 2px; text-transform: uppercase; color: rgba(99,95,81,0.45); white-space: nowrap; margin-top: 10px; }
+.journey-segment-content { max-width: 460px; opacity: 0; transform: translateY(24px); transition: opacity 0.85s cubic-bezier(0.22,1,0.36,1), transform 0.85s cubic-bezier(0.22,1,0.36,1); z-index: 1; }
+.journey-stop[data-side="left"] .journey-segment-content { margin-left: 18%; }
+.journey-stop[data-side="right"] .journey-segment-content { margin-left: auto; margin-right: 18%; text-align: right; }
+.journey-segment-content.is-visible { opacity: 1; transform: translateY(0); }
 .journey-card-num { font-family: 'Cinzel', serif; font-size: 0.58rem; letter-spacing: 3.5px; text-transform: uppercase; color: #5C6E82; display: block; margin-bottom: 8px; }
-.journey-card-eyebrow { font-family: 'EB Garamond', serif; font-size: 0.68rem; letter-spacing: 3px; text-transform: uppercase; color: rgba(232,225,212,0.35); display: block; margin-bottom: 10px; }
-.journey-card-title { font-family: 'Cinzel', serif; font-size: 1.52rem; font-weight: 400; color: #e8e1d4; margin: 0 0 14px; line-height: 1.2; }
-.journey-card-body { font-family: 'EB Garamond', serif; font-size: 1.0rem; color: rgba(232,225,212,0.55); line-height: 1.75; margin: 0 0 18px; }
-.journey-card-list { list-style: none; margin: 0; padding: 0; }
-.journey-card-list li { font-family: 'EB Garamond', serif; font-size: 0.92rem; color: rgba(232,225,212,0.4); padding: 3px 0 3px 18px; position: relative; line-height: 1.5; }
-.journey-card-list li::before { content: '—'; position: absolute; left: 0; color: rgba(92,110,130,0.38); font-size: 0.8rem; }
+.journey-card-title { font-family: 'Cinzel', serif; font-size: 1.75rem; font-weight: 400; color: #1C1A14; margin: 0 0 14px; line-height: 1.2; }
+.journey-card-body { font-family: 'EB Garamond', serif; font-size: 1.05rem; color: rgba(28,26,20,0.6); line-height: 1.8; margin: 0; }
 @media (max-width: 720px) {
-  .journey-stop { grid-template-columns: 28px 1fr; column-gap: 16px; }
-  .journey-stop[data-side="left"] > .journey-card,
-  .journey-stop[data-side="right"] > .journey-card { grid-column: 2; grid-row: 1; }
-  .journey-stop[data-side="left"] > .journey-node-col,
-  .journey-stop[data-side="right"] > .journey-node-col { grid-column: 1; grid-row: 1; }
+  .journey-stop { min-height: 200px; padding: 50px 5%; }
+  .journey-stop[data-side="left"] .journey-node-col { left: 3%; }
+  .journey-stop[data-side="right"] .journey-node-col { right: 3%; }
+  .journey-stop[data-side="left"] .journey-segment-content { margin-left: 16%; }
+  .journey-stop[data-side="right"] .journey-segment-content { margin-right: 16%; max-width: 100%; }
   .journey-header-title { font-size: 1.7rem; }
-  .journey-card { padding: 26px 24px; }
-  .journey-card-title { font-size: 1.25rem; }
+  .journey-card-title { font-size: 1.35rem; }
 }
   </style>
 </head>
@@ -424,7 +420,7 @@
   <div class="journey-header">
     <p class="journey-header-eyebrow">How It Works</p>
     <h2 class="journey-header-title">From Session to Gallery</h2>
-    <p class="journey-header-sub">Every element of the shoot, in the order it matters</p>
+    <p class="journey-header-sub">Four steps, one complete creative experience</p>
   </div>
   <div class="journey-body">
     <svg class="journey-svg-layer" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -434,53 +430,54 @@
 
     <!-- Stop 1 — left -->
     <div class="journey-stop" data-side="left">
-      <div class="journey-card">
-        <span class="journey-card-num">01</span>
-        <span class="journey-card-eyebrow">The Camera</span>
-        <h3 class="journey-card-title">Fujifilm Mirrorless System</h3>
-        <p class="journey-card-body">The Fujifilm X-H2S is a mirrorless camera built around exceptional color science and film simulation modes. Every image has a quality of light that sets it apart from conventional digital photography.</p>
-        <ul class="journey-card-list">
-          <li>Fujifilm X-H2S with professional lens selection</li>
-          <li>Vintage glass available for organic character</li>
-          <li>RAW + JPEG capture for maximum flexibility</li>
-          <li>Macro and close-up detail lens work</li>
-        </ul>
+      <div class="journey-node-col">
+        <div class="journey-node"></div>
+        <span class="journey-node-label">Step 01</span>
       </div>
-      <div class="journey-node-col"><div class="journey-node"></div></div>
+      <div class="journey-segment-content">
+        <span class="journey-card-num">01</span>
+        <h3 class="journey-card-title">Strategize &amp; Brainstorm</h3>
+        <p class="journey-card-body">We start with a conversation — your vision, your audience, and the story you want to tell through imagery. This shapes the mood, locations, and look of every shot.</p>
+      </div>
     </div>
 
     <!-- Stop 2 — right -->
     <div class="journey-stop" data-side="right">
-      <div class="journey-node-col"><div class="journey-node"></div></div>
-      <div class="journey-card">
+      <div class="journey-node-col">
+        <div class="journey-node"></div>
+        <span class="journey-node-label">Step 02</span>
+      </div>
+      <div class="journey-segment-content">
         <span class="journey-card-num">02</span>
-        <span class="journey-card-eyebrow">The Light</span>
-        <h3 class="journey-card-title">Natural Light &amp; Color</h3>
-        <p class="journey-card-body">I prefer natural light because it is honest. When needed, I bring portable flash and diffusers — but always with the goal of light that looks found, not forced. Every gallery is color-processed with a consistent, film-inspired aesthetic.</p>
-        <ul class="journey-card-list">
-          <li>Natural light preferred, portable flash available</li>
-          <li>Film-inspired color processing included</li>
-          <li>Consistent visual style across the full gallery</li>
-          <li>Skin-tone correction and exposure refinement</li>
-        </ul>
+        <h3 class="journey-card-title">Story Unfolds</h3>
+        <p class="journey-card-body">Shoot day. Natural light, intentional composition, and Fujifilm glass — creating images that feel found, not forced. Every frame serves the story we planned together.</p>
       </div>
     </div>
 
     <!-- Stop 3 — left -->
     <div class="journey-stop" data-side="left">
-      <div class="journey-card">
-        <span class="journey-card-num">03</span>
-        <span class="journey-card-eyebrow">The Gallery</span>
-        <h3 class="journey-card-title">Delivery &amp; Licensing</h3>
-        <p class="journey-card-body">Your images are delivered through a private online gallery — fully edited, color-graded, and ready for print or screen. Clear licensing means you always know exactly how you can use your photographs.</p>
-        <ul class="journey-card-list">
-          <li>30+ final edited images (Portraiture)</li>
-          <li>High-resolution files, ready for print</li>
-          <li>Online gallery delivery within 5–7 business days</li>
-          <li>Commercial license included with Product/Brand</li>
-        </ul>
+      <div class="journey-node-col">
+        <div class="journey-node"></div>
+        <span class="journey-node-label">Step 03</span>
       </div>
-      <div class="journey-node-col"><div class="journey-node"></div></div>
+      <div class="journey-segment-content">
+        <span class="journey-card-num">03</span>
+        <h3 class="journey-card-title">Edits</h3>
+        <p class="journey-card-body">Film-inspired color processing, skin-tone refinement, and careful curation — every selected image receives the same consistent, intentional treatment.</p>
+      </div>
+    </div>
+
+    <!-- Stop 4 — right -->
+    <div class="journey-stop" data-side="right">
+      <div class="journey-node-col">
+        <div class="journey-node"></div>
+        <span class="journey-node-label">Step 04</span>
+      </div>
+      <div class="journey-segment-content">
+        <span class="journey-card-num">04</span>
+        <h3 class="journey-card-title">Polished Piece</h3>
+        <p class="journey-card-body">Your gallery, delivered. High-resolution files ready for print or screen, with clear licensing so you always know exactly how your images can be used.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -878,7 +875,7 @@ function updateAddonBtn(key) {
   var fill     = document.querySelector('.journey-path-fill');
   var nodeCols = Array.from(document.querySelectorAll('.journey-node-col'));
   var nodes    = Array.from(document.querySelectorAll('.journey-node'));
-  var cards    = Array.from(document.querySelectorAll('.journey-card'));
+  var contents = Array.from(document.querySelectorAll('.journey-segment-content'));
   if (!section || !bodyEl || !ghost || !fill || !nodeCols.length) return;
 
   var pathLen = 0;
@@ -886,34 +883,27 @@ function updateAddonBtn(key) {
 
   function buildPath() {
     var bRect = bodyEl.getBoundingClientRect();
-    var stops = Array.from(document.querySelectorAll('.journey-stop'));
     pts = nodeCols.map(function(nc) {
       var r = nc.getBoundingClientRect();
-      return {
-        x: r.left + r.width / 2 - bRect.left,
-        y: r.top + r.height / 2 - bRect.top
-      };
+      return { x: r.left + r.width / 2 - bRect.left, y: r.top + r.height / 2 - bRect.top };
     });
     if (!pts.length) return;
-    var swing = bRect.width * 0.38;
-    function sideOf(i) {
-      return stops[i] && stops[i].dataset.side === 'right' ? 1 : -1;
-    }
-    var cx = pts[0].x;
-    var d = 'M ' + cx.toFixed(1) + ',' + (pts[0].y - 60).toFixed(1);
-    d += ' L ' + cx.toFixed(1) + ',' + pts[0].y.toFixed(1);
+    var cx = bRect.width / 2;
+    var d = 'M ' + cx.toFixed(1) + ',' + (pts[0].y - 80).toFixed(1);
+    d += ' C ' + cx.toFixed(1) + ',' + (pts[0].y - 20).toFixed(1)
+       + ' '   + pts[0].x.toFixed(1) + ',' + (pts[0].y - 20).toFixed(1)
+       + ' '   + pts[0].x.toFixed(1) + ',' + pts[0].y.toFixed(1);
     for (var i = 0; i < pts.length - 1; i++) {
       var a = pts[i], b = pts[i + 1];
-      var exitDir  = sideOf(i);
-      var entryDir = sideOf(i + 1);
-      var q1y = a.y + (b.y - a.y) * 0.45;
-      var q2y = a.y + (b.y - a.y) * 0.55;
-      d += ' C ' + (a.x + exitDir  * swing).toFixed(1) + ',' + q1y.toFixed(1)
-         + ' '   + (b.x + entryDir * swing).toFixed(1) + ',' + q2y.toFixed(1)
+      var midY = (a.y + b.y) / 2;
+      d += ' C ' + a.x.toFixed(1) + ',' + midY.toFixed(1)
+         + ' '   + b.x.toFixed(1) + ',' + midY.toFixed(1)
          + ' '   + b.x.toFixed(1) + ',' + b.y.toFixed(1);
     }
     var last = pts[pts.length - 1];
-    d += ' L ' + last.x.toFixed(1) + ',' + (last.y + 60).toFixed(1);
+    d += ' C ' + last.x.toFixed(1) + ',' + (last.y + 20).toFixed(1)
+       + ' '   + cx.toFixed(1) + ',' + (last.y + 20).toFixed(1)
+       + ' '   + cx.toFixed(1) + ',' + (last.y + 80).toFixed(1);
     ghost.setAttribute('d', d);
     fill.setAttribute('d', d);
     pathLen = fill.getTotalLength();
@@ -925,27 +915,20 @@ function updateAddonBtn(key) {
     if (!pathLen || !section) return;
     var sRect = section.getBoundingClientRect();
     var vh = window.innerHeight;
-    /* Start filling when section top enters viewport, finish when section bottom leaves */
     var progress = Math.max(0, Math.min(1, (vh - sRect.top) / (sRect.height + vh * 0.4)));
     fill.style.strokeDashoffset = (pathLen * (1 - progress)).toFixed(1);
-    /* Light up nodes as line reaches each one */
     var bRect = bodyEl.getBoundingClientRect();
     pts.forEach(function(pt, i) {
       var absY = bRect.top + pt.y;
       nodes[i].classList.toggle('is-lit', absY < vh * 0.7);
     });
-    /* Reveal cards on scroll */
-    cards.forEach(function(card) {
-      var r = card.getBoundingClientRect();
-      if (r.top < vh * 0.88) card.classList.add('is-visible');
+    contents.forEach(function(c) {
+      var r = c.getBoundingClientRect();
+      if (r.top < vh * 0.88) c.classList.add('is-visible');
     });
   }
 
-  function init() {
-    buildPath();
-    onScroll();
-  }
-
+  function init() { buildPath(); onScroll(); }
   requestAnimationFrame(function() { requestAnimationFrame(init); });
   window.addEventListener('resize', function() { init(); });
   window.addEventListener('scroll', onScroll, { passive: true });

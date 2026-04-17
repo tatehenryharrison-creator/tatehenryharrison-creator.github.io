@@ -338,38 +338,53 @@
 .journey-header-eyebrow { font-family: 'EB Garamond', serif; font-size: 0.7rem; letter-spacing: 3.5px; text-transform: uppercase; color: #5C6E82; margin: 0 0 14px; }
 .journey-header-title { font-family: 'Cinzel', serif; font-size: 2.2rem; font-weight: 400; color: #1C1A14; margin: 0 0 14px; line-height: 1.15; }
 .journey-header-sub { font-family: 'EB Garamond', serif; font-style: italic; font-size: 1.05rem; color: rgba(99,95,81,0.75); margin: 0; }
-.journey-body { max-width: 960px; margin: 0 auto; padding: 0 8%; position: relative; }
-.journey-svg-layer { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; overflow: visible; }
-.journey-path-ghost { fill: none; stroke: rgba(99,95,81,0.22); stroke-width: 2; stroke-dasharray: 5 9; stroke-linecap: round; }
-.journey-path-fill { fill: none; stroke: #C9A84C; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
-.journey-stop { display: grid; grid-template-columns: 1fr 56px 1fr; column-gap: 28px; align-items: center; padding: 44px 0; }
-.journey-stop[data-side="left"] > .journey-card { grid-column: 1; grid-row: 1; }
-.journey-stop[data-side="left"] > .journey-node-col { grid-column: 2; grid-row: 1; }
-.journey-stop[data-side="right"] > .journey-node-col { grid-column: 2; grid-row: 1; }
-.journey-stop[data-side="right"] > .journey-card { grid-column: 3; grid-row: 1; }
-.journey-node-col { display: flex; justify-content: center; align-items: center; }
-.journey-node { width: 13px; height: 13px; border-radius: 50%; background: rgba(99,95,81,0.3); border: 2px solid rgba(99,95,81,0.35); box-shadow: 0 0 0 5px transparent; transition: background 0.4s ease, border-color 0.4s ease, box-shadow 0.45s ease, transform 0.4s cubic-bezier(0.34,1.56,0.64,1); position: relative; z-index: 1; }
-.journey-node.is-lit { background: #C9A84C; border-color: #b8912e; box-shadow: 0 0 0 7px rgba(201,168,76,0.18), 0 0 20px rgba(201,168,76,0.28); transform: scale(1.55); }
-.journey-card { background: #1C1A14; border: 1px solid rgba(232,225,212,0.09); border-radius: 16px; padding: 36px 40px; opacity: 0; transform: translateY(32px); transition: opacity 0.85s cubic-bezier(0.22,1,0.36,1), transform 0.85s cubic-bezier(0.22,1,0.36,1), border-color 0.3s ease; }
-.journey-card.is-visible { opacity: 1; transform: translateY(0); }
-.journey-card:hover { border-color: rgba(201,168,76,0.22); }
+.journey-body { position: relative; width: 100%; overflow: visible; }
+.journey-svg-layer { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; overflow: visible; z-index: 0; }
+.journey-path-ghost { fill: none; stroke: rgba(99,95,81,0.25); stroke-width: 2; stroke-dasharray: 6 10; stroke-linecap: round; }
+.journey-path-fill { fill: none; stroke: #C9A84C; stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
+.journey-stop { position: relative; display: flex; align-items: center; min-height: 260px; padding: 60px 6%; border-bottom: 1px solid rgba(99,95,81,0.08); z-index: 1; }
+.journey-stop:last-child { border-bottom: none; }
+.journey-node-col { position: absolute; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; align-items: center; z-index: 2; }
+.journey-stop[data-side="left"] .journey-node-col { left: 5%; }
+.journey-stop[data-side="right"] .journey-node-col { right: 5%; }
+.journey-node { width: 18px; height: 18px; border-radius: 50%; background: rgba(99,95,81,0.3); border: 2px solid rgba(99,95,81,0.35); box-shadow: 0 0 0 5px transparent; transition: background 0.4s ease, border-color 0.4s ease, box-shadow 0.45s ease, transform 0.4s cubic-bezier(0.34,1.56,0.64,1); position: relative; z-index: 1; }
+.journey-node.is-lit { background: #C9A84C; border-color: #b8912e; box-shadow: 0 0 0 8px rgba(201,168,76,0.18), 0 0 24px rgba(201,168,76,0.28); transform: scale(1.6); }
+.journey-node-label { font-family: 'EB Garamond', serif; font-size: 0.6rem; letter-spacing: 2px; text-transform: uppercase; color: rgba(99,95,81,0.45); white-space: nowrap; margin-top: 10px; }
+.journey-segment-content { max-width: 460px; opacity: 0; transform: translateY(24px); transition: opacity 0.85s cubic-bezier(0.22,1,0.36,1), transform 0.85s cubic-bezier(0.22,1,0.36,1); z-index: 1; }
+.journey-stop[data-side="left"] .journey-segment-content { margin-left: 18%; }
+.journey-stop[data-side="right"] .journey-segment-content { margin-left: auto; margin-right: 18%; text-align: right; }
+.journey-segment-content.is-visible { opacity: 1; transform: translateY(0); }
 .journey-card-num { font-family: 'Cinzel', serif; font-size: 0.58rem; letter-spacing: 3.5px; text-transform: uppercase; color: #5C6E82; display: block; margin-bottom: 8px; }
-.journey-card-eyebrow { font-family: 'EB Garamond', serif; font-size: 0.68rem; letter-spacing: 3px; text-transform: uppercase; color: rgba(232,225,212,0.35); display: block; margin-bottom: 10px; }
-.journey-card-title { font-family: 'Cinzel', serif; font-size: 1.52rem; font-weight: 400; color: #e8e1d4; margin: 0 0 14px; line-height: 1.2; }
-.journey-card-body { font-family: 'EB Garamond', serif; font-size: 1.0rem; color: rgba(232,225,212,0.55); line-height: 1.75; margin: 0 0 18px; }
-.journey-card-list { list-style: none; margin: 0; padding: 0; }
-.journey-card-list li { font-family: 'EB Garamond', serif; font-size: 0.92rem; color: rgba(232,225,212,0.4); padding: 3px 0 3px 18px; position: relative; line-height: 1.5; }
-.journey-card-list li::before { content: '—'; position: absolute; left: 0; color: rgba(92,110,130,0.38); font-size: 0.8rem; }
+.journey-card-title { font-family: 'Cinzel', serif; font-size: 1.75rem; font-weight: 400; color: #1C1A14; margin: 0 0 14px; line-height: 1.2; }
+.journey-card-body { font-family: 'EB Garamond', serif; font-size: 1.05rem; color: rgba(28,26,20,0.6); line-height: 1.8; margin: 0; }
 @media (max-width: 720px) {
-  .journey-stop { grid-template-columns: 28px 1fr; column-gap: 16px; }
-  .journey-stop[data-side="left"] > .journey-card,
-  .journey-stop[data-side="right"] > .journey-card { grid-column: 2; grid-row: 1; }
-  .journey-stop[data-side="left"] > .journey-node-col,
-  .journey-stop[data-side="right"] > .journey-node-col { grid-column: 1; grid-row: 1; }
+  .journey-stop { min-height: 200px; padding: 50px 5%; }
+  .journey-stop[data-side="left"] .journey-node-col { left: 3%; }
+  .journey-stop[data-side="right"] .journey-node-col { right: 3%; }
+  .journey-stop[data-side="left"] .journey-segment-content { margin-left: 16%; }
+  .journey-stop[data-side="right"] .journey-segment-content { margin-right: 16%; max-width: 100%; }
   .journey-header-title { font-size: 1.7rem; }
-  .journey-card { padding: 26px 24px; }
-  .journey-card-title { font-size: 1.25rem; }
+  .journey-card-title { font-size: 1.35rem; }
 }
+/* ===== AUDIO SECTION ===== */
+.audio-section { background: #1a1814; padding: 100px 10%; text-align: center; border-top: 1px solid rgba(99,95,81,0.12); }
+.audio-eyebrow { font-family: 'EB Garamond', serif; font-size: 0.72rem; letter-spacing: 3px; text-transform: uppercase; color: #635f51; margin-bottom: 12px; }
+.audio-heading { font-size: 2.2rem; color: #f5f4f0; margin: 0 0 56px; }
+.audio-grid { max-width: 820px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px; }
+.audio-card { background: rgba(245,244,240,0.04); border: 1px solid rgba(245,244,240,0.09); border-radius: 12px; padding: 24px 28px; display: flex; align-items: center; gap: 22px; text-align: left; transition: background 0.25s, border-color 0.25s; }
+.audio-card:hover { background: rgba(92,110,130,0.1); border-color: rgba(92,110,130,0.3); }
+.audio-play-btn { flex-shrink: 0; width: 46px; height: 46px; border-radius: 50%; background: rgba(92,110,130,0.18); border: 1px solid rgba(92,110,130,0.4); color: #5C6E82; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.2s, transform 0.15s; font-size: 0; }
+.audio-play-btn:hover { background: rgba(92,110,130,0.32); transform: scale(1.07); }
+.audio-play-btn svg { width: 18px; height: 18px; fill: #5C6E82; flex-shrink: 0; }
+.audio-play-btn.playing svg.icon-play { display: none; }
+.audio-play-btn:not(.playing) svg.icon-pause { display: none; }
+.audio-meta { flex: 1; min-width: 0; }
+.audio-title { font-family: 'EB Garamond', serif; font-size: 1.05rem; color: #f5f4f0; margin: 0 0 4px; font-weight: 600; }
+.audio-desc { font-size: 0.78rem; color: #635f51; letter-spacing: 0.5px; margin: 0 0 12px; }
+.audio-progress-wrap { position: relative; height: 3px; background: rgba(245,244,240,0.1); border-radius: 3px; cursor: pointer; margin-bottom: 6px; }
+.audio-progress-bar { height: 100%; width: 0%; background: #5C6E82; border-radius: 3px; transition: width 0.1s linear; pointer-events: none; }
+.audio-time { font-size: 0.7rem; color: #a8a49c; letter-spacing: 0.5px; display: flex; justify-content: space-between; }
+@media (max-width: 600px) { .audio-section { padding: 72px 6%; } .audio-card { padding: 18px 16px; gap: 14px; } .audio-play-btn { width: 40px; height: 40px; } }
   </style>
 </head>
 <body>
@@ -499,12 +514,35 @@
   </div>
 </section>
 
+<!-- AUDIO -->
+<section class="audio-section" id="audio">
+  <p class="audio-eyebrow anim-fade">Listen</p>
+  <h2 class="audio-heading anim-fade">Audio</h2>
+  <div class="audio-grid">
+    <div class="audio-card anim-fade">
+      <button class="audio-play-btn" aria-label="Play/Pause"><svg class="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg><svg class="icon-pause" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg></button>
+      <div class="audio-meta"><p class="audio-title">Track Title</p><p class="audio-desc">Description / project context</p><div class="audio-progress-wrap"><div class="audio-progress-bar"></div></div><div class="audio-time"><span class="audio-current">0:00</span><span class="audio-duration">0:00</span></div></div>
+      <audio src="" preload="metadata"></audio>
+    </div>
+    <div class="audio-card anim-fade">
+      <button class="audio-play-btn" aria-label="Play/Pause"><svg class="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg><svg class="icon-pause" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg></button>
+      <div class="audio-meta"><p class="audio-title">Track Title</p><p class="audio-desc">Description / project context</p><div class="audio-progress-wrap"><div class="audio-progress-bar"></div></div><div class="audio-time"><span class="audio-current">0:00</span><span class="audio-duration">0:00</span></div></div>
+      <audio src="" preload="metadata"></audio>
+    </div>
+    <div class="audio-card anim-fade">
+      <button class="audio-play-btn" aria-label="Play/Pause"><svg class="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg><svg class="icon-pause" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg></button>
+      <div class="audio-meta"><p class="audio-title">Track Title</p><p class="audio-desc">Description / project context</p><div class="audio-progress-wrap"><div class="audio-progress-bar"></div></div><div class="audio-time"><span class="audio-current">0:00</span><span class="audio-duration">0:00</span></div></div>
+      <audio src="" preload="metadata"></audio>
+    </div>
+  </div>
+</section>
+
 <!-- How It Works — Journey Timeline -->
 <section class="journey-section">
   <div class="journey-header">
     <p class="journey-header-eyebrow">How It Works</p>
     <h2 class="journey-header-title">From Idea to Deliverable</h2>
-    <p class="journey-header-sub">Every element of the production, in the order it matters</p>
+    <p class="journey-header-sub">Four steps, one complete creative experience</p>
   </div>
   <div class="journey-body">
     <svg class="journey-svg-layer" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -514,69 +552,53 @@
 
     <!-- Stop 1 — left -->
     <div class="journey-stop" data-side="left">
-      <div class="journey-card">
-        <span class="journey-card-num">01</span>
-        <span class="journey-card-eyebrow">The Camera</span>
-        <h3 class="journey-card-title">Cinema-Grade Video</h3>
-        <p class="journey-card-body">I shoot on the Fujifilm X-H2S — a mirrorless system renowned for its exceptional color science and film simulation modes. The result is footage that feels intentional, warm, and alive.</p>
-        <ul class="journey-card-list">
-          <li>Fujifilm X-H2S with cinema-calibrated color profiles</li>
-          <li>Single or multi-camera setup depending on package</li>
-          <li>B-roll, cutaway, and detail coverage included</li>
-          <li>Stabilized footage for smooth, professional results</li>
-        </ul>
+      <div class="journey-node-col">
+        <div class="journey-node"></div>
+        <span class="journey-node-label">Step 01</span>
       </div>
-      <div class="journey-node-col"><div class="journey-node"></div></div>
+      <div class="journey-segment-content">
+        <span class="journey-card-num">01</span>
+        <h3 class="journey-card-title">Strategize &amp; Brainstorm</h3>
+        <p class="journey-card-body">We start with a conversation — your goals, your audience, and the story only you can tell. This discovery session shapes every creative decision that follows.</p>
+      </div>
     </div>
 
     <!-- Stop 2 — right -->
     <div class="journey-stop" data-side="right">
-      <div class="journey-node-col"><div class="journey-node"></div></div>
-      <div class="journey-card">
+      <div class="journey-node-col">
+        <div class="journey-node"></div>
+        <span class="journey-node-label">Step 02</span>
+      </div>
+      <div class="journey-segment-content">
         <span class="journey-card-num">02</span>
-        <span class="journey-card-eyebrow">The Sound</span>
-        <h3 class="journey-card-title">Location Audio</h3>
-        <p class="journey-card-body">My competitors use stock audio over their videos. I record real ambient sound on location and turn it into a cinematic soundtrack. Audio is not an afterthought — it is half the story.</p>
-        <ul class="journey-card-list">
-          <li>Wireless lapel mic for primary subject</li>
-          <li>Ambient audio capture throughout the shoot</li>
-          <li>Professional audio mix and noise cleanup</li>
-          <li>Optional full audio package add-on available</li>
-        </ul>
+        <h3 class="journey-card-title">Story Unfolds</h3>
+        <p class="journey-card-body">Shoot day. Intentional light, professional audio, and cinema glass — built around your location, your energy, and the moments that make the frame come alive.</p>
       </div>
     </div>
 
     <!-- Stop 3 — left -->
     <div class="journey-stop" data-side="left">
-      <div class="journey-card">
-        <span class="journey-card-num">03</span>
-        <span class="journey-card-eyebrow">The Grade</span>
-        <h3 class="journey-card-title">Color &amp; Light</h3>
-        <p class="journey-card-body">Color grading is the difference between footage and film. Every project receives a carefully considered grade that serves the mood and story — not just the exposure.</p>
-        <ul class="journey-card-list">
-          <li>Natural light preferred, portable fill available</li>
-          <li>Film-inspired professional color grade included</li>
-          <li>Custom LUT for visual consistency across the project</li>
-          <li>Skin-tone calibration and exposure correction</li>
-        </ul>
+      <div class="journey-node-col">
+        <div class="journey-node"></div>
+        <span class="journey-node-label">Step 03</span>
       </div>
-      <div class="journey-node-col"><div class="journey-node"></div></div>
+      <div class="journey-segment-content">
+        <span class="journey-card-num">03</span>
+        <h3 class="journey-card-title">Edits</h3>
+        <p class="journey-card-body">The cut that serves the story. Color-graded, audio-mixed, and paced for impact — with revision rounds built in to make sure it's exactly right.</p>
+      </div>
     </div>
 
     <!-- Stop 4 — right -->
     <div class="journey-stop" data-side="right">
-      <div class="journey-node-col"><div class="journey-node"></div></div>
-      <div class="journey-card">
+      <div class="journey-node-col">
+        <div class="journey-node"></div>
+        <span class="journey-node-label">Step 04</span>
+      </div>
+      <div class="journey-segment-content">
         <span class="journey-card-num">04</span>
-        <span class="journey-card-eyebrow">The Finish</span>
-        <h3 class="journey-card-title">Delivery &amp; Rights</h3>
-        <p class="journey-card-body">Clean file delivery, clear licensing, and revision rounds that respect your timeline. You get the final product ready for every screen — from Instagram to broadcast.</p>
-        <ul class="journey-card-list">
-          <li>Edited final cut delivered in 5–10 business days</li>
-          <li>Social media cuts formatted for each platform</li>
-          <li>Revisions included (number varies by package)</li>
-          <li>Full commercial license on Novel and Epic packages</li>
-        </ul>
+        <h3 class="journey-card-title">Polished Piece</h3>
+        <p class="journey-card-body">Delivered in every format you need. Clean files, full commercial license, and platform-ready cuts — the final piece, done right.</p>
       </div>
     </div>
   </div>
@@ -1157,7 +1179,7 @@ function updateAddonBtn(key) {
   var fill     = document.querySelector('.journey-path-fill');
   var nodeCols = Array.from(document.querySelectorAll('.journey-node-col'));
   var nodes    = Array.from(document.querySelectorAll('.journey-node'));
-  var cards    = Array.from(document.querySelectorAll('.journey-card'));
+  var contents = Array.from(document.querySelectorAll('.journey-segment-content'));
   if (!section || !bodyEl || !ghost || !fill || !nodeCols.length) return;
 
   var pathLen = 0;
@@ -1165,38 +1187,30 @@ function updateAddonBtn(key) {
 
   function buildPath() {
     var bRect = bodyEl.getBoundingClientRect();
-    var stops = Array.from(document.querySelectorAll('.journey-stop'));
     pts = nodeCols.map(function(nc) {
       var r = nc.getBoundingClientRect();
-      return {
-        x: r.left + r.width / 2 - bRect.left,
-        y: r.top + r.height / 2 - bRect.top
-      };
+      return { x: r.left + r.width / 2 - bRect.left, y: r.top + r.height / 2 - bRect.top };
     });
     if (!pts.length) return;
-    /* Swing amount — ~38% of body width creates a satisfying meander */
-    var swing = bRect.width * 0.38;
-    /* First stop side determines initial swing direction */
-    function sideOf(i) {
-      return stops[i] && stops[i].dataset.side === 'right' ? 1 : -1;
-    }
-    var cx = pts[0].x;
-    var d = 'M ' + cx.toFixed(1) + ',' + (pts[0].y - 60).toFixed(1);
-    d += ' L ' + cx.toFixed(1) + ',' + pts[0].y.toFixed(1);
+    var cx = bRect.width / 2;
+    /* Entry: top-center curves down to first node */
+    var d = 'M ' + cx.toFixed(1) + ',' + (pts[0].y - 80).toFixed(1);
+    d += ' C ' + cx.toFixed(1) + ',' + (pts[0].y - 20).toFixed(1)
+       + ' '   + pts[0].x.toFixed(1) + ',' + (pts[0].y - 20).toFixed(1)
+       + ' '   + pts[0].x.toFixed(1) + ',' + pts[0].y.toFixed(1);
+    /* S-curves: CP1 shares x with node A, CP2 shares x with node B, both at midY */
     for (var i = 0; i < pts.length - 1; i++) {
       var a = pts[i], b = pts[i + 1];
-      /* Control point for segment exit: swing toward current stop's card side */
-      var exitDir  = sideOf(i);
-      /* Control point for segment entry: swing toward next stop's card side */
-      var entryDir = sideOf(i + 1);
-      var q1y = a.y + (b.y - a.y) * 0.45;
-      var q2y = a.y + (b.y - a.y) * 0.55;
-      d += ' C ' + (a.x + exitDir  * swing).toFixed(1) + ',' + q1y.toFixed(1)
-         + ' '   + (b.x + entryDir * swing).toFixed(1) + ',' + q2y.toFixed(1)
+      var midY = (a.y + b.y) / 2;
+      d += ' C ' + a.x.toFixed(1) + ',' + midY.toFixed(1)
+         + ' '   + b.x.toFixed(1) + ',' + midY.toFixed(1)
          + ' '   + b.x.toFixed(1) + ',' + b.y.toFixed(1);
     }
+    /* Exit: last node curves back to bottom-center */
     var last = pts[pts.length - 1];
-    d += ' L ' + last.x.toFixed(1) + ',' + (last.y + 60).toFixed(1);
+    d += ' C ' + last.x.toFixed(1) + ',' + (last.y + 20).toFixed(1)
+       + ' '   + cx.toFixed(1) + ',' + (last.y + 20).toFixed(1)
+       + ' '   + cx.toFixed(1) + ',' + (last.y + 80).toFixed(1);
     ghost.setAttribute('d', d);
     fill.setAttribute('d', d);
     pathLen = fill.getTotalLength();
@@ -1208,30 +1222,55 @@ function updateAddonBtn(key) {
     if (!pathLen || !section) return;
     var sRect = section.getBoundingClientRect();
     var vh = window.innerHeight;
-    /* Start filling when section top enters viewport, finish when section bottom leaves */
     var progress = Math.max(0, Math.min(1, (vh - sRect.top) / (sRect.height + vh * 0.4)));
     fill.style.strokeDashoffset = (pathLen * (1 - progress)).toFixed(1);
-    /* Light up nodes as line reaches each one */
     var bRect = bodyEl.getBoundingClientRect();
     pts.forEach(function(pt, i) {
       var absY = bRect.top + pt.y;
       nodes[i].classList.toggle('is-lit', absY < vh * 0.7);
     });
-    /* Reveal cards on scroll */
-    cards.forEach(function(card) {
-      var r = card.getBoundingClientRect();
-      if (r.top < vh * 0.88) card.classList.add('is-visible');
+    contents.forEach(function(c) {
+      var r = c.getBoundingClientRect();
+      if (r.top < vh * 0.88) c.classList.add('is-visible');
     });
   }
 
-  function init() {
-    buildPath();
-    onScroll();
-  }
-
+  function init() { buildPath(); onScroll(); }
   requestAnimationFrame(function() { requestAnimationFrame(init); });
   window.addEventListener('resize', function() { init(); });
   window.addEventListener('scroll', onScroll, { passive: true });
+})();
+
+/* ===== AUDIO PLAYERS ===== */
+(function() {
+  function fmt(s) { s = Math.floor(s || 0); return Math.floor(s / 60) + ':' + ('0' + (s % 60)).slice(-2); }
+  document.querySelectorAll('.audio-card').forEach(function(card) {
+    var btn = card.querySelector('.audio-play-btn');
+    var audio = card.querySelector('audio');
+    var bar = card.querySelector('.audio-progress-bar');
+    var wrap = card.querySelector('.audio-progress-wrap');
+    var current = card.querySelector('.audio-current');
+    var duration = card.querySelector('.audio-duration');
+    if (!audio) return;
+    audio.addEventListener('loadedmetadata', function() { duration.textContent = fmt(audio.duration); });
+    audio.addEventListener('timeupdate', function() {
+      current.textContent = fmt(audio.currentTime);
+      bar.style.width = (audio.duration ? (audio.currentTime / audio.duration) * 100 : 0) + '%';
+    });
+    audio.addEventListener('ended', function() { btn.classList.remove('playing'); bar.style.width = '0%'; current.textContent = '0:00'; });
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.audio-card audio').forEach(function(a) {
+        if (a !== audio) { a.pause(); a.closest('.audio-card').querySelector('.audio-play-btn').classList.remove('playing'); }
+      });
+      if (audio.paused) { audio.play().catch(function() { btn.classList.remove('playing'); }); btn.classList.add('playing'); }
+      else { audio.pause(); btn.classList.remove('playing'); }
+    });
+    wrap.addEventListener('click', function(e) {
+      if (!audio.duration) return;
+      var rect = wrap.getBoundingClientRect();
+      audio.currentTime = ((e.clientX - rect.left) / rect.width) * audio.duration;
+    });
+  });
 })();
 </script>
 </body>

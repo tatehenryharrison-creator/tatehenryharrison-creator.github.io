@@ -59,7 +59,9 @@
     .stripe-wrap { background:#fff; border:1.5px solid rgba(99,95,81,0.14); border-radius:14px; padding:32px; text-align:center; margin-bottom:24px; }
     .stripe-coming { font-family:'EB Garamond',serif; font-size:0.72rem; letter-spacing:2px; text-transform:uppercase; color:#a8a49c; border:1px solid rgba(92,92,88,.35); border-radius:20px; padding:4px 14px; display:inline-block; margin-bottom:14px; }
     .stripe-title { font-family:'Cinzel',serif; font-size:1.1rem; color:#1C1A14; margin:0 0 8px; }
-    .stripe-desc { font-family:'EB Garamond',serif; font-size:0.9rem; color:#a8a49c; margin:0; line-height:1.6; }
+    .stripe-desc { font-family:'EB Garamond',serif; font-size:0.9rem; color:#a8a49c; margin:0 0 4px; line-height:1.6; }
+    .stripe-btn { display:block; width:100%; font-family:'EB Garamond',serif; font-size:0.92rem; letter-spacing:.04em; color:#fff; background:#635BFF; border:none; border-radius:50px; padding:11px 22px; cursor:pointer; transition:opacity .2s, transform .2s; margin-top:12px; }
+    .stripe-btn:hover { opacity:.85; transform:translateY(-1px); }
 
     .check-note { font-family:'EB Garamond',serif; font-size:0.85rem; color:#a8a49c; text-align:center; line-height:1.6; margin-top:8px; }
 
@@ -109,9 +111,16 @@
 
   <!-- Stripe / Credit Card -->
   <div class="stripe-wrap">
-    <span class="stripe-coming">Coming Soon</span>
-    <h3 class="stripe-title">Credit Card via Stripe</h3>
-    <p class="stripe-desc">Secure card payments are being set up for this package. In the meantime, please use one of the methods below — all are instant and fee-free.</p>
+    <svg height="28" viewBox="0 0 60 25" xmlns="http://www.w3.org/2000/svg" style="margin-bottom:12px"><path d="M59.64 14.28h-8.06c.19 1.93 1.63 2.64 3.43 2.64 1.71 0 2.95-.37 4.05-.95v3.32a8.33 8.33 0 0 1-4.56 1.1c-4.01 0-6.83-2.58-6.83-7.48 0-4.19 2.39-7.52 6.3-7.52 3.92 0 5.96 3.28 5.96 7.5 0 .4-.04 1.26-.29 1.39zm-5.92-5.62c-1.03 0-2.17.73-2.17 2.58h4.25c0-1.85-1.07-2.58-2.08-2.58zM40.95 20.3c-1.44 0-2.32-.6-2.9-1.04l-.02 4.63-4.12.87V6.27h3.75l.36 1.04c.53-.69 1.74-1.39 3.4-1.39 3.34 0 5.66 2.95 5.66 7.1-.01 4.43-2.38 7.28-6.13 7.28zm-1.31-10.31c-.76 0-1.43.27-1.72.68l.02 5.35c.28.41.96.68 1.72.68 1.55 0 2.38-1.75 2.38-3.36 0-1.6-.83-3.35-2.4-3.35zM25.1 7.25l-4.12.88V6.27h4.12v.98zm0 13.05h-4.12V8.82h4.12V20.3zm-5.2-15.14-4.1.87V4.5c0-1.3-.93-1.85-2.31-1.85-1.3 0-2.4.69-3.2 1.61v.78l.01 15.25H6.18V2.1h3.54l.26 1.15C10.65 2.52 11.83 2 13.62 2c2.62 0 4.27 1.66 4.27 4.1v.73zM5.62 20.3C2.25 20.3 0 18.05 0 15.31c0-2.92 2.32-4.41 5.77-4.41h2.17v-.96C7.94 8.7 7.09 8.25 5.81 8.25c-1.3 0-2.56.37-3.46.85V5.78c.9-.5 2.36-.99 4.36-.99 3.37 0 5.35 1.7 5.35 5.26v10.25H8.73l-.3-1.12c-.77.82-1.84 1.12-2.81 1.12z" fill="#635BFF"/></svg>
+    <h3 class="stripe-title">Pay by Card</h3>
+    <p class="stripe-desc">Secure checkout via Stripe — accepts all major cards.</p>
+    <form action="/create-checkout-session" method="POST">
+      <input type="hidden" name="package" value="Chapter">
+      <input type="hidden" name="amount" id="stripe-amount" value="800">
+      <input type="hidden" name="success_url" value="/payment-success.html">
+      <input type="hidden" name="cancel_url" value="/payment-chapter.html">
+      <button type="submit" class="stripe-btn">Pay by Card</button>
+    </form>
   </div>
 
   <div class="methods-grid">
@@ -140,7 +149,7 @@
       <h3 class="method-name">Zelle</h3>
       <p class="method-desc">Send directly through your bank app — instant, no fees.</p>
       <p class="zelle-detail"><strong>Phone:</strong> (303) 968-8078</p>
-      <p class="zelle-detail"><strong>Email:</strong> tate@harrisonmediallc.com</p>
+      <p class="zelle-detail"><strong>Email:</strong> info@tateharrisonmedia.com</p>
       <button class="copy-btn" onclick="navigator.clipboard.writeText('3039688078').then(()=>{this.textContent='Copied!';setTimeout(()=>this.textContent='Copy Number',2000)})">Copy Number</button>
     </div>
     <div class="method-card" style="display:flex;flex-direction:column;justify-content:center;align-items:center;background:#faf9f6;">
@@ -150,7 +159,7 @@
   </div>
 
   <p class="check-note">
-    Questions? <a href="schedule.html" style="color:#5C6E82;">Book a free consultation</a> or email <a href="mailto:tate@harrisonmediallc.com" style="color:#5C6E82;">tate@harrisonmediallc.com</a>
+    Questions? <a href="schedule.html" style="color:#5C6E82;">Book a free consultation</a> or email <a href="mailto:info@tateharrisonmedia.com" style="color:#5C6E82;">info@tateharrisonmedia.com</a>
   </p>
 </div>
 
@@ -178,6 +187,8 @@
   if (total) {
     document.getElementById('total-display').textContent = '$' + parseInt(total).toLocaleString();
   }
+  var _amt = document.getElementById('stripe-amount');
+  if (_amt && total) _amt.value = parseInt(total);
 })();
 </script>
 </body>
