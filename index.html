@@ -3340,6 +3340,44 @@ if (_footerForm) _footerForm.addEventListener('submit', async function(e) {
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
 })();
 
+/* ===== PORTFOLIO SOFT STOP ===== */
+(function() {
+    var section   = document.getElementById('work');
+    if (!section) return;
+
+    var locked    = false;   // true while the pause is active
+    var triggered = false;   // prevent re-firing mid-pause
+    var lastY     = window.scrollY;
+    var HOLD_MS   = 550;     // pause duration
+    var THRESHOLD = 80;      // px above section top that triggers the stop
+
+    window.addEventListener('scroll', function() {
+        var y         = window.scrollY;
+        var scrollingDown = y > lastY;
+        lastY         = y;
+
+        if (locked || !scrollingDown) return;
+
+        var sectionTop = section.getBoundingClientRect().top + window.scrollY;
+        var distanceTo = sectionTop - y;
+
+        // Trigger when the section top is within THRESHOLD px below viewport top
+        if (distanceTo > -20 && distanceTo < THRESHOLD && !triggered) {
+            triggered = true;
+            locked    = true;
+
+            var snapY = sectionTop;
+            window.scrollTo({ top: snapY, behavior: 'smooth' });
+
+            setTimeout(function() {
+                locked = false;
+                // Reset triggered once the user scrolls away so it can fire again on re-entry
+                setTimeout(function() { triggered = false; }, 1200);
+            }, HOLD_MS);
+        }
+    }, { passive: true });
+})();
+
 /* ===== MOBILE: DEFAULT SCROLL TO NOVEL CARD ===== */
 (function() {
     if (window.innerWidth > 767) return; /* desktop — no action needed */
