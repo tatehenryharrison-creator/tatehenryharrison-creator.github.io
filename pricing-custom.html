@@ -280,46 +280,130 @@
 .audio-time { font-size: 0.7rem; color: #a8a49c; letter-spacing: 0.5px; display: flex; justify-content: space-between; }
 @media (max-width: 600px) { .audio-section { padding: 72px 6%; } .audio-card { padding: 18px 16px; gap: 14px; } .audio-play-btn { width: 40px; height: 40px; } }
 
-    /* ── Merged What's Included + Journey overlay ── */
-    .wi-section { position: relative; }
-    .wi-journey-body { position: relative; }
-    .wi-panel { position: relative; z-index: 1; }
-    .wi-journey-svg {
-      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-      pointer-events: none; overflow: visible; z-index: 0;
+    /* ── WHAT'S INCLUDED ACCORDION ── */
+    .acc-section { background: #111009; }
+    .acc-header { text-align: center; padding: 80px 10% 52px; }
+    .acc-eyebrow-label { font-family: 'EB Garamond', serif; font-size: 0.7rem; letter-spacing: 3.5px; text-transform: uppercase; color: #5C6E82; margin: 0 0 14px; }
+    .acc-heading { font-family: 'Cinzel', serif; font-size: 2.2rem; font-weight: 400; color: #e8e1d4; margin: 0 0 16px; }
+    .acc-intro { font-family: 'EB Garamond', serif; font-size: 1rem; color: rgba(232,225,212,0.5); max-width: 500px; margin: 0 auto; line-height: 1.7; }
+
+    .acc-item {
+      position: relative; overflow: hidden;
+      border-top: 1px solid rgba(232,225,212,0.06);
     }
-    .wi-journey-path-ghost {
-      fill: none; stroke: rgba(201,168,76,0.09); stroke-width: 1.8; stroke-dasharray: 5 5;
+    .acc-item:last-of-type { border-bottom: 1px solid rgba(232,225,212,0.06); }
+
+    .acc-bar {
+      position: relative; min-height: 88px;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 22px 8%;
+      background-image: var(--acc-bg, none);
+      background-size: cover; background-position: center;
+      background-color: #1a1714;
+      transition: min-height 0.7s cubic-bezier(0.22,1,0.36,1), padding 0.7s cubic-bezier(0.22,1,0.36,1);
+      flex-wrap: wrap; align-content: flex-start;
     }
-    .wi-journey-path-fill {
-      fill: none; stroke: #C9A84C; stroke-width: 1.8; stroke-dasharray: 5 5;
+    .acc-bar::before {
+      content: ''; position: absolute; inset: 0;
+      background: rgba(14,11,8,0.68);
+      transition: background 0.5s ease; pointer-events: none;
     }
-    .wi-node-col {
-      position: absolute; top: 50%; transform: translateY(-50%);
-      z-index: 2; display: flex; flex-direction: column; align-items: center;
+    .acc-item.open .acc-bar::before { background: rgba(14,11,8,0.55); }
+    .acc-bar::after {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse 80% 90% at center, rgba(0,0,0,0.55) 0%, transparent 100%);
+      opacity: 0; transition: opacity 0.55s ease; pointer-events: none; z-index: 0;
     }
-    .wi-panel[data-side="left"]  .wi-node-col { left:  2.5%; }
-    .wi-panel[data-side="right"] .wi-node-col { right: 2.5%; }
-    .wi-journey-node {
-      width: 13px; height: 13px; border-radius: 50%;
+    .acc-item.open .acc-bar::after { opacity: 1; }
+
+    .acc-left {
+      display: flex; align-items: center; gap: 20px;
+      position: relative; z-index: 1; flex: 1;
+    }
+    .acc-item.open .acc-bar { flex-direction: column; align-items: center; justify-content: center; min-height: 150px; padding-bottom: 18px; }
+    .acc-item.open .acc-left { flex: none; width: 100%; justify-content: center; gap: 0; }
+
+    .acc-num {
+      font-family: 'Cinzel', serif; font-size: 0.72rem; letter-spacing: 2px;
+      color: rgba(232,225,212,0.28); font-weight: 600; min-width: 24px;
+      transition: opacity 0.45s ease, max-width 0.55s ease, margin 0.55s ease;
+      overflow: hidden; max-width: 60px;
+    }
+    .acc-item.open .acc-num { opacity: 0; max-width: 0; margin: 0; }
+
+    .acc-title {
+      font-family: 'Cinzel', serif; font-size: 1.3rem; font-weight: 400;
+      color: #e8e1d4; letter-spacing: 0.8px; word-break: break-word;
+      transition: font-size 0.7s cubic-bezier(0.22,1,0.36,1), letter-spacing 0.7s ease;
+    }
+    .acc-item.open .acc-title { font-size: 2rem; letter-spacing: 2.5px; }
+
+    .acc-step-dot {
+      width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
       background: rgba(201,168,76,0.2); border: 1.5px solid rgba(201,168,76,0.35);
-      transition: background 0.5s, border-color 0.5s, box-shadow 0.5s, transform 0.5s;
+      transition: background 0.5s, border-color 0.5s, box-shadow 0.5s, opacity 0.4s, max-width 0.4s;
     }
-    .wi-journey-node.is-lit {
-      background: #C9A84C; border-color: #D4B055;
-      box-shadow: 0 0 14px rgba(201,168,76,0.55); transform: scale(1.18);
+    .acc-item.open .acc-step-dot {
+      opacity: 0; max-width: 0; overflow: hidden;
     }
-    .wi-node-label {
-      display: block; margin-top: 7px;
-      font-family: 'EB Garamond', serif; font-size: 0.57rem;
-      letter-spacing: 1.5px; text-transform: uppercase;
-      color: rgba(201,168,76,0.45); text-align: center; white-space: nowrap;
+
+    .acc-chevron {
+      font-size: 1.7rem; font-weight: 300; color: rgba(232,225,212,0.6);
+      line-height: 1; position: relative; z-index: 1;
+      width: 38px; height: 38px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      border: 1.5px solid rgba(201,168,76,0.4); border-radius: 50%;
+      background: rgba(0,0,0,0.3);
+      transition: transform 0.7s cubic-bezier(0.34,1.56,0.64,1),
+                  color 0.3s, border-color 0.3s, background 0.3s;
     }
-    .wi-journey-phase {
-      font-family: 'EB Garamond', serif; font-size: 0.6rem;
-      letter-spacing: 2.5px; text-transform: uppercase;
-      color: rgba(201,168,76,0.65); margin: 0 0 10px;
+    .acc-item.open .acc-chevron {
+      transform: rotate(45deg); color: #C9A84C;
+      border-color: #C9A84C; background: rgba(201,168,76,0.1);
+      position: absolute; top: 16px; right: 8%;
     }
+
+    .acc-body {
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.75s cubic-bezier(0.22,1,0.36,1);
+      background: #181512;
+    }
+    .acc-item.open .acc-body { max-height: 600px; }
+    .acc-body-inner { padding: 32px 8% 36px; }
+    .acc-body-desc {
+      font-family: 'EB Garamond', serif; font-size: 1.05rem;
+      color: rgba(232,225,212,0.55); line-height: 1.8; margin: 0 0 18px;
+    }
+    .acc-body ul { margin: 0; padding: 0; list-style: none; }
+    .acc-body ul li {
+      font-family: 'EB Garamond', serif; font-size: 0.98rem;
+      color: rgba(232,225,212,0.5); line-height: 1.65;
+      padding: 5px 0 5px 26px; position: relative;
+    }
+    .acc-body ul li::before {
+      content: '—'; position: absolute; left: 0;
+      color: rgba(92,110,130,0.45); font-size: 0.9rem;
+    }
+
+    /* Portfolio CTA inside acc-section */
+    .wi-portfolio-cta {
+      text-align: center; padding: 52px 10% 64px; background: #111009;
+    }
+    .wi-portfolio-link {
+      display: inline-block; font-family: 'EB Garamond', serif;
+      font-size: 0.92rem; letter-spacing: 0.08em; text-transform: uppercase;
+      color: #e8e1d4; border: 1px solid rgba(232,225,212,0.3);
+      border-radius: 50px; padding: 12px 36px; text-decoration: none;
+      transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+    }
+    .wi-portfolio-link:hover { background: rgba(232,225,212,0.08); border-color: rgba(232,225,212,0.55); }
+
+    @media (max-width: 600px) {
+      .acc-bar { padding: 20px 6%; min-height: 76px; }
+      .acc-body-inner { padding: 24px 6% 28px; }
+      .acc-item.open .acc-title { font-size: 1.55rem; }
+    }
+
   </style>
 </head>
 <body>
@@ -355,86 +439,77 @@
   <p class="pkg-subtitle">For multi-day campaigns, hybrid video and photography, and projects that don't fit a single category. Built around what you actually need.</p>
 </div>
 
-<!-- What's Included — Merged with Journey -->
-<section class="wi-section wi-journey-merged">
-  <div class="wi-header">
-    <p class="wi-eyebrow">What's Included · How It Works</p>
-    <h2 class="wi-title">From Brief to Campaign</h2>
-    <p class="wi-intro">Four phases woven through every production — from first creative call to final campaign delivery, each step is intentional.</p>
+<!-- What's Included — Scroll Accordion -->
+<section class="acc-section">
+  <div class="acc-header">
+    <p class="acc-eyebrow-label">What's Included</p>
+    <h2 class="acc-heading">From Brief to Campaign</h2>
+    <p class="acc-intro">Three pillars of production, each handled as part of one complete creative vision.</p>
   </div>
-  <div class="wi-journey-body">
-  <svg class="wi-journey-svg" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <path class="wi-journey-path-ghost" d=""/>
-    <path class="wi-journey-path-fill" d=""/>
-  </svg>
 
-  <!-- Panel 1 — Multi-Media Production / Strategize & Brainstorm -->
-  <div class="wi-panel" data-side="left">
-    <div class="wi-node-col"><div class="wi-journey-node"></div><span class="wi-node-label">Step 01</span></div>
-    <div class="wi-visual">
-      <div class="wi-visual-bg" style="background: linear-gradient(135deg, #0d1a2e 0%, #1a2d45 40%, #0a1220 100%);"></div>
-      <div class="wi-visual-overlay"></div>
-      <div class="wi-visual-num">01</div>
+  <!-- 01 — Multi-Media Coverage -->
+  <div class="acc-item" style="--acc-bg: url('assets/acc-video.jpg')">
+    <div class="acc-bar">
+      <div class="acc-left">
+        <span class="acc-step-dot"></span>
+        <span class="acc-num">01</span>
+        <span class="acc-title">Multi-Media Coverage</span>
+      </div>
+      <span class="acc-chevron">+</span>
     </div>
-    <div class="wi-text">
-      <p class="wi-journey-phase">Strategize &amp; Brainstorm</p>
-      <p class="wi-panel-eyebrow">The Production</p>
-      <h3 class="wi-panel-title">Multi-Media Coverage</h3>
-      <p class="wi-panel-body">Custom packages combine Fujifilm video and photography into one cohesive production. One director, one vision — both mediums handled with the same care and intentionality.</p>
-      <ul class="wi-panel-list">
+    <div class="acc-body"><div class="acc-body-inner">
+      <p class="acc-body-desc">Custom packages combine Fujifilm video and photography into one cohesive production. One director, one vision — both mediums handled with the same care and intentionality.</p>
+      <ul>
         <li>Fujifilm X-H2S multi-camera video setup</li>
         <li>High-resolution photography throughout</li>
         <li>Pre-production planning session included</li>
         <li>Multiple locations, subjects, and scenes</li>
       </ul>
-    </div>
+    </div></div>
   </div>
 
-  <!-- Panel 2 — Audio & Light / Story Unfolds -->
-  <div class="wi-panel wi-panel--alt" data-side="right">
-    <div class="wi-node-col"><div class="wi-journey-node"></div><span class="wi-node-label">Step 02</span></div>
-    <div class="wi-visual">
-      <div class="wi-visual-bg" style="background: linear-gradient(135deg, #1a1208 0%, #2d2010 40%, #120e06 100%);"></div>
-      <div class="wi-visual-overlay"></div>
-      <div class="wi-visual-num">02</div>
+  <!-- 02 — Audio, Light & Color -->
+  <div class="acc-item" style="--acc-bg: url('assets/acc-lighting.jpeg')">
+    <div class="acc-bar">
+      <div class="acc-left">
+        <span class="acc-step-dot"></span>
+        <span class="acc-num">02</span>
+        <span class="acc-title">Audio, Light &amp; Color</span>
+      </div>
+      <span class="acc-chevron">+</span>
     </div>
-    <div class="wi-text">
-      <p class="wi-journey-phase">Story Unfolds</p>
-      <p class="wi-panel-eyebrow">The Craft</p>
-      <h3 class="wi-panel-title">Audio, Light &amp; Color</h3>
-      <p class="wi-panel-body">Every deliverable — whether video or still — is color-graded and finished to the same standard. Audio is captured live on location, not added after from a stock library.</p>
-      <ul class="wi-panel-list">
+    <div class="acc-body"><div class="acc-body-inner">
+      <p class="acc-body-desc">Every deliverable — whether video or still — is color-graded and finished to the same standard. Audio is captured live on location, not added after from a stock library.</p>
+      <ul>
         <li>Wireless lapel and boom mic setup</li>
         <li>Professional lighting kit on all shoot days</li>
         <li>Full cinematic color grade across all footage</li>
         <li>Consistent visual style — film and photo matched</li>
       </ul>
-    </div>
+    </div></div>
   </div>
 
-  <!-- Panel 3 — Campaign Delivery / Polished Piece -->
-  <div class="wi-panel" data-side="left">
-    <div class="wi-node-col"><div class="wi-journey-node"></div><span class="wi-node-label">Step 03</span></div>
-    <div class="wi-visual">
-      <div class="wi-visual-bg" style="background: linear-gradient(135deg, #0e1a0e 0%, #1a2e1a 40%, #0a150a 100%);"></div>
-      <div class="wi-visual-overlay"></div>
-      <div class="wi-visual-num">03</div>
+  <!-- 03 — Campaign Delivery -->
+  <div class="acc-item" style="--acc-bg: url('assets/acc-audio.jpg')">
+    <div class="acc-bar">
+      <div class="acc-left">
+        <span class="acc-step-dot"></span>
+        <span class="acc-num">03</span>
+        <span class="acc-title">Campaign Delivery</span>
+      </div>
+      <span class="acc-chevron">+</span>
     </div>
-    <div class="wi-text">
-      <p class="wi-journey-phase">Campaign Delivery</p>
-      <p class="wi-panel-eyebrow">The Finish</p>
-      <h3 class="wi-panel-title">Campaign Delivery</h3>
-      <p class="wi-panel-body">Multi-day shoots produce a lot. I organize, edit, and deliver everything in a structured package — ready for your website, social channels, and press materials.</p>
-      <ul class="wi-panel-list">
+    <div class="acc-body"><div class="acc-body-inner">
+      <p class="acc-body-desc">Multi-day shoots produce a lot. I organize, edit, and deliver everything in a structured package — ready for your website, social channels, and press materials.</p>
+      <ul>
         <li>Edited video final cut + all social format cuts</li>
         <li>Full photography gallery, edited and color-graded</li>
         <li>Unlimited revisions on all packages</li>
         <li>Full commercial license for all deliverables</li>
       </ul>
-    </div>
+    </div></div>
   </div>
 
-  </div><!-- /wi-journey-body -->
   <!-- Portfolio CTA -->
   <div class="wi-portfolio-cta">
     <a href="index.html#work" class="wi-portfolio-link">View All Portfolio Work →</a>
@@ -1053,67 +1128,22 @@ function updateAddonBtn(key) {
   panel.addEventListener('click', function(e){ e.stopPropagation(); });
 })();
 
-/* ===== JOURNEY OVERLAY — scroll-fill path on wi-panels ===== */
+/* ===== ACCORDION SCROLL-EXPAND ===== */
 (function() {
-  var section  = document.querySelector('.wi-journey-merged');
-  var bodyEl   = document.querySelector('.wi-journey-body');
-  var ghost    = document.querySelector('.wi-journey-path-ghost');
-  var fill     = document.querySelector('.wi-journey-path-fill');
-  var nodeCols = Array.from(document.querySelectorAll('.wi-node-col'));
-  var nodes    = Array.from(document.querySelectorAll('.wi-journey-node'));
-  if (!section || !bodyEl || !ghost || !fill || !nodeCols.length) return;
-
-  var pathLen = 0;
-  var pts = [];
-
-  function buildPath() {
-    var bRect = bodyEl.getBoundingClientRect();
-    pts = nodeCols.map(function(nc) {
-      var r = nc.getBoundingClientRect();
-      return { x: r.left + r.width / 2 - bRect.left, y: r.top + r.height / 2 - bRect.top };
-    });
-    if (!pts.length) return;
-    var cx = bRect.width / 2;
-    var d = 'M ' + cx.toFixed(1) + ',' + (pts[0].y - 80).toFixed(1);
-    d += ' C ' + cx.toFixed(1) + ',' + (pts[0].y - 20).toFixed(1)
-       + ' '   + pts[0].x.toFixed(1) + ',' + (pts[0].y - 20).toFixed(1)
-       + ' '   + pts[0].x.toFixed(1) + ',' + pts[0].y.toFixed(1);
-    for (var i = 0; i < pts.length - 1; i++) {
-      var a = pts[i], b = pts[i + 1];
-      var midY = (a.y + b.y) / 2;
-      d += ' C ' + a.x.toFixed(1) + ',' + midY.toFixed(1)
-         + ' '   + b.x.toFixed(1) + ',' + midY.toFixed(1)
-         + ' '   + b.x.toFixed(1) + ',' + b.y.toFixed(1);
-    }
-    var last = pts[pts.length - 1];
-    d += ' C ' + last.x.toFixed(1) + ',' + (last.y + 20).toFixed(1)
-       + ' '   + cx.toFixed(1) + ',' + (last.y + 20).toFixed(1)
-       + ' '   + cx.toFixed(1) + ',' + (last.y + 80).toFixed(1);
-    ghost.setAttribute('d', d);
-    fill.setAttribute('d', d);
-    pathLen = fill.getTotalLength();
-    fill.style.strokeDasharray = pathLen;
-    fill.style.strokeDashoffset = pathLen;
-  }
-
-  function onScroll() {
-    if (!pathLen || !section) return;
-    var sRect = section.getBoundingClientRect();
+  var items = Array.from(document.querySelectorAll('.acc-item'));
+  if (!items.length) return;
+  function checkScroll() {
     var vh = window.innerHeight;
-    var progress = Math.max(0, Math.min(1, (vh - sRect.top) / (sRect.height + vh * 0.4)));
-    fill.style.strokeDashoffset = (pathLen * (1 - progress)).toFixed(1);
-    var bRect = bodyEl.getBoundingClientRect();
-    pts.forEach(function(pt, i) {
-      var absY = bRect.top + pt.y;
-      nodes[i].classList.toggle('is-lit', absY < vh * 0.7);
+    items.forEach(function(item) {
+      var rect = item.getBoundingClientRect();
+      if (rect.top < vh * 0.55 && rect.bottom > 0) item.classList.add('open');
     });
   }
-
-  function init() { buildPath(); onScroll(); }
-  requestAnimationFrame(function() { requestAnimationFrame(init); });
-  window.addEventListener('resize', function() { init(); });
-  window.addEventListener('scroll', onScroll, { passive: true });
+  checkScroll();
+  window.addEventListener('scroll', checkScroll, { passive: true });
+  window.addEventListener('resize', checkScroll);
 })();
+
 
 /* ===== AUDIO PLAYERS ===== */
 (function() {
