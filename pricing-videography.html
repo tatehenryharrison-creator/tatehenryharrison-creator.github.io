@@ -502,6 +502,7 @@
       cursor: pointer;
       user-select: none;
       will-change: transform;
+      perspective: 1200px;          /* single depth context for child spin */
     }
     .coin-shadow {
       position: absolute;
@@ -564,15 +565,33 @@
     }
     .coin-back {
       transform: rotateY(180deg);
-      background: linear-gradient(145deg, #1C1A14 0%, #2d2921 45%, #1C1A14 100%);
       display: flex; align-items: center; justify-content: center;
     }
+    /* Shared top-edge highlight on all backs */
     .coin-back::before {
       content: '';
       position: absolute; inset: 0;
-      background: linear-gradient(135deg, rgba(255,255,255,0.07) 0%, transparent 55%);
+      background: linear-gradient(160deg,
+        rgba(255,255,255,0.18) 0%,
+        rgba(255,255,255,0.04) 35%,
+        transparent 65%);
       border-radius: 20px;
+      pointer-events: none;
     }
+    /* Gleam sweep on backs — mirrors the front gleam */
+    .coin-back::after {
+      content: '';
+      position: absolute;
+      top: 0; bottom: 0; width: 60px;
+      left: -65px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.18), transparent);
+      transform: skewX(-16deg);
+      pointer-events: none;
+      animation: coin-gleam 7s ease-in-out infinite;
+    }
+    .coin-chapter .coin-back::after { animation-delay: 1.5s; }
+    .coin-novel   .coin-back::after { animation-delay: 2.7s; }
+    .coin-epic    .coin-back::after { animation-delay: 3.9s; }
     /* Chapter — royal red */
     .coin-chapter .coin-front {
       border: 2px solid #C41E3A;
@@ -580,7 +599,13 @@
                   0 0 22px rgba(196,30,58,0.3),
                   0 10px 40px rgba(196,30,58,0.16);
     }
-    .coin-chapter .coin-back  { border: 2px solid rgba(196,30,58,0.5); box-shadow: 0 0 16px rgba(196,30,58,0.25); }
+    .coin-chapter .coin-back {
+      background: linear-gradient(150deg, #e03454 0%, #C41E3A 45%, #8c1526 100%);
+      border: 2px solid rgba(230,80,100,0.45);
+      box-shadow: inset 0 0 0 1px rgba(255,150,170,0.12),
+                  0 0 28px rgba(196,30,58,0.55),
+                  0 8px 32px rgba(196,30,58,0.25);
+    }
     .coin-chapter .coin-tier-name { color: #C41E3A; }
     /* Novel — cash green */
     .coin-novel .coin-front {
@@ -589,7 +614,13 @@
                   0 0 22px rgba(26,122,63,0.3),
                   0 10px 40px rgba(26,122,63,0.16);
     }
-    .coin-novel .coin-back  { border: 2px solid rgba(26,122,63,0.5); box-shadow: 0 0 16px rgba(26,122,63,0.25); }
+    .coin-novel .coin-back {
+      background: linear-gradient(150deg, #27b05a 0%, #1A7A3F 45%, #0d4824 100%);
+      border: 2px solid rgba(70,200,120,0.45);
+      box-shadow: inset 0 0 0 1px rgba(120,230,160,0.12),
+                  0 0 28px rgba(26,122,63,0.55),
+                  0 8px 32px rgba(26,122,63,0.25);
+    }
     .coin-novel .coin-tier-name { color: #1A7A3F; }
     /* Epic — gold */
     .coin-epic .coin-front {
@@ -598,7 +629,13 @@
                   0 0 24px rgba(201,168,76,0.36),
                   0 10px 40px rgba(201,168,76,0.2);
     }
-    .coin-epic .coin-back   { border: 2px solid rgba(201,168,76,0.55); box-shadow: 0 0 18px rgba(201,168,76,0.3); }
+    .coin-epic .coin-back {
+      background: linear-gradient(150deg, #e8c860 0%, #C9A84C 45%, #8a7030 100%);
+      border: 2px solid rgba(240,210,120,0.45);
+      box-shadow: inset 0 0 0 1px rgba(255,235,160,0.15),
+                  0 0 32px rgba(201,168,76,0.6),
+                  0 8px 32px rgba(201,168,76,0.28);
+    }
     .coin-epic .coin-tier-name { color: #C9A84C; }
 
     .coin-eyebrow {
@@ -1684,7 +1721,8 @@ function updateAddonBtn(key) {
 
   /* Set initial position */
   function setAngle(c, angle) {
-    c.inner.style.transform = 'perspective(1200px) rotateY(' + angle.toFixed(2) + 'deg)';
+    /* Perspective is a CSS property on .coin-card — do not repeat it here */
+    c.inner.style.transform = 'rotateY(' + angle.toFixed(2) + 'deg)';
     if (c.shadow) {
       var facing = Math.abs(Math.cos(angle * Math.PI / 180));
       c.shadow.style.opacity = (0.25 + facing * 0.45).toFixed(3);
@@ -1693,30 +1731,38 @@ function updateAddonBtn(key) {
 
   coins.forEach(function (c) { setAngle(c, c.totalAngle); });
 
+  /* locked = true once the section has been fully scrolled past.
+     Unlocks only when the user scrolls back up so spinProgress < UNLOCK. */
+  var locked      = false;
+  var UNLOCK_AT   = 0.88;   /* hysteresis — must scroll back up this far to re-engage */
   var prevSettled = false;
 
-  function update() {
+  function getSpinProgress() {
     var section = document.getElementById('pkg-coins');
-    if (!section) return;
-    var rect     = section.getBoundingClientRect();
-    var vh       = window.innerHeight;
-    var sectionH = section.offsetHeight;
+    if (!section) return 0;
+    var rect      = section.getBoundingClientRect();
+    var vh        = window.innerHeight;
+    var sectionH  = section.offsetHeight;
+    var raw       = (vh - rect.top) / (vh + sectionH);
+    var trigger   = sectionH / (vh + sectionH);
+    return trigger > 0 ? Math.max(0, Math.min(1, raw / trigger)) : 0;
+  }
 
-    /* rawProgress: 0 when section top hits viewport bottom, grows as you scroll */
-    var rawProgress = (vh - rect.top) / (vh + sectionH);
+  function update() {
+    var sp = getSpinProgress();
 
-    /* bottomTrigger = progress value when section bottom reaches viewport bottom */
-    var bottomTrigger = sectionH / (vh + sectionH);
+    /* Engage lock when fully spun-in */
+    if (sp >= 1) locked = true;
 
-    /* spinProgress: 0 → 1 as section bottom comes from below to match viewport bottom */
-    var spinProgress = bottomTrigger > 0
-      ? Math.max(0, Math.min(1, rawProgress / bottomTrigger))
-      : 0;
+    /* Release lock when user scrolls back up past the hysteresis threshold */
+    if (locked && sp < UNLOCK_AT) locked = false;
 
-    var settled = spinProgress >= 1;
+    /* While locked: freeze at face-forward (angle = 0) */
+    var settled = locked || sp >= 1;
+    var angle0  = settled ? 0 : null;  /* null = compute per-card */
 
     coins.forEach(function (c) {
-      var angle = settled ? 0 : c.totalAngle * (1 - spinProgress);
+      var angle = (angle0 !== null) ? angle0 : c.totalAngle * (1 - sp);
       setAngle(c, angle);
       if (settled && !prevSettled) {
         c.card.classList.add('coin-settled');
@@ -1813,13 +1859,13 @@ function updateAddonBtn(key) {
       /* Remove transition so the tracking stays real-time */
       card.style.transition = 'none';
       card.style.transform  =
-        'perspective(900px) rotateX(' + rotX.toFixed(2) + 'deg) rotateY(' + rotY.toFixed(2) + 'deg)';
+        'rotateX(' + rotX.toFixed(2) + 'deg) rotateY(' + rotY.toFixed(2) + 'deg)';
     });
 
     card.addEventListener('mouseleave', function () {
       /* Longer ease-out so the card drifts gently back to flat */
       card.style.transition = EASE_OUT;
-      card.style.transform  = 'perspective(900px) rotateX(0deg) rotateY(0deg)';
+      card.style.transform  = 'rotateX(0deg) rotateY(0deg)';
     });
   });
 })();
