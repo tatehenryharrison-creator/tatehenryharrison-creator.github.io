@@ -219,128 +219,133 @@
 .audio-time { font-size: 0.7rem; color: #a8a49c; letter-spacing: 0.5px; display: flex; justify-content: space-between; }
 @media (max-width: 600px) { .audio-section { padding: 72px 6%; } .audio-card { padding: 18px 16px; gap: 14px; } .audio-play-btn { width: 40px; height: 40px; } }
 
-    /* ── WHAT'S INCLUDED ACCORDION ── */
+    /* ── WHAT'S INCLUDED TIMELINE ── */
     .acc-section { background: #111009; }
-    .acc-header { text-align: center; padding: 80px 10% 52px; }
+    .acc-header { text-align: center; padding: 80px 10% 60px; }
     .acc-eyebrow-label { font-family: 'EB Garamond', serif; font-size: 0.7rem; letter-spacing: 3.5px; text-transform: uppercase; color: #5C6E82; margin: 0 0 14px; }
     .acc-heading { font-family: 'Cinzel', serif; font-size: 2.2rem; font-weight: 400; color: #e8e1d4; margin: 0 0 16px; }
     .acc-intro { font-family: 'EB Garamond', serif; font-size: 1rem; color: rgba(232,225,212,0.5); max-width: 500px; margin: 0 auto; line-height: 1.7; }
 
+    .acc-timeline {
+      position: relative;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 6% 90px;
+    }
+    .acc-timeline::before {
+      content: '';
+      position: absolute;
+      left: calc(6% + 148px);
+      top: 0; bottom: 0;
+      width: 1px;
+      background: repeating-linear-gradient(
+        to bottom,
+        rgba(201,168,76,0.28) 0px, rgba(201,168,76,0.28) 5px,
+        transparent 5px, transparent 14px
+      );
+    }
+
     .acc-item {
-      position: relative; overflow: hidden;
-      border-top: 1px solid rgba(232,225,212,0.06);
+      display: flex;
+      align-items: flex-start;
+      padding-top: 64px;
+      position: relative;
     }
-    .acc-item:last-of-type { border-bottom: 1px solid rgba(232,225,212,0.06); }
 
-    .acc-bar {
-      position: relative; min-height: 88px;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 22px 8%;
-      background-image: var(--acc-bg, none);
-      background-size: cover; background-position: center;
-      background-color: #1a1714;
-      transition: min-height 0.7s cubic-bezier(0.22,1,0.36,1), padding 0.7s cubic-bezier(0.22,1,0.36,1);
-      flex-wrap: wrap; align-content: flex-start;
+    .acc-meta {
+      width: 148px;
+      flex-shrink: 0;
+      position: relative;
+      min-height: 20px;
     }
-    .acc-bar::before {
-      content: ''; position: absolute; inset: 0;
-      background: rgba(14,11,8,0.68);
-      transition: background 0.5s ease; pointer-events: none;
-    }
-    .acc-item.open .acc-bar::before { background: rgba(14,11,8,0.55); }
-    .acc-bar::after {
-      content: ''; position: absolute; inset: 0;
-      background: radial-gradient(ellipse 80% 90% at center, rgba(0,0,0,0.55) 0%, transparent 100%);
-      opacity: 0; transition: opacity 0.55s ease; pointer-events: none; z-index: 0;
-    }
-    .acc-item.open .acc-bar::after { opacity: 1; }
-
-    .acc-left {
-      display: flex; align-items: center; gap: 20px;
-      position: relative; z-index: 1; flex: 1;
-    }
-    .acc-item.open .acc-bar { flex-direction: column; align-items: center; justify-content: center; min-height: 150px; padding-bottom: 18px; }
-    .acc-item.open .acc-left { flex: none; width: 100%; justify-content: center; gap: 0; }
-
     .acc-num {
-      font-family: 'Cinzel', serif; font-size: 0.72rem; letter-spacing: 2px;
-      color: rgba(232,225,212,0.28); font-weight: 600; min-width: 24px;
-      transition: opacity 0.45s ease, max-width 0.55s ease, margin 0.55s ease;
-      overflow: hidden; max-width: 60px;
+      position: absolute;
+      right: 37px;
+      top: 2px;
+      font-family: 'Cinzel', serif; font-size: 0.68rem; letter-spacing: 2px;
+      color: rgba(232,225,212,0.18); font-weight: 600;
+      transition: color 0.55s ease;
     }
-    .acc-item.open .acc-num { opacity: 0; max-width: 0; margin: 0; }
+    .acc-item.open .acc-num { color: rgba(201,168,76,0.65); }
+
+    .acc-dot {
+      position: absolute;
+      right: -7px;
+      top: 3px;
+      width: 14px; height: 14px; border-radius: 50%;
+      border: 2px solid rgba(201,168,76,0.3);
+      background: #111009;
+      z-index: 2;
+      transition: background 0.65s cubic-bezier(0.22,1,0.36,1),
+                  border-color 0.65s cubic-bezier(0.22,1,0.36,1),
+                  box-shadow 0.65s cubic-bezier(0.22,1,0.36,1);
+    }
+    .acc-item.open .acc-dot {
+      background: #C9A84C; border-color: #C9A84C;
+      box-shadow: 0 0 18px rgba(201,168,76,0.55), 0 0 5px rgba(201,168,76,0.9);
+    }
+
+    .acc-content { flex: 1; padding-left: 36px; }
 
     .acc-title {
-      font-family: 'Cinzel', serif; font-size: 1.3rem; font-weight: 400;
-      color: #e8e1d4; letter-spacing: 0.8px; word-break: break-word;
-      transition: font-size 0.7s cubic-bezier(0.22,1,0.36,1), letter-spacing 0.7s ease;
+      font-family: 'Cinzel', serif; font-size: 1.25rem; font-weight: 400;
+      color: rgba(232,225,212,0.28); margin: 0; letter-spacing: 1px;
+      transition: color 0.65s ease,
+                  font-size 0.75s cubic-bezier(0.22,1,0.36,1),
+                  letter-spacing 0.75s ease;
+      line-height: 1.2;
     }
-    .acc-item.open .acc-title { font-size: 2rem; letter-spacing: 2.5px; }
-
-    .acc-step-dot {
-      width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
-      background: rgba(201,168,76,0.2); border: 1.5px solid rgba(201,168,76,0.35);
-      transition: background 0.5s, border-color 0.5s, box-shadow 0.5s, opacity 0.4s, max-width 0.4s;
-    }
-    .acc-item.open .acc-step-dot {
-      opacity: 0; max-width: 0; overflow: hidden;
-    }
-
-    .acc-chevron {
-      font-size: 1.7rem; font-weight: 300; color: rgba(232,225,212,0.6);
-      line-height: 1; position: relative; z-index: 1;
-      width: 38px; height: 38px; flex-shrink: 0;
-      display: flex; align-items: center; justify-content: center;
-      border: 1.5px solid rgba(201,168,76,0.4); border-radius: 50%;
-      background: rgba(0,0,0,0.3);
-      transition: transform 0.7s cubic-bezier(0.34,1.56,0.64,1),
-                  color 0.3s, border-color 0.3s, background 0.3s;
-    }
-    .acc-item.open .acc-chevron {
-      transform: rotate(45deg); color: #C9A84C;
-      border-color: #C9A84C; background: rgba(201,168,76,0.1);
-      position: absolute; top: 16px; right: 8%;
+    .acc-item.open .acc-title {
+      color: #e8e1d4; font-size: 1.8rem; letter-spacing: 1.8px;
     }
 
     .acc-body {
       max-height: 0; overflow: hidden;
-      transition: max-height 0.75s cubic-bezier(0.22,1,0.36,1);
-      background: #181512;
+      transition: max-height 0.9s cubic-bezier(0.22,1,0.36,1),
+                  opacity 0.5s ease;
+      opacity: 0;
     }
-    .acc-item.open .acc-body { max-height: 600px; }
-    .acc-body-inner { padding: 32px 8% 36px; }
+    .acc-item.open .acc-body { max-height: 440px; opacity: 1; }
+
+    .acc-body-inner { padding: 22px 0 32px; }
     .acc-body-desc {
       font-family: 'EB Garamond', serif; font-size: 1.05rem;
-      color: rgba(232,225,212,0.55); line-height: 1.8; margin: 0 0 18px;
+      color: rgba(232,225,212,0.5); line-height: 1.8; margin: 0 0 18px;
     }
     .acc-body ul { margin: 0; padding: 0; list-style: none; }
     .acc-body ul li {
-      font-family: 'EB Garamond', serif; font-size: 0.98rem;
-      color: rgba(232,225,212,0.5); line-height: 1.65;
-      padding: 5px 0 5px 26px; position: relative;
+      font-family: 'EB Garamond', serif; font-size: 0.97rem;
+      color: rgba(232,225,212,0.42); line-height: 1.65;
+      padding: 5px 0 5px 24px; position: relative;
     }
     .acc-body ul li::before {
       content: '—'; position: absolute; left: 0;
-      color: rgba(92,110,130,0.45); font-size: 0.9rem;
+      color: rgba(92,110,130,0.4); font-size: 0.9rem;
     }
 
-    /* Portfolio CTA inside acc-section */
-    .wi-portfolio-cta {
-      text-align: center; padding: 52px 10% 64px; background: #111009;
-    }
+    .wi-portfolio-cta { text-align: center; padding: 40px 10% 64px; background: #111009; }
     .wi-portfolio-link {
       display: inline-block; font-family: 'EB Garamond', serif;
       font-size: 0.92rem; letter-spacing: 0.08em; text-transform: uppercase;
       color: #e8e1d4; border: 1px solid rgba(232,225,212,0.3);
       border-radius: 50px; padding: 12px 36px; text-decoration: none;
-      transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+      transition: background 0.25s, border-color 0.25s;
     }
     .wi-portfolio-link:hover { background: rgba(232,225,212,0.08); border-color: rgba(232,225,212,0.55); }
 
+    @media (max-width: 900px) {
+      .acc-timeline { padding: 0 5% 80px; }
+      .acc-timeline::before { left: calc(5% + 110px); }
+      .acc-meta { width: 110px; }
+      .acc-num { right: 30px; }
+    }
     @media (max-width: 600px) {
-      .acc-bar { padding: 20px 6%; min-height: 76px; }
-      .acc-body-inner { padding: 24px 6% 28px; }
-      .acc-item.open .acc-title { font-size: 1.55rem; }
+      .acc-timeline { padding: 0 5% 64px; }
+      .acc-timeline::before { left: calc(5% + 80px); }
+      .acc-meta { width: 80px; }
+      .acc-num { right: 22px; font-size: 0.6rem; }
+      .acc-item { padding-top: 48px; }
+      .acc-item.open .acc-title { font-size: 1.4rem; }
     }
 
   </style>
@@ -386,68 +391,69 @@
     <p class="acc-intro">Three pillars of production, each handled as part of one complete creative vision.</p>
   </div>
 
-  <!-- 01 — Multi-Media Coverage -->
-  <div class="acc-item" style="--acc-bg: url('assets/acc-video.jpg')">
-    <div class="acc-bar">
-      <div class="acc-left">
-        <span class="acc-step-dot"></span>
+  <div class="acc-timeline">
+
+    <!-- 01 — Multi-Media Coverage -->
+    <div class="acc-item">
+      <div class="acc-meta">
         <span class="acc-num">01</span>
-        <span class="acc-title">Multi-Media Coverage</span>
+        <div class="acc-dot"></div>
       </div>
-      <span class="acc-chevron">+</span>
+      <div class="acc-content">
+        <h3 class="acc-title">Multi-Media Coverage</h3>
+        <div class="acc-body"><div class="acc-body-inner">
+          <p class="acc-body-desc">Custom packages combine Fujifilm video and photography into one cohesive production. One director, one vision — both mediums handled with the same care and intentionality.</p>
+          <ul>
+            <li>Fujifilm X-H2S multi-camera video setup</li>
+            <li>High-resolution photography throughout</li>
+            <li>Pre-production planning session included</li>
+            <li>Multiple locations, subjects, and scenes</li>
+          </ul>
+        </div></div>
+      </div>
     </div>
-    <div class="acc-body"><div class="acc-body-inner">
-      <p class="acc-body-desc">Custom packages combine Fujifilm video and photography into one cohesive production. One director, one vision — both mediums handled with the same care and intentionality.</p>
-      <ul>
-        <li>Fujifilm X-H2S multi-camera video setup</li>
-        <li>High-resolution photography throughout</li>
-        <li>Pre-production planning session included</li>
-        <li>Multiple locations, subjects, and scenes</li>
-      </ul>
-    </div></div>
-  </div>
 
-  <!-- 02 — Audio, Light & Color -->
-  <div class="acc-item" style="--acc-bg: url('assets/acc-lighting.jpeg')">
-    <div class="acc-bar">
-      <div class="acc-left">
-        <span class="acc-step-dot"></span>
+    <!-- 02 — Audio, Light & Color -->
+    <div class="acc-item">
+      <div class="acc-meta">
         <span class="acc-num">02</span>
-        <span class="acc-title">Audio, Light &amp; Color</span>
+        <div class="acc-dot"></div>
       </div>
-      <span class="acc-chevron">+</span>
+      <div class="acc-content">
+        <h3 class="acc-title">Audio, Light &amp; Color</h3>
+        <div class="acc-body"><div class="acc-body-inner">
+          <p class="acc-body-desc">Every deliverable — whether video or still — is color-graded and finished to the same standard. Audio is captured live on location, not added after from a stock library.</p>
+          <ul>
+            <li>Wireless lapel and boom mic setup</li>
+            <li>Professional lighting kit on all shoot days</li>
+            <li>Full cinematic color grade across all footage</li>
+            <li>Consistent visual style — film and photo matched</li>
+          </ul>
+        </div></div>
+      </div>
     </div>
-    <div class="acc-body"><div class="acc-body-inner">
-      <p class="acc-body-desc">Every deliverable — whether video or still — is color-graded and finished to the same standard. Audio is captured live on location, not added after from a stock library.</p>
-      <ul>
-        <li>Wireless lapel and boom mic setup</li>
-        <li>Professional lighting kit on all shoot days</li>
-        <li>Full cinematic color grade across all footage</li>
-        <li>Consistent visual style — film and photo matched</li>
-      </ul>
-    </div></div>
-  </div>
 
-  <!-- 03 — Campaign Delivery -->
-  <div class="acc-item" style="--acc-bg: url('assets/acc-audio.jpg')">
-    <div class="acc-bar">
-      <div class="acc-left">
-        <span class="acc-step-dot"></span>
+    <!-- 03 — Campaign Delivery -->
+    <div class="acc-item">
+      <div class="acc-meta">
         <span class="acc-num">03</span>
-        <span class="acc-title">Campaign Delivery</span>
+        <div class="acc-dot"></div>
       </div>
-      <span class="acc-chevron">+</span>
+      <div class="acc-content">
+        <h3 class="acc-title">Campaign Delivery</h3>
+        <div class="acc-body"><div class="acc-body-inner">
+          <p class="acc-body-desc">Multi-day shoots produce a lot. I organize, edit, and deliver everything in a structured package — ready for your website, social channels, and press materials.</p>
+          <ul>
+            <li>Edited video final cut + all social format cuts</li>
+            <li>Full photography gallery, edited and color-graded</li>
+            <li>Unlimited revisions on all packages</li>
+            <li>Full commercial license for all deliverables</li>
+          </ul>
+        </div></div>
+      </div>
     </div>
-    <div class="acc-body"><div class="acc-body-inner">
-      <p class="acc-body-desc">Multi-day shoots produce a lot. I organize, edit, and deliver everything in a structured package — ready for your website, social channels, and press materials.</p>
-      <ul>
-        <li>Edited video final cut + all social format cuts</li>
-        <li>Full photography gallery, edited and color-graded</li>
-        <li>Unlimited revisions on all packages</li>
-        <li>Full commercial license for all deliverables</li>
-      </ul>
-    </div></div>
-  </div>
+
+  </div><!-- /acc-timeline -->
 
   <!-- Portfolio CTA -->
   <div class="wi-portfolio-cta">
