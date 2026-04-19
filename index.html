@@ -348,7 +348,7 @@ html, body { overflow-x: hidden; }
     color: rgba(245,244,240,0.8);
     text-shadow: 0 1px 6px rgba(0,0,0,0.6);
     white-space: nowrap; pointer-events: none;
-    animation: handleNudge 3s ease-in-out 0.8s 2;
+    transition: opacity 0.3s ease;
 }
 .ba-mobile-labels { display: none; }
 .ba-caption {
@@ -1810,42 +1810,6 @@ footer > * { position: relative; z-index: 1; }
     </div>
 </div>
 
-<!-- BEFORE / AFTER SLIDER -->
-<section class="ba-section" id="difference">
-    <p class="ba-label-top">The Difference</p>
-    <div class="ba-wrap" id="baWrap">
-        <!-- iPhone — right / bottom layer -->
-        <div class="ba-before">
-            <video autoplay muted loop playsinline preload="auto">
-                <source src="iPhone Comparison.mp4" type="video/mp4">
-            </video>
-            <span class="ba-tag">iPhone (4K)</span>
-        </div>
-        <!-- XH2S — left / top layer, clips from right -->
-        <div class="ba-after" id="baAfter">
-            <video autoplay muted loop playsinline preload="auto">
-                <source src="XH2S Comparison.mp4" type="video/mp4">
-            </video>
-            <span class="ba-tag">Mirrorless Camera<br><span style="font-size:0.85em;font-style:italic;opacity:0.75;font-weight:400;letter-spacing:0.5px;text-transform:none;">(Professionally Color Graded by Tate)</span></span>
-        </div>
-        <div class="ba-divider" id="baDivider">
-            <div class="ba-handle"></div>
-            <span class="ba-drag-hint">drag</span>
-        </div>
-    </div>
-    <div class="ba-mobile-labels">
-        <div class="ba-mobile-label">Mirrorless Camera<br><span style="font-style:italic;opacity:0.7;text-transform:none;letter-spacing:0;font-size:0.9em;">(Professionally Color Graded by Tate)</span></div>
-        <div class="ba-mobile-label">iPhone (4K)</div>
-    </div>
-    <p class="ba-caption">Drag to compare — mirrorless camera footage professionally color graded vs. 4K iPhone footage</p>
-    <a href="#about" class="ba-scroll-arrow" aria-label="Scroll to About section">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <polyline points="6 5 12 11 18 5"></polyline>
-            <polyline points="6 12 12 18 18 12"></polyline>
-        </svg>
-    </a>
-</section>
-
 <!-- ABOUT -->
 <section id="about" class="about-section">
     <div class="about-inner">
@@ -1993,6 +1957,42 @@ footer > * { position: relative; z-index: 1; }
     </div>
 </section>
 
+
+<!-- BEFORE / AFTER SLIDER -->
+<section class="ba-section" id="difference">
+    <p class="ba-label-top">The Difference</p>
+    <div class="ba-wrap" id="baWrap">
+        <!-- iPhone — right / bottom layer -->
+        <div class="ba-before">
+            <video autoplay muted loop playsinline preload="auto">
+                <source src="iPhone Comparison.mp4" type="video/mp4">
+            </video>
+            <span class="ba-tag">iPhone (4K)</span>
+        </div>
+        <!-- XH2S — left / top layer, clips from right -->
+        <div class="ba-after" id="baAfter">
+            <video autoplay muted loop playsinline preload="auto">
+                <source src="XH2S Comparison.mp4" type="video/mp4">
+            </video>
+            <span class="ba-tag">Mirrorless Camera<br><span style="font-size:0.85em;font-style:italic;opacity:0.75;font-weight:400;letter-spacing:0.5px;text-transform:none;">(Professionally Color Graded by Tate)</span></span>
+        </div>
+        <div class="ba-divider" id="baDivider">
+            <div class="ba-handle"></div>
+            <span class="ba-drag-hint">drag</span>
+        </div>
+    </div>
+    <div class="ba-mobile-labels">
+        <div class="ba-mobile-label">Mirrorless Camera<br><span style="font-style:italic;opacity:0.7;text-transform:none;letter-spacing:0;font-size:0.9em;">(Professionally Color Graded by Tate)</span></div>
+        <div class="ba-mobile-label">iPhone (4K)</div>
+    </div>
+    <p class="ba-caption">Drag to compare — mirrorless camera footage professionally color graded vs. 4K iPhone footage</p>
+    <a href="#work" class="ba-scroll-arrow" aria-label="Scroll to Portfolio section">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <polyline points="6 5 12 11 18 5"></polyline>
+            <polyline points="6 12 12 18 18 12"></polyline>
+        </svg>
+    </a>
+</section>
 
 <!-- PORTFOLIO / WORK -->
 <!-- ┌─────────────────────────────────────────────────────────────────────────┐
@@ -2828,6 +2828,18 @@ document.querySelectorAll('.pricing-card').forEach(card => {
         setPos(e.touches[0].clientX);
     }, { passive: false });
     window.addEventListener('touchend', () => { dragging = false; });
+
+    /* Hide drag hint permanently once the user first interacts */
+    const hint = divider ? divider.querySelector('.ba-drag-hint') : null;
+    function hideHint() {
+        if (hint) { hint.style.opacity = '0'; hint.style.pointerEvents = 'none'; }
+        wrap.removeEventListener('mousedown', hideHint);
+        wrap.removeEventListener('touchstart', hideHint);
+    }
+    if (hint) {
+        wrap.addEventListener('mousedown',  hideHint);
+        wrap.addEventListener('touchstart', hideHint, { passive: true });
+    }
 })();
 
 /* ===== PORTFOLIO FILTER ===== */
