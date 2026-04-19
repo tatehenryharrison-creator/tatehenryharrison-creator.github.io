@@ -501,6 +501,8 @@
       flex-shrink: 0;
       cursor: pointer;
       user-select: none;
+      will-change: transform;
+      perspective: 1200px;          /* single depth context for child spin */
     }
     .coin-shadow {
       position: absolute;
@@ -563,15 +565,33 @@
     }
     .coin-back {
       transform: rotateY(180deg);
-      background: linear-gradient(145deg, #1C1A14 0%, #2d2921 45%, #1C1A14 100%);
       display: flex; align-items: center; justify-content: center;
     }
+    /* Shared top-edge highlight on all backs */
     .coin-back::before {
       content: '';
       position: absolute; inset: 0;
-      background: linear-gradient(135deg, rgba(255,255,255,0.07) 0%, transparent 55%);
+      background: linear-gradient(160deg,
+        rgba(255,255,255,0.18) 0%,
+        rgba(255,255,255,0.04) 35%,
+        transparent 65%);
       border-radius: 20px;
+      pointer-events: none;
     }
+    /* Gleam sweep on backs — mirrors the front gleam */
+    .coin-back::after {
+      content: '';
+      position: absolute;
+      top: 0; bottom: 0; width: 60px;
+      left: -65px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.18), transparent);
+      transform: skewX(-16deg);
+      pointer-events: none;
+      animation: coin-gleam 7s ease-in-out infinite;
+    }
+    .coin-chapter .coin-back::after { animation-delay: 1.5s; }
+    .coin-novel   .coin-back::after { animation-delay: 2.7s; }
+    .coin-epic    .coin-back::after { animation-delay: 3.9s; }
     /* Chapter — royal red */
     .coin-chapter .coin-front {
       border: 2px solid #C41E3A;
@@ -579,7 +599,13 @@
                   0 0 22px rgba(196,30,58,0.3),
                   0 10px 40px rgba(196,30,58,0.16);
     }
-    .coin-chapter .coin-back  { border: 2px solid rgba(196,30,58,0.5); box-shadow: 0 0 16px rgba(196,30,58,0.25); }
+    .coin-chapter .coin-back {
+      background: linear-gradient(150deg, #e03454 0%, #C41E3A 45%, #8c1526 100%);
+      border: 2px solid rgba(230,80,100,0.45);
+      box-shadow: inset 0 0 0 1px rgba(255,150,170,0.12),
+                  0 0 28px rgba(196,30,58,0.55),
+                  0 8px 32px rgba(196,30,58,0.25);
+    }
     .coin-chapter .coin-tier-name { color: #C41E3A; }
     /* Novel — cash green */
     .coin-novel .coin-front {
@@ -588,7 +614,13 @@
                   0 0 22px rgba(26,122,63,0.3),
                   0 10px 40px rgba(26,122,63,0.16);
     }
-    .coin-novel .coin-back  { border: 2px solid rgba(26,122,63,0.5); box-shadow: 0 0 16px rgba(26,122,63,0.25); }
+    .coin-novel .coin-back {
+      background: linear-gradient(150deg, #27b05a 0%, #1A7A3F 45%, #0d4824 100%);
+      border: 2px solid rgba(70,200,120,0.45);
+      box-shadow: inset 0 0 0 1px rgba(120,230,160,0.12),
+                  0 0 28px rgba(26,122,63,0.55),
+                  0 8px 32px rgba(26,122,63,0.25);
+    }
     .coin-novel .coin-tier-name { color: #1A7A3F; }
     /* Epic — gold */
     .coin-epic .coin-front {
@@ -597,7 +629,13 @@
                   0 0 24px rgba(201,168,76,0.36),
                   0 10px 40px rgba(201,168,76,0.2);
     }
-    .coin-epic .coin-back   { border: 2px solid rgba(201,168,76,0.55); box-shadow: 0 0 18px rgba(201,168,76,0.3); }
+    .coin-epic .coin-back {
+      background: linear-gradient(150deg, #e8c860 0%, #C9A84C 45%, #8a7030 100%);
+      border: 2px solid rgba(240,210,120,0.45);
+      box-shadow: inset 0 0 0 1px rgba(255,235,160,0.15),
+                  0 0 32px rgba(201,168,76,0.6),
+                  0 8px 32px rgba(201,168,76,0.28);
+    }
     .coin-epic .coin-tier-name { color: #C9A84C; }
 
     .coin-eyebrow {
@@ -650,7 +688,7 @@
     /* ── CINEMA-GRADE VIDEO ── */
     .cv-section { background: #0e0c09; }
     .cv-banner {
-      position: relative; height: 460px;
+      position: relative; height: 240px;
       background-image: url('assets/acc-video.jpg');
       background-size: cover; background-position: center;
       display: flex; align-items: center; justify-content: center; overflow: hidden;
@@ -665,16 +703,16 @@
       color: #e8e1d4; letter-spacing: 6px; text-align: center; margin: 0;
       text-shadow: 0 2px 24px rgba(0,0,0,0.5);
     }
-    .cv-content { max-width: 1200px; margin: 0 auto; padding: 52px 5% 80px; }
+    .cv-content { max-width: 1200px; margin: 0 auto; padding: 64px 5% 100px; }
     .cv-sub-a {
       display: grid;
       grid-template-columns: 1fr 1fr 1.4fr 1.4fr 1.4fr 1fr 1fr;
-      gap: 14px; margin-bottom: 18px; align-items: start;
+      gap: 18px; margin-bottom: 24px; align-items: stretch;
     }
     .cv-sub-b {
       display: grid;
       grid-template-columns: repeat(3, 1fr) 1.8fr repeat(3, 1fr);
-      gap: 14px; align-items: stretch;
+      gap: 18px; align-items: stretch;
     }
     .cv-photo-slot {
       aspect-ratio: 1 / 1;
@@ -682,13 +720,46 @@
       border-radius: 10px; border: 1px dashed rgba(232,225,212,0.12);
     }
     .cv-text-slot {
-      min-height: 110px; background: rgba(255,255,255,0.03);
+      min-height: 190px; background: rgba(255,255,255,0.03);
       border-radius: 10px; border: 1px dashed rgba(232,225,212,0.08);
     }
     .cv-text-center-slot {
       background: rgba(255,255,255,0.03);
       border-radius: 10px; border: 1px dashed rgba(232,225,212,0.08);
     }
+
+
+    /* ── COIN CARD CTA (hover) ── */
+    .coin-epic { width: 302px; } /* 20% wider than Novel (252px) */
+    .coin-cta {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 64px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      padding-bottom: 15px;
+      gap: 3px;
+      opacity: 0;
+      transform: translateY(5px);
+      transition: opacity 0.22s ease, transform 0.22s ease;
+      pointer-events: none;
+      z-index: 10;
+      border-radius: 0 0 20px 20px;
+      background: linear-gradient(to bottom, transparent 0%, rgba(254,254,252,0.93) 55%);
+    }
+    .coin-card:hover .coin-cta { opacity: 1; transform: translateY(0); }
+    .coin-cta-text {
+      font-family: 'EB Garamond', serif;
+      font-size: 0.7rem;
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+      color: #635f51;
+      line-height: 1;
+    }
+    .coin-cta-chevron { display: block; color: rgba(99,95,81,0.55); }
+    .coin-card:hover .coin-select-hint { opacity: 0 !important; }
 
     @media (max-width: 960px) {
       .pkg-coins-inner { gap: 18px; }
@@ -752,7 +823,7 @@
 
     <!-- Chapter — Royal Red -->
     <div class="coin-card coin-chapter" id="coin-chapter"
-         onclick="(function(el){selectPackage('chapter');document.querySelectorAll('.coin-card').forEach(function(c){c.classList.remove('selected');});el.classList.add('selected');})(this)">
+         onclick="(function(el){selectPackage('chapter');document.querySelectorAll('.coin-card').forEach(function(c){c.classList.remove('selected');});el.classList.add('selected');var t=document.getElementById('cart-section');if(t){t.scrollIntoView({behavior:'smooth'});}})(this)">
       <div class="coin-shadow"></div>
       <div class="coin-inner" id="coin-chapter-inner">
         <div class="coin-face coin-front">
@@ -771,11 +842,17 @@
         </div>
         <div class="coin-face coin-back"></div>
       </div>
+      <div class="coin-cta" aria-hidden="true">
+        <span class="coin-cta-text">Details &amp; Checkout</span>
+        <svg class="coin-cta-chevron" width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
     </div>
 
     <!-- Novel — Cash Green -->
     <div class="coin-card coin-novel" id="coin-novel"
-         onclick="(function(el){selectPackage('novel');document.querySelectorAll('.coin-card').forEach(function(c){c.classList.remove('selected');});el.classList.add('selected');})(this)">
+         onclick="(function(el){selectPackage('novel');document.querySelectorAll('.coin-card').forEach(function(c){c.classList.remove('selected');});el.classList.add('selected');var t=document.getElementById('cart-section');if(t){t.scrollIntoView({behavior:'smooth'});}})(this)">
       <div class="coin-shadow"></div>
       <div class="coin-inner" id="coin-novel-inner">
         <div class="coin-face coin-front">
@@ -795,11 +872,17 @@
         </div>
         <div class="coin-face coin-back"></div>
       </div>
+      <div class="coin-cta" aria-hidden="true">
+        <span class="coin-cta-text">Details &amp; Checkout</span>
+        <svg class="coin-cta-chevron" width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
     </div>
 
     <!-- Epic — Gold -->
     <div class="coin-card coin-epic" id="coin-epic"
-         onclick="(function(el){selectPackage('epic');document.querySelectorAll('.coin-card').forEach(function(c){c.classList.remove('selected');});el.classList.add('selected');})(this)">
+         onclick="(function(el){selectPackage('epic');document.querySelectorAll('.coin-card').forEach(function(c){c.classList.remove('selected');});el.classList.add('selected');var t=document.getElementById('cart-section');if(t){t.scrollIntoView({behavior:'smooth'});}})(this)">
       <div class="coin-shadow"></div>
       <div class="coin-inner" id="coin-epic-inner">
         <div class="coin-face coin-front">
@@ -818,6 +901,12 @@
         </div>
         <div class="coin-face coin-back"></div>
       </div>
+      <div class="coin-cta" aria-hidden="true">
+        <span class="coin-cta-text">Details &amp; Checkout</span>
+        <svg class="coin-cta-chevron" width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
     </div>
 
   </div>
@@ -825,20 +914,29 @@
 
 <!-- ── TRIDENT PROGRESS LINE ── -->
 <div class="trident-wrap" id="trident-wrap">
-  <svg class="trident-svg" id="trident-svg" viewBox="0 0 860 170"
+  <svg class="trident-svg" id="trident-svg" viewBox="0 0 860 180"
        preserveAspectRatio="xMidYMid meet" fill="none"
        xmlns="http://www.w3.org/2000/svg">
-    <!-- Dotted background trident -->
-    <path
-      d="M143,0 L143,110 M430,0 L430,110 M717,0 L717,110 M143,110 L717,110 M430,110 L430,162"
-      stroke="rgba(201,168,76,0.22)" stroke-width="1.5"
-      stroke-dasharray="5 9" stroke-linecap="round"/>
-    <!-- Solid animated fill -->
-    <path id="trident-fill"
-      d="M143,0 L143,110 M430,0 L430,110 M717,0 L717,110 M143,110 L717,110 M430,110 L430,162"
-      stroke="rgba(201,168,76,0.82)" stroke-width="1.5" stroke-linecap="round"/>
+    <!-- Dotted background (static) — three curved prongs + stem -->
+    <path class="td-bg" d="M143,0 C143,72 390,95 430,112"
+          stroke="rgba(201,168,76,0.22)" stroke-width="1.5" stroke-dasharray="5 9" stroke-linecap="round"/>
+    <path class="td-bg" d="M430,0 L430,112"
+          stroke="rgba(201,168,76,0.22)" stroke-width="1.5" stroke-dasharray="5 9" stroke-linecap="round"/>
+    <path class="td-bg" d="M717,0 C717,72 470,95 430,112"
+          stroke="rgba(201,168,76,0.22)" stroke-width="1.5" stroke-dasharray="5 9" stroke-linecap="round"/>
+    <path class="td-bg" d="M430,112 L430,168"
+          stroke="rgba(201,168,76,0.22)" stroke-width="1.5" stroke-dasharray="5 9" stroke-linecap="round"/>
+    <!-- Animated fill — separate paths, animate concurrently -->
+    <path id="td-fl" d="M143,0 C143,72 390,95 430,112"
+          stroke="rgba(201,168,76,0.85)" stroke-width="1.5" stroke-linecap="round"/>
+    <path id="td-fm" d="M430,0 L430,112"
+          stroke="rgba(201,168,76,0.85)" stroke-width="1.5" stroke-linecap="round"/>
+    <path id="td-fr" d="M717,0 C717,72 470,95 430,112"
+          stroke="rgba(201,168,76,0.85)" stroke-width="1.5" stroke-linecap="round"/>
+    <path id="td-fs" d="M430,112 L430,168"
+          stroke="rgba(201,168,76,0.85)" stroke-width="1.5" stroke-linecap="round"/>
     <!-- Completion dot -->
-    <circle id="trident-dot" cx="430" cy="162" r="5.5" fill="#C9A84C"/>
+    <circle id="td-dot" cx="430" cy="168" r="5.5" fill="#C9A84C"/>
   </svg>
 </div>
 
@@ -1378,7 +1476,7 @@
 </section>
 
 <!-- Package Selection + Cart -->
-<section class="cart-section">
+<section class="cart-section" id="cart-section">
   <p class="cart-eyebrow">Select Your Package</p>
   <h2 class="cart-title">Choose Your Chapter</h2>
   <p class="cart-subtitle">Select a package below and add any creative extras to build your quote.</p>
@@ -1597,88 +1695,114 @@ function updateAddonBtn(key) {
 })();
 </script>
 <script>
-/* ── COIN SPIN PHYSICS ── */
+/* ── SCROLL-DRIVEN COIN SPIN ── */
 (function () {
   'use strict';
+
   var specs = [
-    { innerId: 'coin-chapter-inner', cardId: 'coin-chapter', startAngle: 20,  initV: 10,  brakeDelay: 0   },
-    { innerId: 'coin-novel-inner',   cardId: 'coin-novel',   startAngle: 140, initV: 11,  brakeDelay: 480 },
-    { innerId: 'coin-epic-inner',    cardId: 'coin-epic',    startAngle: 260, initV: 12,  brakeDelay: 960 },
+    { innerId: 'coin-chapter-inner', cardId: 'coin-chapter', totalAngle: 1125 },
+    { innerId: 'coin-novel-inner',   cardId: 'coin-novel',   totalAngle: 1245 },
+    { innerId: 'coin-epic-inner',    cardId: 'coin-epic',    totalAngle: 1365 },
   ];
+
   var coins = specs.map(function (s) {
-    var inner = document.getElementById(s.innerId);
-    var card  = document.getElementById(s.cardId);
+    var inner  = document.getElementById(s.innerId);
+    var card   = document.getElementById(s.cardId);
     if (!inner || !card) return null;
-    return { inner: inner, card: card, angle: s.startAngle, velocity: s.initV,
-             brakeDelay: s.brakeDelay, braking: false, settling: false, settled: false };
+    return {
+      inner:      inner,
+      card:       card,
+      shadow:     card.querySelector('.coin-shadow'),
+      totalAngle: s.totalAngle,
+    };
   }).filter(Boolean);
+
   if (!coins.length) return;
 
-  coins.forEach(function (c) {
-    c.inner.style.transform = 'perspective(1200px) rotateY(' + c.angle + 'deg)';
-  });
-
-  function tick() {
-    var anyActive = false;
-    coins.forEach(function (c) {
-      if (c.settled) return;
-      if (c.settling) {
-        var target = Math.ceil(c.angle / 360) * 360;
-        if (target === 0) target = 360;
-        c.angle += (target - c.angle) * 0.13;
-        c.inner.style.transform = 'perspective(1200px) rotateY(' + c.angle + 'deg)';
-        if (Math.abs(target - c.angle) < 0.12) {
-          c.angle = target;
-          c.inner.style.transform = 'perspective(1200px) rotateY(' + c.angle + 'deg)';
-          c.settled = true;
-          c.card.classList.add('coin-settled');
-        }
-        anyActive = true;
-        return;
-      }
-      c.velocity *= c.braking ? 0.872 : 0.994;
-      c.angle += c.velocity;
-      c.inner.style.transform = 'perspective(1200px) rotateY(' + c.angle + 'deg)';
-      var shadow = c.card.querySelector('.coin-shadow');
-      if (shadow) {
-        var facing = Math.abs(Math.cos(c.angle * Math.PI / 180));
-        shadow.style.opacity = (0.28 + facing * 0.42).toFixed(3);
-      }
-      if (c.braking && c.velocity < 0.85) c.settling = true;
-      anyActive = true;
-    });
-    if (anyActive) requestAnimationFrame(tick);
-  }
-  requestAnimationFrame(tick);
-
-  var brakeTriggered = false;
-  function checkBrake() {
-    if (brakeTriggered) return;
-    var section = document.getElementById('pkg-coins');
-    if (!section) return;
-    var rect = section.getBoundingClientRect();
-    if (rect.bottom < window.innerHeight * 0.55) {
-      brakeTriggered = true;
-      coins.forEach(function (c) {
-        setTimeout(function () { c.braking = true; }, c.brakeDelay);
-      });
-      window.removeEventListener('scroll', checkBrake);
+  /* Set initial position */
+  function setAngle(c, angle) {
+    /* Perspective is a CSS property on .coin-card — do not repeat it here */
+    c.inner.style.transform = 'rotateY(' + angle.toFixed(2) + 'deg)';
+    if (c.shadow) {
+      var facing = Math.abs(Math.cos(angle * Math.PI / 180));
+      c.shadow.style.opacity = (0.25 + facing * 0.45).toFixed(3);
     }
   }
-  window.addEventListener('scroll', checkBrake, { passive: true });
-  checkBrake();
+
+  coins.forEach(function (c) { setAngle(c, c.totalAngle); });
+
+  /* locked = true once the section has been fully scrolled past.
+     Unlocks only when the user scrolls back up so spinProgress < UNLOCK. */
+  var locked      = false;
+  var UNLOCK_AT   = 0.88;   /* hysteresis — must scroll back up this far to re-engage */
+  var prevSettled = false;
+
+  function getSpinProgress() {
+    var section = document.getElementById('pkg-coins');
+    if (!section) return 0;
+    var rect      = section.getBoundingClientRect();
+    var vh        = window.innerHeight;
+    var sectionH  = section.offsetHeight;
+    var raw       = (vh - rect.top) / (vh + sectionH);
+    var trigger   = sectionH / (vh + sectionH);
+    return trigger > 0 ? Math.max(0, Math.min(1, raw / trigger)) : 0;
+  }
+
+  function update() {
+    var sp = getSpinProgress();
+
+    /* Engage lock when fully spun-in */
+    if (sp >= 1) locked = true;
+
+    /* Release lock when user scrolls back up past the hysteresis threshold */
+    if (locked && sp < UNLOCK_AT) locked = false;
+
+    /* While locked: freeze at face-forward (angle = 0) */
+    var settled = locked || sp >= 1;
+    var angle0  = settled ? 0 : null;  /* null = compute per-card */
+
+    coins.forEach(function (c) {
+      var angle = (angle0 !== null) ? angle0 : c.totalAngle * (1 - sp);
+      setAngle(c, angle);
+      if (settled && !prevSettled) {
+        c.card.classList.add('coin-settled');
+      } else if (!settled) {
+        c.card.classList.remove('coin-settled');
+      }
+    });
+
+    prevSettled = settled;
+  }
+
+  window.addEventListener('scroll', update, { passive: true });
+  window.addEventListener('resize', update);
+  update();
 })();
 
-/* ── TRIDENT FILL ANIMATION ── */
+/* ── TRIDENT FILL (concurrent prongs, then stem) ── */
 (function () {
-  var fill = document.getElementById('trident-fill');
-  var dot  = document.getElementById('trident-dot');
-  var cvSection = document.getElementById('cv-section');
-  if (!fill || !dot || !cvSection) return;
+  var ids    = ['td-fl', 'td-fm', 'td-fr'];
+  var stemId = 'td-fs';
+  var dotId  = 'td-dot';
+  var cvId   = 'cv-section';
 
-  var totalLen = fill.getTotalLength();
-  fill.setAttribute('stroke-dasharray', totalLen);
-  fill.setAttribute('stroke-dashoffset', totalLen);
+  var fills = ids.map(function (id) { return document.getElementById(id); }).filter(Boolean);
+  var stem  = document.getElementById(stemId);
+  var dot   = document.getElementById(dotId);
+  var cvSection = document.getElementById(cvId);
+
+  if (!fills.length || !stem || !dot || !cvSection) return;
+
+  /* Init dash state */
+  fills.forEach(function (f) {
+    var len = f.getTotalLength();
+    f._len = len;
+    f.setAttribute('stroke-dasharray',  len.toFixed(2));
+    f.setAttribute('stroke-dashoffset', len.toFixed(2));
+  });
+  var sLen = stem.getTotalLength();
+  stem.setAttribute('stroke-dasharray',  sLen.toFixed(2));
+  stem.setAttribute('stroke-dashoffset', sLen.toFixed(2));
   dot.style.opacity = '0';
 
   function update() {
@@ -1687,22 +1811,63 @@ function updateAddonBtn(key) {
     var tRect  = wrap.getBoundingClientRect();
     var cvRect = cvSection.getBoundingClientRect();
     var vh     = window.innerHeight;
-    var from   = tRect.top - vh * 0.1;
-    var to     = cvRect.top - vh * 0.55;
-    var progress = from <= 0
-      ? Math.max(0, Math.min(1, (Math.abs(from)) / Math.max(1, Math.abs(from) + Math.abs(to - from))))
-      : 0;
-    /* simpler: linear from trident entering view to cv-section reaching mid-viewport */
-    var start = tRect.top;
-    var end   = cvRect.top - vh * 0.5;
-    progress = Math.max(0, Math.min(1, (vh - start) / Math.max(1, vh - end)));
-    fill.setAttribute('stroke-dashoffset', (totalLen * (1 - progress)).toFixed(2));
-    dot.style.opacity = progress > 0.88 ? ((progress - 0.88) / 0.12).toFixed(3) : '0';
+
+    /* Overall progress: 0 when trident enters viewport, 1 when cv-section mid hits mid-viewport */
+    var start    = vh - tRect.top;             /* px scrolled past trident top */
+    var total    = (cvRect.top + cvRect.height * 0.5) - tRect.top + vh * 0.1;
+    var progress = Math.max(0, Math.min(1, start / Math.max(1, total)));
+
+    /* Phase 1 (0–0.80): all three prongs fill concurrently */
+    var prongsP = Math.max(0, Math.min(1, progress / 0.80));
+    fills.forEach(function (f) {
+      f.setAttribute('stroke-dashoffset', (f._len * (1 - prongsP)).toFixed(2));
+    });
+
+    /* Phase 2 (0.80–1.0): stem + dot */
+    var stemP = Math.max(0, Math.min(1, (progress - 0.80) / 0.20));
+    stem.setAttribute('stroke-dashoffset', (sLen * (1 - stemP)).toFixed(2));
+    dot.style.opacity = stemP > 0.7 ? ((stemP - 0.7) / 0.3).toFixed(3) : '0';
   }
 
   window.addEventListener('scroll', update, { passive: true });
   window.addEventListener('resize', update);
   update();
+})();
+
+/* ── COIN CARD TILT ON HOVER ── */
+(function () {
+  var MAX_TILT = 6;          /* max degrees of tilt in any direction */
+  var EASE_IN  = 'transform 0.18s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+  var EASE_OUT = 'transform 0.50s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+
+  document.querySelectorAll('.coin-card').forEach(function (card) {
+
+    card.addEventListener('mouseenter', function () {
+      /* Short ease so the first tilt snaps in crisply */
+      card.style.transition = EASE_IN;
+    });
+
+    card.addEventListener('mousemove', function (e) {
+      var rect = card.getBoundingClientRect();
+      /* Normalise mouse position to -1 … +1 within the card */
+      var dx = ((e.clientX - rect.left) / rect.width  - 0.5) * 2;
+      var dy = ((e.clientY - rect.top)  / rect.height - 0.5) * 2;
+
+      var rotY =  dx * MAX_TILT;   /* positive dx → right edge comes forward */
+      var rotX = -dy * MAX_TILT;   /* positive dy (bottom) → top tilts forward */
+
+      /* Remove transition so the tracking stays real-time */
+      card.style.transition = 'none';
+      card.style.transform  =
+        'rotateX(' + rotX.toFixed(2) + 'deg) rotateY(' + rotY.toFixed(2) + 'deg)';
+    });
+
+    card.addEventListener('mouseleave', function () {
+      /* Longer ease-out so the card drifts gently back to flat */
+      card.style.transition = EASE_OUT;
+      card.style.transform  = 'rotateX(0deg) rotateY(0deg)';
+    });
+  });
 })();
 </script>
 
