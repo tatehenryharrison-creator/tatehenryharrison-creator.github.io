@@ -501,6 +501,7 @@
       flex-shrink: 0;
       cursor: pointer;
       user-select: none;
+      will-change: transform;
     }
     .coin-shadow {
       position: absolute;
@@ -1785,6 +1786,42 @@ function updateAddonBtn(key) {
   window.addEventListener('scroll', update, { passive: true });
   window.addEventListener('resize', update);
   update();
+})();
+
+/* ── COIN CARD TILT ON HOVER ── */
+(function () {
+  var MAX_TILT = 6;          /* max degrees of tilt in any direction */
+  var EASE_IN  = 'transform 0.18s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+  var EASE_OUT = 'transform 0.50s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+
+  document.querySelectorAll('.coin-card').forEach(function (card) {
+
+    card.addEventListener('mouseenter', function () {
+      /* Short ease so the first tilt snaps in crisply */
+      card.style.transition = EASE_IN;
+    });
+
+    card.addEventListener('mousemove', function (e) {
+      var rect = card.getBoundingClientRect();
+      /* Normalise mouse position to -1 … +1 within the card */
+      var dx = ((e.clientX - rect.left) / rect.width  - 0.5) * 2;
+      var dy = ((e.clientY - rect.top)  / rect.height - 0.5) * 2;
+
+      var rotY =  dx * MAX_TILT;   /* positive dx → right edge comes forward */
+      var rotX = -dy * MAX_TILT;   /* positive dy (bottom) → top tilts forward */
+
+      /* Remove transition so the tracking stays real-time */
+      card.style.transition = 'none';
+      card.style.transform  =
+        'perspective(900px) rotateX(' + rotX.toFixed(2) + 'deg) rotateY(' + rotY.toFixed(2) + 'deg)';
+    });
+
+    card.addEventListener('mouseleave', function () {
+      /* Longer ease-out so the card drifts gently back to flat */
+      card.style.transition = EASE_OUT;
+      card.style.transform  = 'perspective(900px) rotateX(0deg) rotateY(0deg)';
+    });
+  });
 })();
 </script>
 
