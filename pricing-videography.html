@@ -483,6 +483,234 @@
     }
   
 
+    /* ── COIN SPIN PACKAGE CARDS ── */
+    .pkg-coins-section {
+      background: #f5f4f0;
+      padding: 60px 5% 0;
+    }
+    .pkg-coins-inner {
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      gap: 40px;
+    }
+    .coin-card {
+      position: relative;
+      width: 252px;
+      height: 410px;
+      flex-shrink: 0;
+      cursor: pointer;
+      user-select: none;
+    }
+    .coin-shadow {
+      position: absolute;
+      bottom: -16px;
+      left: 50%;
+      width: 72%;
+      height: 30px;
+      border-radius: 50%;
+      filter: blur(18px);
+      transform: translateX(-50%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .coin-chapter .coin-shadow { background: radial-gradient(ellipse, rgba(196,30,58,0.6) 0%, transparent 70%); }
+    .coin-novel   .coin-shadow { background: radial-gradient(ellipse, rgba(26,122,63,0.6)  0%, transparent 70%); }
+    .coin-epic    .coin-shadow { background: radial-gradient(ellipse, rgba(201,168,76,0.6) 0%, transparent 70%); }
+
+    .coin-inner {
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+      -webkit-transform-style: preserve-3d;
+      position: relative;
+      z-index: 1;
+    }
+    .coin-face {
+      position: absolute;
+      inset: 0;
+      border-radius: 20px;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      overflow: hidden;
+    }
+    .coin-front {
+      background: #fefefc;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 28px 20px 20px;
+      position: relative;
+    }
+    /* Gleam sweep */
+    .coin-front::after {
+      content: '';
+      position: absolute;
+      top: 0; bottom: 0; width: 50px;
+      left: -55px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.52), transparent);
+      transform: skewX(-16deg);
+      pointer-events: none;
+      animation: coin-gleam 7s ease-in-out infinite;
+    }
+    .coin-chapter .coin-front::after { animation-delay: 1s; }
+    .coin-novel   .coin-front::after { animation-delay: 2.2s; }
+    .coin-epic    .coin-front::after { animation-delay: 3.4s; }
+    @keyframes coin-gleam {
+      0%,100% { left: -55px; opacity: 0; }
+      6%       { opacity: 1; }
+      28%      { left: calc(100% + 55px); opacity: 0; }
+    }
+    .coin-back {
+      transform: rotateY(180deg);
+      background: linear-gradient(145deg, #1C1A14 0%, #2d2921 45%, #1C1A14 100%);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .coin-back::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.07) 0%, transparent 55%);
+      border-radius: 20px;
+    }
+    /* Chapter — royal red */
+    .coin-chapter .coin-front {
+      border: 2px solid #C41E3A;
+      box-shadow: inset 0 0 0 1px rgba(196,30,58,0.12),
+                  0 0 22px rgba(196,30,58,0.3),
+                  0 10px 40px rgba(196,30,58,0.16);
+    }
+    .coin-chapter .coin-back  { border: 2px solid rgba(196,30,58,0.5); box-shadow: 0 0 16px rgba(196,30,58,0.25); }
+    .coin-chapter .coin-tier-name { color: #C41E3A; }
+    /* Novel — cash green */
+    .coin-novel .coin-front {
+      border: 2px solid #1A7A3F;
+      box-shadow: inset 0 0 0 1px rgba(26,122,63,0.12),
+                  0 0 22px rgba(26,122,63,0.3),
+                  0 10px 40px rgba(26,122,63,0.16);
+    }
+    .coin-novel .coin-back  { border: 2px solid rgba(26,122,63,0.5); box-shadow: 0 0 16px rgba(26,122,63,0.25); }
+    .coin-novel .coin-tier-name { color: #1A7A3F; }
+    /* Epic — gold */
+    .coin-epic .coin-front {
+      border: 2px solid #C9A84C;
+      box-shadow: inset 0 0 0 1px rgba(201,168,76,0.16),
+                  0 0 24px rgba(201,168,76,0.36),
+                  0 10px 40px rgba(201,168,76,0.2);
+    }
+    .coin-epic .coin-back   { border: 2px solid rgba(201,168,76,0.55); box-shadow: 0 0 18px rgba(201,168,76,0.3); }
+    .coin-epic .coin-tier-name { color: #C9A84C; }
+
+    .coin-eyebrow {
+      font-family: 'EB Garamond', serif; font-size: 0.65rem;
+      letter-spacing: 3px; text-transform: uppercase;
+      color: #a8a49c; margin: 0 0 8px;
+    }
+    .coin-tier-name {
+      font-family: 'Cinzel', serif; font-size: 1.85rem; font-weight: 400;
+      margin: 0 0 5px; letter-spacing: 1px;
+    }
+    .coin-price {
+      font-family: 'EB Garamond', serif; font-size: 1.3rem;
+      color: #635f51; margin: 0 0 12px;
+    }
+    .coin-divider { width: 34px; height: 1px; margin: 0 auto 14px; opacity: 0.28; }
+    .coin-chapter .coin-divider { background: #C41E3A; }
+    .coin-novel   .coin-divider { background: #1A7A3F; }
+    .coin-epic    .coin-divider { background: #C9A84C; }
+    .coin-features { list-style: none; margin: 0; padding: 0; width: 100%; text-align: left; }
+    .coin-features li {
+      font-family: 'EB Garamond', serif; font-size: 0.88rem;
+      color: #635f51; line-height: 1.55; padding: 3px 0 3px 17px; position: relative;
+    }
+    .coin-features li::before { content: '—'; position: absolute; left: 0; color: rgba(99,95,81,0.4); font-size: 0.83rem; }
+    .coin-badge {
+      font-family: 'EB Garamond', serif; font-size: 0.66rem;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      color: #1A7A3F; border: 1px solid rgba(26,122,63,0.4);
+      border-radius: 50px; padding: 2px 10px; margin-bottom: 8px;
+      align-self: center;
+    }
+    .coin-select-hint {
+      font-family: 'EB Garamond', serif; font-size: 0.78rem;
+      color: #a8a49c; margin-top: auto; padding-top: 10px;
+      opacity: 0; transition: opacity 0.3s;
+    }
+    .coin-card.selected .coin-select-hint { opacity: 1; }
+    .coin-card.coin-settled .coin-front { animation: coin-settle-bounce 0.42s cubic-bezier(0.34,1.56,0.64,1); }
+    @keyframes coin-settle-bounce { 0% { transform: scale(1.03); } 60% { transform: scale(0.98); } 100% { transform: scale(1); } }
+
+    /* ── TRIDENT PROGRESS LINE ── */
+    .trident-wrap {
+      background: #f5f4f0;
+      display: flex; justify-content: center;
+      padding: 0 5%;
+    }
+    .trident-svg { max-width: 860px; width: 100%; display: block; }
+
+    /* ── CINEMA-GRADE VIDEO ── */
+    .cv-section { background: #0e0c09; }
+    .cv-banner {
+      position: relative; height: 460px;
+      background-image: url('assets/acc-video.jpg');
+      background-size: cover; background-position: center;
+      display: flex; align-items: center; justify-content: center; overflow: hidden;
+    }
+    .cv-banner::before {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.38) 0%, rgba(0,0,0,0.62) 100%);
+    }
+    .cv-banner-title {
+      position: relative; z-index: 1;
+      font-family: 'Cinzel', serif; font-size: 3rem; font-weight: 400;
+      color: #e8e1d4; letter-spacing: 6px; text-align: center; margin: 0;
+      text-shadow: 0 2px 24px rgba(0,0,0,0.5);
+    }
+    .cv-content { max-width: 1200px; margin: 0 auto; padding: 52px 5% 80px; }
+    .cv-sub-a {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1.4fr 1.4fr 1.4fr 1fr 1fr;
+      gap: 14px; margin-bottom: 18px; align-items: start;
+    }
+    .cv-sub-b {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr) 1.8fr repeat(3, 1fr);
+      gap: 14px; align-items: stretch;
+    }
+    .cv-photo-slot {
+      aspect-ratio: 1 / 1;
+      background: rgba(255,255,255,0.04);
+      border-radius: 10px; border: 1px dashed rgba(232,225,212,0.12);
+    }
+    .cv-text-slot {
+      min-height: 110px; background: rgba(255,255,255,0.03);
+      border-radius: 10px; border: 1px dashed rgba(232,225,212,0.08);
+    }
+    .cv-text-center-slot {
+      background: rgba(255,255,255,0.03);
+      border-radius: 10px; border: 1px dashed rgba(232,225,212,0.08);
+    }
+
+    @media (max-width: 960px) {
+      .pkg-coins-inner { gap: 18px; }
+      .coin-card { width: 210px; height: 390px; }
+      .coin-tier-name { font-size: 1.6rem; }
+      .cv-banner-title { font-size: 2.2rem; letter-spacing: 4px; }
+      .cv-sub-a { grid-template-columns: repeat(3, 1fr); }
+      .cv-sub-a .cv-text-slot { display: none; }
+      .cv-sub-b { grid-template-columns: repeat(3, 1fr); }
+      .cv-sub-b .cv-text-center-slot { grid-column: 1 / -1; }
+    }
+    @media (max-width: 600px) {
+      .pkg-coins-inner { flex-direction: column; align-items: center; gap: 52px; }
+      .coin-card { width: 240px; height: 410px; }
+      .trident-svg { display: none; }
+      .cv-banner { height: 300px; }
+      .cv-banner-title { font-size: 1.7rem; letter-spacing: 3px; }
+      .cv-sub-a { grid-template-columns: repeat(3, 1fr); }
+      .cv-sub-a .cv-text-slot { display: none; }
+      .cv-sub-b { grid-template-columns: repeat(2, 1fr); }
+      .cv-sub-b .cv-text-center-slot { grid-column: 1 / -1; }
+    }
   </style>
 </head>
 <body>
@@ -518,6 +746,132 @@
   <p class="pkg-subtitle">Every project is a story worth telling well. I bring Fujifilm cinema glass, intentional light, and genuine craft to every frame.</p>
 </div>
 
+<!-- ── COIN SPIN PACKAGE CARDS ── -->
+<section class="pkg-coins-section" id="pkg-coins">
+  <div class="pkg-coins-inner">
+
+    <!-- Chapter — Royal Red -->
+    <div class="coin-card coin-chapter" id="coin-chapter"
+         onclick="(function(el){selectPackage('chapter');document.querySelectorAll('.coin-card').forEach(function(c){c.classList.remove('selected');});el.classList.add('selected');})(this)">
+      <div class="coin-shadow"></div>
+      <div class="coin-inner" id="coin-chapter-inner">
+        <div class="coin-face coin-front">
+          <p class="coin-eyebrow">Half Day</p>
+          <h3 class="coin-tier-name">Chapter</h3>
+          <p class="coin-price">$800</p>
+          <div class="coin-divider"></div>
+          <ul class="coin-features">
+            <li>Single-camera setup</li>
+            <li>Up to 4 hours coverage</li>
+            <li>Up to 5-min edited video</li>
+            <li>Color grading included</li>
+            <li>1 round of revisions</li>
+          </ul>
+          <p class="coin-select-hint">Selected ✓</p>
+        </div>
+        <div class="coin-face coin-back"></div>
+      </div>
+    </div>
+
+    <!-- Novel — Cash Green -->
+    <div class="coin-card coin-novel" id="coin-novel"
+         onclick="(function(el){selectPackage('novel');document.querySelectorAll('.coin-card').forEach(function(c){c.classList.remove('selected');});el.classList.add('selected');})(this)">
+      <div class="coin-shadow"></div>
+      <div class="coin-inner" id="coin-novel-inner">
+        <div class="coin-face coin-front">
+          <span class="coin-badge">Most Popular</span>
+          <p class="coin-eyebrow">Full Day</p>
+          <h3 class="coin-tier-name">Novel</h3>
+          <p class="coin-price">$1,400</p>
+          <div class="coin-divider"></div>
+          <ul class="coin-features">
+            <li>Multi-camera setup</li>
+            <li>Up to 8 hours coverage</li>
+            <li>Up to 10-min edited video</li>
+            <li>Full color grade + audio mix</li>
+            <li>2 revisions + social cuts</li>
+          </ul>
+          <p class="coin-select-hint">Selected ✓</p>
+        </div>
+        <div class="coin-face coin-back"></div>
+      </div>
+    </div>
+
+    <!-- Epic — Gold -->
+    <div class="coin-card coin-epic" id="coin-epic"
+         onclick="(function(el){selectPackage('epic');document.querySelectorAll('.coin-card').forEach(function(c){c.classList.remove('selected');});el.classList.add('selected');})(this)">
+      <div class="coin-shadow"></div>
+      <div class="coin-inner" id="coin-epic-inner">
+        <div class="coin-face coin-front">
+          <p class="coin-eyebrow">Two Days</p>
+          <h3 class="coin-tier-name">Epic</h3>
+          <p class="coin-price">$2,400</p>
+          <div class="coin-divider"></div>
+          <ul class="coin-features">
+            <li>Multi-camera, 2-day shoot</li>
+            <li>Up to 20-min edited video</li>
+            <li>Full color grade + audio mix</li>
+            <li>Unlimited revisions</li>
+            <li>Full commercial license</li>
+          </ul>
+          <p class="coin-select-hint">Selected ✓</p>
+        </div>
+        <div class="coin-face coin-back"></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── TRIDENT PROGRESS LINE ── -->
+<div class="trident-wrap" id="trident-wrap">
+  <svg class="trident-svg" id="trident-svg" viewBox="0 0 860 170"
+       preserveAspectRatio="xMidYMid meet" fill="none"
+       xmlns="http://www.w3.org/2000/svg">
+    <!-- Dotted background trident -->
+    <path
+      d="M143,0 L143,110 M430,0 L430,110 M717,0 L717,110 M143,110 L717,110 M430,110 L430,162"
+      stroke="rgba(201,168,76,0.22)" stroke-width="1.5"
+      stroke-dasharray="5 9" stroke-linecap="round"/>
+    <!-- Solid animated fill -->
+    <path id="trident-fill"
+      d="M143,0 L143,110 M430,0 L430,110 M717,0 L717,110 M143,110 L717,110 M430,110 L430,162"
+      stroke="rgba(201,168,76,0.82)" stroke-width="1.5" stroke-linecap="round"/>
+    <!-- Completion dot -->
+    <circle id="trident-dot" cx="430" cy="162" r="5.5" fill="#C9A84C"/>
+  </svg>
+</div>
+
+<!-- ── CINEMA-GRADE VIDEO ── -->
+<section class="cv-section" id="cv-section">
+  <div class="cv-banner">
+    <h2 class="cv-banner-title">Cinema-Grade Video</h2>
+  </div>
+  <div class="cv-content">
+    <!-- Sub A: [text][text] | [photo][photo][photo] | [text][text] -->
+    <div class="cv-sub-a">
+      <div class="cv-text-slot"></div>
+      <div class="cv-text-slot"></div>
+      <div class="cv-photo-slot"></div>
+      <div class="cv-photo-slot"></div>
+      <div class="cv-photo-slot"></div>
+      <div class="cv-text-slot"></div>
+      <div class="cv-text-slot"></div>
+    </div>
+    <!-- Sub B: [photo][photo][photo] | [text] | [photo][photo][photo] -->
+    <div class="cv-sub-b">
+      <div class="cv-photo-slot"></div>
+      <div class="cv-photo-slot"></div>
+      <div class="cv-photo-slot"></div>
+      <div class="cv-text-center-slot"></div>
+      <div class="cv-photo-slot"></div>
+      <div class="cv-photo-slot"></div>
+      <div class="cv-photo-slot"></div>
+    </div>
+  </div>
+</section>
+
+
 <!-- What's Included — Scroll Accordion -->
 <section class="acc-section">
   <div class="acc-header">
@@ -527,26 +881,6 @@
   </div>
 
   <div class="acc-timeline">
-
-    <!-- 01 — Video -->
-    <div class="acc-item">
-      <div class="acc-meta">
-        <span class="acc-num">01</span>
-        <div class="acc-dot"></div>
-      </div>
-      <div class="acc-content">
-        <h3 class="acc-title">Cinema-Grade Video</h3>
-        <div class="acc-body"><div class="acc-body-inner">
-          <p class="acc-body-desc">I shoot on the Fujifilm X-H2S — a mirrorless system renowned for its exceptional color science and film simulation modes. The result is footage that feels intentional, warm, and alive.</p>
-          <ul>
-            <li>Fujifilm X-H2S with cinema-calibrated color profiles</li>
-            <li>Single or multi-camera setup depending on package</li>
-            <li>B-roll, cutaway, and detail coverage included</li>
-            <li>Stabilized footage for smooth, professional results</li>
-          </ul>
-        </div></div>
-      </div>
-    </div>
 
     <!-- 02 — Audio -->
     <div class="acc-item">
@@ -1262,5 +1596,115 @@ function updateAddonBtn(key) {
   });
 })();
 </script>
+<script>
+/* ── COIN SPIN PHYSICS ── */
+(function () {
+  'use strict';
+  var specs = [
+    { innerId: 'coin-chapter-inner', cardId: 'coin-chapter', startAngle: 20,  initV: 10,  brakeDelay: 0   },
+    { innerId: 'coin-novel-inner',   cardId: 'coin-novel',   startAngle: 140, initV: 11,  brakeDelay: 480 },
+    { innerId: 'coin-epic-inner',    cardId: 'coin-epic',    startAngle: 260, initV: 12,  brakeDelay: 960 },
+  ];
+  var coins = specs.map(function (s) {
+    var inner = document.getElementById(s.innerId);
+    var card  = document.getElementById(s.cardId);
+    if (!inner || !card) return null;
+    return { inner: inner, card: card, angle: s.startAngle, velocity: s.initV,
+             brakeDelay: s.brakeDelay, braking: false, settling: false, settled: false };
+  }).filter(Boolean);
+  if (!coins.length) return;
+
+  coins.forEach(function (c) {
+    c.inner.style.transform = 'perspective(1200px) rotateY(' + c.angle + 'deg)';
+  });
+
+  function tick() {
+    var anyActive = false;
+    coins.forEach(function (c) {
+      if (c.settled) return;
+      if (c.settling) {
+        var target = Math.ceil(c.angle / 360) * 360;
+        if (target === 0) target = 360;
+        c.angle += (target - c.angle) * 0.13;
+        c.inner.style.transform = 'perspective(1200px) rotateY(' + c.angle + 'deg)';
+        if (Math.abs(target - c.angle) < 0.12) {
+          c.angle = target;
+          c.inner.style.transform = 'perspective(1200px) rotateY(' + c.angle + 'deg)';
+          c.settled = true;
+          c.card.classList.add('coin-settled');
+        }
+        anyActive = true;
+        return;
+      }
+      c.velocity *= c.braking ? 0.872 : 0.994;
+      c.angle += c.velocity;
+      c.inner.style.transform = 'perspective(1200px) rotateY(' + c.angle + 'deg)';
+      var shadow = c.card.querySelector('.coin-shadow');
+      if (shadow) {
+        var facing = Math.abs(Math.cos(c.angle * Math.PI / 180));
+        shadow.style.opacity = (0.28 + facing * 0.42).toFixed(3);
+      }
+      if (c.braking && c.velocity < 0.85) c.settling = true;
+      anyActive = true;
+    });
+    if (anyActive) requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+
+  var brakeTriggered = false;
+  function checkBrake() {
+    if (brakeTriggered) return;
+    var section = document.getElementById('pkg-coins');
+    if (!section) return;
+    var rect = section.getBoundingClientRect();
+    if (rect.bottom < window.innerHeight * 0.55) {
+      brakeTriggered = true;
+      coins.forEach(function (c) {
+        setTimeout(function () { c.braking = true; }, c.brakeDelay);
+      });
+      window.removeEventListener('scroll', checkBrake);
+    }
+  }
+  window.addEventListener('scroll', checkBrake, { passive: true });
+  checkBrake();
+})();
+
+/* ── TRIDENT FILL ANIMATION ── */
+(function () {
+  var fill = document.getElementById('trident-fill');
+  var dot  = document.getElementById('trident-dot');
+  var cvSection = document.getElementById('cv-section');
+  if (!fill || !dot || !cvSection) return;
+
+  var totalLen = fill.getTotalLength();
+  fill.setAttribute('stroke-dasharray', totalLen);
+  fill.setAttribute('stroke-dashoffset', totalLen);
+  dot.style.opacity = '0';
+
+  function update() {
+    var wrap   = document.getElementById('trident-wrap');
+    if (!wrap) return;
+    var tRect  = wrap.getBoundingClientRect();
+    var cvRect = cvSection.getBoundingClientRect();
+    var vh     = window.innerHeight;
+    var from   = tRect.top - vh * 0.1;
+    var to     = cvRect.top - vh * 0.55;
+    var progress = from <= 0
+      ? Math.max(0, Math.min(1, (Math.abs(from)) / Math.max(1, Math.abs(from) + Math.abs(to - from))))
+      : 0;
+    /* simpler: linear from trident entering view to cv-section reaching mid-viewport */
+    var start = tRect.top;
+    var end   = cvRect.top - vh * 0.5;
+    progress = Math.max(0, Math.min(1, (vh - start) / Math.max(1, vh - end)));
+    fill.setAttribute('stroke-dashoffset', (totalLen * (1 - progress)).toFixed(2));
+    dot.style.opacity = progress > 0.88 ? ((progress - 0.88) / 0.12).toFixed(3) : '0';
+  }
+
+  window.addEventListener('scroll', update, { passive: true });
+  window.addEventListener('resize', update);
+  update();
+})();
+</script>
+
 </body>
 </html>
