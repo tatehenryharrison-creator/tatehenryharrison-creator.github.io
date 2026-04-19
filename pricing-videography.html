@@ -734,31 +734,30 @@
     .coin-cta {
       position: absolute;
       bottom: 0; left: 0; right: 0;
-      height: 64px;
+      height: 44px;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: flex-end;
-      padding-bottom: 15px;
-      gap: 3px;
+      padding-bottom: 10px;
+      gap: 2px;
       opacity: 0;
-      transform: translateY(5px);
+      transform: translateY(4px);
       transition: opacity 0.22s ease, transform 0.22s ease;
       pointer-events: none;
       z-index: 10;
-      border-radius: 0 0 20px 20px;
-      background: linear-gradient(to bottom, transparent 0%, rgba(254,254,252,0.93) 55%);
+      background: linear-gradient(to bottom, transparent 0%, rgba(254,254,252,0.96) 48%);
     }
     .coin-card:hover .coin-cta { opacity: 1; transform: translateY(0); }
     .coin-cta-text {
       font-family: 'EB Garamond', serif;
-      font-size: 0.7rem;
-      letter-spacing: 1.8px;
+      font-size: 0.58rem;
+      letter-spacing: 1.4px;
       text-transform: uppercase;
-      color: #635f51;
+      color: rgba(99,95,81,0.7);
       line-height: 1;
     }
-    .coin-cta-chevron { display: block; color: rgba(99,95,81,0.55); }
+    .coin-cta-chevron { display: block; color: rgba(99,95,81,0.4); }
     .coin-card:hover .coin-select-hint { opacity: 0 !important; }
 
     @media (max-width: 960px) {
@@ -839,14 +838,14 @@
             <li>1 round of revisions</li>
           </ul>
           <p class="coin-select-hint">Selected ✓</p>
+          <div class="coin-cta" aria-hidden="true">
+            <span class="coin-cta-text">Details &amp; Checkout</span>
+            <svg class="coin-cta-chevron" width="10" height="7" viewBox="0 0 10 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1 1L5 5.5L9 1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
         </div>
         <div class="coin-face coin-back"></div>
-      </div>
-      <div class="coin-cta" aria-hidden="true">
-        <span class="coin-cta-text">Details &amp; Checkout</span>
-        <svg class="coin-cta-chevron" width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
       </div>
     </div>
 
@@ -869,14 +868,14 @@
             <li>2 revisions + social cuts</li>
           </ul>
           <p class="coin-select-hint">Selected ✓</p>
+          <div class="coin-cta" aria-hidden="true">
+            <span class="coin-cta-text">Details &amp; Checkout</span>
+            <svg class="coin-cta-chevron" width="10" height="7" viewBox="0 0 10 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1 1L5 5.5L9 1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
         </div>
         <div class="coin-face coin-back"></div>
-      </div>
-      <div class="coin-cta" aria-hidden="true">
-        <span class="coin-cta-text">Details &amp; Checkout</span>
-        <svg class="coin-cta-chevron" width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
       </div>
     </div>
 
@@ -898,14 +897,14 @@
             <li>Full commercial license</li>
           </ul>
           <p class="coin-select-hint">Selected ✓</p>
+          <div class="coin-cta" aria-hidden="true">
+            <span class="coin-cta-text">Details &amp; Checkout</span>
+            <svg class="coin-cta-chevron" width="10" height="7" viewBox="0 0 10 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1 1L5 5.5L9 1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
         </div>
         <div class="coin-face coin-back"></div>
-      </div>
-      <div class="coin-cta" aria-hidden="true">
-        <span class="coin-cta-text">Details &amp; Checkout</span>
-        <svg class="coin-cta-chevron" width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
       </div>
     </div>
 
