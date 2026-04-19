@@ -650,7 +650,7 @@
     /* ── CINEMA-GRADE VIDEO ── */
     .cv-section { background: #0e0c09; }
     .cv-banner {
-      position: relative; height: 460px;
+      position: relative; height: 240px;
       background-image: url('assets/acc-video.jpg');
       background-size: cover; background-position: center;
       display: flex; align-items: center; justify-content: center; overflow: hidden;
@@ -665,16 +665,16 @@
       color: #e8e1d4; letter-spacing: 6px; text-align: center; margin: 0;
       text-shadow: 0 2px 24px rgba(0,0,0,0.5);
     }
-    .cv-content { max-width: 1200px; margin: 0 auto; padding: 52px 5% 80px; }
+    .cv-content { max-width: 1200px; margin: 0 auto; padding: 64px 5% 100px; }
     .cv-sub-a {
       display: grid;
       grid-template-columns: 1fr 1fr 1.4fr 1.4fr 1.4fr 1fr 1fr;
-      gap: 14px; margin-bottom: 18px; align-items: start;
+      gap: 18px; margin-bottom: 24px; align-items: stretch;
     }
     .cv-sub-b {
       display: grid;
       grid-template-columns: repeat(3, 1fr) 1.8fr repeat(3, 1fr);
-      gap: 14px; align-items: stretch;
+      gap: 18px; align-items: stretch;
     }
     .cv-photo-slot {
       aspect-ratio: 1 / 1;
@@ -682,7 +682,7 @@
       border-radius: 10px; border: 1px dashed rgba(232,225,212,0.12);
     }
     .cv-text-slot {
-      min-height: 110px; background: rgba(255,255,255,0.03);
+      min-height: 190px; background: rgba(255,255,255,0.03);
       border-radius: 10px; border: 1px dashed rgba(232,225,212,0.08);
     }
     .cv-text-center-slot {
@@ -825,20 +825,29 @@
 
 <!-- ── TRIDENT PROGRESS LINE ── -->
 <div class="trident-wrap" id="trident-wrap">
-  <svg class="trident-svg" id="trident-svg" viewBox="0 0 860 170"
+  <svg class="trident-svg" id="trident-svg" viewBox="0 0 860 180"
        preserveAspectRatio="xMidYMid meet" fill="none"
        xmlns="http://www.w3.org/2000/svg">
-    <!-- Dotted background trident -->
-    <path
-      d="M143,0 L143,110 M430,0 L430,110 M717,0 L717,110 M143,110 L717,110 M430,110 L430,162"
-      stroke="rgba(201,168,76,0.22)" stroke-width="1.5"
-      stroke-dasharray="5 9" stroke-linecap="round"/>
-    <!-- Solid animated fill -->
-    <path id="trident-fill"
-      d="M143,0 L143,110 M430,0 L430,110 M717,0 L717,110 M143,110 L717,110 M430,110 L430,162"
-      stroke="rgba(201,168,76,0.82)" stroke-width="1.5" stroke-linecap="round"/>
+    <!-- Dotted background (static) — three curved prongs + stem -->
+    <path class="td-bg" d="M143,0 C143,72 390,95 430,112"
+          stroke="rgba(201,168,76,0.22)" stroke-width="1.5" stroke-dasharray="5 9" stroke-linecap="round"/>
+    <path class="td-bg" d="M430,0 L430,112"
+          stroke="rgba(201,168,76,0.22)" stroke-width="1.5" stroke-dasharray="5 9" stroke-linecap="round"/>
+    <path class="td-bg" d="M717,0 C717,72 470,95 430,112"
+          stroke="rgba(201,168,76,0.22)" stroke-width="1.5" stroke-dasharray="5 9" stroke-linecap="round"/>
+    <path class="td-bg" d="M430,112 L430,168"
+          stroke="rgba(201,168,76,0.22)" stroke-width="1.5" stroke-dasharray="5 9" stroke-linecap="round"/>
+    <!-- Animated fill — separate paths, animate concurrently -->
+    <path id="td-fl" d="M143,0 C143,72 390,95 430,112"
+          stroke="rgba(201,168,76,0.85)" stroke-width="1.5" stroke-linecap="round"/>
+    <path id="td-fm" d="M430,0 L430,112"
+          stroke="rgba(201,168,76,0.85)" stroke-width="1.5" stroke-linecap="round"/>
+    <path id="td-fr" d="M717,0 C717,72 470,95 430,112"
+          stroke="rgba(201,168,76,0.85)" stroke-width="1.5" stroke-linecap="round"/>
+    <path id="td-fs" d="M430,112 L430,168"
+          stroke="rgba(201,168,76,0.85)" stroke-width="1.5" stroke-linecap="round"/>
     <!-- Completion dot -->
-    <circle id="trident-dot" cx="430" cy="162" r="5.5" fill="#C9A84C"/>
+    <circle id="td-dot" cx="430" cy="168" r="5.5" fill="#C9A84C"/>
   </svg>
 </div>
 
@@ -1597,88 +1606,105 @@ function updateAddonBtn(key) {
 })();
 </script>
 <script>
-/* ── COIN SPIN PHYSICS ── */
+/* ── SCROLL-DRIVEN COIN SPIN ── */
 (function () {
   'use strict';
+
   var specs = [
-    { innerId: 'coin-chapter-inner', cardId: 'coin-chapter', startAngle: 20,  initV: 10,  brakeDelay: 0   },
-    { innerId: 'coin-novel-inner',   cardId: 'coin-novel',   startAngle: 140, initV: 11,  brakeDelay: 480 },
-    { innerId: 'coin-epic-inner',    cardId: 'coin-epic',    startAngle: 260, initV: 12,  brakeDelay: 960 },
+    { innerId: 'coin-chapter-inner', cardId: 'coin-chapter', totalAngle: 1125 },
+    { innerId: 'coin-novel-inner',   cardId: 'coin-novel',   totalAngle: 1245 },
+    { innerId: 'coin-epic-inner',    cardId: 'coin-epic',    totalAngle: 1365 },
   ];
+
   var coins = specs.map(function (s) {
-    var inner = document.getElementById(s.innerId);
-    var card  = document.getElementById(s.cardId);
+    var inner  = document.getElementById(s.innerId);
+    var card   = document.getElementById(s.cardId);
     if (!inner || !card) return null;
-    return { inner: inner, card: card, angle: s.startAngle, velocity: s.initV,
-             brakeDelay: s.brakeDelay, braking: false, settling: false, settled: false };
+    return {
+      inner:      inner,
+      card:       card,
+      shadow:     card.querySelector('.coin-shadow'),
+      totalAngle: s.totalAngle,
+    };
   }).filter(Boolean);
+
   if (!coins.length) return;
 
-  coins.forEach(function (c) {
-    c.inner.style.transform = 'perspective(1200px) rotateY(' + c.angle + 'deg)';
-  });
-
-  function tick() {
-    var anyActive = false;
-    coins.forEach(function (c) {
-      if (c.settled) return;
-      if (c.settling) {
-        var target = Math.ceil(c.angle / 360) * 360;
-        if (target === 0) target = 360;
-        c.angle += (target - c.angle) * 0.13;
-        c.inner.style.transform = 'perspective(1200px) rotateY(' + c.angle + 'deg)';
-        if (Math.abs(target - c.angle) < 0.12) {
-          c.angle = target;
-          c.inner.style.transform = 'perspective(1200px) rotateY(' + c.angle + 'deg)';
-          c.settled = true;
-          c.card.classList.add('coin-settled');
-        }
-        anyActive = true;
-        return;
-      }
-      c.velocity *= c.braking ? 0.872 : 0.994;
-      c.angle += c.velocity;
-      c.inner.style.transform = 'perspective(1200px) rotateY(' + c.angle + 'deg)';
-      var shadow = c.card.querySelector('.coin-shadow');
-      if (shadow) {
-        var facing = Math.abs(Math.cos(c.angle * Math.PI / 180));
-        shadow.style.opacity = (0.28 + facing * 0.42).toFixed(3);
-      }
-      if (c.braking && c.velocity < 0.85) c.settling = true;
-      anyActive = true;
-    });
-    if (anyActive) requestAnimationFrame(tick);
-  }
-  requestAnimationFrame(tick);
-
-  var brakeTriggered = false;
-  function checkBrake() {
-    if (brakeTriggered) return;
-    var section = document.getElementById('pkg-coins');
-    if (!section) return;
-    var rect = section.getBoundingClientRect();
-    if (rect.bottom < window.innerHeight * 0.55) {
-      brakeTriggered = true;
-      coins.forEach(function (c) {
-        setTimeout(function () { c.braking = true; }, c.brakeDelay);
-      });
-      window.removeEventListener('scroll', checkBrake);
+  /* Set initial position */
+  function setAngle(c, angle) {
+    c.inner.style.transform = 'perspective(1200px) rotateY(' + angle.toFixed(2) + 'deg)';
+    if (c.shadow) {
+      var facing = Math.abs(Math.cos(angle * Math.PI / 180));
+      c.shadow.style.opacity = (0.25 + facing * 0.45).toFixed(3);
     }
   }
-  window.addEventListener('scroll', checkBrake, { passive: true });
-  checkBrake();
+
+  coins.forEach(function (c) { setAngle(c, c.totalAngle); });
+
+  var prevSettled = false;
+
+  function update() {
+    var section = document.getElementById('pkg-coins');
+    if (!section) return;
+    var rect     = section.getBoundingClientRect();
+    var vh       = window.innerHeight;
+    var sectionH = section.offsetHeight;
+
+    /* rawProgress: 0 when section top hits viewport bottom, grows as you scroll */
+    var rawProgress = (vh - rect.top) / (vh + sectionH);
+
+    /* bottomTrigger = progress value when section bottom reaches viewport bottom */
+    var bottomTrigger = sectionH / (vh + sectionH);
+
+    /* spinProgress: 0 → 1 as section bottom comes from below to match viewport bottom */
+    var spinProgress = bottomTrigger > 0
+      ? Math.max(0, Math.min(1, rawProgress / bottomTrigger))
+      : 0;
+
+    var settled = spinProgress >= 1;
+
+    coins.forEach(function (c) {
+      var angle = settled ? 0 : c.totalAngle * (1 - spinProgress);
+      setAngle(c, angle);
+      if (settled && !prevSettled) {
+        c.card.classList.add('coin-settled');
+      } else if (!settled) {
+        c.card.classList.remove('coin-settled');
+      }
+    });
+
+    prevSettled = settled;
+  }
+
+  window.addEventListener('scroll', update, { passive: true });
+  window.addEventListener('resize', update);
+  update();
 })();
 
-/* ── TRIDENT FILL ANIMATION ── */
+/* ── TRIDENT FILL (concurrent prongs, then stem) ── */
 (function () {
-  var fill = document.getElementById('trident-fill');
-  var dot  = document.getElementById('trident-dot');
-  var cvSection = document.getElementById('cv-section');
-  if (!fill || !dot || !cvSection) return;
+  var ids    = ['td-fl', 'td-fm', 'td-fr'];
+  var stemId = 'td-fs';
+  var dotId  = 'td-dot';
+  var cvId   = 'cv-section';
 
-  var totalLen = fill.getTotalLength();
-  fill.setAttribute('stroke-dasharray', totalLen);
-  fill.setAttribute('stroke-dashoffset', totalLen);
+  var fills = ids.map(function (id) { return document.getElementById(id); }).filter(Boolean);
+  var stem  = document.getElementById(stemId);
+  var dot   = document.getElementById(dotId);
+  var cvSection = document.getElementById(cvId);
+
+  if (!fills.length || !stem || !dot || !cvSection) return;
+
+  /* Init dash state */
+  fills.forEach(function (f) {
+    var len = f.getTotalLength();
+    f._len = len;
+    f.setAttribute('stroke-dasharray',  len.toFixed(2));
+    f.setAttribute('stroke-dashoffset', len.toFixed(2));
+  });
+  var sLen = stem.getTotalLength();
+  stem.setAttribute('stroke-dasharray',  sLen.toFixed(2));
+  stem.setAttribute('stroke-dashoffset', sLen.toFixed(2));
   dot.style.opacity = '0';
 
   function update() {
@@ -1687,17 +1713,22 @@ function updateAddonBtn(key) {
     var tRect  = wrap.getBoundingClientRect();
     var cvRect = cvSection.getBoundingClientRect();
     var vh     = window.innerHeight;
-    var from   = tRect.top - vh * 0.1;
-    var to     = cvRect.top - vh * 0.55;
-    var progress = from <= 0
-      ? Math.max(0, Math.min(1, (Math.abs(from)) / Math.max(1, Math.abs(from) + Math.abs(to - from))))
-      : 0;
-    /* simpler: linear from trident entering view to cv-section reaching mid-viewport */
-    var start = tRect.top;
-    var end   = cvRect.top - vh * 0.5;
-    progress = Math.max(0, Math.min(1, (vh - start) / Math.max(1, vh - end)));
-    fill.setAttribute('stroke-dashoffset', (totalLen * (1 - progress)).toFixed(2));
-    dot.style.opacity = progress > 0.88 ? ((progress - 0.88) / 0.12).toFixed(3) : '0';
+
+    /* Overall progress: 0 when trident enters viewport, 1 when cv-section mid hits mid-viewport */
+    var start    = vh - tRect.top;             /* px scrolled past trident top */
+    var total    = (cvRect.top + cvRect.height * 0.5) - tRect.top + vh * 0.1;
+    var progress = Math.max(0, Math.min(1, start / Math.max(1, total)));
+
+    /* Phase 1 (0–0.80): all three prongs fill concurrently */
+    var prongsP = Math.max(0, Math.min(1, progress / 0.80));
+    fills.forEach(function (f) {
+      f.setAttribute('stroke-dashoffset', (f._len * (1 - prongsP)).toFixed(2));
+    });
+
+    /* Phase 2 (0.80–1.0): stem + dot */
+    var stemP = Math.max(0, Math.min(1, (progress - 0.80) / 0.20));
+    stem.setAttribute('stroke-dashoffset', (sLen * (1 - stemP)).toFixed(2));
+    dot.style.opacity = stemP > 0.7 ? ((stemP - 0.7) / 0.3).toFixed(3) : '0';
   }
 
   window.addEventListener('scroll', update, { passive: true });
