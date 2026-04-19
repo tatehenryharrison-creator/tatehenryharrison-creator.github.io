@@ -900,6 +900,7 @@ function updateAddonBtn(key) {
 (function(){
   var btn = document.getElementById('navTocBtn');
   var panel = document.getElementById('navTocPanel');
+  if (!btn || !panel) return;
   btn.addEventListener('click', function(e){ e.stopPropagation(); var open = panel.classList.toggle('open'); btn.classList.toggle('open', open); btn.setAttribute('aria-expanded', open); });
   document.addEventListener('click', function(){ panel.classList.remove('open'); btn.classList.remove('open'); });
   panel.addEventListener('click', function(e){ e.stopPropagation(); });
@@ -938,7 +939,7 @@ function updateAddonBtn(key) {
     var wrap = card.querySelector('.audio-progress-wrap');
     var current = card.querySelector('.audio-current');
     var duration = card.querySelector('.audio-duration');
-    if (!audio) return;
+    if (!audio || !btn || !bar || !wrap || !current || !duration) return;
     audio.addEventListener('loadedmetadata', function() { duration.textContent = fmt(audio.duration); });
     audio.addEventListener('timeupdate', function() {
       current.textContent = fmt(audio.currentTime);

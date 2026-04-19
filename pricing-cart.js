@@ -170,7 +170,7 @@ function updateAddonQtyBtn(key, qty) {
 
 // Scroll-reveal via IntersectionObserver
 function initScrollReveal() {
-  const els = document.querySelectorAll('.wi-panel, .addon-btn-wrap, .compare-section, .cart-section');
+  const els = document.querySelectorAll('.acc-item, .addon-btn-wrap, .compare-section, .cart-section');
   const obs = new IntersectionObserver((entries) => {
     entries.forEach(e => {
       if (e.isIntersecting) {
