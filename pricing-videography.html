@@ -690,6 +690,39 @@
       border-radius: 10px; border: 1px dashed rgba(232,225,212,0.08);
     }
 
+
+    /* ── COIN CARD CTA (hover) ── */
+    .coin-epic { width: 302px; } /* 20% wider than Novel (252px) */
+    .coin-cta {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 64px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      padding-bottom: 15px;
+      gap: 3px;
+      opacity: 0;
+      transform: translateY(5px);
+      transition: opacity 0.22s ease, transform 0.22s ease;
+      pointer-events: none;
+      z-index: 10;
+      border-radius: 0 0 20px 20px;
+      background: linear-gradient(to bottom, transparent 0%, rgba(254,254,252,0.93) 55%);
+    }
+    .coin-card:hover .coin-cta { opacity: 1; transform: translateY(0); }
+    .coin-cta-text {
+      font-family: 'EB Garamond', serif;
+      font-size: 0.7rem;
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+      color: #635f51;
+      line-height: 1;
+    }
+    .coin-cta-chevron { display: block; color: rgba(99,95,81,0.55); }
+    .coin-card:hover .coin-select-hint { opacity: 0 !important; }
+
     @media (max-width: 960px) {
       .pkg-coins-inner { gap: 18px; }
       .coin-card { width: 210px; height: 390px; }
@@ -752,7 +785,7 @@
 
     <!-- Chapter — Royal Red -->
     <div class="coin-card coin-chapter" id="coin-chapter"
-         onclick="(function(el){selectPackage('chapter');document.querySelectorAll('.coin-card').forEach(function(c){c.classList.remove('selected');});el.classList.add('selected');})(this)">
+         onclick="(function(el){selectPackage('chapter');document.querySelectorAll('.coin-card').forEach(function(c){c.classList.remove('selected');});el.classList.add('selected');var t=document.getElementById('cart-section');if(t){t.scrollIntoView({behavior:'smooth'});}})(this)">
       <div class="coin-shadow"></div>
       <div class="coin-inner" id="coin-chapter-inner">
         <div class="coin-face coin-front">
@@ -771,11 +804,17 @@
         </div>
         <div class="coin-face coin-back"></div>
       </div>
+      <div class="coin-cta" aria-hidden="true">
+        <span class="coin-cta-text">Details &amp; Checkout</span>
+        <svg class="coin-cta-chevron" width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
     </div>
 
     <!-- Novel — Cash Green -->
     <div class="coin-card coin-novel" id="coin-novel"
-         onclick="(function(el){selectPackage('novel');document.querySelectorAll('.coin-card').forEach(function(c){c.classList.remove('selected');});el.classList.add('selected');})(this)">
+         onclick="(function(el){selectPackage('novel');document.querySelectorAll('.coin-card').forEach(function(c){c.classList.remove('selected');});el.classList.add('selected');var t=document.getElementById('cart-section');if(t){t.scrollIntoView({behavior:'smooth'});}})(this)">
       <div class="coin-shadow"></div>
       <div class="coin-inner" id="coin-novel-inner">
         <div class="coin-face coin-front">
@@ -795,11 +834,17 @@
         </div>
         <div class="coin-face coin-back"></div>
       </div>
+      <div class="coin-cta" aria-hidden="true">
+        <span class="coin-cta-text">Details &amp; Checkout</span>
+        <svg class="coin-cta-chevron" width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
     </div>
 
     <!-- Epic — Gold -->
     <div class="coin-card coin-epic" id="coin-epic"
-         onclick="(function(el){selectPackage('epic');document.querySelectorAll('.coin-card').forEach(function(c){c.classList.remove('selected');});el.classList.add('selected');})(this)">
+         onclick="(function(el){selectPackage('epic');document.querySelectorAll('.coin-card').forEach(function(c){c.classList.remove('selected');});el.classList.add('selected');var t=document.getElementById('cart-section');if(t){t.scrollIntoView({behavior:'smooth'});}})(this)">
       <div class="coin-shadow"></div>
       <div class="coin-inner" id="coin-epic-inner">
         <div class="coin-face coin-front">
@@ -817,6 +862,12 @@
           <p class="coin-select-hint">Selected ✓</p>
         </div>
         <div class="coin-face coin-back"></div>
+      </div>
+      <div class="coin-cta" aria-hidden="true">
+        <span class="coin-cta-text">Details &amp; Checkout</span>
+        <svg class="coin-cta-chevron" width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
       </div>
     </div>
 
@@ -1387,7 +1438,7 @@
 </section>
 
 <!-- Package Selection + Cart -->
-<section class="cart-section">
+<section class="cart-section" id="cart-section">
   <p class="cart-eyebrow">Select Your Package</p>
   <h2 class="cart-title">Choose Your Chapter</h2>
   <p class="cart-subtitle">Select a package below and add any creative extras to build your quote.</p>
