@@ -164,7 +164,7 @@
     .cb-sep { width: 1px; background: rgba(232,225,212,0.1); align-self: stretch; margin: 12px 0; flex-shrink: 0; }
     .cb-addons-wrap { flex: 1; display: flex; flex-direction: column; gap: 1px; min-width: 0; }
     .cb-addons-val { font-family: 'EB Garamond', serif; font-size: 0.88rem; color: rgba(232,225,212,0.55); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .cb-total-wrap { display: flex; flex-direction: column; gap: 1px; flex-shrink: 0; }
+    .cb-total-wrap { display: none; }
     .cb-total-val { font-family: 'Cinzel', serif; font-size: 1.2rem; color: #C9A84C; }
     .cb-payment-icons { display: flex; gap: 8px; align-items: center; flex-shrink: 0; }
     .cb-proceed-btn { flex-shrink: 0; font-family: 'EB Garamond', serif; font-size: 0.88rem; color: #1C1A14; background: #C9A84C; border: none; border-radius: 50px; padding: 10px 26px; cursor: pointer; transition: opacity 0.2s ease; white-space: nowrap; }
@@ -547,7 +547,6 @@
             <line x1="5" y1="26" x2="11.5" y2="26" stroke="#C9A84C" stroke-width="1.2" stroke-linecap="round"/>
           </svg>
           <span class="addon-fold-name">Vintage Glass</span>
-          <span class="addon-fold-price">+$150</span>
           <span class="addon-fold-arrow">▾</span>
         </button>
         <div class="addon-panel" id="addon-panel-vintage-glass">
@@ -555,7 +554,7 @@
             <h4 class="addon-panel-head">Vintage Glass</h4>
             <p class="addon-panel-desc">Adapted lenses from the 1960s–80s are imbued with organic bokeh, legendary flares, and gentle warmth modern optics can't replicate.</p>
             <ul class="addon-panel-list"><li>SMC Takumar 55mm</li><li>Юпитер (Jupiter) 9</li><li>Vivitar Series 1</li></ul>
-            <button class="addon-add-btn" id="btn-vintage-glass" onclick="toggleAddon('vintage-glass'); updateAddonBtn('vintage-glass')">Add to Order — +$150</button>
+            <button class="addon-add-btn" id="btn-vintage-glass" onclick="toggleAddon('vintage-glass'); updateAddonBtn('vintage-glass')">Add to Order</button>
           </div>
         </div>
       </div>
@@ -576,7 +575,6 @@
             <circle cx="26" cy="26" r="4" stroke="#C9A84C" stroke-width="1" opacity="0.5"/>
           </svg>
           <span class="addon-fold-name">35mm Film</span>
-          <span class="addon-fold-price">+$200</span>
           <span class="addon-fold-arrow">▾</span>
         </button>
         <div class="addon-panel" id="addon-panel-film-35mm">
@@ -584,7 +582,7 @@
             <h4 class="addon-panel-head">35mm Film</h4>
             <p class="addon-panel-desc">When working with analogue film, every frame is deliberate before the shutter fires. Each film recipe is strikingly artistic.</p>
             <ul class="addon-panel-list"><li>Kodak Portra 400</li><li>Kodak Gold 200</li><li>Ilford HP5</li><li>Fuji Superia 400</li></ul>
-            <button class="addon-add-btn" id="btn-film-35mm" onclick="toggleAddon('film-35mm'); updateAddonBtn('film-35mm')">Add to Order — +$200</button>
+            <button class="addon-add-btn" id="btn-film-35mm" onclick="toggleAddon('film-35mm'); updateAddonBtn('film-35mm')">Add to Order</button>
           </div>
         </div>
       </div>
@@ -599,7 +597,6 @@
             <circle cx="22" cy="22" r="2" fill="#C9A84C" opacity="0.5"/>
           </svg>
           <span class="addon-fold-name">Macro</span>
-          <span class="addon-fold-price">+$100</span>
           <span class="addon-fold-arrow">▾</span>
         </button>
         <div class="addon-panel" id="addon-panel-macro">
@@ -607,7 +604,7 @@
             <h4 class="addon-panel-head">Macro Photography</h4>
             <p class="addon-panel-desc">Life-size magnification for products, textiles, botanicals, and jewellery — where detail is everything.</p>
             <ul class="addon-panel-list"><li>True 1:1 macro magnification</li><li>Studio lighting setup</li><li>Jewellery, fabric, food detail</li></ul>
-            <button class="addon-add-btn" id="btn-macro" onclick="toggleAddon('macro'); updateAddonBtn('macro')">Add to Order — +$100</button>
+            <button class="addon-add-btn" id="btn-macro" onclick="toggleAddon('macro'); updateAddonBtn('macro')">Add to Order</button>
           </div>
         </div>
       </div>
@@ -627,7 +624,6 @@
             <ellipse cx="40" cy="40" rx="5" ry="3" stroke="#C9A84C" stroke-width="1" opacity="0.7"/>
           </svg>
           <span class="addon-fold-name">Drone</span>
-          <span class="addon-fold-price">+$300</span>
           <span class="addon-fold-arrow">▾</span>
         </button>
         <div class="addon-panel" id="addon-panel-drone">
@@ -635,7 +631,7 @@
             <h4 class="addon-panel-head">Drone Footage</h4>
             <p class="addon-panel-desc">Aerial perspective adds scale and cinematic sweep. Especially powerful for multi-day brand campaigns with outdoor locations.</p>
             <ul class="addon-panel-list"><li>Licensed drone operator</li><li>4K aerial footage</li><li>Edited into final cut</li><li>Location-permitting</li></ul>
-            <button class="addon-add-btn" id="btn-drone" onclick="toggleAddon('drone'); updateAddonBtn('drone')">Add to Order — +$300</button>
+            <button class="addon-add-btn" id="btn-drone" onclick="toggleAddon('drone'); updateAddonBtn('drone')">Add to Order</button>
           </div>
         </div>
       </div>
@@ -650,7 +646,6 @@
             <line x1="20" y1="46" x2="32" y2="46" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/>
           </svg>
           <span class="addon-fold-name">Audio Package</span>
-          <span class="addon-fold-price">+$250</span>
           <span class="addon-fold-arrow">▾</span>
         </button>
         <div class="addon-panel" id="addon-panel-audio">
@@ -658,7 +653,7 @@
             <h4 class="addon-panel-head">Full Audio Package</h4>
             <p class="addon-panel-desc">Multi-track sync recording, professional mastering, and music licensing. Real ambient sound captured on location.</p>
             <ul class="addon-panel-list"><li>Multi-track sync recording</li><li>Boom mic + lapel setup</li><li>Professional mastering</li><li>Music licensing included</li></ul>
-            <button class="addon-add-btn" id="btn-audio" onclick="toggleAddon('audio'); updateAddonBtn('audio')">Add to Order — +$250</button>
+            <button class="addon-add-btn" id="btn-audio" onclick="toggleAddon('audio'); updateAddonBtn('audio')">Add to Order</button>
           </div>
         </div>
       </div>
@@ -679,7 +674,6 @@
             <line x1="24.5" y1="42" x2="27.5" y2="42" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/>
           </svg>
           <span class="addon-fold-name">Lighting</span>
-          <span class="addon-fold-price">+$200</span>
           <span class="addon-fold-arrow">▾</span>
         </button>
         <div class="addon-panel" id="addon-panel-lighting">
@@ -687,7 +681,7 @@
             <h4 class="addon-panel-head">Lighting Package</h4>
             <p class="addon-panel-desc">Professional continuous and strobe lighting for controlled, cinematic illumination across both video and photo deliverables in your campaign.</p>
             <ul class="addon-panel-list"><li>Aputure 600D key light</li><li>Softbox + reflector kit</li><li>Practical accent lights</li><li>Full setup + breakdown</li></ul>
-            <button class="addon-add-btn" id="btn-lighting" onclick="toggleAddon('lighting'); updateAddonBtn('lighting')">Add to Order — +$200</button>
+            <button class="addon-add-btn" id="btn-lighting" onclick="toggleAddon('lighting'); updateAddonBtn('lighting')">Add to Order</button>
           </div>
         </div>
       </div>
@@ -702,7 +696,6 @@
             <line x1="13" y1="46" x2="39" y2="46" stroke="#C9A84C" stroke-width="1" stroke-linecap="round" opacity="0.25"/>
           </svg>
           <span class="addon-fold-name">Long-Form</span>
-          <span class="addon-fold-price">+$300</span>
           <span class="addon-fold-arrow">▾</span>
         </button>
         <div class="addon-panel" id="addon-panel-longform">
@@ -710,7 +703,7 @@
             <h4 class="addon-panel-head">Long-Form Video</h4>
             <p class="addon-panel-desc">Full continuous recording with minimal editing — ideal for panels, keynotes, speeches, and events that need complete documentation alongside your highlight reel.</p>
             <ul class="addon-panel-list"><li>Full event recording</li><li>Minimal cuts / light edit</li><li>Ideal for speeches &amp; panels</li><li>Delivered as single file</li></ul>
-            <button class="addon-add-btn" id="btn-longform" onclick="toggleAddon('longform'); updateAddonBtn('longform')">Add to Order — +$300</button>
+            <button class="addon-add-btn" id="btn-longform" onclick="toggleAddon('longform'); updateAddonBtn('longform')">Add to Order</button>
           </div>
         </div>
       </div>
@@ -725,7 +718,6 @@
             <line x1="12" y1="7" x2="28" y2="7" stroke="#C9A84C" stroke-width="1" stroke-linecap="round" opacity="0.25"/>
           </svg>
           <span class="addon-fold-name">B-Roll</span>
-          <span class="addon-fold-price">+$150</span>
           <span class="addon-fold-arrow">▾</span>
         </button>
         <div class="addon-panel" id="addon-panel-broll">
@@ -733,7 +725,7 @@
             <h4 class="addon-panel-head">B-Roll Package</h4>
             <p class="addon-panel-desc">Dedicated supplemental footage — detail shots, environment cuts, process sequences — that gives the editor more to work with and the final film more texture and rhythm.</p>
             <ul class="addon-panel-list"><li>Dedicated B-roll session</li><li>Environment &amp; detail shots</li><li>Woven into final edit</li><li>Adds depth and pacing</li></ul>
-            <button class="addon-add-btn" id="btn-broll" onclick="toggleAddon('broll'); updateAddonBtn('broll')">Add to Order — +$150</button>
+            <button class="addon-add-btn" id="btn-broll" onclick="toggleAddon('broll'); updateAddonBtn('broll')">Add to Order</button>
           </div>
         </div>
       </div>
@@ -746,7 +738,6 @@
             <path d="M20 22l4 4 8-8" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
           <span class="addon-fold-name">Extra Revision</span>
-          <span class="addon-fold-price">+$75/round</span>
           <span class="addon-fold-arrow">▾</span>
         </button>
         <div class="addon-panel" id="addon-panel-extra-revision">
@@ -759,7 +750,7 @@
               <span class="addon-stepper-count" id="qty-extra-revision">0</span>
               <button class="addon-stepper-btn" onclick="setAddonQty('extra-revision', 1)">+</button>
             </div>
-            <span class="addon-stepper-label">rounds × $75 each</span>
+            <span class="addon-stepper-label">rounds</span>
           </div>
         </div>
       </div>
@@ -775,7 +766,6 @@
             <path d="M32 5l4 3-4 3" stroke="#C9A84C" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
           <span class="addon-fold-name">+3 Min Edit</span>
-          <span class="addon-fold-price">+$150/block</span>
           <span class="addon-fold-arrow">▾</span>
         </button>
         <div class="addon-panel" id="addon-panel-plus-3min">
@@ -788,7 +778,7 @@
               <span class="addon-stepper-count" id="qty-plus-3min">0</span>
               <button class="addon-stepper-btn" onclick="setAddonQty('plus-3min', 1)">+</button>
             </div>
-            <span class="addon-stepper-label">3-min blocks × $150 each</span>
+            <span class="addon-stepper-label">3-min blocks</span>
           </div>
         </div>
       </div>
@@ -801,7 +791,6 @@
             <path d="M32 12l3 3" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/>
           </svg>
           <span class="addon-fold-name">Extra Retouching</span>
-          <span class="addon-fold-price">+$50/5 photos</span>
           <span class="addon-fold-arrow">▾</span>
         </button>
         <div class="addon-panel" id="addon-panel-extra-retouching">
@@ -814,7 +803,7 @@
               <span class="addon-stepper-count" id="qty-extra-retouching">0</span>
               <button class="addon-stepper-btn" onclick="setAddonQty('extra-retouching', 1)">+</button>
             </div>
-            <span class="addon-stepper-label">sets of 5 photos × $50 each</span>
+            <span class="addon-stepper-label">sets of 5 photos</span>
           </div>
         </div>
       </div>
@@ -829,7 +818,6 @@
             <path d="M13 22l3 3 5-6" stroke="#C9A84C" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
           </svg>
           <span class="addon-fold-name">+5 Selects</span>
-          <span class="addon-fold-price">+$75/set</span>
           <span class="addon-fold-arrow">▾</span>
         </button>
         <div class="addon-panel" id="addon-panel-plus-5selects">
@@ -842,7 +830,7 @@
               <span class="addon-stepper-count" id="qty-plus-5selects">0</span>
               <button class="addon-stepper-btn" onclick="setAddonQty('plus-5selects', 1)">+</button>
             </div>
-            <span class="addon-stepper-label">sets of 5 photos × $75 each</span>
+            <span class="addon-stepper-label">sets of 5 photos</span>
           </div>
         </div>
       </div>
@@ -914,9 +902,6 @@
       <div class="cg-val">Add-on</div>
 
       <div class="cg-label" style="border-radius:0 0 0 14px;">Price</div>
-      <div class="cg-price">$1,200</div>
-      <div class="cg-price">$2,200</div>
-      <div class="cg-price" style="border-radius:0 0 14px 0;">$3,800</div>
     </div>
   </div>
 </section>
@@ -931,7 +916,6 @@
     <div class="pkg-tier" data-tier="hybrid" onclick="selectPackage('hybrid')">
       <p class="tier-label">1–2 Day Shoot</p>
       <h3 class="tier-name">Hybrid</h3>
-      <p class="tier-price">$1,200</p>
       <ul class="tier-features">
         <li>Video + photography combined</li>
         <li>1–2 day shoot, 1–2 locations</li>
@@ -945,7 +929,6 @@
       <span class="tier-badge">Most Popular</span>
       <p class="tier-label">3+ Day Shoot</p>
       <h3 class="tier-name">Multi-Day</h3>
-      <p class="tier-price">$2,200</p>
       <ul class="tier-features">
         <li>Video + photography, 3+ days</li>
         <li>Multiple locations and scenes</li>
@@ -958,7 +941,6 @@
     <div class="pkg-tier" data-tier="campaign" onclick="selectPackage('campaign')">
       <p class="tier-label">Full Campaign</p>
       <h3 class="tier-name">Campaign</h3>
-      <p class="tier-price">$3,800</p>
       <ul class="tier-features">
         <li>Week-long production</li>
         <li>Unlimited locations and subjects</li>
@@ -972,38 +954,34 @@
 
   <p class="cart-addons-title">Add-Ons</p>
   <div class="addon-toggles">
-    <button class="addon-toggle" data-addon="vintage-glass" onclick="toggleAddon('vintage-glass')">Vintage Glass <span class="addon-toggle-price">+$150</span></button>
-    <button class="addon-toggle" data-addon="film-35mm" onclick="toggleAddon('film-35mm')">35mm Film <span class="addon-toggle-price">+$200</span></button>
-    <button class="addon-toggle" data-addon="macro" onclick="toggleAddon('macro')">Macro <span class="addon-toggle-price">+$100</span></button>
-    <button class="addon-toggle" data-addon="drone" onclick="toggleAddon('drone')">Drone <span class="addon-toggle-price">+$300</span></button>
-    <button class="addon-toggle" data-addon="audio" onclick="toggleAddon('audio')">Audio Package <span class="addon-toggle-price">+$250</span></button>
-    <button class="addon-toggle" data-addon="lighting" onclick="toggleAddon('lighting')">Lighting <span class="addon-toggle-price">+$200</span></button>
-    <button class="addon-toggle" data-addon="longform" onclick="toggleAddon('longform')">Long-Form Video <span class="addon-toggle-price">+$300</span></button>
-    <button class="addon-toggle" data-addon="broll" onclick="toggleAddon('broll')">B-Roll <span class="addon-toggle-price">+$150</span></button>
+    <button class="addon-toggle" data-addon="vintage-glass" onclick="toggleAddon('vintage-glass')">Vintage Glass</button>
+    <button class="addon-toggle" data-addon="film-35mm" onclick="toggleAddon('film-35mm')">35mm Film</button>
+    <button class="addon-toggle" data-addon="macro" onclick="toggleAddon('macro')">Macro</button>
+    <button class="addon-toggle" data-addon="drone" onclick="toggleAddon('drone')">Drone</button>
+    <button class="addon-toggle" data-addon="audio" onclick="toggleAddon('audio')">Audio Package</button>
+    <button class="addon-toggle" data-addon="lighting" onclick="toggleAddon('lighting')">Lighting</button>
+    <button class="addon-toggle" data-addon="longform" onclick="toggleAddon('longform')">Long-Form Video</button>
+    <button class="addon-toggle" data-addon="broll" onclick="toggleAddon('broll')">B-Roll</button>
     <span class="addon-qty-wrap" data-addon="extra-revision">
       <span class="aq-label">Extra Revision</span>
-      <span class="aq-price">+$75/round</span>
       <button class="aq-btn" onclick="setAddonQty('extra-revision', -1)">−</button>
       <span class="aq-count cart-qty-display" data-addon="extra-revision">0</span>
       <button class="aq-btn" onclick="setAddonQty('extra-revision', 1)">+</button>
     </span>
     <span class="addon-qty-wrap" data-addon="plus-3min">
       <span class="aq-label">+3 Min Edit</span>
-      <span class="aq-price">+$150/block</span>
       <button class="aq-btn" onclick="setAddonQty('plus-3min', -1)">−</button>
       <span class="aq-count cart-qty-display" data-addon="plus-3min">0</span>
       <button class="aq-btn" onclick="setAddonQty('plus-3min', 1)">+</button>
     </span>
     <span class="addon-qty-wrap" data-addon="extra-retouching">
       <span class="aq-label">Extra Retouching</span>
-      <span class="aq-price">+$50/5 photos</span>
       <button class="aq-btn" onclick="setAddonQty('extra-retouching', -1)">−</button>
       <span class="aq-count cart-qty-display" data-addon="extra-retouching">0</span>
       <button class="aq-btn" onclick="setAddonQty('extra-retouching', 1)">+</button>
     </span>
     <span class="addon-qty-wrap" data-addon="plus-5selects">
       <span class="aq-label">+5 Selects</span>
-      <span class="aq-price">+$75/set</span>
       <button class="aq-btn" onclick="setAddonQty('plus-5selects', -1)">−</button>
       <span class="aq-count cart-qty-display" data-addon="plus-5selects">0</span>
       <button class="aq-btn" onclick="setAddonQty('plus-5selects', 1)">+</button>
@@ -1029,7 +1007,7 @@
   <div class="cb-sep"></div>
   <div class="cb-total-wrap">
     <span class="cb-label">Total</span>
-    <span class="cb-total-val" id="cb-total">$0</span>
+    <span class="cb-total-val" id="cb-total"></span>
   </div>
   <div class="cb-sep"></div>
   <div class="cb-payment-icons" title="Accepted: PayPal, Venmo, Stripe, Zelle">
