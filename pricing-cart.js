@@ -74,6 +74,16 @@ function renderBar() {
   const totalDisplay = document.getElementById('cb-total');
   const proceedBtn = document.getElementById('cb-proceed');
 
+  // Always sync addon visual states regardless of package selection
+  document.querySelectorAll('.addon-toggle[data-addon]').forEach(btn => {
+    const key = btn.dataset.addon;
+    const qty = cart.addons[key] || 0;
+    btn.classList.toggle('addon-toggle--active', qty > 0);
+  });
+  document.querySelectorAll('.cart-qty-display[data-addon]').forEach(el => {
+    el.textContent = cart.addons[el.dataset.addon] || 0;
+  });
+
   if (!cart.package) {
     bar.classList.remove('cart-bar--visible');
     return;
@@ -89,14 +99,12 @@ function renderBar() {
     addonsDisplay.textContent = active.length ? active.join(', ') : 'No add-ons';
   }
 
-  const total = calcTotal();
   if (totalDisplay) totalDisplay.style.display = 'none';
 
   if (proceedBtn) {
     proceedBtn.onclick = () => {
       const page = PAYMENT_PAGES[cart.package];
       if (!page) return;
-      // Encode addons as key:qty pairs, omit zero-qty
       const addonsArr = Object.entries(cart.addons)
         .filter(([, qty]) => qty > 0)
         .map(([key, qty]) => qty > 1 ? `${key}:${qty}` : key);
@@ -107,18 +115,6 @@ function renderBar() {
   // Sync tier tiles
   document.querySelectorAll('.pkg-tier[data-tier]').forEach(t => {
     t.classList.toggle('selected', t.dataset.tier === cart.package);
-  });
-
-  // Sync addon toggle buttons
-  document.querySelectorAll('.addon-toggle[data-addon]').forEach(btn => {
-    const key = btn.dataset.addon;
-    const qty = cart.addons[key] || 0;
-    btn.classList.toggle('addon-toggle--active', qty > 0);
-  });
-
-  // Sync qty displays in bottom cart
-  document.querySelectorAll('.cart-qty-display[data-addon]').forEach(el => {
-    el.textContent = cart.addons[el.dataset.addon] || 0;
   });
 }
 

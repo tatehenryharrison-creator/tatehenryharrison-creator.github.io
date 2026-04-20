@@ -1040,8 +1040,7 @@ function updateAddonBtn(key) {
   if ((cart.addons[key] || 0) > 0) {
     btn.textContent = 'Added ✓'; btn.classList.add('added');
   } else {
-    const prices = { 'vintage-glass': 150, 'film-35mm': 200, 'macro': 100, 'drone': 300, 'audio': 250, 'lighting': 200, 'longform': 300, 'broll': 150 };
-    btn.textContent = `Add to Order — +$${prices[key]}`; btn.classList.remove('added');
+    btn.textContent = 'Add to Order'; btn.classList.remove('added');
   }
 }
 (function(){

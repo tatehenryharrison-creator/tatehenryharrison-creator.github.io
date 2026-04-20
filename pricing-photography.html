@@ -839,8 +839,7 @@ function updateAddonBtn(key) {
     btn.textContent = 'Added ✓';
     btn.classList.add('added');
   } else {
-    const prices = { 'vintage-glass': 150, 'film-35mm': 200, 'macro': 100, 'lighting': 200 };
-    btn.textContent = `Add to Order — +$${prices[key]}`;
+    btn.textContent = 'Add to Order';
     btn.classList.remove('added');
   }
 }
