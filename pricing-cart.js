@@ -23,14 +23,14 @@ const PRICES = {
 };
 
 const PAYMENT_PAGES = {
-  chapter: 'payment-chapter.html',
-  novel: 'payment-novel.html',
-  epic: 'payment-epic.html',
-  portraiture: 'payment-portraiture.html',
-  'product-brand': 'payment-product-brand.html',
-  hybrid: 'payment-custom.html',
-  multiday: 'payment-custom.html',
-  campaign: 'payment-custom.html'
+  chapter: 'quote.html',
+  novel: 'quote.html',
+  epic: 'quote.html',
+  portraiture: 'quote.html',
+  'product-brand': 'quote.html',
+  hybrid: 'quote.html',
+  multiday: 'quote.html',
+  campaign: 'quote.html'
 };
 
 const PACKAGE_LABELS = {
@@ -57,6 +57,75 @@ const ADDON_LABELS = {
 // addons is now a plain object: { key: quantity }
 let cart = { package: null, addons: {} };
 
+// ── Add-to-cart fly animation ──────────────────────────────────────────────
+let _lastAddonClickEl = null;
+
+function flyChip(fromEl, toEl) {
+  if (!fromEl || !toEl) return;
+
+  const srcR = fromEl.getBoundingClientRect();
+  const dstR = toEl.getBoundingClientRect();
+
+  const srcX = srcR.left + srcR.width  / 2;
+  const srcY = srcR.top  + srcR.height / 2;
+  const dstX = dstR.left + dstR.width  / 2;
+  const dstY = dstR.top  + dstR.height / 2;
+
+  // Arc: control point lifted 56px above the straight midpoint
+  const midX = (srcX + dstX) / 2;
+  const midY = srcY + (dstY - srcY) * 0.35 - 56;
+
+  const chip = document.createElement('div');
+  chip.textContent = '+1';
+  Object.assign(chip.style, {
+    position:     'fixed',
+    left:         '0',
+    top:          '0',
+    fontFamily:   "'Cinzel', serif",
+    fontSize:     '0.68rem',
+    fontWeight:   '700',
+    color:        '#1C1A14',
+    background:   '#C9A84C',
+    borderRadius: '50px',
+    padding:      '3px 10px',
+    zIndex:       '100000',
+    pointerEvents:'none',
+    willChange:   'transform, opacity',
+    transform:    `translate(${srcX}px,${srcY}px) translate(-50%,-50%)`,
+  });
+  document.body.appendChild(chip);
+
+  const anim = chip.animate([
+    { transform: `translate(${srcX}px,${srcY}px) translate(-50%,-50%) scale(1)`,    opacity: 1 },
+    { transform: `translate(${midX}px,${midY}px) translate(-50%,-50%) scale(1.25)`, opacity: 1 },
+    { transform: `translate(${dstX}px,${dstY}px) translate(-50%,-50%) scale(0.5)`,  opacity: 0 },
+  ], { duration: 560, easing: 'cubic-bezier(0.22,1,0.36,1)', fill: 'forwards' });
+  anim.onfinish = () => chip.remove();
+
+  // Pulse the destination on arrival
+  setTimeout(() => {
+    toEl.animate([
+      { transform: 'scale(1)',    boxShadow: '0 0 0 0 rgba(201,168,76,0)' },
+      { transform: 'scale(1.07)', boxShadow: '0 0 0 6px rgba(201,168,76,0.3)' },
+      { transform: 'scale(1)',    boxShadow: '0 0 0 0 rgba(201,168,76,0)' },
+    ], { duration: 240, easing: 'ease-out' });
+  }, 520);
+}
+
+function flyToCart(addonEl) {
+  const btn = document.getElementById('cb-proceed');
+  const bar = document.getElementById('cart-bar');
+  if (!addonEl || !btn || !bar || !bar.classList.contains('cart-bar--visible')) return;
+  flyChip(addonEl, btn);
+}
+
+function flyFromCart(addonEl) {
+  const btn = document.getElementById('cb-proceed');
+  const bar = document.getElementById('cart-bar');
+  if (!addonEl || !btn || !bar || !bar.classList.contains('cart-bar--visible')) return;
+  flyChip(btn, addonEl);
+}
+
 function calcTotal() {
   if (!cart.package) return 0;
   let t = PRICES.packages[cart.package] || 0;
@@ -74,6 +143,16 @@ function renderBar() {
   const totalDisplay = document.getElementById('cb-total');
   const proceedBtn = document.getElementById('cb-proceed');
 
+  // Always sync addon visual states regardless of package selection
+  document.querySelectorAll('.addon-toggle[data-addon]').forEach(btn => {
+    const key = btn.dataset.addon;
+    const qty = cart.addons[key] || 0;
+    btn.classList.toggle('addon-toggle--active', qty > 0);
+  });
+  document.querySelectorAll('.cart-qty-display[data-addon]').forEach(el => {
+    el.textContent = cart.addons[el.dataset.addon] || 0;
+  });
+
   if (!cart.package) {
     bar.classList.remove('cart-bar--visible');
     return;
@@ -89,14 +168,12 @@ function renderBar() {
     addonsDisplay.textContent = active.length ? active.join(', ') : 'No add-ons';
   }
 
-  const total = calcTotal();
   if (totalDisplay) totalDisplay.style.display = 'none';
 
   if (proceedBtn) {
     proceedBtn.onclick = () => {
       const page = PAYMENT_PAGES[cart.package];
       if (!page) return;
-      // Encode addons as key:qty pairs, omit zero-qty
       const addonsArr = Object.entries(cart.addons)
         .filter(([, qty]) => qty > 0)
         .map(([key, qty]) => qty > 1 ? `${key}:${qty}` : key);
@@ -108,18 +185,6 @@ function renderBar() {
   document.querySelectorAll('.pkg-tier[data-tier]').forEach(t => {
     t.classList.toggle('selected', t.dataset.tier === cart.package);
   });
-
-  // Sync addon toggle buttons
-  document.querySelectorAll('.addon-toggle[data-addon]').forEach(btn => {
-    const key = btn.dataset.addon;
-    const qty = cart.addons[key] || 0;
-    btn.classList.toggle('addon-toggle--active', qty > 0);
-  });
-
-  // Sync qty displays in bottom cart
-  document.querySelectorAll('.cart-qty-display[data-addon]').forEach(el => {
-    el.textContent = cart.addons[el.dataset.addon] || 0;
-  });
 }
 
 function selectPackage(tier) {
@@ -129,7 +194,10 @@ function selectPackage(tier) {
 
 // For toggle-style addons (qty 0 or 1)
 function toggleAddon(addonKey) {
-  cart.addons[addonKey] = (cart.addons[addonKey] || 0) > 0 ? 0 : 1;
+  const wasOff = (cart.addons[addonKey] || 0) === 0;
+  cart.addons[addonKey] = wasOff ? 1 : 0;
+  if (wasOff) flyToCart(_lastAddonClickEl);
+  else        flyFromCart(_lastAddonClickEl);
   renderBar();
 }
 
@@ -138,6 +206,8 @@ function setAddonQty(key, delta) {
   const current = cart.addons[key] || 0;
   const next = Math.max(0, current + delta);
   cart.addons[key] = next;
+  if (delta > 0 && next > 0)        flyToCart(_lastAddonClickEl);
+  else if (delta < 0 && current > 0) flyFromCart(_lastAddonClickEl);
   // Update qty displays inside panels
   const panelQty = document.getElementById('qty-' + key);
   if (panelQty) panelQty.textContent = next;
@@ -231,4 +301,10 @@ function toggleCompare() {
 document.addEventListener('DOMContentLoaded', () => {
   initScrollReveal();
   initCollageZoom();
+
+  // Capture the clicked addon element before onclick fires, so flyToCart knows the source
+  document.body.addEventListener('click', e => {
+    const src = e.target.closest('.addon-toggle, .addon-add-btn, .aq-btn');
+    if (src) _lastAddonClickEl = src;
+  }, true); // capture phase — runs before onclick attributes
 });

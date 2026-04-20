@@ -516,9 +516,9 @@
       pointer-events: none;
       z-index: 0;
     }
-    .coin-chapter .coin-shadow { background: radial-gradient(ellipse, rgba(196,30,58,0.6) 0%, transparent 70%); }
+    .coin-chapter .coin-shadow { background: radial-gradient(ellipse, rgba(196,30,58,0.6) 0%, transparent 70%); bottom: -8px; }
     .coin-novel   .coin-shadow { background: radial-gradient(ellipse, rgba(26,122,63,0.6)  0%, transparent 70%); }
-    .coin-epic    .coin-shadow { background: radial-gradient(ellipse, rgba(201,168,76,0.6) 0%, transparent 70%); }
+    .coin-epic    .coin-shadow { background: radial-gradient(ellipse, rgba(201,168,76,0.6) 0%, transparent 70%); bottom: -8px; }
 
     .coin-inner {
       width: 100%;
@@ -1559,7 +1559,7 @@
     <!-- Zelle Z -->
     <svg width="20" height="20" viewBox="0 0 48 48" class="cb-payment-icon" style="opacity:0.4;" xmlns="http://www.w3.org/2000/svg"><text x="50%" y="54%" dominant-baseline="middle" text-anchor="middle" font-family="Arial,sans-serif" font-weight="800" font-size="36" fill="#e8e1d4">Z</text></svg>
   </div>
-  <button class="cb-proceed-btn" id="cb-proceed">Proceed to Payment →</button>
+  <button class="cb-proceed-btn" id="cb-proceed">Get Your Quote →</button>
 </div>
 
 
@@ -1599,8 +1599,7 @@ function updateAddonBtn(key) {
     btn.textContent = 'Added ✓';
     btn.classList.add('added');
   } else {
-    const prices = { 'vintage-glass': 150, 'film-35mm': 200, 'drone': 300, 'audio': 250, 'lighting': 200, 'longform': 300, 'broll': 150, 'macro': 100 };
-    btn.textContent = `Add to Order — +$${prices[key]}`;
+    btn.textContent = 'Add to Order';
     btn.classList.remove('added');
   }
 }
