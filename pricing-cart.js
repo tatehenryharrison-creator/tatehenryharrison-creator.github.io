@@ -90,7 +90,7 @@ function renderBar() {
   }
 
   const total = calcTotal();
-  if (totalDisplay) totalDisplay.textContent = '$' + total.toLocaleString();
+  if (totalDisplay) totalDisplay.style.display = 'none';
 
   if (proceedBtn) {
     proceedBtn.onclick = () => {
@@ -100,7 +100,7 @@ function renderBar() {
       const addonsArr = Object.entries(cart.addons)
         .filter(([, qty]) => qty > 0)
         .map(([key, qty]) => qty > 1 ? `${key}:${qty}` : key);
-      window.location.href = `${page}?package=${cart.package}&addons=${addonsArr.join(',')}&total=${total}`;
+      window.location.href = `${page}?package=${cart.package}&addons=${addonsArr.join(',')}`;
     };
   }
 
@@ -158,12 +158,12 @@ function updateAddonQtyBtn(key, qty) {
   } else {
     const price = PRICES.addons[key] || 0;
     const labels = {
-      'extra-revision': `Add Revisions — +$${price}/round`,
-      'plus-3min': `Add Length — +$${price}/3 min`,
-      'extra-retouching': `Add Retouching — +$${price}/5 photos`,
-      'plus-5selects': `Add Selects — +$${price}/5 photos`
+      'extra-revision': 'Add Revisions',
+      'plus-3min': 'Add Length',
+      'extra-retouching': 'Add Retouching',
+      'plus-5selects': 'Add Selects'
     };
-    btn.textContent = labels[key] || `Add to Order — +$${price}`;
+    btn.textContent = labels[key] || 'Add to Order';
     btn.classList.remove('added');
   }
 }

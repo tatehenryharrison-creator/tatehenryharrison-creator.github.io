@@ -348,7 +348,7 @@ html, body { overflow-x: hidden; }
     color: rgba(245,244,240,0.8);
     text-shadow: 0 1px 6px rgba(0,0,0,0.6);
     white-space: nowrap; pointer-events: none;
-    animation: handleNudge 3s ease-in-out 0.8s 2;
+    transition: opacity 0.3s ease;
 }
 .ba-mobile-labels { display: none; }
 .ba-caption {
@@ -1243,11 +1243,11 @@ footer > * { position: relative; z-index: 1; }
 
 /* ===== AVAILABILITY BADGE ===== */
 .availability-badge {
-    display: inline-flex; align-items: center; gap: 8px;
+    display: inline-flex; align-items: center; gap: 7px;
     background: rgba(92,110,130,0.1); border: 1px solid rgba(92,110,130,0.28);
-    padding: 7px 18px; border-radius: 50px;
-    font-family: 'EB Garamond', serif; font-size: 0.82rem; letter-spacing: 1px;
-    color: #5C6E82; margin-bottom: 28px;
+    padding: 5px 14px; border-radius: 50px;
+    font-family: 'EB Garamond', serif; font-size: 0.76rem; letter-spacing: 1px;
+    color: #5C6E82; margin-bottom: 0;
 }
 .avail-dot {
     width: 7px; height: 7px; border-radius: 50%;
@@ -1261,7 +1261,7 @@ footer > * { position: relative; z-index: 1; }
 
 /* ===== TESTIMONIALS ===== */
 .testimonials-section {
-    background: #1C1A14; padding: 65px 10%; text-align: center;
+    background: #1C1A14; padding: 36px 10%; text-align: center;
 }
 .testimonials-eyebrow {
     font-family: 'EB Garamond', serif;
@@ -1269,8 +1269,8 @@ footer > * { position: relative; z-index: 1; }
     color: #635f51; margin-bottom: 12px;
 }
 .testimonials-heading { font-size: 2.2rem; color: #f5f4f0; margin: 0 0 56px; }
-.testimonials-inner { max-width: 740px; margin: 0 auto; }
-.testimonials-track { position: relative; min-height: 180px; margin-bottom: 36px; }
+.testimonials-inner { max-width: 640px; margin: 0 auto; }
+.testimonials-track { position: relative; margin-bottom: 0; }
 .testimonial-card {
     position: absolute; inset: 0;
     display: flex; flex-direction: column; align-items: center; justify-content: center;
@@ -1284,8 +1284,8 @@ footer > * { position: relative; z-index: 1; }
 }
 .testimonial-text {
     font-family: 'EB Garamond', serif; font-style: italic;
-    font-size: 1.22rem; color: #e8e1d4; line-height: 1.7;
-    margin: 0 0 22px; text-align: center;
+    font-size: 1.18rem; color: #e8e1d4; line-height: 1.65;
+    margin: 0 0 14px; text-align: center;
 }
 .testimonial-cite {
     font-family: 'EB Garamond', serif; font-size: 0.78rem;
@@ -1300,7 +1300,7 @@ footer > * { position: relative; z-index: 1; }
 .t-dot.active { background: #5C6E82; border-color: #5C6E82; }
 .testimonial-stars {
     display: flex; justify-content: center; gap: 4px;
-    margin-bottom: 18px;
+    margin-bottom: 14px;
 }
 .testimonial-stars span {
     font-size: 1.15rem;
@@ -1810,42 +1810,6 @@ footer > * { position: relative; z-index: 1; }
     </div>
 </div>
 
-<!-- BEFORE / AFTER SLIDER -->
-<section class="ba-section" id="difference">
-    <p class="ba-label-top">The Difference</p>
-    <div class="ba-wrap" id="baWrap">
-        <!-- iPhone — right / bottom layer -->
-        <div class="ba-before">
-            <video autoplay muted loop playsinline preload="auto">
-                <source src="iPhone Comparison.mp4" type="video/mp4">
-            </video>
-            <span class="ba-tag">iPhone (4K)</span>
-        </div>
-        <!-- XH2S — left / top layer, clips from right -->
-        <div class="ba-after" id="baAfter">
-            <video autoplay muted loop playsinline preload="auto">
-                <source src="XH2S Comparison.mp4" type="video/mp4">
-            </video>
-            <span class="ba-tag">Mirrorless Camera<br><span style="font-size:0.85em;font-style:italic;opacity:0.75;font-weight:400;letter-spacing:0.5px;text-transform:none;">(Professionally Color Graded by Tate)</span></span>
-        </div>
-        <div class="ba-divider" id="baDivider">
-            <div class="ba-handle"></div>
-            <span class="ba-drag-hint">drag</span>
-        </div>
-    </div>
-    <div class="ba-mobile-labels">
-        <div class="ba-mobile-label">Mirrorless Camera<br><span style="font-style:italic;opacity:0.7;text-transform:none;letter-spacing:0;font-size:0.9em;">(Professionally Color Graded by Tate)</span></div>
-        <div class="ba-mobile-label">iPhone (4K)</div>
-    </div>
-    <p class="ba-caption">Drag to compare — mirrorless camera footage professionally color graded vs. 4K iPhone footage</p>
-    <a href="#about" class="ba-scroll-arrow" aria-label="Scroll to About section">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <polyline points="6 5 12 11 18 5"></polyline>
-            <polyline points="6 12 12 18 18 12"></polyline>
-        </svg>
-    </a>
-</section>
-
 <!-- ABOUT -->
 <section id="about" class="about-section">
     <div class="about-inner">
@@ -1901,6 +1865,9 @@ footer > * { position: relative; z-index: 1; }
     <div class="pricing-header">
         <p class="pricing-eyebrow anim-fade">Investment</p>
         <h2 class="pricing-heading anim-fade">Choose Your Service</h2>
+        <span class="availability-badge" style="margin-top:10px;">
+            <span class="avail-dot"></span> Currently booking
+        </span>
     </div>
 
     <!-- Service Category Tiles -->
@@ -1938,51 +1905,47 @@ footer > * { position: relative; z-index: 1; }
         </a>
     </div>
 
-    <div style="text-align:center; padding: 28px 0 0;">
-        <span class="availability-badge">
-            <span class="avail-dot"></span> Currently booking April &amp; May 2026
-        </span>
-    </div>
-
-    <div style="text-align:center; padding: 40px 0 12px; display:flex; flex-direction:column; align-items:center; gap:14px;">
-        <p style="font-family:'EB Garamond',serif; font-size:0.82rem; letter-spacing:1.5px; text-transform:uppercase; color:#a8a49c; margin:0;">Ready to book?</p>
-        <a href="payment-reserve.html" style="
-            display:inline-block;
-            font-family:'EB Garamond',serif;
-            font-size:1rem;
-            font-weight:600;
-            color:#f5f4f0;
-            background:#2A2220;
-            border:1px solid rgba(245,244,240,0.12);
-            border-radius:10px;
-            padding:14px 36px;
-            text-decoration:none;
-            letter-spacing:0.5px;
-            transition:opacity 0.2s ease, transform 0.2s ease;
-            width:fit-content;
-        " onmouseover="this.style.opacity='0.82';this.style.transform='translateY(-2px)'" onmouseout="this.style.opacity='1';this.style.transform='translateY(0)'">
-            Pay to Reserve &rarr;
-        </a>
-        <a href="payment-final.html" style="
-            display:inline-block;
-            font-family:'EB Garamond',serif;
-            font-size:0.95rem;
-            font-weight:600;
-            color:#2A2220;
-            background:transparent;
-            border:1px solid rgba(42,34,28,0.25);
-            border-radius:10px;
-            padding:13px 36px;
-            text-decoration:none;
-            letter-spacing:0.5px;
-            transition:opacity 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
-            width:fit-content;
-        " onmouseover="this.style.opacity='0.7';this.style.transform='translateY(-2px)'" onmouseout="this.style.opacity='1';this.style.transform='translateY(0)'">
-            Pay for Final Deliverables &rarr;
-        </a>
+    <div style="text-align:center; padding: 20px 0 12px; display:flex; flex-direction:column; align-items:center; gap:10px;">
+        <p style="font-family:'EB Garamond',serif; font-size:0.72rem; letter-spacing:1.5px; text-transform:uppercase; color:#a8a49c; margin:0;">Ready to book?</p>
+        <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap; justify-content:center;">
+            <a href="payment-reserve.html" style="
+                display:inline-block;
+                font-family:'EB Garamond',serif;
+                font-size:0.82rem;
+                font-weight:600;
+                color:#f5f4f0;
+                background:#2A2220;
+                border:1px solid rgba(245,244,240,0.12);
+                border-radius:8px;
+                padding:9px 22px;
+                text-decoration:none;
+                letter-spacing:0.4px;
+                transition:opacity 0.2s ease, transform 0.2s ease;
+                white-space:nowrap;
+            " onmouseover="this.style.opacity='0.82';this.style.transform='translateY(-2px)'" onmouseout="this.style.opacity='1';this.style.transform='translateY(0)'">
+                Pay to Reserve &rarr;
+            </a>
+            <a href="payment-final.html" style="
+                display:inline-block;
+                font-family:'EB Garamond',serif;
+                font-size:0.82rem;
+                font-weight:600;
+                color:#2A2220;
+                background:transparent;
+                border:1px solid rgba(42,34,28,0.25);
+                border-radius:8px;
+                padding:9px 22px;
+                text-decoration:none;
+                letter-spacing:0.4px;
+                transition:opacity 0.2s ease, transform 0.2s ease;
+                white-space:nowrap;
+            " onmouseover="this.style.opacity='0.7';this.style.transform='translateY(-2px)'" onmouseout="this.style.opacity='1';this.style.transform='translateY(0)'">
+                Pay for Final Deliverables &rarr;
+            </a>
+        </div>
         <a href="quote.html" style="
             font-family:'EB Garamond',serif;
-            font-size:0.85rem;
+            font-size:0.8rem;
             color:#5C6E82;
             text-decoration:none;
             letter-spacing:0.3px;
@@ -1993,6 +1956,42 @@ footer > * { position: relative; z-index: 1; }
     </div>
 </section>
 
+
+<!-- BEFORE / AFTER SLIDER -->
+<section class="ba-section" id="difference">
+    <p class="ba-label-top">The Difference</p>
+    <div class="ba-wrap" id="baWrap">
+        <!-- iPhone — right / bottom layer -->
+        <div class="ba-before">
+            <video autoplay muted loop playsinline preload="auto">
+                <source src="iPhone Comparison.mp4" type="video/mp4">
+            </video>
+            <span class="ba-tag">iPhone (4K)</span>
+        </div>
+        <!-- XH2S — left / top layer, clips from right -->
+        <div class="ba-after" id="baAfter">
+            <video autoplay muted loop playsinline preload="auto">
+                <source src="XH2S Comparison.mp4" type="video/mp4">
+            </video>
+            <span class="ba-tag">Mirrorless Camera<br><span style="font-size:0.85em;font-style:italic;opacity:0.75;font-weight:400;letter-spacing:0.5px;text-transform:none;">(Professionally Color Graded by Tate)</span></span>
+        </div>
+        <div class="ba-divider" id="baDivider">
+            <div class="ba-handle"></div>
+            <span class="ba-drag-hint">drag</span>
+        </div>
+    </div>
+    <div class="ba-mobile-labels">
+        <div class="ba-mobile-label">Mirrorless Camera<br><span style="font-style:italic;opacity:0.7;text-transform:none;letter-spacing:0;font-size:0.9em;">(Professionally Color Graded by Tate)</span></div>
+        <div class="ba-mobile-label">iPhone (4K)</div>
+    </div>
+    <p class="ba-caption">Drag to compare — mirrorless camera footage professionally color graded vs. 4K iPhone footage</p>
+    <a href="#work" class="ba-scroll-arrow" aria-label="Scroll to Portfolio section">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <polyline points="6 5 12 11 18 5"></polyline>
+            <polyline points="6 12 12 18 18 12"></polyline>
+        </svg>
+    </a>
+</section>
 
 <!-- PORTFOLIO / WORK -->
 <!-- ┌─────────────────────────────────────────────────────────────────────────┐
@@ -2828,6 +2827,18 @@ document.querySelectorAll('.pricing-card').forEach(card => {
         setPos(e.touches[0].clientX);
     }, { passive: false });
     window.addEventListener('touchend', () => { dragging = false; });
+
+    /* Hide drag hint permanently once the user first interacts */
+    const hint = divider ? divider.querySelector('.ba-drag-hint') : null;
+    function hideHint() {
+        if (hint) { hint.style.opacity = '0'; hint.style.pointerEvents = 'none'; }
+        wrap.removeEventListener('mousedown', hideHint);
+        wrap.removeEventListener('touchstart', hideHint);
+    }
+    if (hint) {
+        wrap.addEventListener('mousedown',  hideHint);
+        wrap.addEventListener('touchstart', hideHint, { passive: true });
+    }
 })();
 
 /* ===== PORTFOLIO FILTER ===== */
