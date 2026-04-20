@@ -57,6 +57,64 @@ const ADDON_LABELS = {
 // addons is now a plain object: { key: quantity }
 let cart = { package: null, addons: {} };
 
+// ── Add-to-cart fly animation ──────────────────────────────────────────────
+let _lastAddonClickEl = null;
+
+function flyToCart(sourceEl) {
+  const destBtn = document.getElementById('cb-proceed');
+  const bar     = document.getElementById('cart-bar');
+  if (!sourceEl || !destBtn || !bar) return;
+  if (!bar.classList.contains('cart-bar--visible')) return;
+
+  const srcR = sourceEl.getBoundingClientRect();
+  const dstR = destBtn.getBoundingClientRect();
+
+  const srcX = srcR.left + srcR.width  / 2;
+  const srcY = srcR.top  + srcR.height / 2;
+  const dstX = dstR.left + dstR.width  / 2;
+  const dstY = dstR.top  + dstR.height / 2;
+
+  // Arc control point: midway horizontally, lifted 56px above the straight line
+  const midX = (srcX + dstX) / 2;
+  const midY = srcY + (dstY - srcY) * 0.35 - 56;
+
+  const chip = document.createElement('div');
+  chip.textContent = '+1';
+  Object.assign(chip.style, {
+    position:     'fixed',
+    left:         '0',
+    top:          '0',
+    fontFamily:   "'Cinzel', serif",
+    fontSize:     '0.68rem',
+    fontWeight:   '700',
+    color:        '#1C1A14',
+    background:   '#C9A84C',
+    borderRadius: '50px',
+    padding:      '3px 10px',
+    zIndex:       '100000',
+    pointerEvents:'none',
+    willChange:   'transform, opacity',
+    transform:    `translate(${srcX}px,${srcY}px) translate(-50%,-50%)`,
+  });
+  document.body.appendChild(chip);
+
+  const anim = chip.animate([
+    { transform: `translate(${srcX}px,${srcY}px) translate(-50%,-50%) scale(1)`,    opacity: 1   },
+    { transform: `translate(${midX}px,${midY}px) translate(-50%,-50%) scale(1.25)`, opacity: 1   },
+    { transform: `translate(${dstX}px,${dstY}px) translate(-50%,-50%) scale(0.5)`,  opacity: 0   },
+  ], { duration: 560, easing: 'cubic-bezier(0.22,1,0.36,1)', fill: 'forwards' });
+  anim.onfinish = () => chip.remove();
+
+  // Pulse the button on arrival
+  setTimeout(() => {
+    destBtn.animate([
+      { transform: 'scale(1)',    boxShadow: '0 0 0 0 rgba(201,168,76,0)' },
+      { transform: 'scale(1.07)', boxShadow: '0 0 0 6px rgba(201,168,76,0.3)' },
+      { transform: 'scale(1)',    boxShadow: '0 0 0 0 rgba(201,168,76,0)' },
+    ], { duration: 240, easing: 'ease-out' });
+  }, 520);
+}
+
 function calcTotal() {
   if (!cart.package) return 0;
   let t = PRICES.packages[cart.package] || 0;
@@ -125,7 +183,9 @@ function selectPackage(tier) {
 
 // For toggle-style addons (qty 0 or 1)
 function toggleAddon(addonKey) {
-  cart.addons[addonKey] = (cart.addons[addonKey] || 0) > 0 ? 0 : 1;
+  const wasOff = (cart.addons[addonKey] || 0) === 0;
+  cart.addons[addonKey] = wasOff ? 1 : 0;
+  if (wasOff) flyToCart(_lastAddonClickEl);
   renderBar();
 }
 
@@ -134,6 +194,7 @@ function setAddonQty(key, delta) {
   const current = cart.addons[key] || 0;
   const next = Math.max(0, current + delta);
   cart.addons[key] = next;
+  if (delta > 0) flyToCart(_lastAddonClickEl);
   // Update qty displays inside panels
   const panelQty = document.getElementById('qty-' + key);
   if (panelQty) panelQty.textContent = next;
@@ -227,4 +288,10 @@ function toggleCompare() {
 document.addEventListener('DOMContentLoaded', () => {
   initScrollReveal();
   initCollageZoom();
+
+  // Capture the clicked addon element before onclick fires, so flyToCart knows the source
+  document.body.addEventListener('click', e => {
+    const src = e.target.closest('.addon-toggle, .addon-add-btn, .aq-btn');
+    if (src) _lastAddonClickEl = src;
+  }, true); // capture phase — runs before onclick attributes
 });
