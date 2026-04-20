@@ -23,14 +23,14 @@ const PRICES = {
 };
 
 const PAYMENT_PAGES = {
-  chapter: 'payment-chapter.html',
-  novel: 'payment-novel.html',
-  epic: 'payment-epic.html',
-  portraiture: 'payment-portraiture.html',
-  'product-brand': 'payment-product-brand.html',
-  hybrid: 'payment-custom.html',
-  multiday: 'payment-custom.html',
-  campaign: 'payment-custom.html'
+  chapter: 'quote.html',
+  novel: 'quote.html',
+  epic: 'quote.html',
+  portraiture: 'quote.html',
+  'product-brand': 'quote.html',
+  hybrid: 'quote.html',
+  multiday: 'quote.html',
+  campaign: 'quote.html'
 };
 
 const PACKAGE_LABELS = {
