@@ -694,6 +694,17 @@
       background-size: cover; background-position: center;
       display: flex; align-items: center; justify-content: center; overflow: hidden;
     }
+    .la-banner {
+      position: relative;
+      aspect-ratio: 2560 / 200;
+      background-image: url('assets/acc-audio.jpg');
+      background-size: cover; background-position: center;
+      display: flex; align-items: center; justify-content: center; overflow: hidden;
+    }
+    .la-banner::before {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.38) 0%, rgba(0,0,0,0.62) 100%);
+    }
     .cv-banner::before {
       content: ''; position: absolute; inset: 0;
       background: linear-gradient(to bottom, rgba(0,0,0,0.38) 0%, rgba(0,0,0,0.62) 100%);
@@ -940,6 +951,36 @@
 <section class="cv-section" id="cv-section">
   <div class="cv-banner">
     <h2 class="cv-banner-title">Cinema-Grade Video</h2>
+  </div>
+  <div class="cv-content">
+    <!-- Sub A: [text][text] | [photo][photo][photo] | [text][text] -->
+    <div class="cv-sub-a">
+      <div class="cv-text-slot"></div>
+      <div class="cv-text-slot"></div>
+      <div class="cv-photo-slot"></div>
+      <div class="cv-photo-slot"></div>
+      <div class="cv-photo-slot"></div>
+      <div class="cv-text-slot"></div>
+      <div class="cv-text-slot"></div>
+    </div>
+    <!-- Sub B: [photo][photo][photo] | [text] | [photo][photo][photo] -->
+    <div class="cv-sub-b">
+      <div class="cv-photo-slot"></div>
+      <div class="cv-photo-slot"></div>
+      <div class="cv-photo-slot"></div>
+      <div class="cv-text-center-slot"></div>
+      <div class="cv-photo-slot"></div>
+      <div class="cv-photo-slot"></div>
+      <div class="cv-photo-slot"></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Location Audio -->
+<section class="cv-section" id="la-section">
+  <div class="la-banner">
+    <h2 class="cv-banner-title">Location Audio</h2>
   </div>
   <div class="cv-content">
     <!-- Sub A: [text][text] | [photo][photo][photo] | [text][text] -->
