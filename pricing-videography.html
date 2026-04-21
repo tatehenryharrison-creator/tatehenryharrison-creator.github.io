@@ -740,6 +740,97 @@
       border-radius: 10px; border: 1px dashed rgba(232,225,212,0.08);
     }
 
+    /* ── COLOR & LIGHT — octagon ring ── */
+    .cl-banner {
+      position: relative;
+      aspect-ratio: 2560 / 200;
+      background-image: url('assets/acc-lighting.jpeg');
+      background-size: cover; background-position: center;
+      display: flex; align-items: center; justify-content: center; overflow: hidden;
+    }
+    .cl-banner::before {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.38) 0%, rgba(0,0,0,0.62) 100%);
+    }
+    .cl-content {
+      width: 100%;
+      padding: 80px 5% 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .cl-ring-wrap {
+      --ring:   min(min(72vw, 68vh), 680px);
+      --photo:  calc(var(--ring) * 0.22);
+      --radius: calc(var(--ring) * 0.385);
+      position: relative;
+      width:  var(--ring);
+      height: var(--ring);
+      flex-shrink: 0;
+    }
+    .cl-photo {
+      position: absolute;
+      width:  var(--photo);
+      height: var(--photo);
+      top:  50%; left: 50%;
+      margin-top:  calc(var(--photo) / -2);
+      margin-left: calc(var(--photo) / -2);
+      border-radius: 10px;
+      background: rgba(255,255,255,0.05);
+      border: 1px dashed rgba(232,225,212,0.14);
+      overflow: hidden;
+    }
+    .cl-photo--1 { transform: rotate(0deg)   translateY(calc(var(--radius) * -1)) rotate(0deg); }
+    .cl-photo--2 { transform: rotate(45deg)  translateY(calc(var(--radius) * -1)) rotate(-45deg); }
+    .cl-photo--3 { transform: rotate(90deg)  translateY(calc(var(--radius) * -1)) rotate(-90deg); }
+    .cl-photo--4 { transform: rotate(135deg) translateY(calc(var(--radius) * -1)) rotate(-135deg); }
+    .cl-photo--5 { transform: rotate(180deg) translateY(calc(var(--radius) * -1)) rotate(-180deg); }
+    .cl-photo--6 { transform: rotate(225deg) translateY(calc(var(--radius) * -1)) rotate(-225deg); }
+    .cl-photo--7 { transform: rotate(270deg) translateY(calc(var(--radius) * -1)) rotate(-270deg); }
+    .cl-photo--8 { transform: rotate(315deg) translateY(calc(var(--radius) * -1)) rotate(-315deg); }
+    .cl-center {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width:  calc(var(--ring) * 0.40);
+      height: calc(var(--ring) * 0.40);
+      border-radius: 50%;
+      background: rgba(14,12,9,0.72);
+      border: 1px solid rgba(201,168,76,0.22);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 24px;
+    }
+    .cl-center-eyebrow {
+      font-family: 'EB Garamond', serif;
+      font-size: 0.62rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #C9A84C;
+      margin: 0 0 10px;
+    }
+    .cl-center-title {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(0.8rem, 2.2vw, 1.15rem);
+      font-weight: 400;
+      color: #e8e1d4;
+      margin: 0 0 10px;
+      line-height: 1.3;
+    }
+    .cl-center-body {
+      font-family: 'EB Garamond', serif;
+      font-size: clamp(0.72rem, 1.5vw, 0.88rem);
+      color: rgba(232,225,212,0.55);
+      margin: 0;
+      line-height: 1.55;
+    }
+    @media (max-width: 600px) {
+      .cl-ring-wrap {
+        --ring:   min(88vw, 360px);
+      }
+    }
 
     /* ── COIN CARD CTA (hover) ── */
     .coin-epic { width: 302px; } /* 20% wider than Novel (252px) */
@@ -1002,6 +1093,33 @@
       <div class="cv-photo-slot"></div>
       <div class="cv-photo-slot"></div>
       <div class="cv-photo-slot"></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Color & Light -->
+<section class="cv-section" id="cl-section">
+  <div class="cl-banner">
+    <h2 class="cv-banner-title">Color &amp; Light</h2>
+  </div>
+  <div class="cl-content">
+    <div class="cl-ring-wrap">
+      <div class="cl-photo cl-photo--1"></div>
+      <div class="cl-photo cl-photo--2"></div>
+      <div class="cl-photo cl-photo--3"></div>
+      <div class="cl-photo cl-photo--4"></div>
+      <div class="cl-photo cl-photo--5"></div>
+      <div class="cl-photo cl-photo--6"></div>
+      <div class="cl-photo cl-photo--7"></div>
+      <div class="cl-photo cl-photo--8"></div>
+      <div class="cl-center">
+        <div>
+          <p class="cl-center-eyebrow">The Grade</p>
+          <h3 class="cl-center-title">Film That Feels</h3>
+          <p class="cl-center-body">Every frame is graded to a deliberate look — not corrected, crafted.</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
