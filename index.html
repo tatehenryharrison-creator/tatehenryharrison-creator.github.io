@@ -328,25 +328,26 @@ html, body { overflow-x: hidden; }
     65%      { transform: translate(calc(-50% + 5px),-50%); }
     82%      { transform: translate(calc(-50% - 5px),-50%); }
 }
+@keyframes ba-float-left {
+    0%, 100% { transform: translateY(-50%) translateX(0); }
+    50%       { transform: translateY(-50%) translateX(-6px); }
+}
+@keyframes ba-float-right {
+    0%, 100% { transform: translateY(-50%) translateX(0); }
+    50%       { transform: translateY(-50%) translateX(6px); }
+}
 .ba-handle::before, .ba-handle::after {
-    content: ''; position: absolute; width: 0; height: 0;
+    content: ''; position: absolute; top: 50%; width: 0; height: 0;
 }
 .ba-handle::before {
     border-top: 7px solid transparent; border-bottom: 7px solid transparent;
     border-right: 10px solid #5C6E82; left: 9px;
+    animation: ba-float-left 1.4s ease-in-out infinite;
 }
 .ba-handle::after {
     border-top: 7px solid transparent; border-bottom: 7px solid transparent;
     border-left: 10px solid #5C6E82; right: 9px;
-}
-/* "DRAG" label — sits inside the handle circle as a flex child */
-.ba-drag-hint {
-    font-family: 'Cinzel', serif; font-size: 0.44rem;
-    letter-spacing: 1.2px; text-transform: uppercase;
-    color: rgba(92,110,130,0.9);
-    white-space: nowrap; pointer-events: none;
-    position: relative; z-index: 1;
-    transition: opacity 0.3s ease;
+    animation: ba-float-right 1.4s ease-in-out infinite;
 }
 .ba-mobile-labels { display: none; }
 .ba-caption {
@@ -1086,7 +1087,6 @@ footer > * { position: relative; z-index: 1; }
     .ba-handle { width: 38px; height: 38px; }
     .ba-handle::before { left: 6px; border-right-width: 8px; border-top-width: 5px; border-bottom-width: 5px; }
     .ba-handle::after  { right: 6px; border-left-width: 8px; border-top-width: 5px; border-bottom-width: 5px; }
-    .ba-drag-hint { font-size: 0.4rem; letter-spacing: 0.8px; }
     .ba-tag { display: none; }
     .ba-mobile-labels { display: flex; }
     .ba-scroll-arrow { display: none; }
@@ -1233,7 +1233,6 @@ footer > * { position: relative; z-index: 1; }
     .ba-handle { width: 34px; height: 34px; }
     .ba-handle::before { left: 5px; border-right-width: 7px; border-top-width: 4px; border-bottom-width: 4px; }
     .ba-handle::after  { right: 5px; border-left-width: 7px; border-top-width: 4px; border-bottom-width: 4px; }
-    .ba-drag-hint { font-size: 0.38rem; letter-spacing: 0.6px; }
     .process-modal-overlay { align-items: flex-end; }
     .process-modal {
         max-width: 100%; width: 100%; border-radius: 24px 24px 0 0;
@@ -1992,7 +1991,7 @@ footer > * { position: relative; z-index: 1; }
             <span class="ba-tag">Mirrorless Camera<br><span style="font-size:0.85em;font-style:italic;opacity:0.75;font-weight:400;letter-spacing:0.5px;text-transform:none;">(Professionally Color Graded by Tate)</span></span>
         </div>
         <div class="ba-divider" id="baDivider">
-            <div class="ba-handle"><span class="ba-drag-hint">drag</span></div>
+            <div class="ba-handle"></div>
         </div>
     </div>
     <div class="ba-mobile-labels">
