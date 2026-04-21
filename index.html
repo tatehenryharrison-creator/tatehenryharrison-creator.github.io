@@ -1055,7 +1055,7 @@ footer > * { position: relative; z-index: 1; }
     .pricing-grid--2 { grid-template-columns: repeat(2, 1fr); max-width: 100%; }
     .portfolio-grid { columns: 2; }
     .about-inner { flex-direction: column; gap: 36px; }
-    .about-photo { flex: none; width: 100%; max-width: 340px; margin: 0 auto; }
+    .about-photo { flex: none; width: 100%; max-width: none; margin: 0 auto; }
 }
 
 @media (max-width: 768px) {
@@ -1103,7 +1103,7 @@ footer > * { position: relative; z-index: 1; }
     /* ABOUT */
     .about-section { padding: 64px 5%; }
     .about-inner { gap: 28px; }
-    .about-photo { max-width: 260px; }
+    .about-photo { width: 100%; max-width: none; }
     .about-heading { font-size: 2rem; }
     .about-body { font-size: 1rem; line-height: 1.75; }
 
@@ -1137,9 +1137,9 @@ footer > * { position: relative; z-index: 1; }
 
     /* SERVICE TILES */
     .service-tiles-wrap { grid-template-columns: 1fr; padding: 0 5%; gap: 14px; }
-    .service-tile { padding: 44px 32px; }
+    .service-tile { padding: 32px 28px; }
     .service-tile-title { font-size: 2rem; }
-    .service-tile-custom { padding: 32px 28px; }
+    .service-tile-custom { padding: 44px 32px; }
     .service-tile-custom-body { flex-direction: column; align-items: flex-start; gap: 20px; }
     .service-tile-custom-hands { width: 180px; align-self: center; }
 
@@ -1185,16 +1185,15 @@ footer > * { position: relative; z-index: 1; }
     .reel-section { padding: 60px 5%; }
 
     /* PORTFOLIO */
-    /* Fixed grid on mobile — no masonry reflow as images load */
+    /* 2-column masonry on mobile — natural photo proportions */
     .portfolio-grid {
-        columns: unset;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 8px;
+        display: block;
+        columns: 2;
+        column-gap: 8px;
     }
-    .portfolio-item { break-inside: unset; margin-bottom: 0; }
-    .portfolio-img-wrap { aspect-ratio: 1 / 1; }
-    .portfolio-thumb { width: 100%; height: 100%; object-fit: cover; }
+    .portfolio-item { break-inside: avoid; margin-bottom: 8px; }
+    .portfolio-img-wrap { aspect-ratio: unset; }
+    .portfolio-thumb { width: 100%; height: auto; object-fit: cover; }
     .portfolio-section { padding: 64px 3% 48px; }
     .portfolio-header { margin-bottom: 32px; }
     .portfolio-filters { gap: 6px; margin-bottom: 28px; }
@@ -1756,7 +1755,7 @@ footer > * { position: relative; z-index: 1; }
             <a href="#about">About Me</a>
             <a href="#pricing">Services</a>
             <a href="#work">Portfolio</a>
-            <a href="schedule.html">Free Consultation</a>
+            <a href="quote.html">Get a Quote</a>
         </nav>
     </div>
 </div>
@@ -2689,7 +2688,7 @@ footer > * { position: relative; z-index: 1; }
 </div>
 
 <!-- Mobile Sticky CTA -->
-<a href="schedule.html" class="mobile-cta">Book a Free Consultation →</a>
+<a href="quote.html" class="mobile-cta">Get a Quote →</a>
 
 <script>
 

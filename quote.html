@@ -227,6 +227,10 @@
     .success-body { font-family: 'EB Garamond', serif; font-size: 1.1rem; color: #635f51; line-height: 1.7; max-width: 400px; margin: 0 auto 36px; }
     .success-back { font-family: 'EB Garamond', serif; font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase; color: #5C6E82; text-decoration: none; border-bottom: 1px solid rgba(92,110,130,0.35); padding-bottom: 2px; }
     .success-back:hover { border-bottom-color: #5C6E82; }
+    .success-consult { margin-top: 52px; padding-top: 36px; border-top: 1px solid rgba(99,95,81,0.12); }
+    .success-consult-hint { font-family: 'EB Garamond', serif; font-size: 0.9rem; color: #a8a49c; margin: 0 0 18px; letter-spacing: 0.02em; }
+    .success-consult-btn { display: inline-block; font-family: 'EB Garamond', serif; font-size: 0.95rem; letter-spacing: 0.04em; color: #2A2220; text-decoration: none; padding: 13px 32px; border: 1px solid rgba(99,95,81,0.3); border-radius: 50px; transition: border-color 0.2s ease, background 0.2s ease; }
+    .success-consult-btn:hover { border-color: rgba(201,168,76,0.6); background: rgba(201,168,76,0.04); }
 
     /* FOOTER */
     footer { background: #1C1A14; color: #e8e1d4; text-align: center; padding: 32px 10%; font-size: 0.88rem; line-height: 1.8; }
@@ -379,11 +383,10 @@
     <h2 class="success-title">You're all set.</h2>
     <p class="success-body">Your quote request is on its way to Tate. Expect a reply within 24 hours.</p>
     <a href="index.html" class="success-back">← Back to home</a>
-  </div>
-
-  <div style="text-align:center; padding: 48px 10% 40px; background: #f5f4f0;">
-    <p style="font-family:'EB Garamond',serif; font-size:0.88rem; color:#a8a49c; margin:0 0 18px; letter-spacing:0.02em;">Prefer to talk it through first?</p>
-    <a href="schedule.html" style="display:inline-block; font-family:'EB Garamond',serif; font-size:0.95rem; letter-spacing:0.04em; color:#2A2220; text-decoration:none; padding:13px 32px; border:1px solid rgba(99,95,81,0.3); border-radius:50px; transition:border-color 0.2s ease, background 0.2s ease;" onmouseover="this.style.borderColor='rgba(201,168,76,0.6)';this.style.background='rgba(201,168,76,0.04)'" onmouseout="this.style.borderColor='rgba(99,95,81,0.3)';this.style.background='transparent'">Book a Free Consultation</a>
+    <div class="success-consult">
+      <p class="success-consult-hint">Want to talk through the details first?</p>
+      <a href="schedule.html" class="success-consult-btn">Schedule a Free Consultation →</a>
+    </div>
   </div>
 
   <footer>
