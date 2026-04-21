@@ -880,6 +880,8 @@
     @media (max-width: 600px) {
       .pkg-coins-inner { flex-direction: column; align-items: center; gap: 52px; }
       .coin-card { width: 240px; height: 410px; }
+      /* Hide hover-only CTA on mobile — no hover, and it bleeds through the 3D spin */
+      .coin-cta { display: none !important; }
       .trident-svg { display: none; }
       .cv-banner-title { font-size: 1.7rem; letter-spacing: 3px; }
       .cv-sub-a { grid-template-columns: repeat(3, 1fr); }
@@ -1838,7 +1840,7 @@ function updateAddonBtn(key) {
 })();
 </script>
 <script>
-/* ── SCROLL-DRIVEN COIN SPIN ── */
+/* ── COIN SPIN — desktop: scroll-driven · mobile: per-coin IntersectionObserver ── */
 (function () {
   'use strict';
 
@@ -1849,8 +1851,8 @@ function updateAddonBtn(key) {
   ];
 
   var coins = specs.map(function (s) {
-    var inner  = document.getElementById(s.innerId);
-    var card   = document.getElementById(s.cardId);
+    var inner = document.getElementById(s.innerId);
+    var card  = document.getElementById(s.cardId);
     if (!inner || !card) return null;
     return {
       inner:      inner,
@@ -1862,9 +1864,7 @@ function updateAddonBtn(key) {
 
   if (!coins.length) return;
 
-  /* Set initial position */
   function setAngle(c, angle) {
-    /* Perspective is a CSS property on .coin-card — do not repeat it here */
     c.inner.style.transform = 'rotateY(' + angle.toFixed(2) + 'deg)';
     if (c.shadow) {
       var facing = Math.abs(Math.cos(angle * Math.PI / 180));
@@ -1872,38 +1872,74 @@ function updateAddonBtn(key) {
     }
   }
 
+  /* Start every coin at its full spin angle */
   coins.forEach(function (c) { setAngle(c, c.totalAngle); });
 
-  /* locked = true once the section has been fully scrolled past.
-     Unlocks only when the user scrolls back up so spinProgress < UNLOCK. */
+  /* ── MOBILE PATH: each coin spins in independently when it enters view ── */
+  if (window.matchMedia('(max-width: 600px)').matches) {
+    coins.forEach(function (c) {
+      var done = false;
+
+      var obs = new IntersectionObserver(function (entries) {
+        if (done) return;
+        if (!entries[0].isIntersecting) return;
+        done = true;
+        obs.disconnect();
+
+        /* Staggered delay — chapter first, epic last */
+        var delay = c.totalAngle === 1125 ? 0 : c.totalAngle === 1245 ? 120 : 240;
+
+        setTimeout(function () {
+          var start    = null;
+          var duration = 950; /* ms */
+          var from     = c.totalAngle;
+
+          function easeOut(t) { return 1 - Math.pow(1 - t, 3); }
+
+          function frame(ts) {
+            if (!start) start = ts;
+            var t = Math.min(1, (ts - start) / duration);
+            setAngle(c, from * (1 - easeOut(t)));
+            if (t < 1) {
+              requestAnimationFrame(frame);
+            } else {
+              setAngle(c, 0);
+              c.card.classList.add('coin-settled');
+            }
+          }
+
+          requestAnimationFrame(frame);
+        }, delay);
+      }, { threshold: 0.38 });
+
+      obs.observe(c.card);
+    });
+
+    return; /* skip desktop scroll wiring */
+  }
+
+  /* ── DESKTOP PATH: scroll-driven, all coins together ── */
   var locked      = false;
-  var UNLOCK_AT   = 0.88;   /* hysteresis — must scroll back up this far to re-engage */
+  var UNLOCK_AT   = 0.88;
   var prevSettled = false;
 
   function getSpinProgress() {
     var section = document.getElementById('pkg-coins');
     if (!section) return 0;
-    var rect     = section.getBoundingClientRect();
-    var vh       = window.innerHeight;
-    var sectionH = section.offsetHeight;
-    /* Activate over at least 65% of viewport height so the animation is
-       perceivable on large/tall monitors where the whole section fits in view */
+    var rect        = section.getBoundingClientRect();
+    var vh          = window.innerHeight;
+    var sectionH    = section.offsetHeight;
     var activationH = Math.max(sectionH, vh * 0.65);
     return Math.max(0, Math.min(1, (vh - rect.top) / activationH));
   }
 
   function update() {
     var sp = getSpinProgress();
-
-    /* Engage lock when fully spun-in */
     if (sp >= 1) locked = true;
-
-    /* Release lock when user scrolls back up past the hysteresis threshold */
     if (locked && sp < UNLOCK_AT) locked = false;
 
-    /* While locked: freeze at face-forward (angle = 0) */
     var settled = locked || sp >= 1;
-    var angle0  = settled ? 0 : null;  /* null = compute per-card */
+    var angle0  = settled ? 0 : null;
 
     coins.forEach(function (c) {
       var angle = (angle0 !== null) ? angle0 : c.totalAngle * (1 - sp);
