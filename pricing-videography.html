@@ -516,8 +516,8 @@
       pointer-events: none;
       z-index: 0;
     }
-    .coin-chapter .coin-shadow { background: radial-gradient(ellipse, rgba(196,30,58,0.6) 0%, transparent 70%); bottom: -8px; }
-    .coin-novel   .coin-shadow { background: radial-gradient(ellipse, rgba(26,122,63,0.6)  0%, transparent 70%); }
+    .coin-chapter .coin-shadow { background: radial-gradient(ellipse, rgba(139,16,32,0.65) 0%, transparent 70%); bottom: -8px; }
+    .coin-novel   .coin-shadow { background: radial-gradient(ellipse, rgba(15,92,43,0.65)  0%, transparent 70%); }
     .coin-epic    .coin-shadow { background: radial-gradient(ellipse, rgba(201,168,76,0.6) 0%, transparent 70%); bottom: -8px; }
 
     .coin-inner {
@@ -592,36 +592,36 @@
     .coin-chapter .coin-back::after { animation-delay: 1.5s; }
     .coin-novel   .coin-back::after { animation-delay: 2.7s; }
     .coin-epic    .coin-back::after { animation-delay: 3.9s; }
-    /* Chapter — royal red */
+    /* Chapter — deep crimson */
     .coin-chapter .coin-front {
-      border: 2px solid #C41E3A;
-      box-shadow: inset 0 0 0 1px rgba(196,30,58,0.12),
-                  0 0 22px rgba(196,30,58,0.3),
-                  0 10px 40px rgba(196,30,58,0.16);
+      border: 2px solid #8B1020;
+      box-shadow: inset 0 0 0 1px rgba(139,16,32,0.14),
+                  0 0 22px rgba(139,16,32,0.35),
+                  0 10px 40px rgba(139,16,32,0.2);
     }
     .coin-chapter .coin-back {
-      background: linear-gradient(150deg, #e03454 0%, #C41E3A 45%, #8c1526 100%);
-      border: 2px solid rgba(230,80,100,0.45);
-      box-shadow: inset 0 0 0 1px rgba(255,150,170,0.12),
-                  0 0 28px rgba(196,30,58,0.55),
-                  0 8px 32px rgba(196,30,58,0.25);
+      background: linear-gradient(150deg, #B81A30 0%, #8B1020 45%, #500A12 100%);
+      border: 2px solid rgba(185,40,65,0.45);
+      box-shadow: inset 0 0 0 1px rgba(220,100,120,0.12),
+                  0 0 28px rgba(139,16,32,0.6),
+                  0 8px 32px rgba(139,16,32,0.28);
     }
-    .coin-chapter .coin-tier-name { color: #C41E3A; }
-    /* Novel — cash green */
+    .coin-chapter .coin-tier-name { color: #8B1020; }
+    /* Novel — deep forest green */
     .coin-novel .coin-front {
-      border: 2px solid #1A7A3F;
-      box-shadow: inset 0 0 0 1px rgba(26,122,63,0.12),
-                  0 0 22px rgba(26,122,63,0.3),
-                  0 10px 40px rgba(26,122,63,0.16);
+      border: 2px solid #0F5C2B;
+      box-shadow: inset 0 0 0 1px rgba(15,92,43,0.14),
+                  0 0 22px rgba(15,92,43,0.35),
+                  0 10px 40px rgba(15,92,43,0.2);
     }
     .coin-novel .coin-back {
-      background: linear-gradient(150deg, #27b05a 0%, #1A7A3F 45%, #0d4824 100%);
-      border: 2px solid rgba(70,200,120,0.45);
-      box-shadow: inset 0 0 0 1px rgba(120,230,160,0.12),
-                  0 0 28px rgba(26,122,63,0.55),
-                  0 8px 32px rgba(26,122,63,0.25);
+      background: linear-gradient(150deg, #177A38 0%, #0F5C2B 45%, #072B14 100%);
+      border: 2px solid rgba(40,160,80,0.45);
+      box-shadow: inset 0 0 0 1px rgba(80,200,120,0.12),
+                  0 0 28px rgba(15,92,43,0.6),
+                  0 8px 32px rgba(15,92,43,0.28);
     }
-    .coin-novel .coin-tier-name { color: #1A7A3F; }
+    .coin-novel .coin-tier-name { color: #0F5C2B; }
     /* Epic — gold */
     .coin-epic .coin-front {
       border: 2px solid #C9A84C;
@@ -652,8 +652,8 @@
       color: #635f51; margin: 0 0 12px;
     }
     .coin-divider { width: 34px; height: 1px; margin: 0 auto 14px; opacity: 0.28; }
-    .coin-chapter .coin-divider { background: #C41E3A; }
-    .coin-novel   .coin-divider { background: #1A7A3F; }
+    .coin-chapter .coin-divider { background: #8B1020; }
+    .coin-novel   .coin-divider { background: #0F5C2B; }
     .coin-epic    .coin-divider { background: #C9A84C; }
     .coin-features { list-style: none; margin: 0; padding: 0; width: 100%; text-align: left; }
     .coin-features li {
@@ -693,6 +693,17 @@
       background-image: url('assets/acc-video.jpg');
       background-size: cover; background-position: center;
       display: flex; align-items: center; justify-content: center; overflow: hidden;
+    }
+    .la-banner {
+      position: relative;
+      aspect-ratio: 2560 / 200;
+      background-image: url('assets/acc-audio.jpg');
+      background-size: cover; background-position: center;
+      display: flex; align-items: center; justify-content: center; overflow: hidden;
+    }
+    .la-banner::before {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.38) 0%, rgba(0,0,0,0.62) 100%);
     }
     .cv-banner::before {
       content: ''; position: absolute; inset: 0;
@@ -966,6 +977,36 @@
 </section>
 
 
+<!-- Location Audio -->
+<section class="cv-section" id="la-section">
+  <div class="la-banner">
+    <h2 class="cv-banner-title">Location Audio</h2>
+  </div>
+  <div class="cv-content">
+    <!-- Sub A: [text][text] | [photo][photo][photo] | [text][text] -->
+    <div class="cv-sub-a">
+      <div class="cv-text-slot"></div>
+      <div class="cv-text-slot"></div>
+      <div class="cv-photo-slot"></div>
+      <div class="cv-photo-slot"></div>
+      <div class="cv-photo-slot"></div>
+      <div class="cv-text-slot"></div>
+      <div class="cv-text-slot"></div>
+    </div>
+    <!-- Sub B: [photo][photo][photo] | [text] | [photo][photo][photo] -->
+    <div class="cv-sub-b">
+      <div class="cv-photo-slot"></div>
+      <div class="cv-photo-slot"></div>
+      <div class="cv-photo-slot"></div>
+      <div class="cv-text-center-slot"></div>
+      <div class="cv-photo-slot"></div>
+      <div class="cv-photo-slot"></div>
+      <div class="cv-photo-slot"></div>
+    </div>
+  </div>
+</section>
+
+
 <!-- What's Included — Scroll Accordion -->
 <section class="acc-section">
   <div class="acc-header">
@@ -1069,7 +1110,7 @@
 
 
 <!-- Add-On Gradient Buttons -->
-<section class="addon-section">
+<section class="addon-section" id="addon-section">
   <p class="addon-eyebrow">Creative Add-Ons</p>
   <h2 class="addon-title">Expand Your Production</h2>
   <p class="addon-subtitle">Each add-on is a considered creative choice, not an upsell. Add what genuinely serves the story.</p>
@@ -1296,19 +1337,20 @@
             <line x1="18" y1="22" x2="26" y2="22" stroke="#C9A84C" stroke-width="1.2" stroke-linecap="round" opacity="0.6"/>
             <line x1="22" y1="18" x2="22" y2="26" stroke="#C9A84C" stroke-width="1.2" stroke-linecap="round" opacity="0.6"/>
           </svg>
-          <span class="addon-fold-name">Macro</span>
+          <span class="addon-fold-name">Macro (Close-Up)</span>
           <span class="addon-fold-arrow">▾</span>
         </button>
         <div class="addon-panel" id="addon-panel-macro">
           <div class="addon-panel-inner">
-            <h4 class="addon-panel-head">Macro / Close-Up Shots</h4>
-            <p class="addon-panel-desc">Extreme close-up footage that reveals the texture and detail of your subject — perfect for products, food, jewellery, botanicals, or any moment where the tiny things tell the story.</p>
+            <h4 class="addon-panel-head">Macro (Close-Up)</h4>
+            <p class="addon-panel-desc">Extreme close-up footage that reveals the texture and detail of your subject. Perfect for products, food, jewelry, botanicals, or any moment where the tiny things tell the story.</p>
             <ul class="addon-panel-list">
               <li>True macro 1:1 footage</li>
               <li>Texture and detail shots</li>
               <li>Edited into final cut</li>
               <li>Ideal for products &amp; food</li>
             </ul>
+            <a id="macro-portfolio-link" href="index.html?filter=macro-product&from=pricing-videography#work" style="display:inline-block;font-family:'EB Garamond',serif;font-size:0.82rem;color:#5C6E82;letter-spacing:0.04em;text-decoration:none;border-bottom:1px solid rgba(92,110,130,0.35);padding-bottom:1px;margin-bottom:14px;">See examples in portfolio →</a>
             <button class="addon-add-btn" id="btn-macro" onclick="toggleAddon('macro'); updateAddonBtn('macro')">Add to Order</button>
           </div>
         </div>
@@ -1511,7 +1553,7 @@
     <button class="addon-toggle" data-addon="lighting" onclick="toggleAddon('lighting')">Lighting</button>
     <button class="addon-toggle" data-addon="longform" onclick="toggleAddon('longform')">Long-Form Video</button>
     <button class="addon-toggle" data-addon="broll" onclick="toggleAddon('broll')">B-Roll</button>
-    <button class="addon-toggle" data-addon="macro" onclick="toggleAddon('macro')">Macro / Close-Ups</button>
+    <button class="addon-toggle" data-addon="macro" onclick="toggleAddon('macro')">Macro (Close-Up)</button>
     <span class="addon-qty-wrap" data-addon="extra-revision">
       <span class="aq-label">Extra Revision</span>
       <button class="aq-btn" onclick="setAddonQty('extra-revision', -1)">−</button>
@@ -1527,7 +1569,10 @@
   </div>
 
   <p style="font-family:'EB Garamond',serif;font-size:0.85rem;color:#a8a49c;text-align:center;margin-top:24px;line-height:1.6;">
-    Need something custom? <a href="schedule.html" style="color:#5C6E82;">Book a free consultation</a> and we'll build the right plan together.
+    Need something different? <a href="schedule.html" style="color:#5C6E82;">Book a free consultation</a> and we'll build the right plan together.
+  </p>
+  <p style="font-family:'EB Garamond',serif;font-size:0.85rem;color:#a8a49c;text-align:center;margin-top:10px;line-height:1.6;">
+    Every project is unique, so pricing is tailored to your specific needs. <a href="quote.html" style="color:#5C6E82;">Request a quote</a> to get an accurate, custom estimate.
   </p>
 </section>
 
@@ -1843,6 +1888,68 @@ function updateAddonBtn(key) {
       card.style.transform  = 'rotateX(0deg) rotateY(0deg)';
     });
   });
+})();
+</script>
+
+<script>
+/* ── Macro portfolio link + cart restore ─────────────────────────────────── */
+(function () {
+  // Keep the "See examples" link in sync with whatever is in the cart
+  function refreshMacroLink() {
+    var link = document.getElementById('macro-portfolio-link');
+    if (!link) return;
+    var params = 'filter=macro-product&from=pricing-videography';
+    if (cart.package) params += '&package=' + cart.package;
+    var addonParts = Object.entries(cart.addons)
+      .filter(function(e){ return e[1] > 0; })
+      .map(function(e){ return e[1] > 1 ? e[0] + ':' + e[1] : e[0]; });
+    if (addonParts.length) params += '&addons=' + addonParts.join(',');
+    link.href = 'index.html?' + params + '#work';
+  }
+
+  // Patch selectPackage / toggleAddon / setAddonQty to also refresh the link
+  var _origSelect = selectPackage;
+  selectPackage = function(t){ _origSelect(t); refreshMacroLink(); };
+  var _origToggle = toggleAddon;
+  toggleAddon = function(k){ _origToggle(k); refreshMacroLink(); };
+  var _origQty = setAddonQty;
+  setAddonQty = function(k,d){ _origQty(k,d); refreshMacroLink(); };
+
+  // Restore cart from URL params (e.g. returning from portfolio page)
+  var p = new URLSearchParams(window.location.search);
+  var pkg     = p.get('package');
+  var addons  = p.get('addons');
+  var restore = p.get('restore');
+
+  if (pkg) {
+    cart.package = pkg;
+  }
+  if (addons) {
+    addons.split(',').filter(Boolean).forEach(function(part) {
+      var kv = part.split(':');
+      cart.addons[kv[0]] = parseInt(kv[1] || '1', 10);
+    });
+  }
+  if (pkg || addons || restore) {
+    // Re-render the bar with restored state
+    document.addEventListener('DOMContentLoaded', function() {
+      renderBar();
+      refreshMacroLink();
+      // If returning to the macro add-on specifically, scroll there and open the panel
+      if (restore === 'macro' || window.location.hash === '#addon-panel-macro') {
+        setTimeout(function() {
+          var panel = document.getElementById('addon-panel-macro');
+          if (panel) {
+            panel.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            toggleAddonPanel('macro');
+          }
+        }, 400);
+      }
+    });
+  }
+
+  // Initial link state
+  document.addEventListener('DOMContentLoaded', refreshMacroLink);
 })();
 </script>
 

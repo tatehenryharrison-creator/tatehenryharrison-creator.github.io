@@ -479,6 +479,18 @@ html, body { overflow-x: hidden; }
     text-transform: uppercase; font-style: normal;
 }
 
+/* ===== BACK-TO-PRICING BANNER ===== */
+#back-pricing-banner {
+    background: #fff; border-bottom: 1px solid rgba(99,95,81,0.14);
+    text-align: center; padding: 14px 5%;
+}
+#back-pricing-link {
+    font-family: 'EB Garamond', serif; font-size: 0.92rem;
+    color: #5C6E82; text-decoration: none; letter-spacing: 0.02em;
+    transition: opacity 0.2s;
+}
+#back-pricing-link:hover { opacity: 0.65; }
+
 /* ===== PORTFOLIO SECTION ===== */
 .portfolio-section { background: #f5f4f0; padding: 100px 10%; }
 .portfolio-header { text-align: center; margin-bottom: 50px; }
@@ -2023,6 +2035,7 @@ footer > * { position: relative; z-index: 1; }
             <button class="filter-btn filter-btn--sub" data-filter="nature">Nature</button>
             <button class="filter-btn filter-btn--sub" data-filter="street">Street</button>
             <button class="filter-btn filter-btn--sub" data-filter="product-photography">Product Photography</button>
+            <button class="filter-btn filter-btn--sub" data-filter="macro-product">Macro &amp; Product</button>
             <button class="filter-btn filter-btn--sub" data-filter="vintage">Vintage &amp; Film</button>
         </div>
     </div>
@@ -2390,7 +2403,7 @@ footer > * { position: relative; z-index: 1; }
         </div>
 
         <!-- ── PRODUCT PHOTOGRAPHY ────────────────────────────── -->
-        <div class="portfolio-item" data-category="product-photography" data-lightbox-src="portfolio/Photography/Product Photography/Market Booth (Shitake Mushrooms).jpg">
+        <div class="portfolio-item" data-category="product-photography macro-product" data-lightbox-src="portfolio/Photography/Product Photography/Market Booth (Shitake Mushrooms).jpg">
             <div class="portfolio-img-wrap">
                 <img class="portfolio-thumb" src="portfolio/Photography/Product Photography/Market Booth (Shitake Mushrooms)_2.jpg" alt="Market Booth" loading="lazy">
                 <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Product Photography</p></div></div>
@@ -2401,7 +2414,7 @@ footer > * { position: relative; z-index: 1; }
             </div>
         </div>
 
-        <div class="portfolio-item" data-category="product-photography" data-lightbox-src="portfolio/Photography/Product Photography/Pentax K1000_2.jpg">
+        <div class="portfolio-item" data-category="product-photography macro-product" data-lightbox-src="portfolio/Photography/Product Photography/Pentax K1000_2.jpg">
             <div class="portfolio-img-wrap">
                 <img class="portfolio-thumb" src="portfolio/Photography/Product Photography/Pentax K1000.jpg" alt="Pentax K1000" loading="lazy">
                 <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Product Photography</p></div></div>
@@ -2412,7 +2425,7 @@ footer > * { position: relative; z-index: 1; }
             </div>
         </div>
 
-        <div class="portfolio-item" data-category="product-photography" data-lightbox-src="portfolio/Photography/Product Photography/Encyclopedia.jpg">
+        <div class="portfolio-item" data-category="product-photography macro-product" data-lightbox-src="portfolio/Photography/Product Photography/Encyclopedia.jpg">
             <div class="portfolio-img-wrap">
                 <img class="portfolio-thumb" src="portfolio/Photography/Product Photography/Encyclopedia2.jpg" alt="Encyclopedia" loading="lazy">
                 <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Product Photography</p></div></div>
@@ -2423,7 +2436,7 @@ footer > * { position: relative; z-index: 1; }
             </div>
         </div>
 
-        <div class="portfolio-item" data-category="product-photography" data-lightbox-src="portfolio/Photography/Product Photography/Farm & Garden Club2.jpg">
+        <div class="portfolio-item" data-category="product-photography macro-product" data-lightbox-src="portfolio/Photography/Product Photography/Farm & Garden Club2.jpg">
             <div class="portfolio-img-wrap">
                 <img class="portfolio-thumb" src="portfolio/Photography/Product Photography/Farm & Garden Club.jpg" alt="Farm &amp; Garden Club" loading="lazy">
                 <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Product Photography</p></div></div>
@@ -2434,7 +2447,7 @@ footer > * { position: relative; z-index: 1; }
             </div>
         </div>
 
-        <div class="portfolio-item" data-category="product-photography" data-lightbox-src="portfolio/Photography/Product Photography/Silver Necklaces on Display_2.jpg">
+        <div class="portfolio-item" data-category="product-photography macro-product" data-lightbox-src="portfolio/Photography/Product Photography/Silver Necklaces on Display_2.jpg">
             <div class="portfolio-img-wrap">
                 <img class="portfolio-thumb" src="portfolio/Photography/Product Photography/Silver Necklaces on Display.jpg" alt="Silver Necklaces on Display" loading="lazy">
                 <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Product Photography</p></div></div>
@@ -2502,7 +2515,7 @@ footer > * { position: relative; z-index: 1; }
     <p style="margin-bottom: 30px; font-weight: 400; letter-spacing: 0.5px;">
         <a class="contact-link" href="tel:720-600-2697">720-600-2697</a>
         <span style="margin: 0 15px; opacity: 0.4;">&bull;</span>
-        <a class="contact-link" href="mailto:Tate@HarrisonMediaLLC.com">Tate@HarrisonMediaLLC.com</a>
+        <a class="contact-link" href="mailto:info@tateharrisonmedia.com">info@tateharrisonmedia.com</a>
     </p>
     <a href="quote.html" style="display:inline-block;margin-top:10px;padding:15px 40px;background:#C9A84C;color:#1C1A14;font-family:'EB Garamond',serif;font-size:1rem;letter-spacing:0.06em;text-decoration:none;border-radius:50px;transition:opacity 0.2s ease,transform 0.2s ease;" onmouseover="this.style.opacity='0.82';this.style.transform='translateY(-2px)'" onmouseout="this.style.opacity='1';this.style.transform=''">Get a Quote</a>
 </section>
@@ -2854,7 +2867,7 @@ document.querySelectorAll('.pricing-card').forEach(card => {
     const items      = document.querySelectorAll('.portfolio-item');
 
     /* photo categories shown in this portfolio */
-    const photoCats  = ['portraits','nature','street','product-photography','vintage'];
+    const photoCats  = ['portraits','nature','street','product-photography','macro-product','vintage'];
 
     function showItems(filter) {
         items.forEach(item => {
@@ -2908,10 +2921,51 @@ document.querySelectorAll('.pricing-card').forEach(card => {
     });
 
     /* Auto-activate tab from URL param: ?tab=videography */
-    const urlTab = new URLSearchParams(window.location.search).get('tab');
-    if (urlTab) {
+    const _params  = new URLSearchParams(window.location.search);
+    const urlTab   = _params.get('tab');
+    const urlFilter = _params.get('filter');
+
+    if (urlFilter && photoCats.includes(urlFilter)) {
+        // Auto-activate Photography tab, then the specific sub-filter
+        const photoBtn = Array.from(topBtns).find(b => b.dataset.top === 'photography');
+        if (photoBtn) photoBtn.click();
+        const subBtn = Array.from(subBtns).find(b => b.dataset.filter === urlFilter);
+        if (subBtn) { setSubActive(subBtn); showItems(urlFilter); }
+    } else if (urlTab) {
         const matchBtn = Array.from(topBtns).find(b => b.dataset.top === urlTab);
         if (matchBtn) matchBtn.click();
+    }
+
+    /* Back-to-pricing banner when arriving from a pricing page */
+    const fromPage = _params.get('from');
+    if (fromPage) {
+        const pkgParam    = _params.get('package') || '';
+        const addonsParam = _params.get('addons')  || '';
+
+        const BACK_LABELS = {
+            'pricing-videography': 'Videography Packages',
+            'pricing-photography': 'Photography Packages',
+            'pricing-custom':      'Custom Packages'
+        };
+        const backLabel = BACK_LABELS[fromPage] || 'Back to Pricing';
+
+        // Build return URL — restore cart state and re-open macro panel
+        let returnUrl = fromPage + '.html';
+        const returnParts = [];
+        if (pkgParam)    returnParts.push('package=' + pkgParam);
+        if (addonsParam) returnParts.push('addons='  + addonsParam);
+        returnParts.push('restore=macro');
+        returnUrl += '?' + returnParts.join('&') + '#addon-section';
+
+        const banner = document.createElement('div');
+        banner.id = 'back-pricing-banner';
+        banner.innerHTML =
+            '<a href="' + returnUrl + '" id="back-pricing-link">' +
+            '← Return to ' + backLabel + ' with your selections' +
+            '</a>';
+        // Insert banner just before the #work section
+        const workSection = document.getElementById('work');
+        if (workSection) workSection.parentNode.insertBefore(banner, workSection);
     }
 })();
 
