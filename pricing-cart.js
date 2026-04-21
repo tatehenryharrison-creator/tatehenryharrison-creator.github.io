@@ -99,7 +99,7 @@ function flyChip(fromEl, toEl) {
     { transform: `translate(${srcX}px,${srcY}px) translate(-50%,-50%) scale(1)`,    opacity: 1 },
     { transform: `translate(${midX}px,${midY}px) translate(-50%,-50%) scale(1.25)`, opacity: 1 },
     { transform: `translate(${dstX}px,${dstY}px) translate(-50%,-50%) scale(0.5)`,  opacity: 0 },
-  ], { duration: 560, easing: 'cubic-bezier(0.22,1,0.36,1)', fill: 'forwards' });
+  ], { duration: 1100, easing: 'cubic-bezier(0.22,1,0.36,1)', fill: 'forwards' });
   anim.onfinish = () => chip.remove();
 
   // Pulse the destination on arrival
@@ -108,8 +108,8 @@ function flyChip(fromEl, toEl) {
       { transform: 'scale(1)',    boxShadow: '0 0 0 0 rgba(201,168,76,0)' },
       { transform: 'scale(1.07)', boxShadow: '0 0 0 6px rgba(201,168,76,0.3)' },
       { transform: 'scale(1)',    boxShadow: '0 0 0 0 rgba(201,168,76,0)' },
-    ], { duration: 240, easing: 'ease-out' });
-  }, 520);
+    ], { duration: 300, easing: 'ease-out' });
+  }, 1020);
 }
 
 function flyToCart(addonEl) {
@@ -197,7 +197,6 @@ function toggleAddon(addonKey) {
   const wasOff = (cart.addons[addonKey] || 0) === 0;
   cart.addons[addonKey] = wasOff ? 1 : 0;
   if (wasOff) flyToCart(_lastAddonClickEl);
-  else        flyFromCart(_lastAddonClickEl);
   renderBar();
 }
 
@@ -206,8 +205,7 @@ function setAddonQty(key, delta) {
   const current = cart.addons[key] || 0;
   const next = Math.max(0, current + delta);
   cart.addons[key] = next;
-  if (delta > 0 && next > 0)        flyToCart(_lastAddonClickEl);
-  else if (delta < 0 && current > 0) flyFromCart(_lastAddonClickEl);
+  if (delta > 0 && next > 0) flyToCart(_lastAddonClickEl);
   // Update qty displays inside panels
   const panelQty = document.getElementById('qty-' + key);
   if (panelQty) panelQty.textContent = next;
