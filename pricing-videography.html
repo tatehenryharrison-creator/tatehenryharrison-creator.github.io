@@ -440,6 +440,9 @@
 .audio-progress-bar { height: 100%; width: 0%; background: #5C6E82; border-radius: 3px; transition: width 0.1s linear; pointer-events: none; }
 .audio-time { font-size: 0.7rem; color: #a8a49c; letter-spacing: 0.5px; display: flex; justify-content: space-between; }
 @media (max-width: 600px) { .audio-section { padding: 72px 6%; } .audio-card { padding: 18px 16px; gap: 14px; } .audio-play-btn { width: 40px; height: 40px; } }
+.la-audio { padding: 0 10% 72px; }
+.la-audio .audio-card { max-width: 820px; margin: 0 auto; }
+@media (max-width: 600px) { .la-audio { padding: 0 6% 56px; } }
 
     /* ── Merged What's Included + Journey overlay ── */
     .wi-section { position: relative; }
@@ -1153,6 +1156,14 @@
       <div class="cv-photo-slot"></div>
     </div>
   </div>
+  <!-- Sample Audio Track -->
+  <div class="la-audio">
+    <div class="audio-card anim-fade">
+      <button class="audio-play-btn" aria-label="Play/Pause"><svg class="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg><svg class="icon-pause" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg></button>
+      <div class="audio-meta"><p class="audio-title">Location Audio Sample</p><p class="audio-desc">Ambient on-location sound — recorded live, not stock</p><div class="audio-progress-wrap"><div class="audio-progress-bar"></div></div><div class="audio-time"><span class="audio-current">0:00</span><span class="audio-duration">0:00</span></div></div>
+      <audio src="" preload="metadata"></audio>
+    </div>
+  </div>
 </section>
 
 
@@ -1261,28 +1272,6 @@
   </div>
 </section>
 
-<!-- AUDIO -->
-<section class="audio-section" id="audio">
-  <p class="audio-eyebrow anim-fade">Listen</p>
-  <h2 class="audio-heading anim-fade">Audio</h2>
-  <div class="audio-grid">
-    <div class="audio-card anim-fade">
-      <button class="audio-play-btn" aria-label="Play/Pause"><svg class="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg><svg class="icon-pause" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg></button>
-      <div class="audio-meta"><p class="audio-title">Track Title</p><p class="audio-desc">Description / project context</p><div class="audio-progress-wrap"><div class="audio-progress-bar"></div></div><div class="audio-time"><span class="audio-current">0:00</span><span class="audio-duration">0:00</span></div></div>
-      <audio src="" preload="metadata"></audio>
-    </div>
-    <div class="audio-card anim-fade">
-      <button class="audio-play-btn" aria-label="Play/Pause"><svg class="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg><svg class="icon-pause" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg></button>
-      <div class="audio-meta"><p class="audio-title">Track Title</p><p class="audio-desc">Description / project context</p><div class="audio-progress-wrap"><div class="audio-progress-bar"></div></div><div class="audio-time"><span class="audio-current">0:00</span><span class="audio-duration">0:00</span></div></div>
-      <audio src="" preload="metadata"></audio>
-    </div>
-    <div class="audio-card anim-fade">
-      <button class="audio-play-btn" aria-label="Play/Pause"><svg class="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg><svg class="icon-pause" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg></button>
-      <div class="audio-meta"><p class="audio-title">Track Title</p><p class="audio-desc">Description / project context</p><div class="audio-progress-wrap"><div class="audio-progress-bar"></div></div><div class="audio-time"><span class="audio-current">0:00</span><span class="audio-duration">0:00</span></div></div>
-      <audio src="" preload="metadata"></audio>
-    </div>
-  </div>
-</section>
 
 
 <!-- Add-On Gradient Buttons -->
@@ -1970,9 +1959,10 @@ function updateAddonBtn(key) {
   }
 
   /* ── DESKTOP PATH: scroll-driven, all coins together ── */
-  var locked      = false;
-  var UNLOCK_AT   = 0.88;
-  var prevSettled = false;
+  var locked        = false;
+  var UNLOCK_AT     = 0.88;
+  var prevSettled   = false;
+  var _spinOnceFlag = false;
 
   function getSpinProgress() {
     var section = document.getElementById('pkg-coins');
@@ -1984,8 +1974,42 @@ function updateAddonBtn(key) {
     return Math.max(0, Math.min(1, (vh - rect.top) / activationH));
   }
 
+  /* One-shot animated spin-in used when section is already in view at load */
+  function runSpinIn() {
+    if (_spinOnceFlag) return;
+    _spinOnceFlag = true;
+    var delays = [0, 160, 320];
+    coins.forEach(function (c, i) {
+      var delay = delays[i] || 0;
+      setTimeout(function () {
+        var start    = null;
+        var duration = 1050;
+        var from     = c.totalAngle;
+        function ease(t) { return 1 - Math.pow(1 - t, 3); }
+        function frame(ts) {
+          if (!start) start = ts;
+          var t = Math.min(1, (ts - start) / duration);
+          setAngle(c, from * (1 - ease(t)));
+          if (t < 1) {
+            requestAnimationFrame(frame);
+          } else {
+            setAngle(c, 0);
+            c.card.classList.add('coin-settled');
+          }
+        }
+        requestAnimationFrame(frame);
+      }, delay);
+    });
+    locked      = true;
+    prevSettled = true;
+  }
+
   function update() {
     var sp = getSpinProgress();
+
+    /* Section already fully in view — animate in once, then bail */
+    if (sp >= 1 && !_spinOnceFlag) { runSpinIn(); return; }
+
     if (sp >= 1) locked = true;
     if (locked && sp < UNLOCK_AT) locked = false;
 
