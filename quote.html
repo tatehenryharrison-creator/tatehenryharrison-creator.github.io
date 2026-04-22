@@ -73,12 +73,6 @@
       font-family: 'EB Garamond', serif; font-size: 0.72rem;
       letter-spacing: 2.5px; text-transform: uppercase; color: #C9A84C;
     }
-    .sel-change-link {
-      font-family: 'EB Garamond', serif; font-size: 0.82rem; color: #5C6E82;
-      text-decoration: none; border-bottom: 1px solid rgba(92,110,130,0.3);
-      padding-bottom: 1px; white-space: nowrap;
-    }
-    .sel-change-link:hover { border-bottom-color: #5C6E82; }
     .sel-pkg-row {
       display: flex; align-items: baseline; gap: 10px; margin-bottom: 12px;
     }
@@ -278,7 +272,6 @@
     <div class="sel-card" id="sel-card">
       <div class="sel-card-header">
         <span class="sel-card-title">Your Selection</span>
-        <a href="#" class="sel-change-link" id="sel-change-link">← Change selections</a>
       </div>
       <div class="sel-pkg-row">
         <span class="sel-pkg-label" id="sel-pkg-label"></span>
@@ -439,16 +432,6 @@
       campaign:        'Custom — Campaign'
     };
 
-    const PACKAGE_SOURCE = {
-      chapter:         'pricing-videography.html',
-      novel:           'pricing-videography.html',
-      epic:            'pricing-videography.html',
-      portraiture:     'pricing-photography.html',
-      'product-brand': 'pricing-photography.html',
-      hybrid:          'pricing-custom.html',
-      multiday:        'pricing-custom.html',
-      campaign:        'pricing-custom.html'
-    };
 
     const ADDON_LABELS = {
       'vintage-glass':    'Vintage Glass',
@@ -505,9 +488,6 @@
       document.getElementById('sel-card').classList.add('visible');
       document.getElementById('sel-pkg-label').textContent = PACKAGE_LABELS[pkgKey] || pkgKey;
       document.getElementById('sel-pkg-sub').textContent   = PACKAGE_SUBS[pkgKey]   || '';
-
-      const src = PACKAGE_SOURCE[pkgKey];
-      if (src) document.getElementById('sel-change-link').href = src;
 
       // Render ALL relevant add-ons: selected = active gold, unselected = greyed + struck
       const addonRow = document.getElementById('sel-addons-row');
