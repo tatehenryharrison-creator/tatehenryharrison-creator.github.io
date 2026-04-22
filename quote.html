@@ -73,12 +73,6 @@
       font-family: 'EB Garamond', serif; font-size: 0.72rem;
       letter-spacing: 2.5px; text-transform: uppercase; color: #C9A84C;
     }
-    .sel-change-link {
-      font-family: 'EB Garamond', serif; font-size: 0.82rem; color: #5C6E82;
-      text-decoration: none; border-bottom: 1px solid rgba(92,110,130,0.3);
-      padding-bottom: 1px; white-space: nowrap;
-    }
-    .sel-change-link:hover { border-bottom-color: #5C6E82; }
     .sel-pkg-row {
       display: flex; align-items: baseline; gap: 10px; margin-bottom: 12px;
     }
@@ -102,17 +96,24 @@
     }
     .sel-addon-chip:hover { background: rgba(201,168,76,0.18); }
     .sel-addon-chip.removed {
-      opacity: 0.38; background: transparent;
-      border-color: rgba(99,95,81,0.2); color: #a8a49c;
+      opacity: 0.6;
+      background: rgba(99,95,81,0.05);
+      border-color: rgba(99,95,81,0.18);
+      color: #a8a49c;
       text-decoration: line-through;
+      text-decoration-color: rgba(99,95,81,0.55);
     }
     .sel-addon-chip-x {
       font-size: 0.72rem; color: #C9A84C; line-height: 1; margin-left: 2px;
     }
-    .sel-addon-chip.removed .sel-addon-chip-x { content: '+'; }
-    .sel-no-addons {
-      font-family: 'EB Garamond', serif; font-size: 0.88rem; color: #a8a49c;
-      font-style: italic;
+    .sel-addon-chip.removed .sel-addon-chip-x { color: #a8a49c; }
+    /* Add-ons sub-section inside sel-card */
+    .sel-addons-section { margin-top: 16px; }
+    .sel-addons-divider { height: 1px; background: rgba(99,95,81,0.1); margin-bottom: 14px; }
+    .sel-addons-label {
+      font-family: 'EB Garamond', serif; font-size: 0.68rem;
+      letter-spacing: 2.5px; text-transform: uppercase;
+      color: #a8a49c; display: block; margin-bottom: 10px;
     }
 
     .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 24px; }
@@ -152,25 +153,32 @@
 
     textarea { resize: vertical; min-height: 130px; line-height: 1.6; }
 
-    /* Date mode toggle */
+    /* Date mode toggle — floating pill segmented control */
     .date-toggle {
-      display: inline-flex; border: 1px solid rgba(99,95,81,0.22);
-      border-radius: 8px; overflow: hidden; margin-bottom: 10px;
+      display: inline-flex;
+      background: rgba(99,95,81,0.09);
+      border-radius: 50px;
+      padding: 3px;
+      margin-bottom: 12px;
     }
     .date-toggle-btn {
       background: none; border: none; cursor: pointer;
       font-family: 'EB Garamond', serif; font-size: 0.88rem;
-      color: #635f51; padding: 7px 18px;
-      transition: background 0.18s ease, color 0.18s ease;
+      color: #635f51; padding: 8px 22px;
+      border-radius: 50px;
+      transition: background 0.22s ease, color 0.22s ease, box-shadow 0.22s ease;
+      letter-spacing: 0.2px;
     }
     .date-toggle-btn.active {
-      background: #5C6E82; color: #f5f4f0;
+      background: #fff;
+      color: #1C1A14;
+      box-shadow: 0 1px 5px rgba(28,26,20,0.11);
     }
-    .date-range-row { display: flex; gap: 12px; }
-    .date-range-field { flex: 1; display: flex; flex-direction: column; gap: 4px; }
+    .date-range-row { display: flex; gap: 14px; }
+    .date-range-field { flex: 1; display: flex; flex-direction: column; gap: 6px; }
     .date-range-label {
-      font-family: 'EB Garamond', serif; font-size: 0.78rem;
-      letter-spacing: 1px; text-transform: uppercase; color: #a8a49c;
+      font-family: 'EB Garamond', serif; font-size: 0.72rem;
+      letter-spacing: 1.5px; text-transform: uppercase; color: #a8a49c;
     }
 
     /* intl-tel-input overrides */
@@ -227,6 +235,10 @@
     .success-body { font-family: 'EB Garamond', serif; font-size: 1.1rem; color: #635f51; line-height: 1.7; max-width: 400px; margin: 0 auto 36px; }
     .success-back { font-family: 'EB Garamond', serif; font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase; color: #5C6E82; text-decoration: none; border-bottom: 1px solid rgba(92,110,130,0.35); padding-bottom: 2px; }
     .success-back:hover { border-bottom-color: #5C6E82; }
+    .success-consult { margin-top: 52px; padding-top: 36px; border-top: 1px solid rgba(99,95,81,0.12); }
+    .success-consult-hint { font-family: 'EB Garamond', serif; font-size: 0.9rem; color: #a8a49c; margin: 0 0 18px; letter-spacing: 0.02em; }
+    .success-consult-btn { display: inline-block; font-family: 'EB Garamond', serif; font-size: 0.95rem; letter-spacing: 0.04em; color: #2A2220; text-decoration: none; padding: 13px 32px; border: 1px solid rgba(99,95,81,0.3); border-radius: 50px; transition: border-color 0.2s ease, background 0.2s ease; }
+    .success-consult-btn:hover { border-color: rgba(201,168,76,0.6); background: rgba(201,168,76,0.04); }
 
     /* FOOTER */
     footer { background: #1C1A14; color: #e8e1d4; text-align: center; padding: 32px 10%; font-size: 0.88rem; line-height: 1.8; }
@@ -267,13 +279,16 @@
     <div class="sel-card" id="sel-card">
       <div class="sel-card-header">
         <span class="sel-card-title">Your Selection</span>
-        <a href="#" class="sel-change-link" id="sel-change-link">← Change selections</a>
       </div>
       <div class="sel-pkg-row">
         <span class="sel-pkg-label" id="sel-pkg-label"></span>
         <span class="sel-pkg-sub" id="sel-pkg-sub"></span>
       </div>
-      <div class="sel-addons-row" id="sel-addons-row"></div>
+      <div class="sel-addons-section">
+        <div class="sel-addons-divider"></div>
+        <span class="sel-addons-label">Add-ons</span>
+        <div class="sel-addons-row" id="sel-addons-row"></div>
+      </div>
     </div>
 
     <form id="quote-form" novalidate>
@@ -327,12 +342,6 @@
         </div>
       </div>
 
-      <!-- Add-ons (pre-populated from cart; user can adjust) -->
-      <div class="field-group" id="addons-field" style="display:none">
-        <label>Add-ons</label>
-        <div id="addon-chips" style="display:flex; flex-wrap:wrap; gap:8px; margin-top:2px;"></div>
-      </div>
-
       <div class="field-group">
         <label>Shoot date</label>
         <div class="date-toggle">
@@ -379,11 +388,10 @@
     <h2 class="success-title">You're all set.</h2>
     <p class="success-body">Your quote request is on its way to Tate. Expect a reply within 24 hours.</p>
     <a href="index.html" class="success-back">← Back to home</a>
-  </div>
-
-  <div style="text-align:center; padding: 48px 10% 40px; background: #f5f4f0;">
-    <p style="font-family:'EB Garamond',serif; font-size:0.88rem; color:#a8a49c; margin:0 0 18px; letter-spacing:0.02em;">Prefer to talk it through first?</p>
-    <a href="schedule.html" style="display:inline-block; font-family:'EB Garamond',serif; font-size:0.95rem; letter-spacing:0.04em; color:#2A2220; text-decoration:none; padding:13px 32px; border:1px solid rgba(99,95,81,0.3); border-radius:50px; transition:border-color 0.2s ease, background 0.2s ease;" onmouseover="this.style.borderColor='rgba(201,168,76,0.6)';this.style.background='rgba(201,168,76,0.04)'" onmouseout="this.style.borderColor='rgba(99,95,81,0.3)';this.style.background='transparent'">Book a Free Consultation</a>
+    <div class="success-consult">
+      <p class="success-consult-hint">Want to talk through the details first?</p>
+      <a href="schedule.html" class="success-consult-btn">Schedule a Free Consultation →</a>
+    </div>
   </div>
 
   <footer>
@@ -431,31 +439,32 @@
       campaign:        'Custom — Campaign'
     };
 
-    // Which pricing page to go back to for each package type
-    const PACKAGE_SOURCE = {
-      chapter: 'pricing-videography.html',
-      novel:   'pricing-videography.html',
-      epic:    'pricing-videography.html',
-      portraiture:     'pricing-photography.html',
-      'product-brand': 'pricing-photography.html',
-      hybrid:    'pricing-custom.html',
-      multiday:  'pricing-custom.html',
-      campaign:  'pricing-custom.html'
-    };
 
     const ADDON_LABELS = {
-      'vintage-glass':     'Vintage Glass',
-      'film-35mm':         '35mm Film',
-      'macro':             'Macro',
-      'drone':             'Drone',
-      'audio':             'Audio Package',
-      'lighting':          'Lighting',
-      'longform':          'Long-Form Video',
-      'broll':             'B-Roll',
-      'extra-revision':    'Extra Revision',
-      'plus-3min':         '+3 Min Edit',
-      'extra-retouching':  'Extra Retouching',
-      'plus-5selects':     '+5 Selects'
+      'vintage-glass':    'Vintage Glass',
+      'film-35mm':        '35mm Film',
+      'macro':            'Macro',
+      'drone':            'Drone',
+      'audio':            'Audio Package',
+      'lighting':         'Lighting',
+      'longform':         'Long-Form Video',
+      'broll':            'B-Roll',
+      'extra-revision':   'Extra Revision',
+      'plus-3min':        '+3 Min Edit',
+      'extra-retouching': 'Extra Retouching',
+      'plus-5selects':    '+5 Selects'
+    };
+
+    // All add-ons available per package type
+    const PACKAGE_ADDONS = {
+      chapter:         ['vintage-glass','film-35mm','macro','drone','audio','lighting','longform','broll','extra-revision','plus-3min'],
+      novel:           ['vintage-glass','film-35mm','macro','drone','audio','lighting','longform','broll','extra-revision','plus-3min'],
+      epic:            ['vintage-glass','film-35mm','macro','drone','audio','lighting','longform','broll','extra-revision','plus-3min'],
+      portraiture:     ['vintage-glass','film-35mm','macro','drone','extra-retouching','plus-5selects'],
+      'product-brand': ['vintage-glass','film-35mm','macro','drone','extra-retouching','plus-5selects'],
+      hybrid:          ['vintage-glass','film-35mm','macro','drone','audio','lighting','longform','broll','extra-revision','plus-3min','extra-retouching','plus-5selects'],
+      multiday:        ['vintage-glass','film-35mm','macro','drone','audio','lighting','longform','broll','extra-revision','plus-3min','extra-retouching','plus-5selects'],
+      campaign:        ['vintage-glass','film-35mm','macro','drone','audio','lighting','longform','broll','extra-revision','plus-3min','extra-retouching','plus-5selects'],
     };
 
     // ── Parse URL params ──────────────────────────────────────────────────────
@@ -463,8 +472,6 @@
     const pkgKey      = urlParams.get('package') || '';
     const addonsParam = urlParams.get('addons')  || '';
 
-    // addons format: "vintage-glass,drone,extra-revision:2"
-    // returns { key: qty }
     function parseAddons(str) {
       const out = {};
       if (!str) return out;
@@ -475,51 +482,41 @@
       return out;
     }
 
-    const selectedAddons = parseAddons(addonsParam); // { key: qty }
-    // Working copy — chips can toggle these off
-    const activeAddons = Object.assign({}, selectedAddons);
+    const selectedAddons = parseAddons(addonsParam); // came from cart URL
+    const activeAddons   = Object.assign({}, selectedAddons); // working copy
 
     // ── Pre-fill UI ───────────────────────────────────────────────────────────
     (function prefill() {
       if (!pkgKey) return;
 
-      // Update header copy
       document.getElementById('page-title').textContent    = 'Almost there — just a few details.';
       document.getElementById('page-subtitle').textContent = 'Your selections are locked in below. Fill in your info and I\'ll send a personalised quote within 24 hours.';
 
-      // Show selection summary card
-      const card = document.getElementById('sel-card');
-      card.classList.add('visible');
-
+      document.getElementById('sel-card').classList.add('visible');
       document.getElementById('sel-pkg-label').textContent = PACKAGE_LABELS[pkgKey] || pkgKey;
       document.getElementById('sel-pkg-sub').textContent   = PACKAGE_SUBS[pkgKey]   || '';
 
-      // Change link
-      const src = PACKAGE_SOURCE[pkgKey];
-      if (src) document.getElementById('sel-change-link').href = src;
-
-      // Addon chips in summary card
+      // Render ALL relevant add-ons: selected = active gold, unselected = greyed + struck
       const addonRow = document.getElementById('sel-addons-row');
-      const addonKeys = Object.keys(selectedAddons);
-      if (addonKeys.length === 0) {
-        addonRow.innerHTML = '<span class="sel-no-addons">No add-ons selected</span>';
-      } else {
-        addonKeys.forEach(key => {
-          const qty = selectedAddons[key];
-          const label = (ADDON_LABELS[key] || key) + (qty > 1 ? ' ×' + qty : '');
-          const chip = document.createElement('span');
-          chip.className = 'sel-addon-chip';
-          chip.dataset.key = key;
-          chip.innerHTML = label + '<span class="sel-addon-chip-x">✕</span>';
-          chip.addEventListener('click', function() {
-            const removed = chip.classList.toggle('removed');
-            chip.querySelector('.sel-addon-chip-x').textContent = removed ? '+' : '✕';
-            activeAddons[key] = removed ? 0 : qty;
-            syncAddonChips();
-          });
-          addonRow.appendChild(chip);
+      (PACKAGE_ADDONS[pkgKey] || []).forEach(key => {
+        const isActive = (selectedAddons[key] || 0) > 0;
+        const qty      = selectedAddons[key] || 1;
+        const label    = (ADDON_LABELS[key] || key) + (isActive && qty > 1 ? ' ×' + qty : '');
+
+        const chip = document.createElement('span');
+        chip.className   = 'sel-addon-chip' + (isActive ? '' : ' removed');
+        chip.dataset.key = key;
+        chip.innerHTML   = label + '<span class="sel-addon-chip-x">' + (isActive ? '✕' : '+') + '</span>';
+
+        chip.addEventListener('click', function () {
+          const removing = !chip.classList.contains('removed'); // currently active → remove
+          chip.classList.toggle('removed', removing);
+          chip.querySelector('.sel-addon-chip-x').textContent = removing ? '+' : '✕';
+          activeAddons[key] = removing ? 0 : 1;
         });
-      }
+
+        addonRow.appendChild(chip);
+      });
 
       // Auto-select service dropdown
       const svc = PACKAGE_TO_SERVICE[pkgKey];
@@ -529,62 +526,7 @@
           if (sel.options[i].value === svc) { sel.selectedIndex = i; break; }
         }
       }
-
-      // Render addon chips in form (interactive, for adjusting)
-      renderFormAddonChips();
     })();
-
-    // ── Form addon chips (below service dropdown) ─────────────────────────────
-    function renderFormAddonChips() {
-      const addonKeys = Object.keys(selectedAddons);
-      if (!addonKeys.length) return;
-
-      const field = document.getElementById('addons-field');
-      const container = document.getElementById('addon-chips');
-      field.style.display = '';
-
-      addonKeys.forEach(key => {
-        const qty = selectedAddons[key];
-        const label = (ADDON_LABELS[key] || key) + (qty > 1 ? ' ×' + qty : '');
-        const chip = document.createElement('span');
-        chip.dataset.formKey = key;
-        chip.style.cssText = 'display:inline-flex;align-items:center;gap:6px;font-family:\'EB Garamond\',serif;font-size:0.84rem;color:#1C1A14;background:rgba(201,168,76,0.12);border:1px solid rgba(201,168,76,0.4);border-radius:20px;padding:5px 14px;cursor:pointer;transition:all 0.18s ease;user-select:none;';
-        chip.innerHTML = label + '<span style="font-size:0.72rem;color:#C9A84C;margin-left:2px;">✕</span>';
-        chip.title = 'Click to remove from quote';
-        chip.addEventListener('click', () => {
-          const removed = chip.dataset.removed === 'true';
-          chip.dataset.removed = (!removed).toString();
-          activeAddons[key] = removed ? qty : 0;
-          chip.style.opacity        = removed ? '1' : '0.38';
-          chip.style.textDecoration = removed ? 'none' : 'line-through';
-          chip.style.background     = removed ? 'rgba(201,168,76,0.12)' : 'transparent';
-          chip.style.borderColor    = removed ? 'rgba(201,168,76,0.4)' : 'rgba(99,95,81,0.2)';
-          chip.querySelector('span').textContent = removed ? '✕' : '+';
-          // Mirror to summary card
-          const summaryChip = document.querySelector('#sel-addons-row .sel-addon-chip[data-key="' + key + '"]');
-          if (summaryChip) {
-            const summaryRemoved = summaryChip.classList.toggle('removed', !removed);
-            summaryChip.querySelector('.sel-addon-chip-x').textContent = !removed ? '+' : '✕';
-          }
-        });
-        container.appendChild(chip);
-      });
-    }
-
-    function syncAddonChips() {
-      // Keep form chips in sync when summary card chips are toggled
-      Object.keys(selectedAddons).forEach(key => {
-        const chip = document.querySelector('#addon-chips [data-form-key="' + key + '"]');
-        if (!chip) return;
-        const removed = (activeAddons[key] || 0) === 0;
-        chip.dataset.removed      = removed.toString();
-        chip.style.opacity        = removed ? '0.38' : '1';
-        chip.style.textDecoration = removed ? 'line-through' : 'none';
-        chip.style.background     = removed ? 'transparent' : 'rgba(201,168,76,0.12)';
-        chip.style.borderColor    = removed ? 'rgba(99,95,81,0.2)' : 'rgba(201,168,76,0.4)';
-        chip.querySelector('span').textContent = removed ? '+' : '✕';
-      });
-    }
 
     // ── Date mode toggle ──────────────────────────────────────────────────────
     let dateMode = 'single';

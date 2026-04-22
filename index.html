@@ -259,8 +259,6 @@ html, body { overflow-x: hidden; }
 }
 .ba-wrap {
     position: relative; max-width: 1120px; width: 88%;
-    padding-bottom: 49.5%; /* 16:9 fallback for old browsers */
-    height: 0;
     aspect-ratio: 16 / 9;
     margin: 0 auto; overflow: hidden;
     cursor: grab; border-radius: 10px; user-select: none;
@@ -274,7 +272,7 @@ html, body { overflow-x: hidden; }
 .ba-before video, .ba-after video {
     position: absolute; inset: 0;
     width: 100%; height: 100%;
-    object-fit: fill; display: block; pointer-events: none;
+    object-fit: cover; display: block; pointer-events: none;
 }
 .ba-before {
     background: #2c2926;
@@ -328,25 +326,26 @@ html, body { overflow-x: hidden; }
     65%      { transform: translate(calc(-50% + 5px),-50%); }
     82%      { transform: translate(calc(-50% - 5px),-50%); }
 }
+@keyframes ba-float-left {
+    0%, 100% { transform: translateY(-50%) translateX(0); }
+    50%       { transform: translateY(-50%) translateX(-6px); }
+}
+@keyframes ba-float-right {
+    0%, 100% { transform: translateY(-50%) translateX(0); }
+    50%       { transform: translateY(-50%) translateX(6px); }
+}
 .ba-handle::before, .ba-handle::after {
-    content: ''; position: absolute; width: 0; height: 0;
+    content: ''; position: absolute; top: 50%; width: 0; height: 0;
 }
 .ba-handle::before {
     border-top: 7px solid transparent; border-bottom: 7px solid transparent;
     border-right: 10px solid #5C6E82; left: 9px;
+    animation: ba-float-left 1.4s ease-in-out infinite;
 }
 .ba-handle::after {
     border-top: 7px solid transparent; border-bottom: 7px solid transparent;
     border-left: 10px solid #5C6E82; right: 9px;
-}
-/* "DRAG" label — sits inside the handle circle as a flex child */
-.ba-drag-hint {
-    font-family: 'Cinzel', serif; font-size: 0.44rem;
-    letter-spacing: 1.2px; text-transform: uppercase;
-    color: rgba(92,110,130,0.9);
-    white-space: nowrap; pointer-events: none;
-    position: relative; z-index: 1;
-    transition: opacity 0.3s ease;
+    animation: ba-float-right 1.4s ease-in-out infinite;
 }
 .ba-mobile-labels { display: none; }
 .ba-caption {
@@ -1056,7 +1055,7 @@ footer > * { position: relative; z-index: 1; }
     .pricing-grid--2 { grid-template-columns: repeat(2, 1fr); max-width: 100%; }
     .portfolio-grid { columns: 2; }
     .about-inner { flex-direction: column; gap: 36px; }
-    .about-photo { flex: none; width: 100%; max-width: 340px; margin: 0 auto; }
+    .about-photo { flex: none; width: 100%; max-width: none; margin: 0 auto; }
 }
 
 @media (max-width: 768px) {
@@ -1081,12 +1080,11 @@ footer > * { position: relative; z-index: 1; }
     .subtext p { font-size: 0.88rem; line-height: 1.5; }
 
     /* SLIDER */
-    .ba-wrap { height: auto; padding-bottom: 49.5%; } /* aspect-ratio inherited from base rule (16/9) */
+    .ba-wrap { width: 96%; }
     .ba-section { padding: 40px 0 28px; }
     .ba-handle { width: 38px; height: 38px; }
     .ba-handle::before { left: 6px; border-right-width: 8px; border-top-width: 5px; border-bottom-width: 5px; }
     .ba-handle::after  { right: 6px; border-left-width: 8px; border-top-width: 5px; border-bottom-width: 5px; }
-    .ba-drag-hint { font-size: 0.4rem; letter-spacing: 0.8px; }
     .ba-tag { display: none; }
     .ba-mobile-labels { display: flex; }
     .ba-scroll-arrow { display: none; }
@@ -1105,7 +1103,7 @@ footer > * { position: relative; z-index: 1; }
     /* ABOUT */
     .about-section { padding: 64px 5%; }
     .about-inner { gap: 28px; }
-    .about-photo { max-width: 260px; }
+    .about-photo { width: 100%; max-width: none; }
     .about-heading { font-size: 2rem; }
     .about-body { font-size: 1rem; line-height: 1.75; }
 
@@ -1139,9 +1137,9 @@ footer > * { position: relative; z-index: 1; }
 
     /* SERVICE TILES */
     .service-tiles-wrap { grid-template-columns: 1fr; padding: 0 5%; gap: 14px; }
-    .service-tile { padding: 44px 32px; }
+    .service-tile { padding: 32px 28px; }
     .service-tile-title { font-size: 2rem; }
-    .service-tile-custom { padding: 32px 28px; }
+    .service-tile-custom { padding: 44px 32px; }
     .service-tile-custom-body { flex-direction: column; align-items: flex-start; gap: 20px; }
     .service-tile-custom-hands { width: 180px; align-self: center; }
 
@@ -1187,16 +1185,15 @@ footer > * { position: relative; z-index: 1; }
     .reel-section { padding: 60px 5%; }
 
     /* PORTFOLIO */
-    /* Fixed grid on mobile — no masonry reflow as images load */
+    /* 2-column masonry on mobile — natural photo proportions */
     .portfolio-grid {
-        columns: unset;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 8px;
+        display: block;
+        columns: 2;
+        column-gap: 8px;
     }
-    .portfolio-item { break-inside: unset; margin-bottom: 0; }
-    .portfolio-img-wrap { aspect-ratio: 1 / 1; }
-    .portfolio-thumb { width: 100%; height: 100%; object-fit: cover; }
+    .portfolio-item { break-inside: avoid; margin-bottom: 8px; }
+    .portfolio-img-wrap { aspect-ratio: unset; }
+    .portfolio-thumb { width: 100%; height: auto; object-fit: cover; }
     .portfolio-section { padding: 64px 3% 48px; }
     .portfolio-header { margin-bottom: 32px; }
     .portfolio-filters { gap: 6px; margin-bottom: 28px; }
@@ -1233,7 +1230,6 @@ footer > * { position: relative; z-index: 1; }
     .ba-handle { width: 34px; height: 34px; }
     .ba-handle::before { left: 5px; border-right-width: 7px; border-top-width: 4px; border-bottom-width: 4px; }
     .ba-handle::after  { right: 5px; border-left-width: 7px; border-top-width: 4px; border-bottom-width: 4px; }
-    .ba-drag-hint { font-size: 0.38rem; letter-spacing: 0.6px; }
     .process-modal-overlay { align-items: flex-end; }
     .process-modal {
         max-width: 100%; width: 100%; border-radius: 24px 24px 0 0;
@@ -1759,7 +1755,7 @@ footer > * { position: relative; z-index: 1; }
             <a href="#about">About Me</a>
             <a href="#pricing">Services</a>
             <a href="#work">Portfolio</a>
-            <a href="schedule.html">Free Consultation</a>
+            <a href="quote.html">Get a Quote</a>
         </nav>
     </div>
 </div>
@@ -1992,7 +1988,7 @@ footer > * { position: relative; z-index: 1; }
             <span class="ba-tag">Mirrorless Camera<br><span style="font-size:0.85em;font-style:italic;opacity:0.75;font-weight:400;letter-spacing:0.5px;text-transform:none;">(Professionally Color Graded by Tate)</span></span>
         </div>
         <div class="ba-divider" id="baDivider">
-            <div class="ba-handle"><span class="ba-drag-hint">drag</span></div>
+            <div class="ba-handle"></div>
         </div>
     </div>
     <div class="ba-mobile-labels">
@@ -2034,7 +2030,6 @@ footer > * { position: relative; z-index: 1; }
             <button class="filter-btn filter-btn--sub" data-filter="portraits">Portraits</button>
             <button class="filter-btn filter-btn--sub" data-filter="nature">Nature</button>
             <button class="filter-btn filter-btn--sub" data-filter="street">Street</button>
-            <button class="filter-btn filter-btn--sub" data-filter="product-photography">Product Photography</button>
             <button class="filter-btn filter-btn--sub" data-filter="macro-product">Macro &amp; Product</button>
             <button class="filter-btn filter-btn--sub" data-filter="vintage">Vintage &amp; Film</button>
         </div>
@@ -2181,6 +2176,17 @@ footer > * { position: relative; z-index: 1; }
             </div>
         </div>
 
+        <div class="portfolio-item" data-category="portraits" data-lightbox-src="portfolio/Photography/Portraits/Salsa_Fujifilm XT4_35mm f1.4 R.jpg">
+            <div class="portfolio-img-wrap">
+                <img class="portfolio-thumb" src="portfolio/Photography/Portraits/Salsa2.jpg" alt="Salsa" loading="lazy">
+                <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Portraits</p></div></div>
+            </div>
+            <div class="portfolio-caption">
+                <span class="caption-title">Salsa</span>
+                <span class="caption-gear">Fujifilm X-T4 · XF 35mm f/1.4 R</span>
+            </div>
+        </div>
+
         <!-- ── STREET ───────────────────────────────────────────── -->
         <div class="portfolio-item" data-category="street" data-lightbox-src="portfolio/Photography/Street/Pearl Street Protest.jpg">
             <div class="portfolio-img-wrap">
@@ -2245,6 +2251,39 @@ footer > * { position: relative; z-index: 1; }
             <div class="portfolio-caption">
                 <span class="caption-title">Break Club</span>
                 <span class="caption-gear">Fujifilm X-H2 · XF 16-55mm f/2.8</span>
+            </div>
+        </div>
+
+        <div class="portfolio-item" data-category="street" data-lightbox-src="portfolio/Photography/Street/Alleyway Landslide.jpg">
+            <div class="portfolio-img-wrap">
+                <img class="portfolio-thumb" src="portfolio/Photography/Street/Alleyway Landslide-2.jpg" alt="Alleyway Landslide" loading="lazy">
+                <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Street</p></div></div>
+            </div>
+            <div class="portfolio-caption">
+                <span class="caption-title">Alleyway Landslide</span>
+                <span class="caption-gear">Fujifilm X-H2</span>
+            </div>
+        </div>
+
+        <div class="portfolio-item" data-category="street" data-lightbox-src="portfolio/Photography/Street/Iron Bridge.jpg">
+            <div class="portfolio-img-wrap">
+                <img class="portfolio-thumb" src="portfolio/Photography/Street/Iron Bridge 2.jpg" alt="Iron Bridge" loading="lazy">
+                <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Street</p></div></div>
+            </div>
+            <div class="portfolio-caption">
+                <span class="caption-title">Iron Bridge</span>
+                <span class="caption-gear">Fujifilm X-H2</span>
+            </div>
+        </div>
+
+        <div class="portfolio-item" data-category="street" data-lightbox-src="portfolio/Photography/Street/Long Beach Paraglider.jpg">
+            <div class="portfolio-img-wrap">
+                <img class="portfolio-thumb" src="portfolio/Photography/Street/Long Beach Paraglider2.jpg" alt="Long Beach Paraglider" loading="lazy">
+                <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Street</p></div></div>
+            </div>
+            <div class="portfolio-caption">
+                <span class="caption-title">Long Beach Paraglider</span>
+                <span class="caption-gear">Fujifilm X-H2</span>
             </div>
         </div>
 
@@ -2347,16 +2386,6 @@ footer > * { position: relative; z-index: 1; }
             </div>
         </div>
 
-        <div class="portfolio-item" data-category="nature" data-lightbox-src="portfolio/Photography/Nature/Cherry Blossoms.jpg">
-            <div class="portfolio-img-wrap">
-                <img class="portfolio-thumb" src="portfolio/Photography/Nature/Cherry Blossoms_2.jpg" alt="Cherry Blossoms" loading="lazy">
-                <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Nature</p></div></div>
-            </div>
-            <div class="portfolio-caption">
-                <span class="caption-title">Cherry Blossoms</span>
-                <span class="caption-gear">Fujifilm X-H2 · XF 16-55mm f/2.8</span>
-            </div>
-        </div>
 
         <div class="portfolio-item" data-category="nature" data-lightbox-src="portfolio/Photography/Nature/Log Layers.jpg">
             <div class="portfolio-img-wrap">
@@ -2391,19 +2420,74 @@ footer > * { position: relative; z-index: 1; }
             </div>
         </div>
 
-        <div class="portfolio-item" data-category="nature" data-lightbox-src="portfolio/Photography/Nature/Icicle Drop.jpg">
+        <div class="portfolio-item" data-category="nature macro-product" data-lightbox-src="portfolio/Photography/Nature/Icicle Drop_Laowa Macro.jpg">
             <div class="portfolio-img-wrap">
                 <img class="portfolio-thumb" src="portfolio/Photography/Nature/Icicle Drop_2.jpg" alt="Icicle Drop" loading="lazy">
                 <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Nature</p></div></div>
             </div>
             <div class="portfolio-caption">
                 <span class="caption-title">Icicle Drop</span>
-                <span class="caption-gear">Fujifilm X-H2</span>
+                <span class="caption-gear">Fujifilm X-H2 · Laowa 65mm Macro</span>
+            </div>
+        </div>
+
+        <div class="portfolio-item" data-category="nature" data-lightbox-src="portfolio/Photography/Nature/Bee.jpg">
+            <div class="portfolio-img-wrap">
+                <img class="portfolio-thumb" src="portfolio/Photography/Nature/Bee2.jpg" alt="Bee" loading="lazy">
+                <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Nature</p></div></div>
+            </div>
+            <div class="portfolio-caption">
+                <span class="caption-title">Bee</span>
+                <span class="caption-gear">Fujifilm X-H2 · Laowa 65mm Macro</span>
+            </div>
+        </div>
+
+        <div class="portfolio-item" data-category="nature" data-lightbox-src="portfolio/Photography/Nature/Galaxy Pond_Laowa Macro.jpg">
+            <div class="portfolio-img-wrap">
+                <img class="portfolio-thumb" src="portfolio/Photography/Nature/Galaxy Pond 2.jpg" alt="Galaxy Pond" loading="lazy">
+                <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Nature</p></div></div>
+            </div>
+            <div class="portfolio-caption">
+                <span class="caption-title">Galaxy Pond</span>
+                <span class="caption-gear">Fujifilm X-H2 · Laowa 65mm Macro</span>
+            </div>
+        </div>
+
+        <div class="portfolio-item" data-category="nature" data-lightbox-src="portfolio/Photography/Nature/Miniature Tree_Laowa Macro.jpg">
+            <div class="portfolio-img-wrap">
+                <img class="portfolio-thumb" src="portfolio/Photography/Nature/Miniature Tree 2.jpg" alt="Miniature Tree" loading="lazy">
+                <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Nature</p></div></div>
+            </div>
+            <div class="portfolio-caption">
+                <span class="caption-title">Miniature Tree</span>
+                <span class="caption-gear">Fujifilm X-H2 · Laowa 65mm Macro</span>
+            </div>
+        </div>
+
+        <div class="portfolio-item" data-category="nature macro-product" data-lightbox-src="portfolio/Photography/Nature/Sap.jpg">
+            <div class="portfolio-img-wrap">
+                <img class="portfolio-thumb" src="portfolio/Photography/Nature/Sap2_Laowa Macro.jpg" alt="Sap" loading="lazy">
+                <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Nature</p></div></div>
+            </div>
+            <div class="portfolio-caption">
+                <span class="caption-title">Sap</span>
+                <span class="caption-gear">Fujifilm X-H2 · Laowa 65mm Macro</span>
+            </div>
+        </div>
+
+        <div class="portfolio-item" data-category="nature macro-product" data-lightbox-src="portfolio/Photography/Nature/Traveler_Laowa Macro.jpg">
+            <div class="portfolio-img-wrap">
+                <img class="portfolio-thumb" src="portfolio/Photography/Nature/Traveler2.jpg" alt="Traveler" loading="lazy">
+                <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Nature</p></div></div>
+            </div>
+            <div class="portfolio-caption">
+                <span class="caption-title">Traveler</span>
+                <span class="caption-gear">Fujifilm X-H2 · Laowa 65mm Macro</span>
             </div>
         </div>
 
         <!-- ── PRODUCT PHOTOGRAPHY ────────────────────────────── -->
-        <div class="portfolio-item" data-category="product-photography macro-product" data-lightbox-src="portfolio/Photography/Product Photography/Market Booth (Shitake Mushrooms).jpg">
+        <div class="portfolio-item" data-category="macro-product" data-lightbox-src="portfolio/Photography/Product Photography/Market Booth (Shitake Mushrooms).jpg">
             <div class="portfolio-img-wrap">
                 <img class="portfolio-thumb" src="portfolio/Photography/Product Photography/Market Booth (Shitake Mushrooms)_2.jpg" alt="Market Booth" loading="lazy">
                 <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Product Photography</p></div></div>
@@ -2414,7 +2498,7 @@ footer > * { position: relative; z-index: 1; }
             </div>
         </div>
 
-        <div class="portfolio-item" data-category="product-photography macro-product" data-lightbox-src="portfolio/Photography/Product Photography/Pentax K1000_2.jpg">
+        <div class="portfolio-item" data-category="macro-product" data-lightbox-src="portfolio/Photography/Product Photography/Pentax K1000_2.jpg">
             <div class="portfolio-img-wrap">
                 <img class="portfolio-thumb" src="portfolio/Photography/Product Photography/Pentax K1000.jpg" alt="Pentax K1000" loading="lazy">
                 <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Product Photography</p></div></div>
@@ -2425,7 +2509,7 @@ footer > * { position: relative; z-index: 1; }
             </div>
         </div>
 
-        <div class="portfolio-item" data-category="product-photography macro-product" data-lightbox-src="portfolio/Photography/Product Photography/Encyclopedia.jpg">
+        <div class="portfolio-item" data-category="macro-product" data-lightbox-src="portfolio/Photography/Product Photography/Encyclopedia.jpg">
             <div class="portfolio-img-wrap">
                 <img class="portfolio-thumb" src="portfolio/Photography/Product Photography/Encyclopedia2.jpg" alt="Encyclopedia" loading="lazy">
                 <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Product Photography</p></div></div>
@@ -2436,7 +2520,7 @@ footer > * { position: relative; z-index: 1; }
             </div>
         </div>
 
-        <div class="portfolio-item" data-category="product-photography macro-product" data-lightbox-src="portfolio/Photography/Product Photography/Farm & Garden Club2.jpg">
+        <div class="portfolio-item" data-category="macro-product" data-lightbox-src="portfolio/Photography/Product Photography/Farm & Garden Club2.jpg">
             <div class="portfolio-img-wrap">
                 <img class="portfolio-thumb" src="portfolio/Photography/Product Photography/Farm & Garden Club.jpg" alt="Farm &amp; Garden Club" loading="lazy">
                 <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Product Photography</p></div></div>
@@ -2447,7 +2531,7 @@ footer > * { position: relative; z-index: 1; }
             </div>
         </div>
 
-        <div class="portfolio-item" data-category="product-photography macro-product" data-lightbox-src="portfolio/Photography/Product Photography/Silver Necklaces on Display_2.jpg">
+        <div class="portfolio-item" data-category="macro-product" data-lightbox-src="portfolio/Photography/Product Photography/Silver Necklaces on Display_2.jpg">
             <div class="portfolio-img-wrap">
                 <img class="portfolio-thumb" src="portfolio/Photography/Product Photography/Silver Necklaces on Display.jpg" alt="Silver Necklaces on Display" loading="lazy">
                 <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Product Photography</p></div></div>
@@ -2455,6 +2539,39 @@ footer > * { position: relative; z-index: 1; }
             <div class="portfolio-caption">
                 <span class="caption-title">Silver Necklaces on Display</span>
                 <span class="caption-gear">Fujifilm X-H2 · SMC Takumar 55mm</span>
+            </div>
+        </div>
+
+        <div class="portfolio-item" data-category="macro-product" data-lightbox-src="portfolio/Photography/Product Photography/Intricate Pattern.jpg">
+            <div class="portfolio-img-wrap">
+                <img class="portfolio-thumb" src="portfolio/Photography/Product Photography/Intricate Pattern 2.jpg" alt="Intricate Pattern" loading="lazy">
+                <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Product Photography</p></div></div>
+            </div>
+            <div class="portfolio-caption">
+                <span class="caption-title">Intricate Pattern</span>
+                <span class="caption-gear">Fujifilm X-H2 · Laowa 65mm Macro</span>
+            </div>
+        </div>
+
+        <div class="portfolio-item" data-category="macro-product" data-lightbox-src="portfolio/Photography/Product Photography/Kpanlogo Drum.jpg">
+            <div class="portfolio-img-wrap">
+                <img class="portfolio-thumb" src="portfolio/Photography/Product Photography/Kpanlogo Drum2.jpg" alt="Kpanlogo Drum" loading="lazy">
+                <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Product Photography</p></div></div>
+            </div>
+            <div class="portfolio-caption">
+                <span class="caption-title">Kpanlogo Drum</span>
+                <span class="caption-gear">Fujifilm X-H2</span>
+            </div>
+        </div>
+
+        <div class="portfolio-item" data-category="macro-product" data-lightbox-src="portfolio/Photography/Product Photography/Ornament.jpg">
+            <div class="portfolio-img-wrap">
+                <img class="portfolio-thumb" src="portfolio/Photography/Product Photography/Ornament2.jpg" alt="Ornament" loading="lazy">
+                <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Product Photography</p></div></div>
+            </div>
+            <div class="portfolio-caption">
+                <span class="caption-title">Ornament</span>
+                <span class="caption-gear">Fujifilm X-H2 · Laowa 65mm Macro</span>
             </div>
         </div>
 
@@ -2467,6 +2584,17 @@ footer > * { position: relative; z-index: 1; }
             <div class="portfolio-caption">
                 <span class="caption-title">Port Police Boats</span>
                 <span class="caption-gear">Film · Kodak Ektachrome · Jupiter-9 85mm</span>
+            </div>
+        </div>
+
+        <div class="portfolio-item" data-category="vintage" data-lightbox-src="portfolio/Photography/Vintage & Film/Barrier Island.jpg">
+            <div class="portfolio-img-wrap">
+                <img class="portfolio-thumb" src="portfolio/Photography/Vintage & Film/Barrier Island2.jpg" alt="Barrier Island" loading="lazy">
+                <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Vintage &amp; Film</p></div></div>
+            </div>
+            <div class="portfolio-caption">
+                <span class="caption-title">Barrier Island</span>
+                <span class="caption-gear">Film</span>
             </div>
         </div>
 
@@ -2560,7 +2688,7 @@ footer > * { position: relative; z-index: 1; }
 </div>
 
 <!-- Mobile Sticky CTA -->
-<a href="schedule.html" class="mobile-cta">Book a Free Consultation →</a>
+<a href="quote.html" class="mobile-cta">Get a Quote →</a>
 
 <script>
 
@@ -2867,7 +2995,7 @@ document.querySelectorAll('.pricing-card').forEach(card => {
     const items      = document.querySelectorAll('.portfolio-item');
 
     /* photo categories shown in this portfolio */
-    const photoCats  = ['portraits','nature','street','product-photography','macro-product','vintage'];
+    const photoCats  = ['portraits','nature','street','macro-product','vintage'];
 
     function showItems(filter) {
         items.forEach(item => {

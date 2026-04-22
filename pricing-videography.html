@@ -440,6 +440,9 @@
 .audio-progress-bar { height: 100%; width: 0%; background: #5C6E82; border-radius: 3px; transition: width 0.1s linear; pointer-events: none; }
 .audio-time { font-size: 0.7rem; color: #a8a49c; letter-spacing: 0.5px; display: flex; justify-content: space-between; }
 @media (max-width: 600px) { .audio-section { padding: 72px 6%; } .audio-card { padding: 18px 16px; gap: 14px; } .audio-play-btn { width: 40px; height: 40px; } }
+.la-audio { padding: 0 10% 72px; }
+.la-audio .audio-card { max-width: 820px; margin: 0 auto; }
+@media (max-width: 600px) { .la-audio { padding: 0 6% 56px; } }
 
     /* ── Merged What's Included + Journey overlay ── */
     .wi-section { position: relative; }
@@ -668,6 +671,9 @@
       border-radius: 50px; padding: 2px 10px; margin-bottom: 8px;
       align-self: center;
     }
+    .coin-badge--gold {
+      color: #C9A84C; border-color: rgba(201,168,76,0.45);
+    }
     .coin-select-hint {
       font-family: 'EB Garamond', serif; font-size: 0.78rem;
       color: #a8a49c; margin-top: auto; padding-top: 10px;
@@ -689,14 +695,14 @@
     .cv-section { background: #0e0c09; }
     .cv-banner {
       position: relative;
-      aspect-ratio: 2560 / 200; /* matches native image resolution */
+      aspect-ratio: 2560 / 244; /* matches native image resolution */
       background-image: url('assets/acc-video.jpg');
       background-size: cover; background-position: center;
       display: flex; align-items: center; justify-content: center; overflow: hidden;
     }
     .la-banner {
       position: relative;
-      aspect-ratio: 2560 / 200;
+      aspect-ratio: 2560 / 244;
       background-image: url('assets/acc-audio.jpg');
       background-size: cover; background-position: center;
       display: flex; align-items: center; justify-content: center; overflow: hidden;
@@ -714,8 +720,9 @@
       font-family: 'Cinzel', serif; font-size: 3rem; font-weight: 400;
       color: #e8e1d4; letter-spacing: 6px; text-align: center; margin: 0;
       text-shadow: 0 2px 24px rgba(0,0,0,0.5);
+      width: 100%;
     }
-    .cv-content { max-width: 1200px; margin: 0 auto; padding: 64px 5% 100px; }
+    .cv-content { width: 100%; padding: 64px 0 100px; }
     .cv-sub-a {
       display: grid;
       grid-template-columns: 1fr 1fr 1.4fr 1.4fr 1.4fr 1fr 1fr;
@@ -740,6 +747,97 @@
       border-radius: 10px; border: 1px dashed rgba(232,225,212,0.08);
     }
 
+    /* ── COLOR & LIGHT — octagon ring ── */
+    .cl-banner {
+      position: relative;
+      aspect-ratio: 2560 / 244;
+      background-image: url('assets/acc-lighting.jpeg');
+      background-size: cover; background-position: center;
+      display: flex; align-items: center; justify-content: center; overflow: hidden;
+    }
+    .cl-banner::before {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.38) 0%, rgba(0,0,0,0.62) 100%);
+    }
+    .cl-content {
+      width: 100%;
+      padding: 80px 5% 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .cl-ring-wrap {
+      --ring:   min(min(72vw, 68vh), 680px);
+      --photo:  calc(var(--ring) * 0.22);
+      --radius: calc(var(--ring) * 0.385);
+      position: relative;
+      width:  var(--ring);
+      height: var(--ring);
+      flex-shrink: 0;
+    }
+    .cl-photo {
+      position: absolute;
+      width:  var(--photo);
+      height: var(--photo);
+      top:  50%; left: 50%;
+      margin-top:  calc(var(--photo) / -2);
+      margin-left: calc(var(--photo) / -2);
+      border-radius: 10px;
+      background: rgba(255,255,255,0.05);
+      border: 1px dashed rgba(232,225,212,0.14);
+      overflow: hidden;
+    }
+    .cl-photo--1 { transform: rotate(0deg)   translateY(calc(var(--radius) * -1)) rotate(0deg); }
+    .cl-photo--2 { transform: rotate(45deg)  translateY(calc(var(--radius) * -1)) rotate(-45deg); }
+    .cl-photo--3 { transform: rotate(90deg)  translateY(calc(var(--radius) * -1)) rotate(-90deg); }
+    .cl-photo--4 { transform: rotate(135deg) translateY(calc(var(--radius) * -1)) rotate(-135deg); }
+    .cl-photo--5 { transform: rotate(180deg) translateY(calc(var(--radius) * -1)) rotate(-180deg); }
+    .cl-photo--6 { transform: rotate(225deg) translateY(calc(var(--radius) * -1)) rotate(-225deg); }
+    .cl-photo--7 { transform: rotate(270deg) translateY(calc(var(--radius) * -1)) rotate(-270deg); }
+    .cl-photo--8 { transform: rotate(315deg) translateY(calc(var(--radius) * -1)) rotate(-315deg); }
+    .cl-center {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width:  calc(var(--ring) * 0.40);
+      height: calc(var(--ring) * 0.40);
+      border-radius: 50%;
+      background: rgba(14,12,9,0.72);
+      border: 1px solid rgba(201,168,76,0.22);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 24px;
+    }
+    .cl-center-eyebrow {
+      font-family: 'EB Garamond', serif;
+      font-size: 0.62rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #C9A84C;
+      margin: 0 0 10px;
+    }
+    .cl-center-title {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(0.8rem, 2.2vw, 1.15rem);
+      font-weight: 400;
+      color: #e8e1d4;
+      margin: 0 0 10px;
+      line-height: 1.3;
+    }
+    .cl-center-body {
+      font-family: 'EB Garamond', serif;
+      font-size: clamp(0.72rem, 1.5vw, 0.88rem);
+      color: rgba(232,225,212,0.55);
+      margin: 0;
+      line-height: 1.55;
+    }
+    @media (max-width: 600px) {
+      .cl-ring-wrap {
+        --ring:   min(88vw, 360px);
+      }
+    }
 
     /* ── COIN CARD CTA (hover) ── */
     .coin-epic { width: 302px; } /* 20% wider than Novel (252px) */
@@ -772,6 +870,11 @@
     .coin-cta-chevron { display: block; color: rgba(99,95,81,0.4); }
     .coin-card:hover .coin-select-hint { opacity: 0 !important; }
 
+    /* Mobile line-break utility — hidden on desktop, shown at 600px */
+    .mob-br { display: none; }
+    /* Mobile CV diamond — hidden on desktop, shown at 600px */
+    .cv-diamond { display: none; }
+
     @media (max-width: 960px) {
       .pkg-coins-inner { gap: 18px; }
       .coin-card { width: 210px; height: 390px; }
@@ -785,12 +888,48 @@
     @media (max-width: 600px) {
       .pkg-coins-inner { flex-direction: column; align-items: center; gap: 52px; }
       .coin-card { width: 240px; height: 410px; }
+      /* Hide hover-only CTA on mobile — no hover, and it bleeds through the 3D spin */
+      .coin-cta { display: none !important; }
       .trident-svg { display: none; }
-      .cv-banner-title { font-size: 1.7rem; letter-spacing: 3px; }
+
+      /* ── Banners: taller + two-line titles ── */
+      .cv-banner, .la-banner, .cl-banner {
+        aspect-ratio: unset;
+        padding: 44px 5%;
+      }
+      .mob-br { display: block; }
+      .cv-banner-title { font-size: 1.6rem; letter-spacing: 3px; line-height: 1.25; }
+
+      /* ── Location Audio: keep existing sub-a/sub-b layout ── */
       .cv-sub-a { grid-template-columns: repeat(3, 1fr); }
       .cv-sub-a .cv-text-slot { display: none; }
       .cv-sub-b { grid-template-columns: repeat(2, 1fr); }
       .cv-sub-b .cv-text-center-slot { grid-column: 1 / -1; }
+
+      /* ── Cinema-Grade Video: hide desktop grids, show diamond ── */
+      #cv-section .cv-sub-a,
+      #cv-section .cv-sub-b { display: none !important; }
+      .cv-diamond {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        gap: 8px;
+        padding: 36px 5% 64px;
+      }
+      .cv-diamond .cv-text-slot { min-height: 80px; }
+      /* Row 1 — 1 photo centered (cols 3–4) */
+      .cv-diamond > :nth-child(1) { grid-column: 3 / 5; grid-row: 1; }
+      /* Row 2 — 2 photos */
+      .cv-diamond > :nth-child(2) { grid-column: 1 / 4; grid-row: 2; }
+      .cv-diamond > :nth-child(3) { grid-column: 4 / 7; grid-row: 2; }
+      /* Row 3 — 3 text boxes */
+      .cv-diamond > :nth-child(4) { grid-column: 1 / 3; grid-row: 3; }
+      .cv-diamond > :nth-child(5) { grid-column: 3 / 5; grid-row: 3; }
+      .cv-diamond > :nth-child(6) { grid-column: 5 / 7; grid-row: 3; }
+      /* Row 4 — 2 photos */
+      .cv-diamond > :nth-child(7) { grid-column: 1 / 4; grid-row: 4; }
+      .cv-diamond > :nth-child(8) { grid-column: 4 / 7; grid-row: 4; }
+      /* Row 5 — 1 photo centered (cols 3–4) */
+      .cv-diamond > :nth-child(9) { grid-column: 3 / 5; grid-row: 5; }
     }
   </style>
 </head>
@@ -894,6 +1033,7 @@
       <div class="coin-shadow"></div>
       <div class="coin-inner" id="coin-epic-inner">
         <div class="coin-face coin-front">
+          <span class="coin-badge coin-badge--gold">Best Deal</span>
           <p class="coin-eyebrow">Two Days</p>
           <h3 class="coin-tier-name">Epic</h3>
           <div class="coin-divider"></div>
@@ -950,10 +1090,10 @@
 <!-- ── CINEMA-GRADE VIDEO ── -->
 <section class="cv-section" id="cv-section">
   <div class="cv-banner">
-    <h2 class="cv-banner-title">Cinema-Grade Video</h2>
+    <h2 class="cv-banner-title">Cinema-Grade<br class="mob-br"> Video</h2>
   </div>
   <div class="cv-content">
-    <!-- Sub A: [text][text] | [photo][photo][photo] | [text][text] -->
+    <!-- Desktop: [text][text] | [photo][photo][photo] | [text][text] -->
     <div class="cv-sub-a">
       <div class="cv-text-slot"></div>
       <div class="cv-text-slot"></div>
@@ -963,7 +1103,7 @@
       <div class="cv-text-slot"></div>
       <div class="cv-text-slot"></div>
     </div>
-    <!-- Sub B: [photo][photo][photo] | [text] | [photo][photo][photo] -->
+    <!-- Desktop: [photo][photo][photo] | [text] | [photo][photo][photo] -->
     <div class="cv-sub-b">
       <div class="cv-photo-slot"></div>
       <div class="cv-photo-slot"></div>
@@ -972,6 +1112,18 @@
       <div class="cv-photo-slot"></div>
       <div class="cv-photo-slot"></div>
       <div class="cv-photo-slot"></div>
+    </div>
+    <!-- Mobile diamond: 1 · 2 · 3 · 2 · 1 -->
+    <div class="cv-diamond">
+      <div class="cv-photo-slot"></div><!-- row 1: center photo -->
+      <div class="cv-photo-slot"></div><!-- row 2: left photo -->
+      <div class="cv-photo-slot"></div><!-- row 2: right photo -->
+      <div class="cv-text-slot"></div> <!-- row 3: text left -->
+      <div class="cv-text-slot"></div> <!-- row 3: text center -->
+      <div class="cv-text-slot"></div> <!-- row 3: text right -->
+      <div class="cv-photo-slot"></div><!-- row 4: left photo -->
+      <div class="cv-photo-slot"></div><!-- row 4: right photo -->
+      <div class="cv-photo-slot"></div><!-- row 5: center photo -->
     </div>
   </div>
 </section>
@@ -980,7 +1132,7 @@
 <!-- Location Audio -->
 <section class="cv-section" id="la-section">
   <div class="la-banner">
-    <h2 class="cv-banner-title">Location Audio</h2>
+    <h2 class="cv-banner-title">Location<br class="mob-br"> Audio</h2>
   </div>
   <div class="cv-content">
     <!-- Sub A: [text][text] | [photo][photo][photo] | [text][text] -->
@@ -1002,6 +1154,41 @@
       <div class="cv-photo-slot"></div>
       <div class="cv-photo-slot"></div>
       <div class="cv-photo-slot"></div>
+    </div>
+  </div>
+  <!-- Sample Audio Track -->
+  <div class="la-audio">
+    <div class="audio-card anim-fade">
+      <button class="audio-play-btn" aria-label="Play/Pause"><svg class="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg><svg class="icon-pause" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg></button>
+      <div class="audio-meta"><p class="audio-title">Location Audio Sample</p><p class="audio-desc">Ambient on-location sound — recorded live, not stock</p><div class="audio-progress-wrap"><div class="audio-progress-bar"></div></div><div class="audio-time"><span class="audio-current">0:00</span><span class="audio-duration">0:00</span></div></div>
+      <audio src="" preload="metadata"></audio>
+    </div>
+  </div>
+</section>
+
+
+<!-- Color & Light -->
+<section class="cv-section" id="cl-section">
+  <div class="cl-banner">
+    <h2 class="cv-banner-title">Color &amp; Light</h2>
+  </div>
+  <div class="cl-content">
+    <div class="cl-ring-wrap">
+      <div class="cl-photo cl-photo--1"></div>
+      <div class="cl-photo cl-photo--2"></div>
+      <div class="cl-photo cl-photo--3"></div>
+      <div class="cl-photo cl-photo--4"></div>
+      <div class="cl-photo cl-photo--5"></div>
+      <div class="cl-photo cl-photo--6"></div>
+      <div class="cl-photo cl-photo--7"></div>
+      <div class="cl-photo cl-photo--8"></div>
+      <div class="cl-center">
+        <div>
+          <p class="cl-center-eyebrow">The Grade</p>
+          <h3 class="cl-center-title">Film That Feels</h3>
+          <p class="cl-center-body">Every frame is graded to a deliberate look — not corrected, crafted.</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -1085,28 +1272,6 @@
   </div>
 </section>
 
-<!-- AUDIO -->
-<section class="audio-section" id="audio">
-  <p class="audio-eyebrow anim-fade">Listen</p>
-  <h2 class="audio-heading anim-fade">Audio</h2>
-  <div class="audio-grid">
-    <div class="audio-card anim-fade">
-      <button class="audio-play-btn" aria-label="Play/Pause"><svg class="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg><svg class="icon-pause" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg></button>
-      <div class="audio-meta"><p class="audio-title">Track Title</p><p class="audio-desc">Description / project context</p><div class="audio-progress-wrap"><div class="audio-progress-bar"></div></div><div class="audio-time"><span class="audio-current">0:00</span><span class="audio-duration">0:00</span></div></div>
-      <audio src="" preload="metadata"></audio>
-    </div>
-    <div class="audio-card anim-fade">
-      <button class="audio-play-btn" aria-label="Play/Pause"><svg class="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg><svg class="icon-pause" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg></button>
-      <div class="audio-meta"><p class="audio-title">Track Title</p><p class="audio-desc">Description / project context</p><div class="audio-progress-wrap"><div class="audio-progress-bar"></div></div><div class="audio-time"><span class="audio-current">0:00</span><span class="audio-duration">0:00</span></div></div>
-      <audio src="" preload="metadata"></audio>
-    </div>
-    <div class="audio-card anim-fade">
-      <button class="audio-play-btn" aria-label="Play/Pause"><svg class="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg><svg class="icon-pause" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg></button>
-      <div class="audio-meta"><p class="audio-title">Track Title</p><p class="audio-desc">Description / project context</p><div class="audio-progress-wrap"><div class="audio-progress-bar"></div></div><div class="audio-time"><span class="audio-current">0:00</span><span class="audio-duration">0:00</span></div></div>
-      <audio src="" preload="metadata"></audio>
-    </div>
-  </div>
-</section>
 
 
 <!-- Add-On Gradient Buttons -->
@@ -1715,7 +1880,7 @@ function updateAddonBtn(key) {
 })();
 </script>
 <script>
-/* ── SCROLL-DRIVEN COIN SPIN ── */
+/* ── COIN SPIN — desktop: scroll-driven · mobile: per-coin IntersectionObserver ── */
 (function () {
   'use strict';
 
@@ -1726,8 +1891,8 @@ function updateAddonBtn(key) {
   ];
 
   var coins = specs.map(function (s) {
-    var inner  = document.getElementById(s.innerId);
-    var card   = document.getElementById(s.cardId);
+    var inner = document.getElementById(s.innerId);
+    var card  = document.getElementById(s.cardId);
     if (!inner || !card) return null;
     return {
       inner:      inner,
@@ -1739,9 +1904,7 @@ function updateAddonBtn(key) {
 
   if (!coins.length) return;
 
-  /* Set initial position */
   function setAngle(c, angle) {
-    /* Perspective is a CSS property on .coin-card — do not repeat it here */
     c.inner.style.transform = 'rotateY(' + angle.toFixed(2) + 'deg)';
     if (c.shadow) {
       var facing = Math.abs(Math.cos(angle * Math.PI / 180));
@@ -1749,37 +1912,109 @@ function updateAddonBtn(key) {
     }
   }
 
+  /* Start every coin at its full spin angle */
   coins.forEach(function (c) { setAngle(c, c.totalAngle); });
 
-  /* locked = true once the section has been fully scrolled past.
-     Unlocks only when the user scrolls back up so spinProgress < UNLOCK. */
-  var locked      = false;
-  var UNLOCK_AT   = 0.88;   /* hysteresis — must scroll back up this far to re-engage */
-  var prevSettled = false;
+  /* ── MOBILE PATH: each coin spins in independently when it enters view ── */
+  if (window.matchMedia('(max-width: 600px)').matches) {
+    coins.forEach(function (c) {
+      var done = false;
+
+      var obs = new IntersectionObserver(function (entries) {
+        if (done) return;
+        if (!entries[0].isIntersecting) return;
+        done = true;
+        obs.disconnect();
+
+        /* Staggered delay — chapter first, epic last */
+        var delay = c.totalAngle === 1125 ? 0 : c.totalAngle === 1245 ? 120 : 240;
+
+        setTimeout(function () {
+          var start    = null;
+          var duration = 950; /* ms */
+          var from     = c.totalAngle;
+
+          function easeOut(t) { return 1 - Math.pow(1 - t, 3); }
+
+          function frame(ts) {
+            if (!start) start = ts;
+            var t = Math.min(1, (ts - start) / duration);
+            setAngle(c, from * (1 - easeOut(t)));
+            if (t < 1) {
+              requestAnimationFrame(frame);
+            } else {
+              setAngle(c, 0);
+              c.card.classList.add('coin-settled');
+            }
+          }
+
+          requestAnimationFrame(frame);
+        }, delay);
+      }, { threshold: 0.38 });
+
+      obs.observe(c.card);
+    });
+
+    return; /* skip desktop scroll wiring */
+  }
+
+  /* ── DESKTOP PATH: scroll-driven, all coins together ── */
+  var locked        = false;
+  var UNLOCK_AT     = 0.88;
+  var prevSettled   = false;
+  var _spinOnceFlag = false;
 
   function getSpinProgress() {
     var section = document.getElementById('pkg-coins');
     if (!section) return 0;
-    var rect      = section.getBoundingClientRect();
-    var vh        = window.innerHeight;
-    var sectionH  = section.offsetHeight;
-    var raw       = (vh - rect.top) / (vh + sectionH);
-    var trigger   = sectionH / (vh + sectionH);
-    return trigger > 0 ? Math.max(0, Math.min(1, raw / trigger)) : 0;
+    var rect        = section.getBoundingClientRect();
+    var vh          = window.innerHeight;
+    var sectionH    = section.offsetHeight;
+    var activationH = Math.max(sectionH, vh * 0.65);
+    return Math.max(0, Math.min(1, (vh - rect.top) / activationH));
+  }
+
+  /* One-shot animated spin-in used when section is already in view at load */
+  function runSpinIn() {
+    if (_spinOnceFlag) return;
+    _spinOnceFlag = true;
+    var delays = [0, 160, 320];
+    coins.forEach(function (c, i) {
+      var delay = delays[i] || 0;
+      setTimeout(function () {
+        var start    = null;
+        var duration = 1050;
+        var from     = c.totalAngle;
+        function ease(t) { return 1 - Math.pow(1 - t, 3); }
+        function frame(ts) {
+          if (!start) start = ts;
+          var t = Math.min(1, (ts - start) / duration);
+          setAngle(c, from * (1 - ease(t)));
+          if (t < 1) {
+            requestAnimationFrame(frame);
+          } else {
+            setAngle(c, 0);
+            c.card.classList.add('coin-settled');
+          }
+        }
+        requestAnimationFrame(frame);
+      }, delay);
+    });
+    locked      = true;
+    prevSettled = true;
   }
 
   function update() {
     var sp = getSpinProgress();
 
-    /* Engage lock when fully spun-in */
-    if (sp >= 1) locked = true;
+    /* Section already fully in view — animate in once, then bail */
+    if (sp >= 1 && !_spinOnceFlag) { runSpinIn(); return; }
 
-    /* Release lock when user scrolls back up past the hysteresis threshold */
+    if (sp >= 1) locked = true;
     if (locked && sp < UNLOCK_AT) locked = false;
 
-    /* While locked: freeze at face-forward (angle = 0) */
     var settled = locked || sp >= 1;
-    var angle0  = settled ? 0 : null;  /* null = compute per-card */
+    var angle0  = settled ? 0 : null;
 
     coins.forEach(function (c) {
       var angle = (angle0 !== null) ? angle0 : c.totalAngle * (1 - sp);
