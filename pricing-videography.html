@@ -767,9 +767,10 @@
       justify-content: center;
     }
     .cl-ring-wrap {
-      --ring:   min(min(72vw, 68vh), 680px);
-      --photo:  calc(var(--ring) * 0.22);
-      --radius: calc(var(--ring) * 0.385);
+      --ring:    min(min(72vw, 68vh), 680px);
+      --photo-w: calc(var(--ring) * 0.32);
+      --photo-h: calc(var(--ring) * 0.23);
+      --radius:  calc(var(--ring) * 0.385);
       position: relative;
       width:  var(--ring);
       height: var(--ring);
@@ -777,11 +778,11 @@
     }
     .cl-photo {
       position: absolute;
-      width:  var(--photo);
-      height: var(--photo);
+      width:  var(--photo-w);
+      height: var(--photo-h);
       top:  50%; left: 50%;
-      margin-top:  calc(var(--photo) / -2);
-      margin-left: calc(var(--photo) / -2);
+      margin-top:  calc(var(--photo-h) / -2);
+      margin-left: calc(var(--photo-w) / -2);
       border-radius: 10px;
       background: rgba(255,255,255,0.05);
       border: 1px dashed rgba(232,225,212,0.14);
@@ -1880,29 +1881,26 @@ function updateAddonBtn(key) {
 })();
 </script>
 <script>
-/* ── COIN SPIN — desktop: scroll-driven · mobile: per-coin IntersectionObserver ── */
+/* ── COIN SPIN — single 360° spin-in when section enters viewport ── */
 (function () {
   'use strict';
 
   var specs = [
-    { innerId: 'coin-chapter-inner', cardId: 'coin-chapter', totalAngle: 1125 },
-    { innerId: 'coin-novel-inner',   cardId: 'coin-novel',   totalAngle: 1245 },
-    { innerId: 'coin-epic-inner',    cardId: 'coin-epic',    totalAngle: 1365 },
+    { innerId: 'coin-chapter-inner', cardId: 'coin-chapter' },
+    { innerId: 'coin-novel-inner',   cardId: 'coin-novel'   },
+    { innerId: 'coin-epic-inner',    cardId: 'coin-epic'    },
   ];
 
   var coins = specs.map(function (s) {
     var inner = document.getElementById(s.innerId);
     var card  = document.getElementById(s.cardId);
     if (!inner || !card) return null;
-    return {
-      inner:      inner,
-      card:       card,
-      shadow:     card.querySelector('.coin-shadow'),
-      totalAngle: s.totalAngle,
-    };
+    return { inner: inner, card: card, shadow: card.querySelector('.coin-shadow') };
   }).filter(Boolean);
 
   if (!coins.length) return;
+
+  var START = 360; /* one full rotation back from face-forward */
 
   function setAngle(c, angle) {
     c.inner.style.transform = 'rotateY(' + angle.toFixed(2) + 'deg)';
@@ -1912,84 +1910,27 @@ function updateAddonBtn(key) {
     }
   }
 
-  /* Start every coin at its full spin angle */
-  coins.forEach(function (c) { setAngle(c, c.totalAngle); });
+  /* Hold every coin at the start angle until the section appears */
+  coins.forEach(function (c) { setAngle(c, START); });
 
-  /* ── MOBILE PATH: each coin spins in independently when it enters view ── */
-  if (window.matchMedia('(max-width: 600px)').matches) {
-    coins.forEach(function (c) {
-      var done = false;
+  var section = document.getElementById('pkg-coins');
+  if (!section) return;
 
-      var obs = new IntersectionObserver(function (entries) {
-        if (done) return;
-        if (!entries[0].isIntersecting) return;
-        done = true;
-        obs.disconnect();
+  var fired = false;
 
-        /* Staggered delay — chapter first, epic last */
-        var delay = c.totalAngle === 1125 ? 0 : c.totalAngle === 1245 ? 120 : 240;
-
-        setTimeout(function () {
-          var start    = null;
-          var duration = 950; /* ms */
-          var from     = c.totalAngle;
-
-          function easeOut(t) { return 1 - Math.pow(1 - t, 3); }
-
-          function frame(ts) {
-            if (!start) start = ts;
-            var t = Math.min(1, (ts - start) / duration);
-            setAngle(c, from * (1 - easeOut(t)));
-            if (t < 1) {
-              requestAnimationFrame(frame);
-            } else {
-              setAngle(c, 0);
-              c.card.classList.add('coin-settled');
-            }
-          }
-
-          requestAnimationFrame(frame);
-        }, delay);
-      }, { threshold: 0.38 });
-
-      obs.observe(c.card);
-    });
-
-    return; /* skip desktop scroll wiring */
-  }
-
-  /* ── DESKTOP PATH: scroll-driven, all coins together ── */
-  var locked        = false;
-  var UNLOCK_AT     = 0.88;
-  var prevSettled   = false;
-  var _spinOnceFlag = false;
-
-  function getSpinProgress() {
-    var section = document.getElementById('pkg-coins');
-    if (!section) return 0;
-    var rect        = section.getBoundingClientRect();
-    var vh          = window.innerHeight;
-    var sectionH    = section.offsetHeight;
-    var activationH = Math.max(sectionH, vh * 0.65);
-    return Math.max(0, Math.min(1, (vh - rect.top) / activationH));
-  }
-
-  /* One-shot animated spin-in used when section is already in view at load */
-  function runSpinIn() {
-    if (_spinOnceFlag) return;
-    _spinOnceFlag = true;
-    var delays = [0, 160, 320];
+  function spinIn() {
+    if (fired) return;
+    fired = true;
+    var DELAYS   = [0, 150, 300];
+    var DURATION = 900;
+    function ease(t) { return 1 - Math.pow(1 - t, 3); }
     coins.forEach(function (c, i) {
-      var delay = delays[i] || 0;
       setTimeout(function () {
-        var start    = null;
-        var duration = 1050;
-        var from     = c.totalAngle;
-        function ease(t) { return 1 - Math.pow(1 - t, 3); }
+        var start = null;
         function frame(ts) {
           if (!start) start = ts;
-          var t = Math.min(1, (ts - start) / duration);
-          setAngle(c, from * (1 - ease(t)));
+          var t = Math.min(1, (ts - start) / DURATION);
+          setAngle(c, START * (1 - ease(t)));
           if (t < 1) {
             requestAnimationFrame(frame);
           } else {
@@ -1998,40 +1939,18 @@ function updateAddonBtn(key) {
           }
         }
         requestAnimationFrame(frame);
-      }, delay);
+      }, DELAYS[i] || 0);
     });
-    locked      = true;
-    prevSettled = true;
   }
 
-  function update() {
-    var sp = getSpinProgress();
+  var obs = new IntersectionObserver(function (entries) {
+    if (entries[0].isIntersecting) {
+      obs.disconnect();
+      spinIn();
+    }
+  }, { threshold: 0.25 });
 
-    /* Section already fully in view — animate in once, then bail */
-    if (sp >= 1 && !_spinOnceFlag) { runSpinIn(); return; }
-
-    if (sp >= 1) locked = true;
-    if (locked && sp < UNLOCK_AT) locked = false;
-
-    var settled = locked || sp >= 1;
-    var angle0  = settled ? 0 : null;
-
-    coins.forEach(function (c) {
-      var angle = (angle0 !== null) ? angle0 : c.totalAngle * (1 - sp);
-      setAngle(c, angle);
-      if (settled && !prevSettled) {
-        c.card.classList.add('coin-settled');
-      } else if (!settled) {
-        c.card.classList.remove('coin-settled');
-      }
-    });
-
-    prevSettled = settled;
-  }
-
-  window.addEventListener('scroll', update, { passive: true });
-  window.addEventListener('resize', update);
-  update();
+  obs.observe(section);
 })();
 
 /* ── TRIDENT FILL (concurrent prongs, then stem) ── */
