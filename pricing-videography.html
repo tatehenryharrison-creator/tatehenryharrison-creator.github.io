@@ -747,6 +747,29 @@
       border-radius: 10px; border: 1px dashed rgba(232,225,212,0.08);
     }
 
+    /* ── CINEMA-GRADE VIDEO GEAR GRID ── */
+    .cv-gear { padding: 40px 3% 90px; }
+    .cv-gear-top {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+    .cv-gear-bottom {
+      display: grid;
+      grid-template-columns: repeat(8, 1fr);
+    }
+    .cv-gear-slot {
+      aspect-ratio: 3 / 2;
+      overflow: hidden;
+      position: relative;
+    }
+    .cv-gear-slot img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      transform: scale(1.8);
+      display: block;
+    }
+
     /* ── COLOR & LIGHT — octagon ring ── */
     .cl-banner {
       position: relative;
@@ -885,6 +908,8 @@
       .cv-sub-a .cv-text-slot { display: none; }
       .cv-sub-b { grid-template-columns: repeat(3, 1fr); }
       .cv-sub-b .cv-text-center-slot { grid-column: 1 / -1; }
+      /* Gear grid: collapse bottom row to 4 cols at tablet */
+      .cv-gear-bottom { grid-template-columns: repeat(4, 1fr); }
     }
     @media (max-width: 600px) {
       .pkg-coins-inner { flex-direction: column; align-items: center; gap: 52px; }
@@ -907,7 +932,11 @@
       .cv-sub-b { grid-template-columns: repeat(2, 1fr); }
       .cv-sub-b .cv-text-center-slot { grid-column: 1 / -1; }
 
-      /* ── Cinema-Grade Video: hide desktop grids, show diamond ── */
+      /* ── Cinema-Grade Video: gear grid tweaks for mobile ── */
+      .cv-gear { padding: 24px 0 64px; }
+      .cv-gear-top { grid-template-columns: 1fr 1fr 1fr; }
+      .cv-gear-bottom { grid-template-columns: repeat(4, 1fr); }
+      /* hide old placeholder grids if still present */
       #cv-section .cv-sub-a,
       #cv-section .cv-sub-b { display: none !important; }
       .cv-diamond {
@@ -1093,38 +1122,23 @@
   <div class="cv-banner">
     <h2 class="cv-banner-title">Cinema-Grade<br class="mob-br"> Video</h2>
   </div>
-  <div class="cv-content">
-    <!-- Desktop: [text][text] | [photo][photo][photo] | [text][text] -->
-    <div class="cv-sub-a">
-      <div class="cv-text-slot"></div>
-      <div class="cv-text-slot"></div>
-      <div class="cv-photo-slot"></div>
-      <div class="cv-photo-slot"></div>
-      <div class="cv-photo-slot"></div>
-      <div class="cv-text-slot"></div>
-      <div class="cv-text-slot"></div>
+  <div class="cv-gear">
+    <!-- Top row: hero cameras -->
+    <div class="cv-gear-top">
+      <div class="cv-gear-slot"><img src="Packages Pics/Video/Drone.png" alt="DJI Drone"></div>
+      <div class="cv-gear-slot"><img src="Packages Pics/Video/Rig.png" alt="Camera Rig"></div>
+      <div class="cv-gear-slot"><img src="Packages Pics/Video/Xt4.png" alt="Fujifilm X-T4"></div>
     </div>
-    <!-- Desktop: [photo][photo][photo] | [text] | [photo][photo][photo] -->
-    <div class="cv-sub-b">
-      <div class="cv-photo-slot"></div>
-      <div class="cv-photo-slot"></div>
-      <div class="cv-photo-slot"></div>
-      <div class="cv-text-center-slot"></div>
-      <div class="cv-photo-slot"></div>
-      <div class="cv-photo-slot"></div>
-      <div class="cv-photo-slot"></div>
-    </div>
-    <!-- Mobile diamond: 1 · 2 · 3 · 2 · 1 -->
-    <div class="cv-diamond">
-      <div class="cv-photo-slot"></div><!-- row 1: center photo -->
-      <div class="cv-photo-slot"></div><!-- row 2: left photo -->
-      <div class="cv-photo-slot"></div><!-- row 2: right photo -->
-      <div class="cv-text-slot"></div> <!-- row 3: text left -->
-      <div class="cv-text-slot"></div> <!-- row 3: text center -->
-      <div class="cv-text-slot"></div> <!-- row 3: text right -->
-      <div class="cv-photo-slot"></div><!-- row 4: left photo -->
-      <div class="cv-photo-slot"></div><!-- row 4: right photo -->
-      <div class="cv-photo-slot"></div><!-- row 5: center photo -->
+    <!-- Bottom row: lenses & accessories -->
+    <div class="cv-gear-bottom">
+      <div class="cv-gear-slot"><img src="Packages Pics/Video/Jupiter.png" alt="Jupiter-9 85mm"></div>
+      <div class="cv-gear-slot"><img src="Packages Pics/Video/Laowa.png" alt="Laowa Macro 65mm"></div>
+      <div class="cv-gear-slot"><img src="Packages Pics/Video/Tak.png" alt="SMC Takumar 55mm"></div>
+      <div class="cv-gear-slot"><img src="Packages Pics/Video/Viv.png" alt="Vivitar 135mm"></div>
+      <div class="cv-gear-slot"><img src="Packages Pics/Video/Viv Macro.png" alt="Vivitar Macro"></div>
+      <div class="cv-gear-slot"><img src="Packages Pics/Video/xf1024.png" alt="XF 10-24mm"></div>
+      <div class="cv-gear-slot"><img src="Packages Pics/Video/xf1655.png" alt="XF 16-55mm"></div>
+      <div class="cv-gear-slot"><img src="Packages Pics/Video/Adapter.png" alt="Lens Adapter"></div>
     </div>
   </div>
 </section>
