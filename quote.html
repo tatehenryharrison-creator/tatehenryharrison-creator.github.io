@@ -233,12 +233,12 @@
     }
     .success-title { font-size: 2.2rem; margin: 0 0 16px; color: #1C1A14; }
     .success-body { font-family: 'EB Garamond', serif; font-size: 1.1rem; color: #635f51; line-height: 1.7; max-width: 400px; margin: 0 auto 36px; }
-    .success-back { font-family: 'EB Garamond', serif; font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase; color: #5C6E82; text-decoration: none; border-bottom: 1px solid rgba(92,110,130,0.35); padding-bottom: 2px; }
-    .success-back:hover { border-bottom-color: #5C6E82; }
-    .success-consult { margin-top: 52px; padding-top: 36px; border-top: 1px solid rgba(99,95,81,0.12); }
-    .success-consult-hint { font-family: 'EB Garamond', serif; font-size: 0.9rem; color: #a8a49c; margin: 0 0 18px; letter-spacing: 0.02em; }
-    .success-consult-btn { display: inline-block; font-family: 'EB Garamond', serif; font-size: 0.95rem; letter-spacing: 0.04em; color: #2A2220; text-decoration: none; padding: 13px 32px; border: 1px solid rgba(99,95,81,0.3); border-radius: 50px; transition: border-color 0.2s ease, background 0.2s ease; }
-    .success-consult-btn:hover { border-color: rgba(201,168,76,0.6); background: rgba(201,168,76,0.04); }
+    .success-actions { display: flex; flex-direction: column; align-items: center; gap: 14px; margin-top: 36px; padding-top: 36px; border-top: 1px solid rgba(99,95,81,0.12); }
+    .success-next-label { font-family: 'EB Garamond', serif; font-size: 0.9rem; color: #a8a49c; margin: 0 0 4px; letter-spacing: 0.02em; }
+    .success-consult-btn { display: inline-block; font-family: 'EB Garamond', serif; font-size: 0.95rem; letter-spacing: 0.04em; color: #f5f4f0; background: #5C6E82; text-decoration: none; padding: 13px 32px; border-radius: 50px; transition: opacity 0.2s ease; }
+    .success-consult-btn:hover { opacity: 0.85; }
+    .success-back { display: inline-block; font-family: 'EB Garamond', serif; font-size: 0.9rem; letter-spacing: 0.04em; color: #a8a49c; text-decoration: none; padding: 11px 32px; border: 1px solid rgba(99,95,81,0.28); border-radius: 50px; transition: border-color 0.2s ease, color 0.2s ease; margin-top: 4px; }
+    .success-back:hover { border-color: rgba(99,95,81,0.5); color: #635f51; }
 
     /* FOOTER */
     footer { background: #1C1A14; color: #e8e1d4; text-align: center; padding: 32px 10%; font-size: 0.88rem; line-height: 1.8; }
@@ -387,10 +387,10 @@
     </div>
     <h2 class="success-title">You're all set.</h2>
     <p class="success-body">Your quote request is on its way to Tate. Expect a reply within 24 hours.</p>
-    <a href="index.html" class="success-back">← Back to home</a>
-    <div class="success-consult">
-      <p class="success-consult-hint">Want to talk through the details first?</p>
+    <div class="success-actions">
+      <p class="success-next-label">Next Step</p>
       <a href="schedule.html" class="success-consult-btn">Schedule a Free Consultation →</a>
+      <a href="index.html" class="success-back">← Back to Home</a>
     </div>
   </div>
 
