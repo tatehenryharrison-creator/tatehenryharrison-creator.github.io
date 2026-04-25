@@ -62,67 +62,51 @@
     .addon-subtitle { font-family: 'EB Garamond', serif; font-size: 0.98rem; color: #635f51; text-align: center; margin: 0 0 44px; line-height: 1.6; max-width: 500px; margin-left: auto; margin-right: auto; }
 
     .addon-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; margin-bottom: 0; }
-    /* Qty stepper inside panels */
-    .addon-stepper { display: inline-flex; align-items: center; gap: 0; border: 1px solid rgba(201,168,76,0.35); border-radius: 50px; overflow: hidden; margin-bottom: 16px; }
-    .addon-stepper-btn { background: none; border: none; color: #C9A84C; font-size: 1.1rem; padding: 6px 16px; cursor: pointer; transition: background 0.2s; font-family: 'EB Garamond', serif; }
-    .addon-stepper-btn:hover { background: rgba(201,168,76,0.12); }
-    .addon-stepper-count { font-family: 'Cinzel', serif; font-size: 0.95rem; color: #e8e1d4; min-width: 32px; text-align: center; }
-    .addon-stepper-label { font-family: 'EB Garamond', serif; font-size: 0.82rem; color: rgba(232,225,212,0.45); margin-bottom: 16px; display: block; }
-    /* Mini stepper in cart bar addon-toggles */
-    .addon-qty-wrap { display: inline-flex; align-items: center; gap: 6px; font-family: 'EB Garamond', serif; font-size: 0.88rem; color: #635f51; border: 1px solid rgba(99,95,81,0.25); border-radius: 50px; padding: 4px 8px 4px 14px; }
-    .addon-qty-wrap.addon-toggle--active { background: #1C1A14; border-color: #1C1A14; color: #e8e1d4; }
-    .addon-qty-wrap .aq-label { pointer-events: none; }
+    /* ── REDESIGNED ADD-ON CARDS ── */
+    .addon-card { background: linear-gradient(155deg, #1e1b17 0%, #272118 60%, #1a1714 100%); border: 1px solid rgba(201,168,76,0.16); border-radius: 16px; overflow: hidden; transition: border-color 0.3s ease, box-shadow 0.3s ease; }
+    .addon-card:hover { border-color: rgba(201,168,76,0.3); box-shadow: 0 8px 28px rgba(0,0,0,0.22); }
+    .addon-card.is-added { border-color: rgba(201,168,76,0.55); box-shadow: 0 0 0 1px rgba(201,168,76,0.12), 0 8px 28px rgba(0,0,0,0.2); }
+    .addon-card-main { display: flex; align-items: center; gap: 14px; padding: 18px 20px; }
+    .addon-card-icon-wrap { flex-shrink: 0; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; background: rgba(201,168,76,0.06); border: 1px solid rgba(201,168,76,0.14); border-radius: 12px; }
+    .addon-card-icon-wrap svg { width: 24px; height: 24px; }
+    .addon-card-info { flex: 1; min-width: 0; }
+    .addon-card-name { font-family: 'Cinzel', serif; font-weight: 400; font-size: 0.88rem; color: #e8e1d4; margin: 0 0 3px; letter-spacing: 0.3px; }
+    .addon-card-tagline { font-family: 'EB Garamond', serif; font-size: 0.84rem; color: rgba(232,225,212,0.38); margin: 0 0 6px; line-height: 1.4; }
+    .addon-card-details-btn { background: none; border: none; padding: 0; cursor: pointer; font-family: 'EB Garamond', serif; font-size: 0.72rem; letter-spacing: 0.07em; text-transform: uppercase; color: rgba(232,225,212,0.25); display: inline-flex; align-items: center; gap: 4px; transition: color 0.2s ease; }
+    .addon-card-details-btn:hover { color: rgba(201,168,76,0.6); }
+    .addon-card-chevron { transition: transform 0.3s ease; display: inline-block; }
+    .addon-card.details-open .addon-card-chevron { transform: rotate(180deg); }
+    .addon-card-action { flex-shrink: 0; }
+    .addon-toggle-btn { display: inline-flex; align-items: center; font-family: 'EB Garamond', serif; font-size: 0.88rem; letter-spacing: 0.04em; color: #1C1A14; background: #C9A84C; border: 1px solid transparent; border-radius: 50px; padding: 9px 20px; cursor: pointer; white-space: nowrap; transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.15s ease; }
+    .addon-toggle-btn:hover { transform: translateY(-1px); opacity: 0.9; }
+    .addon-toggle-btn.added { background: transparent; color: #C9A84C; border-color: rgba(201,168,76,0.45); }
+    .addon-card-stepper { display: flex; align-items: center; gap: 8px; }
+    .addon-stepper-btn { width: 30px; height: 30px; border-radius: 50%; border: 1px solid rgba(201,168,76,0.32); background: transparent; color: #C9A84C; font-size: 1.1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.15s, border-color 0.15s; }
+    .addon-stepper-btn:hover { background: rgba(201,168,76,0.1); border-color: rgba(201,168,76,0.55); }
+    .addon-stepper-count { font-family: 'Cinzel', serif; font-size: 0.9rem; color: #e8e1d4; min-width: 20px; text-align: center; }
+    .addon-card-expand { max-height: 0; overflow: hidden; transition: max-height 0.55s cubic-bezier(0.22,1,0.36,1); }
+    .addon-card.details-open .addon-card-expand { max-height: 400px; }
+    .addon-card-expand-inner { padding: 16px 20px 20px calc(44px + 34px); border-top: 1px solid rgba(201,168,76,0.09); }
+    .addon-card-expand-desc { font-family: 'EB Garamond', serif; font-size: 0.93rem; color: rgba(232,225,212,0.5); line-height: 1.72; margin: 0 0 14px; }
+    .addon-card-expand-tags { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+    .addon-card-expand-tags li { font-family: 'EB Garamond', serif; font-size: 0.8rem; color: rgba(201,168,76,0.8); background: rgba(201,168,76,0.07); border: 1px solid rgba(201,168,76,0.2); border-radius: 4px; padding: 3px 9px; }
+    .addon-card-portfolio-link { display: inline-block; margin-top: 12px; font-family: 'EB Garamond', serif; font-size: 0.82rem; color: #5C6E82; letter-spacing: 0.04em; text-decoration: none; border-bottom: 1px solid rgba(92,110,130,0.35); padding-bottom: 1px; }
+    /* Mini stepper in cart bar */
+    .addon-qty-wrap { display: inline-flex; align-items: center; gap: 4px; font-size: 0.78rem; }
     .addon-qty-wrap .aq-price { font-size: 0.78rem; opacity: 0.6; }
     .aq-btn { background: none; border: none; color: inherit; cursor: pointer; font-size: 1rem; line-height: 1; padding: 0 4px; opacity: 0.7; }
     .aq-btn:hover { opacity: 1; }
     .aq-count { min-width: 18px; text-align: center; font-family: 'Cinzel', serif; font-size: 0.82rem; }
-    .addon-fold-btn {
-      display: flex; flex-direction: column; align-items: center; gap: 10px;
-      padding: 22px 16px 20px;
-      background: linear-gradient(155deg, #1e1b17 0%, #2d2720 60%, #1a1714 100%);
-      border: 1px solid rgba(201,168,76,0.18);
-      border-radius: 14px; cursor: pointer;
-      transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.25s ease;
-      text-align: center; color: #e8e1d4;
-    }
-    .addon-fold-btn:hover { border-color: rgba(201,168,76,0.45); box-shadow: 0 8px 28px rgba(0,0,0,0.25); transform: translateY(-2px); }
-    .addon-fold-btn.active { border-color: #C9A84C; box-shadow: 0 0 0 2px rgba(201,168,76,0.2), 0 8px 28px rgba(0,0,0,0.25); }
-    .addon-fold-icon { width: 36px; height: 36px; opacity: 0.85; }
-    .addon-fold-name { font-family: 'Cinzel', serif; font-size: 0.88rem; font-weight: 400; color: #e8e1d4; letter-spacing: 0.5px; }
-    .addon-fold-price { font-family: 'EB Garamond', serif; font-size: 0.8rem; color: #C9A84C; letter-spacing: 0.5px; }
-    .addon-fold-arrow { font-size: 0.7rem; color: rgba(232,225,212,0.3); margin-top: 2px; transition: transform 0.3s ease; }
-    .addon-fold-btn.active .addon-fold-arrow { transform: rotate(180deg); }
-
-    .addon-panel {
-      max-height: 0; overflow: hidden;
-      transition: max-height 0.7s cubic-bezier(0.22,1,0.36,1);
-      background: #1a1714; border-radius: 0 0 14px 14px;
-      margin-top: -4px;
-    }
-    .addon-panel-inner { padding: 32px 36px 36px; }
-    .addon-panel-head { font-family: 'Cinzel', serif; font-size: 1.3rem; color: #e8e1d4; margin: 0 0 10px; }
-    .addon-panel-desc { font-family: 'EB Garamond', serif; font-size: 0.98rem; color: rgba(232,225,212,0.6); line-height: 1.7; margin: 0 0 22px; }
-    .addon-panel-list { list-style: none; margin: 0 0 24px; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
-    .addon-panel-list li { font-family: 'EB Garamond', serif; font-size: 0.82rem; color: #C9A84C; background: rgba(201,168,76,0.08); border: 1px solid rgba(201,168,76,0.22); border-radius: 4px; padding: 4px 10px; }
-    .addon-add-btn {
-      display: inline-flex; align-items: center; gap: 8px;
-      font-family: 'EB Garamond', serif; font-size: 0.9rem; letter-spacing: 0.04em;
-      color: #1C1A14; background: #C9A84C; border: none; border-radius: 50px;
-      padding: 10px 28px; cursor: pointer;
-      transition: opacity 0.2s ease, transform 0.2s ease;
-    }
-    .addon-add-btn:hover { opacity: 0.88; transform: translateY(-1px); }
-    .addon-add-btn.added { background: rgba(201,168,76,0.15); color: #C9A84C; border: 1px solid rgba(201,168,76,0.4); }
-
-    .addon-btn-wrap { opacity: 0; transform: translateY(32px); transition: opacity 0.7s ease, transform 0.7s ease; }
-    .addon-btn-wrap.is-visible { opacity: 1; transform: translateY(0); }
+    /* 2-col grid for add-on cards */
+    .sect-addons-grid--2 { grid-template-columns: repeat(2, 1fr); }
+    @media (max-width: 700px) { .sect-addons-grid--2 { grid-template-columns: 1fr; } .addon-card-expand-inner { padding-left: 20px; } }
 
     /* ── SECTION-EMBEDDED ADD-ONS ── */
     .sect-addons { padding: 0 3% 64px; }
     .sect-addons-label { font-family: 'EB Garamond', serif; font-size: 0.68rem; letter-spacing: 3px; text-transform: uppercase; color: rgba(232,225,212,0.3); margin: 0 0 22px; text-align: center; }
     #cv-section .sect-addons-label { color: rgba(99,95,81,0.45); }
     .sect-addons-grid { display: grid; gap: 14px; }
-    .sect-addons-grid--4 { grid-template-columns: repeat(4, 1fr); }
+    .sect-addons-grid--4 { grid-template-columns: repeat(2, 1fr); }
     .sect-addons-grid--1 { grid-template-columns: 1fr; max-width: 300px; margin: 0 auto; }
     /* Paper-to-dark fade used at bottom of Video and Audio sections */
     .sect-fade-to-dark { height: 240px; background: linear-gradient(to bottom, #f5f4f0 0%, #d3d2ce 25%, #898782 50%, #3e3c36 75%, #1C1A14 100%); pointer-events: none; margin: 0; }
@@ -1041,128 +1025,152 @@
   <!-- Video Add-Ons: Vintage & Film, Drone, Macro -->
   <div class="sect-addons">
     <p class="sect-addons-label">Add-Ons</p>
-    <div class="sect-addons-grid sect-addons-grid--4">
+    <div class="sect-addons-grid sect-addons-grid--2">
 
       <!-- Vintage Glass -->
-      <div>
-        <button class="addon-fold-btn" data-key="vintage-glass" onclick="toggleAddonPanel('vintage-glass')">
-          <svg class="addon-fold-icon" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="26" cy="26" r="23" stroke="#C9A84C" stroke-width="1.5"/>
-            <circle cx="26" cy="26" r="14.5" stroke="#C9A84C" stroke-width="1" opacity="0.45"/>
-            <circle cx="26" cy="26" r="7" stroke="#C9A84C" stroke-width="1.5"/>
-            <line x1="26" y1="11.5" x2="26" y2="5" stroke="#C9A84C" stroke-width="1.2" stroke-linecap="round"/>
-            <line x1="26" y1="47" x2="26" y2="40.5" stroke="#C9A84C" stroke-width="1.2" stroke-linecap="round"/>
-            <line x1="40.5" y1="26" x2="47" y2="26" stroke="#C9A84C" stroke-width="1.2" stroke-linecap="round"/>
-            <line x1="5" y1="26" x2="11.5" y2="26" stroke="#C9A84C" stroke-width="1.2" stroke-linecap="round"/>
-          </svg>
-          <span class="addon-fold-name">Vintage Glass</span>
-          <span class="addon-fold-arrow">▾</span>
-        </button>
-        <div class="addon-panel" id="addon-panel-vintage-glass">
-          <div class="addon-panel-inner">
-            <h4 class="addon-panel-head">Vintage Glass</h4>
-            <p class="addon-panel-desc">Adapted lenses from the 1960s–80s are imbued with organic bokeh, legendary flares, and gentle warmth modern optics can't replicate. Some stories deserve a softer edge.</p>
-            <ul class="addon-panel-list">
+      <div class="addon-card" id="card-vintage-glass">
+        <div class="addon-card-main">
+          <div class="addon-card-icon-wrap">
+            <svg viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="26" cy="26" r="23" stroke="#C9A84C" stroke-width="1.5"/>
+              <circle cx="26" cy="26" r="14.5" stroke="#C9A84C" stroke-width="1" opacity="0.45"/>
+              <circle cx="26" cy="26" r="7" stroke="#C9A84C" stroke-width="1.5"/>
+              <line x1="26" y1="11.5" x2="26" y2="5" stroke="#C9A84C" stroke-width="1.2" stroke-linecap="round"/>
+              <line x1="26" y1="47" x2="26" y2="40.5" stroke="#C9A84C" stroke-width="1.2" stroke-linecap="round"/>
+              <line x1="40.5" y1="26" x2="47" y2="26" stroke="#C9A84C" stroke-width="1.2" stroke-linecap="round"/>
+              <line x1="5" y1="26" x2="11.5" y2="26" stroke="#C9A84C" stroke-width="1.2" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="addon-card-info">
+            <p class="addon-card-name">Vintage Glass</p>
+            <p class="addon-card-tagline">Organic bokeh &amp; legendary flares</p>
+            <button class="addon-card-details-btn" onclick="toggleAddonDetails('vintage-glass')">Details <span class="addon-card-chevron">▾</span></button>
+          </div>
+          <div class="addon-card-action">
+            <button class="addon-toggle-btn" id="btn-vintage-glass" onclick="toggleAddon('vintage-glass'); updateAddonBtn('vintage-glass')">Add</button>
+          </div>
+        </div>
+        <div class="addon-card-expand" id="expand-vintage-glass">
+          <div class="addon-card-expand-inner">
+            <p class="addon-card-expand-desc">Adapted lenses from the 1960s–80s are imbued with organic bokeh, legendary flares, and gentle warmth modern optics can't replicate. Some stories deserve a softer edge.</p>
+            <ul class="addon-card-expand-tags">
               <li>SMC Takumar 55mm</li>
               <li>Юпитер (Jupiter) 9</li>
               <li>Vivitar Series 1</li>
             </ul>
-            <button class="addon-add-btn" id="btn-vintage-glass" onclick="toggleAddon('vintage-glass'); updateAddonBtn('vintage-glass')">Add to Order</button>
           </div>
         </div>
       </div>
 
       <!-- 35mm Film -->
-      <div>
-        <button class="addon-fold-btn" data-key="film-35mm" onclick="toggleAddonPanel('film-35mm')">
-          <svg class="addon-fold-icon" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="10" y="9" width="32" height="34" rx="3.5" stroke="#C9A84C" stroke-width="1.5"/>
-            <rect x="15" y="4" width="22" height="6" rx="2" stroke="#C9A84C" stroke-width="1.5"/>
-            <rect x="15" y="42" width="22" height="6" rx="2" stroke="#C9A84C" stroke-width="1.5"/>
-            <rect x="12" y="16" width="4" height="5" rx="1" fill="#C9A84C" opacity="0.5"/>
-            <rect x="12" y="24" width="4" height="5" rx="1" fill="#C9A84C" opacity="0.5"/>
-            <rect x="12" y="32" width="4" height="5" rx="1" fill="#C9A84C" opacity="0.5"/>
-            <rect x="36" y="16" width="4" height="5" rx="1" fill="#C9A84C" opacity="0.5"/>
-            <rect x="36" y="24" width="4" height="5" rx="1" fill="#C9A84C" opacity="0.5"/>
-            <rect x="36" y="32" width="4" height="5" rx="1" fill="#C9A84C" opacity="0.5"/>
-            <rect x="19" y="16" width="14" height="20" rx="2" stroke="#C9A84C" stroke-width="1" opacity="0.65"/>
-            <circle cx="26" cy="26" r="4" stroke="#C9A84C" stroke-width="1" opacity="0.5"/>
-          </svg>
-          <span class="addon-fold-name">35mm Film</span>
-          <span class="addon-fold-arrow">▾</span>
-        </button>
-        <div class="addon-panel" id="addon-panel-film-35mm">
-          <div class="addon-panel-inner">
-            <h4 class="addon-panel-head">35mm Film</h4>
-            <p class="addon-panel-desc">When working with analogue film, every frame is deliberate before the shutter fires. The quality of film is very similar to digital, and each film recipe is strikingly artistic.</p>
-            <ul class="addon-panel-list">
+      <div class="addon-card" id="card-film-35mm">
+        <div class="addon-card-main">
+          <div class="addon-card-icon-wrap">
+            <svg viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="10" y="9" width="32" height="34" rx="3.5" stroke="#C9A84C" stroke-width="1.5"/>
+              <rect x="15" y="4" width="22" height="6" rx="2" stroke="#C9A84C" stroke-width="1.5"/>
+              <rect x="15" y="42" width="22" height="6" rx="2" stroke="#C9A84C" stroke-width="1.5"/>
+              <rect x="12" y="16" width="4" height="5" rx="1" fill="#C9A84C" opacity="0.5"/>
+              <rect x="12" y="24" width="4" height="5" rx="1" fill="#C9A84C" opacity="0.5"/>
+              <rect x="12" y="32" width="4" height="5" rx="1" fill="#C9A84C" opacity="0.5"/>
+              <rect x="36" y="16" width="4" height="5" rx="1" fill="#C9A84C" opacity="0.5"/>
+              <rect x="36" y="24" width="4" height="5" rx="1" fill="#C9A84C" opacity="0.5"/>
+              <rect x="36" y="32" width="4" height="5" rx="1" fill="#C9A84C" opacity="0.5"/>
+              <rect x="19" y="16" width="14" height="20" rx="2" stroke="#C9A84C" stroke-width="1" opacity="0.65"/>
+              <circle cx="26" cy="26" r="4" stroke="#C9A84C" stroke-width="1" opacity="0.5"/>
+            </svg>
+          </div>
+          <div class="addon-card-info">
+            <p class="addon-card-name">35mm Film</p>
+            <p class="addon-card-tagline">Deliberate frames, artistic grain</p>
+            <button class="addon-card-details-btn" onclick="toggleAddonDetails('film-35mm')">Details <span class="addon-card-chevron">▾</span></button>
+          </div>
+          <div class="addon-card-action">
+            <button class="addon-toggle-btn" id="btn-film-35mm" onclick="toggleAddon('film-35mm'); updateAddonBtn('film-35mm')">Add</button>
+          </div>
+        </div>
+        <div class="addon-card-expand" id="expand-film-35mm">
+          <div class="addon-card-expand-inner">
+            <p class="addon-card-expand-desc">When working with analogue film, every frame is deliberate before the shutter fires. The quality of film is very similar to digital, and each film recipe is strikingly artistic.</p>
+            <ul class="addon-card-expand-tags">
               <li>Kodak Portra 400</li>
               <li>Kodak Gold 200</li>
               <li>Ilford HP5</li>
               <li>Fuji Superia 400</li>
             </ul>
-            <button class="addon-add-btn" id="btn-film-35mm" onclick="toggleAddon('film-35mm'); updateAddonBtn('film-35mm')">Add to Order</button>
           </div>
         </div>
       </div>
 
       <!-- Drone -->
-      <div>
-        <button class="addon-fold-btn" data-key="drone" onclick="toggleAddonPanel('drone')">
-          <svg class="addon-fold-icon" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="26" cy="26" r="6" stroke="#C9A84C" stroke-width="1.5"/>
-            <line x1="26" y1="20" x2="26" y2="12" stroke="#C9A84C" stroke-width="1.2" stroke-linecap="round"/>
-            <line x1="26" y1="40" x2="26" y2="32" stroke="#C9A84C" stroke-width="1.2" stroke-linecap="round"/>
-            <line x1="20" y1="26" x2="12" y2="26" stroke="#C9A84C" stroke-width="1.2" stroke-linecap="round"/>
-            <line x1="40" y1="26" x2="32" y2="26" stroke="#C9A84C" stroke-width="1.2" stroke-linecap="round"/>
-            <ellipse cx="12" cy="12" rx="5" ry="3" stroke="#C9A84C" stroke-width="1" opacity="0.7"/>
-            <ellipse cx="40" cy="12" rx="5" ry="3" stroke="#C9A84C" stroke-width="1" opacity="0.7"/>
-            <ellipse cx="12" cy="40" rx="5" ry="3" stroke="#C9A84C" stroke-width="1" opacity="0.7"/>
-            <ellipse cx="40" cy="40" rx="5" ry="3" stroke="#C9A84C" stroke-width="1" opacity="0.7"/>
-          </svg>
-          <span class="addon-fold-name">Drone</span>
-          <span class="addon-fold-arrow">▾</span>
-        </button>
-        <div class="addon-panel" id="addon-panel-drone">
-          <div class="addon-panel-inner">
-            <h4 class="addon-panel-head">Drone Footage</h4>
-            <p class="addon-panel-desc">Aerial perspective adds scale, context, and cinematic sweep to any production. Drone footage transforms a good film into something genuinely impressive.</p>
-            <ul class="addon-panel-list">
+      <div class="addon-card" id="card-drone">
+        <div class="addon-card-main">
+          <div class="addon-card-icon-wrap">
+            <svg viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="26" cy="26" r="6" stroke="#C9A84C" stroke-width="1.5"/>
+              <line x1="26" y1="20" x2="26" y2="12" stroke="#C9A84C" stroke-width="1.2" stroke-linecap="round"/>
+              <line x1="26" y1="40" x2="26" y2="32" stroke="#C9A84C" stroke-width="1.2" stroke-linecap="round"/>
+              <line x1="20" y1="26" x2="12" y2="26" stroke="#C9A84C" stroke-width="1.2" stroke-linecap="round"/>
+              <line x1="40" y1="26" x2="32" y2="26" stroke="#C9A84C" stroke-width="1.2" stroke-linecap="round"/>
+              <ellipse cx="12" cy="12" rx="5" ry="3" stroke="#C9A84C" stroke-width="1" opacity="0.7"/>
+              <ellipse cx="40" cy="12" rx="5" ry="3" stroke="#C9A84C" stroke-width="1" opacity="0.7"/>
+              <ellipse cx="12" cy="40" rx="5" ry="3" stroke="#C9A84C" stroke-width="1" opacity="0.7"/>
+              <ellipse cx="40" cy="40" rx="5" ry="3" stroke="#C9A84C" stroke-width="1" opacity="0.7"/>
+            </svg>
+          </div>
+          <div class="addon-card-info">
+            <p class="addon-card-name">Drone</p>
+            <p class="addon-card-tagline">Aerial scale and cinematic sweep</p>
+            <button class="addon-card-details-btn" onclick="toggleAddonDetails('drone')">Details <span class="addon-card-chevron">▾</span></button>
+          </div>
+          <div class="addon-card-action">
+            <button class="addon-toggle-btn" id="btn-drone" onclick="toggleAddon('drone'); updateAddonBtn('drone')">Add</button>
+          </div>
+        </div>
+        <div class="addon-card-expand" id="expand-drone">
+          <div class="addon-card-expand-inner">
+            <p class="addon-card-expand-desc">Aerial perspective adds scale, context, and cinematic sweep to any production. Drone footage transforms a good film into something genuinely impressive.</p>
+            <ul class="addon-card-expand-tags">
               <li>Licensed drone operator</li>
               <li>4K aerial footage</li>
               <li>Fully edited into final cut</li>
               <li>Location-permitting</li>
             </ul>
-            <button class="addon-add-btn" id="btn-drone" onclick="toggleAddon('drone'); updateAddonBtn('drone')">Add to Order</button>
           </div>
         </div>
       </div>
 
       <!-- Macro / Close-Ups -->
-      <div>
-        <button class="addon-fold-btn" data-key="macro" onclick="toggleAddonPanel('macro')">
-          <svg class="addon-fold-icon" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="22" cy="22" r="13" stroke="#C9A84C" stroke-width="1.5"/>
-            <circle cx="22" cy="22" r="6" stroke="#C9A84C" stroke-width="1" opacity="0.55"/>
-            <line x1="31.5" y1="31.5" x2="44" y2="44" stroke="#C9A84C" stroke-width="2" stroke-linecap="round"/>
-            <line x1="18" y1="22" x2="26" y2="22" stroke="#C9A84C" stroke-width="1.2" stroke-linecap="round" opacity="0.6"/>
-            <line x1="22" y1="18" x2="22" y2="26" stroke="#C9A84C" stroke-width="1.2" stroke-linecap="round" opacity="0.6"/>
-          </svg>
-          <span class="addon-fold-name">Macro (Close-Up)</span>
-          <span class="addon-fold-arrow">▾</span>
-        </button>
-        <div class="addon-panel" id="addon-panel-macro">
-          <div class="addon-panel-inner">
-            <h4 class="addon-panel-head">Macro (Close-Up)</h4>
-            <p class="addon-panel-desc">Extreme close-up footage that reveals the texture and detail of your subject. Perfect for products, food, jewelry, botanicals, or any moment where the tiny things tell the story.</p>
-            <ul class="addon-panel-list">
+      <div class="addon-card" id="card-macro">
+        <div class="addon-card-main">
+          <div class="addon-card-icon-wrap">
+            <svg viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="22" cy="22" r="13" stroke="#C9A84C" stroke-width="1.5"/>
+              <circle cx="22" cy="22" r="6" stroke="#C9A84C" stroke-width="1" opacity="0.55"/>
+              <line x1="31.5" y1="31.5" x2="44" y2="44" stroke="#C9A84C" stroke-width="2" stroke-linecap="round"/>
+              <line x1="18" y1="22" x2="26" y2="22" stroke="#C9A84C" stroke-width="1.2" stroke-linecap="round" opacity="0.6"/>
+              <line x1="22" y1="18" x2="22" y2="26" stroke="#C9A84C" stroke-width="1.2" stroke-linecap="round" opacity="0.6"/>
+            </svg>
+          </div>
+          <div class="addon-card-info">
+            <p class="addon-card-name">Macro (Close-Up)</p>
+            <p class="addon-card-tagline">Texture and detail in extreme close-up</p>
+            <button class="addon-card-details-btn" onclick="toggleAddonDetails('macro')">Details <span class="addon-card-chevron">▾</span></button>
+          </div>
+          <div class="addon-card-action">
+            <button class="addon-toggle-btn" id="btn-macro" onclick="toggleAddon('macro'); updateAddonBtn('macro')">Add</button>
+          </div>
+        </div>
+        <div class="addon-card-expand" id="expand-macro">
+          <div class="addon-card-expand-inner">
+            <p class="addon-card-expand-desc">Extreme close-up footage that reveals the texture and detail of your subject. Perfect for products, food, jewelry, botanicals, or any moment where the tiny things tell the story.</p>
+            <ul class="addon-card-expand-tags">
               <li>True macro 1:1 footage</li>
               <li>Texture and detail shots</li>
               <li>Edited into final cut</li>
               <li>Ideal for products &amp; food</li>
             </ul>
-            <a id="macro-portfolio-link" href="index.html?filter=macro-product&from=pricing-videography#work" style="display:inline-block;font-family:'EB Garamond',serif;font-size:0.82rem;color:#5C6E82;letter-spacing:0.04em;text-decoration:none;border-bottom:1px solid rgba(92,110,130,0.35);padding-bottom:1px;margin-bottom:14px;">See examples in portfolio →</a>
-            <button class="addon-add-btn" id="btn-macro" onclick="toggleAddon('macro'); updateAddonBtn('macro')">Add to Order</button>
+            <a id="macro-portfolio-link" href="index.html?filter=macro-product&from=pricing-videography#work" class="addon-card-portfolio-link">See examples in portfolio →</a>
           </div>
         </div>
       </div>
@@ -1205,28 +1213,34 @@
     <div class="sect-addons-grid sect-addons-grid--1">
 
       <!-- Audio Package -->
-      <div>
-        <button class="addon-fold-btn" data-key="audio" onclick="toggleAddonPanel('audio')">
-          <svg class="addon-fold-icon" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M26 8a6 6 0 0 1 6 6v14a6 6 0 0 1-12 0V14a6 6 0 0 1 6-6z" stroke="#C9A84C" stroke-width="1.5"/>
-            <path d="M38 24v4a12 12 0 0 1-24 0v-4" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/>
-            <line x1="26" y1="40" x2="26" y2="46" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/>
-            <line x1="20" y1="46" x2="32" y2="46" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/>
-          </svg>
-          <span class="addon-fold-name">Audio Package</span>
-          <span class="addon-fold-arrow">▾</span>
-        </button>
-        <div class="addon-panel" id="addon-panel-audio">
-          <div class="addon-panel-inner">
-            <h4 class="addon-panel-head">Full Audio Package</h4>
-            <p class="addon-panel-desc">Upgrade to a full audio production package with multi-track sync recording, professional mastering, and music licensing. Don't settle for stock songs online.</p>
-            <ul class="addon-panel-list">
+      <div class="addon-card" id="card-audio">
+        <div class="addon-card-main">
+          <div class="addon-card-icon-wrap">
+            <svg viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M26 8a6 6 0 0 1 6 6v14a6 6 0 0 1-12 0V14a6 6 0 0 1 6-6z" stroke="#C9A84C" stroke-width="1.5"/>
+              <path d="M38 24v4a12 12 0 0 1-24 0v-4" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/>
+              <line x1="26" y1="40" x2="26" y2="46" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/>
+              <line x1="20" y1="46" x2="32" y2="46" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="addon-card-info">
+            <p class="addon-card-name">Audio Package</p>
+            <p class="addon-card-tagline">Multi-track sync, mastering &amp; music</p>
+            <button class="addon-card-details-btn" onclick="toggleAddonDetails('audio')">Details <span class="addon-card-chevron">▾</span></button>
+          </div>
+          <div class="addon-card-action">
+            <button class="addon-toggle-btn" id="btn-audio" onclick="toggleAddon('audio'); updateAddonBtn('audio')">Add</button>
+          </div>
+        </div>
+        <div class="addon-card-expand" id="expand-audio">
+          <div class="addon-card-expand-inner">
+            <p class="addon-card-expand-desc">Upgrade to a full audio production package with multi-track sync recording, professional mastering, and music licensing. Don't settle for stock songs online.</p>
+            <ul class="addon-card-expand-tags">
               <li>Multi-track sync recording</li>
               <li>Boom mic + lapel setup</li>
               <li>Professional audio mastering</li>
               <li>Music licensing included</li>
             </ul>
-            <button class="addon-add-btn" id="btn-audio" onclick="toggleAddon('audio'); updateAddonBtn('audio')">Add to Order</button>
           </div>
         </div>
       </div>
@@ -1267,34 +1281,40 @@
     <div class="sect-addons-grid sect-addons-grid--1">
 
       <!-- Lighting Package -->
-      <div>
-        <button class="addon-fold-btn" data-key="lighting" onclick="toggleAddonPanel('lighting')">
-          <svg class="addon-fold-icon" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="26" cy="20" r="9" stroke="#C9A84C" stroke-width="1.5"/>
-            <line x1="26" y1="5" x2="26" y2="9" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/>
-            <line x1="26" y1="31" x2="26" y2="35" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/>
-            <line x1="11" y1="20" x2="15" y2="20" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/>
-            <line x1="37" y1="20" x2="41" y2="20" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/>
-            <line x1="15.5" y1="9.5" x2="18.5" y2="12.5" stroke="#C9A84C" stroke-width="1.2" stroke-linecap="round"/>
-            <line x1="36.5" y1="9.5" x2="33.5" y2="12.5" stroke="#C9A84C" stroke-width="1.2" stroke-linecap="round"/>
-            <line x1="22" y1="35" x2="30" y2="35" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/>
-            <line x1="23" y1="38.5" x2="29" y2="38.5" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/>
-            <line x1="24.5" y1="42" x2="27.5" y2="42" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/>
-          </svg>
-          <span class="addon-fold-name">Lighting</span>
-          <span class="addon-fold-arrow">▾</span>
-        </button>
-        <div class="addon-panel" id="addon-panel-lighting">
-          <div class="addon-panel-inner">
-            <h4 class="addon-panel-head">Lighting Package</h4>
-            <p class="addon-panel-desc">Professional continuous and strobe lighting setup for controlled, cinematic illumination. Takes your production from documentary to high-end commercial quality.</p>
-            <ul class="addon-panel-list">
+      <div class="addon-card" id="card-lighting">
+        <div class="addon-card-main">
+          <div class="addon-card-icon-wrap">
+            <svg viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="26" cy="20" r="9" stroke="#C9A84C" stroke-width="1.5"/>
+              <line x1="26" y1="5" x2="26" y2="9" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/>
+              <line x1="26" y1="31" x2="26" y2="35" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/>
+              <line x1="11" y1="20" x2="15" y2="20" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/>
+              <line x1="37" y1="20" x2="41" y2="20" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/>
+              <line x1="15.5" y1="9.5" x2="18.5" y2="12.5" stroke="#C9A84C" stroke-width="1.2" stroke-linecap="round"/>
+              <line x1="36.5" y1="9.5" x2="33.5" y2="12.5" stroke="#C9A84C" stroke-width="1.2" stroke-linecap="round"/>
+              <line x1="22" y1="35" x2="30" y2="35" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/>
+              <line x1="23" y1="38.5" x2="29" y2="38.5" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/>
+              <line x1="24.5" y1="42" x2="27.5" y2="42" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="addon-card-info">
+            <p class="addon-card-name">Lighting</p>
+            <p class="addon-card-tagline">Controlled, cinematic illumination</p>
+            <button class="addon-card-details-btn" onclick="toggleAddonDetails('lighting')">Details <span class="addon-card-chevron">▾</span></button>
+          </div>
+          <div class="addon-card-action">
+            <button class="addon-toggle-btn" id="btn-lighting" onclick="toggleAddon('lighting'); updateAddonBtn('lighting')">Add</button>
+          </div>
+        </div>
+        <div class="addon-card-expand" id="expand-lighting">
+          <div class="addon-card-expand-inner">
+            <p class="addon-card-expand-desc">Professional continuous and strobe lighting setup for controlled, cinematic illumination. Takes your production from documentary to high-end commercial quality.</p>
+            <ul class="addon-card-expand-tags">
               <li>Aputure 600D key light</li>
               <li>Softbox + reflector kit</li>
               <li>Practical accent lights</li>
               <li>Full setup + breakdown</li>
             </ul>
-            <button class="addon-add-btn" id="btn-lighting" onclick="toggleAddon('lighting'); updateAddonBtn('lighting')">Add to Order</button>
           </div>
         </div>
       </div>
@@ -1310,121 +1330,143 @@
     <h2 class="cv-banner-title">Delivery</h2>
   </div>
   <div class="sect-addons">
-    <div class="sect-addons-grid sect-addons-grid--4">
+    <div class="sect-addons-grid sect-addons-grid--2">
 
-      <!-- Extra Revision (qty) -->
-      <div>
-        <button class="addon-fold-btn" data-key="extra-revision" onclick="toggleAddonPanel('extra-revision')">
-          <svg class="addon-fold-icon" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M38 14H14a2 2 0 0 0-2 2v20a2 2 0 0 0 2 2h24a2 2 0 0 0 2-2V16a2 2 0 0 0-2-2z" stroke="#C9A84C" stroke-width="1.5"/>
-            <path d="M20 22l4 4 8-8" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M8 14c3-5 10-8 18-8s15 3 18 8" stroke="#C9A84C" stroke-width="1" stroke-linecap="round" opacity="0.35"/>
-          </svg>
-          <span class="addon-fold-name">Extra Revision</span>
-          <span class="addon-fold-arrow">▾</span>
-        </button>
-        <div class="addon-panel" id="addon-panel-extra-revision">
-          <div class="addon-panel-inner">
-            <h4 class="addon-panel-head">Extra Revision Rounds</h4>
-            <p class="addon-panel-desc">Need more back-and-forth? Add additional revision rounds beyond what's included in your package. Each round covers a full set of changes reviewed together.</p>
-            <ul class="addon-panel-list">
-              <li>Full revision cycle per round</li>
-              <li>Notes reviewed together</li>
-              <li>Stacks with any package</li>
-            </ul>
-            <div class="addon-stepper">
+      <!-- Extra Revision (qty stepper) -->
+      <div class="addon-card" id="card-extra-revision">
+        <div class="addon-card-main">
+          <div class="addon-card-icon-wrap">
+            <svg viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M38 14H14a2 2 0 0 0-2 2v20a2 2 0 0 0 2 2h24a2 2 0 0 0 2-2V16a2 2 0 0 0-2-2z" stroke="#C9A84C" stroke-width="1.5"/>
+              <path d="M20 22l4 4 8-8" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M8 14c3-5 10-8 18-8s15 3 18 8" stroke="#C9A84C" stroke-width="1" stroke-linecap="round" opacity="0.35"/>
+            </svg>
+          </div>
+          <div class="addon-card-info">
+            <p class="addon-card-name">Extra Revision</p>
+            <p class="addon-card-tagline">Additional rounds beyond your package</p>
+            <button class="addon-card-details-btn" onclick="toggleAddonDetails('extra-revision')">Details <span class="addon-card-chevron">▾</span></button>
+          </div>
+          <div class="addon-card-action">
+            <div class="addon-card-stepper">
               <button class="addon-stepper-btn" onclick="setAddonQty('extra-revision', -1)">−</button>
               <span class="addon-stepper-count" id="qty-extra-revision">0</span>
               <button class="addon-stepper-btn" onclick="setAddonQty('extra-revision', 1)">+</button>
             </div>
-            <span class="addon-stepper-label">rounds</span>
+          </div>
+        </div>
+        <div class="addon-card-expand" id="expand-extra-revision">
+          <div class="addon-card-expand-inner">
+            <p class="addon-card-expand-desc">Need more back-and-forth? Add additional revision rounds beyond what's included in your package. Each round covers a full set of changes reviewed together.</p>
+            <ul class="addon-card-expand-tags">
+              <li>Full revision cycle per round</li>
+              <li>Notes reviewed together</li>
+              <li>Stacks with any package</li>
+            </ul>
           </div>
         </div>
       </div>
 
-      <!-- +3 Minutes Highly Edited (qty) -->
-      <div>
-        <button class="addon-fold-btn" data-key="plus-3min" onclick="toggleAddonPanel('plus-3min')">
-          <svg class="addon-fold-icon" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="26" cy="28" r="18" stroke="#C9A84C" stroke-width="1.5"/>
-            <line x1="26" y1="28" x2="26" y2="16" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/>
-            <line x1="26" y1="28" x2="34" y2="32" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/>
-            <path d="M22 8h8" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/>
-            <path d="M32 5l4 3-4 3" stroke="#C9A84C" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-          <span class="addon-fold-name">+3 Min Edit</span>
-          <span class="addon-fold-arrow">▾</span>
-        </button>
-        <div class="addon-panel" id="addon-panel-plus-3min">
-          <div class="addon-panel-inner">
-            <h4 class="addon-panel-head">+3 Minutes Highly Edited</h4>
-            <p class="addon-panel-desc">Extend your final cut in 3-minute increments — each block fully color-graded, sound-designed, and cut to the same standard as the rest of the film. For stories that need more room to breathe.</p>
-            <ul class="addon-panel-list">
+      <!-- +3 Minutes Highly Edited (qty stepper) -->
+      <div class="addon-card" id="card-plus-3min">
+        <div class="addon-card-main">
+          <div class="addon-card-icon-wrap">
+            <svg viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="26" cy="28" r="18" stroke="#C9A84C" stroke-width="1.5"/>
+              <line x1="26" y1="28" x2="26" y2="16" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/>
+              <line x1="26" y1="28" x2="34" y2="32" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/>
+              <path d="M22 8h8" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/>
+              <path d="M32 5l4 3-4 3" stroke="#C9A84C" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="addon-card-info">
+            <p class="addon-card-name">+3 Min Edit</p>
+            <p class="addon-card-tagline">Extend your final cut in 3-min blocks</p>
+            <button class="addon-card-details-btn" onclick="toggleAddonDetails('plus-3min')">Details <span class="addon-card-chevron">▾</span></button>
+          </div>
+          <div class="addon-card-action">
+            <div class="addon-card-stepper">
+              <button class="addon-stepper-btn" onclick="setAddonQty('plus-3min', -1)">−</button>
+              <span class="addon-stepper-count" id="qty-plus-3min">0</span>
+              <button class="addon-stepper-btn" onclick="setAddonQty('plus-3min', 1)">+</button>
+            </div>
+          </div>
+        </div>
+        <div class="addon-card-expand" id="expand-plus-3min">
+          <div class="addon-card-expand-inner">
+            <p class="addon-card-expand-desc">Extend your final cut in 3-minute increments — each block fully color-graded, sound-designed, and cut to the same standard as the rest of the film. For stories that need more room to breathe.</p>
+            <ul class="addon-card-expand-tags">
               <li>Per 3-minute block</li>
               <li>Full color grade + audio</li>
               <li>Same quality as main edit</li>
               <li>Seamlessly integrated</li>
             </ul>
-            <div class="addon-stepper">
-              <button class="addon-stepper-btn" onclick="setAddonQty('plus-3min', -1)">−</button>
-              <span class="addon-stepper-count" id="qty-plus-3min">0</span>
-              <button class="addon-stepper-btn" onclick="setAddonQty('plus-3min', 1)">+</button>
-            </div>
-            <span class="addon-stepper-label">3-min blocks</span>
           </div>
         </div>
       </div>
 
       <!-- B-Roll -->
-      <div>
-        <button class="addon-fold-btn" data-key="broll" onclick="toggleAddonPanel('broll')">
-          <svg class="addon-fold-icon" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="8" y="16" width="24" height="20" rx="3" stroke="#C9A84C" stroke-width="1.5"/>
-            <path d="M32 22l10-5v18l-10-5V22z" stroke="#C9A84C" stroke-width="1.5" stroke-linejoin="round"/>
-            <line x1="8" y1="10" x2="32" y2="10" stroke="#C9A84C" stroke-width="1" stroke-linecap="round" opacity="0.4"/>
-            <line x1="12" y1="7" x2="28" y2="7" stroke="#C9A84C" stroke-width="1" stroke-linecap="round" opacity="0.25"/>
-          </svg>
-          <span class="addon-fold-name">B-Roll</span>
-          <span class="addon-fold-arrow">▾</span>
-        </button>
-        <div class="addon-panel" id="addon-panel-broll">
-          <div class="addon-panel-inner">
-            <h4 class="addon-panel-head">B-Roll Package</h4>
-            <p class="addon-panel-desc">A dedicated session of supplemental footage — detail shots, environment cuts, process sequences — that gives the editor more to work with and the final film more texture and rhythm.</p>
-            <ul class="addon-panel-list">
+      <div class="addon-card" id="card-broll">
+        <div class="addon-card-main">
+          <div class="addon-card-icon-wrap">
+            <svg viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="8" y="16" width="24" height="20" rx="3" stroke="#C9A84C" stroke-width="1.5"/>
+              <path d="M32 22l10-5v18l-10-5V22z" stroke="#C9A84C" stroke-width="1.5" stroke-linejoin="round"/>
+              <line x1="8" y1="10" x2="32" y2="10" stroke="#C9A84C" stroke-width="1" stroke-linecap="round" opacity="0.4"/>
+              <line x1="12" y1="7" x2="28" y2="7" stroke="#C9A84C" stroke-width="1" stroke-linecap="round" opacity="0.25"/>
+            </svg>
+          </div>
+          <div class="addon-card-info">
+            <p class="addon-card-name">B-Roll</p>
+            <p class="addon-card-tagline">Supplemental shots, texture &amp; rhythm</p>
+            <button class="addon-card-details-btn" onclick="toggleAddonDetails('broll')">Details <span class="addon-card-chevron">▾</span></button>
+          </div>
+          <div class="addon-card-action">
+            <button class="addon-toggle-btn" id="btn-broll" onclick="toggleAddon('broll'); updateAddonBtn('broll')">Add</button>
+          </div>
+        </div>
+        <div class="addon-card-expand" id="expand-broll">
+          <div class="addon-card-expand-inner">
+            <p class="addon-card-expand-desc">A dedicated session of supplemental footage — detail shots, environment cuts, process sequences — that gives the editor more to work with and the final film more texture and rhythm.</p>
+            <ul class="addon-card-expand-tags">
               <li>Dedicated B-roll session</li>
               <li>Environment &amp; detail shots</li>
               <li>Woven into final edit</li>
               <li>Adds depth and pacing</li>
             </ul>
-            <button class="addon-add-btn" id="btn-broll" onclick="toggleAddon('broll'); updateAddonBtn('broll')">Add to Order</button>
           </div>
         </div>
       </div>
 
       <!-- Long-Form Video -->
-      <div>
-        <button class="addon-fold-btn" data-key="longform" onclick="toggleAddonPanel('longform')">
-          <svg class="addon-fold-icon" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="7" y="13" width="38" height="26" rx="4" stroke="#C9A84C" stroke-width="1.5"/>
-            <path d="M21 19l12 7-12 7V19z" stroke="#C9A84C" stroke-width="1.5" stroke-linejoin="round"/>
-            <line x1="7" y1="43" x2="45" y2="43" stroke="#C9A84C" stroke-width="1" stroke-linecap="round" opacity="0.4"/>
-            <line x1="13" y1="46" x2="39" y2="46" stroke="#C9A84C" stroke-width="1" stroke-linecap="round" opacity="0.25"/>
-          </svg>
-          <span class="addon-fold-name">Long-Form</span>
-          <span class="addon-fold-arrow">▾</span>
-        </button>
-        <div class="addon-panel" id="addon-panel-longform">
-          <div class="addon-panel-inner">
-            <h4 class="addon-panel-head">Long-Form Video</h4>
-            <p class="addon-panel-desc">Full continuous recording with minimal editing — ideal for panels, keynotes, speeches, ceremonies, and events that need complete documentation rather than a cinematic highlight reel.</p>
-            <ul class="addon-panel-list">
+      <div class="addon-card" id="card-longform">
+        <div class="addon-card-main">
+          <div class="addon-card-icon-wrap">
+            <svg viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="7" y="13" width="38" height="26" rx="4" stroke="#C9A84C" stroke-width="1.5"/>
+              <path d="M21 19l12 7-12 7V19z" stroke="#C9A84C" stroke-width="1.5" stroke-linejoin="round"/>
+              <line x1="7" y1="43" x2="45" y2="43" stroke="#C9A84C" stroke-width="1" stroke-linecap="round" opacity="0.4"/>
+              <line x1="13" y1="46" x2="39" y2="46" stroke="#C9A84C" stroke-width="1" stroke-linecap="round" opacity="0.25"/>
+            </svg>
+          </div>
+          <div class="addon-card-info">
+            <p class="addon-card-name">Long-Form</p>
+            <p class="addon-card-tagline">Full event recording, minimal cuts</p>
+            <button class="addon-card-details-btn" onclick="toggleAddonDetails('longform')">Details <span class="addon-card-chevron">▾</span></button>
+          </div>
+          <div class="addon-card-action">
+            <button class="addon-toggle-btn" id="btn-longform" onclick="toggleAddon('longform'); updateAddonBtn('longform')">Add</button>
+          </div>
+        </div>
+        <div class="addon-card-expand" id="expand-longform">
+          <div class="addon-card-expand-inner">
+            <p class="addon-card-expand-desc">Full continuous recording with minimal editing — ideal for panels, keynotes, speeches, ceremonies, and events that need complete documentation rather than a cinematic highlight reel.</p>
+            <ul class="addon-card-expand-tags">
               <li>Full event recording</li>
               <li>Minimal cuts / light edit</li>
               <li>Ideal for speeches &amp; panels</li>
               <li>Delivered as single file</li>
             </ul>
-            <button class="addon-add-btn" id="btn-longform" onclick="toggleAddon('longform'); updateAddonBtn('longform')">Add to Order</button>
           </div>
         </div>
       </div>
@@ -1654,15 +1696,27 @@
 <script>
 function updateAddonBtn(key) {
   const btn = document.getElementById('btn-' + key);
+  const card = document.getElementById('card-' + key);
   if (!btn) return;
-  if ((cart.addons[key] || 0) > 0) {
-    btn.textContent = 'Added ✓';
-    btn.classList.add('added');
-  } else {
-    btn.textContent = 'Add to Order';
-    btn.classList.remove('added');
-  }
+  const isAdded = (cart.addons[key] || 0) > 0;
+  btn.textContent = isAdded ? '✓ Added' : 'Add';
+  btn.classList.toggle('added', isAdded);
+  if (card) card.classList.toggle('is-added', isAdded);
 }
+
+function toggleAddonDetails(key) {
+  const card = document.getElementById('card-' + key);
+  if (card) card.classList.toggle('details-open');
+}
+
+(function() {
+  const _orig = setAddonQty;
+  setAddonQty = function(key, delta) {
+    _orig(key, delta);
+    const card = document.getElementById('card-' + key);
+    if (card) card.classList.toggle('is-added', (cart.addons[key] || 0) > 0);
+  };
+})();
 
 // Nav TOC dropdown
 (function(){
@@ -1918,13 +1972,13 @@ function updateAddonBtn(key) {
     document.addEventListener('DOMContentLoaded', function() {
       renderBar();
       refreshMacroLink();
-      // If returning to the macro add-on specifically, scroll there and open the panel
-      if (restore === 'macro' || window.location.hash === '#addon-panel-macro') {
+      // If returning to the macro add-on specifically, scroll there and open the details
+      if (restore === 'macro' || window.location.hash === '#addon-panel-macro' || window.location.hash === '#expand-macro') {
         setTimeout(function() {
-          var panel = document.getElementById('addon-panel-macro');
-          if (panel) {
-            panel.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            toggleAddonPanel('macro');
+          var card = document.getElementById('card-macro');
+          if (card) {
+            card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            card.classList.add('details-open');
           }
         }, 400);
       }
