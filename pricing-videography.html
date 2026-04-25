@@ -256,6 +256,11 @@
     .sect-addons-grid { display: grid; gap: 14px; }
     .sect-addons-grid--4 { grid-template-columns: repeat(4, 1fr); }
     .sect-addons-grid--1 { grid-template-columns: 1fr; max-width: 300px; margin: 0 auto; }
+    /* Paper-to-dark fade used at bottom of Video and Audio sections */
+    .sect-fade-to-dark { height: 140px; background: linear-gradient(to bottom, #f5f4f0 0%, #1C1A14 100%); pointer-events: none; margin: 0; }
+    #la-section { background: #f5f4f0; }
+    #cv-section .sect-addons,
+    #la-section .sect-addons { background: #1C1A14; padding-top: 48px; }
     /* Delivery section banner */
     .delivery-banner { padding: 64px 10% 52px; text-align: center; border-bottom: 1px solid rgba(201,168,76,0.12); }
 
@@ -1188,6 +1193,7 @@
       <div class="cv-gear-slot"><img src="Packages Pics/Video/Adapter.png" alt="Lens Adapter"></div>
     </div>
   </div>
+  <div class="sect-fade-to-dark"></div>
 
   <!-- Video Add-Ons: Vintage & Film, Drone, Macro -->
   <div class="sect-addons">
@@ -1339,6 +1345,7 @@
       <audio src="" preload="metadata"></audio>
     </div>
   </div>
+  <div class="sect-fade-to-dark"></div>
 
   <!-- Audio Add-On -->
   <div class="sect-addons">
