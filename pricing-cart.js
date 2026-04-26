@@ -153,13 +153,14 @@ function renderBar() {
     el.textContent = cart.addons[el.dataset.addon] || 0;
   });
 
-  if (!cart.package) {
+  const hasAddons = Object.values(cart.addons).some(qty => qty > 0);
+  if (!cart.package && !hasAddons) {
     bar.classList.remove('cart-bar--visible');
     return;
   }
 
   bar.classList.add('cart-bar--visible');
-  if (pkgDisplay) pkgDisplay.textContent = PACKAGE_LABELS[cart.package] || cart.package;
+  if (pkgDisplay) pkgDisplay.textContent = cart.package ? (PACKAGE_LABELS[cart.package] || cart.package) : '—';
 
   if (addonsDisplay) {
     const active = Object.entries(cart.addons)
@@ -172,12 +173,14 @@ function renderBar() {
 
   if (proceedBtn) {
     proceedBtn.onclick = () => {
-      const page = PAYMENT_PAGES[cart.package];
-      if (!page) return;
+      const page = PAYMENT_PAGES[cart.package] || 'quote.html';
       const addonsArr = Object.entries(cart.addons)
         .filter(([, qty]) => qty > 0)
         .map(([key, qty]) => qty > 1 ? `${key}:${qty}` : key);
-      window.location.href = `${page}?package=${cart.package}&addons=${addonsArr.join(',')}`;
+      const params = [];
+      if (cart.package) params.push(`package=${cart.package}`);
+      if (addonsArr.length) params.push(`addons=${addonsArr.join(',')}`);
+      window.location.href = page + (params.length ? `?${params.join('&')}` : '');
     };
   }
 
