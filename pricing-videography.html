@@ -121,12 +121,14 @@
     .cv-progress-svg { position: absolute; top: 0; left: 0; width: 100%; height: 500px; overflow: visible; }
     .cv-prog-ghost { fill: none; stroke: rgba(201,168,76,0.12); stroke-width: 1.8; stroke-dasharray: 5 9; stroke-linecap: round; }
     .cv-prog-fill { fill: none; stroke: rgba(201,168,76,0.82); stroke-width: 1.8; stroke-linecap: round; }
-    .cv-progress-label { position: absolute; top: 250px; left: 78%; transform: translate(-50%, -50%); pointer-events: none; }
+    .cv-progress-label { position: absolute; top: 250px; left: 50%; transform: translate(-50%, -50%); pointer-events: none; }
     .cv-progress-label-inner { display: inline-block; padding: 8px 22px; border-radius: 50px; background: rgba(14,12,9,0.7); border: 1px solid rgba(201,168,76,0.28); backdrop-filter: blur(8px); white-space: nowrap; }
     .cv-progress-label-text { font-family: 'EB Garamond', serif; font-size: 0.7rem; letter-spacing: 2.5px; text-transform: uppercase; color: rgba(201,168,76,0.7); margin: 0; }
     #la-section { background: #f5f4f0; }
     #cv-section .sect-addons,
     #la-section .sect-addons { background: #1C1A14; padding-top: 48px; }
+    /* Lift audio add-on section above the absolutely-positioned condenser photo */
+    #la-section .sect-addons { position: relative; z-index: 2; }
     /* Delivery section banner */
     .delivery-banner { padding: 64px 10% 52px; text-align: center; border-bottom: 1px solid rgba(201,168,76,0.12); }
 
@@ -177,22 +179,60 @@
 
     .pkg-tiers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 40px; }
     .pkg-tier {
-      background: #fff; border: 1.5px solid rgba(99,95,81,0.15);
-      border-radius: 16px; padding: 36px 28px;
-      cursor: pointer; position: relative;
-      transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+      background: #fefefc;
+      border-radius: 20px;
+      padding: 28px 24px 24px;
+      cursor: pointer; position: relative; overflow: hidden;
+      display: flex; flex-direction: column; align-items: center; text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
-    .pkg-tier:hover { border-color: rgba(92,110,130,0.35); transform: translateY(-3px); box-shadow: 0 12px 40px rgba(28,26,20,0.08); }
-    .pkg-tier.selected { border-color: #5C6E82; box-shadow: 0 0 0 3px rgba(92,110,130,0.18), 0 12px 40px rgba(92,110,130,0.14); transform: translateY(-3px); }
-    .pkg-tier--popular { border-color: rgba(92,110,130,0.3); }
-    .tier-badge { position: absolute; top: 14px; right: 16px; font-family: 'EB Garamond', serif; font-size: 0.67rem; letter-spacing: 2px; text-transform: uppercase; color: #5C6E82; border: 1px solid rgba(92,110,130,0.3); border-radius: 20px; padding: 3px 11px; }
-    .tier-label { font-family: 'EB Garamond', serif; font-size: 0.7rem; letter-spacing: 2.5px; text-transform: uppercase; color: #a8a49c; margin: 0 0 8px; }
-    .tier-name { font-family: 'Cinzel', serif; font-size: 1.7rem; font-weight: 400; color: #1C1A14; margin: 0 0 6px; }
+    /* Gleam sweep — reuses coin-gleam keyframes */
+    .pkg-tier::after {
+      content: ''; position: absolute; top: 0; bottom: 0; width: 50px; left: -55px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.52), transparent);
+      transform: skewX(-16deg); pointer-events: none;
+      animation: coin-gleam 7s ease-in-out infinite;
+    }
+    .pkg-tier[data-tier="chapter"]::after { animation-delay: 1s; }
+    .pkg-tier[data-tier="novel"]::after   { animation-delay: 2.2s; }
+    .pkg-tier[data-tier="epic"]::after    { animation-delay: 3.4s; }
+    /* ── Chapter — deep crimson ── */
+    .pkg-tier[data-tier="chapter"] { border: 2px solid #8B1020; box-shadow: inset 0 0 0 1px rgba(139,16,32,0.1), 0 0 18px rgba(139,16,32,0.18), 0 8px 32px rgba(139,16,32,0.1); }
+    .pkg-tier[data-tier="chapter"]:hover,
+    .pkg-tier[data-tier="chapter"].selected { transform: translateY(-4px); box-shadow: inset 0 0 0 1px rgba(139,16,32,0.14), 0 0 28px rgba(139,16,32,0.38), 0 14px 44px rgba(139,16,32,0.18); }
+    .pkg-tier[data-tier="chapter"] .tier-name    { color: #8B1020; }
+    .pkg-tier[data-tier="chapter"] .tier-divider { background: #8B1020; }
+    .pkg-tier[data-tier="chapter"] .tier-features { border-top-color: rgba(139,16,32,0.18); }
+    .pkg-tier[data-tier="chapter"] .tier-features li::before { color: rgba(139,16,32,0.4); }
+    .pkg-tier[data-tier="chapter"] .tier-select-hint { color: #8B1020; }
+    /* ── Novel — deep forest green ── */
+    .pkg-tier[data-tier="novel"] { border: 2px solid #0F5C2B; box-shadow: inset 0 0 0 1px rgba(15,92,43,0.1), 0 0 18px rgba(15,92,43,0.18), 0 8px 32px rgba(15,92,43,0.1); }
+    .pkg-tier[data-tier="novel"]:hover,
+    .pkg-tier[data-tier="novel"].selected { transform: translateY(-4px); box-shadow: inset 0 0 0 1px rgba(15,92,43,0.14), 0 0 28px rgba(15,92,43,0.38), 0 14px 44px rgba(15,92,43,0.18); }
+    .pkg-tier[data-tier="novel"] .tier-name    { color: #0F5C2B; }
+    .pkg-tier[data-tier="novel"] .tier-divider { background: #0F5C2B; }
+    .pkg-tier[data-tier="novel"] .tier-features { border-top-color: rgba(15,92,43,0.18); }
+    .pkg-tier[data-tier="novel"] .tier-features li::before { color: rgba(15,92,43,0.4); }
+    .pkg-tier[data-tier="novel"] .tier-select-hint { color: #0F5C2B; }
+    /* ── Epic — gold ── */
+    .pkg-tier[data-tier="epic"] { border: 2px solid #C9A84C; box-shadow: inset 0 0 0 1px rgba(201,168,76,0.12), 0 0 20px rgba(201,168,76,0.2), 0 8px 32px rgba(201,168,76,0.12); }
+    .pkg-tier[data-tier="epic"]:hover,
+    .pkg-tier[data-tier="epic"].selected { transform: translateY(-4px); box-shadow: inset 0 0 0 1px rgba(201,168,76,0.16), 0 0 32px rgba(201,168,76,0.42), 0 14px 44px rgba(201,168,76,0.2); }
+    .pkg-tier[data-tier="epic"] .tier-name    { color: #C9A84C; }
+    .pkg-tier[data-tier="epic"] .tier-divider { background: #C9A84C; }
+    .pkg-tier[data-tier="epic"] .tier-features { border-top-color: rgba(201,168,76,0.2); }
+    .pkg-tier[data-tier="epic"] .tier-features li::before { color: rgba(201,168,76,0.5); }
+    .pkg-tier[data-tier="epic"] .tier-select-hint { color: #C9A84C; }
+    /* Typography */
+    .tier-badge { position: absolute; top: 14px; right: 16px; font-family: 'EB Garamond', serif; font-size: 0.66rem; letter-spacing: 1.5px; text-transform: uppercase; color: #1A7A3F; border: 1px solid rgba(26,122,63,0.4); border-radius: 50px; padding: 2px 10px; }
+    .tier-label { font-family: 'EB Garamond', serif; font-size: 1rem; letter-spacing: 2.5px; text-transform: uppercase; color: #a8a49c; margin: 0 0 10px; text-align: center; }
+    .tier-name  { font-family: 'Cinzel', serif; font-size: 2.2rem; font-weight: 400; margin: 0 0 4px; letter-spacing: 1px; text-align: center; }
+    .tier-divider { width: 34px; height: 1px; margin: 0 auto 16px; opacity: 0.28; }
     .tier-price { font-family: 'EB Garamond', serif; font-size: 1.4rem; color: #5C6E82; margin: 0 0 18px; }
-    .tier-features { list-style: none; margin: 0; padding: 0; border-top: 1px solid rgba(99,95,81,0.1); padding-top: 14px; }
+    .tier-features { list-style: none; margin: 0; padding: 0; border-top: 1px solid rgba(99,95,81,0.1); padding-top: 14px; width: 100%; text-align: left; }
     .tier-features li { font-family: 'EB Garamond', serif; font-size: 0.92rem; color: #635f51; padding: 5px 0 5px 18px; position: relative; line-height: 1.4; }
-    .tier-features li::before { content: '—'; position: absolute; left: 0; color: rgba(92,110,130,0.4); font-size: 0.85rem; }
-    .tier-select-hint { font-family: 'EB Garamond', serif; font-size: 0.78rem; letter-spacing: 1px; color: #5C6E82; text-transform: uppercase; margin-top: 16px; opacity: 0; transition: opacity 0.2s ease; text-align: center; }
+    .tier-features li::before { content: '—'; position: absolute; left: 0; font-size: 0.85rem; }
+    .tier-select-hint { font-family: 'EB Garamond', serif; font-size: 0.78rem; letter-spacing: 1px; text-transform: uppercase; margin-top: auto; padding-top: 16px; opacity: 0; transition: opacity 0.3s ease; text-align: center; }
     .pkg-tier.selected .tier-select-hint { opacity: 1; }
 
     /* Add-on toggles in cart section */
@@ -229,8 +269,6 @@
     .cb-addons-val { font-family: 'EB Garamond', serif; font-size: 0.88rem; color: rgba(232,225,212,0.55); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .cb-total-wrap { display: none; }
     .cb-total-val { font-family: 'Cinzel', serif; font-size: 1.2rem; color: #C9A84C; }
-    .cb-payment-icons { display: flex; gap: 8px; align-items: center; flex-shrink: 0; }
-    .cb-payment-icon { width: 28px; height: 20px; object-fit: contain; opacity: 0.45; filter: grayscale(1) brightness(2); }
     .cb-proceed-btn {
       flex-shrink: 0;
       font-family: 'EB Garamond', serif; font-size: 0.88rem; letter-spacing: 0.04em;
@@ -259,16 +297,32 @@
       .compare-grid { grid-template-columns: 1.2fr 1fr 1fr 1fr; font-size: 0.82rem; }
     }
     @media (max-width: 600px) {
-      .pkg-header { padding: 52px 6% 44px; }
+      .pkg-header { padding: 40px 6% 36px; }
+      .pkg-header-icon { height: 72px; }
       .pkg-title { font-size: 2rem; }
-      .addon-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
-      .sect-addons-grid--4 { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+      .addon-grid { grid-template-columns: 1fr; gap: 10px; }
+      .sect-addons-grid--4 { grid-template-columns: 1fr; gap: 10px; }
+      .sect-addons { padding: 0 5% 52px; }
+      .sect-addons-label { margin-bottom: 16px; }
       .pkg-tiers { grid-template-columns: 1fr; }
       .pkg-tier:nth-child(3):last-child { grid-column: unset; max-width: 100%; justify-self: stretch; }
       .compare-grid { grid-template-columns: 1.1fr 0.8fr 0.8fr 0.8fr; }
-      .cart-bar { flex-wrap: wrap; height: auto; padding: 12px 4%; gap: 10px; }
+      .compare-section { padding: 40px 5% 60px; }
+      .cart-section { padding: 60px 5% 80px; }
+      .cart-bar { flex-wrap: wrap; height: auto; padding: 12px 5%; gap: 8px; }
       .cb-sep { display: none; }
+      .cb-addons-wrap { flex-basis: 100%; order: 3; }
+      .cb-proceed-btn { width: 100%; text-align: center; padding: 13px 20px; order: 4; }
+      .cb-pkg-wrap { order: 1; }
       .wi-text { padding: 40px 6% 40px; }
+      /* Progress line: hide SVG on mobile, show label as a clean divider */
+      .cv-progress-svg { display: none; }
+      .cv-progress-wrap { height: auto; overflow: visible; }
+      .cv-progress-label { position: relative; top: auto; left: auto; transform: none; display: flex; justify-content: center; padding: 28px 5%; }
+      .cv-progress-label-inner { background: #1C1A14; backdrop-filter: none; border-color: rgba(201,168,76,0.45); }
+      .cv-progress-label-text { color: #C9A84C; font-size: 0.72rem; letter-spacing: 2px; }
+      /* Audio extras pitch layout already stacks at 640px */
+      .la-addon-layout { padding: 0 5%; }
     }
 /* ── JOURNEY SECTION ── */
 .journey-section { background: #e8e1d4; padding: 80px 0 120px; border-top: 1px solid rgba(99,95,81,0.1); border-bottom: 1px solid rgba(99,95,81,0.1); }
@@ -343,7 +397,7 @@
   position: absolute;
   left: -3%;
   top: 0;
-  height: 58%;
+  height: clamp(120px, 22vw, 400px);
   width: auto;
   pointer-events: none;
   user-select: none;
@@ -353,15 +407,15 @@
   position: absolute;
   right: -2%;
   bottom: 0;
-  height: 58%;
+  height: clamp(130px, 24vw, 440px);
   width: auto;
   pointer-events: none;
   user-select: none;
   z-index: 1;
 }
 @media (max-width: 600px) {
-  .la-ntg5    { height: 32%; }
-  .la-condensor { height: 36%; }
+  .la-ntg5    { height: clamp(70px, 22vw, 120px); }
+  .la-condensor { height: clamp(80px, 26vw, 130px); }
 }
 
     /* ── COIN SPIN PACKAGE CARDS ── */
@@ -790,6 +844,7 @@
       .pkg-coins-inner { gap: 18px; }
       .coin-card { width: 210px; height: 390px; }
       .coin-tier-name { font-size: 1.6rem; }
+      .tier-name { font-size: 1.7rem; }
       .cv-banner-title { font-size: 2.2rem; letter-spacing: 4px; }
       .cv-sub-a { grid-template-columns: repeat(3, 1fr); }
       .cv-sub-a .cv-text-slot { display: none; }
@@ -991,7 +1046,7 @@
   </div>
   <div class="cv-gear">
     <!-- Top row: hero cameras -->
-    <p class="cv-gear-label">2 Cameras + Drone</p>
+    <p class="cv-gear-label">2 Cameras &amp; Drone</p>
     <div class="cv-gear-top">
       <div class="cv-gear-slot"><img src="Packages Pics/Video/Drone.png" alt="DJI Drone"></div>
       <div class="cv-gear-slot"><img src="Packages Pics/Video/Rig.png" alt="Camera Rig"></div>
@@ -1221,7 +1276,7 @@
     <div class="la-addon-layout">
 
       <div class="la-addon-pitch">
-        <p>Other videographers use stock audio. You can get the real deal from a skilled sound engineer. Add the "Audio Extras" package to build the soundtrack you need.</p>
+        <p>Other videographers use stock audio. Don't settle for stock. You can get the real deal from a skilled sound engineer at Tate Harrison Media. Add the "Audio Extras" package to build the soundtrack you need.</p>
       </div>
 
       <!-- Audio Extras -->
@@ -1277,9 +1332,9 @@
       <div class="cl-photo cl-photo--6" style="background-image:url('Color Grading Pictures/DSCF4090.jpg');background-size:cover;background-position:center;border:none;"></div>
       <div class="cl-center">
         <div>
-          <p class="cl-center-eyebrow">The Grade</p>
+          <p class="cl-center-eyebrow">Color Grading</p>
           <h3 class="cl-center-title">Film That Feels</h3>
-          <p class="cl-center-body">Every frame is graded to a deliberate look — not corrected, crafted.</p>
+          <p class="cl-center-body">Every frame is crafted to match the message you want to convey.</p>
         </div>
       </div>
     </div>
@@ -1575,6 +1630,7 @@
     <div class="pkg-tier" data-tier="chapter" onclick="selectPackage('chapter'); this.querySelector('.tier-select-hint').style.opacity=1;">
       <p class="tier-label">Half Day</p>
       <h3 class="tier-name">Chapter</h3>
+      <div class="tier-divider"></div>
       <ul class="tier-features">
         <li>Single-camera setup</li>
         <li>Up to 4 hours coverage</li>
@@ -1588,6 +1644,7 @@
       <span class="tier-badge">Most Popular</span>
       <p class="tier-label">Full Day</p>
       <h3 class="tier-name">Novel</h3>
+      <div class="tier-divider"></div>
       <ul class="tier-features">
         <li>Multi-camera setup</li>
         <li>Up to 8 hours coverage</li>
@@ -1598,8 +1655,9 @@
       <p class="tier-select-hint">Selected ✓</p>
     </div>
     <div class="pkg-tier" data-tier="epic" onclick="selectPackage('epic'); this.querySelector('.tier-select-hint').style.opacity=1;">
-      <p class="tier-label">Two Days</p>
+      <p class="tier-label">2+ Days</p>
       <h3 class="tier-name">Epic</h3>
+      <div class="tier-divider"></div>
       <ul class="tier-features">
         <li>Multi-camera, 2-day shoot</li>
         <li>Up to 20-min edited video</li>
@@ -1658,18 +1716,6 @@
   <div class="cb-total-wrap">
     <span class="cb-label">Total</span>
     <span class="cb-total-val" id="cb-total"></span>
-  </div>
-  <div class="cb-sep"></div>
-  <!-- Payment icons -->
-  <div class="cb-payment-icons" title="Accepted: PayPal, Venmo, Stripe, Zelle">
-    <!-- PayPal -->
-    <svg width="28" height="20" viewBox="0 0 24 24" class="cb-payment-icon" style="fill:#e8e1d4;opacity:0.4;" xmlns="http://www.w3.org/2000/svg"><path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944.901C5.026.382 5.474 0 5.998 0h7.46c2.57 0 4.578.543 5.69 1.81 1.01 1.15 1.304 2.42 1.012 4.287-.983 5.05-4.349 6.797-8.647 6.797h-2.19c-.524 0-.968.382-1.05.9l-1.12 7.106zm14.146-14.42a3.35 3.35 0 0 0-.607-.541c-.93 4.778-4.005 7.201-9.138 7.201h-2.19a.563.563 0 0 0-.556.479l-1.187 7.527h-.506l-.24 1.516a.56.56 0 0 0 .554.647h3.882c.46 0 .85-.334.922-.788l.816-5.09a.932.932 0 0 1 .923-.788h.58c3.76 0 6.705-1.528 7.565-5.946.36-1.847.174-3.388-.777-4.471z"/></svg>
-    <!-- Venmo -->
-    <svg width="28" height="20" viewBox="0 0 24 24" class="cb-payment-icon" style="fill:#e8e1d4;opacity:0.4;" xmlns="http://www.w3.org/2000/svg"><path d="M19.45 2c.65 1.19.93 2.41.93 3.97 0 4.9-4.2 11.2-7.61 15.03H5.65L2.5 3.31l6.27-.59 1.65 12.14c1.54-2.6 3.42-6.78 3.42-9.6 0-1.5-.28-2.54-.72-3.39L19.45 2Z"/></svg>
-    <!-- Stripe -->
-    <svg width="28" height="20" viewBox="0 0 24 24" class="cb-payment-icon" style="fill:#e8e1d4;opacity:0.4;" xmlns="http://www.w3.org/2000/svg"><path d="M13.976 9.15c-2.172-.806-3.356-1.426-3.356-2.409 0-.831.683-1.305 1.901-1.305 2.227 0 4.515.858 6.09 1.631l.89-5.494C18.252.975 15.697 0 12.165 0 9.667 0 7.589.654 6.104 1.872 4.56 3.147 3.757 4.992 3.757 7.218c0 4.039 2.467 5.76 6.476 7.219 2.585.92 3.445 1.574 3.445 2.583 0 .98-.84 1.545-2.354 1.545-1.875 0-4.965-.921-6.99-2.109l-.9 5.555C5.175 22.99 8.385 24 11.714 24c2.641 0 4.843-.624 6.328-1.813 1.664-1.305 2.525-3.236 2.525-5.732 0-4.128-2.524-5.851-6.591-7.305z"/></svg>
-    <!-- Zelle Z -->
-    <svg width="20" height="20" viewBox="0 0 48 48" class="cb-payment-icon" style="opacity:0.4;" xmlns="http://www.w3.org/2000/svg"><text x="50%" y="54%" dominant-baseline="middle" text-anchor="middle" font-family="Arial,sans-serif" font-weight="800" font-size="36" fill="#e8e1d4">Z</text></svg>
   </div>
   <button class="cb-proceed-btn" id="cb-proceed">Get Your Quote →</button>
 </div>
