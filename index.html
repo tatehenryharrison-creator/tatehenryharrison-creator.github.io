@@ -2086,11 +2086,8 @@ footer > * { position: relative; z-index: 1; }
           <!-- Film 1 -->
           <div>
             <h3 style="font-family:'Cinzel',serif;font-weight:400;font-size:1.2rem;color:#1C1A14;margin:0 0 14px;">Belonging</h3>
-            <div style="border-radius:14px;overflow:hidden;background:#1C1A14;box-shadow:0 12px 40px rgba(28,26,20,0.14);">
-              <video controls preload="metadata" style="width:100%;display:block;max-height:420px;object-fit:contain;background:#111009;">
-                <source src="portfolio/Videography/Documentaries/Belonging.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-              </video>
+            <div style="border-radius:14px;overflow:hidden;background:#1C1A14;box-shadow:0 12px 40px rgba(28,26,20,0.14);aspect-ratio:16/9;">
+              <iframe width="100%" height="100%" src="https://www.youtube.com/embed/ZG26_pvV9kU" title="Belonging" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen style="display:block;"></iframe>
             </div>
           </div>
 
@@ -2113,7 +2110,7 @@ footer > * { position: relative; z-index: 1; }
     <div class="portfolio-grid" id="portfolioGrid">
 
         <!-- ── VIDEOGRAPHY ───────────────────────────────────────── -->
-        <div class="portfolio-item portfolio-item--video" data-priority="1" data-category="videography" data-video-src="portfolio/Videography/Documentaries/Belonging.mp4" data-video-title="Belonging">
+        <div class="portfolio-item portfolio-item--video" data-priority="1" data-category="videography" data-youtube-id="ZG26_pvV9kU" data-video-title="Belonging">
             <div class="portfolio-img-wrap">
                 <img class="portfolio-thumb" src="portfolio/Videography/Documentaries/Belonging_thumb.jpg" alt="Belonging" loading="eager">
                 <div class="portfolio-overlay">
@@ -3191,8 +3188,21 @@ document.querySelectorAll('.portfolio-item').forEach(item => {
         const title = item.querySelector('.caption-title')?.textContent || '';
         const gear  = item.querySelector('.caption-gear')?.textContent || '';
 
-        if (item.dataset.videoSrc) {
-            // Video item — embed a native video player
+        if (item.dataset.youtubeId) {
+            // YouTube embed
+            const wrap = document.createElement('div');
+            wrap.style.cssText = 'width:min(90vw,960px);aspect-ratio:16/9;border-radius:6px;overflow:hidden;background:#111;';
+            const iframe = document.createElement('iframe');
+            iframe.src = `https://www.youtube.com/embed/${item.dataset.youtubeId}?autoplay=1`;
+            iframe.title = item.dataset.videoTitle || '';
+            iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+            iframe.allowFullscreen = true;
+            iframe.style.cssText = 'width:100%;height:100%;border:none;display:block;';
+            wrap.appendChild(iframe);
+            lightboxInner.innerHTML = '';
+            lightboxInner.appendChild(wrap);
+        } else if (item.dataset.videoSrc) {
+            // Native video
             const vid = document.createElement('video');
             vid.src = item.dataset.videoSrc;
             vid.controls = true;
