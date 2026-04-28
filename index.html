@@ -543,6 +543,10 @@ html, body { overflow-x: hidden; }
     cursor: pointer; position: relative;
 }
 .portfolio-item.hidden { display: none; }
+.portfolio-item--clipped { display: none !important; }
+.portfolio-view-more { text-align: center; padding: 28px 0 0; }
+.portfolio-view-more-btn { font-family: 'EB Garamond', serif; font-size: 0.95rem; letter-spacing: 0.06em; color: #635f51; background: transparent; border: 1px solid rgba(99,95,81,0.35); padding: 10px 32px; border-radius: 50px; cursor: pointer; transition: border-color 0.2s, color 0.2s; }
+.portfolio-view-more-btn:hover { border-color: #C9A84C; color: #C9A84C; }
 .portfolio-img-wrap {
     border-radius: 8px; overflow: hidden; position: relative;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -1712,6 +1716,44 @@ footer > * { position: relative; z-index: 1; }
 }
 .reel-placeholder-icon { font-size: 2.5rem; opacity: 0.4; }
 
+/* ── JOURNEY SECTION ── */
+.journey-section { background: #e8e1d4; padding: 80px 0 120px; border-top: 1px solid rgba(99,95,81,0.1); border-bottom: 1px solid rgba(99,95,81,0.1); }
+.journey-header { text-align: center; padding: 0 10% 72px; }
+.journey-header-eyebrow { font-family: 'EB Garamond', serif; font-size: 0.7rem; letter-spacing: 3.5px; text-transform: uppercase; color: #5C6E82; margin: 0 0 14px; }
+.journey-header-title { font-family: 'Cinzel', serif; font-size: 2.2rem; font-weight: 400; color: #1C1A14; margin: 0 0 14px; line-height: 1.15; }
+.journey-header-sub { font-family: 'EB Garamond', serif; font-style: italic; font-size: 1.05rem; color: rgba(99,95,81,0.75); margin: 0; }
+.journey-body { position: relative; width: 100%; overflow: visible; }
+.journey-svg-layer { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; overflow: visible; z-index: 0; }
+.journey-path-ghost { fill: none; stroke: rgba(99,95,81,0.25); stroke-width: 2; stroke-dasharray: 6 10; stroke-linecap: round; }
+.journey-path-fill { fill: none; stroke: #C9A84C; stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
+.journey-stop { position: relative; display: flex; align-items: center; min-height: 260px; padding: 60px 6%; border-bottom: 1px solid rgba(99,95,81,0.08); z-index: 1; }
+.journey-stop:last-child { border-bottom: none; }
+.journey-node-col { position: absolute; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; align-items: center; z-index: 2; }
+.journey-stop[data-side="left"] .journey-node-col { left: 5%; }
+.journey-stop[data-side="right"] .journey-node-col { right: 5%; }
+.journey-node { width: 18px; height: 18px; border-radius: 50%; background: rgba(99,95,81,0.3); border: 2px solid rgba(99,95,81,0.35); box-shadow: 0 0 0 5px transparent; transition: background 0.4s ease, border-color 0.4s ease, box-shadow 0.45s ease, transform 0.4s cubic-bezier(0.34,1.56,0.64,1); position: relative; z-index: 1; }
+.journey-node.is-lit { background: #C9A84C; border-color: #b8912e; box-shadow: 0 0 0 8px rgba(201,168,76,0.18), 0 0 24px rgba(201,168,76,0.28); transform: scale(1.6); }
+.journey-node-label { font-family: 'EB Garamond', serif; font-size: 0.6rem; letter-spacing: 2px; text-transform: uppercase; color: rgba(99,95,81,0.45); white-space: nowrap; margin-top: 10px; }
+.journey-segment-content { max-width: 460px; opacity: 0; transform: translateY(24px); transition: opacity 0.85s cubic-bezier(0.22,1,0.36,1), transform 0.85s cubic-bezier(0.22,1,0.36,1); z-index: 1; }
+.journey-stop[data-side="left"] .journey-segment-content { margin-left: 18%; }
+.journey-stop[data-side="right"] .journey-segment-content { margin-left: auto; margin-right: 18%; text-align: right; }
+.journey-segment-content.is-visible { opacity: 1; transform: translateY(0); }
+.journey-card-num { font-family: 'Cinzel', serif; font-size: 0.58rem; letter-spacing: 3.5px; text-transform: uppercase; color: #5C6E82; display: block; margin-bottom: 8px; }
+.journey-card-title { font-family: 'Cinzel', serif; font-size: 1.75rem; font-weight: 400; color: #1C1A14; margin: 0 0 14px; line-height: 1.2; }
+.journey-card-body { font-family: 'EB Garamond', serif; font-size: 1.05rem; color: rgba(28,26,20,0.6); line-height: 1.8; margin: 0; }
+.journey-cta { text-align: center; padding: 52px 0 0; }
+.journey-cta-btn { display: inline-block; font-family: 'EB Garamond', serif; font-size: 1rem; letter-spacing: 0.06em; color: #1C1A14; background: #C9A84C; text-decoration: none; padding: 14px 44px; border-radius: 50px; transition: opacity 0.2s ease, transform 0.2s ease; }
+.journey-cta-btn:hover { opacity: 0.82; transform: translateY(-2px); }
+@media (max-width: 720px) {
+  .journey-stop { min-height: 200px; padding: 50px 5%; }
+  .journey-stop[data-side="left"] .journey-node-col { left: 3%; }
+  .journey-stop[data-side="right"] .journey-node-col { right: 3%; }
+  .journey-stop[data-side="left"] .journey-segment-content { margin-left: 16%; }
+  .journey-stop[data-side="right"] .journey-segment-content { margin-right: 16%; max-width: 100%; }
+  .journey-header-title { font-size: 1.7rem; }
+  .journey-card-title { font-size: 1.35rem; }
+}
+
 </style>
 </head>
 
@@ -1919,7 +1961,7 @@ footer > * { position: relative; z-index: 1; }
     </div>
 
     <div style="text-align:center; padding: 20px 0 12px; display:flex; flex-direction:column; align-items:center; gap:10px;">
-        <p style="font-family:'EB Garamond',serif; font-size:0.72rem; letter-spacing:1.5px; text-transform:uppercase; color:#a8a49c; margin:0;">Ready to book?</p>
+        <p style="font-family:'EB Garamond',serif; font-size:0.72rem; letter-spacing:1.5px; text-transform:uppercase; color:#a8a49c; margin:0;">Already Strategized With Tate?</p>
         <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap; justify-content:center;">
             <a href="payment-reserve.html" style="
                 display:inline-block;
@@ -2044,11 +2086,8 @@ footer > * { position: relative; z-index: 1; }
           <!-- Film 1 -->
           <div>
             <h3 style="font-family:'Cinzel',serif;font-weight:400;font-size:1.2rem;color:#1C1A14;margin:0 0 14px;">Belonging</h3>
-            <div style="border-radius:14px;overflow:hidden;background:#1C1A14;box-shadow:0 12px 40px rgba(28,26,20,0.14);">
-              <video controls preload="metadata" style="width:100%;display:block;max-height:420px;object-fit:contain;background:#111009;">
-                <source src="portfolio/Videography/Documentaries/Belonging.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-              </video>
+            <div style="border-radius:14px;overflow:hidden;background:#1C1A14;box-shadow:0 12px 40px rgba(28,26,20,0.14);aspect-ratio:16/9;">
+              <iframe width="100%" height="100%" src="https://www.youtube.com/embed/ZG26_pvV9kU" title="Belonging" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen style="display:block;"></iframe>
             </div>
           </div>
 
@@ -2071,7 +2110,7 @@ footer > * { position: relative; z-index: 1; }
     <div class="portfolio-grid" id="portfolioGrid">
 
         <!-- ── VIDEOGRAPHY ───────────────────────────────────────── -->
-        <div class="portfolio-item portfolio-item--video" data-category="videography" data-video-src="portfolio/Videography/Documentaries/Belonging.mp4" data-video-title="Belonging">
+        <div class="portfolio-item portfolio-item--video" data-priority="1" data-category="videography" data-youtube-id="ZG26_pvV9kU" data-video-title="Belonging">
             <div class="portfolio-img-wrap">
                 <img class="portfolio-thumb" src="portfolio/Videography/Documentaries/Belonging_thumb.jpg" alt="Belonging" loading="eager">
                 <div class="portfolio-overlay">
@@ -2100,7 +2139,7 @@ footer > * { position: relative; z-index: 1; }
         </div>
 
         <!-- ── PORTRAITS ──────────────────────────────────────── -->
-        <div class="portfolio-item" data-category="portraits" data-lightbox-src="portfolio/Photography/Portraits/Sarah_Fujifilm X-H2_Jupiter9, 85mm.jpg">
+        <div class="portfolio-item" data-priority="1" data-category="portraits" data-lightbox-src="portfolio/Photography/Portraits/Sarah_Fujifilm X-H2_Jupiter9, 85mm.jpg">
             <div class="portfolio-img-wrap">
                 <img class="portfolio-thumb" src="portfolio/Photography/Portraits/Sarah_Fujifilm X-H2_Jupiter9, 85mm_2.jpg" alt="Sarah" loading="eager">
                 <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Portraits</p></div></div>
@@ -2111,7 +2150,7 @@ footer > * { position: relative; z-index: 1; }
             </div>
         </div>
 
-        <div class="portfolio-item" data-category="portraits" data-lightbox-src="portfolio/Photography/Portraits/Yanja_CanonEos6D_28-70mm f4_2.jpg?v=2">
+        <div class="portfolio-item" data-cat-priority="1" data-category="portraits" data-lightbox-src="portfolio/Photography/Portraits/Yanja_CanonEos6D_28-70mm f4_2.jpg?v=2">
             <div class="portfolio-img-wrap">
                 <img class="portfolio-thumb" src="portfolio/Photography/Portraits/Yanja_CanonEos6D_28-70mm f4.jpg?v=2" alt="Yanja" loading="eager">
                 <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Portraits</p></div></div>
@@ -2122,9 +2161,9 @@ footer > * { position: relative; z-index: 1; }
             </div>
         </div>
 
-        <div class="portfolio-item" data-category="portraits" data-lightbox-src="portfolio/Photography/Portraits/Always Changing 2.jpg">
+        <div class="portfolio-item" data-priority="1" data-category="portraits" data-lightbox-src="portfolio/Photography/Portraits/Always Changing P1.jpg">
             <div class="portfolio-img-wrap">
-                <img class="portfolio-thumb" src="portfolio/Photography/Portraits/Always Changing.jpg" alt="Always Changing" loading="lazy">
+                <img class="portfolio-thumb" src="portfolio/Photography/Portraits/Always Changing P1.jpg" alt="Always Changing" loading="lazy">
                 <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Portraits</p></div></div>
             </div>
             <div class="portfolio-caption">
@@ -2133,7 +2172,7 @@ footer > * { position: relative; z-index: 1; }
             </div>
         </div>
 
-        <div class="portfolio-item" data-category="portraits vintage" data-lightbox-src="portfolio/Photography/Portraits/Old Friends (Portrait)_FilmFujicolorSuperia400_PentaxSMCTakumar55mm.jpg">
+        <div class="portfolio-item" data-priority="1" data-category="portraits vintage" data-lightbox-src="portfolio/Photography/Portraits/Old Friends (Portrait)_FilmFujicolorSuperia400_PentaxSMCTakumar55mm.jpg">
             <div class="portfolio-img-wrap">
                 <img class="portfolio-thumb" src="portfolio/Photography/Portraits/Old Friends (Portrait)_FilmFujicolorSuperia400_PentaxSMCTakumar55mm_2.jpg" alt="Old Friends" loading="eager">
                 <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Portraits · Film</p></div></div>
@@ -2155,7 +2194,7 @@ footer > * { position: relative; z-index: 1; }
             </div>
         </div>
 
-        <div class="portfolio-item" data-category="portraits" data-lightbox-src="portfolio/Photography/Portraits/Cara_2_SMCTakumar55mm.jpg">
+        <div class="portfolio-item" data-cat-priority="1" data-category="portraits" data-lightbox-src="portfolio/Photography/Portraits/Cara_2_SMCTakumar55mm.jpg">
             <div class="portfolio-img-wrap">
                 <img class="portfolio-thumb" src="portfolio/Photography/Portraits/Cara_SMCTakumar55mm.jpg" alt="Cara" loading="lazy">
                 <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Portraits</p></div></div>
@@ -2177,7 +2216,7 @@ footer > * { position: relative; z-index: 1; }
             </div>
         </div>
 
-        <div class="portfolio-item" data-category="portraits" data-lightbox-src="portfolio/Photography/Portraits/Salsa_Fujifilm XT4_35mm f1.4 R.jpg">
+        <div class="portfolio-item" data-priority="1" data-category="portraits" data-lightbox-src="portfolio/Photography/Portraits/Salsa_Fujifilm XT4_35mm f1.4 R.jpg">
             <div class="portfolio-img-wrap">
                 <img class="portfolio-thumb" src="portfolio/Photography/Portraits/Salsa2.jpg" alt="Salsa" loading="lazy">
                 <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Portraits</p></div></div>
@@ -2222,7 +2261,7 @@ footer > * { position: relative; z-index: 1; }
             </div>
         </div>
 
-        <div class="portfolio-item portfolio-item--medium" data-category="street" data-lightbox-src="portfolio/Photography/Street/Pizza Shop2.jpg">
+        <div class="portfolio-item portfolio-item--medium" data-priority="1" data-category="street" data-lightbox-src="portfolio/Photography/Street/Pizza Shop2.jpg">
             <div class="portfolio-img-wrap">
                 <img class="portfolio-thumb" src="portfolio/Photography/Street/Pizza Shop.jpg" alt="Pizza Shop" loading="lazy">
                 <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Street</p></div></div>
@@ -2233,7 +2272,7 @@ footer > * { position: relative; z-index: 1; }
             </div>
         </div>
 
-        <div class="portfolio-item" data-category="street" data-lightbox-src="portfolio/Photography/Street/Break Club.jpg">
+        <div class="portfolio-item" data-cat-priority="1" data-category="street" data-lightbox-src="portfolio/Photography/Street/Break Club.jpg">
             <div class="portfolio-img-wrap">
                 <img class="portfolio-thumb" src="portfolio/Photography/Street/Break Club 2.jpg" alt="Break Club" loading="lazy">
                 <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Street</p></div></div>
@@ -2244,7 +2283,7 @@ footer > * { position: relative; z-index: 1; }
             </div>
         </div>
 
-        <div class="portfolio-item" data-category="street" data-lightbox-src="portfolio/Photography/Street/Alleyway Landslide.jpg">
+        <div class="portfolio-item" data-cat-priority="1" data-category="street" data-lightbox-src="portfolio/Photography/Street/Alleyway Landslide.jpg">
             <div class="portfolio-img-wrap">
                 <img class="portfolio-thumb" src="portfolio/Photography/Street/Alleyway Landslide-2.jpg" alt="Alleyway Landslide" loading="lazy">
                 <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Street</p></div></div>
@@ -2288,7 +2327,7 @@ footer > * { position: relative; z-index: 1; }
             </div>
         </div>
 
-        <div class="portfolio-item" data-category="nature" data-lightbox-src="portfolio/Photography/Nature/Gecko Big Island.jpg">
+        <div class="portfolio-item" data-priority="1" data-category="nature" data-lightbox-src="portfolio/Photography/Nature/Gecko Big Island.jpg">
             <div class="portfolio-img-wrap">
                 <img class="portfolio-thumb" src="portfolio/Photography/Nature/Gecko Big Island2.jpg" alt="Gecko, Big Island" loading="lazy">
                 <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Nature</p></div></div>
@@ -2332,7 +2371,7 @@ footer > * { position: relative; z-index: 1; }
             </div>
         </div>
 
-        <div class="portfolio-item" data-category="nature" data-lightbox-src="portfolio/Photography/Nature/Mountain Goat Over Interstate 70.jpg">
+        <div class="portfolio-item" data-cat-priority="1" data-category="nature" data-lightbox-src="portfolio/Photography/Nature/Mountain Goat Over Interstate 70.jpg">
             <div class="portfolio-img-wrap">
                 <img class="portfolio-thumb" src="portfolio/Photography/Nature/Mountain Goat Over Interstate 70_2.jpg" alt="Mountain Goat Over I-70" loading="lazy">
                 <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Nature</p></div></div>
@@ -2377,7 +2416,7 @@ footer > * { position: relative; z-index: 1; }
             </div>
         </div>
 
-        <div class="portfolio-item" data-category="street vintage" data-lightbox-src="portfolio/Photography/Street/EJ on Set-1 Ilford 400_SMCTakumar55mm.jpg">
+        <div class="portfolio-item" data-priority="1" data-category="street vintage" data-lightbox-src="portfolio/Photography/Street/EJ on Set-1 Ilford 400_SMCTakumar55mm.jpg">
             <div class="portfolio-img-wrap">
                 <img class="portfolio-thumb" src="portfolio/Photography/Street/EJ on Set-1-2 Ilford 400_SMCTakumar55mm.jpg" alt="EJ on Set" loading="lazy">
                 <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Street</p></div></div>
@@ -2432,7 +2471,7 @@ footer > * { position: relative; z-index: 1; }
             </div>
         </div>
 
-        <div class="portfolio-item" data-category="nature macro-product" data-lightbox-src="portfolio/Photography/Nature/Sap2_Laowa Macro.jpg">
+        <div class="portfolio-item" data-cat-priority="1" data-category="nature macro-product" data-lightbox-src="portfolio/Photography/Nature/Sap2_Laowa Macro.jpg">
             <div class="portfolio-img-wrap">
                 <img class="portfolio-thumb" src="portfolio/Photography/Nature/Sap.jpg" alt="Sap" loading="lazy">
                 <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Nature</p></div></div>
@@ -2443,7 +2482,7 @@ footer > * { position: relative; z-index: 1; }
             </div>
         </div>
 
-        <div class="portfolio-item" data-category="nature macro-product" data-lightbox-src="portfolio/Photography/Nature/Traveler_Laowa Macro.jpg">
+        <div class="portfolio-item" data-priority="1" data-category="nature macro-product" data-lightbox-src="portfolio/Photography/Nature/Traveler_Laowa Macro.jpg">
             <div class="portfolio-img-wrap">
                 <img class="portfolio-thumb" src="portfolio/Photography/Nature/Traveler2.jpg" alt="Traveler" loading="lazy">
                 <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Nature</p></div></div>
@@ -2455,7 +2494,7 @@ footer > * { position: relative; z-index: 1; }
         </div>
 
         <!-- ── PRODUCT PHOTOGRAPHY ────────────────────────────── -->
-        <div class="portfolio-item" data-category="macro-product" data-lightbox-src="portfolio/Photography/Product Photography/Market Booth (Shitake Mushrooms).jpg">
+        <div class="portfolio-item" data-cat-priority="1" data-category="macro-product" data-lightbox-src="portfolio/Photography/Product Photography/Market Booth (Shitake Mushrooms).jpg">
             <div class="portfolio-img-wrap">
                 <img class="portfolio-thumb" src="portfolio/Photography/Product Photography/Market Booth (Shitake Mushrooms)_2.jpg" alt="Market Booth" loading="lazy">
                 <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Product Photography</p></div></div>
@@ -2466,7 +2505,7 @@ footer > * { position: relative; z-index: 1; }
             </div>
         </div>
 
-        <div class="portfolio-item" data-category="macro-product" data-lightbox-src="portfolio/Photography/Product Photography/Pentax K1000_2.jpg">
+        <div class="portfolio-item" data-cat-priority="1" data-category="macro-product" data-lightbox-src="portfolio/Photography/Product Photography/Pentax K1000_2.jpg">
             <div class="portfolio-img-wrap">
                 <img class="portfolio-thumb" src="portfolio/Photography/Product Photography/Pentax K1000.jpg" alt="Pentax K1000" loading="lazy">
                 <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Product Photography</p></div></div>
@@ -2499,7 +2538,7 @@ footer > * { position: relative; z-index: 1; }
             </div>
         </div>
 
-        <div class="portfolio-item" data-category="macro-product" data-lightbox-src="portfolio/Photography/Product Photography/Silver Necklaces on Display_2.jpg">
+        <div class="portfolio-item" data-cat-priority="1" data-category="macro-product" data-lightbox-src="portfolio/Photography/Product Photography/Silver Necklaces on Display_2.jpg">
             <div class="portfolio-img-wrap">
                 <img class="portfolio-thumb" src="portfolio/Photography/Product Photography/Silver Necklaces on Display.jpg" alt="Silver Necklaces on Display" loading="lazy">
                 <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Product Photography</p></div></div>
@@ -2510,7 +2549,7 @@ footer > * { position: relative; z-index: 1; }
             </div>
         </div>
 
-        <div class="portfolio-item" data-category="macro-product" data-lightbox-src="portfolio/Photography/Product Photography/Intricate Pattern.jpg">
+        <div class="portfolio-item" data-priority="1" data-category="macro-product" data-lightbox-src="portfolio/Photography/Product Photography/Intricate Pattern.jpg">
             <div class="portfolio-img-wrap">
                 <img class="portfolio-thumb" src="portfolio/Photography/Product Photography/Intricate Pattern 2.jpg" alt="Intricate Pattern" loading="lazy">
                 <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Product Photography</p></div></div>
@@ -2521,7 +2560,7 @@ footer > * { position: relative; z-index: 1; }
             </div>
         </div>
 
-        <div class="portfolio-item" data-category="macro-product" data-lightbox-src="portfolio/Photography/Product Photography/Kpanlogo Drum2.jpg">
+        <div class="portfolio-item" data-cat-priority="1" data-category="macro-product" data-lightbox-src="portfolio/Photography/Product Photography/Kpanlogo Drum2.jpg">
             <div class="portfolio-img-wrap">
                 <img class="portfolio-thumb" src="portfolio/Photography/Product Photography/Kpanlogo Drum.jpg" alt="Kpanlogo Drum" loading="lazy">
                 <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Product Photography</p></div></div>
@@ -2532,7 +2571,7 @@ footer > * { position: relative; z-index: 1; }
             </div>
         </div>
 
-        <div class="portfolio-item" data-category="macro-product" data-lightbox-src="portfolio/Photography/Product Photography/Ornament.jpg">
+        <div class="portfolio-item" data-priority="1" data-category="macro-product" data-lightbox-src="portfolio/Photography/Product Photography/Ornament.jpg">
             <div class="portfolio-img-wrap">
                 <img class="portfolio-thumb" src="portfolio/Photography/Product Photography/Ornament2.jpg" alt="Ornament" loading="lazy">
                 <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Product Photography</p></div></div>
@@ -2555,7 +2594,7 @@ footer > * { position: relative; z-index: 1; }
             </div>
         </div>
 
-        <div class="portfolio-item" data-category="vintage" data-lightbox-src="portfolio/Photography/Vintage & Film/Barrier Island2.jpg">
+        <div class="portfolio-item" data-cat-priority="1" data-category="vintage" data-lightbox-src="portfolio/Photography/Vintage & Film/Barrier Island2.jpg">
             <div class="portfolio-img-wrap">
                 <img class="portfolio-thumb" src="portfolio/Photography/Vintage & Film/Barrier Island.jpg" alt="Barrier Island" loading="lazy">
                 <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Vintage &amp; Film</p></div></div>
@@ -2568,6 +2607,79 @@ footer > * { position: relative; z-index: 1; }
 
 
     </div>
+    <div class="portfolio-view-more" id="portfolio-view-more" style="display:none;">
+        <button class="portfolio-view-more-btn" id="portfolio-view-more-btn">View More</button>
+    </div>
+</section>
+
+<!-- How It Works — Journey Timeline -->
+<section class="journey-section">
+  <div class="journey-header">
+    <p class="journey-header-eyebrow">How It Works</p>
+    <h2 class="journey-header-title">From Session to Gallery</h2>
+    <p class="journey-header-sub">Four steps, one complete creative experience</p>
+  </div>
+  <div class="journey-body">
+    <svg class="journey-svg-layer" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path class="journey-path-ghost" d=""/>
+      <path class="journey-path-fill" d=""/>
+    </svg>
+
+    <!-- Stop 1 — left -->
+    <div class="journey-stop" data-side="left">
+      <div class="journey-node-col">
+        <div class="journey-node"></div>
+        <span class="journey-node-label">Step 01</span>
+      </div>
+      <div class="journey-segment-content">
+        <span class="journey-card-num">01</span>
+        <h3 class="journey-card-title">Strategize &amp; Brainstorm</h3>
+        <p class="journey-card-body">We start with a conversation — your vision, your audience, and the story you want to tell through imagery. This shapes the mood, locations, and look of every shot.</p>
+      </div>
+    </div>
+
+    <!-- Stop 2 — right -->
+    <div class="journey-stop" data-side="right">
+      <div class="journey-node-col">
+        <div class="journey-node"></div>
+        <span class="journey-node-label">Step 02</span>
+      </div>
+      <div class="journey-segment-content">
+        <span class="journey-card-num">02</span>
+        <h3 class="journey-card-title">Story Unfolds</h3>
+        <p class="journey-card-body">Shoot day. Natural light, intentional composition, and Fujifilm glass — creating images that feel found, not forced. Every frame serves the story we planned together.</p>
+      </div>
+    </div>
+
+    <!-- Stop 3 — left -->
+    <div class="journey-stop" data-side="left">
+      <div class="journey-node-col">
+        <div class="journey-node"></div>
+        <span class="journey-node-label">Step 03</span>
+      </div>
+      <div class="journey-segment-content">
+        <span class="journey-card-num">03</span>
+        <h3 class="journey-card-title">Edits</h3>
+        <p class="journey-card-body">Film-inspired color processing, skin-tone refinement, and careful curation — every selected image receives the same consistent, intentional treatment.</p>
+      </div>
+    </div>
+
+    <!-- Stop 4 — right -->
+    <div class="journey-stop" data-side="right">
+      <div class="journey-node-col">
+        <div class="journey-node"></div>
+        <span class="journey-node-label">Step 04</span>
+      </div>
+      <div class="journey-segment-content">
+        <span class="journey-card-num">04</span>
+        <h3 class="journey-card-title">Polished Piece</h3>
+        <p class="journey-card-body">Your gallery, delivered. High-resolution files ready for print or screen, with clear licensing so you always know exactly how your images can be used.</p>
+      </div>
+    </div>
+  </div>
+  <div class="journey-cta">
+    <a href="schedule.html" class="journey-cta-btn">Book Your Session →</a>
+  </div>
 </section>
 
 
@@ -3076,8 +3188,21 @@ document.querySelectorAll('.portfolio-item').forEach(item => {
         const title = item.querySelector('.caption-title')?.textContent || '';
         const gear  = item.querySelector('.caption-gear')?.textContent || '';
 
-        if (item.dataset.videoSrc) {
-            // Video item — embed a native video player
+        if (item.dataset.youtubeId) {
+            // YouTube embed
+            const wrap = document.createElement('div');
+            wrap.style.cssText = 'width:min(90vw,960px);aspect-ratio:16/9;border-radius:6px;overflow:hidden;background:#111;';
+            const iframe = document.createElement('iframe');
+            iframe.src = `https://www.youtube.com/embed/${item.dataset.youtubeId}?autoplay=1`;
+            iframe.title = item.dataset.videoTitle || '';
+            iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+            iframe.allowFullscreen = true;
+            iframe.style.cssText = 'width:100%;height:100%;border:none;display:block;';
+            wrap.appendChild(iframe);
+            lightboxInner.innerHTML = '';
+            lightboxInner.appendChild(wrap);
+        } else if (item.dataset.videoSrc) {
+            // Native video
             const vid = document.createElement('video');
             vid.src = item.dataset.videoSrc;
             vid.controls = true;
@@ -3645,6 +3770,141 @@ if (_footerForm) _footerForm.addEventListener('submit', async function(e) {
             grid.scrollLeft = offset;
         });
     });
+})();
+
+/* ===== PORTFOLIO — P1/C1 priority reorder + View More ===== */
+(function() {
+  var grid = document.getElementById('portfolioGrid');
+  if (!grid) return;
+
+  // 1. Move all P1 items to the front, preserving their relative order
+  var p1Items = Array.from(grid.querySelectorAll('.portfolio-item[data-priority="1"]'));
+  var firstOther = grid.querySelector('.portfolio-item:not([data-priority="1"])');
+  p1Items.forEach(function(el) { grid.insertBefore(el, firstOther); });
+
+  // 2. Within each category's non-P1 block, bubble C1 items to the front
+  //    Find the first non-P1 item of each primary category, then insert
+  //    that category's C1 items just before it.
+  var seen = {};
+  Array.from(grid.querySelectorAll('.portfolio-item:not([data-priority="1"])')).forEach(function(item) {
+    var primary = (item.dataset.category || '').split(' ')[0];
+    if (primary && !seen[primary]) seen[primary] = item;
+  });
+  Object.keys(seen).forEach(function(cat) {
+    var anchor = seen[cat];
+    var c1 = Array.from(grid.querySelectorAll(
+      '.portfolio-item[data-cat-priority="1"]:not([data-priority="1"])'
+    )).filter(function(el) {
+      return (el.dataset.category || '').split(' ')[0] === cat;
+    });
+    c1.forEach(function(el) { grid.insertBefore(el, anchor); });
+  });
+
+  // View More
+  var BATCH = 12;
+  var viewLimit = BATCH;
+  var viewMoreWrap = document.getElementById('portfolio-view-more');
+  var viewMoreBtn  = document.getElementById('portfolio-view-more-btn');
+
+  function applyClip() {
+    var allItems = Array.from(grid.querySelectorAll('.portfolio-item'));
+    var visCount = 0;
+    allItems.forEach(function(item) {
+      if (item.classList.contains('hidden')) {
+        item.classList.remove('portfolio-item--clipped');
+        return;
+      }
+      visCount++;
+      item.classList.toggle('portfolio-item--clipped', visCount > viewLimit);
+    });
+    var totalVis = allItems.filter(function(i) { return !i.classList.contains('hidden'); }).length;
+    if (viewMoreWrap) viewMoreWrap.style.display = (totalVis > viewLimit) ? '' : 'none';
+  }
+
+  // Hook into filter button clicks — reset limit on filter change
+  document.querySelectorAll('[data-top], [data-filter]').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      viewLimit = BATCH;
+      setTimeout(applyClip, 0);
+    });
+  });
+
+  if (viewMoreBtn) {
+    viewMoreBtn.addEventListener('click', function() {
+      viewLimit += BATCH;
+      applyClip();
+    });
+  }
+
+  // Initial clip
+  applyClip();
+})();
+
+/* ===== JOURNEY TIMELINE — scroll-fill path ===== */
+(function() {
+  var section  = document.querySelector('.journey-section');
+  var bodyEl   = document.querySelector('.journey-body');
+  var ghost    = document.querySelector('.journey-path-ghost');
+  var fill     = document.querySelector('.journey-path-fill');
+  var nodeCols = Array.from(document.querySelectorAll('.journey-node-col'));
+  var nodes    = Array.from(document.querySelectorAll('.journey-node'));
+  var contents = Array.from(document.querySelectorAll('.journey-segment-content'));
+  if (!section || !bodyEl || !ghost || !fill || !nodeCols.length) return;
+
+  var pathLen = 0;
+  var pts = [];
+
+  function buildPath() {
+    var bRect = bodyEl.getBoundingClientRect();
+    pts = nodeCols.map(function(nc) {
+      var r = nc.getBoundingClientRect();
+      return { x: r.left + r.width / 2 - bRect.left, y: r.top + r.height / 2 - bRect.top };
+    });
+    if (!pts.length) return;
+    var cx = bRect.width / 2;
+    var d = 'M ' + cx.toFixed(1) + ',' + (pts[0].y - 80).toFixed(1);
+    d += ' C ' + cx.toFixed(1) + ',' + (pts[0].y - 20).toFixed(1)
+       + ' '   + pts[0].x.toFixed(1) + ',' + (pts[0].y - 20).toFixed(1)
+       + ' '   + pts[0].x.toFixed(1) + ',' + pts[0].y.toFixed(1);
+    for (var i = 0; i < pts.length - 1; i++) {
+      var a = pts[i], b = pts[i + 1];
+      var midY = (a.y + b.y) / 2;
+      d += ' C ' + a.x.toFixed(1) + ',' + midY.toFixed(1)
+         + ' '   + b.x.toFixed(1) + ',' + midY.toFixed(1)
+         + ' '   + b.x.toFixed(1) + ',' + b.y.toFixed(1);
+    }
+    var last = pts[pts.length - 1];
+    d += ' C ' + last.x.toFixed(1) + ',' + (last.y + 20).toFixed(1)
+       + ' '   + cx.toFixed(1) + ',' + (last.y + 20).toFixed(1)
+       + ' '   + cx.toFixed(1) + ',' + (last.y + 80).toFixed(1);
+    ghost.setAttribute('d', d);
+    fill.setAttribute('d', d);
+    pathLen = fill.getTotalLength();
+    fill.style.strokeDasharray = pathLen;
+    fill.style.strokeDashoffset = pathLen;
+  }
+
+  function onScroll() {
+    if (!pathLen || !section) return;
+    var sRect = section.getBoundingClientRect();
+    var vh = window.innerHeight;
+    var progress = Math.max(0, Math.min(1, (vh - sRect.top) / (sRect.height + vh * 0.4)));
+    fill.style.strokeDashoffset = (pathLen * (1 - progress)).toFixed(1);
+    var bRect = bodyEl.getBoundingClientRect();
+    pts.forEach(function(pt, i) {
+      var absY = bRect.top + pt.y;
+      nodes[i].classList.toggle('is-lit', absY < vh * 0.7);
+    });
+    contents.forEach(function(c) {
+      var r = c.getBoundingClientRect();
+      if (r.top < vh * 0.88) c.classList.add('is-visible');
+    });
+  }
+
+  function init() { buildPath(); onScroll(); }
+  requestAnimationFrame(function() { requestAnimationFrame(init); });
+  window.addEventListener('resize', function() { init(); });
+  window.addEventListener('scroll', onScroll, { passive: true });
 })();
 </script>
 
