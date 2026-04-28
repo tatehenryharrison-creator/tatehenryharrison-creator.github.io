@@ -118,12 +118,12 @@
     .sect-fade-to-dark { height: 240px; background: linear-gradient(to bottom, #f5f4f0 0%, #d3d2ce 25%, #898782 50%, #3e3c36 75%, #1C1A14 100%); pointer-events: none; margin: 0; }
     /* ── VIDEO SECTION PROGRESS LINE ── */
     .cv-progress-wrap { position: relative; height: 0; overflow: visible; z-index: 2; pointer-events: none; }
-    .cv-progress-svg { position: absolute; top: 0; left: 0; width: 100%; height: 500px; overflow: visible; }
+    .cv-progress-svg { position: absolute; top: 0; left: 0; width: 100%; height: 3000px; overflow: visible; }
     .cv-prog-ghost { fill: none; stroke: rgba(201,168,76,0.12); stroke-width: 1.8; stroke-dasharray: 5 9; stroke-linecap: round; }
     .cv-prog-fill { fill: none; stroke: rgba(201,168,76,0.82); stroke-width: 1.8; stroke-linecap: round; }
-    .cv-progress-label { position: absolute; top: 250px; left: 50%; transform: translate(-50%, -50%); pointer-events: none; }
-    .cv-progress-label-inner { display: inline-block; padding: 8px 22px; border-radius: 50px; background: rgba(14,12,9,0.7); border: 1px solid rgba(201,168,76,0.28); backdrop-filter: blur(8px); white-space: nowrap; }
-    .cv-progress-label-text { font-family: 'EB Garamond', serif; font-size: 0.7rem; letter-spacing: 2.5px; text-transform: uppercase; color: rgba(201,168,76,0.7); margin: 0; }
+    .cv-progress-label { position: absolute; top: 80px; left: 50%; transform: translate(-50%, -50%); pointer-events: none; }
+    .cv-progress-label-inner { display: inline-block; padding: 8px 22px; border-radius: 50px; background: rgba(14,12,9,0.82); border: 1px solid rgba(201,168,76,0.45); backdrop-filter: blur(8px); white-space: nowrap; }
+    .cv-progress-label-text { font-family: 'Cinzel', serif; font-weight: 700; font-size: 0.9rem; letter-spacing: 0.04em; color: #C9A84C; margin: 0; }
     #la-section { background: #f5f4f0; }
     #cv-section .sect-addons,
     #la-section .sect-addons { background: #1C1A14; padding-top: 48px; }
@@ -320,7 +320,7 @@
       .cv-progress-wrap { height: auto; overflow: visible; }
       .cv-progress-label { position: relative; top: auto; left: auto; transform: none; display: flex; justify-content: center; padding: 28px 5%; }
       .cv-progress-label-inner { background: #1C1A14; backdrop-filter: none; border-color: rgba(201,168,76,0.45); }
-      .cv-progress-label-text { color: #C9A84C; font-size: 0.72rem; letter-spacing: 2px; }
+      .cv-progress-label-text { color: #C9A84C; font-size: 0.78rem; letter-spacing: 0.04em; }
       /* Audio extras pitch layout already stacks at 640px */
       .la-addon-layout { padding: 0 5%; }
     }
@@ -395,9 +395,9 @@
 #la-section .cv-content { min-height: 300px; }
 .la-ntg5 {
   position: absolute;
-  left: -3%;
+  left: 0;
   top: 0;
-  height: clamp(120px, 22vw, 400px);
+  height: clamp(180px, 32vw, 600px);
   width: auto;
   pointer-events: none;
   user-select: none;
@@ -405,23 +405,24 @@
 }
 .la-condensor {
   position: absolute;
-  right: -2%;
+  right: 0;
   bottom: 0;
-  height: clamp(130px, 24vw, 440px);
+  height: clamp(200px, 36vw, 660px);
   width: auto;
   pointer-events: none;
   user-select: none;
   z-index: 1;
 }
 @media (max-width: 600px) {
-  .la-ntg5    { height: clamp(70px, 22vw, 120px); }
-  .la-condensor { height: clamp(80px, 26vw, 130px); }
+  .la-ntg5    { height: clamp(110px, 30vw, 180px); }
+  .la-condensor { height: clamp(120px, 34vw, 200px); }
 }
 
     /* ── COIN SPIN PACKAGE CARDS ── */
     .pkg-coins-section {
       background: #f5f4f0;
       padding: 60px 5% 0;
+      overflow: hidden;
     }
     .pkg-coins-inner {
       display: flex;
@@ -431,13 +432,13 @@
     }
     .coin-card {
       position: relative;
-      width: 252px;
-      height: 410px;
+      width: 285px;
+      height: 468px;
       flex-shrink: 0;
       cursor: pointer;
       user-select: none;
       will-change: transform;
-      perspective: 1200px;          /* single depth context for child spin */
+      perspective: 2400px;          /* larger = less distortion during spin so front/back look same size */
     }
     .coin-shadow {
       position: absolute;
@@ -538,8 +539,8 @@
       background: linear-gradient(150deg, #B81A30 0%, #8B1020 45%, #500A12 100%);
       border: 2px solid rgba(185,40,65,0.45);
       box-shadow: inset 0 0 0 1px rgba(220,100,120,0.12),
-                  0 0 28px rgba(139,16,32,0.6),
-                  0 8px 32px rgba(139,16,32,0.28);
+                  0 0 22px rgba(139,16,32,0.45),
+                  0 10px 40px rgba(139,16,32,0.22);
     }
     .coin-chapter .coin-tier-name { color: #8B1020; }
     /* Novel — deep forest green */
@@ -553,8 +554,8 @@
       background: linear-gradient(150deg, #177A38 0%, #0F5C2B 45%, #072B14 100%);
       border: 2px solid rgba(40,160,80,0.45);
       box-shadow: inset 0 0 0 1px rgba(80,200,120,0.12),
-                  0 0 28px rgba(15,92,43,0.6),
-                  0 8px 32px rgba(15,92,43,0.28);
+                  0 0 22px rgba(15,92,43,0.45),
+                  0 10px 40px rgba(15,92,43,0.22);
     }
     .coin-novel .coin-tier-name { color: #0F5C2B; }
     /* Epic — gold */
@@ -568,8 +569,8 @@
       background: linear-gradient(150deg, #e8c860 0%, #C9A84C 45%, #8a7030 100%);
       border: 2px solid rgba(240,210,120,0.45);
       box-shadow: inset 0 0 0 1px rgba(255,235,160,0.15),
-                  0 0 32px rgba(201,168,76,0.6),
-                  0 8px 32px rgba(201,168,76,0.28);
+                  0 0 24px rgba(201,168,76,0.42),
+                  0 10px 40px rgba(201,168,76,0.22);
     }
     .coin-epic .coin-tier-name { color: #C9A84C; }
 
@@ -805,7 +806,7 @@
     }
 
     /* ── COIN CARD CTA (hover) ── */
-    .coin-epic { width: 302px; } /* 20% wider than Novel (252px) */
+    .coin-epic { width: 342px; } /* 20% wider than Novel (285px) */
     .coin-cta {
       position: absolute;
       bottom: 0; left: 0; right: 0;
@@ -842,8 +843,8 @@
 
     @media (max-width: 960px) {
       .pkg-coins-inner { gap: 18px; }
-      .coin-card { width: 210px; height: 390px; }
-      .coin-tier-name { font-size: 1.6rem; }
+      .coin-card { width: 228px; height: 420px; }
+      .coin-tier-name { font-size: 1.7rem; }
       .tier-name { font-size: 1.7rem; }
       .cv-banner-title { font-size: 2.2rem; letter-spacing: 4px; }
       .cv-sub-a { grid-template-columns: repeat(3, 1fr); }
@@ -855,7 +856,7 @@
     }
     @media (max-width: 600px) {
       .pkg-coins-inner { flex-direction: column; align-items: center; gap: 52px; }
-      .coin-card { width: 240px; height: 410px; }
+      .coin-card { width: 270px; height: 468px; }
       /* Hide hover-only CTA on mobile — no hover, and it bleeds through the 3D spin */
       .coin-cta { display: none !important; }
       .trident-svg { display: none; }
@@ -992,7 +993,7 @@
       <div class="coin-shadow"></div>
       <div class="coin-inner" id="coin-epic-inner">
         <div class="coin-face coin-front">
-          <span class="coin-badge coin-badge--gold">Best Deal</span>
+          <span class="coin-badge coin-badge--gold">Best Value</span>
           <p class="coin-eyebrow">2+ Days</p>
           <h3 class="coin-tier-name">Epic</h3>
           <div class="coin-divider"></div>
@@ -1068,17 +1069,15 @@
 
   <!-- Progress line — overlays gradient + add-ons -->
   <div class="cv-progress-wrap" aria-hidden="true">
-    <svg class="cv-progress-svg" viewBox="0 0 1000 500" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <!-- Ghost full S-path -->
-      <path class="cv-prog-ghost" d="M 100,0 C 100,210 820,210 820,250 C 820,290 100,290 100,500"/>
-      <!-- Animated upper half -->
-      <path id="cv-prog-top" class="cv-prog-fill" d="M 100,0 C 100,210 820,210 820,250"/>
-      <!-- Animated lower half -->
-      <path id="cv-prog-bot" class="cv-prog-fill" d="M 820,250 C 820,290 100,290 100,500"/>
+    <svg class="cv-progress-svg" viewBox="0 0 1000 3000" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <!-- Ghost: full weaving path across all three sections -->
+      <path class="cv-prog-ghost" d="M 100,0 C 100,210 820,210 820,250 C 820,290 100,290 100,500 C 100,750 820,750 820,900 C 820,1050 100,1050 100,1300 C 100,1550 820,1550 820,1700 C 820,1850 100,1850 100,2100 C 100,2350 820,2350 820,2500 C 820,2650 100,2650 100,2900"/>
+      <!-- Single animated fill path -->
+      <path id="cv-prog-fill" class="cv-prog-fill" d="M 100,0 C 100,210 820,210 820,250 C 820,290 100,290 100,500 C 100,750 820,750 820,900 C 820,1050 100,1050 100,1300 C 100,1550 820,1550 820,1700 C 820,1850 100,1850 100,2100 C 100,2350 820,2350 820,2500 C 820,2650 100,2650 100,2900"/>
     </svg>
     <div class="cv-progress-label">
       <div class="cv-progress-label-inner">
-        <p class="cv-progress-label-text">Contribute to the Creative Process</p>
+        <p class="cv-progress-label-text">All contribute to the creative process</p>
       </div>
     </div>
   </div>
@@ -1655,6 +1654,7 @@
       <p class="tier-select-hint">Selected ✓</p>
     </div>
     <div class="pkg-tier" data-tier="epic" onclick="selectPackage('epic'); this.querySelector('.tier-select-hint').style.opacity=1;">
+      <span class="tier-badge tier-badge--gold">Best Value</span>
       <p class="tier-label">2+ Days</p>
       <h3 class="tier-name">Epic</h3>
       <div class="tier-divider"></div>
@@ -1789,29 +1789,22 @@ function toggleAddonDetails(key) {
 
 /* ===== VIDEO SECTION PROGRESS LINE ===== */
 (function() {
-  var wrap    = document.querySelector('.cv-progress-wrap');
-  var pathTop = document.getElementById('cv-prog-top');
-  var pathBot = document.getElementById('cv-prog-bot');
-  if (!wrap || !pathTop || !pathBot) return;
+  var wrap = document.querySelector('.cv-progress-wrap');
+  var path = document.getElementById('cv-prog-fill');
+  if (!wrap || !path) return;
 
-  var topLen = pathTop.getTotalLength();
-  var botLen = pathBot.getTotalLength();
-  pathTop.style.strokeDasharray  = topLen;
-  pathTop.style.strokeDashoffset = topLen;
-  pathBot.style.strokeDasharray  = botLen;
-  pathBot.style.strokeDashoffset = botLen;
+  var len = path.getTotalLength();
+  path.style.strokeDasharray  = len;
+  path.style.strokeDashoffset = len;
 
   function update() {
     var rect = wrap.getBoundingClientRect();
     var vh   = window.innerHeight;
-    // 0 when wrap enters bottom of viewport, 1 when SVG (500px) has fully passed
-    var raw  = (vh - rect.top) / (vh + 500);
+    // Progress 0→1 as the wrap scrolls from entering the bottom of viewport
+    // to 3000px above it (matching the SVG height spanning all three sections)
+    var raw  = (vh - rect.top) / (vh + 3000);
     var prog = Math.max(0, Math.min(1, raw));
-
-    // Upper half draws first (prog 0→0.5)
-    pathTop.style.strokeDashoffset = topLen * (1 - Math.min(1, prog * 2));
-    // Lower half draws second (prog 0.5→1)
-    pathBot.style.strokeDashoffset = botLen * (1 - Math.max(0, (prog - 0.5) * 2));
+    path.style.strokeDashoffset = (len * (1 - prog)).toFixed(2);
   }
 
   update();
