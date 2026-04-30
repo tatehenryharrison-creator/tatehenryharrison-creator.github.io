@@ -459,13 +459,13 @@
     }
     .coin-card {
       position: relative;
-      width: 285px;
-      height: 468px;
+      width: 252px;
+      height: 410px;
       flex-shrink: 0;
       cursor: pointer;
       user-select: none;
       will-change: transform;
-      perspective: 2400px;          /* larger = less distortion during spin so front/back look same size */
+      perspective: 1200px;          /* single depth context for child spin */
     }
     .coin-shadow {
       position: absolute;
@@ -833,7 +833,7 @@
     }
 
     /* ── COIN CARD CTA (hover) ── */
-    .coin-epic { width: 342px; } /* 20% wider than Novel (285px) */
+    .coin-epic { width: 302px; } /* 20% wider than Novel (252px) */
     .coin-cta {
       position: absolute;
       bottom: 0; left: 0; right: 0;
@@ -870,7 +870,7 @@
 
     @media (max-width: 960px) {
       .pkg-coins-inner { gap: 18px; }
-      .coin-card { width: 228px; height: 420px; }
+      .coin-card { width: 210px; height: 390px; }
       .coin-tier-name { font-size: 1.7rem; }
       .tier-name { font-size: 1.7rem; }
       .cv-banner-title { font-size: 2.2rem; letter-spacing: 4px; }
@@ -883,7 +883,7 @@
     }
     @media (max-width: 600px) {
       .pkg-coins-inner { flex-direction: column; align-items: center; gap: 52px; }
-      .coin-card { width: 270px; height: 468px; }
+      .coin-card { width: 240px; height: 410px; }
       /* Hide hover-only CTA on mobile — no hover, and it bleeds through the 3D spin */
       .coin-cta { display: none !important; }
       .trident-svg { display: none; }
