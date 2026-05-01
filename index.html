@@ -1759,6 +1759,22 @@ footer > * { position: relative; z-index: 1; }
   .journey-stop[data-side="right"] .journey-segment-content { margin-right: 16%; max-width: 100%; }
   .journey-header-title { font-size: 1.7rem; }
   .journey-card-title { font-size: 1.35rem; }
+  /* D — reduce top gap above first journey step on mobile */
+  .journey-section { padding: 48px 0 80px; }
+  .journey-header { padding: 0 5% 36px; }
+}
+
+/* C — About Me: base rules above override the 768px media query due to cascade order;
+   re-assert the correct mobile values here (after the base rules) */
+@media (max-width: 768px) {
+  .about-section { padding: 64px 5%; }
+  .about-inner { gap: 20px; }
+  .about-photo { width: 100%; max-width: none; }
+}
+
+/* E — social icon touch targets: bump to 44px min for mobile accessibility */
+@media (max-width: 768px) {
+  .social-link { width: 44px; height: 44px; }
 }
 
 </style>
@@ -3546,6 +3562,8 @@ if (_footerForm) _footerForm.addEventListener('submit', async function(e) {
 
 /* ===== HOW IT WORKS — JOURNEY MAP ===== */
 (function () {
+    if (!document.getElementById('processModalOverlay')) return; /* modal section not present on this page */
+
     const STEPS = [
         {
             num: 'Step 01',
@@ -3887,7 +3905,7 @@ if (_footerForm) _footerForm.addEventListener('submit', async function(e) {
   }
 
   // Initial clip
-  applyClip();
+  setTimeout(applyClip, 0);
 })();
 
 /* ===== JOURNEY TIMELINE — scroll-fill path ===== */

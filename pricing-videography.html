@@ -505,7 +505,6 @@
       flex-direction: column;
       align-items: center;
       padding: 28px 20px 20px;
-      position: relative;
     }
     /* Gleam sweep */
     .coin-front::after {
@@ -883,7 +882,7 @@
     }
     @media (max-width: 600px) {
       .pkg-coins-inner { flex-direction: column; align-items: center; gap: 52px; }
-      .coin-card { width: 240px; height: 410px; }
+      .coin-card { width: 240px; height: 300px; }
       /* Hide hover-only CTA on mobile — no hover, and it bleeds through the 3D spin */
       .coin-cta { display: none !important; }
       .trident-svg { display: none; }
@@ -977,6 +976,7 @@
       <div class="coin-shadow"></div>
       <div class="coin-inner" id="coin-chapter-inner">
         <div class="coin-face coin-front">
+          <span class="coin-badge" aria-hidden="true" style="visibility:hidden">&nbsp;</span>
           <p class="coin-eyebrow">Half Day</p>
           <h3 class="coin-tier-name">Chapter</h3>
           <div class="coin-divider"></div>
