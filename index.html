@@ -3546,6 +3546,8 @@ if (_footerForm) _footerForm.addEventListener('submit', async function(e) {
 
 /* ===== HOW IT WORKS — JOURNEY MAP ===== */
 (function () {
+    if (!document.getElementById('processModalOverlay')) return; /* modal section not present on this page */
+
     const STEPS = [
         {
             num: 'Step 01',
@@ -3887,7 +3889,7 @@ if (_footerForm) _footerForm.addEventListener('submit', async function(e) {
   }
 
   // Initial clip
-  applyClip();
+  setTimeout(applyClip, 0);
 })();
 
 /* ===== JOURNEY TIMELINE — scroll-fill path ===== */
