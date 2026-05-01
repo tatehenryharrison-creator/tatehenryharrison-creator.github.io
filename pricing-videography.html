@@ -124,11 +124,13 @@
     .cv-progress-label { position: absolute; top: 80px; left: 50%; transform: translate(-50%, -50%); pointer-events: none; }
     .cv-progress-label-inner { display: inline-block; padding: 8px 22px; border-radius: 50px; background: rgba(14,12,9,0.82); border: 1px solid rgba(201,168,76,0.45); backdrop-filter: blur(8px); white-space: nowrap; }
     .cv-progress-label-text { font-family: 'Cinzel', serif; font-weight: 700; font-size: 0.9rem; letter-spacing: 0.04em; color: #C9A84C; margin: 0; }
-    #la-section { background: #f5f4f0; }
+    #la-section { background: #0e0c09; }
+    /* Fade from section dark to addons dark — no cream-to-black sweep needed */
+    #la-section .sect-fade-to-dark { background: linear-gradient(to bottom, #0e0c09 0%, #1C1A14 100%); }
     #cv-section .sect-addons,
     #la-section .sect-addons { background: #1C1A14; padding-top: 48px; }
     /* Lift audio add-on section above the absolutely-positioned condenser photo */
-    #la-section .sect-addons { position: relative; z-index: 2; }
+    #la-section .sect-addons { position: relative; z-index: 4; }
     /* Delivery section banner */
     .delivery-banner { padding: 64px 10% 52px; text-align: center; border-bottom: 1px solid rgba(201,168,76,0.12); }
 
@@ -386,10 +388,10 @@
 .la-audio-box {
   max-width: 860px; margin: 0 auto;
   padding: 28px 28px 24px;
-  border: 1.5px solid rgba(92,110,130,0.48);
+  border: 1.5px solid rgba(92,110,130,0.72);
   border-radius: 20px;
-  background: rgba(12,18,30,0.52);
-  box-shadow: 0 0 52px rgba(92,110,130,0.13), 0 12px 48px rgba(0,0,0,0.28), inset 0 0 32px rgba(92,110,130,0.05);
+  background: rgba(92,110,130,0.18);
+  box-shadow: 0 0 52px rgba(92,110,130,0.22), 0 12px 48px rgba(0,0,0,0.45), inset 0 0 32px rgba(92,110,130,0.08);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
 }
@@ -399,8 +401,8 @@
   color: rgba(92,110,130,0.65); text-align: center; margin: 0 0 18px;
 }
 .la-audio-pair { display: flex; gap: 12px; align-items: stretch; }
-.la-audio-pair .audio-card { flex: 1; min-width: 0; padding: 16px 18px; gap: 14px; background: rgba(92,110,130,0.07); border-color: rgba(92,110,130,0.18); border-radius: 14px; }
-.la-audio-pair .audio-card:hover { background: rgba(92,110,130,0.14); border-color: rgba(92,110,130,0.42); }
+.la-audio-pair .audio-card { flex: 1; min-width: 0; padding: 16px 18px; gap: 14px; background: rgba(92,110,130,0.14); border-color: rgba(92,110,130,0.35); border-radius: 14px; }
+.la-audio-pair .audio-card:hover { background: rgba(92,110,130,0.26); border-color: rgba(92,110,130,0.58); }
 .la-audio-pair .audio-play-btn { width: 40px; height: 40px; flex-shrink: 0; }
 .la-audio-pair .audio-title { font-size: 0.72rem; }
 .la-audio-pair .audio-desc { font-size: 0.82rem; margin-bottom: 10px; }
@@ -428,7 +430,7 @@
   width: auto;
   pointer-events: none;
   user-select: none;
-  z-index: 1;
+  z-index: 3;
 }
 .la-condensor {
   position: absolute;
@@ -438,7 +440,7 @@
   width: auto;
   pointer-events: none;
   user-select: none;
-  z-index: 1;
+  z-index: 3;
 }
 @media (max-width: 600px) {
   .la-ntg5    { height: clamp(110px, 30vw, 180px); }

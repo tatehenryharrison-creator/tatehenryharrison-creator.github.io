@@ -648,11 +648,12 @@ html, body { overflow-x: hidden; }
 .service-tile-eyebrow {
     font-family: 'EB Garamond', serif; font-size: 0.72rem;
     letter-spacing: 3px; text-transform: uppercase;
-    color: #5C6E82; margin: 0 0 18px;
+    color: #5C6E82; margin: 0 0 18px; text-align: center;
 }
 .service-tile-title {
     font-family: 'Cinzel', serif; font-weight: 400;
     font-size: 2.6rem; color: #e8e1d4; margin: 0 0 14px; line-height: 1.1;
+    text-align: center;
 }
 .service-tile-quote-btn {
     display: inline-block;
@@ -673,7 +674,7 @@ html, body { overflow-x: hidden; }
 }
 .service-tile-desc {
     font-family: 'EB Garamond', serif; font-size: 1.05rem;
-    color: #a8a49c; line-height: 1.65; margin: 0 0 40px;
+    color: #a8a49c; line-height: 1.65; margin: 0 0 40px; text-align: center;
 }
 @keyframes arrow-drift {
     0%, 100% { transform: translateX(0); opacity: 1; }
@@ -690,6 +691,7 @@ html, body { overflow-x: hidden; }
     40%  { opacity: 0.52; filter: brightness(1.35) drop-shadow(0 0 18px rgba(201,168,76,0.35)); }
     100% { opacity: 0.32; filter: brightness(1.0) drop-shadow(0 0 0px rgba(201,168,76,0)); }
 }
+.service-tile-custom-body > div { text-align: center; }
 .service-tile-custom {
     display: block; text-decoration: none;
     background: #1C1A14;
@@ -726,7 +728,7 @@ html, body { overflow-x: hidden; }
     mix-blend-mode: screen;
 }
 .service-tile-cta-row {
-    display: flex; align-items: center; justify-content: space-between;
+    display: flex; align-items: center; justify-content: center; gap: 24px;
 }
 .service-tile-custom-body {
     display: flex; align-items: center; justify-content: space-between; gap: 40px;
@@ -1145,7 +1147,7 @@ footer > * { position: relative; z-index: 1; }
     .service-tile { padding: 32px 28px; }
     .service-tile-title { font-size: 2rem; }
     .service-tile-custom { padding: 44px 32px; }
-    .service-tile-custom-body { flex-direction: column; align-items: flex-start; gap: 20px; }
+    .service-tile-custom-body { flex-direction: column; align-items: center; gap: 20px; }
     .service-tile-custom-hands { width: 180px; align-self: center; }
 
     /* PROCESS */
