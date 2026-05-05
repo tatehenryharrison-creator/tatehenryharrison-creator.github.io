@@ -101,6 +101,58 @@
     .sect-addons-grid--2 { grid-template-columns: repeat(2, 1fr); }
     @media (max-width: 700px) { .sect-addons-grid--2 { grid-template-columns: 1fr; } .addon-card-expand-inner { padding-left: 20px; } }
 
+    /* ── FEATURES TILE ── */
+    .features-tile {
+      background: linear-gradient(140deg, #1d1b15 0%, #252118 52%, #1a1714 100%);
+      border: 1.5px solid rgba(201,168,76,0.28);
+      border-radius: 22px;
+      overflow: hidden;
+      margin-bottom: 36px;
+      box-shadow:
+        0 0 60px rgba(201,168,76,0.06),
+        0 20px 64px rgba(0,0,0,0.4),
+        inset 0 1px 0 rgba(201,168,76,0.1);
+    }
+    .features-tile-header {
+      padding: 38px 44px 30px;
+      border-bottom: 1px solid rgba(201,168,76,0.1);
+    }
+    .features-tile-eyebrow {
+      font-family: 'EB Garamond', serif;
+      font-size: 0.7rem;
+      letter-spacing: 3.5px;
+      text-transform: uppercase;
+      color: rgba(201,168,76,0.5);
+      margin: 0 0 12px;
+    }
+    .features-tile-title {
+      font-family: 'Cinzel', serif;
+      font-weight: 400;
+      font-size: 2.6rem;
+      color: #e8e1d4;
+      margin: 0;
+      line-height: 1.05;
+      letter-spacing: 0.5px;
+    }
+    /* Pattern zone — certificate border */
+    .features-tile-pattern {
+      position: relative;
+      background: rgba(201,168,76,0.02);
+      overflow: hidden;
+      padding: 24px 28px;
+    }
+    .features-tile-pattern svg {
+      width: 100%;
+      height: auto;
+      display: block;
+      overflow: visible;
+    }
+    @media (max-width: 600px) {
+      .features-tile-header { padding: 28px 28px 22px; }
+      .features-tile-title { font-size: 2rem; }
+      .features-tile-pattern { padding: 16px 18px; }
+    }
+
     /* ── SECTION-EMBEDDED ADD-ONS ── */
     .sect-addons { padding: 0 3% 64px; }
     .sect-addons-label { font-family: 'EB Garamond', serif; font-size: 0.68rem; letter-spacing: 3px; text-transform: uppercase; color: rgba(232,225,212,0.3); margin: 0 0 22px; text-align: center; }
@@ -123,7 +175,7 @@
     .cv-prog-fill { fill: none; stroke: rgba(201,168,76,0.82); stroke-width: 1.8; stroke-linecap: round; }
     .cv-progress-label { position: absolute; top: 80px; left: 50%; transform: translate(-50%, -50%); pointer-events: none; }
     .cv-progress-label-inner { display: inline-block; padding: 8px 22px; border-radius: 50px; background: rgba(14,12,9,0.82); border: 1px solid rgba(201,168,76,0.45); backdrop-filter: blur(8px); white-space: nowrap; }
-    .cv-progress-label-text { font-family: 'Cinzel', serif; font-weight: 700; font-size: 0.9rem; letter-spacing: 0.04em; color: #C9A84C; margin: 0; }
+    .cv-progress-label-text { font-family: 'EB Garamond', serif; font-style: italic; font-weight: 400; font-size: 1rem; letter-spacing: 0.01em; color: #C9A84C; margin: 0; }
     #la-section { background: #0e0c09; }
     /* Fade from section dark to addons dark — no cream-to-black sweep needed */
     #la-section .sect-fade-to-dark { background: linear-gradient(to bottom, #0e0c09 0%, #1C1A14 100%); }
@@ -371,31 +423,29 @@
       .cb-proceed-btn { width: 100%; text-align: center; padding: 13px 20px; order: 4; }
       .cb-pkg-wrap { order: 1; }
       .wi-text { padding: 40px 6% 40px; }
-      /* Progress line: hide SVG on mobile, show label as an elegant ornamental divider */
+      /* Progress line: hide SVG on mobile, show label as a centred italic quote */
       .cv-progress-svg { display: none; }
       .cv-progress-wrap { height: auto; overflow: visible; }
       .cv-progress-label {
         position: relative; top: auto; left: auto; transform: none;
-        display: flex; align-items: center;
-        gap: 18px; padding: 32px 8%;
+        display: block; text-align: center;
+        padding: 28px 10%;
       }
       .cv-progress-label::before,
-      .cv-progress-label::after {
-        content: '';
-        flex: 1;
-        height: 1px;
-        background: linear-gradient(to right, transparent, rgba(201,168,76,0.4));
-      }
-      .cv-progress-label::after {
-        background: linear-gradient(to left, transparent, rgba(201,168,76,0.4));
-      }
+      .cv-progress-label::after { display: none; }
       .cv-progress-label-inner {
-        background: rgba(28,26,20,0.9);
+        background: transparent;
+        border: none;
         backdrop-filter: none;
-        border-color: rgba(201,168,76,0.48);
-        flex-shrink: 0;
+        padding: 0;
+        border-radius: 0;
+        display: block;
       }
-      .cv-progress-label-text { color: #C9A84C; font-size: 0.76rem; letter-spacing: 0.18em; }
+      .cv-progress-label-text {
+        font-size: 1.15rem;
+        letter-spacing: 0;
+        color: rgba(201,168,76,0.82);
+      }
       /* Audio Extras card: allow button to wrap below icon+info on narrow screens */
       .la-addon-layout .addon-card .addon-card-main { flex-wrap: wrap; gap: 10px; }
       .la-addon-layout .addon-card .addon-card-info { flex: 1 1 0; min-width: 0; }
@@ -527,7 +577,8 @@
 .la-condensor {
   position: absolute;
   right: 0;
-  bottom: 0;
+  /* Mirror NTG5: sit just below the banner */
+  top: calc(244 / 2560 * 100vw);
   height: clamp(200px, 36vw, 660px);
   width: auto;
   pointer-events: none;
@@ -537,7 +588,7 @@
 @media (max-width: 600px) {
   /* Mobile banner uses padding not aspect-ratio; NTG5 placed just below it */
   .la-ntg5    { height: clamp(110px, 30vw, 180px); top: 110px; }
-  .la-condensor { height: clamp(120px, 34vw, 200px); }
+  .la-condensor { height: clamp(120px, 34vw, 200px); top: 110px; }
   /* Tighten blank gap further on mobile */
   #la-section .cv-content { min-height: 20px; }
 }
@@ -980,6 +1031,7 @@
     @media (max-width: 600px) {
       .pkg-coins-inner { flex-direction: column; align-items: center; gap: 52px; }
       .coin-card { width: 240px; height: 300px; }
+      .pkg-coins-section { padding-bottom: 72px; }
       /* Hide hover-only CTA on mobile — no hover, and it bleeds through the 3D spin */
       .coin-cta { display: none !important; }
       .trident-svg { display: none; }
@@ -1210,6 +1262,106 @@
 
   <!-- Video Add-Ons: Vintage & Film, Drone, Macro -->
   <div class="sect-addons">
+
+    <!-- ── Features tile — pattern zone reserved for Claude Design ── -->
+    <div class="features-tile">
+      <div class="features-tile-header">
+        <p class="features-tile-eyebrow">What's Included</p>
+        <h3 class="features-tile-title">Features</h3>
+      </div>
+      <div class="features-tile-pattern">
+        <svg viewBox="0 0 860 240" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+          <defs>
+            <pattern id="ft-dot-h" x="0" y="0" width="18" height="1" patternUnits="userSpaceOnUse">
+              <circle cx="9" cy="0.5" r="1.2" fill="rgba(201,168,76,0.35)"/>
+            </pattern>
+            <pattern id="ft-dot-v" x="0" y="0" width="1" height="18" patternUnits="userSpaceOnUse">
+              <circle cx="0.5" cy="9" r="1.2" fill="rgba(201,168,76,0.35)"/>
+            </pattern>
+            <filter id="ft-gold-glow" x="-20%" y="-20%" width="140%" height="140%">
+              <feGaussianBlur stdDeviation="2.5" result="blur"/>
+              <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
+
+          <!-- Outer border -->
+          <rect x="10" y="10" width="840" height="220" stroke="rgba(201,168,76,0.55)" stroke-width="0.8" fill="none"/>
+
+          <!-- Dot bands -->
+          <rect x="10" y="18" width="840" height="1" fill="url(#ft-dot-h)"/>
+          <rect x="10" y="221" width="840" height="1" fill="url(#ft-dot-h)"/>
+          <rect x="18" y="10" width="1" height="220" fill="url(#ft-dot-v)"/>
+          <rect x="841" y="10" width="1" height="220" fill="url(#ft-dot-v)"/>
+
+          <!-- Inner border -->
+          <rect x="26" y="26" width="808" height="188" stroke="rgba(201,168,76,0.38)" stroke-width="0.8" fill="none"/>
+
+          <!-- Top-left corner -->
+          <g filter="url(#ft-gold-glow)">
+            <path d="M10 36 L10 10 L36 10" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="square" fill="none" opacity="0.9"/>
+            <path d="M10 5 L15 10 L10 15 L5 10 Z" fill="#C9A84C" opacity="0.85"/>
+            <path d="M26 36 L26 26 L36 26" stroke="rgba(201,168,76,0.5)" stroke-width="0.8" fill="none"/>
+          </g>
+
+          <!-- Top-right corner -->
+          <g filter="url(#ft-gold-glow)">
+            <path d="M850 36 L850 10 L824 10" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="square" fill="none" opacity="0.9"/>
+            <path d="M850 5 L855 10 L850 15 L845 10 Z" fill="#C9A84C" opacity="0.85"/>
+            <path d="M834 36 L834 26 L824 26" stroke="rgba(201,168,76,0.5)" stroke-width="0.8" fill="none"/>
+          </g>
+
+          <!-- Bottom-left corner -->
+          <g filter="url(#ft-gold-glow)">
+            <path d="M10 194 L10 220 L36 220" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="square" fill="none" opacity="0.9"/>
+            <path d="M10 215 L15 220 L10 225 L5 220 Z" fill="#C9A84C" opacity="0.85"/>
+            <path d="M26 204 L26 214 L36 214" stroke="rgba(201,168,76,0.5)" stroke-width="0.8" fill="none"/>
+          </g>
+
+          <!-- Bottom-right corner -->
+          <g filter="url(#ft-gold-glow)">
+            <path d="M850 194 L850 220 L824 220" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="square" fill="none" opacity="0.9"/>
+            <path d="M850 215 L855 220 L850 225 L845 220 Z" fill="#C9A84C" opacity="0.85"/>
+            <path d="M834 204 L834 214 L824 214" stroke="rgba(201,168,76,0.5)" stroke-width="0.8" fill="none"/>
+          </g>
+
+          <!-- Top center ornament -->
+          <g filter="url(#ft-gold-glow)">
+            <path d="M430 5 L436 10 L430 15 L424 10 Z" fill="none" stroke="#C9A84C" stroke-width="0.9" opacity="0.8"/>
+            <circle cx="430" cy="10" r="2" fill="#C9A84C" opacity="0.7"/>
+          </g>
+
+          <!-- Bottom center ornament -->
+          <g filter="url(#ft-gold-glow)">
+            <path d="M430 215 L436 220 L430 225 L424 220 Z" fill="none" stroke="#C9A84C" stroke-width="0.9" opacity="0.8"/>
+            <circle cx="430" cy="220" r="2" fill="#C9A84C" opacity="0.7"/>
+          </g>
+
+          <!-- Left center ornament -->
+          <g filter="url(#ft-gold-glow)">
+            <path d="M5 110 L10 104 L15 110 L10 116 Z" fill="none" stroke="#C9A84C" stroke-width="0.9" opacity="0.8"/>
+            <circle cx="10" cy="110" r="2" fill="#C9A84C" opacity="0.7"/>
+          </g>
+
+          <!-- Right center ornament -->
+          <g filter="url(#ft-gold-glow)">
+            <path d="M845 110 L850 104 L855 110 L850 116 Z" fill="none" stroke="#C9A84C" stroke-width="0.9" opacity="0.8"/>
+            <circle cx="850" cy="110" r="2" fill="#C9A84C" opacity="0.7"/>
+          </g>
+
+          <!-- Quarter-point ticks — top & bottom -->
+          <line x1="215" y1="7" x2="215" y2="13" stroke="rgba(201,168,76,0.38)" stroke-width="0.8"/>
+          <line x1="645" y1="7" x2="645" y2="13" stroke="rgba(201,168,76,0.38)" stroke-width="0.8"/>
+          <line x1="215" y1="217" x2="215" y2="223" stroke="rgba(201,168,76,0.38)" stroke-width="0.8"/>
+          <line x1="645" y1="217" x2="645" y2="223" stroke="rgba(201,168,76,0.38)" stroke-width="0.8"/>
+          <!-- Quarter-point ticks — left & right -->
+          <line x1="7" y1="55" x2="13" y2="55" stroke="rgba(201,168,76,0.38)" stroke-width="0.8"/>
+          <line x1="7" y1="165" x2="13" y2="165" stroke="rgba(201,168,76,0.38)" stroke-width="0.8"/>
+          <line x1="847" y1="55" x2="853" y2="55" stroke="rgba(201,168,76,0.38)" stroke-width="0.8"/>
+          <line x1="847" y1="165" x2="853" y2="165" stroke="rgba(201,168,76,0.38)" stroke-width="0.8"/>
+        </svg>
+      </div>
+    </div>
+
     <p class="sect-addons-label">Add-Ons</p>
     <div class="sect-addons-grid sect-addons-grid--2">
 
@@ -1243,6 +1395,8 @@
               <li>SMC Takumar 55mm</li>
               <li>Юпитер (Jupiter) 9</li>
               <li>Vivitar Series 1</li>
+              <li>Carl Zeiss Planar</li>
+              <li>Minolta Rokkor</li>
             </ul>
           </div>
         </div>
