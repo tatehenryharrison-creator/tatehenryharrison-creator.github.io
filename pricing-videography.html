@@ -101,21 +101,22 @@
     .sect-addons-grid--2 { grid-template-columns: repeat(2, 1fr); }
     @media (max-width: 700px) { .sect-addons-grid--2 { grid-template-columns: 1fr; } .addon-card-expand-inner { padding-left: 20px; } }
 
-    /* ── FEATURES TILE ── */
+    /* ── FEATURES TILE — certificate border IS the box ── */
     .features-tile {
-      background: linear-gradient(140deg, #1d1b15 0%, #252118 52%, #1a1714 100%);
-      border: 1.5px solid rgba(201,168,76,0.28);
-      border-radius: 22px;
-      overflow: hidden;
+      position: relative;
       margin-bottom: 36px;
-      box-shadow:
-        0 0 60px rgba(201,168,76,0.06),
-        0 20px 64px rgba(0,0,0,0.4),
-        inset 0 1px 0 rgba(201,168,76,0.1);
+    }
+    .features-tile-border-svg {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      overflow: visible;
+      pointer-events: none;
     }
     .features-tile-header {
-      padding: 38px 44px 30px;
-      border-bottom: 1px solid rgba(201,168,76,0.1);
+      position: relative;
+      z-index: 1;
+      padding: 48px 60px;
     }
     .features-tile-eyebrow {
       font-family: 'EB Garamond', serif;
@@ -134,23 +135,10 @@
       line-height: 1.05;
       letter-spacing: 0.5px;
     }
-    /* Pattern zone — certificate border */
-    .features-tile-pattern {
-      position: relative;
-      background: rgba(201,168,76,0.02);
-      overflow: hidden;
-      padding: 24px 28px;
-    }
-    .features-tile-pattern svg {
-      width: 100%;
-      height: auto;
-      display: block;
-      overflow: visible;
-    }
+    .features-tile-pattern { display: none; }
     @media (max-width: 600px) {
-      .features-tile-header { padding: 28px 28px 22px; }
+      .features-tile-header { padding: 36px 40px; }
       .features-tile-title { font-size: 2rem; }
-      .features-tile-pattern { padding: 16px 18px; }
     }
 
     /* ── SECTION-EMBEDDED ADD-ONS ── */
@@ -167,7 +155,7 @@
     .la-addon-layout .addon-card { flex: 0 0 300px; }
     @media (max-width: 640px) { .la-addon-layout { flex-direction: column; gap: 28px; } .la-addon-layout .addon-card { flex: unset; width: 100%; } }
     /* Paper-to-dark fade used at bottom of Video and Audio sections */
-    .sect-fade-to-dark { height: 240px; background: linear-gradient(to bottom, #f5f4f0 0%, #d3d2ce 25%, #898782 50%, #3e3c36 75%, #1C1A14 100%); pointer-events: none; margin: 0; }
+    .sect-fade-to-dark { height: 160px; background: linear-gradient(to bottom, #f5f4f0 0%, #d3d2ce 25%, #898782 50%, #3e3c36 75%, #1C1A14 100%); pointer-events: none; margin: 0; }
     /* ── VIDEO SECTION PROGRESS LINE ── */
     .cv-progress-wrap { position: relative; height: 0; overflow: visible; z-index: 2; pointer-events: none; }
     .cv-progress-svg { position: absolute; top: 0; left: 0; width: 100%; height: 3000px; overflow: visible; }
@@ -1051,7 +1039,7 @@
       .cv-sub-b .cv-text-center-slot { grid-column: 1 / -1; }
 
       /* ── Cinema-Grade Video: gear grid tweaks for mobile ── */
-      .cv-gear { padding: 24px 0 64px; }
+      .cv-gear { padding: 24px 0 20px; }
       .cv-gear-top { grid-template-columns: 1fr 1fr 1fr; }
       .cv-gear-bottom { grid-template-columns: repeat(4, 1fr); }
       /* hide old placeholder grids if still present */
@@ -1230,7 +1218,7 @@
       <div class="cv-gear-slot"><img src="Packages Pics/Video/Xt4.png" alt="Fujifilm X-T4"></div>
     </div>
     <!-- Bottom row: lenses & accessories -->
-    <p class="cv-gear-label" style="margin-top: 28px;">8+ Specialty Lenses</p>
+    <p class="cv-gear-label" style="margin-top: 28px;">10+ Specialty Lenses</p>
     <div class="cv-gear-bottom">
       <div class="cv-gear-slot"><img src="Packages Pics/Video/Jupiter.png" alt="Jupiter-9 85mm"></div>
       <div class="cv-gear-slot"><img src="Packages Pics/Video/Laowa.png" alt="Laowa Macro 65mm"></div>
@@ -1263,14 +1251,9 @@
   <!-- Video Add-Ons: Vintage & Film, Drone, Macro -->
   <div class="sect-addons">
 
-    <!-- ── Features tile — pattern zone reserved for Claude Design ── -->
+    <!-- ── Features tile — certificate border is the box ── -->
     <div class="features-tile">
-      <div class="features-tile-header">
-        <p class="features-tile-eyebrow">What's Included</p>
-        <h3 class="features-tile-title">Features</h3>
-      </div>
-      <div class="features-tile-pattern">
-        <svg viewBox="0 0 860 240" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+      <svg class="features-tile-border-svg" viewBox="0 0 860 240" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
           <defs>
             <pattern id="ft-dot-h" x="0" y="0" width="18" height="1" patternUnits="userSpaceOnUse">
               <circle cx="9" cy="0.5" r="1.2" fill="rgba(201,168,76,0.35)"/>
@@ -1358,7 +1341,9 @@
           <line x1="7" y1="165" x2="13" y2="165" stroke="rgba(201,168,76,0.38)" stroke-width="0.8"/>
           <line x1="847" y1="55" x2="853" y2="55" stroke="rgba(201,168,76,0.38)" stroke-width="0.8"/>
           <line x1="847" y1="165" x2="853" y2="165" stroke="rgba(201,168,76,0.38)" stroke-width="0.8"/>
-        </svg>
+      </svg>
+      <div class="features-tile-header">
+        <h3 class="features-tile-title">Features</h3>
       </div>
     </div>
 
