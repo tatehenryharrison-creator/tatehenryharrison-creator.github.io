@@ -116,7 +116,15 @@
     .features-tile-header {
       position: relative;
       z-index: 1;
-      padding: 48px 60px;
+      padding: 48px 60px 20px;
+      text-align: center;
+    }
+    .features-tile-body {
+      position: relative;
+      z-index: 1;
+      padding: 0 60px 52px;
+      text-align: center;
+      min-height: 80px;
     }
     .features-tile-eyebrow {
       font-family: 'EB Garamond', serif;
@@ -137,8 +145,9 @@
     }
     .features-tile-pattern { display: none; }
     @media (max-width: 600px) {
-      .features-tile-header { padding: 36px 40px; }
+      .features-tile-header { padding: 36px 32px 16px; }
       .features-tile-title { font-size: 2rem; }
+      .features-tile-body { padding: 0 32px 44px; }
     }
 
     /* ── SECTION-EMBEDDED ADD-ONS ── */
@@ -1344,6 +1353,9 @@
       </svg>
       <div class="features-tile-header">
         <h3 class="features-tile-title">Features</h3>
+      </div>
+      <div class="features-tile-body">
+        <!-- Text content goes here -->
       </div>
     </div>
 
