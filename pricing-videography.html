@@ -84,6 +84,7 @@
     .addon-stepper-btn { width: 30px; height: 30px; border-radius: 50%; border: 1px solid rgba(201,168,76,0.32); background: transparent; color: #C9A84C; font-size: 1.1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.15s, border-color 0.15s; }
     .addon-stepper-btn:hover { background: rgba(201,168,76,0.1); border-color: rgba(201,168,76,0.55); }
     .addon-stepper-count { font-family: 'Cinzel', serif; font-size: 0.9rem; color: #e8e1d4; min-width: 20px; text-align: center; }
+    .addon-card { cursor: pointer; }
     .addon-card-expand { max-height: 0; overflow: hidden; transition: max-height 0.55s cubic-bezier(0.22,1,0.36,1); }
     .addon-card.details-open .addon-card-expand { max-height: 400px; }
     .addon-card-expand-inner { padding: 16px 20px 20px calc(44px + 34px); border-top: 1px solid rgba(201,168,76,0.09); }
@@ -2051,6 +2052,19 @@ function toggleAddonDetails(key) {
   const card = document.getElementById('card-' + key);
   if (card) card.classList.toggle('details-open');
 }
+
+// Tap anywhere on a card (except the Add button) to open/close details
+document.addEventListener('click', function(e) {
+  const card = e.target.closest('.addon-card');
+  if (!card) return;
+  // Ignore clicks on or inside the Add button
+  if (e.target.closest('.addon-toggle-btn')) return;
+  // The details button already fires toggleAddonDetails via onclick — skip double-fire
+  if (e.target.closest('.addon-card-details-btn')) return;
+  // Find the key from the card id (format: card-{key})
+  const key = card.id.replace(/^card-/, '');
+  if (key) toggleAddonDetails(key);
+});
 
 (function() {
   const _orig = setAddonQty;
