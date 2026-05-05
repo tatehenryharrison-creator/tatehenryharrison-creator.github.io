@@ -134,6 +134,60 @@
     /* Delivery section banner */
     .delivery-banner { padding: 64px 10% 52px; text-align: center; border-bottom: 1px solid rgba(201,168,76,0.12); }
 
+    /* ── DELIVERY WORD CHIPS ── */
+    .delivery-chips-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 16px;
+      padding: 44px 10% 52px;
+    }
+    .delivery-chip {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-width: 130px;
+      padding: 24px 32px 22px;
+      background: linear-gradient(150deg, rgba(201,168,76,0.06) 0%, rgba(201,168,76,0.02) 100%);
+      border: 1px solid rgba(201,168,76,0.28);
+      border-radius: 14px;
+      box-shadow: 0 0 22px rgba(201,168,76,0.05), inset 0 1px 0 rgba(201,168,76,0.1);
+      transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.25s ease;
+      cursor: default;
+    }
+    .delivery-chip::before,
+    .delivery-chip::after {
+      content: '';
+      display: block;
+      width: 28px;
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(201,168,76,0.45), transparent);
+      margin: 0 auto;
+    }
+    .delivery-chip::before { margin-bottom: 10px; }
+    .delivery-chip::after  { margin-top: 10px; }
+    .delivery-chip:hover {
+      border-color: rgba(201,168,76,0.55);
+      box-shadow: 0 0 36px rgba(201,168,76,0.12), inset 0 1px 0 rgba(201,168,76,0.18);
+      transform: translateY(-3px);
+    }
+    .delivery-chip-word {
+      font-family: 'Cinzel', serif;
+      font-weight: 400;
+      font-size: 1rem;
+      color: #C9A84C;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    @media (max-width: 600px) {
+      .delivery-chips-row { gap: 12px; padding: 36px 6% 44px; }
+      .delivery-chip { min-width: 110px; padding: 20px 22px 18px; }
+      .delivery-chip-word { font-size: 0.88rem; }
+    }
+
     /* ── COMPARISON TABLE ── */
     .compare-section {
       padding: 60px 10% 80px; background: #f5f4f0;
@@ -317,12 +371,38 @@
       .cb-proceed-btn { width: 100%; text-align: center; padding: 13px 20px; order: 4; }
       .cb-pkg-wrap { order: 1; }
       .wi-text { padding: 40px 6% 40px; }
-      /* Progress line: hide SVG on mobile, show label as a clean divider */
+      /* Progress line: hide SVG on mobile, show label as an elegant ornamental divider */
       .cv-progress-svg { display: none; }
       .cv-progress-wrap { height: auto; overflow: visible; }
-      .cv-progress-label { position: relative; top: auto; left: auto; transform: none; display: flex; justify-content: center; padding: 28px 5%; }
-      .cv-progress-label-inner { background: #1C1A14; backdrop-filter: none; border-color: rgba(201,168,76,0.45); }
-      .cv-progress-label-text { color: #C9A84C; font-size: 0.78rem; letter-spacing: 0.04em; }
+      .cv-progress-label {
+        position: relative; top: auto; left: auto; transform: none;
+        display: flex; align-items: center;
+        gap: 18px; padding: 32px 8%;
+      }
+      .cv-progress-label::before,
+      .cv-progress-label::after {
+        content: '';
+        flex: 1;
+        height: 1px;
+        background: linear-gradient(to right, transparent, rgba(201,168,76,0.4));
+      }
+      .cv-progress-label::after {
+        background: linear-gradient(to left, transparent, rgba(201,168,76,0.4));
+      }
+      .cv-progress-label-inner {
+        background: rgba(28,26,20,0.9);
+        backdrop-filter: none;
+        border-color: rgba(201,168,76,0.48);
+        flex-shrink: 0;
+      }
+      .cv-progress-label-text { color: #C9A84C; font-size: 0.76rem; letter-spacing: 0.18em; }
+      /* Audio Extras card: allow button to wrap below icon+info on narrow screens */
+      .la-addon-layout .addon-card .addon-card-main { flex-wrap: wrap; gap: 10px; }
+      .la-addon-layout .addon-card .addon-card-info { flex: 1 1 0; min-width: 0; }
+      .la-addon-layout .addon-card .addon-card-action {
+        flex: 0 0 100%; display: flex; justify-content: flex-end;
+        padding-left: calc(44px + 10px);
+      }
       /* Audio extras pitch layout already stacks at 640px */
       .la-addon-layout { padding: 0 5%; }
     }
@@ -421,11 +501,23 @@
 /* ── LOCATION AUDIO SCENE IMAGES ── */
 #la-section { position: relative; overflow: hidden; }
 #la-section .la-banner { position: relative; z-index: 2; }
-#la-section .cv-content { min-height: 300px; }
+/* Blank spacer — reduced so audio cards sit closer to the banner */
+#la-section .cv-content { min-height: 60px; }
+/* Banner bottom gradient: banner image fades into section dark bg (#0e0c09) */
+#la-section .la-banner::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 70px;
+  background: linear-gradient(to bottom, transparent 0%, #0e0c09 100%);
+  pointer-events: none;
+  z-index: 3; /* above the banner title (z-index: 1 via .cv-banner-title) */
+}
 .la-ntg5 {
   position: absolute;
   left: 0;
-  top: 0;
+  /* sit just below the banner — banner height = 244/2560 of section width ≈ 9.53vw */
+  top: calc(244 / 2560 * 100vw);
   height: clamp(180px, 32vw, 600px);
   width: auto;
   pointer-events: none;
@@ -443,8 +535,11 @@
   z-index: 3;
 }
 @media (max-width: 600px) {
-  .la-ntg5    { height: clamp(110px, 30vw, 180px); }
+  /* Mobile banner uses padding not aspect-ratio; NTG5 placed just below it */
+  .la-ntg5    { height: clamp(110px, 30vw, 180px); top: 110px; }
   .la-condensor { height: clamp(120px, 34vw, 200px); }
+  /* Tighten blank gap further on mobile */
+  #la-section .cv-content { min-height: 20px; }
 }
 
     /* ── COIN SPIN PACKAGE CARDS ── */
@@ -1424,6 +1519,16 @@
   <div class="delivery-banner">
     <h2 class="cv-banner-title">Delivery</h2>
   </div>
+
+  <!-- ── Delivery word chips — fill in one word each ── -->
+  <div class="delivery-chips-row">
+    <div class="delivery-chip"><span class="delivery-chip-word">Word</span></div>
+    <div class="delivery-chip"><span class="delivery-chip-word">Word</span></div>
+    <div class="delivery-chip"><span class="delivery-chip-word">Word</span></div>
+    <div class="delivery-chip"><span class="delivery-chip-word">Word</span></div>
+    <div class="delivery-chip"><span class="delivery-chip-word">Word</span></div>
+  </div>
+
   <div class="sect-addons">
     <div class="sect-addons-grid sect-addons-grid--2">
 
@@ -1828,19 +1933,32 @@ function toggleAddonDetails(key) {
   path.style.strokeDasharray  = len;
   path.style.strokeDashoffset = len;
 
+  /* Pre-compute document-space positions so line speed matches actual section heights
+     on every screen size. Recomputed on resize. */
+  var scrollStart, scrollTotal;
+
+  function computeLayout() {
+    var vh       = window.innerHeight;
+    var wrapTop  = wrap.getBoundingClientRect().top + window.scrollY;
+    var laSection = document.getElementById('la-section');
+    var endDoc   = laSection
+      ? laSection.getBoundingClientRect().bottom + window.scrollY
+      : wrapTop + 3000;           /* fallback for older layouts */
+    scrollStart = wrapTop - vh;   /* scrollY when wrap first enters viewport bottom */
+    scrollTotal = endDoc - wrapTop + vh; /* total scroll px to animate across */
+  }
+
   function update() {
-    var rect = wrap.getBoundingClientRect();
-    var vh   = window.innerHeight;
-    // Progress 0→1 as the wrap scrolls from entering the bottom of viewport
-    // to 3000px above it (matching the SVG height spanning all three sections)
-    var raw  = (vh - rect.top) / (vh + 3000);
-    var prog = Math.max(0, Math.min(1, raw));
+    var prog = Math.max(0, Math.min(1,
+      (window.scrollY - scrollStart) / Math.max(1, scrollTotal)
+    ));
     path.style.strokeDashoffset = (len * (1 - prog)).toFixed(2);
   }
 
+  computeLayout();
   update();
   window.addEventListener('scroll', update, { passive: true });
-  window.addEventListener('resize', update);
+  window.addEventListener('resize', function() { computeLayout(); update(); });
 })();
 
 
