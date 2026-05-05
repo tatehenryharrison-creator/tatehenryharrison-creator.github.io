@@ -648,11 +648,12 @@ html, body { overflow-x: hidden; }
 .service-tile-eyebrow {
     font-family: 'EB Garamond', serif; font-size: 0.72rem;
     letter-spacing: 3px; text-transform: uppercase;
-    color: #5C6E82; margin: 0 0 18px;
+    color: #5C6E82; margin: 0 0 18px; text-align: center;
 }
 .service-tile-title {
     font-family: 'Cinzel', serif; font-weight: 400;
     font-size: 2.6rem; color: #e8e1d4; margin: 0 0 14px; line-height: 1.1;
+    text-align: center;
 }
 .service-tile-quote-btn {
     display: inline-block;
@@ -673,7 +674,7 @@ html, body { overflow-x: hidden; }
 }
 .service-tile-desc {
     font-family: 'EB Garamond', serif; font-size: 1.05rem;
-    color: #a8a49c; line-height: 1.65; margin: 0 0 40px;
+    color: #a8a49c; line-height: 1.65; margin: 0 0 40px; text-align: center;
 }
 @keyframes arrow-drift {
     0%, 100% { transform: translateX(0); opacity: 1; }
@@ -690,6 +691,13 @@ html, body { overflow-x: hidden; }
     40%  { opacity: 0.52; filter: brightness(1.35) drop-shadow(0 0 18px rgba(201,168,76,0.35)); }
     100% { opacity: 0.32; filter: brightness(1.0) drop-shadow(0 0 0px rgba(201,168,76,0)); }
 }
+.service-tile-custom-body > div { text-align: center; }
+/* Custom tile text overrides — removes need for inline styles in HTML */
+.service-tile-custom .service-tile-eyebrow { color: rgba(201,168,76,0.7); }
+.service-tile-custom .service-tile-title { color: #e8e1d4; font-size: 1.8rem; margin-bottom: 8px; }
+.service-tile-custom .service-tile-desc { color: rgba(232,225,212,0.5); margin: 0; }
+.service-tile-custom .service-tile-cta { color: #C9A84C; flex-shrink: 0; }
+.service-tile-custom-wrap { padding: 0 10%; }
 .service-tile-custom {
     display: block; text-decoration: none;
     background: #1C1A14;
@@ -726,7 +734,7 @@ html, body { overflow-x: hidden; }
     mix-blend-mode: screen;
 }
 .service-tile-cta-row {
-    display: flex; align-items: center; justify-content: space-between;
+    display: flex; align-items: center; justify-content: center; gap: 24px;
 }
 .service-tile-custom-body {
     display: flex; align-items: center; justify-content: space-between; gap: 40px;
@@ -1145,7 +1153,7 @@ footer > * { position: relative; z-index: 1; }
     .service-tile { padding: 32px 28px; }
     .service-tile-title { font-size: 2rem; }
     .service-tile-custom { padding: 44px 32px; }
-    .service-tile-custom-body { flex-direction: column; align-items: flex-start; gap: 20px; }
+    .service-tile-custom-body { flex-direction: column; align-items: center; gap: 20px; }
     .service-tile-custom-hands { width: 180px; align-self: center; }
 
     /* PROCESS */
@@ -1969,15 +1977,15 @@ footer > * { position: relative; z-index: 1; }
             </div>
         </a>
     </div>
-    <div style="padding: 0 10%;">
+    <div class="service-tile-custom-wrap">
         <a href="pricing-custom.html" class="service-tile-custom">
             <div class="service-tile-custom-body">
                 <div>
-                    <p class="service-tile-eyebrow" style="color:rgba(201,168,76,0.7);">03 — Tailored</p>
-                    <h3 class="service-tile-title" style="color:#e8e1d4; font-size:1.8rem; margin-bottom:8px;">Custom</h3>
-                    <p class="service-tile-desc" style="color:rgba(232,225,212,0.5); margin:0;">Something unique? Let's build around your vision — multi-day, hybrid, or large-scale production.</p>
+                    <p class="service-tile-eyebrow">03 — Tailored</p>
+                    <h3 class="service-tile-title">Custom</h3>
+                    <p class="service-tile-desc">Something unique? Let's build around your vision — multi-day, hybrid, or large-scale production.</p>
                 </div>
-                <span class="service-tile-cta" style="color:#C9A84C; flex-shrink:0;">Create →</span>
+                <span class="service-tile-cta">Create →</span>
                 <img src="hands_logo_transparent_clean.png" alt="" class="service-tile-custom-hands" aria-hidden="true">
             </div>
         </a>
