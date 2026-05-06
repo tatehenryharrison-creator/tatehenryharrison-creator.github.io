@@ -1329,10 +1329,45 @@
   <!-- Progress line — overlays gradient + add-ons -->
   <div class="cv-progress-wrap" aria-hidden="true">
     <svg class="cv-progress-svg" viewBox="0 0 1000 3000" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <defs>
+        <!-- Fade mask: line brightens at each peak/turn-around, dims through text crossing zones -->
+        <linearGradient id="cv-prog-fade-grad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%"     stop-color="white" stop-opacity="0.55"/>
+          <stop offset="8.3%"   stop-color="white" stop-opacity="0.90"/> <!-- peak y=250  -->
+          <stop offset="12.5%"  stop-color="white" stop-opacity="0.11"/> <!-- crossing    -->
+          <stop offset="16.7%"  stop-color="white" stop-opacity="0.90"/> <!-- peak y=500  -->
+          <stop offset="23.3%"  stop-color="white" stop-opacity="0.11"/> <!-- crossing    -->
+          <stop offset="30.0%"  stop-color="white" stop-opacity="0.90"/> <!-- peak y=900  -->
+          <stop offset="36.7%"  stop-color="white" stop-opacity="0.11"/> <!-- crossing    -->
+          <stop offset="43.3%"  stop-color="white" stop-opacity="0.90"/> <!-- peak y=1300 -->
+          <stop offset="50.0%"  stop-color="white" stop-opacity="0.11"/> <!-- crossing    -->
+          <stop offset="56.7%"  stop-color="white" stop-opacity="0.90"/> <!-- peak y=1700 -->
+          <stop offset="63.3%"  stop-color="white" stop-opacity="0.11"/> <!-- crossing    -->
+          <stop offset="70.0%"  stop-color="white" stop-opacity="0.90"/> <!-- peak y=2100 -->
+          <stop offset="76.7%"  stop-color="white" stop-opacity="0.11"/> <!-- crossing    -->
+          <stop offset="83.3%"  stop-color="white" stop-opacity="0.90"/> <!-- peak y=2500 -->
+          <stop offset="90.0%"  stop-color="white" stop-opacity="0.11"/> <!-- crossing    -->
+          <stop offset="96.7%"  stop-color="white" stop-opacity="0.90"/> <!-- peak y=2900 -->
+          <stop offset="100%"   stop-color="white" stop-opacity="0.85"/>
+        </linearGradient>
+        <mask id="cv-prog-mask">
+          <rect x="0" y="0" width="1000" height="3000" fill="url(#cv-prog-fade-grad)"/>
+        </mask>
+        <!-- Glow filter for scroll-following tip -->
+        <filter id="cv-tip-glow" x="-150%" y="-150%" width="400%" height="400%">
+          <feGaussianBlur stdDeviation="5" result="blur"/>
+          <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      </defs>
+
       <!-- Ghost: full weaving path across all three sections -->
       <path class="cv-prog-ghost" d="M 100,0 C 100,210 820,210 820,250 C 820,290 100,290 100,500 C 100,750 820,750 820,900 C 820,1050 100,1050 100,1300 C 100,1550 820,1550 820,1700 C 820,1850 100,1850 100,2100 C 100,2350 820,2350 820,2500 C 820,2650 100,2650 100,2900"/>
-      <!-- Single animated fill path -->
-      <path id="cv-prog-fill" class="cv-prog-fill" d="M 100,0 C 100,210 820,210 820,250 C 820,290 100,290 100,500 C 100,750 820,750 820,900 C 820,1050 100,1050 100,1300 C 100,1550 820,1550 820,1700 C 820,1850 100,1850 100,2100 C 100,2350 820,2350 820,2500 C 820,2650 100,2650 100,2900"/>
+      <!-- Animated fill path with fade mask -->
+      <path id="cv-prog-fill" class="cv-prog-fill" mask="url(#cv-prog-mask)"
+            d="M 100,0 C 100,210 820,210 820,250 C 820,290 100,290 100,500 C 100,750 820,750 820,900 C 820,1050 100,1050 100,1300 C 100,1550 820,1550 820,1700 C 820,1850 100,1850 100,2100 C 100,2350 820,2350 820,2500 C 820,2650 100,2650 100,2900"/>
+      <!-- Scroll-following tip: outer halo + inner dot -->
+      <circle id="cv-prog-tip-halo" r="9"   fill="rgba(201,168,76,0.28)" filter="url(#cv-tip-glow)" opacity="0"/>
+      <circle id="cv-prog-tip-dot"  r="2.8" fill="#C9A84C" opacity="0"/>
     </svg>
     <div class="cv-progress-label">
       <div class="cv-progress-label-inner">
@@ -2421,7 +2456,9 @@ document.addEventListener('click', function(e) {
   var path = document.getElementById('cv-prog-fill');
   if (!wrap || !path) return;
 
-  var len = path.getTotalLength();
+  var len      = path.getTotalLength();
+  var tipHalo  = document.getElementById('cv-prog-tip-halo');
+  var tipDot   = document.getElementById('cv-prog-tip-dot');
   path.style.strokeDasharray  = len;
   path.style.strokeDashoffset = len;
 
@@ -2430,12 +2467,17 @@ document.addEventListener('click', function(e) {
   var scrollStart, scrollTotal;
 
   function computeLayout() {
-    var vh       = window.innerHeight;
-    var wrapTop  = wrap.getBoundingClientRect().top + window.scrollY;
+    var vh        = window.innerHeight;
+    var wrapTop   = wrap.getBoundingClientRect().top + window.scrollY;
+    /* Extend through all three sections: cv → la → cl (Color & Light).
+       The SVG path bottom (wrapTop + 2900) aligns with cl-section bottom. */
+    var clSection = document.getElementById('cl-section');
     var laSection = document.getElementById('la-section');
-    var endDoc   = laSection
-      ? laSection.getBoundingClientRect().bottom + window.scrollY
-      : wrapTop + 3000;           /* fallback for older layouts */
+    var endDoc    = clSection
+      ? clSection.getBoundingClientRect().bottom + window.scrollY
+      : laSection
+        ? laSection.getBoundingClientRect().bottom + window.scrollY
+        : wrapTop + 3000;
     scrollStart = wrapTop - vh;   /* scrollY when wrap first enters viewport bottom */
     scrollTotal = endDoc - wrapTop + vh; /* total scroll px to animate across */
   }
@@ -2445,6 +2487,26 @@ document.addEventListener('click', function(e) {
       (window.scrollY - scrollStart) / Math.max(1, scrollTotal)
     ));
     path.style.strokeDashoffset = (len * (1 - prog)).toFixed(2);
+
+    /* Scroll-following tip dot: rides the live endpoint of the drawn line */
+    if (tipHalo && tipDot) {
+      if (prog > 0.005 && prog < 0.995) {
+        var pt = path.getPointAtLength(prog * len);
+        var cx = pt.x.toFixed(2);
+        var cy = pt.y.toFixed(2);
+        tipHalo.setAttribute('cx', cx);
+        tipHalo.setAttribute('cy', cy);
+        tipDot.setAttribute('cx', cx);
+        tipDot.setAttribute('cy', cy);
+        /* Fade in at start, fade out near end */
+        var vis = Math.min(1, Math.min(prog / 0.02, (1 - prog) / 0.02)).toFixed(3);
+        tipHalo.setAttribute('opacity', vis);
+        tipDot.setAttribute('opacity', vis);
+      } else {
+        tipHalo.setAttribute('opacity', '0');
+        tipDot.setAttribute('opacity', '0');
+      }
+    }
   }
 
   computeLayout();
