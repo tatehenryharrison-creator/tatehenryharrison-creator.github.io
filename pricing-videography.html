@@ -84,6 +84,7 @@
     .addon-stepper-btn { width: 30px; height: 30px; border-radius: 50%; border: 1px solid rgba(201,168,76,0.32); background: transparent; color: #C9A84C; font-size: 1.1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.15s, border-color 0.15s; }
     .addon-stepper-btn:hover { background: rgba(201,168,76,0.1); border-color: rgba(201,168,76,0.55); }
     .addon-stepper-count { font-family: 'Cinzel', serif; font-size: 0.9rem; color: #e8e1d4; min-width: 20px; text-align: center; }
+    .addon-card { cursor: pointer; }
     .addon-card-expand { max-height: 0; overflow: hidden; transition: max-height 0.55s cubic-bezier(0.22,1,0.36,1); }
     .addon-card.details-open .addon-card-expand { max-height: 400px; }
     .addon-card-expand-inner { padding: 16px 20px 20px calc(44px + 34px); border-top: 1px solid rgba(201,168,76,0.09); }
@@ -101,6 +102,55 @@
     .sect-addons-grid--2 { grid-template-columns: repeat(2, 1fr); }
     @media (max-width: 700px) { .sect-addons-grid--2 { grid-template-columns: 1fr; } .addon-card-expand-inner { padding-left: 20px; } }
 
+    /* ── FEATURES TILE — certificate border IS the box ── */
+    .features-tile {
+      position: relative;
+      margin-bottom: 36px;
+    }
+    .features-tile-border-svg {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      overflow: visible;
+      pointer-events: none;
+    }
+    .features-tile-header {
+      position: relative;
+      z-index: 1;
+      padding: 48px 60px 20px;
+      text-align: center;
+    }
+    .features-tile-body {
+      position: relative;
+      z-index: 1;
+      padding: 0 60px 52px;
+      text-align: center;
+      min-height: 80px;
+    }
+    .features-tile-eyebrow {
+      font-family: 'EB Garamond', serif;
+      font-size: 0.7rem;
+      letter-spacing: 3.5px;
+      text-transform: uppercase;
+      color: rgba(201,168,76,0.5);
+      margin: 0 0 12px;
+    }
+    .features-tile-title {
+      font-family: 'Cinzel', serif;
+      font-weight: 400;
+      font-size: 2.6rem;
+      color: #e8e1d4;
+      margin: 0;
+      line-height: 1.05;
+      letter-spacing: 0.5px;
+    }
+    .features-tile-pattern { display: none; }
+    @media (max-width: 600px) {
+      .features-tile-header { padding: 36px 32px 16px; }
+      .features-tile-title { font-size: 2rem; }
+      .features-tile-body { padding: 0 32px 44px; }
+    }
+
     /* ── SECTION-EMBEDDED ADD-ONS ── */
     .sect-addons { padding: 0 3% 64px; }
     .sect-addons-label { font-family: 'EB Garamond', serif; font-size: 0.68rem; letter-spacing: 3px; text-transform: uppercase; color: rgba(232,225,212,0.3); margin: 0 0 22px; text-align: center; }
@@ -115,7 +165,7 @@
     .la-addon-layout .addon-card { flex: 0 0 300px; }
     @media (max-width: 640px) { .la-addon-layout { flex-direction: column; gap: 28px; } .la-addon-layout .addon-card { flex: unset; width: 100%; } }
     /* Paper-to-dark fade used at bottom of Video and Audio sections */
-    .sect-fade-to-dark { height: 240px; background: linear-gradient(to bottom, #f5f4f0 0%, #d3d2ce 25%, #898782 50%, #3e3c36 75%, #1C1A14 100%); pointer-events: none; margin: 0; }
+    .sect-fade-to-dark { height: 160px; background: linear-gradient(to bottom, #f5f4f0 0%, #d3d2ce 25%, #898782 50%, #3e3c36 75%, #1C1A14 100%); pointer-events: none; margin: 0; }
     /* ── VIDEO SECTION PROGRESS LINE ── */
     .cv-progress-wrap { position: relative; height: 0; overflow: visible; z-index: 2; pointer-events: none; }
     .cv-progress-svg { position: absolute; top: 0; left: 0; width: 100%; height: 3000px; overflow: visible; }
@@ -123,7 +173,7 @@
     .cv-prog-fill { fill: none; stroke: rgba(201,168,76,0.82); stroke-width: 1.8; stroke-linecap: round; }
     .cv-progress-label { position: absolute; top: 80px; left: 50%; transform: translate(-50%, -50%); pointer-events: none; }
     .cv-progress-label-inner { display: inline-block; padding: 8px 22px; border-radius: 50px; background: rgba(14,12,9,0.82); border: 1px solid rgba(201,168,76,0.45); backdrop-filter: blur(8px); white-space: nowrap; }
-    .cv-progress-label-text { font-family: 'Cinzel', serif; font-weight: 700; font-size: 0.9rem; letter-spacing: 0.04em; color: #C9A84C; margin: 0; }
+    .cv-progress-label-text { font-family: 'EB Garamond', serif; font-style: italic; font-weight: 400; font-size: 1rem; letter-spacing: 0.01em; color: #C9A84C; margin: 0; }
     #la-section { background: #0e0c09; }
     /* Fade from section dark to addons dark — no cream-to-black sweep needed */
     #la-section .sect-fade-to-dark { background: linear-gradient(to bottom, #0e0c09 0%, #1C1A14 100%); }
@@ -187,6 +237,91 @@
       .delivery-chip { min-width: 110px; padding: 20px 22px 18px; }
       .delivery-chip-word { font-size: 0.88rem; }
     }
+
+    /* ── DELIVERY QTY CAPSULES ── */
+    .delivery-qty-capsules {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(201,168,76,0.1);
+    }
+    .delivery-qty-capsule {
+      border-radius: 50px !important;
+    }
+    .delivery-qty-capsule .addon-card-expand {
+      border-radius: 0 0 24px 24px;
+      margin-top: -20px;
+      padding-top: 20px;
+    }
+    .addon-card.details-open.delivery-qty-capsule {
+      border-radius: 24px !important;
+    }
+
+    /* ── DELIVERY CERTIFICATE ── */
+    .delivery-cert-wrap {
+      padding: 0 5% 56px;
+      display: flex;
+      justify-content: center;
+    }
+
+    /* Scoped certificate styles (.hm-cert) */
+    .hm-cert, .hm-cert *, .hm-cert *::before, .hm-cert *::after { box-sizing: border-box; }
+    .hm-cert {
+      --hm-ink:      #1C1A14;
+      --hm-charcoal: #2A2220;
+      --hm-stone:    #635F51;
+      --hm-fog:      #8A8674;
+      --hm-brass:    #C9A84C;
+      --hm-slate:    #5C6E82;
+      --hm-paper:    #f1ede2;
+      position: relative;
+      width: 100%;
+      aspect-ratio: 8.5 / 11;
+      max-width: 760px;
+      margin: 0 auto;
+      background: radial-gradient(ellipse at 50% 40%, #faf8f3 0%, #f1ede2 70%, #e6dfd0 100%);
+      box-shadow: 0 1px 0 rgba(255,255,255,0.6) inset, 0 24px 60px rgba(28,26,20,0.28), 0 2px 8px rgba(28,26,20,0.14);
+      overflow: hidden;
+      color: var(--hm-ink);
+      font-family: 'EB Garamond', Georgia, serif;
+    }
+    .hm-cert::before {
+      content: "";
+      position: absolute; inset: 0;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/><feColorMatrix values='0 0 0 0 0.11  0 0 0 0 0.10  0 0 0 0 0.07  0 0 0 0.5 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.55'/></svg>");
+      opacity: 0.07;
+      mix-blend-mode: multiply;
+      pointer-events: none;
+    }
+    .hm-cert > svg.hm-border { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+    .hm-cert .hm-inner {
+      position: absolute;
+      inset: 13.5%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 28px;
+    }
+    .hm-cert .hm-eyebrow { display: flex; align-items: center; gap: 14px; color: var(--hm-stone); margin-bottom: 22px; width: 90%; }
+    .hm-cert .hm-eyebrow .hm-ln { flex: 1; height: 1px; background: linear-gradient(90deg, transparent, rgba(99,95,81,0.5), transparent); min-width: 40px; }
+    .hm-cert .hm-eyebrow span { font-family: system-ui, sans-serif; font-size: 0.8rem; letter-spacing: 6px; text-transform: uppercase; }
+    .hm-cert h1.hm-title { font-family: 'Cinzel', serif; font-weight: 600; font-size: clamp(1.3rem, 3.4vw, 2.6rem); letter-spacing: 4px; color: var(--hm-charcoal); margin: 0 0 6px; line-height: 1.1; text-transform: uppercase; }
+    .hm-cert .hm-subhead { font-family: 'EB Garamond', serif; font-weight: 400; font-style: italic; font-size: clamp(0.85rem, 1.6vw, 1.15rem); letter-spacing: 2px; color: var(--hm-slate); margin: 0 0 22px; }
+    .hm-cert .hm-recipient { font-family: 'Cinzel', serif; font-weight: 400; font-size: clamp(1.3rem, 3.6vw, 2.4rem); letter-spacing: 2px; color: var(--hm-ink); margin: 16px 0 4px; padding-bottom: 6px; border-bottom: 1px solid rgba(99,95,81,0.35); min-width: 60%; }
+    .hm-cert .hm-body { font-family: 'EB Garamond', serif; font-style: italic; font-size: clamp(0.85rem, 1.5vw, 1.05rem); color: var(--hm-charcoal); margin: 14px auto 0; max-width: 82%; line-height: 1.7; }
+    .hm-cert .hm-body em { font-style: italic; }
+    .hm-cert .hm-footer { display: flex; gap: 60px; align-items: flex-end; margin-top: auto; padding-top: 36px; width: 80%; justify-content: space-between; }
+    .hm-cert .hm-sigblock { flex: 1; min-width: 0; display: flex; flex-direction: column; align-items: center; }
+    .hm-cert .hm-sig { font-family: 'IM Fell English', serif; font-style: italic; font-size: 1.4rem; color: var(--hm-charcoal); letter-spacing: 1px; margin-bottom: 4px; transform: rotate(-3deg); opacity: 0.85; }
+    .hm-cert .hm-sig.hm-sig-date { transform: rotate(-1deg); }
+    .hm-cert .hm-sig-rule { width: 100%; height: 1px; background: rgba(99,95,81,0.5); margin-bottom: 6px; }
+    .hm-cert .hm-sig-label { font-family: system-ui, sans-serif; font-size: 0.62rem; letter-spacing: 2.5px; text-transform: uppercase; color: var(--hm-stone); }
+    .hm-cert .hm-seal { position: absolute; bottom: 12%; right: 10%; width: 17%; aspect-ratio: 1; pointer-events: none; }
+    .hm-cert .hm-seal svg { width: 100%; height: 100%; display: block; }
 
     /* ── COMPARISON TABLE ── */
     .compare-section {
@@ -371,31 +506,29 @@
       .cb-proceed-btn { width: 100%; text-align: center; padding: 13px 20px; order: 4; }
       .cb-pkg-wrap { order: 1; }
       .wi-text { padding: 40px 6% 40px; }
-      /* Progress line: hide SVG on mobile, show label as an elegant ornamental divider */
+      /* Progress line: hide SVG on mobile, show label as a centred italic quote */
       .cv-progress-svg { display: none; }
       .cv-progress-wrap { height: auto; overflow: visible; }
       .cv-progress-label {
         position: relative; top: auto; left: auto; transform: none;
-        display: flex; align-items: center;
-        gap: 18px; padding: 32px 8%;
+        display: block; text-align: center;
+        padding: 28px 10%;
       }
       .cv-progress-label::before,
-      .cv-progress-label::after {
-        content: '';
-        flex: 1;
-        height: 1px;
-        background: linear-gradient(to right, transparent, rgba(201,168,76,0.4));
-      }
-      .cv-progress-label::after {
-        background: linear-gradient(to left, transparent, rgba(201,168,76,0.4));
-      }
+      .cv-progress-label::after { display: none; }
       .cv-progress-label-inner {
-        background: rgba(28,26,20,0.9);
+        background: transparent;
+        border: none;
         backdrop-filter: none;
-        border-color: rgba(201,168,76,0.48);
-        flex-shrink: 0;
+        padding: 0;
+        border-radius: 0;
+        display: block;
       }
-      .cv-progress-label-text { color: #C9A84C; font-size: 0.76rem; letter-spacing: 0.18em; }
+      .cv-progress-label-text {
+        font-size: 1.15rem;
+        letter-spacing: 0;
+        color: rgba(201,168,76,0.82);
+      }
       /* Audio Extras card: allow button to wrap below icon+info on narrow screens */
       .la-addon-layout .addon-card .addon-card-main { flex-wrap: wrap; gap: 10px; }
       .la-addon-layout .addon-card .addon-card-info { flex: 1 1 0; min-width: 0; }
@@ -527,7 +660,8 @@
 .la-condensor {
   position: absolute;
   right: 0;
-  bottom: 0;
+  /* Mirror NTG5: sit just below the banner */
+  top: calc(244 / 2560 * 100vw);
   height: clamp(200px, 36vw, 660px);
   width: auto;
   pointer-events: none;
@@ -537,7 +671,7 @@
 @media (max-width: 600px) {
   /* Mobile banner uses padding not aspect-ratio; NTG5 placed just below it */
   .la-ntg5    { height: clamp(110px, 30vw, 180px); top: 110px; }
-  .la-condensor { height: clamp(120px, 34vw, 200px); }
+  .la-condensor { height: clamp(120px, 34vw, 200px); top: 110px; }
   /* Tighten blank gap further on mobile */
   #la-section .cv-content { min-height: 20px; }
 }
@@ -980,6 +1114,7 @@
     @media (max-width: 600px) {
       .pkg-coins-inner { flex-direction: column; align-items: center; gap: 52px; }
       .coin-card { width: 240px; height: 300px; }
+      .pkg-coins-section { padding-bottom: 72px; }
       /* Hide hover-only CTA on mobile — no hover, and it bleeds through the 3D spin */
       .coin-cta { display: none !important; }
       .trident-svg { display: none; }
@@ -999,7 +1134,7 @@
       .cv-sub-b .cv-text-center-slot { grid-column: 1 / -1; }
 
       /* ── Cinema-Grade Video: gear grid tweaks for mobile ── */
-      .cv-gear { padding: 24px 0 64px; }
+      .cv-gear { padding: 24px 0 20px; }
       .cv-gear-top { grid-template-columns: 1fr 1fr 1fr; }
       .cv-gear-bottom { grid-template-columns: repeat(4, 1fr); }
       /* hide old placeholder grids if still present */
@@ -1171,7 +1306,7 @@
   </div>
   <div class="cv-gear">
     <!-- Top row: hero cameras -->
-    <p class="cv-gear-label">2 Cameras &amp; Drone</p>
+    <p class="cv-gear-label">2 Cameras &amp; 1 Drone</p>
     <div class="cv-gear-top">
       <div class="cv-gear-slot"><img src="Packages Pics/Video/Drone.png" alt="DJI Drone"></div>
       <div class="cv-gear-slot"><img src="Packages Pics/Video/Rig.png" alt="Camera Rig"></div>
@@ -1210,6 +1345,106 @@
 
   <!-- Video Add-Ons: Vintage & Film, Drone, Macro -->
   <div class="sect-addons">
+
+    <!-- ── Features tile — certificate border is the box ── -->
+    <div class="features-tile">
+      <svg class="features-tile-border-svg" viewBox="0 0 860 240" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+          <defs>
+            <pattern id="ft-dot-h" x="0" y="0" width="18" height="1" patternUnits="userSpaceOnUse">
+              <circle cx="9" cy="0.5" r="1.2" fill="rgba(201,168,76,0.35)"/>
+            </pattern>
+            <pattern id="ft-dot-v" x="0" y="0" width="1" height="18" patternUnits="userSpaceOnUse">
+              <circle cx="0.5" cy="9" r="1.2" fill="rgba(201,168,76,0.35)"/>
+            </pattern>
+            <filter id="ft-gold-glow" x="-20%" y="-20%" width="140%" height="140%">
+              <feGaussianBlur stdDeviation="2.5" result="blur"/>
+              <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
+
+          <!-- Outer border -->
+          <rect x="10" y="10" width="840" height="220" stroke="rgba(201,168,76,0.55)" stroke-width="0.8" fill="none"/>
+
+          <!-- Dot bands -->
+          <rect x="10" y="18" width="840" height="1" fill="url(#ft-dot-h)"/>
+          <rect x="10" y="221" width="840" height="1" fill="url(#ft-dot-h)"/>
+          <rect x="18" y="10" width="1" height="220" fill="url(#ft-dot-v)"/>
+          <rect x="841" y="10" width="1" height="220" fill="url(#ft-dot-v)"/>
+
+          <!-- Inner border -->
+          <rect x="26" y="26" width="808" height="188" stroke="rgba(201,168,76,0.38)" stroke-width="0.8" fill="none"/>
+
+          <!-- Top-left corner -->
+          <g filter="url(#ft-gold-glow)">
+            <path d="M10 36 L10 10 L36 10" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="square" fill="none" opacity="0.9"/>
+            <path d="M10 5 L15 10 L10 15 L5 10 Z" fill="#C9A84C" opacity="0.85"/>
+            <path d="M26 36 L26 26 L36 26" stroke="rgba(201,168,76,0.5)" stroke-width="0.8" fill="none"/>
+          </g>
+
+          <!-- Top-right corner -->
+          <g filter="url(#ft-gold-glow)">
+            <path d="M850 36 L850 10 L824 10" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="square" fill="none" opacity="0.9"/>
+            <path d="M850 5 L855 10 L850 15 L845 10 Z" fill="#C9A84C" opacity="0.85"/>
+            <path d="M834 36 L834 26 L824 26" stroke="rgba(201,168,76,0.5)" stroke-width="0.8" fill="none"/>
+          </g>
+
+          <!-- Bottom-left corner -->
+          <g filter="url(#ft-gold-glow)">
+            <path d="M10 194 L10 220 L36 220" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="square" fill="none" opacity="0.9"/>
+            <path d="M10 215 L15 220 L10 225 L5 220 Z" fill="#C9A84C" opacity="0.85"/>
+            <path d="M26 204 L26 214 L36 214" stroke="rgba(201,168,76,0.5)" stroke-width="0.8" fill="none"/>
+          </g>
+
+          <!-- Bottom-right corner -->
+          <g filter="url(#ft-gold-glow)">
+            <path d="M850 194 L850 220 L824 220" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="square" fill="none" opacity="0.9"/>
+            <path d="M850 215 L855 220 L850 225 L845 220 Z" fill="#C9A84C" opacity="0.85"/>
+            <path d="M834 204 L834 214 L824 214" stroke="rgba(201,168,76,0.5)" stroke-width="0.8" fill="none"/>
+          </g>
+
+          <!-- Top center ornament -->
+          <g filter="url(#ft-gold-glow)">
+            <path d="M430 5 L436 10 L430 15 L424 10 Z" fill="none" stroke="#C9A84C" stroke-width="0.9" opacity="0.8"/>
+            <circle cx="430" cy="10" r="2" fill="#C9A84C" opacity="0.7"/>
+          </g>
+
+          <!-- Bottom center ornament -->
+          <g filter="url(#ft-gold-glow)">
+            <path d="M430 215 L436 220 L430 225 L424 220 Z" fill="none" stroke="#C9A84C" stroke-width="0.9" opacity="0.8"/>
+            <circle cx="430" cy="220" r="2" fill="#C9A84C" opacity="0.7"/>
+          </g>
+
+          <!-- Left center ornament -->
+          <g filter="url(#ft-gold-glow)">
+            <path d="M5 110 L10 104 L15 110 L10 116 Z" fill="none" stroke="#C9A84C" stroke-width="0.9" opacity="0.8"/>
+            <circle cx="10" cy="110" r="2" fill="#C9A84C" opacity="0.7"/>
+          </g>
+
+          <!-- Right center ornament -->
+          <g filter="url(#ft-gold-glow)">
+            <path d="M845 110 L850 104 L855 110 L850 116 Z" fill="none" stroke="#C9A84C" stroke-width="0.9" opacity="0.8"/>
+            <circle cx="850" cy="110" r="2" fill="#C9A84C" opacity="0.7"/>
+          </g>
+
+          <!-- Quarter-point ticks — top & bottom -->
+          <line x1="215" y1="7" x2="215" y2="13" stroke="rgba(201,168,76,0.38)" stroke-width="0.8"/>
+          <line x1="645" y1="7" x2="645" y2="13" stroke="rgba(201,168,76,0.38)" stroke-width="0.8"/>
+          <line x1="215" y1="217" x2="215" y2="223" stroke="rgba(201,168,76,0.38)" stroke-width="0.8"/>
+          <line x1="645" y1="217" x2="645" y2="223" stroke="rgba(201,168,76,0.38)" stroke-width="0.8"/>
+          <!-- Quarter-point ticks — left & right -->
+          <line x1="7" y1="55" x2="13" y2="55" stroke="rgba(201,168,76,0.38)" stroke-width="0.8"/>
+          <line x1="7" y1="165" x2="13" y2="165" stroke="rgba(201,168,76,0.38)" stroke-width="0.8"/>
+          <line x1="847" y1="55" x2="853" y2="55" stroke="rgba(201,168,76,0.38)" stroke-width="0.8"/>
+          <line x1="847" y1="165" x2="853" y2="165" stroke="rgba(201,168,76,0.38)" stroke-width="0.8"/>
+      </svg>
+      <div class="features-tile-header">
+        <h3 class="features-tile-title">Features</h3>
+      </div>
+      <div class="features-tile-body">
+        <!-- Text content goes here -->
+      </div>
+    </div>
+
     <p class="sect-addons-label">Add-Ons</p>
     <div class="sect-addons-grid sect-addons-grid--2">
 
@@ -1243,6 +1478,8 @@
               <li>SMC Takumar 55mm</li>
               <li>Юпитер (Jupiter) 9</li>
               <li>Vivitar Series 1</li>
+              <li>Carl Zeiss Planar</li>
+              <li>Minolta Rokkor</li>
             </ul>
           </div>
         </div>
@@ -1529,81 +1766,244 @@
     <div class="delivery-chip"><span class="delivery-chip-word">Word</span></div>
   </div>
 
+  <!-- ── Certificate of Completion ── -->
+  <div class="delivery-cert-wrap">
+    <div class="hm-cert" role="img" aria-label="Certificate of Completion">
+      <svg class="hm-border" viewBox="0 0 850 1100" preserveAspectRatio="none" aria-hidden="true">
+        <defs>
+          <pattern id="hm-guilloche" x="0" y="0" width="32" height="14" patternUnits="userSpaceOnUse">
+            <rect width="32" height="14" fill="#1C1A14"/>
+            <path d="M0 7 Q 8 0 16 7 T 32 7" fill="none" stroke="#C9A84C" stroke-width="1.1"/>
+            <path d="M0 7 Q 8 14 16 7 T 32 7" fill="none" stroke="#C9A84C" stroke-width="1.1"/>
+            <circle cx="0"  cy="7" r="1.6" fill="#e8cb7a"/>
+            <circle cx="16" cy="7" r="1.6" fill="#e8cb7a"/>
+            <circle cx="32" cy="7" r="1.6" fill="#e8cb7a"/>
+          </pattern>
+          <pattern id="hm-guilloche-v" x="0" y="0" width="14" height="32" patternUnits="userSpaceOnUse">
+            <rect width="14" height="32" fill="#1C1A14"/>
+            <path d="M7 0 Q 0 8 7 16 T 7 32" fill="none" stroke="#C9A84C" stroke-width="1.1"/>
+            <path d="M7 0 Q 14 8 7 16 T 7 32" fill="none" stroke="#C9A84C" stroke-width="1.1"/>
+            <circle cx="7" cy="0"  r="1.6" fill="#e8cb7a"/>
+            <circle cx="7" cy="16" r="1.6" fill="#e8cb7a"/>
+            <circle cx="7" cy="32" r="1.6" fill="#e8cb7a"/>
+          </pattern>
+          <pattern id="hm-rope-h" x="0" y="0" width="14" height="10" patternUnits="userSpaceOnUse">
+            <path d="M0 5 Q 3.5 -2 7 5 T 14 5" fill="none" stroke="#1C1A14" stroke-width="1.6"/>
+            <path d="M0 5 Q 3.5 12 7 5 T 14 5" fill="none" stroke="#1C1A14" stroke-width="1.6"/>
+            <circle cx="3.5" cy="1.5" r="0.7" fill="#C9A84C"/>
+            <circle cx="10.5" cy="8.5" r="0.7" fill="#C9A84C"/>
+          </pattern>
+          <pattern id="hm-rope-v" x="0" y="0" width="10" height="14" patternUnits="userSpaceOnUse">
+            <path d="M5 0 Q -2 3.5 5 7 T 5 14" fill="none" stroke="#1C1A14" stroke-width="1.6"/>
+            <path d="M5 0 Q 12 3.5 5 7 T 5 14" fill="none" stroke="#1C1A14" stroke-width="1.6"/>
+            <circle cx="1.5" cy="3.5" r="0.7" fill="#C9A84C"/>
+            <circle cx="8.5" cy="10.5" r="0.7" fill="#C9A84C"/>
+          </pattern>
+          <pattern id="hm-bead-h" x="0" y="0" width="14" height="7" patternUnits="userSpaceOnUse">
+            <circle cx="3.5" cy="3.5" r="2.4" fill="#1C1A14"/>
+            <rect x="7" y="2.6" width="6" height="1.8" fill="#1C1A14"/>
+            <circle cx="3.5" cy="3.5" r="0.9" fill="#C9A84C"/>
+          </pattern>
+          <pattern id="hm-bead-v" x="0" y="0" width="7" height="14" patternUnits="userSpaceOnUse">
+            <circle cx="3.5" cy="3.5" r="2.4" fill="#1C1A14"/>
+            <rect x="2.6" y="7" width="1.8" height="6" fill="#1C1A14"/>
+            <circle cx="3.5" cy="3.5" r="0.9" fill="#C9A84C"/>
+          </pattern>
+          <symbol id="hm-fleuron" viewBox="0 0 100 100">
+            <g stroke-linecap="round" stroke-linejoin="round">
+              <g fill="none" stroke="#1C1A14">
+                <path d="M 6 96 L 6 6 L 96 6"   stroke-width="1.2"/>
+                <path d="M 12 96 L 12 12 L 96 12" stroke-width="0.6"/>
+                <path d="M 16 96 L 16 16 L 96 16" stroke-width="0.6"/>
+              </g>
+              <path d="M 6 96 L 16 96 M 96 6 L 96 16" stroke="#C9A84C" stroke-width="0.8" fill="none"/>
+              <g stroke="#1C1A14" stroke-width="0.9" fill="#f1ede2">
+                <path d="M 30 30 L 36 24 L 42 30 L 36 36 Z"/>
+                <path d="M 44 44 L 50 38 L 56 44 L 50 50 Z"/>
+                <path d="M 58 58 L 64 52 L 70 58 L 64 64 Z"/>
+              </g>
+              <circle cx="36" cy="30" r="1.2" fill="#C9A84C"/>
+              <circle cx="64" cy="58" r="1.2" fill="#C9A84C"/>
+              <path d="M 50 38 L 56 44 L 50 50 L 44 44 Z" fill="#1C1A14"/>
+              <g transform="translate(78 78)">
+                <g stroke="#1C1A14" stroke-width="0.9" fill="none">
+                  <line x1="0" y1="-11" x2="0" y2="-4"/>
+                  <line x1="0" y1="11"  x2="0" y2="4"/>
+                  <line x1="-11" y1="0" x2="-4" y2="0"/>
+                  <line x1="11"  y1="0" x2="4"  y2="0"/>
+                  <line x1="-7.8" y1="-7.8" x2="-2.8" y2="-2.8"/>
+                  <line x1="7.8"  y1="7.8"  x2="2.8"  y2="2.8"/>
+                  <line x1="-7.8" y1="7.8"  x2="-2.8" y2="2.8"/>
+                  <line x1="7.8"  y1="-7.8" x2="2.8"  y2="-2.8"/>
+                </g>
+                <g stroke="#1C1A14" stroke-width="0.6" fill="none">
+                  <line x1="-5.5" y1="-9.5" x2="-2" y2="-3.5"/>
+                  <line x1="5.5"  y1="9.5"  x2="2"  y2="3.5"/>
+                  <line x1="-9.5" y1="-5.5" x2="-3.5" y2="-2"/>
+                  <line x1="9.5"  y1="5.5"  x2="3.5"  y2="2"/>
+                  <line x1="-9.5" y1="5.5"  x2="-3.5" y2="2"/>
+                  <line x1="9.5"  y1="-5.5" x2="3.5"  y2="-2"/>
+                  <line x1="-5.5" y1="9.5"  x2="-2" y2="3.5"/>
+                  <line x1="5.5"  y1="-9.5" x2="2"  y2="-3.5"/>
+                </g>
+                <circle r="3" fill="#1C1A14"/>
+                <circle r="1.4" fill="#C9A84C"/>
+              </g>
+              <g transform="translate(24 76)">
+                <g stroke="#1C1A14" stroke-width="0.9" fill="#f1ede2">
+                  <ellipse cx="0" cy="-7" rx="3" ry="5.5"/>
+                  <ellipse cx="0" cy="7"  rx="3" ry="5.5"/>
+                  <ellipse cx="-7" cy="0" rx="5.5" ry="3"/>
+                  <ellipse cx="7"  cy="0" rx="5.5" ry="3"/>
+                  <ellipse cx="-5" cy="-5" rx="3.2" ry="5" transform="rotate(-45)"/>
+                  <ellipse cx="5"  cy="5"  rx="3.2" ry="5" transform="rotate(-45)"/>
+                </g>
+                <circle r="2.2" fill="#C9A84C" stroke="#1C1A14" stroke-width="0.7"/>
+              </g>
+              <g transform="translate(76 24)">
+                <g stroke="#1C1A14" stroke-width="0.9" fill="#f1ede2">
+                  <ellipse cx="0" cy="-7" rx="3" ry="5.5"/>
+                  <ellipse cx="0" cy="7"  rx="3" ry="5.5"/>
+                  <ellipse cx="-7" cy="0" rx="5.5" ry="3"/>
+                  <ellipse cx="7"  cy="0" rx="5.5" ry="3"/>
+                  <ellipse cx="-5" cy="-5" rx="3.2" ry="5" transform="rotate(-45)"/>
+                  <ellipse cx="5"  cy="5"  rx="3.2" ry="5" transform="rotate(-45)"/>
+                </g>
+                <circle r="2.2" fill="#C9A84C" stroke="#1C1A14" stroke-width="0.7"/>
+              </g>
+            </g>
+          </symbol>
+          <symbol id="hm-crest" viewBox="0 0 200 80">
+            <g fill="none" stroke="#1C1A14" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M 100 40 Q 70 28 50 34 Q 30 40 14 34"/>
+              <path d="M 100 40 Q 76 46 56 50 Q 36 54 22 50"/>
+              <path d="M 100 40 Q 80 38 60 42"/>
+              <path d="M 100 40 Q 130 28 150 34 Q 170 40 186 34"/>
+              <path d="M 100 40 Q 124 46 144 50 Q 164 54 178 50"/>
+              <path d="M 100 40 Q 120 38 140 42"/>
+              <path d="M 100 18 L 114 40 L 100 62 L 86 40 Z" fill="#1C1A14"/>
+              <path d="M 100 26 L 108 40 L 100 54 L 92 40 Z" fill="#C9A84C" stroke="none"/>
+              <circle cx="100" cy="40" r="2.4" fill="#1C1A14" stroke="none"/>
+              <circle cx="100" cy="10" r="3" fill="#1C1A14" stroke="none"/>
+              <path d="M 100 13 L 100 18"/>
+              <circle cx="14" cy="36" r="4" fill="#1C1A14" stroke="none"/>
+              <circle cx="14" cy="36" r="1.8" fill="#C9A84C" stroke="none"/>
+              <circle cx="186" cy="36" r="4" fill="#1C1A14" stroke="none"/>
+              <circle cx="186" cy="36" r="1.8" fill="#C9A84C" stroke="none"/>
+              <path d="M 22 50 Q 18 60 26 66"/>
+              <path d="M 178 50 Q 182 60 174 66"/>
+              <circle cx="60" cy="42" r="1.6" fill="#1C1A14" stroke="none"/>
+              <circle cx="140" cy="42" r="1.6" fill="#1C1A14" stroke="none"/>
+            </g>
+          </symbol>
+          <symbol id="hm-fleur-drop" viewBox="0 0 80 80">
+            <g fill="none" stroke="#1C1A14" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M 40 10 Q 26 28 40 42 Q 54 28 40 10 Z" fill="#1C1A14"/>
+              <path d="M 40 42 Q 20 46 16 62 Q 30 58 40 52" fill="#1C1A14" fill-opacity="0.85"/>
+              <path d="M 40 42 Q 60 46 64 62 Q 50 58 40 52" fill="#1C1A14" fill-opacity="0.85"/>
+              <path d="M 40 42 L 40 70" stroke-width="2.2"/>
+              <circle cx="40" cy="26" r="3" fill="#C9A84C" stroke="none"/>
+              <path d="M 28 66 L 52 66" stroke-width="2.2"/>
+              <circle cx="40" cy="66" r="2" fill="#C9A84C" stroke="none"/>
+            </g>
+          </symbol>
+          <radialGradient id="hm-wax-grad" cx="35%" cy="32%" r="75%">
+            <stop offset="0%"  stop-color="#a83a2c"/>
+            <stop offset="55%" stop-color="#7a2418"/>
+            <stop offset="100%" stop-color="#4a140c"/>
+          </radialGradient>
+        </defs>
+        <!-- Outer ink rule -->
+        <rect x="32" y="32" width="786" height="1036" fill="none" stroke="#1C1A14" stroke-width="2.2"/>
+        <!-- Guilloché bands -->
+        <rect x="46" y="46"   width="758" height="22"  fill="url(#hm-guilloche)"/>
+        <rect x="46" y="1032" width="758" height="22"  fill="url(#hm-guilloche)"/>
+        <rect x="46" y="46"   width="22"  height="1008" fill="url(#hm-guilloche-v)"/>
+        <rect x="782" y="46"  width="22"  height="1008" fill="url(#hm-guilloche-v)"/>
+        <!-- Mid rule -->
+        <rect x="68" y="68" width="714" height="964" fill="none" stroke="#1C1A14" stroke-width="1.2"/>
+        <!-- Rope -->
+        <rect x="72" y="72"   width="706" height="10" fill="url(#hm-rope-h)"/>
+        <rect x="72" y="1018" width="706" height="10" fill="url(#hm-rope-h)"/>
+        <rect x="72" y="72"   width="10" height="956" fill="url(#hm-rope-v)"/>
+        <rect x="768" y="72"  width="10" height="956" fill="url(#hm-rope-v)"/>
+        <!-- Bead-and-reel -->
+        <rect x="86" y="86"   width="678" height="7"  fill="url(#hm-bead-h)"/>
+        <rect x="86" y="1007" width="678" height="7"  fill="url(#hm-bead-h)"/>
+        <rect x="86" y="86"   width="7"   height="928" fill="url(#hm-bead-v)"/>
+        <rect x="757" y="86"  width="7"   height="928" fill="url(#hm-bead-v)"/>
+        <!-- Inner double-rule frame -->
+        <rect x="100" y="100" width="650" height="900" fill="none" stroke="#1C1A14" stroke-width="1.6"/>
+        <rect x="108" y="108" width="634" height="884" fill="none" stroke="#C9A84C" stroke-width="0.9"/>
+        <!-- Corner fleurons -->
+        <use href="#hm-fleuron" x="22" y="22" width="100" height="100"/>
+        <g transform="translate(828 22) scale(-1 1)"><use href="#hm-fleuron" x="0" y="0" width="100" height="100"/></g>
+        <g transform="translate(22 1078) scale(1 -1)"><use href="#hm-fleuron" x="0" y="0" width="100" height="100"/></g>
+        <g transform="translate(828 1078) scale(-1 -1)"><use href="#hm-fleuron" x="0" y="0" width="100" height="100"/></g>
+        <!-- Top-center crest -->
+        <rect x="325" y="20" width="200" height="80" fill="#f1ede2"/>
+        <use href="#hm-crest" x="325" y="6" width="200" height="80"/>
+        <!-- Bottom-center mirror -->
+        <rect x="325" y="1000" width="200" height="80" fill="#f1ede2"/>
+        <g transform="translate(0 1100) scale(1 -1)"><use href="#hm-crest" x="325" y="6" width="200" height="80"/></g>
+        <!-- Side mid fleurs -->
+        <rect x="20" y="510" width="60" height="80" fill="#f1ede2"/>
+        <use href="#hm-fleur-drop" x="18" y="510" width="60" height="80"/>
+        <rect x="770" y="510" width="60" height="80" fill="#f1ede2"/>
+        <g transform="translate(850 510) scale(-1 1)"><use href="#hm-fleur-drop" x="0" y="0" width="60" height="80"/></g>
+      </svg>
+      <div class="hm-inner">
+        <div class="hm-eyebrow">
+          <div class="hm-ln"></div><span>Harrison Media</span><div class="hm-ln"></div>
+        </div>
+        <h1 class="hm-title">Certificate of Completion</h1>
+        <p class="hm-subhead">— Documentary Production —</p>
+        <p class="hm-body">This is to acknowledge that</p>
+        <div class="hm-recipient">Eleanor M. Whitfield</div>
+        <p class="hm-body">has commissioned and received the documentary film
+          <em>"Kindling, A Family Portrait"</em>, produced and delivered in the year
+          two thousand and twenty&#8209;six, with the full archive of frames,
+          audio, and master grade lodged in the studio's vault.</p>
+        <div class="hm-footer">
+          <div class="hm-sigblock">
+            <div class="hm-sig">Tate Harrison</div>
+            <div class="hm-sig-rule"></div>
+            <div class="hm-sig-label">Director · Founder</div>
+          </div>
+          <div class="hm-sigblock">
+            <div class="hm-sig hm-sig-date">12 · iv · mmxxvi</div>
+            <div class="hm-sig-rule"></div>
+            <div class="hm-sig-label">Date of Delivery</div>
+          </div>
+        </div>
+      </div>
+      <div class="hm-seal">
+        <svg viewBox="0 0 200 200">
+          <path d="M 60 110 L 30 200 L 70 180 L 90 130 Z" fill="#7a2418" opacity="0.9"/>
+          <path d="M 140 110 L 170 200 L 130 180 L 110 130 Z" fill="#a83a2c" opacity="0.9"/>
+          <path d="M 60 110 L 30 200 L 70 180 L 90 130 Z" fill="none" stroke="#3a0e08" stroke-width="0.6"/>
+          <path d="M 140 110 L 170 200 L 130 180 L 110 130 Z" fill="none" stroke="#3a0e08" stroke-width="0.6"/>
+          <path d="M 100 18 C 130 18 150 30 162 50 C 178 60 182 88 170 108 C 178 130 158 158 132 162 C 118 178 86 178 68 164 C 42 162 22 138 30 112 C 18 88 28 60 44 50 C 56 28 76 18 100 18 Z"
+                fill="url(#hm-wax-grad)" stroke="#3a0e08" stroke-width="0.8"/>
+          <circle cx="100" cy="92" r="58" fill="none" stroke="#3a0e08" stroke-width="0.6" opacity="0.7"/>
+          <circle cx="100" cy="92" r="54" fill="none" stroke="#f5d7a0" stroke-width="0.4" opacity="0.4"/>
+          <g font-family="Cinzel, serif" font-weight="700" fill="#f5d7a0" opacity="0.92">
+            <text x="100" y="104" text-anchor="middle" font-size="30" letter-spacing="1">THM</text>
+          </g>
+          <defs>
+            <path id="hm-seal-arc" d="M 100 92 m -58 0 a 58 58 0 1 1 116 0 a 58 58 0 1 1 -116 0"/>
+          </defs>
+          <text font-family="Cinzel, serif" font-size="8" fill="#f5d7a0" letter-spacing="2" opacity="0.85">
+            <textPath href="#hm-seal-arc" startOffset="0%">★ HARRISON MEDIA · DOCUMENTARY ATELIER ·</textPath>
+          </text>
+          <ellipse cx="78" cy="58" rx="22" ry="10" fill="#f5d7a0" opacity="0.18"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+
   <div class="sect-addons">
     <div class="sect-addons-grid sect-addons-grid--2">
-
-      <!-- Extra Revision (qty stepper) -->
-      <div class="addon-card" id="card-extra-revision">
-        <div class="addon-card-main">
-          <div class="addon-card-icon-wrap">
-            <svg viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M38 14H14a2 2 0 0 0-2 2v20a2 2 0 0 0 2 2h24a2 2 0 0 0 2-2V16a2 2 0 0 0-2-2z" stroke="#C9A84C" stroke-width="1.5"/>
-              <path d="M20 22l4 4 8-8" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M8 14c3-5 10-8 18-8s15 3 18 8" stroke="#C9A84C" stroke-width="1" stroke-linecap="round" opacity="0.35"/>
-            </svg>
-          </div>
-          <div class="addon-card-info">
-            <p class="addon-card-name">Extra Revision</p>
-            <p class="addon-card-tagline">Additional rounds beyond your package</p>
-            <button class="addon-card-details-btn" onclick="toggleAddonDetails('extra-revision')">Details <span class="addon-card-chevron">▾</span></button>
-          </div>
-          <div class="addon-card-action">
-            <div class="addon-card-stepper">
-              <button class="addon-stepper-btn" onclick="setAddonQty('extra-revision', -1)">−</button>
-              <span class="addon-stepper-count" id="qty-extra-revision">0</span>
-              <button class="addon-stepper-btn" onclick="setAddonQty('extra-revision', 1)">+</button>
-            </div>
-          </div>
-        </div>
-        <div class="addon-card-expand" id="expand-extra-revision">
-          <div class="addon-card-expand-inner">
-            <p class="addon-card-expand-desc">Need more back-and-forth? Add additional revision rounds beyond what's included in your package. Each round covers a full set of changes reviewed together.</p>
-            <ul class="addon-card-expand-tags">
-              <li>Full revision cycle per round</li>
-              <li>Notes reviewed together</li>
-              <li>Stacks with any package</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <!-- +3 Minutes Highly Edited (qty stepper) -->
-      <div class="addon-card" id="card-plus-3min">
-        <div class="addon-card-main">
-          <div class="addon-card-icon-wrap">
-            <svg viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="26" cy="28" r="18" stroke="#C9A84C" stroke-width="1.5"/>
-              <line x1="26" y1="28" x2="26" y2="16" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/>
-              <line x1="26" y1="28" x2="34" y2="32" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/>
-              <path d="M22 8h8" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/>
-              <path d="M32 5l4 3-4 3" stroke="#C9A84C" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </div>
-          <div class="addon-card-info">
-            <p class="addon-card-name">+3 Min Edit</p>
-            <p class="addon-card-tagline">Extend your final cut in 3-min blocks</p>
-            <button class="addon-card-details-btn" onclick="toggleAddonDetails('plus-3min')">Details <span class="addon-card-chevron">▾</span></button>
-          </div>
-          <div class="addon-card-action">
-            <div class="addon-card-stepper">
-              <button class="addon-stepper-btn" onclick="setAddonQty('plus-3min', -1)">−</button>
-              <span class="addon-stepper-count" id="qty-plus-3min">0</span>
-              <button class="addon-stepper-btn" onclick="setAddonQty('plus-3min', 1)">+</button>
-            </div>
-          </div>
-        </div>
-        <div class="addon-card-expand" id="expand-plus-3min">
-          <div class="addon-card-expand-inner">
-            <p class="addon-card-expand-desc">Extend your final cut in 3-minute increments — each block fully color-graded, sound-designed, and cut to the same standard as the rest of the film. For stories that need more room to breathe.</p>
-            <ul class="addon-card-expand-tags">
-              <li>Per 3-minute block</li>
-              <li>Full color grade + audio</li>
-              <li>Same quality as main edit</li>
-              <li>Seamlessly integrated</li>
-            </ul>
-          </div>
-        </div>
-      </div>
 
       <!-- B-Roll -->
       <div class="addon-card" id="card-broll">
@@ -1672,6 +2072,84 @@
       </div>
 
     </div><!-- /sect-addons-grid -->
+
+    <!-- ── Quantity add-ons: own capsules ── -->
+    <div class="delivery-qty-capsules">
+
+      <!-- Extra Revision -->
+      <div class="addon-card delivery-qty-capsule" id="card-extra-revision">
+        <div class="addon-card-main">
+          <div class="addon-card-icon-wrap">
+            <svg viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M38 14H14a2 2 0 0 0-2 2v20a2 2 0 0 0 2 2h24a2 2 0 0 0 2-2V16a2 2 0 0 0-2-2z" stroke="#C9A84C" stroke-width="1.5"/>
+              <path d="M20 22l4 4 8-8" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M8 14c3-5 10-8 18-8s15 3 18 8" stroke="#C9A84C" stroke-width="1" stroke-linecap="round" opacity="0.35"/>
+            </svg>
+          </div>
+          <div class="addon-card-info">
+            <p class="addon-card-name">Extra Revision</p>
+            <p class="addon-card-tagline">Additional rounds beyond your package</p>
+            <button class="addon-card-details-btn" onclick="toggleAddonDetails('extra-revision')">Details <span class="addon-card-chevron">▾</span></button>
+          </div>
+          <div class="addon-card-action">
+            <div class="addon-card-stepper">
+              <button class="addon-stepper-btn" onclick="setAddonQty('extra-revision', -1)">−</button>
+              <span class="addon-stepper-count" id="qty-extra-revision">0</span>
+              <button class="addon-stepper-btn" onclick="setAddonQty('extra-revision', 1)">+</button>
+            </div>
+          </div>
+        </div>
+        <div class="addon-card-expand" id="expand-extra-revision">
+          <div class="addon-card-expand-inner">
+            <p class="addon-card-expand-desc">Need more back-and-forth? Add additional revision rounds beyond what's included in your package. Each round covers a full set of changes reviewed together.</p>
+            <ul class="addon-card-expand-tags">
+              <li>Full revision cycle per round</li>
+              <li>Notes reviewed together</li>
+              <li>Stacks with any package</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- +3 Min Edit -->
+      <div class="addon-card delivery-qty-capsule" id="card-plus-3min">
+        <div class="addon-card-main">
+          <div class="addon-card-icon-wrap">
+            <svg viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="26" cy="28" r="18" stroke="#C9A84C" stroke-width="1.5"/>
+              <line x1="26" y1="28" x2="26" y2="16" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/>
+              <line x1="26" y1="28" x2="34" y2="32" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/>
+              <path d="M22 8h8" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/>
+              <path d="M32 5l4 3-4 3" stroke="#C9A84C" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="addon-card-info">
+            <p class="addon-card-name">+3 Min Edit</p>
+            <p class="addon-card-tagline">Extend your final cut in 3-min blocks</p>
+            <button class="addon-card-details-btn" onclick="toggleAddonDetails('plus-3min')">Details <span class="addon-card-chevron">▾</span></button>
+          </div>
+          <div class="addon-card-action">
+            <div class="addon-card-stepper">
+              <button class="addon-stepper-btn" onclick="setAddonQty('plus-3min', -1)">−</button>
+              <span class="addon-stepper-count" id="qty-plus-3min">0</span>
+              <button class="addon-stepper-btn" onclick="setAddonQty('plus-3min', 1)">+</button>
+            </div>
+          </div>
+        </div>
+        <div class="addon-card-expand" id="expand-plus-3min">
+          <div class="addon-card-expand-inner">
+            <p class="addon-card-expand-desc">Extend your final cut in 3-minute increments — each block fully color-graded, sound-designed, and cut to the same standard as the rest of the film. For stories that need more room to breathe.</p>
+            <ul class="addon-card-expand-tags">
+              <li>Per 3-minute block</li>
+              <li>Full color grade + audio</li>
+              <li>Same quality as main edit</li>
+              <li>Seamlessly integrated</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /delivery-qty-capsules -->
   </div><!-- /sect-addons -->
 </section>
 
@@ -1900,6 +2378,19 @@ function toggleAddonDetails(key) {
   const card = document.getElementById('card-' + key);
   if (card) card.classList.toggle('details-open');
 }
+
+// Tap anywhere on a card (except the Add button) to open/close details
+document.addEventListener('click', function(e) {
+  const card = e.target.closest('.addon-card');
+  if (!card) return;
+  // Ignore clicks on or inside the Add button
+  if (e.target.closest('.addon-toggle-btn')) return;
+  // The details button already fires toggleAddonDetails via onclick — skip double-fire
+  if (e.target.closest('.addon-card-details-btn')) return;
+  // Find the key from the card id (format: card-{key})
+  const key = card.id.replace(/^card-/, '');
+  if (key) toggleAddonDetails(key);
+});
 
 (function() {
   const _orig = setAddonQty;
