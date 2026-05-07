@@ -96,25 +96,34 @@
     }
     .sel-addon-chip:hover { background: rgba(201,168,76,0.18); }
     .sel-addon-chip.removed {
-      opacity: 0.6;
-      background: rgba(99,95,81,0.05);
-      border-color: rgba(99,95,81,0.18);
+      opacity: 0.45;
+      background: rgba(99,95,81,0.04);
+      border-color: rgba(99,95,81,0.15);
       color: #a8a49c;
-      text-decoration: line-through;
-      text-decoration-color: rgba(99,95,81,0.55);
+      /* no strikethrough — just grey out */
     }
     .sel-addon-chip-x {
       font-size: 0.72rem; color: #C9A84C; line-height: 1; margin-left: 2px;
     }
-    .sel-addon-chip.removed .sel-addon-chip-x { color: #a8a49c; }
+    /* Hide the ✕/+ icon when chip is removed — no + button */
+    .sel-addon-chip.removed .sel-addon-chip-x { display: none; }
     /* Add-ons sub-section inside sel-card */
     .sel-addons-section { margin-top: 16px; }
     .sel-addons-divider { height: 1px; background: rgba(99,95,81,0.1); margin-bottom: 14px; }
+    .sel-addons-header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
     .sel-addons-label {
       font-family: 'EB Garamond', serif; font-size: 0.68rem;
       letter-spacing: 2.5px; text-transform: uppercase;
-      color: #a8a49c; display: block; margin-bottom: 10px;
+      color: #a8a49c;
     }
+    .sel-addons-all-btn {
+      font-family: 'EB Garamond', serif; font-size: 0.62rem;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      color: #5C6E82; background: none; border: 1px solid rgba(92,110,130,0.3);
+      border-radius: 20px; padding: 2px 8px; cursor: pointer;
+      transition: background 0.15s ease, border-color 0.15s ease;
+    }
+    .sel-addons-all-btn:hover { background: rgba(92,110,130,0.08); border-color: rgba(92,110,130,0.5); }
 
     .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 24px; }
     .field-group { display: flex; flex-direction: column; gap: 8px; margin-bottom: 24px; }
@@ -286,7 +295,10 @@
       </div>
       <div class="sel-addons-section">
         <div class="sel-addons-divider"></div>
-        <span class="sel-addons-label">Add-ons</span>
+        <div class="sel-addons-header">
+          <span class="sel-addons-label">Add-ons</span>
+          <button class="sel-addons-all-btn" id="sel-addons-all-btn" type="button">select all</button>
+        </div>
         <div class="sel-addons-row" id="sel-addons-row"></div>
       </div>
     </div>
@@ -506,17 +518,30 @@
         const chip = document.createElement('span');
         chip.className   = 'sel-addon-chip' + (isActive ? '' : ' removed');
         chip.dataset.key = key;
-        chip.innerHTML   = label + '<span class="sel-addon-chip-x">' + (isActive ? '✕' : '+') + '</span>';
+        /* Only show ✕ on active chips — no + on inactive */
+        chip.innerHTML   = label + '<span class="sel-addon-chip-x">' + (isActive ? '✕' : '') + '</span>';
 
         chip.addEventListener('click', function () {
           const removing = !chip.classList.contains('removed'); // currently active → remove
           chip.classList.toggle('removed', removing);
-          chip.querySelector('.sel-addon-chip-x').textContent = removing ? '+' : '✕';
+          chip.querySelector('.sel-addon-chip-x').textContent = removing ? '' : '✕';
           activeAddons[key] = removing ? 0 : 1;
         });
 
         addonRow.appendChild(chip);
       });
+
+      // ── Select all add-ons button ──
+      const allBtn = document.getElementById('sel-addons-all-btn');
+      if (allBtn) {
+        allBtn.addEventListener('click', function () {
+          addonRow.querySelectorAll('.sel-addon-chip').forEach(chip => {
+            chip.classList.remove('removed');
+            chip.querySelector('.sel-addon-chip-x').textContent = '✕';
+            activeAddons[chip.dataset.key] = 1;
+          });
+        });
+      }
 
       // Auto-select service dropdown
       const svc = PACKAGE_TO_SERVICE[pkgKey];
