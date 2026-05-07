@@ -1183,7 +1183,8 @@
     }
     @media (max-width: 600px) {
       .pkg-coins-inner { flex-direction: column; align-items: center; gap: 36px; }
-      .coin-card { width: 200px; height: 260px; }
+      /* CTA is hidden on mobile, so reduce height to fit visible content only */
+      .coin-card { width: 200px; height: 190px; }
       .coin-epic { width: 200px; }
       .coin-tier-name { font-size: 1.5rem; }
       .coin-price { font-size: 1.15rem; }
@@ -1260,6 +1261,13 @@
       .hm-cert .hm-sig { font-size: 1.05rem; }
       .hm-cert .hm-sig-label { font-size: 0.55rem; }
       .delivery-pre-line { margin: 36px 6% 20px; }
+
+      /* ── Cart section: tighter vertical spacing on mobile ── */
+      .compare-section { padding: 28px 5% 36px; }
+      .cart-section { padding: 40px 5% 56px; }
+
+      /* ── Addon qty steppers: each on its own full-width row ── */
+      .addon-qty-wrap { flex-basis: 100%; display: flex; justify-content: center; }
     }
   </style>
 </head>
