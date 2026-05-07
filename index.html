@@ -3907,8 +3907,60 @@ if (_footerForm) _footerForm.addEventListener('submit', async function(e) {
 
   if (viewMoreBtn) {
     viewMoreBtn.addEventListener('click', function() {
+      // ── 1. Anchor: remember first item whose top edge is in the viewport ──
+      var anchorEl = null, anchorTop = 0;
+      Array.from(grid.querySelectorAll('.portfolio-item:not(.hidden)'))
+        .filter(function(item) { return item.style.display !== 'none'; })
+        .some(function(item) {
+          var r = item.getBoundingClientRect();
+          if (r.top >= 0 && r.top < window.innerHeight) {
+            anchorEl = item; anchorTop = r.top; return true;
+          }
+        });
+
+      // ── 2. Identify items that will be newly revealed ──
+      var allItems = Array.from(grid.querySelectorAll('.portfolio-item'));
+      var visCount = 0, toReveal = [];
+      allItems.forEach(function(item) {
+        if (item.classList.contains('hidden')) { item.style.display = ''; return; }
+        visCount++;
+        if (visCount > viewLimit && visCount <= viewLimit + BATCH) toReveal.push(item);
+      });
+
+      // ── 3. Stage new items: invisible but in-layout ──
+      toReveal.forEach(function(item) {
+        item.style.transition = 'none';
+        item.style.opacity    = '0';
+        item.style.display    = '';
+      });
+
+      // ── 4. Advance limit and update button ──
       viewLimit += BATCH;
-      applyClip();
+      var totalVis = allItems.filter(function(i) { return !i.classList.contains('hidden'); }).length;
+      if (viewMoreWrap) viewMoreWrap.style.display = (totalVis > viewLimit) ? '' : 'none';
+
+      // ── 5. After browser re-paints with new layout: fix scroll, then fade in ──
+      requestAnimationFrame(function() {
+        requestAnimationFrame(function() {
+          // Scroll correction — undo any column-rebalance drift
+          if (anchorEl) {
+            var drift = anchorEl.getBoundingClientRect().top - anchorTop;
+            if (drift !== 0) window.scrollBy(0, drift);
+          }
+          // Fade in
+          toReveal.forEach(function(item) {
+            item.style.transition = 'opacity 0.42s ease';
+            item.style.opacity    = '1';
+          });
+          // Clean up inline styles once the transition completes
+          setTimeout(function() {
+            toReveal.forEach(function(item) {
+              item.style.transition = '';
+              item.style.opacity    = '';
+            });
+          }, 460);
+        });
+      });
     });
   }
 
