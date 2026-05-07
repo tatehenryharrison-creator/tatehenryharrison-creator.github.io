@@ -169,6 +169,8 @@
     /* ── VIDEO SECTION PROGRESS LINE ── */
     .cv-progress-wrap { position: relative; height: 0; overflow: visible; z-index: 2; pointer-events: none; }
     .cv-progress-svg { position: absolute; top: 0; left: 0; width: 100%; height: 3000px; overflow: visible; }
+    /* Mobile snake — same positioning, taller to cover stacked mobile layout */
+    .cv-progress-svg--mobile { position: absolute; top: 0; left: 0; width: 100%; height: 4600px; overflow: visible; display: none; }
     .cv-prog-ghost { fill: none; stroke: rgba(201,168,76,0.12); stroke-width: 1.8; stroke-dasharray: 5 9; stroke-linecap: round; }
     .cv-prog-fill { fill: none; stroke: rgba(201,168,76,0.82); stroke-width: 1.8; stroke-linecap: round; }
     .cv-progress-label { position: absolute; top: 80px; left: 50%; transform: translate(-50%, -50%); pointer-events: none; }
@@ -525,29 +527,12 @@
       .cb-proceed-btn { width: 100%; text-align: center; padding: 13px 20px; order: 4; }
       .cb-pkg-wrap { order: 1; }
       .wi-text { padding: 40px 6% 40px; }
-      /* Progress line: hide SVG on mobile, show label as a centred italic quote */
+      /* Progress line: swap desktop SVG for the mobile snake */
       .cv-progress-svg { display: none; }
-      .cv-progress-wrap { height: auto; overflow: visible; }
-      .cv-progress-label {
-        position: relative; top: auto; left: auto; transform: none;
-        display: block; text-align: center;
-        padding: 28px 10%;
-      }
-      .cv-progress-label::before,
-      .cv-progress-label::after { display: none; }
-      .cv-progress-label-inner {
-        background: transparent;
-        border: none;
-        backdrop-filter: none;
-        padding: 0;
-        border-radius: 0;
-        display: block;
-      }
-      .cv-progress-label-text {
-        font-size: 1.15rem;
-        letter-spacing: 0;
-        color: rgba(201,168,76,0.82);
-      }
+      .cv-progress-svg--mobile { display: block; }
+      .cv-progress-wrap { height: 0; overflow: visible; }
+      /* Label replaced by the mobile line — hide it */
+      .cv-progress-label { display: none; }
       /* Audio Extras card: allow button to wrap below icon+info on narrow screens */
       .la-addon-layout .addon-card .addon-card-main { flex-wrap: wrap; gap: 10px; }
       .la-addon-layout .addon-card .addon-card-info { flex: 1 1 0; min-width: 0; }
@@ -1388,6 +1373,62 @@
       <circle id="cv-prog-tip-halo" r="9"   fill="rgba(201,168,76,0.28)" filter="url(#cv-tip-glow)" opacity="0"/>
       <circle id="cv-prog-tip-dot"  r="2.8" fill="#C9A84C" opacity="0"/>
     </svg>
+
+    <!-- ── Mobile snake — displayed only on narrow viewports ── -->
+    <svg class="cv-progress-svg cv-progress-svg--mobile"
+         viewBox="0 0 375 4600" preserveAspectRatio="none"
+         fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <defs>
+        <!-- Mobile fade mask: bright at each peak/turn-around, dim at crossings -->
+        <linearGradient id="cv-prog-fade-grad-m" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%"     stop-color="white" stop-opacity="0.55"/>
+          <stop offset="9.8%"  stop-color="white" stop-opacity="0.90"/> <!-- peak y=450  -->
+          <stop offset="14.7%" stop-color="white" stop-opacity="0.11"/> <!-- crossing    -->
+          <stop offset="19.6%" stop-color="white" stop-opacity="0.90"/> <!-- peak y=900  -->
+          <stop offset="28.3%" stop-color="white" stop-opacity="0.11"/> <!-- crossing    -->
+          <stop offset="34.8%" stop-color="white" stop-opacity="0.90"/> <!-- peak y=1600 -->
+          <stop offset="42.4%" stop-color="white" stop-opacity="0.11"/> <!-- crossing    -->
+          <stop offset="50.0%" stop-color="white" stop-opacity="0.90"/> <!-- peak y=2300 -->
+          <stop offset="57.6%" stop-color="white" stop-opacity="0.11"/> <!-- crossing    -->
+          <stop offset="65.2%" stop-color="white" stop-opacity="0.90"/> <!-- peak y=3000 -->
+          <stop offset="72.8%" stop-color="white" stop-opacity="0.11"/> <!-- crossing    -->
+          <stop offset="80.4%" stop-color="white" stop-opacity="0.90"/> <!-- peak y=3700 -->
+          <stop offset="87.0%" stop-color="white" stop-opacity="0.11"/> <!-- crossing    -->
+          <stop offset="93.5%" stop-color="white" stop-opacity="0.90"/> <!-- peak y=4300 -->
+          <stop offset="100%"  stop-color="white" stop-opacity="0.85"/>
+        </linearGradient>
+        <mask id="cv-prog-mask-m">
+          <rect x="0" y="0" width="375" height="4600" fill="url(#cv-prog-fade-grad-m)"/>
+        </mask>
+        <filter id="cv-tip-glow-m" x="-150%" y="-150%" width="400%" height="400%">
+          <feGaussianBlur stdDeviation="5" result="blur"/>
+          <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      </defs>
+
+      <!-- Ghost: faint full path -->
+      <path class="cv-prog-ghost"
+            d="M 110,0 C 110,150 264,300 264,450
+               C 264,600 110,750 110,900
+               C 110,1133 264,1367 264,1600
+               C 264,1833 110,2067 110,2300
+               C 110,2533 264,2767 264,3000
+               C 264,3233 110,3467 110,3700
+               C 110,3900 264,4100 264,4300"/>
+      <!-- Animated fill with fade mask -->
+      <path id="cv-prog-fill-m" class="cv-prog-fill" mask="url(#cv-prog-mask-m)"
+            d="M 110,0 C 110,150 264,300 264,450
+               C 264,600 110,750 110,900
+               C 110,1133 264,1367 264,1600
+               C 264,1833 110,2067 110,2300
+               C 110,2533 264,2767 264,3000
+               C 264,3233 110,3467 110,3700
+               C 110,3900 264,4100 264,4300"/>
+      <!-- Scroll-following tip -->
+      <circle id="cv-prog-tip-halo-m" r="9"   fill="rgba(201,168,76,0.28)" filter="url(#cv-tip-glow-m)" opacity="0"/>
+      <circle id="cv-prog-tip-dot-m"  r="2.8" fill="#C9A84C" opacity="0"/>
+    </svg>
+
     <div class="cv-progress-label">
       <div class="cv-progress-label-inner">
         <p class="cv-progress-label-text">All contribute to the creative process</p>
@@ -2473,6 +2514,13 @@ document.addEventListener('click', function(e) {
   path.style.strokeDasharray  = len;
   path.style.strokeDashoffset = len;
 
+  /* Mobile path elements */
+  var pathM    = document.getElementById('cv-prog-fill-m');
+  var tipHaloM = document.getElementById('cv-prog-tip-halo-m');
+  var tipDotM  = document.getElementById('cv-prog-tip-dot-m');
+  var lenM     = pathM ? pathM.getTotalLength() : 0;
+  if (pathM) { pathM.style.strokeDasharray = lenM; pathM.style.strokeDashoffset = lenM; }
+
   /* Pre-compute document-space positions so line speed matches actual section heights
      on every screen size. Recomputed on resize. */
   var scrollStart, scrollTotal;
@@ -2481,42 +2529,56 @@ document.addEventListener('click', function(e) {
     var vh        = window.innerHeight;
     var wrapTop   = wrap.getBoundingClientRect().top + window.scrollY;
     /* Extend through all three sections: cv → la → cl (Color & Light).
-       The SVG path bottom (wrapTop + 2900) aligns with cl-section bottom. */
-    var clSection = document.getElementById('cl-section');
-    var laSection = document.getElementById('la-section');
-    var endDoc    = clSection
-      ? clSection.getBoundingClientRect().bottom + window.scrollY
-      : laSection
-        ? laSection.getBoundingClientRect().bottom + window.scrollY
-        : wrapTop + 3000;
-    scrollStart = wrapTop - vh;   /* scrollY when wrap first enters viewport bottom */
-    scrollTotal = endDoc - wrapTop + vh; /* total scroll px to animate across */
+       On mobile the delivery section is also included via the taller mobile path. */
+    var clSection      = document.getElementById('cl-section');
+    var laSection      = document.getElementById('la-section');
+    var deliverySection = document.getElementById('delivery-section');
+    var endDoc;
+    if (window.innerWidth <= 600 && deliverySection) {
+      endDoc = deliverySection.getBoundingClientRect().bottom + window.scrollY;
+    } else if (clSection) {
+      endDoc = clSection.getBoundingClientRect().bottom + window.scrollY;
+    } else if (laSection) {
+      endDoc = laSection.getBoundingClientRect().bottom + window.scrollY;
+    } else {
+      endDoc = wrapTop + 3000;
+    }
+    scrollStart = wrapTop - vh;
+    scrollTotal = endDoc - wrapTop + vh;
+  }
+
+  function moveTip(prog, activePath, activeLen, halo, dot, resetHalo, resetDot) {
+    if (halo && dot) {
+      if (prog > 0.005 && prog < 0.995) {
+        var pt  = activePath.getPointAtLength(prog * activeLen);
+        var vis = Math.min(1, Math.min(prog / 0.02, (1 - prog) / 0.02)).toFixed(3);
+        halo.setAttribute('cx', pt.x.toFixed(2)); halo.setAttribute('cy', pt.y.toFixed(2));
+        dot.setAttribute('cx',  pt.x.toFixed(2)); dot.setAttribute('cy',  pt.y.toFixed(2));
+        halo.setAttribute('opacity', vis);
+        dot.setAttribute('opacity',  vis);
+      } else {
+        halo.setAttribute('opacity', '0');
+        dot.setAttribute('opacity',  '0');
+      }
+    }
+    if (resetHalo) resetHalo.setAttribute('opacity', '0');
+    if (resetDot)  resetDot.setAttribute('opacity',  '0');
   }
 
   function update() {
     var prog = Math.max(0, Math.min(1,
       (window.scrollY - scrollStart) / Math.max(1, scrollTotal)
     ));
-    path.style.strokeDashoffset = (len * (1 - prog)).toFixed(2);
-
-    /* Scroll-following tip dot: rides the live endpoint of the drawn line */
-    if (tipHalo && tipDot) {
-      if (prog > 0.005 && prog < 0.995) {
-        var pt = path.getPointAtLength(prog * len);
-        var cx = pt.x.toFixed(2);
-        var cy = pt.y.toFixed(2);
-        tipHalo.setAttribute('cx', cx);
-        tipHalo.setAttribute('cy', cy);
-        tipDot.setAttribute('cx', cx);
-        tipDot.setAttribute('cy', cy);
-        /* Fade in at start, fade out near end */
-        var vis = Math.min(1, Math.min(prog / 0.02, (1 - prog) / 0.02)).toFixed(3);
-        tipHalo.setAttribute('opacity', vis);
-        tipDot.setAttribute('opacity', vis);
-      } else {
-        tipHalo.setAttribute('opacity', '0');
-        tipDot.setAttribute('opacity', '0');
-      }
+    if (window.innerWidth <= 600 && pathM) {
+      /* Mobile: drive the mobile snake; freeze desktop */
+      pathM.style.strokeDashoffset = (lenM * (1 - prog)).toFixed(2);
+      path.style.strokeDashoffset  = len;
+      moveTip(prog, pathM, lenM, tipHaloM, tipDotM, tipHalo, tipDot);
+    } else {
+      /* Desktop: drive the desktop snake; freeze mobile */
+      path.style.strokeDashoffset = (len * (1 - prog)).toFixed(2);
+      if (pathM) pathM.style.strokeDashoffset = lenM;
+      moveTip(prog, path, len, tipHalo, tipDot, tipHaloM, tipDotM);
     }
   }
 
