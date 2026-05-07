@@ -145,10 +145,29 @@
       letter-spacing: 0.5px;
     }
     .features-tile-pattern { display: none; }
+    /* Feature list inside the decorative box */
+    .features-list {
+      list-style: none; padding: 0; margin: 0;
+      display: flex; flex-direction: column; gap: 14px;
+      align-items: center;
+    }
+    .features-list li {
+      font-family: 'EB Garamond', serif;
+      font-size: 1.05rem; letter-spacing: 0.04em;
+      color: rgba(232,225,212,0.68);
+      display: flex; align-items: center; gap: 10px;
+    }
+    .features-list li::before {
+      content: '◆';
+      color: rgba(201,168,76,0.55);
+      font-size: 0.45rem;
+      flex-shrink: 0;
+    }
     @media (max-width: 600px) {
       .features-tile-header { padding: 36px 32px 16px; }
       .features-tile-title { font-size: 2rem; }
       .features-tile-body { padding: 0 32px 44px; }
+      .features-list li { font-size: 0.92rem; }
     }
 
     /* ── SECTION-EMBEDDED ADD-ONS ── */
@@ -177,6 +196,12 @@
     .cv-progress-label-inner { display: inline-block; padding: 8px 22px; border-radius: 50px; background: rgba(14,12,9,0.82); border: 1px solid rgba(201,168,76,0.45); backdrop-filter: blur(8px); white-space: nowrap; }
     .cv-progress-label-text { font-family: 'EB Garamond', serif; font-style: italic; font-weight: 400; font-size: 1rem; letter-spacing: 0.01em; color: #C9A84C; margin: 0; }
     #la-section { background: #0e0c09; }
+    /* Gradient intro before la-banner — mirrors cv-section's sect-fade-to-dark */
+    .la-fade-in {
+      height: 110px;
+      background: linear-gradient(to bottom, #f5f4f0 0%, #d3d2ce 30%, #898782 60%, #3e3c36 85%, #1C1A14 100%);
+      pointer-events: none; margin: 0;
+    }
     /* Fade from section dark to addons dark — no cream-to-black sweep needed */
     #la-section .sect-fade-to-dark { background: linear-gradient(to bottom, #0e0c09 0%, #1C1A14 100%); }
     #cv-section .sect-addons,
@@ -1107,6 +1132,7 @@
 
     /* ── COIN CARD CTA (hover) ── */
     .coin-epic { width: 302px; } /* 20% wider than Novel (252px) */
+    .coin-chapter { height: 370px; } /* slightly shorter than Novel/Epic (410px) */
     .coin-cta {
       position: absolute;
       bottom: 0; left: 0; right: 0;
@@ -1144,6 +1170,7 @@
     @media (max-width: 960px) {
       .pkg-coins-inner { gap: 18px; }
       .coin-card { width: 210px; height: 390px; }
+      .coin-chapter { height: 350px; }
       .coin-tier-name { font-size: 1.7rem; }
       .tier-name { font-size: 1.7rem; }
       .cv-banner-title { font-size: 2.2rem; letter-spacing: 4px; }
@@ -1492,12 +1519,12 @@
         </filter>
       </defs>
 
-      <!-- Ghost: sharp U-turn mobile snake -->
+      <!-- Ghost: desktop-style wide sweeping mobile snake -->
       <path class="cv-prog-ghost"
-            d="M 100,0 C 100,160 230,445 270,450 C 230,455 130,715 90,720 C 130,725 230,975 270,980 C 230,985 130,1245 90,1250 C 130,1255 230,1515 270,1520 C 230,1525 130,1795 90,1800 C 130,1805 230,2055 270,2060 C 230,2065 130,2345 90,2350 C 130,2355 230,2595 270,2600 C 230,2605 130,2895 90,2900 C 130,2905 230,3145 270,3150 C 230,3155 130,3445 90,3450 C 130,3455 230,3695 270,3700 C 230,3705 130,3995 90,4000"/>
+            d="M 90,0 C 210,180 295,440 315,450 C 295,460 75,710 45,720 C 75,730 295,970 315,980 C 295,990 75,1240 45,1250 C 75,1260 295,1510 315,1520 C 295,1530 75,1790 45,1800 C 75,1810 295,2050 315,2060 C 295,2070 75,2340 45,2350 C 75,2360 295,2590 315,2600 C 295,2610 75,2890 45,2900 C 75,2910 295,3140 315,3150 C 295,3160 75,3440 45,3450 C 75,3460 295,3690 315,3700 C 295,3710 75,3990 45,4000"/>
       <!-- Animated fill with fade mask -->
       <path id="cv-prog-fill-m" class="cv-prog-fill" mask="url(#cv-prog-mask-m)"
-            d="M 100,0 C 100,160 230,445 270,450 C 230,455 130,715 90,720 C 130,725 230,975 270,980 C 230,985 130,1245 90,1250 C 130,1255 230,1515 270,1520 C 230,1525 130,1795 90,1800 C 130,1805 230,2055 270,2060 C 230,2065 130,2345 90,2350 C 130,2355 230,2595 270,2600 C 230,2605 130,2895 90,2900 C 130,2905 230,3145 270,3150 C 230,3155 130,3445 90,3450 C 130,3455 230,3695 270,3700 C 230,3705 130,3995 90,4000"/>
+            d="M 90,0 C 210,180 295,440 315,450 C 295,460 75,710 45,720 C 75,730 295,970 315,980 C 295,990 75,1240 45,1250 C 75,1260 295,1510 315,1520 C 295,1530 75,1790 45,1800 C 75,1810 295,2050 315,2060 C 295,2070 75,2340 45,2350 C 75,2360 295,2590 315,2600 C 295,2610 75,2890 45,2900 C 75,2910 295,3140 315,3150 C 295,3160 75,3440 45,3450 C 75,3460 295,3690 315,3700 C 295,3710 75,3990 45,4000"/>
       <!-- Scroll-following tip -->
       <circle id="cv-prog-tip-halo-m" r="9"   fill="rgba(201,168,76,0.28)" filter="url(#cv-tip-glow-m)" opacity="0"/>
       <circle id="cv-prog-tip-dot-m"  r="2.8" fill="#C9A84C" opacity="0"/>
@@ -1559,15 +1586,15 @@
 
           <!-- Bottom-left corner -->
           <g filter="url(#ft-gold-glow)">
-            <path d="M10 194 L10 220 L36 220" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="square" fill="none" opacity="0.9"/>
-            <path d="M10 215 L15 220 L10 225 L5 220 Z" fill="#C9A84C" opacity="0.85"/>
+            <path d="M10 204 L10 230 L36 230" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="square" fill="none" opacity="0.9"/>
+            <path d="M10 225 L15 230 L10 235 L5 230 Z" fill="#C9A84C" opacity="0.85"/>
             <path d="M26 204 L26 214 L36 214" stroke="rgba(201,168,76,0.5)" stroke-width="0.8" fill="none"/>
           </g>
 
           <!-- Bottom-right corner -->
           <g filter="url(#ft-gold-glow)">
-            <path d="M850 194 L850 220 L824 220" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="square" fill="none" opacity="0.9"/>
-            <path d="M850 215 L855 220 L850 225 L845 220 Z" fill="#C9A84C" opacity="0.85"/>
+            <path d="M850 204 L850 230 L824 230" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="square" fill="none" opacity="0.9"/>
+            <path d="M850 225 L855 230 L850 235 L845 230 Z" fill="#C9A84C" opacity="0.85"/>
             <path d="M834 204 L834 214 L824 214" stroke="rgba(201,168,76,0.5)" stroke-width="0.8" fill="none"/>
           </g>
 
@@ -1579,8 +1606,8 @@
 
           <!-- Bottom center ornament -->
           <g filter="url(#ft-gold-glow)">
-            <path d="M430 215 L436 220 L430 225 L424 220 Z" fill="none" stroke="#C9A84C" stroke-width="0.9" opacity="0.8"/>
-            <circle cx="430" cy="220" r="2" fill="#C9A84C" opacity="0.7"/>
+            <path d="M430 225 L436 230 L430 235 L424 230 Z" fill="none" stroke="#C9A84C" stroke-width="0.9" opacity="0.8"/>
+            <circle cx="430" cy="230" r="2" fill="#C9A84C" opacity="0.7"/>
           </g>
 
           <!-- Left center ornament -->
@@ -1598,8 +1625,8 @@
           <!-- Quarter-point ticks — top & bottom -->
           <line x1="215" y1="7" x2="215" y2="13" stroke="rgba(201,168,76,0.38)" stroke-width="0.8"/>
           <line x1="645" y1="7" x2="645" y2="13" stroke="rgba(201,168,76,0.38)" stroke-width="0.8"/>
-          <line x1="215" y1="217" x2="215" y2="223" stroke="rgba(201,168,76,0.38)" stroke-width="0.8"/>
-          <line x1="645" y1="217" x2="645" y2="223" stroke="rgba(201,168,76,0.38)" stroke-width="0.8"/>
+          <line x1="215" y1="227" x2="215" y2="233" stroke="rgba(201,168,76,0.38)" stroke-width="0.8"/>
+          <line x1="645" y1="227" x2="645" y2="233" stroke="rgba(201,168,76,0.38)" stroke-width="0.8"/>
           <!-- Quarter-point ticks — left & right -->
           <line x1="7" y1="55" x2="13" y2="55" stroke="rgba(201,168,76,0.38)" stroke-width="0.8"/>
           <line x1="7" y1="165" x2="13" y2="165" stroke="rgba(201,168,76,0.38)" stroke-width="0.8"/>
@@ -1610,7 +1637,11 @@
         <h3 class="features-tile-title">Features</h3>
       </div>
       <div class="features-tile-body">
-        <!-- Text content goes here -->
+        <ul class="features-list">
+          <li>Professional-grade cinema tools</li>
+          <li>Sharp, stable, and attentive videography</li>
+          <li>Creative angles and techniques</li>
+        </ul>
       </div>
     </div>
 
@@ -1774,6 +1805,7 @@
 
 <!-- Location Audio -->
 <section class="cv-section" id="la-section">
+  <div class="la-fade-in"></div>
   <div class="la-banner">
     <h2 class="cv-banner-title">Location<br class="mob-br"> Audio</h2>
   </div>
@@ -2118,11 +2150,11 @@
         <h1 class="hm-title">Final Delivery</h1>
         <p class="hm-subhead">— Results You Can Expect —</p>
         <div class="delivery-chips-row">
-          <div class="delivery-chip"><span class="delivery-chip-word">Word</span></div>
-          <div class="delivery-chip"><span class="delivery-chip-word">Word</span></div>
-          <div class="delivery-chip"><span class="delivery-chip-word">Word</span></div>
-          <div class="delivery-chip"><span class="delivery-chip-word">Word</span></div>
-          <div class="delivery-chip"><span class="delivery-chip-word">Word</span></div>
+          <div class="delivery-chip"><span class="delivery-chip-word">Edited Film</span></div>
+          <div class="delivery-chip"><span class="delivery-chip-word">Color Grade</span></div>
+          <div class="delivery-chip"><span class="delivery-chip-word">Sound Mix</span></div>
+          <div class="delivery-chip"><span class="delivery-chip-word">Private Link</span></div>
+          <div class="delivery-chip"><span class="delivery-chip-word">1 Revision</span></div>
         </div>
         <!-- Add-ons inside the certificate -->
         <div class="sect-addons">

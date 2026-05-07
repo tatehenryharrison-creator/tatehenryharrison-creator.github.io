@@ -105,8 +105,8 @@
     .sel-addon-chip-x {
       font-size: 0.72rem; color: #C9A84C; line-height: 1; margin-left: 2px;
     }
-    /* Hide the ✕/+ icon when chip is removed — no + button */
-    .sel-addon-chip.removed .sel-addon-chip-x { display: none; }
+    /* Removed chips show + in muted color; active chips show ✕ in gold */
+    .sel-addon-chip.removed .sel-addon-chip-x { color: rgba(99,95,81,0.4); }
     /* Add-ons sub-section inside sel-card */
     .sel-addons-section { margin-top: 16px; }
     .sel-addons-divider { height: 1px; background: rgba(99,95,81,0.1); margin-bottom: 14px; }
@@ -518,13 +518,13 @@
         const chip = document.createElement('span');
         chip.className   = 'sel-addon-chip' + (isActive ? '' : ' removed');
         chip.dataset.key = key;
-        /* Only show ✕ on active chips — no + on inactive */
-        chip.innerHTML   = label + '<span class="sel-addon-chip-x">' + (isActive ? '✕' : '') + '</span>';
+        /* Active chips show ✕, inactive chips show + */
+        chip.innerHTML   = label + '<span class="sel-addon-chip-x">' + (isActive ? '✕' : '+') + '</span>';
 
         chip.addEventListener('click', function () {
           const removing = !chip.classList.contains('removed'); // currently active → remove
           chip.classList.toggle('removed', removing);
-          chip.querySelector('.sel-addon-chip-x').textContent = removing ? '' : '✕';
+          chip.querySelector('.sel-addon-chip-x').textContent = removing ? '+' : '✕';
           activeAddons[key] = removing ? 0 : 1;
         });
 
