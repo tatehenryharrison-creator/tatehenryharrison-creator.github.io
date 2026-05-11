@@ -441,10 +441,8 @@
     }
     .compare-toggle-btn:hover { background: #5C6E82; color: #fff; }
     .compare-table {
-      max-height: 0; overflow: hidden;
-      transition: max-height 0.8s cubic-bezier(0.22,1,0.36,1);
+      max-height: none; overflow: visible;
     }
-    .compare-table--open { max-height: 1000px; }
     .compare-grid {
       display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr;
       border: 1px solid rgba(99,95,81,0.14); border-radius: 14px;
@@ -460,7 +458,7 @@
 
     /* ── PACKAGE TIERS (below) ── */
     .cart-section {
-      padding: 80px 10% 100px; background: #f5f4f0;
+      padding: 40px 10% 100px; background: #f5f4f0;
       opacity: 0; transform: translateY(32px);
       transition: opacity 0.8s ease, transform 0.8s ease;
     }
@@ -2390,10 +2388,7 @@
 
 <!-- Comparison Table -->
 <section class="compare-section">
-  <div class="compare-toggle-wrap">
-    <button class="compare-toggle-btn" id="compare-toggle-btn" onclick="toggleCompare()">View Full Comparison ↓</button>
-  </div>
-  <div class="compare-table" id="compare-table">
+  <div class="compare-table compare-table--open" id="compare-table">
     <div class="compare-grid">
       <div class="cg-head">Feature</div>
       <div class="cg-head">Chapter</div>
@@ -2474,13 +2469,6 @@
       <p class="tier-label">Half Day</p>
       <h3 class="tier-name">Chapter</h3>
       <div class="tier-divider"></div>
-      <ul class="tier-features">
-        <li>Single-camera setup</li>
-        <li>Up to 4 hours coverage</li>
-        <li>Up to 5-min edited video</li>
-        <li>Color grading included</li>
-        <li>1 round of revisions</li>
-      </ul>
       <p class="tier-select-hint">Selected ✓</p>
     </div>
     <div class="pkg-tier pkg-tier--popular" data-tier="novel" onclick="selectPackage('novel')">
@@ -2488,13 +2476,6 @@
       <p class="tier-label">Full Day</p>
       <h3 class="tier-name">Novel</h3>
       <div class="tier-divider"></div>
-      <ul class="tier-features">
-        <li>Multi-camera setup</li>
-        <li>Up to 8 hours coverage</li>
-        <li>Up to 10-min edited video</li>
-        <li>Full color grade + audio mix</li>
-        <li>2 revisions + social cuts</li>
-      </ul>
       <p class="tier-select-hint">Selected ✓</p>
     </div>
     <div class="pkg-tier" data-tier="epic" onclick="selectPackage('epic')">
@@ -2502,13 +2483,6 @@
       <p class="tier-label">2+ Days</p>
       <h3 class="tier-name">Epic</h3>
       <div class="tier-divider"></div>
-      <ul class="tier-features">
-        <li>Multi-camera, 2-day shoot</li>
-        <li>Up to 20-min edited video</li>
-        <li>Full color grade + audio mix</li>
-        <li>Unlimited revisions</li>
-        <li>Full commercial license</li>
-      </ul>
       <p class="tier-select-hint">Selected ✓</p>
     </div>
   </div>

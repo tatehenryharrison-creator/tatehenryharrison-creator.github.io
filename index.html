@@ -535,11 +535,14 @@ html, body { overflow-x: hidden; }
     color: #a8a49c; letter-spacing: 0.02em;
 }
 .portfolio-grid {
-    columns: 3; column-gap: 18px;
+    display: flex; align-items: flex-start; gap: 18px;
     max-width: 1200px; margin: 0 auto;
 }
+.portfolio-col {
+    flex: 1; min-width: 0;
+}
 .portfolio-item {
-    break-inside: avoid; margin-bottom: 24px;
+    margin-bottom: 24px;
     cursor: pointer; position: relative;
 }
 .portfolio-item.hidden { display: none; }
@@ -1066,7 +1069,9 @@ footer > * { position: relative; z-index: 1; }
 @media (max-width: 900px) {
     .pricing-grid { grid-template-columns: repeat(2, 1fr); }
     .pricing-grid--2 { grid-template-columns: repeat(2, 1fr); max-width: 100%; }
-    .portfolio-grid { columns: 2; }
+    .portfolio-grid { display: block; columns: 2; column-gap: 18px; }
+    .portfolio-col { display: contents; }
+    .portfolio-item { break-inside: avoid; }
     .about-inner { flex-direction: column; gap: 16px; }
     .about-photo { flex: none; width: 100%; max-width: none; margin: 0 auto; }
 }
@@ -1204,6 +1209,7 @@ footer > * { position: relative; z-index: 1; }
         columns: 2;
         column-gap: 8px;
     }
+    .portfolio-col { display: contents; }
     .portfolio-item { break-inside: avoid; margin-bottom: 8px; }
     .portfolio-img-wrap { aspect-ratio: unset; }
     .portfolio-thumb { width: 100%; height: auto; object-fit: cover; }
@@ -2180,10 +2186,8 @@ footer > * { position: relative; z-index: 1; }
     }
     .compare-toggle-btn:hover { background: #5C6E82; color: #fff; }
     .compare-table {
-      max-height: 0; overflow: hidden;
-      transition: max-height 0.8s cubic-bezier(0.22,1,0.36,1);
+      max-height: none; overflow: visible;
     }
-    .compare-table--open { max-height: 1000px; }
     .compare-grid {
       display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr;
       border: 1px solid rgba(99,95,81,0.14); border-radius: 14px;
@@ -2199,7 +2203,7 @@ footer > * { position: relative; z-index: 1; }
 
     /* ── PACKAGE TIERS (below) ── */
     .cart-section {
-      padding: 80px 10% 100px; background: #f5f4f0;
+      padding: 40px 10% 100px; background: #f5f4f0;
       opacity: 0; transform: translateY(32px);
       transition: opacity 0.8s ease, transform 0.8s ease;
     }
@@ -4254,10 +4258,7 @@ footer > * { position: relative; z-index: 1; }
 
 <!-- Comparison Table -->
 <section class="compare-section">
-  <div class="compare-toggle-wrap">
-    <button class="compare-toggle-btn" id="compare-toggle-btn" onclick="toggleCompare()">View Full Comparison ↓</button>
-  </div>
-  <div class="compare-table" id="compare-table">
+  <div class="compare-table compare-table--open" id="compare-table">
     <div class="compare-grid">
       <div class="cg-head">Feature</div>
       <div class="cg-head">Chapter</div>
@@ -4338,13 +4339,6 @@ footer > * { position: relative; z-index: 1; }
       <p class="tier-label">Half Day</p>
       <h3 class="tier-name">Chapter</h3>
       <div class="tier-divider"></div>
-      <ul class="tier-features">
-        <li>Single-camera setup</li>
-        <li>Up to 4 hours coverage</li>
-        <li>Up to 5-min edited video</li>
-        <li>Color grading included</li>
-        <li>1 round of revisions</li>
-      </ul>
       <p class="tier-select-hint">Selected ✓</p>
     </div>
     <div class="pkg-tier pkg-tier--popular" data-tier="novel" onclick="selectPackage('novel')">
@@ -4352,13 +4346,6 @@ footer > * { position: relative; z-index: 1; }
       <p class="tier-label">Full Day</p>
       <h3 class="tier-name">Novel</h3>
       <div class="tier-divider"></div>
-      <ul class="tier-features">
-        <li>Multi-camera setup</li>
-        <li>Up to 8 hours coverage</li>
-        <li>Up to 10-min edited video</li>
-        <li>Full color grade + audio mix</li>
-        <li>2 revisions + social cuts</li>
-      </ul>
       <p class="tier-select-hint">Selected ✓</p>
     </div>
     <div class="pkg-tier" data-tier="epic" onclick="selectPackage('epic')">
@@ -4366,13 +4353,6 @@ footer > * { position: relative; z-index: 1; }
       <p class="tier-label">2+ Days</p>
       <h3 class="tier-name">Epic</h3>
       <div class="tier-divider"></div>
-      <ul class="tier-features">
-        <li>Multi-camera, 2-day shoot</li>
-        <li>Up to 20-min edited video</li>
-        <li>Full color grade + audio mix</li>
-        <li>Unlimited revisions</li>
-        <li>Full commercial license</li>
-      </ul>
       <p class="tier-select-hint">Selected ✓</p>
     </div>
   </div>
@@ -6270,96 +6250,134 @@ if (_footerForm) _footerForm.addEventListener('submit', async function(e) {
     c1.forEach(function(el) { grid.insertBefore(el, anchor); });
   });
 
-  // View More
+  // ── Flex-column masonry View More ──────────────────────────────────────────
+  // Switches from CSS multi-column (which rebalances on reveal) to explicit
+  // flex columns managed by JS. Once placed, items never change columns.
   var BATCH = 12;
-  var viewLimit = BATCH;
   var viewMoreWrap = document.getElementById('portfolio-view-more');
   var viewMoreBtn  = document.getElementById('portfolio-view-more-btn');
 
-  function applyClip() {
-    var allItems = Array.from(grid.querySelectorAll('.portfolio-item'));
-    var visCount = 0;
-    allItems.forEach(function(item) {
-      if (item.classList.contains('hidden')) {
-        item.style.display = '';   /* let .hidden CSS rule handle visibility */
-        return;
-      }
-      visCount++;
-      item.style.display = (visCount > viewLimit) ? 'none' : '';
-    });
-    var totalVis = allItems.filter(function(i) { return !i.classList.contains('hidden'); }).length;
-    if (viewMoreWrap) viewMoreWrap.style.display = (totalVis > viewLimit) ? '' : 'none';
-  }
+  // Snapshot sorted order (after priority reorder above)
+  var allItems = Array.from(grid.querySelectorAll('.portfolio-item'));
 
-  // Hook into filter button clicks — reset limit on filter change
-  document.querySelectorAll('[data-top], [data-filter]').forEach(function(btn) {
-    btn.addEventListener('click', function() {
-      viewLimit = BATCH;
-      setTimeout(applyClip, 0);
-    });
+  // Detach all items from the grid
+  allItems.forEach(function(item) { grid.removeChild(item); });
+
+  // Create 3 flex column containers
+  var cols = [0, 1, 2].map(function() {
+    var col = document.createElement('div');
+    col.className = 'portfolio-col';
+    grid.appendChild(col);
+    return col;
   });
 
-  if (viewMoreBtn) {
-    viewMoreBtn.addEventListener('click', function() {
-      // ── 1. Anchor: remember first item whose top edge is in the viewport ──
-      var anchorEl = null, anchorTop = 0;
-      Array.from(grid.querySelectorAll('.portfolio-item:not(.hidden)'))
-        .filter(function(item) { return item.style.display !== 'none'; })
-        .some(function(item) {
-          var r = item.getBoundingClientRect();
-          if (r.top >= 0 && r.top < window.innerHeight) {
-            anchorEl = item; anchorTop = r.top; return true;
-          }
-        });
+  // Append items into columns using estimated heights for balance.
+  // On Show More, items are appended to shortest column — existing items never move.
+  function appendToColumns(items, animate) {
+    if (!items.length) return;
+    // Seed heights from current column offsetHeights
+    var heights = cols.map(function(col) { return col.offsetHeight; });
 
-      // ── 2. Identify items that will be newly revealed ──
-      var allItems = Array.from(grid.querySelectorAll('.portfolio-item'));
-      var visCount = 0, toReveal = [];
-      allItems.forEach(function(item) {
-        if (item.classList.contains('hidden')) { item.style.display = ''; return; }
-        visCount++;
-        if (visCount > viewLimit && visCount <= viewLimit + BATCH) toReveal.push(item);
-      });
+    function pickShortest() {
+      var minH = heights[0], idx = 0;
+      heights.forEach(function(h, i) { if (h < minH) { minH = h; idx = i; } });
+      return idx;
+    }
 
-      // ── 3. Stage new items: invisible but in-layout ──
-      toReveal.forEach(function(item) {
+    if (animate) {
+      items.forEach(function(item) {
+        item.style.opacity = '0';
         item.style.transition = 'none';
-        item.style.opacity    = '0';
-        item.style.display    = '';
       });
+    }
 
-      // ── 4. Advance limit and update button ──
-      viewLimit += BATCH;
-      var totalVis = allItems.filter(function(i) { return !i.classList.contains('hidden'); }).length;
-      if (viewMoreWrap) viewMoreWrap.style.display = (totalVis > viewLimit) ? '' : 'none';
+    items.forEach(function(item) {
+      var idx = pickShortest();
+      cols[idx].appendChild(item);
+      // Estimate item height (natural image ratio or fallback) + margin
+      var img = item.querySelector('img');
+      var colW = cols[idx].offsetWidth || Math.round(grid.offsetWidth / 3 - 12);
+      var estimH = (img && img.naturalWidth)
+        ? Math.round(img.naturalHeight / img.naturalWidth * colW)
+        : Math.round(colW * 0.75);
+      heights[idx] += estimH + 24;
+    });
 
-      // ── 5. After browser re-paints with new layout: fix scroll, then fade in ──
+    if (animate) {
       requestAnimationFrame(function() {
         requestAnimationFrame(function() {
-          // Scroll correction — undo any column-rebalance drift
-          if (anchorEl) {
-            var drift = anchorEl.getBoundingClientRect().top - anchorTop;
-            if (drift !== 0) window.scrollBy(0, drift);
-          }
-          // Fade in
-          toReveal.forEach(function(item) {
+          items.forEach(function(item) {
             item.style.transition = 'opacity 0.42s ease';
-            item.style.opacity    = '1';
+            item.style.opacity = '1';
           });
-          // Clean up inline styles once the transition completes
           setTimeout(function() {
-            toReveal.forEach(function(item) {
+            items.forEach(function(item) {
               item.style.transition = '';
-              item.style.opacity    = '';
+              item.style.opacity = '';
             });
           }, 460);
         });
       });
-    });
+    }
   }
 
-  // Initial clip
-  setTimeout(applyClip, 0);
+  // Returns Set of items currently placed in a column
+  function inColumnsSet() {
+    var s = new Set();
+    cols.forEach(function(col) {
+      Array.from(col.children).forEach(function(item) { s.add(item); });
+    });
+    return s;
+  }
+
+  function updateButton() {
+    if (!viewMoreWrap) return;
+    var placed = inColumnsSet();
+    var hasMore = allItems.some(function(item) {
+      return !placed.has(item) && !item.classList.contains('hidden');
+    });
+    viewMoreWrap.style.display = hasMore ? '' : 'none';
+  }
+
+  // Flush columns and redistribute the first BATCH visible items (no animation).
+  // Called on filter change so the new filter's first batch is shown cleanly.
+  function redistribute() {
+    allItems.forEach(function(item) {
+      if (item.parentNode) item.parentNode.removeChild(item);
+    });
+    cols.forEach(function(col) { col.innerHTML = ''; });
+
+    var visible = allItems.filter(function(item) {
+      return !item.classList.contains('hidden');
+    });
+    appendToColumns(visible.slice(0, BATCH), false);
+    updateButton();
+  }
+
+  // Initial distribution (no animation)
+  redistribute();
+
+  // On filter change — reset to first BATCH of the new filtered set
+  document.querySelectorAll('[data-top], [data-filter]').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      setTimeout(redistribute, 0); // wait for .hidden class to be applied by filter JS
+    });
+  });
+
+  // Show More — append next BATCH to columns WITHOUT touching existing items
+  if (viewMoreBtn) {
+    viewMoreBtn.addEventListener('click', function() {
+      var placed = inColumnsSet();
+      var toReveal = [];
+      allItems.forEach(function(item) {
+        if (!placed.has(item) && !item.classList.contains('hidden') && toReveal.length < BATCH) {
+          toReveal.push(item);
+        }
+      });
+      appendToColumns(toReveal, true);
+      updateButton();
+    });
+  }
 })();
 
 /* ===== JOURNEY TIMELINE — scroll-fill path ===== */
