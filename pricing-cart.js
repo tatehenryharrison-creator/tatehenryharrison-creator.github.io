@@ -184,9 +184,17 @@ function renderBar() {
     };
   }
 
-  // Sync tier tiles
+  // Sync pkg-tier tiles (cart section)
   document.querySelectorAll('.pkg-tier[data-tier]').forEach(t => {
     t.classList.toggle('selected', t.dataset.tier === cart.package);
+    // Clear any lingering inline style so the CSS class is the sole controller
+    const hint = t.querySelector('.tier-select-hint');
+    if (hint) hint.style.opacity = '';
+  });
+
+  // Sync coin cards (same source of truth)
+  document.querySelectorAll('.coin-card[id^="coin-"]').forEach(c => {
+    c.classList.toggle('selected', c.id === 'coin-' + cart.package);
   });
 }
 
