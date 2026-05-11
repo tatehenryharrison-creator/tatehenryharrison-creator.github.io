@@ -195,17 +195,28 @@
     .cv-progress-label { position: absolute; top: 80px; left: 50%; transform: translate(-50%, -50%); pointer-events: none; }
     .cv-progress-label-inner { display: inline-block; padding: 8px 22px; border-radius: 50px; background: rgba(14,12,9,0.82); border: 1px solid rgba(201,168,76,0.45); backdrop-filter: blur(8px); white-space: nowrap; }
     .cv-progress-label-text { font-family: 'EB Garamond', serif; font-style: italic; font-weight: 400; font-size: 1rem; letter-spacing: 0.01em; color: #C9A84C; margin: 0; }
-    #la-section { background: #0e0c09; }
-    /* Gradient intro before la-banner — mirrors cv-section's sect-fade-to-dark */
-    .la-fade-in {
-      height: 110px;
-      background: linear-gradient(to bottom, #f5f4f0 0%, #d3d2ce 30%, #898782 60%, #3e3c36 85%, #1C1A14 100%);
-      pointer-events: none; margin: 0;
-    }
-    /* Fade from section dark to addons dark — no cream-to-black sweep needed */
-    #la-section .sect-fade-to-dark { background: linear-gradient(to bottom, #0e0c09 0%, #1C1A14 100%); }
+    /* la-section: cream first half (banner + audio), dark second half (add-ons) */
+    #la-section { background: #f5f4f0; }
+    /* Remove the artifact gradient bar */
+    .la-fade-in { display: none; }
+    /* Cream → dark transition into the add-ons */
+    #la-section .sect-fade-to-dark { background: linear-gradient(to bottom, #f5f4f0 0%, #1C1A14 100%); }
     #cv-section .sect-addons,
     #la-section .sect-addons { background: #1C1A14; padding-top: 48px; }
+    /* Light-background overrides for the audio card area */
+    #la-section .la-audio-box {
+      background: rgba(255,255,255,0.72);
+      border-color: rgba(92,110,130,0.28);
+      box-shadow: 0 4px 24px rgba(28,26,20,0.06), 0 1px 3px rgba(28,26,20,0.04);
+      backdrop-filter: none; -webkit-backdrop-filter: none;
+    }
+    #la-section .audio-card { background: rgba(92,110,130,0.07); border-color: rgba(92,110,130,0.18); }
+    #la-section .audio-card:hover { background: rgba(92,110,130,0.13); border-color: rgba(92,110,130,0.35); }
+    #la-section .audio-title { color: #1C1A14; }
+    #la-section .audio-desc { color: rgba(99,95,81,0.72); }
+    #la-section .audio-time { color: rgba(99,95,81,0.5); }
+    #la-section .la-audio-box-label { color: rgba(92,110,130,0.75); }
+    #la-section .audio-progress-wrap { background: rgba(92,110,130,0.16); }
     /* Lift audio add-on section above the absolutely-positioned condenser photo */
     #la-section .sect-addons { position: relative; z-index: 4; }
     /* Delivery section banner */
@@ -737,13 +748,13 @@
 #la-section .la-banner { position: relative; z-index: 2; }
 /* Blank spacer — reduced so audio cards sit closer to the banner */
 #la-section .cv-content { min-height: 60px; }
-/* Banner bottom gradient: banner image fades into section dark bg (#0e0c09) */
+/* Banner bottom gradient: banner image fades into section cream bg */
 #la-section .la-banner::after {
   content: '';
   position: absolute;
   bottom: 0; left: 0; right: 0;
   height: 70px;
-  background: linear-gradient(to bottom, transparent 0%, #0e0c09 100%);
+  background: linear-gradient(to bottom, transparent 0%, #f5f4f0 100%);
   pointer-events: none;
   z-index: 3; /* above the banner title (z-index: 1 via .cv-banner-title) */
 }
@@ -1673,8 +1684,8 @@
       </div>
       <div class="features-tile-body">
         <ul class="features-list">
-          <li>Professional-grade cinema tools</li>
-          <li>Sharp, stable, and attentive videography</li>
+          <li>Professional-grade imaging tools</li>
+          <li>Sharp, stable, and attentive work</li>
           <li>Creative angles and techniques</li>
         </ul>
       </div>
@@ -2972,6 +2983,42 @@ document.addEventListener('click', function(e) {
 
   // Initial link state
   document.addEventListener('DOMContentLoaded', refreshMacroLink);
+
+  // ── Persist macro panel open-state across back navigation ────────────────
+  // When the user clicks "See examples in portfolio", save 'macro' to
+  // sessionStorage. On page load (e.g. after pressing the browser back button),
+  // restore the open panel so the user lands right where they were.
+  document.addEventListener('DOMContentLoaded', function() {
+    // Save state on navigate-away
+    var link = document.getElementById('macro-portfolio-link');
+    if (link) {
+      link.addEventListener('click', function() {
+        sessionStorage.setItem('pv-open-panel', 'macro');
+      });
+    }
+
+    // Restore state on page load (covers back-button reload case)
+    var savedPanel = sessionStorage.getItem('pv-open-panel');
+    if (savedPanel === 'macro') {
+      sessionStorage.removeItem('pv-open-panel');
+      setTimeout(function() {
+        var card = document.getElementById('card-macro');
+        if (card) {
+          card.classList.add('details-open');
+          card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }, 300);
+    }
+  });
+
+  // Also handle bfcache restoration (page shown from cache without DOMContentLoaded)
+  window.addEventListener('pageshow', function(e) {
+    if (e.persisted) {
+      // Page was restored from bfcache — the panel state is already correct,
+      // but clear any stale sessionStorage entry to avoid double-open on manual reload
+      sessionStorage.removeItem('pv-open-panel');
+    }
+  });
 })();
 </script>
 

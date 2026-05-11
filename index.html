@@ -1940,17 +1940,28 @@ footer > * { position: relative; z-index: 1; }
     .cv-progress-label { position: absolute; top: 80px; left: 50%; transform: translate(-50%, -50%); pointer-events: none; }
     .cv-progress-label-inner { display: inline-block; padding: 8px 22px; border-radius: 50px; background: rgba(14,12,9,0.82); border: 1px solid rgba(201,168,76,0.45); backdrop-filter: blur(8px); white-space: nowrap; }
     .cv-progress-label-text { font-family: 'EB Garamond', serif; font-style: italic; font-weight: 400; font-size: 1rem; letter-spacing: 0.01em; color: #C9A84C; margin: 0; }
-    #la-section { background: #0e0c09; }
-    /* Gradient intro before la-banner — mirrors cv-section's sect-fade-to-dark */
-    .la-fade-in {
-      height: 110px;
-      background: linear-gradient(to bottom, #f5f4f0 0%, #d3d2ce 30%, #898782 60%, #3e3c36 85%, #1C1A14 100%);
-      pointer-events: none; margin: 0;
-    }
-    /* Fade from section dark to addons dark — no cream-to-black sweep needed */
-    #la-section .sect-fade-to-dark { background: linear-gradient(to bottom, #0e0c09 0%, #1C1A14 100%); }
+    /* la-section: cream first half (banner + audio), dark second half (add-ons) */
+    #la-section { background: #f5f4f0; }
+    /* Remove the artifact gradient bar — no longer needed */
+    .la-fade-in { display: none; }
+    /* Cream → dark transition into the add-ons */
+    #la-section .sect-fade-to-dark { background: linear-gradient(to bottom, #f5f4f0 0%, #1C1A14 100%); }
     #cv-section .sect-addons,
     #la-section .sect-addons { background: #1C1A14; padding-top: 48px; }
+    /* Light-background overrides for the audio card area */
+    #la-section .la-audio-box {
+      background: rgba(255,255,255,0.72);
+      border-color: rgba(92,110,130,0.28);
+      box-shadow: 0 4px 24px rgba(28,26,20,0.06), 0 1px 3px rgba(28,26,20,0.04);
+      backdrop-filter: none; -webkit-backdrop-filter: none;
+    }
+    #la-section .audio-card { background: rgba(92,110,130,0.07); border-color: rgba(92,110,130,0.18); }
+    #la-section .audio-card:hover { background: rgba(92,110,130,0.13); border-color: rgba(92,110,130,0.35); }
+    #la-section .audio-title { color: #1C1A14; }
+    #la-section .audio-desc { color: rgba(99,95,81,0.72); }
+    #la-section .audio-time { color: rgba(99,95,81,0.5); }
+    #la-section .la-audio-box-label { color: rgba(92,110,130,0.75); }
+    #la-section .audio-progress-wrap { background: rgba(92,110,130,0.16); }
     /* Lift audio add-on section above the absolutely-positioned condenser photo */
     #la-section .sect-addons { position: relative; z-index: 4; }
     /* Delivery section banner */
@@ -2475,13 +2486,13 @@ footer > * { position: relative; z-index: 1; }
 #la-section .la-banner { position: relative; z-index: 2; }
 /* Blank spacer — reduced so audio cards sit closer to the banner */
 #la-section .cv-content { min-height: 60px; }
-/* Banner bottom gradient: banner image fades into section dark bg (#0e0c09) */
+/* Banner bottom gradient: banner image fades into section cream bg */
 #la-section .la-banner::after {
   content: '';
   position: absolute;
   bottom: 0; left: 0; right: 0;
   height: 70px;
-  background: linear-gradient(to bottom, transparent 0%, #0e0c09 100%);
+  background: linear-gradient(to bottom, transparent 0%, #f5f4f0 100%);
   pointer-events: none;
   z-index: 3; /* above the banner title (z-index: 1 via .cv-banner-title) */
 }
@@ -3348,21 +3359,21 @@ footer > * { position: relative; z-index: 1; }
         <!-- Fade mask: bright at U-turn peaks/valleys, dim between -->
         <linearGradient id="cv-prog-fade-grad" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%"    stop-color="white" stop-opacity="0.55"/>
-          <stop offset="5.7%"  stop-color="white" stop-opacity="0.11"/> <!-- mid 0→340   -->
+          <stop offset="5.7%"  stop-color="white" stop-opacity="0"/>   <!-- mid 0→340 — transparent over content -->
           <stop offset="11.3%" stop-color="white" stop-opacity="0.90"/> <!-- R peak y=340 -->
-          <stop offset="17.0%" stop-color="white" stop-opacity="0.11"/> <!-- mid 340→680  -->
+          <stop offset="17.0%" stop-color="white" stop-opacity="0"/>   <!-- mid 340→680  -->
           <stop offset="22.7%" stop-color="white" stop-opacity="0.90"/> <!-- L val  y=680 -->
-          <stop offset="28.3%" stop-color="white" stop-opacity="0.11"/> <!-- mid 680→1020 -->
+          <stop offset="28.3%" stop-color="white" stop-opacity="0"/>   <!-- mid 680→1020 -->
           <stop offset="34.0%" stop-color="white" stop-opacity="0.90"/> <!-- R peak y=1020-->
-          <stop offset="39.7%" stop-color="white" stop-opacity="0.11"/> <!-- mid 1020→1360-->
+          <stop offset="39.7%" stop-color="white" stop-opacity="0"/>   <!-- mid 1020→1360-->
           <stop offset="45.3%" stop-color="white" stop-opacity="0.90"/> <!-- L val y=1360 -->
-          <stop offset="51.0%" stop-color="white" stop-opacity="0.11"/> <!-- mid 1360→1700-->
+          <stop offset="51.0%" stop-color="white" stop-opacity="0"/>   <!-- mid 1360→1700-->
           <stop offset="56.7%" stop-color="white" stop-opacity="0.90"/> <!-- R peak y=1700-->
-          <stop offset="62.3%" stop-color="white" stop-opacity="0.11"/> <!-- mid 1700→2040-->
+          <stop offset="62.3%" stop-color="white" stop-opacity="0"/>   <!-- mid 1700→2040-->
           <stop offset="68.0%" stop-color="white" stop-opacity="0.90"/> <!-- L val y=2040 -->
-          <stop offset="73.7%" stop-color="white" stop-opacity="0.11"/> <!-- mid 2040→2380-->
+          <stop offset="73.7%" stop-color="white" stop-opacity="0"/>   <!-- mid 2040→2380-->
           <stop offset="79.3%" stop-color="white" stop-opacity="0.90"/> <!-- R peak y=2380-->
-          <stop offset="85.0%" stop-color="white" stop-opacity="0.11"/> <!-- mid 2380→2720-->
+          <stop offset="85.0%" stop-color="white" stop-opacity="0"/>   <!-- mid 2380→2720-->
           <stop offset="90.7%" stop-color="white" stop-opacity="0.90"/> <!-- L val y=2720 -->
           <stop offset="100%"  stop-color="white" stop-opacity="0.85"/>
         </linearGradient>
@@ -3376,8 +3387,8 @@ footer > * { position: relative; z-index: 1; }
         </filter>
       </defs>
 
-      <!-- Ghost: smooth sinusoidal snake -->
-      <path class="cv-prog-ghost" d="M 130,0 C 870,0 130,340 870,340 C 130,340 870,680 130,680 C 870,680 130,1020 870,1020 C 130,1020 870,1360 130,1360 C 870,1360 130,1700 870,1700 C 130,1700 870,2040 130,2040 C 870,2040 130,2380 870,2380 C 130,2380 870,2720 130,2720"/>
+      <!-- Ghost: smooth sinusoidal snake (shares same fade mask so mid-sections disappear too) -->
+      <path class="cv-prog-ghost" mask="url(#cv-prog-mask)" d="M 130,0 C 870,0 130,340 870,340 C 130,340 870,680 130,680 C 870,680 130,1020 870,1020 C 130,1020 870,1360 130,1360 C 870,1360 130,1700 870,1700 C 130,1700 870,2040 130,2040 C 870,2040 130,2380 870,2380 C 130,2380 870,2720 130,2720"/>
       <!-- Animated fill path with fade mask -->
       <path id="cv-prog-fill" class="cv-prog-fill" mask="url(#cv-prog-mask)"
             d="M 130,0 C 870,0 130,340 870,340 C 130,340 870,680 130,680 C 870,680 130,1020 870,1020 C 130,1020 870,1360 130,1360 C 870,1360 130,1700 870,1700 C 130,1700 870,2040 130,2040 C 870,2040 130,2380 870,2380 C 130,2380 870,2720 130,2720"/>
@@ -3394,29 +3405,29 @@ footer > * { position: relative; z-index: 1; }
         <!-- Mobile fade mask: bright at each U-turn peak/valley -->
         <linearGradient id="cv-prog-fade-grad-m" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%"    stop-color="white" stop-opacity="0.55"/>
-          <stop offset="3.6%"  stop-color="white" stop-opacity="0.11"/> <!-- mid 0→330   -->
+          <stop offset="3.6%"  stop-color="white" stop-opacity="0"/>   <!-- mid 0→330 — transparent over content -->
           <stop offset="7.2%"  stop-color="white" stop-opacity="0.90"/> <!-- R peak y=330 -->
-          <stop offset="10.8%" stop-color="white" stop-opacity="0.11"/> <!-- mid 330→660  -->
+          <stop offset="10.8%" stop-color="white" stop-opacity="0"/>   <!-- mid 330→660  -->
           <stop offset="14.3%" stop-color="white" stop-opacity="0.90"/> <!-- L val  y=660 -->
-          <stop offset="17.9%" stop-color="white" stop-opacity="0.11"/> <!-- mid 660→990  -->
+          <stop offset="17.9%" stop-color="white" stop-opacity="0"/>   <!-- mid 660→990  -->
           <stop offset="21.5%" stop-color="white" stop-opacity="0.90"/> <!-- R peak y=990 -->
-          <stop offset="25.1%" stop-color="white" stop-opacity="0.11"/> <!-- mid 990→1320 -->
+          <stop offset="25.1%" stop-color="white" stop-opacity="0"/>   <!-- mid 990→1320 -->
           <stop offset="28.7%" stop-color="white" stop-opacity="0.90"/> <!-- L val y=1320 -->
-          <stop offset="32.3%" stop-color="white" stop-opacity="0.11"/> <!-- mid 1320→1650-->
+          <stop offset="32.3%" stop-color="white" stop-opacity="0"/>   <!-- mid 1320→1650-->
           <stop offset="35.9%" stop-color="white" stop-opacity="0.90"/> <!-- R peak y=1650-->
-          <stop offset="39.5%" stop-color="white" stop-opacity="0.11"/> <!-- mid 1650→1980-->
+          <stop offset="39.5%" stop-color="white" stop-opacity="0"/>   <!-- mid 1650→1980-->
           <stop offset="43.0%" stop-color="white" stop-opacity="0.90"/> <!-- L val y=1980 -->
-          <stop offset="46.6%" stop-color="white" stop-opacity="0.11"/> <!-- mid 1980→2310-->
+          <stop offset="46.6%" stop-color="white" stop-opacity="0"/>   <!-- mid 1980→2310-->
           <stop offset="50.2%" stop-color="white" stop-opacity="0.90"/> <!-- R peak y=2310-->
-          <stop offset="53.8%" stop-color="white" stop-opacity="0.11"/> <!-- mid 2310→2640-->
+          <stop offset="53.8%" stop-color="white" stop-opacity="0"/>   <!-- mid 2310→2640-->
           <stop offset="57.4%" stop-color="white" stop-opacity="0.90"/> <!-- L val y=2640 -->
-          <stop offset="61.0%" stop-color="white" stop-opacity="0.11"/> <!-- mid 2640→2970-->
+          <stop offset="61.0%" stop-color="white" stop-opacity="0"/>   <!-- mid 2640→2970-->
           <stop offset="64.6%" stop-color="white" stop-opacity="0.90"/> <!-- R peak y=2970-->
-          <stop offset="68.2%" stop-color="white" stop-opacity="0.11"/> <!-- mid 2970→3300-->
+          <stop offset="68.2%" stop-color="white" stop-opacity="0"/>   <!-- mid 2970→3300-->
           <stop offset="71.7%" stop-color="white" stop-opacity="0.90"/> <!-- L val y=3300 -->
-          <stop offset="75.3%" stop-color="white" stop-opacity="0.11"/> <!-- mid 3300→3630-->
+          <stop offset="75.3%" stop-color="white" stop-opacity="0"/>   <!-- mid 3300→3630-->
           <stop offset="78.9%" stop-color="white" stop-opacity="0.90"/> <!-- R peak y=3630-->
-          <stop offset="82.5%" stop-color="white" stop-opacity="0.11"/> <!-- mid 3630→3960-->
+          <stop offset="82.5%" stop-color="white" stop-opacity="0"/>   <!-- mid 3630→3960-->
           <stop offset="86.1%" stop-color="white" stop-opacity="0.90"/> <!-- L val y=3960 -->
           <stop offset="100%"  stop-color="white" stop-opacity="0.85"/>
         </linearGradient>
@@ -3429,8 +3440,8 @@ footer > * { position: relative; z-index: 1; }
         </filter>
       </defs>
 
-      <!-- Ghost: smooth sinusoidal mobile snake -->
-      <path class="cv-prog-ghost"
+      <!-- Ghost: smooth sinusoidal mobile snake (shares mask so mid-sections are transparent) -->
+      <path class="cv-prog-ghost" mask="url(#cv-prog-mask-m)"
             d="M 45,0 C 315,0 45,330 315,330 C 45,330 315,660 45,660 C 315,660 45,990 315,990 C 45,990 315,1320 45,1320 C 315,1320 45,1650 315,1650 C 45,1650 315,1980 45,1980 C 315,1980 45,2310 315,2310 C 45,2310 315,2640 45,2640 C 315,2640 45,2970 315,2970 C 45,2970 315,3300 45,3300 C 315,3300 45,3630 315,3630 C 45,3630 315,3960 45,3960"/>
       <!-- Animated fill with fade mask -->
       <path id="cv-prog-fill-m" class="cv-prog-fill" mask="url(#cv-prog-mask-m)"
@@ -3548,8 +3559,8 @@ footer > * { position: relative; z-index: 1; }
       </div>
       <div class="features-tile-body">
         <ul class="features-list">
-          <li>Professional-grade cinema tools</li>
-          <li>Sharp, stable, and attentive videography</li>
+          <li>Professional-grade imaging tools</li>
+          <li>Sharp, stable, and attentive work</li>
           <li>Creative angles and techniques</li>
         </ul>
       </div>
