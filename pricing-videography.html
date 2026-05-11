@@ -685,9 +685,8 @@
 .audio-time { font-size: 0.65rem; font-family: 'EB Garamond', serif; color: rgba(168,164,156,0.55); letter-spacing: 0.5px; display: flex; justify-content: space-between; }
 
 /* ── LOCATION AUDIO BOX ── */
-.la-audio { padding: 0 8% 80px; position: relative; /* no z-index — lets right card slip behind condenser */ }
 .la-audio-box {
-  max-width: 860px; margin: 0 auto;
+  width: 100%; max-width: 860px; margin: 0 auto;
   padding: 28px 28px 24px;
   border: 1.5px solid rgba(92,110,130,0.72);
   border-radius: 20px;
@@ -719,39 +718,19 @@
   .la-audio-pair { flex-direction: column; gap: 10px; }
 }
 
-/* ── LOCATION AUDIO SCENE IMAGES ── */
-#la-section { position: relative; overflow: hidden; }
+/* ── LOCATION AUDIO SCENE: NTG5 | audio card | condenser, all in-flow ── */
+#la-section { position: relative; }
 #la-section .la-banner { position: relative; z-index: 2; }
-/* Blank spacer — reduced so audio cards sit closer to the banner */
-#la-section .cv-content { min-height: 60px; }
-.la-ntg5 {
-  position: absolute;
-  left: 0;
-  /* sit just below the banner — banner height = 244/2560 of section width ≈ 9.53vw */
-  top: calc(244 / 2560 * 100vw);
-  height: clamp(180px, 32vw, 600px);
-  width: auto;
-  pointer-events: none;
-  user-select: none;
-  z-index: 3;
-}
-.la-condensor {
-  position: absolute;
-  right: 0;
-  /* Mirror NTG5: sit just below the banner */
-  top: calc(244 / 2560 * 100vw);
-  height: clamp(200px, 36vw, 660px);
-  width: auto;
-  pointer-events: none;
-  user-select: none;
-  z-index: 3;
-}
-@media (max-width: 600px) {
-  /* Mobile banner uses padding not aspect-ratio; NTG5 placed just below it */
-  .la-ntg5    { height: clamp(110px, 30vw, 180px); top: 110px; }
-  .la-condensor { height: clamp(120px, 34vw, 200px); top: 110px; }
-  /* Tighten blank gap further on mobile */
-  #la-section .cv-content { min-height: 20px; }
+/* Three-column flex — mics in-flow so they set the section height and can't be clipped */
+.la-mic-scene { display: flex; align-items: flex-start; }
+.la-audio { flex: 1; display: flex; align-items: center; padding: 40px 4% 60px; }
+.la-ntg5  { flex-shrink: 0; height: clamp(200px, 28vw, 500px); width: auto; pointer-events: none; user-select: none; }
+.la-condensor { flex-shrink: 0; height: clamp(220px, 32vw, 560px); width: auto; pointer-events: none; user-select: none; }
+@media (max-width: 700px) {
+  /* Below 700 px mics would squish the audio card — hide them */
+  .la-mic-scene .la-ntg5,
+  .la-mic-scene .la-condensor { display: none; }
+  .la-audio { padding: 0 6% 60px; }
 }
 
     /* ── COIN SPIN PACKAGE CARDS ── */
@@ -1797,11 +1776,10 @@
   <div class="la-banner">
     <h2 class="cv-banner-title">Location<br class="mob-br"> Audio</h2>
   </div>
-  <img src="Packages Pics/Audio/NTG5.png" class="la-ntg5" alt="Røde NTG5 Shotgun Mic">
-  <img src="Packages Pics/Audio/Condensor.png" class="la-condensor" alt="Condenser Microphone">
-  <div class="cv-content"></div>
-  <!-- Sample Audio Tracks -->
-  <div class="la-audio">
+  <div class="la-mic-scene">
+    <img src="Packages Pics/Audio/NTG5.png" class="la-ntg5" alt="Røde NTG5 Shotgun Mic">
+    <!-- Sample Audio Tracks -->
+    <div class="la-audio">
     <div class="la-audio-box">
       <p class="la-audio-box-label">Audio Preview</p>
       <div class="audio-card">
@@ -1810,7 +1788,9 @@
         <audio src="audio-sample.mp3" type="audio/mpeg" preload="metadata"></audio>
       </div>
     </div><!-- /la-audio-box -->
-  </div><!-- /la-audio -->
+    </div><!-- /la-audio -->
+    <img src="Packages Pics/Audio/Condensor.png" class="la-condensor" alt="Condenser Microphone">
+  </div><!-- /la-mic-scene -->
 
   <!-- Audio Add-On -->
   <div class="sect-addons">
