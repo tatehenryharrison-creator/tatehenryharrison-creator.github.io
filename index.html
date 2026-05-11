@@ -1940,30 +1940,11 @@ footer > * { position: relative; z-index: 1; }
     .cv-progress-label { position: absolute; top: 80px; left: 50%; transform: translate(-50%, -50%); pointer-events: none; }
     .cv-progress-label-inner { display: inline-block; padding: 8px 22px; border-radius: 50px; background: rgba(14,12,9,0.82); border: 1px solid rgba(201,168,76,0.45); backdrop-filter: blur(8px); white-space: nowrap; }
     .cv-progress-label-text { font-family: 'EB Garamond', serif; font-style: italic; font-weight: 400; font-size: 1rem; letter-spacing: 0.01em; color: #C9A84C; margin: 0; }
-    /* la-section: cream first half (banner + audio), dark second half (add-ons) */
-    #la-section { background: #f5f4f0; }
-    /* Remove the artifact gradient bar — no longer needed */
+    /* la-section: fully dark throughout */
     .la-fade-in { display: none; }
-    /* Cream → dark transition into the add-ons */
-    #la-section .sect-fade-to-dark { background: linear-gradient(to bottom, #f5f4f0 0%, #1C1A14 100%); }
-    #cv-section .sect-addons,
-    #la-section .sect-addons { background: #1C1A14; padding-top: 48px; }
-    /* Light-background overrides for the audio card area */
-    #la-section .la-audio-box {
-      background: rgba(255,255,255,0.72);
-      border-color: rgba(92,110,130,0.28);
-      box-shadow: 0 4px 24px rgba(28,26,20,0.06), 0 1px 3px rgba(28,26,20,0.04);
-      backdrop-filter: none; -webkit-backdrop-filter: none;
-    }
-    #la-section .audio-card { background: rgba(92,110,130,0.07); border-color: rgba(92,110,130,0.18); }
-    #la-section .audio-card:hover { background: rgba(92,110,130,0.13); border-color: rgba(92,110,130,0.35); }
-    #la-section .audio-title { color: #1C1A14; }
-    #la-section .audio-desc { color: rgba(99,95,81,0.72); }
-    #la-section .audio-time { color: rgba(99,95,81,0.5); }
-    #la-section .la-audio-box-label { color: rgba(92,110,130,0.75); }
-    #la-section .audio-progress-wrap { background: rgba(92,110,130,0.16); }
-    /* Lift audio add-on section above the absolutely-positioned condenser photo */
-    #la-section .sect-addons { position: relative; z-index: 4; }
+    #cv-section .sect-addons { background: #1C1A14; padding-top: 48px; }
+    /* Lift audio add-on above the absolutely-positioned condenser photo */
+    #la-section .sect-addons { position: relative; z-index: 4; padding-top: 48px; }
     /* Delivery section banner */
     .delivery-banner { padding: 64px 10% 52px; text-align: center; border-bottom: 1px solid rgba(201,168,76,0.12); }
 
@@ -2481,16 +2462,6 @@ footer > * { position: relative; z-index: 1; }
 #la-section .la-banner { position: relative; z-index: 2; }
 /* Blank spacer — reduced so audio cards sit closer to the banner */
 #la-section .cv-content { min-height: 60px; }
-/* Banner bottom gradient: banner image fades into section cream bg */
-#la-section .la-banner::after {
-  content: '';
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  height: 70px;
-  background: linear-gradient(to bottom, transparent 0%, #f5f4f0 100%);
-  pointer-events: none;
-  z-index: 3; /* above the banner title (z-index: 1 via .cv-banner-title) */
-}
 .la-ntg5 {
   position: absolute;
   left: 0;
@@ -3715,7 +3686,6 @@ footer > * { position: relative; z-index: 1; }
       </div>
     </div><!-- /la-audio-box -->
   </div><!-- /la-audio -->
-  <div class="sect-fade-to-dark"></div>
 
   <!-- Audio Add-On -->
   <div class="sect-addons">
