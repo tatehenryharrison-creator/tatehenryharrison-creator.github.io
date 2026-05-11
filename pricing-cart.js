@@ -196,6 +196,31 @@ function renderBar() {
   document.querySelectorAll('.coin-card[id^="coin-"]').forEach(c => {
     c.classList.toggle('selected', c.id === 'coin-' + cart.package);
   });
+
+  // Floating arrow above the proceed button
+  const arrow = document.getElementById('cart-arrow');
+  if (arrow) {
+    const PKG_COLORS = {
+      chapter: '#8B1020', novel: '#0F5C2B', epic: '#C9A84C',
+      hybrid: '#5C6E82', multiday: '#5C6E82', campaign: '#C9A84C'
+    };
+    if (cart.package && bar.classList.contains('cart-bar--visible')) {
+      arrow.style.color = PKG_COLORS[cart.package] || '#C9A84C';
+      // Position arrow centred above the proceed button after bar slides in
+      setTimeout(() => {
+        const btn = document.getElementById('cb-proceed');
+        if (!btn) return;
+        const bRect = btn.getBoundingClientRect();
+        const barRect = bar.getBoundingClientRect();
+        const btnCentreX = bRect.left + bRect.width / 2;
+        const rightOffset = barRect.right - btnCentreX - 15; // 15 = half arrow width
+        arrow.style.right = rightOffset + 'px';
+        arrow.classList.add('cart-arrow--visible');
+      }, 420); // wait for cart-bar slide-in (0.4s transition)
+    } else {
+      arrow.classList.remove('cart-arrow--visible');
+    }
+  }
 }
 
 function selectPackage(tier) {
@@ -317,3 +342,14 @@ document.addEventListener('DOMContentLoaded', () => {
     if (src) _lastAddonClickEl = src;
   }, true); // capture phase — runs before onclick attributes
 });
+
+// Reposition arrow on resize
+window.addEventListener('resize', () => {
+  const arrow = document.getElementById('cart-arrow');
+  const bar = document.getElementById('cart-bar');
+  const btn = document.getElementById('cb-proceed');
+  if (!arrow || !bar || !btn || !bar.classList.contains('cart-bar--visible')) return;
+  const bRect = btn.getBoundingClientRect();
+  const barRect = bar.getBoundingClientRect();
+  arrow.style.right = (barRect.right - (bRect.left + bRect.width / 2) - 15) + 'px';
+}, { passive: true });

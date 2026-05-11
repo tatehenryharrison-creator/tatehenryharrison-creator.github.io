@@ -2310,6 +2310,25 @@ footer > * { position: relative; z-index: 1; }
     }
     .cb-proceed-btn:hover { opacity: 0.88; }
 
+    /* ── FLOATING PACKAGE ARROW ── */
+    @keyframes cart-arrow-bounce {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-9px); }
+    }
+    #cart-arrow {
+      position: absolute;
+      bottom: calc(100% + 12px);
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.35s ease;
+      filter: drop-shadow(0 0 8px currentColor);
+    }
+    #cart-arrow.cart-arrow--visible {
+      opacity: 1;
+      animation: cart-arrow-bounce 1.4s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+    }
+    #cart-arrow svg { width: 30px; height: 30px; display: block; }
+
     /* ── RESPONSIVE (videography) ── */
     @media (max-width: 900px) {
       .wi-panel { grid-template-columns: 1fr; }
@@ -4392,6 +4411,12 @@ footer > * { position: relative; z-index: 1; }
 
 <!-- Sticky Cart Bar -->
 <div class="cart-bar" id="cart-bar">
+  <div id="cart-arrow">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="6 5 12 11 18 5"/>
+      <polyline points="6 13 12 19 18 13"/>
+    </svg>
+  </div>
   <div class="cb-pkg-wrap">
     <span class="cb-label">Package</span>
     <span class="cb-value" id="cb-package">—</span>
@@ -4561,9 +4586,9 @@ footer > * { position: relative; z-index: 1; }
             </div>
         </div>
 
-        <div class="portfolio-item" data-priority="1" data-category="portraits" data-lightbox-src="portfolio/Photography/Portraits/Always Changing P1.jpg">
+        <div class="portfolio-item" data-priority="1" data-category="portraits" data-lightbox-src="portfolio/Photography/Portraits/Always Changing 2.jpg">
             <div class="portfolio-img-wrap">
-                <img class="portfolio-thumb" src="portfolio/Photography/Portraits/Always Changing P1.jpg" alt="Always Changing" loading="lazy">
+                <img class="portfolio-thumb" src="portfolio/Photography/Portraits/Always Changing.jpg" alt="Always Changing" loading="lazy">
                 <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Portraits</p></div></div>
             </div>
             <div class="portfolio-caption">

@@ -571,6 +571,25 @@
     }
     .cb-proceed-btn:hover { opacity: 0.88; }
 
+    /* ── FLOATING PACKAGE ARROW ── */
+    @keyframes cart-arrow-bounce {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-9px); }
+    }
+    #cart-arrow {
+      position: absolute;
+      bottom: calc(100% + 12px);
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.35s ease;
+      filter: drop-shadow(0 0 8px currentColor);
+    }
+    #cart-arrow.cart-arrow--visible {
+      opacity: 1;
+      animation: cart-arrow-bounce 1.4s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+    }
+    #cart-arrow svg { width: 30px; height: 30px; display: block; }
+
     /* ── FOOTER ── */
     footer { text-align: center; padding: 40px 0; font-size: 0.85rem; color: #a8a49c; border-top: 1px solid rgba(99,95,81,0.1); }
     .social-links { display: flex; justify-content: center; gap: 14px; margin-bottom: 18px; }
@@ -2528,6 +2547,12 @@
 
 <!-- Sticky Cart Bar -->
 <div class="cart-bar" id="cart-bar">
+  <div id="cart-arrow">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="6 5 12 11 18 5"/>
+      <polyline points="6 13 12 19 18 13"/>
+    </svg>
+  </div>
   <div class="cb-pkg-wrap">
     <span class="cb-label">Package</span>
     <span class="cb-value" id="cb-package">—</span>
