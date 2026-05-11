@@ -535,11 +535,14 @@ html, body { overflow-x: hidden; }
     color: #a8a49c; letter-spacing: 0.02em;
 }
 .portfolio-grid {
-    columns: 3; column-gap: 18px;
+    display: flex; align-items: flex-start; gap: 18px;
     max-width: 1200px; margin: 0 auto;
 }
+.portfolio-col {
+    flex: 1; min-width: 0;
+}
 .portfolio-item {
-    break-inside: avoid; margin-bottom: 24px;
+    margin-bottom: 24px;
     cursor: pointer; position: relative;
 }
 .portfolio-item.hidden { display: none; }
@@ -1066,7 +1069,9 @@ footer > * { position: relative; z-index: 1; }
 @media (max-width: 900px) {
     .pricing-grid { grid-template-columns: repeat(2, 1fr); }
     .pricing-grid--2 { grid-template-columns: repeat(2, 1fr); max-width: 100%; }
-    .portfolio-grid { columns: 2; }
+    .portfolio-grid { display: block; columns: 2; column-gap: 18px; }
+    .portfolio-col { display: contents; }
+    .portfolio-item { break-inside: avoid; }
     .about-inner { flex-direction: column; gap: 16px; }
     .about-photo { flex: none; width: 100%; max-width: none; margin: 0 auto; }
 }
@@ -1204,6 +1209,7 @@ footer > * { position: relative; z-index: 1; }
         columns: 2;
         column-gap: 8px;
     }
+    .portfolio-col { display: contents; }
     .portfolio-item { break-inside: avoid; margin-bottom: 8px; }
     .portfolio-img-wrap { aspect-ratio: unset; }
     .portfolio-thumb { width: 100%; height: auto; object-fit: cover; }
@@ -1934,17 +1940,28 @@ footer > * { position: relative; z-index: 1; }
     .cv-progress-label { position: absolute; top: 80px; left: 50%; transform: translate(-50%, -50%); pointer-events: none; }
     .cv-progress-label-inner { display: inline-block; padding: 8px 22px; border-radius: 50px; background: rgba(14,12,9,0.82); border: 1px solid rgba(201,168,76,0.45); backdrop-filter: blur(8px); white-space: nowrap; }
     .cv-progress-label-text { font-family: 'EB Garamond', serif; font-style: italic; font-weight: 400; font-size: 1rem; letter-spacing: 0.01em; color: #C9A84C; margin: 0; }
-    #la-section { background: #0e0c09; }
-    /* Gradient intro before la-banner — mirrors cv-section's sect-fade-to-dark */
-    .la-fade-in {
-      height: 110px;
-      background: linear-gradient(to bottom, #f5f4f0 0%, #d3d2ce 30%, #898782 60%, #3e3c36 85%, #1C1A14 100%);
-      pointer-events: none; margin: 0;
-    }
-    /* Fade from section dark to addons dark — no cream-to-black sweep needed */
-    #la-section .sect-fade-to-dark { background: linear-gradient(to bottom, #0e0c09 0%, #1C1A14 100%); }
+    /* la-section: cream first half (banner + audio), dark second half (add-ons) */
+    #la-section { background: #f5f4f0; }
+    /* Remove the artifact gradient bar — no longer needed */
+    .la-fade-in { display: none; }
+    /* Cream → dark transition into the add-ons */
+    #la-section .sect-fade-to-dark { background: linear-gradient(to bottom, #f5f4f0 0%, #1C1A14 100%); }
     #cv-section .sect-addons,
     #la-section .sect-addons { background: #1C1A14; padding-top: 48px; }
+    /* Light-background overrides for the audio card area */
+    #la-section .la-audio-box {
+      background: rgba(255,255,255,0.72);
+      border-color: rgba(92,110,130,0.28);
+      box-shadow: 0 4px 24px rgba(28,26,20,0.06), 0 1px 3px rgba(28,26,20,0.04);
+      backdrop-filter: none; -webkit-backdrop-filter: none;
+    }
+    #la-section .audio-card { background: rgba(92,110,130,0.07); border-color: rgba(92,110,130,0.18); }
+    #la-section .audio-card:hover { background: rgba(92,110,130,0.13); border-color: rgba(92,110,130,0.35); }
+    #la-section .audio-title { color: #1C1A14; }
+    #la-section .audio-desc { color: rgba(99,95,81,0.72); }
+    #la-section .audio-time { color: rgba(99,95,81,0.5); }
+    #la-section .la-audio-box-label { color: rgba(92,110,130,0.75); }
+    #la-section .audio-progress-wrap { background: rgba(92,110,130,0.16); }
     /* Lift audio add-on section above the absolutely-positioned condenser photo */
     #la-section .sect-addons { position: relative; z-index: 4; }
     /* Delivery section banner */
@@ -2037,24 +2054,18 @@ footer > * { position: relative; z-index: 1; }
       padding: 0 5% 80px;
       display: flex;
       justify-content: center;
+      overflow: hidden;
     }
 
     /* Scoped certificate styles (.hm-cert) */
     .hm-cert, .hm-cert *, .hm-cert *::before, .hm-cert *::after { box-sizing: border-box; }
-    /* ── Desktop certificate: wider, less tall ── */
-    @media (min-width: 601px) {
-      .hm-cert {
-        max-width: 980px !important;
-        padding: 8% !important;
-      }
-      /* 2-column add-ons layout inside the cert on desktop */
-      .hm-cert .hm-cert-two-col {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 0 48px;
-        align-items: start;
-        width: 100%;
-      }
+    /* 2-column add-ons layout inside the cert — always active (cert scales as one unit) */
+    .hm-cert .hm-cert-two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0 48px;
+      align-items: start;
+      width: 100%;
     }
 
     .hm-cert {
@@ -2066,11 +2077,12 @@ footer > * { position: relative; z-index: 1; }
       --hm-slate:    #5C6E82;
       --hm-paper:    #f1ede2;
       position: relative;
-      width: 100%;
+      width: 900px;
       /* Height grows with content — padding replaces fixed aspect-ratio + absolute inset */
-      padding: 13.5%;
-      max-width: 760px;
+      padding: 8%;
+      max-width: none;
       margin: 0 auto;
+      transform-origin: top center;
       background: radial-gradient(ellipse at 50% 40%, #faf8f3 0%, #f1ede2 70%, #e6dfd0 100%);
       box-shadow: 0 1px 0 rgba(255,255,255,0.6) inset, 0 24px 60px rgba(28,26,20,0.28), 0 2px 8px rgba(28,26,20,0.14);
       overflow: hidden;
@@ -2098,10 +2110,10 @@ footer > * { position: relative; z-index: 1; }
     .hm-cert .hm-eyebrow { display: flex; align-items: center; gap: 14px; color: var(--hm-stone); margin-bottom: 22px; width: 90%; }
     .hm-cert .hm-eyebrow .hm-ln { flex: 1; height: 1px; background: linear-gradient(90deg, transparent, rgba(99,95,81,0.5), transparent); min-width: 40px; }
     .hm-cert .hm-eyebrow span { font-family: system-ui, sans-serif; font-size: 0.8rem; letter-spacing: 6px; text-transform: uppercase; }
-    .hm-cert h1.hm-title { font-family: 'Cinzel', serif; font-weight: 600; font-size: clamp(1.3rem, 3.4vw, 2.6rem); letter-spacing: 4px; color: var(--hm-charcoal); margin: 0 0 6px; line-height: 1.1; text-transform: uppercase; }
-    .hm-cert .hm-subhead { font-family: 'EB Garamond', serif; font-weight: 400; font-style: italic; font-size: clamp(0.85rem, 1.6vw, 1.15rem); letter-spacing: 2px; color: var(--hm-slate); margin: 0 0 22px; }
-    .hm-cert .hm-recipient { font-family: 'Cinzel', serif; font-weight: 400; font-size: clamp(1.3rem, 3.6vw, 2.4rem); letter-spacing: 2px; color: var(--hm-ink); margin: 16px 0 4px; padding-bottom: 6px; border-bottom: 1px solid rgba(99,95,81,0.35); min-width: 60%; }
-    .hm-cert .hm-body { font-family: 'EB Garamond', serif; font-style: italic; font-size: clamp(0.85rem, 1.5vw, 1.05rem); color: var(--hm-charcoal); margin: 14px auto 0; max-width: 82%; line-height: 1.7; }
+    .hm-cert h1.hm-title { font-family: 'Cinzel', serif; font-weight: 600; font-size: 2.4rem; letter-spacing: 4px; color: var(--hm-charcoal); margin: 0 0 6px; line-height: 1.1; text-transform: uppercase; }
+    .hm-cert .hm-subhead { font-family: 'EB Garamond', serif; font-weight: 400; font-style: italic; font-size: 1.1rem; letter-spacing: 2px; color: var(--hm-slate); margin: 0 0 22px; }
+    .hm-cert .hm-recipient { font-family: 'Cinzel', serif; font-weight: 400; font-size: 2.2rem; letter-spacing: 2px; color: var(--hm-ink); margin: 16px 0 4px; padding-bottom: 6px; border-bottom: 1px solid rgba(99,95,81,0.35); min-width: 60%; }
+    .hm-cert .hm-body { font-family: 'EB Garamond', serif; font-style: italic; font-size: 1.0rem; color: var(--hm-charcoal); margin: 14px auto 0; max-width: 82%; line-height: 1.7; }
     .hm-cert .hm-body em { font-style: italic; }
     .hm-cert .hm-footer { display: flex; gap: 60px; align-items: flex-end; margin-top: 28px; padding-top: 36px; width: 80%; justify-content: space-between; }
     .hm-cert .hm-sigblock { flex: 1; min-width: 0; display: flex; flex-direction: column; align-items: center; }
@@ -2180,10 +2192,8 @@ footer > * { position: relative; z-index: 1; }
     }
     .compare-toggle-btn:hover { background: #5C6E82; color: #fff; }
     .compare-table {
-      max-height: 0; overflow: hidden;
-      transition: max-height 0.8s cubic-bezier(0.22,1,0.36,1);
+      max-height: none; overflow: visible;
     }
-    .compare-table--open { max-height: 1000px; }
     .compare-grid {
       display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr;
       border: 1px solid rgba(99,95,81,0.14); border-radius: 14px;
@@ -2199,7 +2209,7 @@ footer > * { position: relative; z-index: 1; }
 
     /* ── PACKAGE TIERS (below) ── */
     .cart-section {
-      padding: 80px 10% 100px; background: #f5f4f0;
+      padding: 40px 10% 100px; background: #f5f4f0;
       opacity: 0; transform: translateY(32px);
       transition: opacity 0.8s ease, transform 0.8s ease;
     }
@@ -2309,6 +2319,25 @@ footer > * { position: relative; z-index: 1; }
       white-space: nowrap;
     }
     .cb-proceed-btn:hover { opacity: 0.88; }
+
+    /* ── FLOATING PACKAGE ARROW ── */
+    @keyframes cart-arrow-bounce {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-9px); }
+    }
+    #cart-arrow {
+      position: absolute;
+      bottom: calc(100% + 12px);
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.35s ease;
+      filter: drop-shadow(0 0 8px currentColor);
+    }
+    #cart-arrow.cart-arrow--visible {
+      opacity: 1;
+      animation: cart-arrow-bounce 1.4s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+    }
+    #cart-arrow svg { width: 30px; height: 30px; display: block; }
 
     /* ── RESPONSIVE (videography) ── */
     @media (max-width: 900px) {
@@ -2452,13 +2481,13 @@ footer > * { position: relative; z-index: 1; }
 #la-section .la-banner { position: relative; z-index: 2; }
 /* Blank spacer — reduced so audio cards sit closer to the banner */
 #la-section .cv-content { min-height: 60px; }
-/* Banner bottom gradient: banner image fades into section dark bg (#0e0c09) */
+/* Banner bottom gradient: banner image fades into section cream bg */
 #la-section .la-banner::after {
   content: '';
   position: absolute;
   bottom: 0; left: 0; right: 0;
   height: 70px;
-  background: linear-gradient(to bottom, transparent 0%, #0e0c09 100%);
+  background: linear-gradient(to bottom, transparent 0%, #f5f4f0 100%);
   pointer-events: none;
   z-index: 3; /* above the banner title (z-index: 1 via .cv-banner-title) */
 }
@@ -2984,30 +3013,6 @@ footer > * { position: relative; z-index: 1; }
       /* Row 5 — 1 photo centered (cols 3–4) */
       .cv-diamond > :nth-child(9) { grid-column: 3 / 5; grid-row: 5; }
 
-      /* ── Mobile certificate: compact + max ~50% taller than original ── */
-      .hm-cert {
-        padding: 10%;
-      }
-      .hm-cert h1.hm-title { font-size: 1.3rem; letter-spacing: 2px; }
-      .hm-cert .hm-subhead { font-size: 0.82rem; margin-bottom: 14px; }
-      .hm-cert .hm-eyebrow { margin-bottom: 12px; }
-      .hm-cert .delivery-chips-row { padding: 12px 0 6px; gap: 6px; }
-      .hm-cert .delivery-chip { min-width: 52px; padding: 10px 10px 8px; }
-      .hm-cert .delivery-chip-word { font-size: 0.7rem; letter-spacing: 0.08em; }
-      .hm-cert .delivery-chip::before,
-      .hm-cert .delivery-chip::after { width: 18px; }
-      .hm-cert .sect-addons { padding: 12px 0 0; }
-      .hm-cert .addon-card-main { padding: 12px 14px; gap: 10px; }
-      .hm-cert .addon-card-icon-wrap { display: none; }
-      .hm-cert .addon-card-name { font-size: 0.76rem; }
-      .hm-cert .addon-card-tagline { font-size: 0.72rem; margin-bottom: 4px; }
-      .hm-cert .addon-toggle-btn { padding: 6px 12px; font-size: 0.78rem; }
-      .hm-cert .addon-stepper-btn { width: 24px; height: 24px; }
-      .hm-cert .sect-addons-grid--2 { grid-template-columns: 1fr; gap: 8px; }
-      .hm-cert .delivery-qty-capsules { margin-top: 12px; padding-top: 12px; }
-      .hm-cert .hm-footer { padding-top: 20px; margin-top: 16px; gap: 24px; width: 90%; }
-      .hm-cert .hm-sig { font-size: 1.05rem; }
-      .hm-cert .hm-sig-label { font-size: 0.55rem; }
       .delivery-pre-line { margin: 36px 6% 20px; }
 
       /* ── Cart section: tighter vertical spacing on mobile ── */
@@ -3325,21 +3330,21 @@ footer > * { position: relative; z-index: 1; }
         <!-- Fade mask: bright at U-turn peaks/valleys, dim between -->
         <linearGradient id="cv-prog-fade-grad" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%"    stop-color="white" stop-opacity="0.55"/>
-          <stop offset="5.7%"  stop-color="white" stop-opacity="0.11"/> <!-- mid 0→340   -->
+          <stop offset="5.7%"  stop-color="white" stop-opacity="0"/>   <!-- mid 0→340 — transparent over content -->
           <stop offset="11.3%" stop-color="white" stop-opacity="0.90"/> <!-- R peak y=340 -->
-          <stop offset="17.0%" stop-color="white" stop-opacity="0.11"/> <!-- mid 340→680  -->
+          <stop offset="17.0%" stop-color="white" stop-opacity="0"/>   <!-- mid 340→680  -->
           <stop offset="22.7%" stop-color="white" stop-opacity="0.90"/> <!-- L val  y=680 -->
-          <stop offset="28.3%" stop-color="white" stop-opacity="0.11"/> <!-- mid 680→1020 -->
+          <stop offset="28.3%" stop-color="white" stop-opacity="0"/>   <!-- mid 680→1020 -->
           <stop offset="34.0%" stop-color="white" stop-opacity="0.90"/> <!-- R peak y=1020-->
-          <stop offset="39.7%" stop-color="white" stop-opacity="0.11"/> <!-- mid 1020→1360-->
+          <stop offset="39.7%" stop-color="white" stop-opacity="0"/>   <!-- mid 1020→1360-->
           <stop offset="45.3%" stop-color="white" stop-opacity="0.90"/> <!-- L val y=1360 -->
-          <stop offset="51.0%" stop-color="white" stop-opacity="0.11"/> <!-- mid 1360→1700-->
+          <stop offset="51.0%" stop-color="white" stop-opacity="0"/>   <!-- mid 1360→1700-->
           <stop offset="56.7%" stop-color="white" stop-opacity="0.90"/> <!-- R peak y=1700-->
-          <stop offset="62.3%" stop-color="white" stop-opacity="0.11"/> <!-- mid 1700→2040-->
+          <stop offset="62.3%" stop-color="white" stop-opacity="0"/>   <!-- mid 1700→2040-->
           <stop offset="68.0%" stop-color="white" stop-opacity="0.90"/> <!-- L val y=2040 -->
-          <stop offset="73.7%" stop-color="white" stop-opacity="0.11"/> <!-- mid 2040→2380-->
+          <stop offset="73.7%" stop-color="white" stop-opacity="0"/>   <!-- mid 2040→2380-->
           <stop offset="79.3%" stop-color="white" stop-opacity="0.90"/> <!-- R peak y=2380-->
-          <stop offset="85.0%" stop-color="white" stop-opacity="0.11"/> <!-- mid 2380→2720-->
+          <stop offset="85.0%" stop-color="white" stop-opacity="0"/>   <!-- mid 2380→2720-->
           <stop offset="90.7%" stop-color="white" stop-opacity="0.90"/> <!-- L val y=2720 -->
           <stop offset="100%"  stop-color="white" stop-opacity="0.85"/>
         </linearGradient>
@@ -3353,8 +3358,8 @@ footer > * { position: relative; z-index: 1; }
         </filter>
       </defs>
 
-      <!-- Ghost: smooth sinusoidal snake -->
-      <path class="cv-prog-ghost" d="M 130,0 C 870,0 130,340 870,340 C 130,340 870,680 130,680 C 870,680 130,1020 870,1020 C 130,1020 870,1360 130,1360 C 870,1360 130,1700 870,1700 C 130,1700 870,2040 130,2040 C 870,2040 130,2380 870,2380 C 130,2380 870,2720 130,2720"/>
+      <!-- Ghost: smooth sinusoidal snake (shares same fade mask so mid-sections disappear too) -->
+      <path class="cv-prog-ghost" mask="url(#cv-prog-mask)" d="M 130,0 C 870,0 130,340 870,340 C 130,340 870,680 130,680 C 870,680 130,1020 870,1020 C 130,1020 870,1360 130,1360 C 870,1360 130,1700 870,1700 C 130,1700 870,2040 130,2040 C 870,2040 130,2380 870,2380 C 130,2380 870,2720 130,2720"/>
       <!-- Animated fill path with fade mask -->
       <path id="cv-prog-fill" class="cv-prog-fill" mask="url(#cv-prog-mask)"
             d="M 130,0 C 870,0 130,340 870,340 C 130,340 870,680 130,680 C 870,680 130,1020 870,1020 C 130,1020 870,1360 130,1360 C 870,1360 130,1700 870,1700 C 130,1700 870,2040 130,2040 C 870,2040 130,2380 870,2380 C 130,2380 870,2720 130,2720"/>
@@ -3371,29 +3376,29 @@ footer > * { position: relative; z-index: 1; }
         <!-- Mobile fade mask: bright at each U-turn peak/valley -->
         <linearGradient id="cv-prog-fade-grad-m" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%"    stop-color="white" stop-opacity="0.55"/>
-          <stop offset="3.6%"  stop-color="white" stop-opacity="0.11"/> <!-- mid 0→330   -->
+          <stop offset="3.6%"  stop-color="white" stop-opacity="0"/>   <!-- mid 0→330 — transparent over content -->
           <stop offset="7.2%"  stop-color="white" stop-opacity="0.90"/> <!-- R peak y=330 -->
-          <stop offset="10.8%" stop-color="white" stop-opacity="0.11"/> <!-- mid 330→660  -->
+          <stop offset="10.8%" stop-color="white" stop-opacity="0"/>   <!-- mid 330→660  -->
           <stop offset="14.3%" stop-color="white" stop-opacity="0.90"/> <!-- L val  y=660 -->
-          <stop offset="17.9%" stop-color="white" stop-opacity="0.11"/> <!-- mid 660→990  -->
+          <stop offset="17.9%" stop-color="white" stop-opacity="0"/>   <!-- mid 660→990  -->
           <stop offset="21.5%" stop-color="white" stop-opacity="0.90"/> <!-- R peak y=990 -->
-          <stop offset="25.1%" stop-color="white" stop-opacity="0.11"/> <!-- mid 990→1320 -->
+          <stop offset="25.1%" stop-color="white" stop-opacity="0"/>   <!-- mid 990→1320 -->
           <stop offset="28.7%" stop-color="white" stop-opacity="0.90"/> <!-- L val y=1320 -->
-          <stop offset="32.3%" stop-color="white" stop-opacity="0.11"/> <!-- mid 1320→1650-->
+          <stop offset="32.3%" stop-color="white" stop-opacity="0"/>   <!-- mid 1320→1650-->
           <stop offset="35.9%" stop-color="white" stop-opacity="0.90"/> <!-- R peak y=1650-->
-          <stop offset="39.5%" stop-color="white" stop-opacity="0.11"/> <!-- mid 1650→1980-->
+          <stop offset="39.5%" stop-color="white" stop-opacity="0"/>   <!-- mid 1650→1980-->
           <stop offset="43.0%" stop-color="white" stop-opacity="0.90"/> <!-- L val y=1980 -->
-          <stop offset="46.6%" stop-color="white" stop-opacity="0.11"/> <!-- mid 1980→2310-->
+          <stop offset="46.6%" stop-color="white" stop-opacity="0"/>   <!-- mid 1980→2310-->
           <stop offset="50.2%" stop-color="white" stop-opacity="0.90"/> <!-- R peak y=2310-->
-          <stop offset="53.8%" stop-color="white" stop-opacity="0.11"/> <!-- mid 2310→2640-->
+          <stop offset="53.8%" stop-color="white" stop-opacity="0"/>   <!-- mid 2310→2640-->
           <stop offset="57.4%" stop-color="white" stop-opacity="0.90"/> <!-- L val y=2640 -->
-          <stop offset="61.0%" stop-color="white" stop-opacity="0.11"/> <!-- mid 2640→2970-->
+          <stop offset="61.0%" stop-color="white" stop-opacity="0"/>   <!-- mid 2640→2970-->
           <stop offset="64.6%" stop-color="white" stop-opacity="0.90"/> <!-- R peak y=2970-->
-          <stop offset="68.2%" stop-color="white" stop-opacity="0.11"/> <!-- mid 2970→3300-->
+          <stop offset="68.2%" stop-color="white" stop-opacity="0"/>   <!-- mid 2970→3300-->
           <stop offset="71.7%" stop-color="white" stop-opacity="0.90"/> <!-- L val y=3300 -->
-          <stop offset="75.3%" stop-color="white" stop-opacity="0.11"/> <!-- mid 3300→3630-->
+          <stop offset="75.3%" stop-color="white" stop-opacity="0"/>   <!-- mid 3300→3630-->
           <stop offset="78.9%" stop-color="white" stop-opacity="0.90"/> <!-- R peak y=3630-->
-          <stop offset="82.5%" stop-color="white" stop-opacity="0.11"/> <!-- mid 3630→3960-->
+          <stop offset="82.5%" stop-color="white" stop-opacity="0"/>   <!-- mid 3630→3960-->
           <stop offset="86.1%" stop-color="white" stop-opacity="0.90"/> <!-- L val y=3960 -->
           <stop offset="100%"  stop-color="white" stop-opacity="0.85"/>
         </linearGradient>
@@ -3406,8 +3411,8 @@ footer > * { position: relative; z-index: 1; }
         </filter>
       </defs>
 
-      <!-- Ghost: smooth sinusoidal mobile snake -->
-      <path class="cv-prog-ghost"
+      <!-- Ghost: smooth sinusoidal mobile snake (shares mask so mid-sections are transparent) -->
+      <path class="cv-prog-ghost" mask="url(#cv-prog-mask-m)"
             d="M 45,0 C 315,0 45,330 315,330 C 45,330 315,660 45,660 C 315,660 45,990 315,990 C 45,990 315,1320 45,1320 C 315,1320 45,1650 315,1650 C 45,1650 315,1980 45,1980 C 315,1980 45,2310 315,2310 C 45,2310 315,2640 45,2640 C 315,2640 45,2970 315,2970 C 45,2970 315,3300 45,3300 C 315,3300 45,3630 315,3630 C 45,3630 315,3960 45,3960"/>
       <!-- Animated fill with fade mask -->
       <path id="cv-prog-fill-m" class="cv-prog-fill" mask="url(#cv-prog-mask-m)"
@@ -3525,8 +3530,8 @@ footer > * { position: relative; z-index: 1; }
       </div>
       <div class="features-tile-body">
         <ul class="features-list">
-          <li>Professional-grade cinema tools</li>
-          <li>Sharp, stable, and attentive videography</li>
+          <li>Professional-grade imaging tools</li>
+          <li>Sharp, stable, and attentive work</li>
           <li>Creative angles and techniques</li>
         </ul>
       </div>
@@ -3703,19 +3708,11 @@ footer > * { position: relative; z-index: 1; }
   <div class="la-audio">
     <div class="la-audio-box">
       <p class="la-audio-box-label">Audio Preview</p>
-      <div class="la-audio-pair">
-        <!-- Left card — in front -->
-        <div class="audio-card anim-fade la-card-front">
+      <div class="audio-card">
         <button class="audio-play-btn" aria-label="Play/Pause"><svg class="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg><svg class="icon-pause" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg></button>
         <div class="audio-meta"><p class="audio-title">Location Audio Sample</p><p class="audio-desc">Ambient on-location sound — recorded live, not stock</p><div class="audio-progress-wrap"><div class="audio-progress-bar"></div></div><div class="audio-time"><span class="audio-current">0:00</span><span class="audio-duration">0:00</span></div></div>
         <audio src="Audio Sample.mp3" preload="metadata"></audio>
       </div>
-      <!-- Right card — tucks behind condenser photo -->
-      <div class="audio-card la-card-behind">
-        <button class="audio-play-btn" aria-label="Play/Pause"><svg class="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg><svg class="icon-pause" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg></button>
-        <div class="audio-meta"><p class="audio-title">Location Audio Sample</p><p class="audio-desc">Ambient on-location sound — recorded live, not stock</p><div class="audio-progress-wrap"><div class="audio-progress-bar"></div></div><div class="audio-time"><span class="audio-current">0:00</span><span class="audio-duration">0:00</span></div></div>
-        <audio src="Audio Sample.mp3" preload="metadata"></audio>
-      </div><!-- /la-audio-pair -->
     </div><!-- /la-audio-box -->
   </div><!-- /la-audio-box -->
   </div><!-- /la-audio -->
@@ -4243,10 +4240,7 @@ footer > * { position: relative; z-index: 1; }
 
 <!-- Comparison Table -->
 <section class="compare-section">
-  <div class="compare-toggle-wrap">
-    <button class="compare-toggle-btn" id="compare-toggle-btn" onclick="toggleCompare()">View Full Comparison ↓</button>
-  </div>
-  <div class="compare-table" id="compare-table">
+  <div class="compare-table compare-table--open" id="compare-table">
     <div class="compare-grid">
       <div class="cg-head">Feature</div>
       <div class="cg-head">Chapter</div>
@@ -4323,45 +4317,24 @@ footer > * { position: relative; z-index: 1; }
   <h2 class="cart-title">Select Your Package</h2>
 
   <div class="pkg-tiers">
-    <div class="pkg-tier" data-tier="chapter" onclick="selectPackage('chapter'); this.querySelector('.tier-select-hint').style.opacity=1;">
+    <div class="pkg-tier" data-tier="chapter" onclick="selectPackage('chapter')">
       <p class="tier-label">Half Day</p>
       <h3 class="tier-name">Chapter</h3>
       <div class="tier-divider"></div>
-      <ul class="tier-features">
-        <li>Single-camera setup</li>
-        <li>Up to 4 hours coverage</li>
-        <li>Up to 5-min edited video</li>
-        <li>Color grading included</li>
-        <li>1 round of revisions</li>
-      </ul>
       <p class="tier-select-hint">Selected ✓</p>
     </div>
-    <div class="pkg-tier pkg-tier--popular" data-tier="novel" onclick="selectPackage('novel'); this.querySelector('.tier-select-hint').style.opacity=1;">
+    <div class="pkg-tier pkg-tier--popular" data-tier="novel" onclick="selectPackage('novel')">
       <span class="tier-badge">Most Popular</span>
       <p class="tier-label">Full Day</p>
       <h3 class="tier-name">Novel</h3>
       <div class="tier-divider"></div>
-      <ul class="tier-features">
-        <li>Multi-camera setup</li>
-        <li>Up to 8 hours coverage</li>
-        <li>Up to 10-min edited video</li>
-        <li>Full color grade + audio mix</li>
-        <li>2 revisions + social cuts</li>
-      </ul>
       <p class="tier-select-hint">Selected ✓</p>
     </div>
-    <div class="pkg-tier" data-tier="epic" onclick="selectPackage('epic'); this.querySelector('.tier-select-hint').style.opacity=1;">
+    <div class="pkg-tier" data-tier="epic" onclick="selectPackage('epic')">
       <span class="tier-badge tier-badge--gold">Best Value</span>
       <p class="tier-label">2+ Days</p>
       <h3 class="tier-name">Epic</h3>
       <div class="tier-divider"></div>
-      <ul class="tier-features">
-        <li>Multi-camera, 2-day shoot</li>
-        <li>Up to 20-min edited video</li>
-        <li>Full color grade + audio mix</li>
-        <li>Unlimited revisions</li>
-        <li>Full commercial license</li>
-      </ul>
       <p class="tier-select-hint">Selected ✓</p>
     </div>
   </div>
@@ -4400,6 +4373,12 @@ footer > * { position: relative; z-index: 1; }
 
 <!-- Sticky Cart Bar -->
 <div class="cart-bar" id="cart-bar">
+  <div id="cart-arrow">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="6 5 12 11 18 5"/>
+      <polyline points="6 13 12 19 18 13"/>
+    </svg>
+  </div>
   <div class="cb-pkg-wrap">
     <span class="cb-label">Package</span>
     <span class="cb-value" id="cb-package">—</span>
@@ -4569,9 +4548,9 @@ footer > * { position: relative; z-index: 1; }
             </div>
         </div>
 
-        <div class="portfolio-item" data-priority="1" data-category="portraits" data-lightbox-src="portfolio/Photography/Portraits/Always Changing P1.jpg">
+        <div class="portfolio-item" data-priority="1" data-category="portraits" data-lightbox-src="portfolio/Photography/Portraits/Always Changing 2.jpg">
             <div class="portfolio-img-wrap">
-                <img class="portfolio-thumb" src="portfolio/Photography/Portraits/Always Changing P1.jpg" alt="Always Changing" loading="lazy">
+                <img class="portfolio-thumb" src="portfolio/Photography/Portraits/Always Changing.jpg" alt="Always Changing" loading="lazy">
                 <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Portraits</p></div></div>
             </div>
             <div class="portfolio-caption">
@@ -6253,96 +6232,134 @@ if (_footerForm) _footerForm.addEventListener('submit', async function(e) {
     c1.forEach(function(el) { grid.insertBefore(el, anchor); });
   });
 
-  // View More
+  // ── Flex-column masonry View More ──────────────────────────────────────────
+  // Switches from CSS multi-column (which rebalances on reveal) to explicit
+  // flex columns managed by JS. Once placed, items never change columns.
   var BATCH = 12;
-  var viewLimit = BATCH;
   var viewMoreWrap = document.getElementById('portfolio-view-more');
   var viewMoreBtn  = document.getElementById('portfolio-view-more-btn');
 
-  function applyClip() {
-    var allItems = Array.from(grid.querySelectorAll('.portfolio-item'));
-    var visCount = 0;
-    allItems.forEach(function(item) {
-      if (item.classList.contains('hidden')) {
-        item.style.display = '';   /* let .hidden CSS rule handle visibility */
-        return;
-      }
-      visCount++;
-      item.style.display = (visCount > viewLimit) ? 'none' : '';
-    });
-    var totalVis = allItems.filter(function(i) { return !i.classList.contains('hidden'); }).length;
-    if (viewMoreWrap) viewMoreWrap.style.display = (totalVis > viewLimit) ? '' : 'none';
-  }
+  // Snapshot sorted order (after priority reorder above)
+  var allItems = Array.from(grid.querySelectorAll('.portfolio-item'));
 
-  // Hook into filter button clicks — reset limit on filter change
-  document.querySelectorAll('[data-top], [data-filter]').forEach(function(btn) {
-    btn.addEventListener('click', function() {
-      viewLimit = BATCH;
-      setTimeout(applyClip, 0);
-    });
+  // Detach all items from the grid
+  allItems.forEach(function(item) { grid.removeChild(item); });
+
+  // Create 3 flex column containers
+  var cols = [0, 1, 2].map(function() {
+    var col = document.createElement('div');
+    col.className = 'portfolio-col';
+    grid.appendChild(col);
+    return col;
   });
 
-  if (viewMoreBtn) {
-    viewMoreBtn.addEventListener('click', function() {
-      // ── 1. Anchor: remember first item whose top edge is in the viewport ──
-      var anchorEl = null, anchorTop = 0;
-      Array.from(grid.querySelectorAll('.portfolio-item:not(.hidden)'))
-        .filter(function(item) { return item.style.display !== 'none'; })
-        .some(function(item) {
-          var r = item.getBoundingClientRect();
-          if (r.top >= 0 && r.top < window.innerHeight) {
-            anchorEl = item; anchorTop = r.top; return true;
-          }
-        });
+  // Append items into columns using estimated heights for balance.
+  // On Show More, items are appended to shortest column — existing items never move.
+  function appendToColumns(items, animate) {
+    if (!items.length) return;
+    // Seed heights from current column offsetHeights
+    var heights = cols.map(function(col) { return col.offsetHeight; });
 
-      // ── 2. Identify items that will be newly revealed ──
-      var allItems = Array.from(grid.querySelectorAll('.portfolio-item'));
-      var visCount = 0, toReveal = [];
-      allItems.forEach(function(item) {
-        if (item.classList.contains('hidden')) { item.style.display = ''; return; }
-        visCount++;
-        if (visCount > viewLimit && visCount <= viewLimit + BATCH) toReveal.push(item);
-      });
+    function pickShortest() {
+      var minH = heights[0], idx = 0;
+      heights.forEach(function(h, i) { if (h < minH) { minH = h; idx = i; } });
+      return idx;
+    }
 
-      // ── 3. Stage new items: invisible but in-layout ──
-      toReveal.forEach(function(item) {
+    if (animate) {
+      items.forEach(function(item) {
+        item.style.opacity = '0';
         item.style.transition = 'none';
-        item.style.opacity    = '0';
-        item.style.display    = '';
       });
+    }
 
-      // ── 4. Advance limit and update button ──
-      viewLimit += BATCH;
-      var totalVis = allItems.filter(function(i) { return !i.classList.contains('hidden'); }).length;
-      if (viewMoreWrap) viewMoreWrap.style.display = (totalVis > viewLimit) ? '' : 'none';
+    items.forEach(function(item) {
+      var idx = pickShortest();
+      cols[idx].appendChild(item);
+      // Estimate item height (natural image ratio or fallback) + margin
+      var img = item.querySelector('img');
+      var colW = cols[idx].offsetWidth || Math.round(grid.offsetWidth / 3 - 12);
+      var estimH = (img && img.naturalWidth)
+        ? Math.round(img.naturalHeight / img.naturalWidth * colW)
+        : Math.round(colW * 0.75);
+      heights[idx] += estimH + 24;
+    });
 
-      // ── 5. After browser re-paints with new layout: fix scroll, then fade in ──
+    if (animate) {
       requestAnimationFrame(function() {
         requestAnimationFrame(function() {
-          // Scroll correction — undo any column-rebalance drift
-          if (anchorEl) {
-            var drift = anchorEl.getBoundingClientRect().top - anchorTop;
-            if (drift !== 0) window.scrollBy(0, drift);
-          }
-          // Fade in
-          toReveal.forEach(function(item) {
+          items.forEach(function(item) {
             item.style.transition = 'opacity 0.42s ease';
-            item.style.opacity    = '1';
+            item.style.opacity = '1';
           });
-          // Clean up inline styles once the transition completes
           setTimeout(function() {
-            toReveal.forEach(function(item) {
+            items.forEach(function(item) {
               item.style.transition = '';
-              item.style.opacity    = '';
+              item.style.opacity = '';
             });
           }, 460);
         });
       });
-    });
+    }
   }
 
-  // Initial clip
-  setTimeout(applyClip, 0);
+  // Returns Set of items currently placed in a column
+  function inColumnsSet() {
+    var s = new Set();
+    cols.forEach(function(col) {
+      Array.from(col.children).forEach(function(item) { s.add(item); });
+    });
+    return s;
+  }
+
+  function updateButton() {
+    if (!viewMoreWrap) return;
+    var placed = inColumnsSet();
+    var hasMore = allItems.some(function(item) {
+      return !placed.has(item) && !item.classList.contains('hidden');
+    });
+    viewMoreWrap.style.display = hasMore ? '' : 'none';
+  }
+
+  // Flush columns and redistribute the first BATCH visible items (no animation).
+  // Called on filter change so the new filter's first batch is shown cleanly.
+  function redistribute() {
+    allItems.forEach(function(item) {
+      if (item.parentNode) item.parentNode.removeChild(item);
+    });
+    cols.forEach(function(col) { col.innerHTML = ''; });
+
+    var visible = allItems.filter(function(item) {
+      return !item.classList.contains('hidden');
+    });
+    appendToColumns(visible.slice(0, BATCH), false);
+    updateButton();
+  }
+
+  // Initial distribution (no animation)
+  redistribute();
+
+  // On filter change — reset to first BATCH of the new filtered set
+  document.querySelectorAll('[data-top], [data-filter]').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      setTimeout(redistribute, 0); // wait for .hidden class to be applied by filter JS
+    });
+  });
+
+  // Show More — append next BATCH to columns WITHOUT touching existing items
+  if (viewMoreBtn) {
+    viewMoreBtn.addEventListener('click', function() {
+      var placed = inColumnsSet();
+      var toReveal = [];
+      allItems.forEach(function(item) {
+        if (!placed.has(item) && !item.classList.contains('hidden') && toReveal.length < BATCH) {
+          toReveal.push(item);
+        }
+      });
+      appendToColumns(toReveal, true);
+      updateButton();
+    });
+  }
 })();
 
 /* ===== JOURNEY TIMELINE — scroll-fill path ===== */
@@ -6714,6 +6731,46 @@ document.addEventListener('click', function(e) {
       card.style.transform  = 'rotateX(0deg) rotateY(0deg)';
     });
   });
+})();
+</script>
+
+<script>
+/* ── Certificate geometry lock ──
+   Locks the cert at a fixed 900 px design width and scales it as one rigid
+   unit so fonts, spacing, borders and SVG all stay proportional. */
+(function() {
+  var DESIGN_W = 900;
+  var wrap = document.querySelector('.delivery-cert-wrap');
+  var cert = document.querySelector('.hm-cert');
+  if (!wrap || !cert) return;
+
+  function scaleCert() {
+    /* Reset so we can measure the cert's natural (unscaled) height */
+    cert.style.transform    = '';
+    cert.style.marginBottom = '';
+    var certH  = cert.offsetHeight;
+    /* Available width = wrap inner content area (excludes horizontal padding) */
+    var cs     = getComputedStyle(wrap);
+    var availW = wrap.offsetWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+    var scale  = Math.min(1, availW / DESIGN_W);
+    if (scale < 1) {
+      cert.style.transform    = 'scale(' + scale + ')';
+      /* CSS transform doesn't affect layout — collapse the phantom height */
+      cert.style.marginBottom = Math.round(certH * (scale - 1)) + 'px';
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', scaleCert);
+  } else {
+    scaleCert();
+  }
+  /* Re-scale once fonts are fully loaded (affects cert height) */
+  if (document.fonts && document.fonts.ready) { document.fonts.ready.then(scaleCert); }
+  window.addEventListener('resize', scaleCert, { passive: true });
+  /* Re-scale when add-on cards expand/collapse */
+  var mo = new MutationObserver(scaleCert);
+  mo.observe(cert, { subtree: true, attributes: true, attributeFilter: ['class'] });
 })();
 </script>
 
