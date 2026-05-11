@@ -302,6 +302,22 @@
 
     /* Scoped certificate styles (.hm-cert) */
     .hm-cert, .hm-cert *, .hm-cert *::before, .hm-cert *::after { box-sizing: border-box; }
+    /* ── Desktop certificate: wider, less tall ── */
+    @media (min-width: 601px) {
+      .hm-cert {
+        max-width: 980px !important;
+        padding: 8% !important;
+      }
+      /* 2-column add-ons layout inside the cert on desktop */
+      .hm-cert .hm-cert-two-col {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0 48px;
+        align-items: start;
+        width: 100%;
+      }
+    }
+
     .hm-cert {
       --hm-ink:      #1C1A14;
       --hm-charcoal: #2A2220;
@@ -753,7 +769,7 @@
     .pkg-coins-inner {
       display: flex;
       justify-content: center;
-      align-items: flex-end;
+      align-items: flex-start;
       gap: 40px;
     }
     .coin-card {
@@ -1183,7 +1199,8 @@
     }
     @media (max-width: 600px) {
       .pkg-coins-inner { flex-direction: column; align-items: center; gap: 36px; }
-      .coin-card { width: 200px; height: 260px; }
+      /* CTA is hidden on mobile, so reduce height to fit visible content only */
+      .coin-card { width: 200px; height: 190px; }
       .coin-epic { width: 200px; }
       .coin-tier-name { font-size: 1.5rem; }
       .coin-price { font-size: 1.15rem; }
@@ -1260,6 +1277,13 @@
       .hm-cert .hm-sig { font-size: 1.05rem; }
       .hm-cert .hm-sig-label { font-size: 0.55rem; }
       .delivery-pre-line { margin: 36px 6% 20px; }
+
+      /* ── Cart section: tighter vertical spacing on mobile ── */
+      .compare-section { padding: 28px 5% 36px; }
+      .cart-section { padding: 40px 5% 56px; }
+
+      /* ── Addon qty steppers: each on its own full-width row ── */
+      .addon-qty-wrap { flex-basis: 100%; display: flex; justify-content: center; }
     }
   </style>
 </head>
@@ -1292,8 +1316,8 @@
 <!-- Hero Header -->
 <div class="pkg-header">
   <img src="Package Icons/Video Big.png" alt="" class="pkg-header-icon" aria-hidden="true">
-  <p class="pkg-eyebrow">Professional Video</p>
-  <h1 class="pkg-title">Videography Packages</h1>
+  <p class="pkg-eyebrow">Professional Video / Photo</p>
+  <h1 class="pkg-title">Videography &amp; Photography Packages</h1>
 
 </div>
 
@@ -1401,7 +1425,7 @@
 <!-- ── CINEMA-GRADE VIDEO ── -->
 <section class="cv-section" id="cv-section">
   <div class="cv-banner">
-    <h2 class="cv-banner-title">Cinema-Grade<br class="mob-br"> Video</h2>
+    <h2 class="cv-banner-title">Studio-Grade<br class="mob-br"> Video &amp; Photo</h2>
   </div>
   <div class="cv-gear">
     <!-- Top row: hero cameras -->
@@ -1432,24 +1456,22 @@
         <!-- Fade mask: bright at U-turn peaks/valleys, dim between -->
         <linearGradient id="cv-prog-fade-grad" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%"    stop-color="white" stop-opacity="0.55"/>
-          <stop offset="5.7%"  stop-color="white" stop-opacity="0.11"/> <!-- crossing    -->
+          <stop offset="5.7%"  stop-color="white" stop-opacity="0.11"/> <!-- mid 0→340   -->
           <stop offset="11.3%" stop-color="white" stop-opacity="0.90"/> <!-- R peak y=340 -->
-          <stop offset="15.3%" stop-color="white" stop-opacity="0.11"/> <!-- crossing    -->
-          <stop offset="20.7%" stop-color="white" stop-opacity="0.90"/> <!-- L val  y=620 -->
-          <stop offset="25.7%" stop-color="white" stop-opacity="0.11"/> <!-- crossing    -->
-          <stop offset="30.7%" stop-color="white" stop-opacity="0.90"/> <!-- R peak y=920 -->
-          <stop offset="35.3%" stop-color="white" stop-opacity="0.11"/> <!-- crossing    -->
-          <stop offset="40.0%" stop-color="white" stop-opacity="0.90"/> <!-- L val y=1200 -->
-          <stop offset="44.8%" stop-color="white" stop-opacity="0.11"/> <!-- crossing    -->
-          <stop offset="49.7%" stop-color="white" stop-opacity="0.90"/> <!-- R peak y=1490-->
-          <stop offset="54.7%" stop-color="white" stop-opacity="0.11"/> <!-- crossing    -->
-          <stop offset="59.7%" stop-color="white" stop-opacity="0.90"/> <!-- L val y=1790 -->
-          <stop offset="64.3%" stop-color="white" stop-opacity="0.11"/> <!-- crossing    -->
-          <stop offset="69.0%" stop-color="white" stop-opacity="0.90"/> <!-- R peak y=2070-->
-          <stop offset="73.8%" stop-color="white" stop-opacity="0.11"/> <!-- crossing    -->
-          <stop offset="78.7%" stop-color="white" stop-opacity="0.90"/> <!-- L val y=2360 -->
-          <stop offset="83.3%" stop-color="white" stop-opacity="0.11"/> <!-- crossing    -->
-          <stop offset="88.0%" stop-color="white" stop-opacity="0.90"/> <!-- R peak y=2640-->
+          <stop offset="17.0%" stop-color="white" stop-opacity="0.11"/> <!-- mid 340→680  -->
+          <stop offset="22.7%" stop-color="white" stop-opacity="0.90"/> <!-- L val  y=680 -->
+          <stop offset="28.3%" stop-color="white" stop-opacity="0.11"/> <!-- mid 680→1020 -->
+          <stop offset="34.0%" stop-color="white" stop-opacity="0.90"/> <!-- R peak y=1020-->
+          <stop offset="39.7%" stop-color="white" stop-opacity="0.11"/> <!-- mid 1020→1360-->
+          <stop offset="45.3%" stop-color="white" stop-opacity="0.90"/> <!-- L val y=1360 -->
+          <stop offset="51.0%" stop-color="white" stop-opacity="0.11"/> <!-- mid 1360→1700-->
+          <stop offset="56.7%" stop-color="white" stop-opacity="0.90"/> <!-- R peak y=1700-->
+          <stop offset="62.3%" stop-color="white" stop-opacity="0.11"/> <!-- mid 1700→2040-->
+          <stop offset="68.0%" stop-color="white" stop-opacity="0.90"/> <!-- L val y=2040 -->
+          <stop offset="73.7%" stop-color="white" stop-opacity="0.11"/> <!-- mid 2040→2380-->
+          <stop offset="79.3%" stop-color="white" stop-opacity="0.90"/> <!-- R peak y=2380-->
+          <stop offset="85.0%" stop-color="white" stop-opacity="0.11"/> <!-- mid 2380→2720-->
+          <stop offset="90.7%" stop-color="white" stop-opacity="0.90"/> <!-- L val y=2720 -->
           <stop offset="100%"  stop-color="white" stop-opacity="0.85"/>
         </linearGradient>
         <mask id="cv-prog-mask">
@@ -1462,11 +1484,11 @@
         </filter>
       </defs>
 
-      <!-- Ghost: meandering snake with sharp U-turn angles -->
-      <path class="cv-prog-ghost" d="M 130,0 C 500,160 800,340 900,340 C 800,340 200,620 80,620 C 200,620 760,920 880,920 C 760,920 240,1200 100,1200 C 240,1200 820,1490 920,1490 C 820,1490 160,1790 80,1790 C 160,1790 770,2070 870,2070 C 770,2070 210,2360 110,2360 C 210,2360 800,2640 900,2640 C 800,2640 130,2900 130,2900"/>
+      <!-- Ghost: smooth sinusoidal snake -->
+      <path class="cv-prog-ghost" d="M 130,0 C 870,0 130,340 870,340 C 130,340 870,680 130,680 C 870,680 130,1020 870,1020 C 130,1020 870,1360 130,1360 C 870,1360 130,1700 870,1700 C 130,1700 870,2040 130,2040 C 870,2040 130,2380 870,2380 C 130,2380 870,2720 130,2720"/>
       <!-- Animated fill path with fade mask -->
       <path id="cv-prog-fill" class="cv-prog-fill" mask="url(#cv-prog-mask)"
-            d="M 130,0 C 500,160 800,340 900,340 C 800,340 200,620 80,620 C 200,620 760,920 880,920 C 760,920 240,1200 100,1200 C 240,1200 820,1490 920,1490 C 820,1490 160,1790 80,1790 C 160,1790 770,2070 870,2070 C 770,2070 210,2360 110,2360 C 210,2360 800,2640 900,2640 C 800,2640 130,2900 130,2900"/>
+            d="M 130,0 C 870,0 130,340 870,340 C 130,340 870,680 130,680 C 870,680 130,1020 870,1020 C 130,1020 870,1360 130,1360 C 870,1360 130,1700 870,1700 C 130,1700 870,2040 130,2040 C 870,2040 130,2380 870,2380 C 130,2380 870,2720 130,2720"/>
       <!-- Scroll-following tip: outer halo + inner dot -->
       <circle id="cv-prog-tip-halo" r="9"   fill="rgba(201,168,76,0.28)" filter="url(#cv-tip-glow)" opacity="0"/>
       <circle id="cv-prog-tip-dot"  r="2.8" fill="#C9A84C" opacity="0"/>
@@ -1480,34 +1502,30 @@
         <!-- Mobile fade mask: bright at each U-turn peak/valley -->
         <linearGradient id="cv-prog-fade-grad-m" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%"    stop-color="white" stop-opacity="0.55"/>
-          <stop offset="4.9%"  stop-color="white" stop-opacity="0.11"/> <!-- crossing    -->
-          <stop offset="9.8%"  stop-color="white" stop-opacity="0.90"/> <!-- R peak y=450 -->
-          <stop offset="12.7%" stop-color="white" stop-opacity="0.11"/> <!-- crossing    -->
-          <stop offset="15.7%" stop-color="white" stop-opacity="0.90"/> <!-- L val  y=720 -->
-          <stop offset="18.5%" stop-color="white" stop-opacity="0.11"/> <!-- crossing    -->
-          <stop offset="21.3%" stop-color="white" stop-opacity="0.90"/> <!-- R peak y=980 -->
-          <stop offset="24.2%" stop-color="white" stop-opacity="0.11"/> <!-- crossing    -->
-          <stop offset="27.2%" stop-color="white" stop-opacity="0.90"/> <!-- L val y=1250 -->
-          <stop offset="30.1%" stop-color="white" stop-opacity="0.11"/> <!-- crossing    -->
-          <stop offset="33.0%" stop-color="white" stop-opacity="0.90"/> <!-- R peak y=1520-->
-          <stop offset="36.1%" stop-color="white" stop-opacity="0.11"/> <!-- crossing    -->
-          <stop offset="39.1%" stop-color="white" stop-opacity="0.90"/> <!-- L val y=1800 -->
-          <stop offset="42.0%" stop-color="white" stop-opacity="0.11"/> <!-- crossing    -->
-          <stop offset="44.8%" stop-color="white" stop-opacity="0.90"/> <!-- R peak y=2060-->
-          <stop offset="47.9%" stop-color="white" stop-opacity="0.11"/> <!-- crossing    -->
-          <stop offset="51.1%" stop-color="white" stop-opacity="0.90"/> <!-- L val y=2350 -->
-          <stop offset="53.8%" stop-color="white" stop-opacity="0.11"/> <!-- crossing    -->
-          <stop offset="56.5%" stop-color="white" stop-opacity="0.90"/> <!-- R peak y=2600-->
-          <stop offset="59.8%" stop-color="white" stop-opacity="0.11"/> <!-- crossing    -->
-          <stop offset="63.0%" stop-color="white" stop-opacity="0.90"/> <!-- L val y=2900 -->
-          <stop offset="65.8%" stop-color="white" stop-opacity="0.11"/> <!-- crossing    -->
-          <stop offset="68.5%" stop-color="white" stop-opacity="0.90"/> <!-- R peak y=3150-->
-          <stop offset="71.7%" stop-color="white" stop-opacity="0.11"/> <!-- crossing    -->
-          <stop offset="75.0%" stop-color="white" stop-opacity="0.90"/> <!-- L val y=3450 -->
-          <stop offset="77.7%" stop-color="white" stop-opacity="0.11"/> <!-- crossing    -->
-          <stop offset="80.4%" stop-color="white" stop-opacity="0.90"/> <!-- R peak y=3700-->
-          <stop offset="83.7%" stop-color="white" stop-opacity="0.11"/> <!-- crossing    -->
-          <stop offset="87.0%" stop-color="white" stop-opacity="0.90"/> <!-- L val y=4000 -->
+          <stop offset="3.6%"  stop-color="white" stop-opacity="0.11"/> <!-- mid 0→330   -->
+          <stop offset="7.2%"  stop-color="white" stop-opacity="0.90"/> <!-- R peak y=330 -->
+          <stop offset="10.8%" stop-color="white" stop-opacity="0.11"/> <!-- mid 330→660  -->
+          <stop offset="14.3%" stop-color="white" stop-opacity="0.90"/> <!-- L val  y=660 -->
+          <stop offset="17.9%" stop-color="white" stop-opacity="0.11"/> <!-- mid 660→990  -->
+          <stop offset="21.5%" stop-color="white" stop-opacity="0.90"/> <!-- R peak y=990 -->
+          <stop offset="25.1%" stop-color="white" stop-opacity="0.11"/> <!-- mid 990→1320 -->
+          <stop offset="28.7%" stop-color="white" stop-opacity="0.90"/> <!-- L val y=1320 -->
+          <stop offset="32.3%" stop-color="white" stop-opacity="0.11"/> <!-- mid 1320→1650-->
+          <stop offset="35.9%" stop-color="white" stop-opacity="0.90"/> <!-- R peak y=1650-->
+          <stop offset="39.5%" stop-color="white" stop-opacity="0.11"/> <!-- mid 1650→1980-->
+          <stop offset="43.0%" stop-color="white" stop-opacity="0.90"/> <!-- L val y=1980 -->
+          <stop offset="46.6%" stop-color="white" stop-opacity="0.11"/> <!-- mid 1980→2310-->
+          <stop offset="50.2%" stop-color="white" stop-opacity="0.90"/> <!-- R peak y=2310-->
+          <stop offset="53.8%" stop-color="white" stop-opacity="0.11"/> <!-- mid 2310→2640-->
+          <stop offset="57.4%" stop-color="white" stop-opacity="0.90"/> <!-- L val y=2640 -->
+          <stop offset="61.0%" stop-color="white" stop-opacity="0.11"/> <!-- mid 2640→2970-->
+          <stop offset="64.6%" stop-color="white" stop-opacity="0.90"/> <!-- R peak y=2970-->
+          <stop offset="68.2%" stop-color="white" stop-opacity="0.11"/> <!-- mid 2970→3300-->
+          <stop offset="71.7%" stop-color="white" stop-opacity="0.90"/> <!-- L val y=3300 -->
+          <stop offset="75.3%" stop-color="white" stop-opacity="0.11"/> <!-- mid 3300→3630-->
+          <stop offset="78.9%" stop-color="white" stop-opacity="0.90"/> <!-- R peak y=3630-->
+          <stop offset="82.5%" stop-color="white" stop-opacity="0.11"/> <!-- mid 3630→3960-->
+          <stop offset="86.1%" stop-color="white" stop-opacity="0.90"/> <!-- L val y=3960 -->
           <stop offset="100%"  stop-color="white" stop-opacity="0.85"/>
         </linearGradient>
         <mask id="cv-prog-mask-m">
@@ -1519,12 +1537,12 @@
         </filter>
       </defs>
 
-      <!-- Ghost: desktop-style wide sweeping mobile snake -->
+      <!-- Ghost: smooth sinusoidal mobile snake -->
       <path class="cv-prog-ghost"
-            d="M 90,0 C 210,180 295,440 315,450 C 295,460 75,710 45,720 C 75,730 295,970 315,980 C 295,990 75,1240 45,1250 C 75,1260 295,1510 315,1520 C 295,1530 75,1790 45,1800 C 75,1810 295,2050 315,2060 C 295,2070 75,2340 45,2350 C 75,2360 295,2590 315,2600 C 295,2610 75,2890 45,2900 C 75,2910 295,3140 315,3150 C 295,3160 75,3440 45,3450 C 75,3460 295,3690 315,3700 C 295,3710 75,3990 45,4000"/>
+            d="M 45,0 C 315,0 45,330 315,330 C 45,330 315,660 45,660 C 315,660 45,990 315,990 C 45,990 315,1320 45,1320 C 315,1320 45,1650 315,1650 C 45,1650 315,1980 45,1980 C 315,1980 45,2310 315,2310 C 45,2310 315,2640 45,2640 C 315,2640 45,2970 315,2970 C 45,2970 315,3300 45,3300 C 315,3300 45,3630 315,3630 C 45,3630 315,3960 45,3960"/>
       <!-- Animated fill with fade mask -->
       <path id="cv-prog-fill-m" class="cv-prog-fill" mask="url(#cv-prog-mask-m)"
-            d="M 90,0 C 210,180 295,440 315,450 C 295,460 75,710 45,720 C 75,730 295,970 315,980 C 295,990 75,1240 45,1250 C 75,1260 295,1510 315,1520 C 295,1530 75,1790 45,1800 C 75,1810 295,2050 315,2060 C 295,2070 75,2340 45,2350 C 75,2360 295,2590 315,2600 C 295,2610 75,2890 45,2900 C 75,2910 295,3140 315,3150 C 295,3160 75,3440 45,3450 C 75,3460 295,3690 315,3700 C 295,3710 75,3990 45,4000"/>
+            d="M 45,0 C 315,0 45,330 315,330 C 45,330 315,660 45,660 C 315,660 45,990 315,990 C 45,990 315,1320 45,1320 C 315,1320 45,1650 315,1650 C 45,1650 315,1980 45,1980 C 315,1980 45,2310 315,2310 C 45,2310 315,2640 45,2640 C 315,2640 45,2970 315,2970 C 45,2970 315,3300 45,3300 C 315,3300 45,3630 315,3630 C 45,3630 315,3960 45,3960"/>
       <!-- Scroll-following tip -->
       <circle id="cv-prog-tip-halo-m" r="9"   fill="rgba(201,168,76,0.28)" filter="url(#cv-tip-glow-m)" opacity="0"/>
       <circle id="cv-prog-tip-dot-m"  r="2.8" fill="#C9A84C" opacity="0"/>
@@ -1821,13 +1839,13 @@
         <div class="audio-card anim-fade la-card-front">
         <button class="audio-play-btn" aria-label="Play/Pause"><svg class="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg><svg class="icon-pause" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg></button>
         <div class="audio-meta"><p class="audio-title">Location Audio Sample</p><p class="audio-desc">Ambient on-location sound — recorded live, not stock</p><div class="audio-progress-wrap"><div class="audio-progress-bar"></div></div><div class="audio-time"><span class="audio-current">0:00</span><span class="audio-duration">0:00</span></div></div>
-        <audio src="" preload="metadata"></audio>
+        <audio src="Audio Sample.mp3" preload="metadata"></audio>
       </div>
       <!-- Right card — tucks behind condenser photo -->
       <div class="audio-card la-card-behind">
         <button class="audio-play-btn" aria-label="Play/Pause"><svg class="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg><svg class="icon-pause" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg></button>
         <div class="audio-meta"><p class="audio-title">Location Audio Sample</p><p class="audio-desc">Ambient on-location sound — recorded live, not stock</p><div class="audio-progress-wrap"><div class="audio-progress-bar"></div></div><div class="audio-time"><span class="audio-current">0:00</span><span class="audio-duration">0:00</span></div></div>
-        <audio src="" preload="metadata"></audio>
+        <audio src="Audio Sample.mp3" preload="metadata"></audio>
       </div><!-- /la-audio-pair -->
     </div><!-- /la-audio-box -->
   </div><!-- /la-audio-box -->
@@ -2144,18 +2162,22 @@
         <g transform="translate(850 510) scale(-1 1)"><use href="#hm-fleur-drop" x="0" y="0" width="60" height="80"/></g>
       </svg>
       <div class="hm-inner">
-        <div class="hm-eyebrow">
-          <div class="hm-ln"></div><span>Harrison Media</span><div class="hm-ln"></div>
-        </div>
-        <h1 class="hm-title">Final Delivery</h1>
-        <p class="hm-subhead">— Results You Can Expect —</p>
-        <div class="delivery-chips-row">
-          <div class="delivery-chip"><span class="delivery-chip-word">Edited Film</span></div>
-          <div class="delivery-chip"><span class="delivery-chip-word">Color Grade</span></div>
-          <div class="delivery-chip"><span class="delivery-chip-word">Sound Mix</span></div>
-          <div class="delivery-chip"><span class="delivery-chip-word">Private Link</span></div>
-          <div class="delivery-chip"><span class="delivery-chip-word">1 Revision</span></div>
-        </div>
+        <div class="hm-cert-two-col">
+          <div class="hm-cert-left">
+            <div class="hm-eyebrow">
+              <div class="hm-ln"></div><span>Harrison Media</span><div class="hm-ln"></div>
+            </div>
+            <h1 class="hm-title">Final Delivery</h1>
+            <p class="hm-subhead">— Results You Can Expect —</p>
+            <div class="delivery-chips-row">
+              <div class="delivery-chip"><span class="delivery-chip-word">Edited Film</span></div>
+              <div class="delivery-chip"><span class="delivery-chip-word">Color Grade</span></div>
+              <div class="delivery-chip"><span class="delivery-chip-word">Sound Mix</span></div>
+              <div class="delivery-chip"><span class="delivery-chip-word">Private Link</span></div>
+              <div class="delivery-chip"><span class="delivery-chip-word">1 Revision</span></div>
+            </div>
+          </div><!-- /hm-cert-left -->
+          <div class="hm-cert-right">
         <!-- Add-ons inside the certificate -->
         <div class="sect-addons">
           <p class="sect-addons-label">Add-Ons Available</p>
@@ -2307,6 +2329,8 @@
 
           </div><!-- /delivery-qty-capsules -->
         </div><!-- /sect-addons inside cert -->
+          </div><!-- /hm-cert-right -->
+        </div><!-- /hm-cert-two-col -->
 
         <div class="hm-footer">
           <div class="hm-sigblock">
