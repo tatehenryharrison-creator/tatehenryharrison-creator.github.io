@@ -3711,10 +3711,9 @@ footer > * { position: relative; z-index: 1; }
       <div class="audio-card">
         <button class="audio-play-btn" aria-label="Play/Pause"><svg class="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg><svg class="icon-pause" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg></button>
         <div class="audio-meta"><p class="audio-title">Location Audio Sample</p><p class="audio-desc">Ambient on-location sound — recorded live, not stock</p><div class="audio-progress-wrap"><div class="audio-progress-bar"></div></div><div class="audio-time"><span class="audio-current">0:00</span><span class="audio-duration">0:00</span></div></div>
-        <audio src="Audio Sample.mp3" preload="metadata"></audio>
+        <audio src="audio-sample.mp3" type="audio/mpeg" preload="metadata"></audio>
       </div>
     </div><!-- /la-audio-box -->
-  </div><!-- /la-audio-box -->
   </div><!-- /la-audio -->
   <div class="sect-fade-to-dark"></div>
 
@@ -5834,52 +5833,6 @@ document.querySelectorAll('.faq-item').forEach(item => {
         if (finished) { startSession(); }
         else if (video.paused) { video.play().catch(function(){}); btn.innerHTML = '&#9646;&#9646; Pause'; }
         else { video.pause(); btn.textContent = '▶ Play'; }
-    });
-})();
-
-/* ===== AUDIO PLAYERS ===== */
-(function() {
-    function fmt(s) {
-        s = Math.floor(s || 0);
-        return Math.floor(s / 60) + ':' + ('0' + (s % 60)).slice(-2);
-    }
-    document.querySelectorAll('.audio-card').forEach(function(card) {
-        var btn      = card.querySelector('.audio-play-btn');
-        var audio    = card.querySelector('audio');
-        var bar      = card.querySelector('.audio-progress-bar');
-        var wrap     = card.querySelector('.audio-progress-wrap');
-        var current  = card.querySelector('.audio-current');
-        var duration = card.querySelector('.audio-duration');
-        if (!audio) return;
-
-        audio.addEventListener('loadedmetadata', function() {
-            duration.textContent = fmt(audio.duration);
-        });
-        audio.addEventListener('timeupdate', function() {
-            current.textContent = fmt(audio.currentTime);
-            var pct = audio.duration ? (audio.currentTime / audio.duration) * 100 : 0;
-            bar.style.width = pct + '%';
-        });
-        audio.addEventListener('ended', function() {
-            btn.classList.remove('playing');
-            bar.style.width = '0%';
-            current.textContent = '0:00';
-        });
-        btn.addEventListener('click', function() {
-            // Pause all other players
-            document.querySelectorAll('.audio-card audio').forEach(function(a) {
-                if (a !== audio) { a.pause(); a.closest('.audio-card').querySelector('.audio-play-btn').classList.remove('playing'); }
-            });
-            if (audio.paused) {
-                audio.play().catch(function() { btn.classList.remove('playing'); });
-                btn.classList.add('playing');
-            } else { audio.pause(); btn.classList.remove('playing'); }
-        });
-        wrap.addEventListener('click', function(e) {
-            if (!audio.duration) return;
-            var rect = wrap.getBoundingClientRect();
-            audio.currentTime = ((e.clientX - rect.left) / rect.width) * audio.duration;
-        });
     });
 })();
 
