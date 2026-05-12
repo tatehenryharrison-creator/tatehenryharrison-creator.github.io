@@ -1896,16 +1896,6 @@ footer > * { position: relative; z-index: 1; }
     @media (max-width: 640px) { .la-addon-layout { flex-direction: column; gap: 28px; } .la-addon-layout .addon-card { flex: unset; width: 100%; } }
     /* Paper-to-dark fade used at bottom of Video and Audio sections */
     .sect-fade-to-dark { height: 160px; background: linear-gradient(to bottom, #f5f4f0 0%, #d3d2ce 25%, #898782 50%, #3e3c36 75%, #1C1A14 100%); pointer-events: none; margin: 0; }
-    /* ── VIDEO SECTION PROGRESS LINE ── */
-    .cv-progress-wrap { position: relative; height: 0; overflow: visible; z-index: 2; pointer-events: none; }
-    .cv-progress-svg { position: absolute; top: 0; left: 0; width: 100%; height: 3000px; overflow: visible; pointer-events: none; }
-    /* Mobile snake — same positioning, taller to cover stacked mobile layout */
-    .cv-progress-svg--mobile { position: absolute; top: 0; left: 0; width: 100%; height: 4600px; overflow: visible; display: none; pointer-events: none; }
-    .cv-prog-ghost { fill: none; stroke: rgba(201,168,76,0.12); stroke-width: 1.8; stroke-dasharray: 5 9; stroke-linecap: round; }
-    .cv-prog-fill { fill: none; stroke: rgba(201,168,76,0.82); stroke-width: 1.8; stroke-linecap: round; }
-    .cv-progress-label { position: absolute; top: 80px; left: 50%; transform: translate(-50%, -50%); pointer-events: none; }
-    .cv-progress-label-inner { display: inline-block; padding: 8px 22px; border-radius: 50px; background: rgba(14,12,9,0.82); border: 1px solid rgba(201,168,76,0.45); backdrop-filter: blur(8px); white-space: nowrap; }
-    .cv-progress-label-text { font-family: 'EB Garamond', serif; font-style: italic; font-weight: 400; font-size: 1rem; letter-spacing: 0.01em; color: #C9A84C; margin: 0; }
     /* la-section: fully light/cream throughout */
     .la-fade-in { display: none; }
     #la-section { background: #f5f4f0; }
@@ -2293,12 +2283,6 @@ footer > * { position: relative; z-index: 1; }
       .cb-proceed-btn { width: 100%; text-align: center; padding: 13px 20px; order: 4; }
       .cb-pkg-wrap { order: 1; }
       .wi-text { padding: 40px 6% 40px; }
-      /* Progress line: swap desktop SVG for the mobile snake */
-      .cv-progress-svg { display: none; }
-      .cv-progress-svg--mobile { display: block; }
-      .cv-progress-wrap { height: 0; overflow: visible; }
-      /* Label replaced by the mobile line — hide it */
-      .cv-progress-label { display: none; }
       /* Audio Extras card: allow button to wrap below icon+info on narrow screens */
       .la-addon-layout .addon-card .addon-card-main { flex-wrap: wrap; gap: 10px; }
       .la-addon-layout .addon-card .addon-card-info { flex: 1 1 0; min-width: 0; }
@@ -3209,112 +3193,6 @@ footer > * { position: relative; z-index: 1; }
       <div class="cv-gear-slot"><img src="Packages Pics/Video/xf1024.png" alt="XF 10-24mm"></div>
       <div class="cv-gear-slot"><img src="Packages Pics/Video/xf1655.png" alt="XF 16-55mm"></div>
       <div class="cv-gear-slot"><img src="Packages Pics/Video/Adapter.png" alt="Lens Adapter"></div>
-    </div>
-  </div>
-
-  <!-- Progress line — overlays gradient + add-ons -->
-  <div class="cv-progress-wrap" aria-hidden="true">
-    <svg class="cv-progress-svg" viewBox="0 0 1000 3000" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <defs>
-        <!-- Fade mask: bright at U-turn peaks/valleys, dim between -->
-        <linearGradient id="cv-prog-fade-grad" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%"    stop-color="white" stop-opacity="0.55"/>
-          <stop offset="5.7%"  stop-color="white" stop-opacity="0"/>   <!-- mid 0→340 — transparent over content -->
-          <stop offset="11.3%" stop-color="white" stop-opacity="0.90"/> <!-- R peak y=340 -->
-          <stop offset="17.0%" stop-color="white" stop-opacity="0"/>   <!-- mid 340→680  -->
-          <stop offset="22.7%" stop-color="white" stop-opacity="0.90"/> <!-- L val  y=680 -->
-          <stop offset="28.3%" stop-color="white" stop-opacity="0"/>   <!-- mid 680→1020 -->
-          <stop offset="34.0%" stop-color="white" stop-opacity="0.90"/> <!-- R peak y=1020-->
-          <stop offset="39.7%" stop-color="white" stop-opacity="0"/>   <!-- mid 1020→1360-->
-          <stop offset="45.3%" stop-color="white" stop-opacity="0.90"/> <!-- L val y=1360 -->
-          <stop offset="51.0%" stop-color="white" stop-opacity="0"/>   <!-- mid 1360→1700-->
-          <stop offset="56.7%" stop-color="white" stop-opacity="0.90"/> <!-- R peak y=1700-->
-          <stop offset="62.3%" stop-color="white" stop-opacity="0"/>   <!-- mid 1700→2040-->
-          <stop offset="68.0%" stop-color="white" stop-opacity="0.90"/> <!-- L val y=2040 -->
-          <stop offset="73.7%" stop-color="white" stop-opacity="0"/>   <!-- mid 2040→2380-->
-          <stop offset="79.3%" stop-color="white" stop-opacity="0.90"/> <!-- R peak y=2380-->
-          <stop offset="85.0%" stop-color="white" stop-opacity="0"/>   <!-- mid 2380→2720-->
-          <stop offset="90.7%" stop-color="white" stop-opacity="0.90"/> <!-- L val y=2720 -->
-          <stop offset="100%"  stop-color="white" stop-opacity="0.85"/>
-        </linearGradient>
-        <mask id="cv-prog-mask">
-          <rect x="0" y="0" width="1000" height="3000" fill="url(#cv-prog-fade-grad)"/>
-        </mask>
-        <!-- Glow filter for scroll-following tip -->
-        <filter id="cv-tip-glow" x="-150%" y="-150%" width="400%" height="400%">
-          <feGaussianBlur stdDeviation="5" result="blur"/>
-          <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-        </filter>
-      </defs>
-
-      <!-- Ghost: smooth sinusoidal snake (shares same fade mask so mid-sections disappear too) -->
-      <path class="cv-prog-ghost" mask="url(#cv-prog-mask)" d="M 130,0 C 870,0 130,340 870,340 C 130,340 870,680 130,680 C 870,680 130,1020 870,1020 C 130,1020 870,1360 130,1360 C 870,1360 130,1700 870,1700 C 130,1700 870,2040 130,2040 C 870,2040 130,2380 870,2380 C 130,2380 870,2720 130,2720"/>
-      <!-- Animated fill path with fade mask -->
-      <path id="cv-prog-fill" class="cv-prog-fill" mask="url(#cv-prog-mask)"
-            d="M 130,0 C 870,0 130,340 870,340 C 130,340 870,680 130,680 C 870,680 130,1020 870,1020 C 130,1020 870,1360 130,1360 C 870,1360 130,1700 870,1700 C 130,1700 870,2040 130,2040 C 870,2040 130,2380 870,2380 C 130,2380 870,2720 130,2720"/>
-      <!-- Scroll-following tip: outer halo + inner dot -->
-      <circle id="cv-prog-tip-halo" r="9"   fill="rgba(201,168,76,0.28)" filter="url(#cv-tip-glow)" opacity="0"/>
-      <circle id="cv-prog-tip-dot"  r="2.8" fill="#C9A84C" opacity="0"/>
-    </svg>
-
-    <!-- ── Mobile snake — displayed only on narrow viewports ── -->
-    <svg class="cv-progress-svg cv-progress-svg--mobile"
-         viewBox="0 0 375 4600" preserveAspectRatio="none"
-         fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <defs>
-        <!-- Mobile fade mask: bright at each U-turn peak/valley -->
-        <linearGradient id="cv-prog-fade-grad-m" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%"    stop-color="white" stop-opacity="0.55"/>
-          <stop offset="3.6%"  stop-color="white" stop-opacity="0"/>   <!-- mid 0→330 — transparent over content -->
-          <stop offset="7.2%"  stop-color="white" stop-opacity="0.90"/> <!-- R peak y=330 -->
-          <stop offset="10.8%" stop-color="white" stop-opacity="0"/>   <!-- mid 330→660  -->
-          <stop offset="14.3%" stop-color="white" stop-opacity="0.90"/> <!-- L val  y=660 -->
-          <stop offset="17.9%" stop-color="white" stop-opacity="0"/>   <!-- mid 660→990  -->
-          <stop offset="21.5%" stop-color="white" stop-opacity="0.90"/> <!-- R peak y=990 -->
-          <stop offset="25.1%" stop-color="white" stop-opacity="0"/>   <!-- mid 990→1320 -->
-          <stop offset="28.7%" stop-color="white" stop-opacity="0.90"/> <!-- L val y=1320 -->
-          <stop offset="32.3%" stop-color="white" stop-opacity="0"/>   <!-- mid 1320→1650-->
-          <stop offset="35.9%" stop-color="white" stop-opacity="0.90"/> <!-- R peak y=1650-->
-          <stop offset="39.5%" stop-color="white" stop-opacity="0"/>   <!-- mid 1650→1980-->
-          <stop offset="43.0%" stop-color="white" stop-opacity="0.90"/> <!-- L val y=1980 -->
-          <stop offset="46.6%" stop-color="white" stop-opacity="0"/>   <!-- mid 1980→2310-->
-          <stop offset="50.2%" stop-color="white" stop-opacity="0.90"/> <!-- R peak y=2310-->
-          <stop offset="53.8%" stop-color="white" stop-opacity="0"/>   <!-- mid 2310→2640-->
-          <stop offset="57.4%" stop-color="white" stop-opacity="0.90"/> <!-- L val y=2640 -->
-          <stop offset="61.0%" stop-color="white" stop-opacity="0"/>   <!-- mid 2640→2970-->
-          <stop offset="64.6%" stop-color="white" stop-opacity="0.90"/> <!-- R peak y=2970-->
-          <stop offset="68.2%" stop-color="white" stop-opacity="0"/>   <!-- mid 2970→3300-->
-          <stop offset="71.7%" stop-color="white" stop-opacity="0.90"/> <!-- L val y=3300 -->
-          <stop offset="75.3%" stop-color="white" stop-opacity="0"/>   <!-- mid 3300→3630-->
-          <stop offset="78.9%" stop-color="white" stop-opacity="0.90"/> <!-- R peak y=3630-->
-          <stop offset="82.5%" stop-color="white" stop-opacity="0"/>   <!-- mid 3630→3960-->
-          <stop offset="86.1%" stop-color="white" stop-opacity="0.90"/> <!-- L val y=3960 -->
-          <stop offset="100%"  stop-color="white" stop-opacity="0.85"/>
-        </linearGradient>
-        <mask id="cv-prog-mask-m">
-          <rect x="0" y="0" width="375" height="4600" fill="url(#cv-prog-fade-grad-m)"/>
-        </mask>
-        <filter id="cv-tip-glow-m" x="-150%" y="-150%" width="400%" height="400%">
-          <feGaussianBlur stdDeviation="5" result="blur"/>
-          <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-        </filter>
-      </defs>
-
-      <!-- Ghost: smooth sinusoidal mobile snake (shares mask so mid-sections are transparent) -->
-      <path class="cv-prog-ghost" mask="url(#cv-prog-mask-m)"
-            d="M 45,0 C 315,0 45,330 315,330 C 45,330 315,660 45,660 C 315,660 45,990 315,990 C 45,990 315,1320 45,1320 C 315,1320 45,1650 315,1650 C 45,1650 315,1980 45,1980 C 315,1980 45,2310 315,2310 C 45,2310 315,2640 45,2640 C 315,2640 45,2970 315,2970 C 45,2970 315,3300 45,3300 C 315,3300 45,3630 315,3630 C 45,3630 315,3960 45,3960"/>
-      <!-- Animated fill with fade mask -->
-      <path id="cv-prog-fill-m" class="cv-prog-fill" mask="url(#cv-prog-mask-m)"
-            d="M 45,0 C 315,0 45,330 315,330 C 45,330 315,660 45,660 C 315,660 45,990 315,990 C 45,990 315,1320 45,1320 C 315,1320 45,1650 315,1650 C 45,1650 315,1980 45,1980 C 315,1980 45,2310 315,2310 C 45,2310 315,2640 45,2640 C 315,2640 45,2970 315,2970 C 45,2970 315,3300 45,3300 C 315,3300 45,3630 315,3630 C 45,3630 315,3960 45,3960"/>
-      <!-- Scroll-following tip -->
-      <circle id="cv-prog-tip-halo-m" r="9"   fill="rgba(201,168,76,0.28)" filter="url(#cv-tip-glow-m)" opacity="0"/>
-      <circle id="cv-prog-tip-dot-m"  r="2.8" fill="#C9A84C" opacity="0"/>
-    </svg>
-
-    <div class="cv-progress-label">
-      <div class="cv-progress-label-inner">
-        <p class="cv-progress-label-text">All contribute to the creative process</p>
-      </div>
     </div>
   </div>
 
@@ -6276,89 +6154,6 @@ document.addEventListener('click', function(e) {
     var card = document.getElementById('card-' + key);
     if (card) card.classList.toggle('is-added', (cart.addons[key] || 0) > 0);
   };
-})();
-
-/* ===== VIDEO SECTION PROGRESS LINE ===== */
-(function() {
-  var wrap = document.querySelector('.cv-progress-wrap');
-  var path = document.getElementById('cv-prog-fill');
-  if (!wrap || !path) return;
-
-  var len      = path.getTotalLength();
-  var tipHalo  = document.getElementById('cv-prog-tip-halo');
-  var tipDot   = document.getElementById('cv-prog-tip-dot');
-  path.style.strokeDasharray  = len;
-  path.style.strokeDashoffset = len;
-
-  var pathM    = document.getElementById('cv-prog-fill-m');
-  var tipHaloM = document.getElementById('cv-prog-tip-halo-m');
-  var tipDotM  = document.getElementById('cv-prog-tip-dot-m');
-  var lenM     = pathM ? pathM.getTotalLength() : 0;
-  if (pathM) { pathM.style.strokeDasharray = lenM; pathM.style.strokeDashoffset = lenM; }
-
-  var scrollStart, scrollTotal;
-
-  function computeLayout() {
-    var vh      = window.innerHeight;
-    var wrapTop = wrap.getBoundingClientRect().top + window.scrollY;
-    var certWrap    = document.querySelector('.delivery-cert-wrap');
-    var clSection   = document.getElementById('cl-section');
-    var laSection   = document.getElementById('la-section');
-    var endDoc;
-    if (certWrap) {
-      endDoc = certWrap.getBoundingClientRect().top + window.scrollY;
-    } else if (clSection) {
-      endDoc = clSection.getBoundingClientRect().bottom + window.scrollY;
-    } else if (laSection) {
-      endDoc = laSection.getBoundingClientRect().bottom + window.scrollY;
-    } else {
-      endDoc = wrapTop + 3000;
-    }
-    scrollStart = wrapTop - vh;
-    scrollTotal = endDoc - wrapTop;
-  }
-
-  function moveTip(prog, activePath, activeLen, halo, dot, resetHalo, resetDot) {
-    if (halo && dot) {
-      var vh = window.innerHeight;
-      var dotProg = Math.max(0, Math.min(0.995,
-        (window.scrollY + vh - scrollStart) / Math.max(1, scrollTotal)
-      ));
-      if (prog > 0.001 && dotProg < 0.998) {
-        var pt  = activePath.getPointAtLength(dotProg * activeLen);
-        var vis = Math.min(1, Math.min(prog / 0.015, (1 - dotProg) / 0.015)).toFixed(3);
-        halo.setAttribute('cx', pt.x.toFixed(2)); halo.setAttribute('cy', pt.y.toFixed(2));
-        dot.setAttribute('cx',  pt.x.toFixed(2)); dot.setAttribute('cy',  pt.y.toFixed(2));
-        halo.setAttribute('opacity', vis);
-        dot.setAttribute('opacity',  vis);
-      } else {
-        halo.setAttribute('opacity', '0');
-        dot.setAttribute('opacity',  '0');
-      }
-    }
-    if (resetHalo) resetHalo.setAttribute('opacity', '0');
-    if (resetDot)  resetDot.setAttribute('opacity',  '0');
-  }
-
-  function update() {
-    var prog = Math.max(0, Math.min(1,
-      (window.scrollY - scrollStart) / Math.max(1, scrollTotal)
-    ));
-    if (window.innerWidth <= 600 && pathM) {
-      pathM.style.strokeDashoffset = (lenM * (1 - prog)).toFixed(2);
-      path.style.strokeDashoffset  = len;
-      moveTip(prog, pathM, lenM, tipHaloM, tipDotM, tipHalo, tipDot);
-    } else {
-      path.style.strokeDashoffset = (len * (1 - prog)).toFixed(2);
-      if (pathM) pathM.style.strokeDashoffset = lenM;
-      moveTip(prog, path, len, tipHalo, tipDot, tipHaloM, tipDotM);
-    }
-  }
-
-  computeLayout();
-  update();
-  window.addEventListener('scroll', update, { passive: true });
-  window.addEventListener('resize', function() { computeLayout(); update(); });
 })();
 
 /* ===== AUDIO PLAYERS ===== */
