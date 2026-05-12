@@ -180,45 +180,26 @@
     /* Audio add-on: pitch text left + card right */
     .la-addon-layout { display: flex; align-items: center; gap: 48px; max-width: 760px; margin: 0 auto; padding: 0 3%; }
     .la-addon-pitch { flex: 1; min-width: 0; }
-    .la-addon-pitch p { font-family: 'EB Garamond', serif; font-size: 1.08rem; color: rgba(232,225,212,0.6); line-height: 1.75; margin: 0; }
+    .la-addon-pitch p { font-family: 'EB Garamond', serif; font-size: 1.08rem; color: #635f51; line-height: 1.75; margin: 0; }
     .la-addon-layout .addon-card { flex: 0 0 300px; }
     @media (max-width: 640px) { .la-addon-layout { flex-direction: column; gap: 28px; } .la-addon-layout .addon-card { flex: unset; width: 100%; } }
     /* Paper-to-dark fade used at bottom of Video and Audio sections */
     .sect-fade-to-dark { height: 160px; background: linear-gradient(to bottom, #f5f4f0 0%, #d3d2ce 25%, #898782 50%, #3e3c36 75%, #1C1A14 100%); pointer-events: none; margin: 0; }
     /* ── VIDEO SECTION PROGRESS LINE ── */
     .cv-progress-wrap { position: relative; height: 0; overflow: visible; z-index: 2; pointer-events: none; }
-    .cv-progress-svg { position: absolute; top: 0; left: 0; width: 100%; height: 3000px; overflow: visible; }
+    .cv-progress-svg { position: absolute; top: 0; left: 0; width: 100%; height: 3000px; overflow: visible; pointer-events: none; }
     /* Mobile snake — same positioning, taller to cover stacked mobile layout */
-    .cv-progress-svg--mobile { position: absolute; top: 0; left: 0; width: 100%; height: 4600px; overflow: visible; display: none; }
+    .cv-progress-svg--mobile { position: absolute; top: 0; left: 0; width: 100%; height: 4600px; overflow: visible; display: none; pointer-events: none; }
     .cv-prog-ghost { fill: none; stroke: rgba(201,168,76,0.12); stroke-width: 1.8; stroke-dasharray: 5 9; stroke-linecap: round; }
     .cv-prog-fill { fill: none; stroke: rgba(201,168,76,0.82); stroke-width: 1.8; stroke-linecap: round; }
     .cv-progress-label { position: absolute; top: 80px; left: 50%; transform: translate(-50%, -50%); pointer-events: none; }
     .cv-progress-label-inner { display: inline-block; padding: 8px 22px; border-radius: 50px; background: rgba(14,12,9,0.82); border: 1px solid rgba(201,168,76,0.45); backdrop-filter: blur(8px); white-space: nowrap; }
     .cv-progress-label-text { font-family: 'EB Garamond', serif; font-style: italic; font-weight: 400; font-size: 1rem; letter-spacing: 0.01em; color: #C9A84C; margin: 0; }
-    /* la-section: cream first half (banner + audio), dark second half (add-ons) */
-    #la-section { background: #f5f4f0; }
-    /* Remove the artifact gradient bar */
+    /* la-section: dark banner + mic scene; cream add-on area fades to dark below */
     .la-fade-in { display: none; }
-    /* Cream → dark transition into the add-ons */
-    #la-section .sect-fade-to-dark { background: linear-gradient(to bottom, #f5f4f0 0%, #1C1A14 100%); }
-    #cv-section .sect-addons,
-    #la-section .sect-addons { background: #1C1A14; padding-top: 48px; }
-    /* Light-background overrides for the audio card area */
-    #la-section .la-audio-box {
-      background: rgba(255,255,255,0.72);
-      border-color: rgba(92,110,130,0.28);
-      box-shadow: 0 4px 24px rgba(28,26,20,0.06), 0 1px 3px rgba(28,26,20,0.04);
-      backdrop-filter: none; -webkit-backdrop-filter: none;
-    }
-    #la-section .audio-card { background: rgba(92,110,130,0.07); border-color: rgba(92,110,130,0.18); }
-    #la-section .audio-card:hover { background: rgba(92,110,130,0.13); border-color: rgba(92,110,130,0.35); }
-    #la-section .audio-title { color: #1C1A14; }
-    #la-section .audio-desc { color: rgba(99,95,81,0.72); }
-    #la-section .audio-time { color: rgba(99,95,81,0.5); }
-    #la-section .la-audio-box-label { color: rgba(92,110,130,0.75); }
-    #la-section .audio-progress-wrap { background: rgba(92,110,130,0.16); }
-    /* Lift audio add-on section above the absolutely-positioned condenser photo */
-    #la-section .sect-addons { position: relative; z-index: 4; }
+    #cv-section .sect-addons { padding-top: 48px; }
+    #la-section .sect-addons { background: #f5f4f0; position: relative; z-index: 4; padding-top: 48px; }
+    #la-section .sect-addons-label { color: rgba(99,95,81,0.45); }
     /* Delivery section banner */
     .delivery-banner { padding: 64px 10% 52px; text-align: center; border-bottom: 1px solid rgba(201,168,76,0.12); }
 
@@ -430,38 +411,6 @@
     .hm-cert .delivery-qty-capsule { border-radius: 50px !important; }
     .hm-cert .addon-card.details-open.delivery-qty-capsule { border-radius: 24px !important; }
 
-    /* ── COMPARISON TABLE ── */
-    .compare-section {
-      padding: 60px 10% 80px; background: #f5f4f0;
-      opacity: 0; transform: translateY(32px);
-      transition: opacity 0.8s ease, transform 0.8s ease;
-    }
-    .compare-section.is-visible { opacity: 1; transform: translateY(0); }
-    .compare-toggle-wrap { text-align: center; margin-bottom: 32px; }
-    .compare-toggle-btn {
-      display: inline-block; font-family: 'EB Garamond', serif;
-      font-size: 0.9rem; letter-spacing: 0.04em; color: #5C6E82;
-      border: 1px solid rgba(92,110,130,0.4); border-radius: 50px;
-      padding: 10px 28px; cursor: pointer; background: none;
-      transition: background 0.2s ease, color 0.2s ease;
-    }
-    .compare-toggle-btn:hover { background: #5C6E82; color: #fff; }
-    .compare-table {
-      max-height: none; overflow: visible;
-    }
-    .compare-grid {
-      display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr;
-      border: 1px solid rgba(99,95,81,0.14); border-radius: 14px;
-      overflow: hidden;
-    }
-    .cg-head { background: #1C1A14; color: #e8e1d4; font-family: 'Cinzel', serif; font-size: 0.88rem; font-weight: 400; padding: 16px 18px; letter-spacing: 0.5px; }
-    .cg-head:first-child { background: transparent; color: #a8a49c; font-family: 'EB Garamond', serif; font-size: 0.72rem; letter-spacing: 2px; text-transform: uppercase; }
-    .cg-label { font-family: 'EB Garamond', serif; font-size: 0.9rem; color: #635f51; padding: 13px 18px; background: #faf9f6; border-top: 1px solid rgba(99,95,81,0.09); }
-    .cg-val { font-family: 'EB Garamond', serif; font-size: 0.9rem; color: #1C1A14; padding: 13px 18px; border-top: 1px solid rgba(99,95,81,0.09); text-align: center; }
-    .cg-val--check { color: #5C6E82; }
-    .cg-val--x { color: rgba(99,95,81,0.3); }
-    .cg-price { font-family: 'Cinzel', serif; font-size: 1.1rem; color: #1C1A14; padding: 16px 18px; border-top: 1px solid rgba(99,95,81,0.12); text-align: center; }
-
     /* ── PACKAGE TIERS (below) ── */
     .cart-section {
       padding: 40px 10% 100px; background: #f5f4f0;
@@ -609,7 +558,6 @@
       .sect-addons-grid--4 { grid-template-columns: repeat(2, 1fr); }
       .pkg-tiers { grid-template-columns: 1fr 1fr; gap: 14px; }
       .pkg-tier:nth-child(3):last-child { grid-column: 1 / -1; max-width: calc(50% - 7px); justify-self: center; }
-      .compare-grid { grid-template-columns: 1.2fr 1fr 1fr 1fr; font-size: 0.82rem; }
     }
     @media (max-width: 600px) {
       .pkg-header { padding: 28px 6% 24px; }
@@ -621,8 +569,6 @@
       .sect-addons-label { margin-bottom: 16px; }
       .pkg-tiers { grid-template-columns: 1fr; }
       .pkg-tier:nth-child(3):last-child { grid-column: unset; max-width: 100%; justify-self: stretch; }
-      .compare-grid { grid-template-columns: 1.1fr 0.8fr 0.8fr 0.8fr; }
-      .compare-section { padding: 40px 5% 60px; }
       .cart-section { padding: 60px 5% 80px; }
       .cart-bar { flex-wrap: wrap; height: auto; padding: 12px 5%; gap: 8px; }
       .cb-sep { display: none; }
@@ -704,9 +650,8 @@
 .audio-time { font-size: 0.65rem; font-family: 'EB Garamond', serif; color: rgba(168,164,156,0.55); letter-spacing: 0.5px; display: flex; justify-content: space-between; }
 
 /* ── LOCATION AUDIO BOX ── */
-.la-audio { padding: 0 8% 80px; position: relative; /* no z-index — lets right card slip behind condenser */ }
 .la-audio-box {
-  max-width: 860px; margin: 0 auto;
+  width: 100%; max-width: 860px; margin: 0 auto;
   padding: 28px 28px 24px;
   border: 1.5px solid rgba(92,110,130,0.72);
   border-radius: 20px;
@@ -738,49 +683,19 @@
   .la-audio-pair { flex-direction: column; gap: 10px; }
 }
 
-/* ── LOCATION AUDIO SCENE IMAGES ── */
-#la-section { position: relative; overflow: hidden; }
+/* ── LOCATION AUDIO SCENE: NTG5 | audio card | condenser, all in-flow ── */
+#la-section { position: relative; }
 #la-section .la-banner { position: relative; z-index: 2; }
-/* Blank spacer — reduced so audio cards sit closer to the banner */
-#la-section .cv-content { min-height: 60px; }
-/* Banner bottom gradient: banner image fades into section cream bg */
-#la-section .la-banner::after {
-  content: '';
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  height: 70px;
-  background: linear-gradient(to bottom, transparent 0%, #f5f4f0 100%);
-  pointer-events: none;
-  z-index: 3; /* above the banner title (z-index: 1 via .cv-banner-title) */
-}
-.la-ntg5 {
-  position: absolute;
-  left: 0;
-  /* sit just below the banner — banner height = 244/2560 of section width ≈ 9.53vw */
-  top: calc(244 / 2560 * 100vw);
-  height: clamp(180px, 32vw, 600px);
-  width: auto;
-  pointer-events: none;
-  user-select: none;
-  z-index: 3;
-}
-.la-condensor {
-  position: absolute;
-  right: 0;
-  /* Mirror NTG5: sit just below the banner */
-  top: calc(244 / 2560 * 100vw);
-  height: clamp(200px, 36vw, 660px);
-  width: auto;
-  pointer-events: none;
-  user-select: none;
-  z-index: 3;
-}
-@media (max-width: 600px) {
-  /* Mobile banner uses padding not aspect-ratio; NTG5 placed just below it */
-  .la-ntg5    { height: clamp(110px, 30vw, 180px); top: 110px; }
-  .la-condensor { height: clamp(120px, 34vw, 200px); top: 110px; }
-  /* Tighten blank gap further on mobile */
-  #la-section .cv-content { min-height: 20px; }
+/* Three-column flex — mics in-flow so they set the section height and can't be clipped */
+.la-mic-scene { display: flex; align-items: flex-start; }
+.la-audio { flex: 1; display: flex; align-items: center; padding: 40px 4% 60px; }
+.la-ntg5  { flex-shrink: 0; height: clamp(200px, 28vw, 500px); width: auto; pointer-events: none; user-select: none; }
+.la-condensor { flex-shrink: 0; height: clamp(220px, 32vw, 560px); width: auto; pointer-events: none; user-select: none; }
+@media (max-width: 700px) {
+  /* Below 700 px mics would squish the audio card — hide them */
+  .la-mic-scene .la-ntg5,
+  .la-mic-scene .la-condensor { display: none; }
+  .la-audio { padding: 0 6% 60px; }
 }
 
     /* ── COIN SPIN PACKAGE CARDS ── */
@@ -1004,10 +919,6 @@
       background-image: url('assets/acc-audio.jpg');
       background-size: cover; background-position: center;
       display: flex; align-items: center; justify-content: center; overflow: hidden;
-    }
-    .la-banner::before {
-      content: ''; position: absolute; inset: 0;
-      background: linear-gradient(to bottom, rgba(0,0,0,0.38) 0%, rgba(0,0,0,0.62) 100%);
     }
     .cv-banner::before {
       content: ''; position: absolute; inset: 0;
@@ -1278,7 +1189,6 @@
       .delivery-pre-line { margin: 36px 6% 20px; }
 
       /* ── Cart section: tighter vertical spacing on mobile ── */
-      .compare-section { padding: 28px 5% 36px; }
       .cart-section { padding: 40px 5% 56px; }
 
       /* ── Addon qty steppers: each on its own full-width row ── */
@@ -1554,8 +1464,6 @@
     </div>
   </div>
 
-  <div class="sect-fade-to-dark"></div>
-
   <!-- Video Add-Ons: Vintage & Film, Drone, Macro -->
   <div class="sect-addons">
 
@@ -1826,22 +1734,21 @@
   <div class="la-banner">
     <h2 class="cv-banner-title">Location<br class="mob-br"> Audio</h2>
   </div>
-  <img src="Packages Pics/Audio/NTG5.png" class="la-ntg5" alt="Røde NTG5 Shotgun Mic">
-  <img src="Packages Pics/Audio/Condensor.png" class="la-condensor" alt="Condenser Microphone">
-  <div class="cv-content"></div>
-  <!-- Sample Audio Tracks -->
-  <div class="la-audio">
+  <div class="la-mic-scene">
+    <img src="Packages Pics/Audio/NTG5.png" class="la-ntg5" alt="Røde NTG5 Shotgun Mic">
+    <!-- Sample Audio Tracks -->
+    <div class="la-audio">
     <div class="la-audio-box">
       <p class="la-audio-box-label">Audio Preview</p>
       <div class="audio-card">
         <button class="audio-play-btn" aria-label="Play/Pause"><svg class="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg><svg class="icon-pause" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg></button>
-        <div class="audio-meta"><p class="audio-title">Location Audio Sample</p><p class="audio-desc">Ambient on-location sound — recorded live, not stock</p><div class="audio-progress-wrap"><div class="audio-progress-bar"></div></div><div class="audio-time"><span class="audio-current">0:00</span><span class="audio-duration">0:00</span></div></div>
-        <audio src="Audio Sample.mp3" preload="metadata"></audio>
+        <div class="audio-meta"><p class="audio-title">Location Audio Sample</p><p class="audio-desc">Ambient on-location sound: recorded live, musically arranged.</p><div class="audio-progress-wrap"><div class="audio-progress-bar"></div></div><div class="audio-time"><span class="audio-current">0:00</span><span class="audio-duration">0:00</span></div></div>
+        <audio src="audio-sample.mp3" type="audio/mpeg" preload="metadata"></audio>
       </div>
     </div><!-- /la-audio-box -->
-  </div><!-- /la-audio-box -->
-  </div><!-- /la-audio -->
-  <div class="sect-fade-to-dark"></div>
+    </div><!-- /la-audio -->
+    <img src="Packages Pics/Audio/Condensor.png" class="la-condensor" alt="Condenser Microphone">
+  </div><!-- /la-mic-scene -->
 
   <!-- Audio Add-On -->
   <div class="sect-addons">
@@ -1887,6 +1794,7 @@
 
     </div><!-- /la-addon-layout -->
   </div><!-- /sect-addons -->
+  <div class="sect-fade-to-dark"></div>
 </section>
 
 
@@ -2367,80 +2275,6 @@
 
 
 
-
-<!-- Comparison Table -->
-<section class="compare-section">
-  <div class="compare-table compare-table--open" id="compare-table">
-    <div class="compare-grid">
-      <div class="cg-head">Feature</div>
-      <div class="cg-head">Chapter</div>
-      <div class="cg-head">Novel</div>
-      <div class="cg-head">Epic</div>
-
-      <div class="cg-label">Coverage</div>
-      <div class="cg-val">4 hours</div>
-      <div class="cg-val">8 hours</div>
-      <div class="cg-val">2 days</div>
-
-      <div class="cg-label">Cameras</div>
-      <div class="cg-val">Single</div>
-      <div class="cg-val">Multi</div>
-      <div class="cg-val">Multi</div>
-
-      <div class="cg-label">Final Cut Length</div>
-      <div class="cg-val">Up to 5 min</div>
-      <div class="cg-val">Up to 10 min</div>
-      <div class="cg-val">Up to 20 min</div>
-
-      <div class="cg-label">Color Grade</div>
-      <div class="cg-val cg-val--check">✓</div>
-      <div class="cg-val cg-val--check">✓</div>
-      <div class="cg-val cg-val--check">✓ Full</div>
-
-      <div class="cg-label">Audio Mix</div>
-      <div class="cg-val">Basic</div>
-      <div class="cg-val cg-val--check">Full</div>
-      <div class="cg-val cg-val--check">Full</div>
-
-      <div class="cg-label">Social Cuts</div>
-      <div class="cg-val cg-val--x">—</div>
-      <div class="cg-val cg-val--check">✓</div>
-      <div class="cg-val cg-val--check">✓</div>
-
-      <div class="cg-label">Revisions</div>
-      <div class="cg-val">1 round</div>
-      <div class="cg-val">2 rounds</div>
-      <div class="cg-val">Unlimited</div>
-
-      <div class="cg-label">Commercial License</div>
-      <div class="cg-val cg-val--x">—</div>
-      <div class="cg-val cg-val--check">✓</div>
-      <div class="cg-val cg-val--check">✓</div>
-
-      <div class="cg-label">Drone Available</div>
-      <div class="cg-val">Add-on</div>
-      <div class="cg-val">Add-on</div>
-      <div class="cg-val cg-val--check">Included</div>
-
-      <div class="cg-label">Lighting Package</div>
-      <div class="cg-val">Add-on</div>
-      <div class="cg-val">Add-on</div>
-      <div class="cg-val">Add-on</div>
-
-      <div class="cg-label">Long-Form Video</div>
-      <div class="cg-val">Add-on</div>
-      <div class="cg-val">Add-on</div>
-      <div class="cg-val">Add-on</div>
-
-      <div class="cg-label">B-Roll</div>
-      <div class="cg-val">Add-on</div>
-      <div class="cg-val">Add-on</div>
-      <div class="cg-val">Add-on</div>
-
-      <div class="cg-label" style="border-radius:0 0 0 14px;">Price</div>
-    </div>
-  </div>
-</section>
 
 <!-- Package Selection + Cart -->
 <section class="cart-section" id="cart-section">
