@@ -1906,11 +1906,24 @@ footer > * { position: relative; z-index: 1; }
     .cv-progress-label { position: absolute; top: 80px; left: 50%; transform: translate(-50%, -50%); pointer-events: none; }
     .cv-progress-label-inner { display: inline-block; padding: 8px 22px; border-radius: 50px; background: rgba(14,12,9,0.82); border: 1px solid rgba(201,168,76,0.45); backdrop-filter: blur(8px); white-space: nowrap; }
     .cv-progress-label-text { font-family: 'EB Garamond', serif; font-style: italic; font-weight: 400; font-size: 1rem; letter-spacing: 0.01em; color: #C9A84C; margin: 0; }
-    /* la-section: dark banner + mic scene; cream add-on area fades to dark below */
+    /* la-section: fully light/cream throughout */
     .la-fade-in { display: none; }
+    #la-section { background: #f5f4f0; }
     #cv-section .sect-addons { padding-top: 48px; }
     #la-section .sect-addons { background: #f5f4f0; position: relative; z-index: 4; padding-top: 48px; }
     #la-section .sect-addons-label { color: rgba(99,95,81,0.45); }
+    /* Audio card overrides for cream background */
+    #la-section .la-audio-box {
+      background: rgba(92,110,130,0.08);
+      border-color: rgba(92,110,130,0.22);
+      box-shadow: 0 4px 24px rgba(92,110,130,0.1), 0 2px 8px rgba(0,0,0,0.06);
+    }
+    #la-section .audio-card { background: rgba(92,110,130,0.07); border-color: rgba(92,110,130,0.16); }
+    #la-section .audio-card:hover { background: rgba(92,110,130,0.14); border-color: rgba(92,110,130,0.3); }
+    #la-section .audio-title { color: #1C1A14; }
+    #la-section .audio-desc { color: rgba(99,95,81,0.75); }
+    #la-section .audio-time { color: rgba(99,95,81,0.45); }
+    #la-section .audio-progress-wrap { background: rgba(92,110,130,0.14); }
     /* Delivery section banner */
     .delivery-banner { padding: 64px 10% 52px; text-align: center; border-bottom: 1px solid rgba(201,168,76,0.12); }
 
