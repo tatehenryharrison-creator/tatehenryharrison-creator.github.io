@@ -1898,9 +1898,9 @@ footer > * { position: relative; z-index: 1; }
     .sect-fade-to-dark { height: 160px; background: linear-gradient(to bottom, #f5f4f0 0%, #d3d2ce 25%, #898782 50%, #3e3c36 75%, #1C1A14 100%); pointer-events: none; margin: 0; }
     /* ── VIDEO SECTION PROGRESS LINE ── */
     .cv-progress-wrap { position: relative; height: 0; overflow: visible; z-index: 2; pointer-events: none; }
-    .cv-progress-svg { position: absolute; top: 0; left: 0; width: 100%; height: 3000px; overflow: visible; }
+    .cv-progress-svg { position: absolute; top: 0; left: 0; width: 100%; height: 3000px; overflow: visible; pointer-events: none; }
     /* Mobile snake — same positioning, taller to cover stacked mobile layout */
-    .cv-progress-svg--mobile { position: absolute; top: 0; left: 0; width: 100%; height: 4600px; overflow: visible; display: none; }
+    .cv-progress-svg--mobile { position: absolute; top: 0; left: 0; width: 100%; height: 4600px; overflow: visible; display: none; pointer-events: none; }
     .cv-prog-ghost { fill: none; stroke: rgba(201,168,76,0.12); stroke-width: 1.8; stroke-dasharray: 5 9; stroke-linecap: round; }
     .cv-prog-fill { fill: none; stroke: rgba(201,168,76,0.82); stroke-width: 1.8; stroke-linecap: round; }
     .cv-progress-label { position: absolute; top: 80px; left: 50%; transform: translate(-50%, -50%); pointer-events: none; }
@@ -3583,7 +3583,7 @@ footer > * { position: relative; z-index: 1; }
       <p class="la-audio-box-label">Audio Preview</p>
       <div class="audio-card">
         <button class="audio-play-btn" aria-label="Play/Pause"><svg class="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg><svg class="icon-pause" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg></button>
-        <div class="audio-meta"><p class="audio-title">Location Audio Sample</p><p class="audio-desc">Ambient on-location sound — recorded live, not stock</p><div class="audio-progress-wrap"><div class="audio-progress-bar"></div></div><div class="audio-time"><span class="audio-current">0:00</span><span class="audio-duration">0:00</span></div></div>
+        <div class="audio-meta"><p class="audio-title">Location Audio Sample</p><p class="audio-desc">Ambient on-location sound: recorded live, musically arranged.</p><div class="audio-progress-wrap"><div class="audio-progress-bar"></div></div><div class="audio-time"><span class="audio-current">0:00</span><span class="audio-duration">0:00</span></div></div>
         <audio src="audio-sample.mp3" type="audio/mpeg" preload="metadata"></audio>
       </div>
     </div><!-- /la-audio-box -->
@@ -4268,7 +4268,7 @@ footer > * { position: relative; z-index: 1; }
     <div class="portfolio-empty" id="portfolioEmpty" style="padding:40px 5% 60px;">
       <div style="max-width:1100px;margin:0 auto;">
         <p style="font-family:'EB Garamond',serif;font-size:0.7rem;letter-spacing:3px;text-transform:uppercase;color:#5C6E82;margin:0 0 36px;text-align:center;">Films</p>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:28px;">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));gap:28px;">
 
           <!-- Film 1 -->
           <div>
@@ -4286,6 +4286,14 @@ footer > * { position: relative; z-index: 1; }
                 <source src="portfolio/Videography/Speeches/Harrison Media Boundaries.mp4" type="video/mp4">
                 Your browser does not support the video tag.
               </video>
+            </div>
+          </div>
+
+          <!-- Film 3 -->
+          <div>
+            <h3 style="font-family:'Cinzel',serif;font-weight:400;font-size:1.2rem;color:#1C1A14;margin:0 0 14px;">Medicine Mender</h3>
+            <div style="border-radius:14px;overflow:hidden;background:#1C1A14;box-shadow:0 12px 40px rgba(28,26,20,0.14);aspect-ratio:16/9;">
+              <iframe width="100%" height="100%" src="https://www.youtube.com/embed/QBk1Ow0i6qM" title="Medicine Mender at Denver Fashion Week" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen style="display:block;"></iframe>
             </div>
           </div>
 
@@ -4308,6 +4316,20 @@ footer > * { position: relative; z-index: 1; }
             <div class="portfolio-caption">
                 <span class="caption-title">Belonging</span>
                 <span class="caption-gear">Short Film</span>
+            </div>
+        </div>
+
+        <div class="portfolio-item portfolio-item--video" data-priority="2" data-category="videography" data-youtube-id="QBk1Ow0i6qM" data-video-title="Medicine Mender at Denver Fashion Week">
+            <div class="portfolio-img-wrap">
+                <img class="portfolio-thumb" src="https://img.youtube.com/vi/QBk1Ow0i6qM/hqdefault.jpg" alt="Medicine Mender at Denver Fashion Week" loading="lazy">
+                <div class="portfolio-overlay">
+                    <div class="portfolio-video-play"><svg viewBox="0 0 24 24" fill="#f5f4f0" width="40" height="40"><path d="M8 5v14l11-7z"/></svg></div>
+                    <div class="portfolio-meta"><p class="portfolio-meta-cat">Videography</p></div>
+                </div>
+            </div>
+            <div class="portfolio-caption">
+                <span class="caption-title">Medicine Mender</span>
+                <span class="caption-gear">Denver Fashion Week</span>
             </div>
         </div>
 
