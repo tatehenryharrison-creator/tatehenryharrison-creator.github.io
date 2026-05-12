@@ -1891,7 +1891,7 @@ footer > * { position: relative; z-index: 1; }
     /* Audio add-on: pitch text left + card right */
     .la-addon-layout { display: flex; align-items: center; gap: 48px; max-width: 760px; margin: 0 auto; padding: 0 3%; }
     .la-addon-pitch { flex: 1; min-width: 0; }
-    .la-addon-pitch p { font-family: 'EB Garamond', serif; font-size: 1.08rem; color: rgba(232,225,212,0.6); line-height: 1.75; margin: 0; }
+    .la-addon-pitch p { font-family: 'EB Garamond', serif; font-size: 1.08rem; color: #635f51; line-height: 1.75; margin: 0; }
     .la-addon-layout .addon-card { flex: 0 0 300px; }
     @media (max-width: 640px) { .la-addon-layout { flex-direction: column; gap: 28px; } .la-addon-layout .addon-card { flex: unset; width: 100%; } }
     /* Paper-to-dark fade used at bottom of Video and Audio sections */
@@ -1906,11 +1906,11 @@ footer > * { position: relative; z-index: 1; }
     .cv-progress-label { position: absolute; top: 80px; left: 50%; transform: translate(-50%, -50%); pointer-events: none; }
     .cv-progress-label-inner { display: inline-block; padding: 8px 22px; border-radius: 50px; background: rgba(14,12,9,0.82); border: 1px solid rgba(201,168,76,0.45); backdrop-filter: blur(8px); white-space: nowrap; }
     .cv-progress-label-text { font-family: 'EB Garamond', serif; font-style: italic; font-weight: 400; font-size: 1rem; letter-spacing: 0.01em; color: #C9A84C; margin: 0; }
-    /* la-section: fully dark throughout */
+    /* la-section: dark banner + mic scene; cream add-on area fades to dark below */
     .la-fade-in { display: none; }
-    #cv-section .sect-addons { background: #1C1A14; padding-top: 48px; }
-    /* Lift audio add-on above the absolutely-positioned condenser photo */
-    #la-section .sect-addons { position: relative; z-index: 4; padding-top: 48px; }
+    #cv-section .sect-addons { padding-top: 48px; }
+    #la-section .sect-addons { background: #f5f4f0; position: relative; z-index: 4; padding-top: 48px; }
+    #la-section .sect-addons-label { color: rgba(99,95,81,0.45); }
     /* Delivery section banner */
     .delivery-banner { padding: 64px 10% 52px; text-align: center; border-bottom: 1px solid rgba(201,168,76,0.12); }
 
@@ -2624,10 +2624,6 @@ footer > * { position: relative; z-index: 1; }
       background-size: cover; background-position: center;
       display: flex; align-items: center; justify-content: center; overflow: hidden;
     }
-    .la-banner::before {
-      content: ''; position: absolute; inset: 0;
-      background: linear-gradient(to bottom, rgba(0,0,0,0.38) 0%, rgba(0,0,0,0.62) 100%);
-    }
     .cv-banner::before {
       content: ''; position: absolute; inset: 0;
       background: linear-gradient(to bottom, rgba(0,0,0,0.38) 0%, rgba(0,0,0,0.62) 100%);
@@ -3309,8 +3305,6 @@ footer > * { position: relative; z-index: 1; }
     </div>
   </div>
 
-  <div class="sect-fade-to-dark"></div>
-
   <!-- Video Add-Ons: Vintage & Film, Drone, Macro -->
   <div class="sect-addons">
 
@@ -3641,6 +3635,7 @@ footer > * { position: relative; z-index: 1; }
 
     </div><!-- /la-addon-layout -->
   </div><!-- /sect-addons -->
+  <div class="sect-fade-to-dark"></div>
 </section>
 
 
