@@ -45,7 +45,7 @@ const ADDON_LABELS = {
   'macro': 'Macro',
   'drone': 'Drone',
   'audio': 'Audio',
-  'lighting': 'Lighting',
+  'lighting': 'Lighting Extras',
   'longform': 'Long-Form Video',
   'broll': 'B-Roll',
   'extra-revision': 'Extra Revisions',
