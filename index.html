@@ -2816,7 +2816,7 @@ footer > * { position: relative; z-index: 1; }
     .cl-ring-wrap {
       --ring:    min(min(72vw, 68vh), 680px);
       --photo-w: calc(var(--ring) * 0.32);
-      --photo-h: calc(var(--ring) * 0.23);
+      --photo-h: calc(var(--ring) * 0.30);
       --radius:  calc(var(--ring) * 0.385);
       position: relative;
       width:  var(--ring);
@@ -2830,9 +2830,8 @@ footer > * { position: relative; z-index: 1; }
       top:  50%; left: 50%;
       margin-top:  calc(var(--photo-h) / -2);
       margin-left: calc(var(--photo-w) / -2);
-      border-radius: 10px;
+      clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
       background: rgba(255,255,255,0.05);
-      border: 1px dashed rgba(232,225,212,0.14);
       overflow: hidden;
     }
     .cl-photo--1 { transform: rotate(0deg)   translateY(calc(var(--radius) * -1)) rotate(0deg); }
