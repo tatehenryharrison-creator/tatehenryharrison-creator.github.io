@@ -48,8 +48,8 @@ const ADDON_LABELS = {
   'lighting': 'Lighting',
   'longform': 'Long-Form Video',
   'broll': 'B-Roll',
-  'extra-revision': 'Extra Revision',
-  'plus-3min': '+3 Min Edit',
+  'extra-revision': 'Extra Revisions',
+  'plus-3min': 'Add Length to Edited Videos',
   'extra-retouching': 'Extra Retouching',
   'plus-5selects': '+5 Selects'
 };
