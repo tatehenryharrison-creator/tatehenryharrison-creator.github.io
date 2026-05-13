@@ -200,11 +200,9 @@
     .sect-addons-grid--4 { grid-template-columns: repeat(2, 1fr); }
     .sect-addons-grid--1 { grid-template-columns: 1fr; max-width: 300px; margin: 0 auto; }
     /* Audio add-on: pitch text left + card right */
-    .la-addon-layout { display: flex; align-items: center; gap: 48px; max-width: 760px; margin: 0 auto; padding: 0 3%; }
-    .la-addon-pitch { flex: 1; min-width: 0; }
-    .la-addon-pitch p { font-family: 'EB Garamond', serif; font-size: 1.08rem; color: #635f51; line-height: 1.75; margin: 0; }
-    .la-addon-layout .addon-card { flex: 0 0 300px; }
-    @media (max-width: 640px) { .la-addon-layout { flex-direction: column; gap: 28px; } .la-addon-layout .addon-card { flex: unset; width: 100%; } }
+    .la-addon-layout { display: flex; justify-content: center; max-width: 760px; margin: 0 auto; padding: 0 3%; }
+    .la-addon-layout .addon-card { flex: 0 0 340px; }
+    @media (max-width: 640px) { .la-addon-layout .addon-card { flex: unset; width: 100%; } }
     /* Paper-to-dark fade used at bottom of Video and Audio sections */
     .sect-fade-to-dark { height: 160px; background: linear-gradient(to bottom, #f5f4f0 0%, #d3d2ce 25%, #898782 50%, #3e3c36 75%, #1C1A14 100%); pointer-events: none; margin: 0; }
     /* la-section: fully light/cream throughout */
@@ -1901,10 +1899,6 @@
     <p class="sect-addons-label">Add-On</p>
     <div class="la-addon-layout">
 
-      <div class="la-addon-pitch">
-        <p>Other videographers use stock audio. Don't settle for stock. You can get the real deal from a skilled sound engineer at Tate Harrison Media. Add the "Audio Extras" package to build the soundtrack you need.</p>
-      </div>
-
       <!-- Audio Extras -->
       <div class="addon-card" id="card-audio">
         <div class="addon-card-main">
@@ -1927,7 +1921,7 @@
         </div>
         <div class="addon-card-expand" id="expand-audio">
           <div class="addon-card-expand-inner">
-            <p class="addon-card-expand-desc">Upgrade to a full audio production package with multi-track sync recording, professional mastering, and music licensing. Standard package includes standard, quality audio recording.</p>
+            <p class="addon-card-expand-desc">Upgrade to a full audio production package with multi-track sync recording, professional mastering, and musical soundscapes. Other videographers use stock audio. Don't settle for stock songs online.</p>
             <ul class="addon-card-expand-tags">
               <li>Multi-track sync recording</li>
               <li>Boom mic + lapel setup</li>
