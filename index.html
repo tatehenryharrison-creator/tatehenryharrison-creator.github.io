@@ -3999,7 +3999,7 @@ footer > * { position: relative; z-index: 1; }
           <!-- Quantity add-ons -->
           <div class="delivery-qty-capsules">
 
-            <!-- Extra Revision -->
+            <!-- Extra Revisions -->
             <div class="addon-card delivery-qty-capsule" id="card-extra-revision">
               <div class="addon-card-main">
                 <div class="addon-card-icon-wrap">
@@ -4010,16 +4010,12 @@ footer > * { position: relative; z-index: 1; }
                   </svg>
                 </div>
                 <div class="addon-card-info">
-                  <p class="addon-card-name">Extra Revision</p>
+                  <p class="addon-card-name">Extra Revisions</p>
                   <p class="addon-card-tagline">Additional rounds beyond your package</p>
                   <button class="addon-card-details-btn" onclick="toggleAddonDetails('extra-revision')">Details <span class="addon-card-chevron">▾</span></button>
                 </div>
                 <div class="addon-card-action">
-                  <div class="addon-card-stepper">
-                    <button class="addon-stepper-btn" onclick="setAddonQty('extra-revision', -1)">−</button>
-                    <span class="addon-stepper-count" id="qty-extra-revision">0</span>
-                    <button class="addon-stepper-btn" onclick="setAddonQty('extra-revision', 1)">+</button>
-                  </div>
+                  <button class="addon-toggle-btn" id="btn-extra-revision" onclick="toggleAddon('extra-revision'); updateAddonBtn('extra-revision')">Add</button>
                 </div>
               </div>
               <div class="addon-card-expand" id="expand-extra-revision">
@@ -4034,7 +4030,7 @@ footer > * { position: relative; z-index: 1; }
               </div>
             </div>
 
-            <!-- +3 Min Edit -->
+            <!-- Add Length to Edited Videos -->
             <div class="addon-card delivery-qty-capsule" id="card-plus-3min">
               <div class="addon-card-main">
                 <div class="addon-card-icon-wrap">
@@ -4047,16 +4043,12 @@ footer > * { position: relative; z-index: 1; }
                   </svg>
                 </div>
                 <div class="addon-card-info">
-                  <p class="addon-card-name">+3 Min Edit</p>
+                  <p class="addon-card-name">Add Length to Edited Videos</p>
                   <p class="addon-card-tagline">Extend your final cut in 3-min blocks</p>
                   <button class="addon-card-details-btn" onclick="toggleAddonDetails('plus-3min')">Details <span class="addon-card-chevron">▾</span></button>
                 </div>
                 <div class="addon-card-action">
-                  <div class="addon-card-stepper">
-                    <button class="addon-stepper-btn" onclick="setAddonQty('plus-3min', -1)">−</button>
-                    <span class="addon-stepper-count" id="qty-plus-3min">0</span>
-                    <button class="addon-stepper-btn" onclick="setAddonQty('plus-3min', 1)">+</button>
-                  </div>
+                  <button class="addon-toggle-btn" id="btn-plus-3min" onclick="toggleAddon('plus-3min'); updateAddonBtn('plus-3min')">Add</button>
                 </div>
               </div>
               <div class="addon-card-expand" id="expand-plus-3min">
@@ -4318,13 +4310,13 @@ footer > * { position: relative; z-index: 1; }
     <button class="addon-toggle" data-addon="broll" onclick="toggleAddon('broll')">B-Roll</button>
     <button class="addon-toggle" data-addon="macro" onclick="toggleAddon('macro')">Macro (Close-Up)</button>
     <span class="addon-qty-wrap" data-addon="extra-revision">
-      <span class="aq-label">Extra Revision</span>
+      <span class="aq-label">Extra Revisions</span>
       <button class="aq-btn" onclick="setAddonQty('extra-revision', -1)">−</button>
       <span class="aq-count cart-qty-display" data-addon="extra-revision">0</span>
       <button class="aq-btn" onclick="setAddonQty('extra-revision', 1)">+</button>
     </span>
     <span class="addon-qty-wrap" data-addon="plus-3min">
-      <span class="aq-label">+3 Min Edit</span>
+      <span class="aq-label">Add Length to Edited Videos</span>
       <button class="aq-btn" onclick="setAddonQty('plus-3min', -1)">−</button>
       <span class="aq-count cart-qty-display" data-addon="plus-3min">0</span>
       <button class="aq-btn" onclick="setAddonQty('plus-3min', 1)">+</button>
