@@ -344,8 +344,25 @@
       max-width: none;
       margin: 0 auto;
       transform-origin: top center;
-      background: radial-gradient(ellipse at 50% 40%, #faf8f3 0%, #f1ede2 70%, #e6dfd0 100%);
-      box-shadow: 0 1px 0 rgba(255,255,255,0.6) inset, 0 24px 60px rgba(28,26,20,0.28), 0 2px 8px rgba(28,26,20,0.14);
+      /* Directional paper lighting — bright top-left, warm shadow bottom-right */
+      background:
+        radial-gradient(ellipse at 20% 10%, rgba(255,255,255,0.72) 0%, transparent 54%),
+        radial-gradient(ellipse at 80% 92%, rgba(158,142,114,0.22) 0%, transparent 48%),
+        linear-gradient(152deg, #faf8f2 0%, #f1ece0 50%, #e9dfce 100%);
+      box-shadow:
+        /* ── Inset bevel: top & left bright, bottom & right recessed ── */
+        inset  0  1px 0   rgba(255,255,255,0.9),
+        inset  1px  0 0   rgba(255,255,255,0.5),
+        inset  0 -2px 6px rgba(28,26,20,0.06),
+        inset -2px  0 6px rgba(28,26,20,0.04),
+        /* ── Page stack: two solid-colour layers beneath the cert ── */
+        6px 10px 0 0 #e6dfc9,
+        12px 20px 0 0 #d9d0b8,
+        /* ── Lift shadows: contact → near → ambient ── */
+        0  2px  5px rgba(28,26,20,0.14),
+        0  8px 24px rgba(28,26,20,0.20),
+        0 24px 54px rgba(28,26,20,0.22),
+        0 52px 88px rgba(28,26,20,0.10);
       overflow: hidden;
       color: var(--hm-ink);
       font-family: 'EB Garamond', Georgia, serif;
@@ -354,7 +371,7 @@
       content: "";
       position: absolute; inset: 0;
       background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/><feColorMatrix values='0 0 0 0 0.11  0 0 0 0 0.10  0 0 0 0 0.07  0 0 0 0.5 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.55'/></svg>");
-      opacity: 0.07;
+      opacity: 0.11;
       mix-blend-mode: multiply;
       pointer-events: none;
     }
@@ -764,7 +781,7 @@
 .audio-title { font-family: 'Cinzel', serif; font-weight: 400; font-size: 0.78rem; letter-spacing: 0.06em; color: #e8e4da; margin: 0 0 5px; }
 .audio-desc { font-family: 'EB Garamond', serif; font-style: italic; font-size: 0.85rem; color: rgba(168,164,156,0.75); letter-spacing: 0; margin: 0 0 12px; }
 .audio-progress-wrap { position: relative; height: 3px; background: rgba(92,110,130,0.18); border-radius: 3px; cursor: pointer; margin-bottom: 6px; }
-.audio-progress-bar { height: 100%; width: 0%; background: #5C6E82; border-radius: 3px; transition: width 0.1s linear; pointer-events: none; }
+.audio-progress-bar { height: 100%; width: 0%; background: #5C6E82; border-radius: 3px; pointer-events: none; }
 .audio-time { font-size: 0.65rem; font-family: 'EB Garamond', serif; color: rgba(168,164,156,0.55); letter-spacing: 0.5px; display: flex; justify-content: space-between; }
 
 /* ── LOCATION AUDIO BOX ── */
@@ -2575,17 +2592,22 @@ document.addEventListener('click', function(e) {
     var current = card.querySelector('.audio-current');
     var duration = card.querySelector('.audio-duration');
     if (!audio || !btn || !bar || !wrap || !current || !duration) return;
-    audio.addEventListener('loadedmetadata', function() { duration.textContent = fmt(audio.duration); });
-    audio.addEventListener('timeupdate', function() {
-      current.textContent = fmt(audio.currentTime);
+    var raf = null;
+    function tick() {
       bar.style.width = (audio.duration ? (audio.currentTime / audio.duration) * 100 : 0) + '%';
-    });
-    audio.addEventListener('ended', function() { btn.classList.remove('playing'); bar.style.width = '0%'; current.textContent = '0:00'; });
+      current.textContent = fmt(audio.currentTime);
+      raf = requestAnimationFrame(tick);
+    }
+    function startRaf() { if (!raf) raf = requestAnimationFrame(tick); }
+    function stopRaf()  { if (raf)  { cancelAnimationFrame(raf); raf = null; } }
+    audio.addEventListener('loadedmetadata', function() { duration.textContent = fmt(audio.duration); });
+    audio.addEventListener('pause',  stopRaf);
+    audio.addEventListener('ended', function() { stopRaf(); btn.classList.remove('playing'); bar.style.width = '0%'; current.textContent = '0:00'; });
     btn.addEventListener('click', function() {
       document.querySelectorAll('.audio-card audio').forEach(function(a) {
         if (a !== audio) { a.pause(); a.closest('.audio-card').querySelector('.audio-play-btn').classList.remove('playing'); }
       });
-      if (audio.paused) { audio.play().catch(function() { btn.classList.remove('playing'); }); btn.classList.add('playing'); }
+      if (audio.paused) { audio.play().catch(function() { btn.classList.remove('playing'); }); btn.classList.add('playing'); startRaf(); }
       else { audio.pause(); btn.classList.remove('playing'); }
     });
     wrap.addEventListener('click', function(e) {
