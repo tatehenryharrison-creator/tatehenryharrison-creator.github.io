@@ -1834,7 +1834,7 @@ footer > * { position: relative; z-index: 1; }
     .features-tile-body {
       position: relative;
       z-index: 1;
-      padding: 0 60px 52px;
+      padding: 0 60px 24px;
       text-align: center;
       min-height: 80px;
     }
@@ -1877,7 +1877,7 @@ footer > * { position: relative; z-index: 1; }
     @media (max-width: 600px) {
       .features-tile-header { padding: 36px 32px 16px; }
       .features-tile-title { font-size: 2rem; }
-      .features-tile-body { padding: 0 32px 44px; }
+      .features-tile-body { padding: 0 32px 18px; }
       .features-list li { font-size: 0.92rem; }
     }
 
@@ -1889,6 +1889,11 @@ footer > * { position: relative; z-index: 1; }
     #cv-section .features-tile-title { color: #1C1A14; }
     #cv-section .features-list li { color: rgba(28,26,20,0.82); }
     #cv-section .features-list li::before { color: rgba(201,168,76,0.75); }
+    #cv-section .ft-format-name { color: rgba(28,26,20,0.9); }
+    #cv-section .ft-format-list li { color: rgba(28,26,20,0.72); }
+    #cv-section .ft-format-list li::before { color: rgba(201,168,76,0.6); }
+    #cv-section .features-tile-divider .ftd-label { color: rgba(99,95,81,0.45); }
+    #cv-section .features-tile-divider .ftd-line { background: linear-gradient(90deg, transparent, rgba(99,95,81,0.25), transparent); }
     .sect-addons-grid { display: grid; gap: 14px; }
     .sect-addons-grid--4 { grid-template-columns: repeat(2, 1fr); }
     .sect-addons-grid--1 { grid-template-columns: 1fr; max-width: 300px; margin: 0 auto; }
@@ -2129,96 +2134,77 @@ footer > * { position: relative; z-index: 1; }
     .hm-cert .delivery-qty-capsule { border-radius: 50px !important; }
     .hm-cert .addon-card.details-open.delivery-qty-capsule { border-radius: 24px !important; }
 
-    /* ── FORMAT TILES ── */
-    .format-tiles-wrap { padding: 72px 5% 88px; text-align: center; }
-    .format-tiles-eyebrow {
+    /* ── FORMAT COLUMNS inside the features tile ── */
+    .features-tile-divider {
+      position: relative; z-index: 1;
+      display: flex; align-items: center; gap: 16px;
+      padding: 0 52px 28px;
+    }
+    .features-tile-divider .ftd-line {
+      flex: 1; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(201,168,76,0.3), transparent);
+    }
+    .features-tile-divider .ftd-label {
       font-family: 'EB Garamond', serif;
-      font-size: 0.68rem; letter-spacing: 3.5px; text-transform: uppercase;
-      color: rgba(201,168,76,0.45); margin: 0 0 44px;
+      font-size: 0.66rem; letter-spacing: 3.5px; text-transform: uppercase;
+      color: rgba(201,168,76,0.42); white-space: nowrap;
     }
-    .format-tiles-row {
-      display: flex; align-items: flex-start; justify-content: center;
-      max-width: 1160px; margin: 0 auto;
+    .features-tile-formats {
+      position: relative; z-index: 1;
+      display: flex; align-items: flex-start;
+      padding: 0 40px 52px;
     }
-    .format-tile {
-      flex: 1; min-width: 0;
-      background: rgba(255,255,255,0.025);
-      border: 1px solid rgba(201,168,76,0.22);
-      border-radius: 14px; overflow: hidden;
-      display: flex; flex-direction: column;
-      transition: border-color 0.3s;
-    }
-    .format-tile:hover { border-color: rgba(201,168,76,0.42); }
-    .format-tile-header {
-      padding: 22px 18px 14px;
-      border-bottom: 1px solid rgba(201,168,76,0.1);
-    }
-    .format-tile-num {
-      font-family: 'EB Garamond', serif; font-size: 0.62rem;
-      letter-spacing: 3px; text-transform: uppercase;
-      color: rgba(201,168,76,0.38); margin: 0 0 7px;
-    }
-    .format-tile-title {
-      font-family: 'Cinzel', serif; font-weight: 400;
-      font-size: 1.05rem; color: #e8e1d4; margin: 0; line-height: 1.25;
-    }
-    .format-tile-photo {
-      margin: 18px 14px 0;
-      aspect-ratio: 16 / 9;
-      border: 1px dashed rgba(201,168,76,0.22);
-      border-radius: 8px;
-      display: flex; align-items: center; justify-content: center;
-      background: rgba(0,0,0,0.2); overflow: hidden; position: relative;
-    }
-    .format-tile-photo-inner {
-      display: flex; flex-direction: column; align-items: center; gap: 7px;
-      pointer-events: none;
-    }
-    .format-tile-photo-label {
-      font-family: 'EB Garamond', serif; font-size: 0.65rem;
-      letter-spacing: 2.5px; text-transform: uppercase;
-      color: rgba(201,168,76,0.28);
-    }
-    .format-tile-bullets {
-      list-style: none; margin: 14px 0 0; padding: 0 18px 22px;
-      text-align: left; display: flex; flex-direction: column; gap: 8px; flex: 1;
-    }
-    .format-tile-bullets li {
-      font-family: 'EB Garamond', serif; font-size: 0.91rem; letter-spacing: 0.02em;
-      color: rgba(232,225,212,0.72); display: flex; align-items: flex-start;
-      gap: 8px; line-height: 1.45;
-    }
-    .format-tile-bullets li::before {
-      content: '—'; color: rgba(201,168,76,0.5); font-size: 0.8rem;
-      flex-shrink: 0; margin-top: 1px;
-    }
-    .format-arrow {
+    .ft-format-arrow {
       flex-shrink: 0; width: 36px;
       display: flex; align-items: flex-start; justify-content: center;
-      padding-top: 42px;
+      padding-top: 22px;
     }
-    .format-arrow--vert { display: none; } /* vertical arrows: mobile only */
-    @media (max-width: 860px) {
-      .format-tiles-row {
+    .ft-format-arrow--vert { display: none; }
+    .ft-format-col { flex: 1; min-width: 0; }
+    .ft-format-num {
+      font-family: 'Cinzel', serif;
+      font-size: 0.55rem; letter-spacing: 3px;
+      color: rgba(201,168,76,0.42); margin: 0 0 6px;
+    }
+    .ft-format-name {
+      font-family: 'Cinzel', serif; font-weight: 400;
+      font-size: 0.73rem; letter-spacing: 1.2px;
+      color: #e8e1d4; margin: 0 0 10px; line-height: 1.3;
+    }
+    .ft-format-rule {
+      width: 18px; height: 1px;
+      background: rgba(201,168,76,0.38); margin-bottom: 11px;
+    }
+    .ft-format-list {
+      list-style: none; margin: 0; padding: 0;
+      display: flex; flex-direction: column; gap: 5px;
+    }
+    .ft-format-list li {
+      font-family: 'EB Garamond', serif;
+      font-size: 0.8rem; color: rgba(232,225,212,0.7);
+      padding-left: 12px; position: relative; line-height: 1.4;
+    }
+    .ft-format-list li::before {
+      content: '–'; position: absolute; left: 0;
+      color: rgba(201,168,76,0.5);
+    }
+    @media (max-width: 680px) {
+      .features-tile-formats {
         display: grid;
-        grid-template-columns: 1fr 40px 1fr;
-        max-width: 540px;
-        margin: 0 auto;
+        grid-template-columns: 1fr 32px 1fr;
+        padding: 0 22px 40px;
       }
-      .format-tile { width: auto; }
-      /* Tile grid positions */
-      .format-tiles-row .format-tile:nth-child(1) { grid-column: 1; grid-row: 1; }
-      .format-tiles-row .format-tile:nth-child(3) { grid-column: 3; grid-row: 1; }
-      .format-tiles-row .format-tile:nth-child(7) { grid-column: 1; grid-row: 3; }
-      .format-tiles-row .format-tile:nth-child(9) { grid-column: 3; grid-row: 3; }
-      /* Horizontal arrows: top row and bottom row */
-      .format-tiles-row .format-arrow:nth-child(2) { grid-column: 2; grid-row: 1; padding-top: 0; align-self: center; justify-self: center; }
-      .format-tiles-row .format-arrow:nth-child(4) { display: none; } /* desktop-only middle arrow */
-      .format-tiles-row .format-arrow:nth-child(8) { grid-column: 2; grid-row: 3; padding-top: 0; align-self: center; justify-self: center; }
-      /* Vertical arrows: left col and right col of the middle row */
-      .format-arrow--vert { display: flex; }
-      .format-tiles-row .format-arrow--vert:nth-child(5) { grid-column: 1; grid-row: 2; align-self: center; justify-self: center; transform: rotate(90deg); }
-      .format-tiles-row .format-arrow--vert:nth-child(6) { grid-column: 3; grid-row: 2; align-self: center; justify-self: center; transform: rotate(90deg); }
+      .features-tile-formats > .ft-format-col:nth-child(1) { grid-column: 1; grid-row: 1; }
+      .features-tile-formats > .ft-format-arrow:nth-child(2) { grid-column: 2; grid-row: 1; align-self: center; justify-self: center; padding-top: 0; }
+      .features-tile-formats > .ft-format-col:nth-child(3) { grid-column: 3; grid-row: 1; }
+      .features-tile-formats > .ft-format-arrow:nth-child(4) { display: none; }
+      .ft-format-arrow--vert { display: flex; }
+      .features-tile-formats > .ft-format-arrow--vert:nth-child(5) { grid-column: 1; grid-row: 2; align-self: center; justify-self: center; transform: rotate(90deg); }
+      .features-tile-formats > .ft-format-arrow--vert:nth-child(6) { grid-column: 3; grid-row: 2; align-self: center; justify-self: center; transform: rotate(90deg); }
+      .features-tile-formats > .ft-format-col:nth-child(7) { grid-column: 1; grid-row: 3; }
+      .features-tile-formats > .ft-format-arrow:nth-child(8) { grid-column: 2; grid-row: 3; align-self: center; justify-self: center; padding-top: 0; }
+      .features-tile-formats > .ft-format-col:nth-child(9) { grid-column: 3; grid-row: 3; }
+      .features-tile-divider { padding: 0 30px 24px; }
     }
 
     /* ── PACKAGE TIERS (below) ── */
@@ -3418,7 +3404,114 @@ footer > * { position: relative; z-index: 1; }
           <li>Creative angles and techniques</li>
         </ul>
       </div>
-    </div>
+
+      <!-- Divider -->
+      <div class="features-tile-divider">
+        <span class="ftd-line"></span>
+        <span class="ftd-label">Optimized For Every Format</span>
+        <span class="ftd-line"></span>
+      </div>
+
+      <!-- Format columns -->
+      <div class="features-tile-formats">
+
+        <!-- 01 Social Media -->
+        <div class="ft-format-col">
+          <p class="ft-format-num">01</p>
+          <h4 class="ft-format-name">Social Media</h4>
+          <div class="ft-format-rule"></div>
+          <ul class="ft-format-list">
+            <li>Vertical &amp; horizontal cuts</li>
+            <li>Reels, TikTok &amp; Shorts</li>
+            <li>Platform-optimized pacing</li>
+            <li>Story sequencing</li>
+          </ul>
+        </div>
+
+        <!-- h-arrow -->
+        <div class="ft-format-arrow" aria-hidden="true">
+          <svg width="24" height="12" viewBox="0 0 28 14" fill="none">
+            <path d="M7 1L1 7L7 13" stroke="rgba(201,168,76,0.5)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+            <line x1="1" y1="7" x2="27" y2="7" stroke="rgba(201,168,76,0.32)" stroke-width="1.4" stroke-linecap="round"/>
+            <path d="M21 1L27 7L21 13" stroke="rgba(201,168,76,0.5)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+
+        <!-- 02 Long-Form Events -->
+        <div class="ft-format-col">
+          <p class="ft-format-num">02</p>
+          <h4 class="ft-format-name">Long-Form Events</h4>
+          <div class="ft-format-rule"></div>
+          <ul class="ft-format-list">
+            <li>Full event documentation</li>
+            <li>Multi-angle coverage</li>
+            <li>Cinematic highlight reel</li>
+            <li>Live stream compatible</li>
+          </ul>
+        </div>
+
+        <!-- h-arrow desktop (col 2 → col 3) -->
+        <div class="ft-format-arrow" aria-hidden="true">
+          <svg width="24" height="12" viewBox="0 0 28 14" fill="none">
+            <path d="M7 1L1 7L7 13" stroke="rgba(201,168,76,0.5)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+            <line x1="1" y1="7" x2="27" y2="7" stroke="rgba(201,168,76,0.32)" stroke-width="1.4" stroke-linecap="round"/>
+            <path d="M21 1L27 7L21 13" stroke="rgba(201,168,76,0.5)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+
+        <!-- Vertical arrows: mobile only -->
+        <div class="ft-format-arrow ft-format-arrow--vert" aria-hidden="true">
+          <svg width="24" height="12" viewBox="0 0 28 14" fill="none">
+            <path d="M7 1L1 7L7 13" stroke="rgba(201,168,76,0.5)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+            <line x1="1" y1="7" x2="27" y2="7" stroke="rgba(201,168,76,0.32)" stroke-width="1.4" stroke-linecap="round"/>
+            <path d="M21 1L27 7L21 13" stroke="rgba(201,168,76,0.5)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="ft-format-arrow ft-format-arrow--vert" aria-hidden="true">
+          <svg width="24" height="12" viewBox="0 0 28 14" fill="none">
+            <path d="M7 1L1 7L7 13" stroke="rgba(201,168,76,0.5)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+            <line x1="1" y1="7" x2="27" y2="7" stroke="rgba(201,168,76,0.32)" stroke-width="1.4" stroke-linecap="round"/>
+            <path d="M21 1L27 7L21 13" stroke="rgba(201,168,76,0.5)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+
+        <!-- 03 Product & Brand -->
+        <div class="ft-format-col">
+          <p class="ft-format-num">03</p>
+          <h4 class="ft-format-name">Product &amp; Brand</h4>
+          <div class="ft-format-rule"></div>
+          <ul class="ft-format-list">
+            <li>Hero product films</li>
+            <li>Lifestyle &amp; context shots</li>
+            <li>Campaign-ready assets</li>
+            <li>Multi-format exports</li>
+          </ul>
+        </div>
+
+        <!-- h-arrow -->
+        <div class="ft-format-arrow" aria-hidden="true">
+          <svg width="24" height="12" viewBox="0 0 28 14" fill="none">
+            <path d="M7 1L1 7L7 13" stroke="rgba(201,168,76,0.5)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+            <line x1="1" y1="7" x2="27" y2="7" stroke="rgba(201,168,76,0.32)" stroke-width="1.4" stroke-linecap="round"/>
+            <path d="M21 1L27 7L21 13" stroke="rgba(201,168,76,0.5)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+
+        <!-- 04 Docu-Series -->
+        <div class="ft-format-col">
+          <p class="ft-format-num">04</p>
+          <h4 class="ft-format-name">Docu-Series</h4>
+          <div class="ft-format-rule"></div>
+          <ul class="ft-format-list">
+            <li>Mini Documentary Series</li>
+            <li>Optimized for YouTube &amp; TV</li>
+            <li>Episode arc &amp; structure</li>
+            <li>Long-arc storytelling</li>
+          </ul>
+        </div>
+
+      </div><!-- /features-tile-formats -->
+    </div><!-- /features-tile -->
 
     <p class="sect-addons-label">Add-Ons</p>
     <div class="sect-addons-grid sect-addons-grid--2">
@@ -4111,168 +4204,6 @@ footer > * { position: relative; z-index: 1; }
     </div>
   </div>
 
-  <!-- Format Tiles -->
-  <div class="format-tiles-wrap">
-    <p class="format-tiles-eyebrow">Optimized For Every Format</p>
-    <div class="format-tiles-row">
-
-      <!-- 01 Social Media -->
-      <div class="format-tile">
-        <div class="format-tile-header">
-          <p class="format-tile-num">01</p>
-          <h3 class="format-tile-title">Social Media</h3>
-        </div>
-        <div class="format-tile-photo">
-          <div class="format-tile-photo-inner">
-            <svg width="30" height="24" viewBox="0 0 30 24" fill="none" aria-hidden="true">
-              <rect x="1" y="1" width="28" height="22" rx="2.5" stroke="rgba(201,168,76,0.32)" stroke-width="1.2"/>
-              <rect x="1" y="4.5" width="4" height="3" rx="0.6" fill="rgba(201,168,76,0.18)"/>
-              <rect x="1" y="10" width="4" height="3" rx="0.6" fill="rgba(201,168,76,0.18)"/>
-              <rect x="1" y="15.5" width="4" height="3" rx="0.6" fill="rgba(201,168,76,0.18)"/>
-              <rect x="25" y="4.5" width="4" height="3" rx="0.6" fill="rgba(201,168,76,0.18)"/>
-              <rect x="25" y="10" width="4" height="3" rx="0.6" fill="rgba(201,168,76,0.18)"/>
-              <rect x="25" y="15.5" width="4" height="3" rx="0.6" fill="rgba(201,168,76,0.18)"/>
-            </svg>
-            <span class="format-tile-photo-label">Photo</span>
-          </div>
-        </div>
-        <ul class="format-tile-bullets">
-          <li>Vertical &amp; horizontal cuts</li>
-          <li>Reels, TikTok &amp; YouTube Shorts</li>
-          <li>Platform-optimized pacing</li>
-          <li>Story sequencing</li>
-        </ul>
-      </div>
-
-      <!-- Arrow -->
-      <div class="format-arrow" aria-hidden="true">
-        <svg width="28" height="14" viewBox="0 0 28 14" fill="none">
-          <path d="M7 1L1 7L7 13" stroke="rgba(201,168,76,0.52)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-          <line x1="1" y1="7" x2="27" y2="7" stroke="rgba(201,168,76,0.35)" stroke-width="1.4" stroke-linecap="round"/>
-          <path d="M21 1L27 7L21 13" stroke="rgba(201,168,76,0.52)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </div>
-
-      <!-- 02 Long-Form Events -->
-      <div class="format-tile">
-        <div class="format-tile-header">
-          <p class="format-tile-num">02</p>
-          <h3 class="format-tile-title">Long-Form Events</h3>
-        </div>
-        <div class="format-tile-photo">
-          <div class="format-tile-photo-inner">
-            <svg width="30" height="24" viewBox="0 0 30 24" fill="none" aria-hidden="true">
-              <rect x="1" y="1" width="28" height="22" rx="2.5" stroke="rgba(201,168,76,0.32)" stroke-width="1.2"/>
-              <rect x="1" y="4.5" width="4" height="3" rx="0.6" fill="rgba(201,168,76,0.18)"/>
-              <rect x="1" y="10" width="4" height="3" rx="0.6" fill="rgba(201,168,76,0.18)"/>
-              <rect x="1" y="15.5" width="4" height="3" rx="0.6" fill="rgba(201,168,76,0.18)"/>
-              <rect x="25" y="4.5" width="4" height="3" rx="0.6" fill="rgba(201,168,76,0.18)"/>
-              <rect x="25" y="10" width="4" height="3" rx="0.6" fill="rgba(201,168,76,0.18)"/>
-              <rect x="25" y="15.5" width="4" height="3" rx="0.6" fill="rgba(201,168,76,0.18)"/>
-            </svg>
-            <span class="format-tile-photo-label">Photo</span>
-          </div>
-        </div>
-        <ul class="format-tile-bullets">
-          <li>Full event documentation</li>
-          <li>Multi-angle coverage</li>
-          <li>Cinematic highlight reel</li>
-          <li>Live stream compatible</li>
-        </ul>
-      </div>
-
-      <!-- Arrow (desktop: tile2→tile3 horizontal; mobile: hidden) -->
-      <div class="format-arrow" aria-hidden="true">
-        <svg width="28" height="14" viewBox="0 0 28 14" fill="none">
-          <path d="M7 1L1 7L7 13" stroke="rgba(201,168,76,0.52)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-          <line x1="1" y1="7" x2="27" y2="7" stroke="rgba(201,168,76,0.35)" stroke-width="1.4" stroke-linecap="round"/>
-          <path d="M21 1L27 7L21 13" stroke="rgba(201,168,76,0.52)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </div>
-
-      <!-- Vertical arrows: mobile only — tile1↔tile3 (left col) and tile2↔tile4 (right col) -->
-      <div class="format-arrow format-arrow--vert" aria-hidden="true">
-        <svg width="28" height="14" viewBox="0 0 28 14" fill="none">
-          <path d="M7 1L1 7L7 13" stroke="rgba(201,168,76,0.52)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-          <line x1="1" y1="7" x2="27" y2="7" stroke="rgba(201,168,76,0.35)" stroke-width="1.4" stroke-linecap="round"/>
-          <path d="M21 1L27 7L21 13" stroke="rgba(201,168,76,0.52)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </div>
-      <div class="format-arrow format-arrow--vert" aria-hidden="true">
-        <svg width="28" height="14" viewBox="0 0 28 14" fill="none">
-          <path d="M7 1L1 7L7 13" stroke="rgba(201,168,76,0.52)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-          <line x1="1" y1="7" x2="27" y2="7" stroke="rgba(201,168,76,0.35)" stroke-width="1.4" stroke-linecap="round"/>
-          <path d="M21 1L27 7L21 13" stroke="rgba(201,168,76,0.52)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </div>
-
-      <!-- 03 Product & Brand -->
-      <div class="format-tile">
-        <div class="format-tile-header">
-          <p class="format-tile-num">03</p>
-          <h3 class="format-tile-title">Product &amp; Brand</h3>
-        </div>
-        <div class="format-tile-photo">
-          <div class="format-tile-photo-inner">
-            <svg width="30" height="24" viewBox="0 0 30 24" fill="none" aria-hidden="true">
-              <rect x="1" y="1" width="28" height="22" rx="2.5" stroke="rgba(201,168,76,0.32)" stroke-width="1.2"/>
-              <rect x="1" y="4.5" width="4" height="3" rx="0.6" fill="rgba(201,168,76,0.18)"/>
-              <rect x="1" y="10" width="4" height="3" rx="0.6" fill="rgba(201,168,76,0.18)"/>
-              <rect x="1" y="15.5" width="4" height="3" rx="0.6" fill="rgba(201,168,76,0.18)"/>
-              <rect x="25" y="4.5" width="4" height="3" rx="0.6" fill="rgba(201,168,76,0.18)"/>
-              <rect x="25" y="10" width="4" height="3" rx="0.6" fill="rgba(201,168,76,0.18)"/>
-              <rect x="25" y="15.5" width="4" height="3" rx="0.6" fill="rgba(201,168,76,0.18)"/>
-            </svg>
-            <span class="format-tile-photo-label">Photo</span>
-          </div>
-        </div>
-        <ul class="format-tile-bullets">
-          <li>Hero product films</li>
-          <li>Lifestyle &amp; context shots</li>
-          <li>Campaign-ready assets</li>
-          <li>Multi-format exports</li>
-        </ul>
-      </div>
-
-      <!-- Arrow -->
-      <div class="format-arrow" aria-hidden="true">
-        <svg width="28" height="14" viewBox="0 0 28 14" fill="none">
-          <path d="M7 1L1 7L7 13" stroke="rgba(201,168,76,0.52)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-          <line x1="1" y1="7" x2="27" y2="7" stroke="rgba(201,168,76,0.35)" stroke-width="1.4" stroke-linecap="round"/>
-          <path d="M21 1L27 7L21 13" stroke="rgba(201,168,76,0.52)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </div>
-
-      <!-- 04 Docu-Series -->
-      <div class="format-tile">
-        <div class="format-tile-header">
-          <p class="format-tile-num">04</p>
-          <h3 class="format-tile-title">Docu-Series</h3>
-        </div>
-        <div class="format-tile-photo">
-          <div class="format-tile-photo-inner">
-            <svg width="30" height="24" viewBox="0 0 30 24" fill="none" aria-hidden="true">
-              <rect x="1" y="1" width="28" height="22" rx="2.5" stroke="rgba(201,168,76,0.32)" stroke-width="1.2"/>
-              <rect x="1" y="4.5" width="4" height="3" rx="0.6" fill="rgba(201,168,76,0.18)"/>
-              <rect x="1" y="10" width="4" height="3" rx="0.6" fill="rgba(201,168,76,0.18)"/>
-              <rect x="1" y="15.5" width="4" height="3" rx="0.6" fill="rgba(201,168,76,0.18)"/>
-              <rect x="25" y="4.5" width="4" height="3" rx="0.6" fill="rgba(201,168,76,0.18)"/>
-              <rect x="25" y="10" width="4" height="3" rx="0.6" fill="rgba(201,168,76,0.18)"/>
-              <rect x="25" y="15.5" width="4" height="3" rx="0.6" fill="rgba(201,168,76,0.18)"/>
-            </svg>
-            <span class="format-tile-photo-label">Photo</span>
-          </div>
-        </div>
-        <ul class="format-tile-bullets">
-          <li>Mini Documentary Series</li>
-          <li>Optimized for YouTube &amp; TV</li>
-          <li>Episode arc &amp; structure</li>
-          <li>Long-arc storytelling</li>
-        </ul>
-      </div>
-
-    </div>
-  </div>
 
 </section>
 
