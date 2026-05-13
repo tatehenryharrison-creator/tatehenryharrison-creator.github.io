@@ -2384,6 +2384,28 @@ footer > * { position: relative; z-index: 1; }
       }
       /* Audio extras pitch layout already stacks at 640px */
       .la-addon-layout { padding: 0 5%; }
+      /* ── Certificate: compact paper-like proportions on mobile ── */
+      .delivery-cert-wrap { padding: 0 1% 40px; }
+      .hm-cert { width: 560px; padding: 5% 7%; }
+      .hm-cert h1.hm-title { font-size: 1.7rem; letter-spacing: 2.5px; }
+      .hm-cert .hm-subhead { font-size: 0.8rem; margin-bottom: 10px; }
+      .hm-cert .hm-eyebrow { margin-bottom: 12px; }
+      .hm-cert .hm-eyebrow span { font-size: 0.68rem; letter-spacing: 4px; }
+      .hm-cert .hm-cert-two-col { gap: 0 16px; }
+      .hm-cert .delivery-chips-row { padding: 8px 0 4px; gap: 6px; }
+      .hm-cert .delivery-chip { padding: 8px 10px 6px; min-width: unset; }
+      .hm-cert .delivery-chip-word { font-size: 0.75rem; letter-spacing: 2.5px; }
+      .hm-cert .sect-addons { padding: 6px 0 0; }
+      .hm-cert .sect-addons-label { margin-bottom: 6px; font-size: 0.6rem; }
+      .hm-cert .delivery-qty-capsules { margin-top: 6px; padding-top: 6px; }
+      .hm-cert .addon-card-name { font-size: 0.82rem; }
+      .hm-cert .addon-card-tagline { font-size: 0.72rem; }
+      .hm-cert .addon-stepper-btn { width: 24px; height: 24px; font-size: 0.85rem; }
+      .hm-cert .addon-stepper-count { font-size: 0.82rem; }
+      .hm-cert .hm-footer { margin-top: 12px; padding-top: 14px; gap: 16px; width: 92%; }
+      .hm-cert .hm-sig { font-size: 1.0rem; }
+      .hm-cert .hm-sig-label { font-size: 0.52rem; letter-spacing: 2px; }
+      .hm-cert .hm-seal { width: 13%; bottom: 10%; right: 8%; }
     }
 /* ── JOURNEY SECTION ── */
 .journey-section { background: #e8e1d4; padding: 80px 0 120px; border-top: 1px solid rgba(99,95,81,0.1); border-bottom: 1px solid rgba(99,95,81,0.1); }
@@ -6597,23 +6619,25 @@ document.addEventListener('click', function(e) {
 
 <script>
 /* ── Certificate geometry lock ──
-   Locks the cert at a fixed 900 px design width and scales it as one rigid
-   unit so fonts, spacing, borders and SVG all stay proportional. */
+   Scales the cert to fit available width as one rigid unit so fonts,
+   spacing, borders and SVG all stay proportional.
+   On mobile the CSS sets width:560px (vs 900px desktop) so the cert
+   appears at ~62% scale instead of ~39% — more legible, paper-like. */
 (function() {
-  var DESIGN_W = 900;
   var wrap = document.querySelector('.delivery-cert-wrap');
   var cert = document.querySelector('.hm-cert');
   if (!wrap || !cert) return;
 
   function scaleCert() {
-    /* Reset so we can measure the cert's natural (unscaled) height */
+    /* Reset transform so we can measure the cert's natural dimensions */
     cert.style.transform    = '';
     cert.style.marginBottom = '';
     var certH  = cert.offsetHeight;
+    var certW  = cert.offsetWidth; /* respects CSS media-query width override */
     /* Available width = wrap inner content area (excludes horizontal padding) */
     var cs     = getComputedStyle(wrap);
     var availW = wrap.offsetWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
-    var scale  = Math.min(1, availW / DESIGN_W);
+    var scale  = Math.min(1, availW / certW);
     if (scale < 1) {
       cert.style.transform    = 'scale(' + scale + ')';
       /* CSS transform doesn't affect layout — collapse the phantom height */
