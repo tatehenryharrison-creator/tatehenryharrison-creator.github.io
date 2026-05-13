@@ -2193,10 +2193,28 @@ footer > * { position: relative; z-index: 1; }
       display: flex; align-items: flex-start; justify-content: center;
       padding-top: 42px;
     }
+    .format-arrow--vert { display: none; } /* vertical arrows: mobile only */
     @media (max-width: 860px) {
-      .format-tiles-row { flex-direction: column; align-items: center; max-width: 420px; }
-      .format-tile { width: 100%; }
-      .format-arrow { width: 36px; height: 36px; padding-top: 0; rotate: 90deg; }
+      .format-tiles-row {
+        display: grid;
+        grid-template-columns: 1fr 40px 1fr;
+        max-width: 540px;
+        margin: 0 auto;
+      }
+      .format-tile { width: auto; }
+      /* Tile grid positions */
+      .format-tiles-row .format-tile:nth-child(1) { grid-column: 1; grid-row: 1; }
+      .format-tiles-row .format-tile:nth-child(3) { grid-column: 3; grid-row: 1; }
+      .format-tiles-row .format-tile:nth-child(7) { grid-column: 1; grid-row: 3; }
+      .format-tiles-row .format-tile:nth-child(9) { grid-column: 3; grid-row: 3; }
+      /* Horizontal arrows: top row and bottom row */
+      .format-tiles-row .format-arrow:nth-child(2) { grid-column: 2; grid-row: 1; padding-top: 0; align-self: center; justify-self: center; }
+      .format-tiles-row .format-arrow:nth-child(4) { display: none; } /* desktop-only middle arrow */
+      .format-tiles-row .format-arrow:nth-child(8) { grid-column: 2; grid-row: 3; padding-top: 0; align-self: center; justify-self: center; }
+      /* Vertical arrows: left col and right col of the middle row */
+      .format-arrow--vert { display: flex; }
+      .format-tiles-row .format-arrow--vert:nth-child(5) { grid-column: 1; grid-row: 2; align-self: center; justify-self: center; transform: rotate(90deg); }
+      .format-tiles-row .format-arrow--vert:nth-child(6) { grid-column: 3; grid-row: 2; align-self: center; justify-self: center; transform: rotate(90deg); }
     }
 
     /* ── PACKAGE TIERS (below) ── */
@@ -4145,8 +4163,24 @@ footer > * { position: relative; z-index: 1; }
         </ul>
       </div>
 
-      <!-- Arrow -->
+      <!-- Arrow (desktop: tile2→tile3 horizontal; mobile: hidden) -->
       <div class="format-arrow" aria-hidden="true">
+        <svg width="28" height="14" viewBox="0 0 28 14" fill="none">
+          <path d="M7 1L1 7L7 13" stroke="rgba(201,168,76,0.52)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+          <line x1="1" y1="7" x2="27" y2="7" stroke="rgba(201,168,76,0.35)" stroke-width="1.4" stroke-linecap="round"/>
+          <path d="M21 1L27 7L21 13" stroke="rgba(201,168,76,0.52)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+
+      <!-- Vertical arrows: mobile only — tile1↔tile3 (left col) and tile2↔tile4 (right col) -->
+      <div class="format-arrow format-arrow--vert" aria-hidden="true">
+        <svg width="28" height="14" viewBox="0 0 28 14" fill="none">
+          <path d="M7 1L1 7L7 13" stroke="rgba(201,168,76,0.52)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+          <line x1="1" y1="7" x2="27" y2="7" stroke="rgba(201,168,76,0.35)" stroke-width="1.4" stroke-linecap="round"/>
+          <path d="M21 1L27 7L21 13" stroke="rgba(201,168,76,0.52)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="format-arrow format-arrow--vert" aria-hidden="true">
         <svg width="28" height="14" viewBox="0 0 28 14" fill="none">
           <path d="M7 1L1 7L7 13" stroke="rgba(201,168,76,0.52)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
           <line x1="1" y1="7" x2="27" y2="7" stroke="rgba(201,168,76,0.35)" stroke-width="1.4" stroke-linecap="round"/>
