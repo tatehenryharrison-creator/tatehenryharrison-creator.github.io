@@ -485,18 +485,26 @@
 
     // ── Pre-fill UI ───────────────────────────────────────────────────────────
     (function prefill() {
-      if (!pkgKey) return;
+      if (!pkgKey && !addonsParam) return;
 
       document.getElementById('page-title').textContent    = 'Almost there — just a few details.';
       document.getElementById('page-subtitle').textContent = 'Your selections are locked in below. Fill in your info and I\'ll send a personalised quote within 24 hours.';
 
       document.getElementById('sel-card').classList.add('visible');
-      document.getElementById('sel-pkg-label').textContent = PACKAGE_LABELS[pkgKey] || pkgKey;
-      document.getElementById('sel-pkg-sub').textContent   = PACKAGE_SUBS[pkgKey]   || '';
 
-      // Render ALL relevant add-ons: selected = active gold, unselected = greyed + struck
-      const addonRow = document.getElementById('sel-addons-row');
-      (PACKAGE_ADDONS[pkgKey] || []).forEach(key => {
+      if (pkgKey) {
+        document.getElementById('sel-pkg-label').textContent = PACKAGE_LABELS[pkgKey] || pkgKey;
+        document.getElementById('sel-pkg-sub').textContent   = PACKAGE_SUBS[pkgKey]   || '';
+      }
+
+      // If package selected: show all package add-ons (selected highlighted, rest greyed).
+      // If add-ons only: show only the selected add-ons as active chips.
+      const addonRow  = document.getElementById('sel-addons-row');
+      const addonKeys = pkgKey
+        ? (PACKAGE_ADDONS[pkgKey] || [])
+        : Object.keys(selectedAddons).filter(k => (selectedAddons[k] || 0) > 0);
+
+      addonKeys.forEach(key => {
         const isActive = (selectedAddons[key] || 0) > 0;
         const qty      = selectedAddons[key] || 1;
         const label    = (ADDON_LABELS[key] || key) + (isActive && qty > 1 ? ' ×' + qty : '');
@@ -504,11 +512,10 @@
         const chip = document.createElement('span');
         chip.className   = 'sel-addon-chip' + (isActive ? '' : ' removed');
         chip.dataset.key = key;
-        /* Active chips show ✕, inactive chips show + */
         chip.innerHTML   = label + '<span class="sel-addon-chip-x">' + (isActive ? '✕' : '+') + '</span>';
 
         chip.addEventListener('click', function () {
-          const removing = !chip.classList.contains('removed'); // currently active → remove
+          const removing = !chip.classList.contains('removed');
           chip.classList.toggle('removed', removing);
           chip.querySelector('.sel-addon-chip-x').textContent = removing ? '+' : '✕';
           activeAddons[key] = removing ? 0 : 1;
@@ -529,12 +536,14 @@
         });
       }
 
-      // Auto-select service dropdown
-      const svc = PACKAGE_TO_SERVICE[pkgKey];
-      if (svc) {
-        const sel = document.getElementById('service');
-        for (let i = 0; i < sel.options.length; i++) {
-          if (sel.options[i].value === svc) { sel.selectedIndex = i; break; }
+      // Auto-select service dropdown when a package is known
+      if (pkgKey) {
+        const svc = PACKAGE_TO_SERVICE[pkgKey];
+        if (svc) {
+          const sel = document.getElementById('service');
+          for (let i = 0; i < sel.options.length; i++) {
+            if (sel.options[i].value === svc) { sel.selectedIndex = i; break; }
+          }
         }
       }
     })();
@@ -643,6 +652,9 @@
       }
     });
   </script>
+
+<!-- Analytics — replace YOUR_GOATCOUNTER_CODE with your code from goatcounter.com -->
+<script data-goatcounter="https://YOUR_GOATCOUNTER_CODE.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 
 </body>
 </html>

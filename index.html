@@ -1856,39 +1856,9 @@ footer > * { position: relative; z-index: 1; }
       letter-spacing: 1px;
     }
     .features-tile-pattern { display: none; }
-    /* ── Stat row replacing the old bullet list ── */
-    .features-stats {
-      display: flex; align-items: stretch; justify-content: center;
-    }
-    .features-stat {
-      flex: 1; display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      padding: 0 20px 4px;
-    }
-    .features-stat-val {
-      font-family: 'Cinzel', serif;
-      font-size: 0.78rem; letter-spacing: 1.2px;
-      color: #e8e1d4;
-      margin: 0 0 5px; text-align: center;
-    }
-    .features-stat-label {
-      font-family: 'EB Garamond', serif; font-style: italic;
-      font-size: 0.82rem; letter-spacing: 0.02em;
-      color: rgba(232,225,212,0.52);
-      margin: 0; text-align: center; line-height: 1.4;
-    }
-    .features-stat-rule {
-      width: 1px; flex-shrink: 0;
-      background: rgba(201,168,76,0.22);
-      margin-bottom: 4px;
-    }
     @media (max-width: 600px) {
       .features-tile-header { padding: 36px 32px 16px; }
       .features-tile-title { font-size: 1.6rem; }
-      .features-tile-body { padding: 0 22px 18px; }
-      .features-stats { flex-direction: column; gap: 14px; }
-      .features-stat { padding: 0; }
-      .features-stat-rule { width: auto; height: 1px; margin: 0; }
     }
 
     /* ── SECTION-EMBEDDED ADD-ONS ── */
@@ -1899,9 +1869,7 @@ footer > * { position: relative; z-index: 1; }
     #cv-section .features-tile-title { color: #1C1A14; }
     #cv-section .features-list li { color: rgba(28,26,20,0.82); }
     #cv-section .features-list li::before { color: rgba(201,168,76,0.75); }
-    #cv-section .features-stat-val { color: #1C1A14; }
-    #cv-section .features-stat-label { color: rgba(28,26,20,0.5); }
-    #cv-section .features-stat-rule { background: rgba(201,168,76,0.28); }
+
     #cv-section .ft-format-name { color: rgba(28,26,20,0.9); }
     #cv-section .ft-format-list li { color: rgba(28,26,20,0.72); }
     #cv-section .ft-format-list li::before { color: rgba(201,168,76,0.6); }
@@ -2499,7 +2467,7 @@ footer > * { position: relative; z-index: 1; }
 #la-section .la-banner { position: relative; z-index: 2; }
 /* Three-column flex — mics in-flow so they set the section height and can't be clipped */
 .la-mic-scene { display: flex; align-items: flex-start; }
-.la-audio { flex: 1; display: flex; align-items: center; padding: 40px 4% 60px; }
+.la-audio { flex: 1; display: flex; align-items: center; justify-content: center; padding: 40px 4% 60px; }
 .la-ntg5  { flex-shrink: 0; height: clamp(200px, 28vw, 500px); width: auto; pointer-events: none; user-select: none; }
 .la-condensor { flex-shrink: 0; height: clamp(220px, 32vw, 560px); width: auto; pointer-events: none; user-select: none; }
 @media (max-width: 700px) {
@@ -3402,25 +3370,6 @@ footer > * { position: relative; z-index: 1; }
       <div class="features-tile-header">
         <h3 class="features-tile-title">Features</h3>
       </div>
-      <div class="features-tile-body">
-        <div class="features-stats">
-          <div class="features-stat">
-            <span class="features-stat-val">2 Cameras · 1 Drone</span>
-            <span class="features-stat-label">Multi-angle cinematic coverage</span>
-          </div>
-          <div class="features-stat-rule"></div>
-          <div class="features-stat">
-            <span class="features-stat-val">8+ Specialty Lenses</span>
-            <span class="features-stat-label">Vintage glass &amp; modern optics</span>
-          </div>
-          <div class="features-stat-rule"></div>
-          <div class="features-stat">
-            <span class="features-stat-val">Color Graded</span>
-            <span class="features-stat-label">Every frame, every time</span>
-          </div>
-        </div>
-      </div>
-
       <!-- Divider -->
       <div class="features-tile-divider">
         <span class="ftd-line"></span>
@@ -4444,6 +4393,40 @@ footer > * { position: relative; z-index: 1; }
             <div class="portfolio-caption">
                 <span class="caption-title">Star Power Coaching</span>
                 <span class="caption-gear">Brand Film</span>
+            </div>
+        </div>
+
+        <!-- Unable to Load placeholders -->
+        <div class="portfolio-item portfolio-item--video" data-category="videography">
+            <div class="portfolio-img-wrap" style="background:#1a1814;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px;">
+                <svg viewBox="0 0 24 24" fill="none" width="36" height="36" style="opacity:0.3"><circle cx="12" cy="12" r="10" stroke="#e8e1d4" stroke-width="1.4"/><line x1="8" y1="8" x2="16" y2="16" stroke="#e8e1d4" stroke-width="1.4" stroke-linecap="round"/><line x1="16" y1="8" x2="8" y2="16" stroke="#e8e1d4" stroke-width="1.4" stroke-linecap="round"/></svg>
+                <span style="font-family:'EB Garamond',serif;font-size:0.78rem;letter-spacing:2px;text-transform:uppercase;color:rgba(232,225,212,0.28);">Unable to Load</span>
+            </div>
+            <div class="portfolio-caption">
+                <span class="caption-title">Unable to Load</span>
+                <span class="caption-gear">Videography</span>
+            </div>
+        </div>
+
+        <div class="portfolio-item portfolio-item--video" data-category="videography">
+            <div class="portfolio-img-wrap" style="background:#1a1814;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px;">
+                <svg viewBox="0 0 24 24" fill="none" width="36" height="36" style="opacity:0.3"><circle cx="12" cy="12" r="10" stroke="#e8e1d4" stroke-width="1.4"/><line x1="8" y1="8" x2="16" y2="16" stroke="#e8e1d4" stroke-width="1.4" stroke-linecap="round"/><line x1="16" y1="8" x2="8" y2="16" stroke="#e8e1d4" stroke-width="1.4" stroke-linecap="round"/></svg>
+                <span style="font-family:'EB Garamond',serif;font-size:0.78rem;letter-spacing:2px;text-transform:uppercase;color:rgba(232,225,212,0.28);">Unable to Load</span>
+            </div>
+            <div class="portfolio-caption">
+                <span class="caption-title">Unable to Load</span>
+                <span class="caption-gear">Videography</span>
+            </div>
+        </div>
+
+        <div class="portfolio-item portfolio-item--video" data-category="videography">
+            <div class="portfolio-img-wrap" style="background:#1a1814;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px;">
+                <svg viewBox="0 0 24 24" fill="none" width="36" height="36" style="opacity:0.3"><circle cx="12" cy="12" r="10" stroke="#e8e1d4" stroke-width="1.4"/><line x1="8" y1="8" x2="16" y2="16" stroke="#e8e1d4" stroke-width="1.4" stroke-linecap="round"/><line x1="16" y1="8" x2="8" y2="16" stroke="#e8e1d4" stroke-width="1.4" stroke-linecap="round"/></svg>
+                <span style="font-family:'EB Garamond',serif;font-size:0.78rem;letter-spacing:2px;text-transform:uppercase;color:rgba(232,225,212,0.28);">Unable to Load</span>
+            </div>
+            <div class="portfolio-caption">
+                <span class="caption-title">Unable to Load</span>
+                <span class="caption-gear">Videography</span>
             </div>
         </div>
 
@@ -6554,6 +6537,9 @@ document.addEventListener('click', function(e) {
 })();
 </script>
 
+
+<!-- Analytics — replace YOUR_GOATCOUNTER_CODE with your code from goatcounter.com -->
+<script data-goatcounter="https://YOUR_GOATCOUNTER_CODE.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 
 </body>
 </html>
