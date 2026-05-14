@@ -1103,8 +1103,8 @@
     }
     .cl-ring-wrap {
       --ring:    min(min(72vw, 68vh), 680px);
-      --photo-w: calc(var(--ring) * 0.32);
       --photo-h: calc(var(--ring) * 0.30);
+      --photo-w: calc(var(--photo-h) * 1.1547); /* 2/√3 — correct flat-top hexagon ratio */
       --radius:  calc(var(--ring) * 0.385);
       position: relative;
       width:  var(--ring);
