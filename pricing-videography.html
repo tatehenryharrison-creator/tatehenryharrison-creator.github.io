@@ -2528,7 +2528,8 @@ document.addEventListener('click', function(e) {
     }
     function startRaf() { if (!raf) raf = requestAnimationFrame(tick); }
     function stopRaf()  { if (raf)  { cancelAnimationFrame(raf); raf = null; } }
-    audio.addEventListener('loadedmetadata', function() { duration.textContent = fmt(audio.duration); });
+    function setDuration() { if (audio.duration && isFinite(audio.duration)) duration.textContent = fmt(audio.duration); }
+    if (audio.readyState >= 1) { setDuration(); } else { audio.addEventListener('loadedmetadata', setDuration); }
     audio.addEventListener('pause',  stopRaf);
     audio.addEventListener('ended', function() { stopRaf(); btn.classList.remove('playing'); bar.style.width = '0%'; current.textContent = '0:00'; });
     btn.addEventListener('click', function() {
