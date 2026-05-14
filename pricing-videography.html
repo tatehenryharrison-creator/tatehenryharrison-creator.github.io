@@ -371,12 +371,13 @@
       width: 100%;
     }
     .hm-cert .delivery-chip {
-      min-width: 80px;
-      padding: 16px 18px 14px;
+      min-width: 108px;
+      padding: 22px 26px 20px;
       background: rgba(201,168,76,0.07);
       border-color: rgba(201,168,76,0.40);
       box-shadow: 0 0 14px rgba(201,168,76,0.08), inset 0 1px 0 rgba(201,168,76,0.14);
     }
+    .hm-cert .delivery-chip .delivery-chip-word { font-size: 1.05rem; }
     .hm-cert .delivery-chip:hover { background: rgba(201,168,76,0.13); }
 
     /* ── Add-on cards inside certificate (light / paper context) ── */
@@ -409,9 +410,22 @@
     .hm-cert .addon-stepper-btn { color: #C9A84C; border-color: rgba(201,168,76,0.3); }
     .hm-cert .addon-stepper-btn:hover { background: rgba(201,168,76,0.1); border-color: rgba(201,168,76,0.5); }
     .hm-cert .addon-stepper-count { color: #2A2220; }
-    .hm-cert .delivery-qty-capsules { border-top-color: rgba(201,168,76,0.1); margin-top: 16px; padding-top: 16px; }
+    .hm-cert .delivery-qty-capsules { border-top-color: rgba(201,168,76,0.1); margin-top: 10px; padding-top: 10px; }
     .hm-cert .delivery-qty-capsule { border-radius: 50px !important; }
     .hm-cert .addon-card.details-open.delivery-qty-capsule { border-radius: 24px !important; }
+    /* ── Compact add-on cards inside cert so expanded details don't push footer ── */
+    .hm-cert .addon-card-main { padding: 10px 12px; gap: 10px; }
+    .hm-cert .addon-card-icon-wrap { width: 34px; height: 34px; border-radius: 9px; flex-shrink: 0; }
+    .hm-cert .addon-card-icon-wrap svg { width: 18px; height: 18px; }
+    .hm-cert .addon-card-name { font-size: 0.78rem; margin-bottom: 2px; }
+    .hm-cert .addon-card-tagline { font-size: 0.72rem; margin-bottom: 3px; }
+    .hm-cert .addon-card-details-btn { font-size: 0.6rem; }
+    .hm-cert .addon-toggle-btn { padding: 5px 13px; font-size: 0.75rem; }
+    .hm-cert .addon-card-expand-inner { padding: 9px 12px 11px calc(34px + 22px); }
+    .hm-cert .addon-card-expand-desc { font-size: 0.77rem; line-height: 1.5; margin-bottom: 7px; }
+    .hm-cert .addon-card-expand-tags { gap: 4px; }
+    .hm-cert .addon-card-expand-tags li { font-size: 0.68rem; padding: 2px 7px; }
+    .hm-cert .sect-addons-grid { gap: 8px; }
 
     /* ── FORMAT TILES ── */
     /* ── FORMAT COLUMNS inside the features tile ── */
@@ -2148,10 +2162,11 @@
             <h1 class="hm-title">Final Delivery</h1>
             <p class="hm-subhead">— Results You Can Expect —</p>
             <div class="delivery-chips-row">
-              <div class="delivery-chip"><span class="delivery-chip-word">Edited Film</span></div>
+              <div class="delivery-chip"><span class="delivery-chip-word">Edited Media</span></div>
               <div class="delivery-chip"><span class="delivery-chip-word">Color Grade</span></div>
               <div class="delivery-chip"><span class="delivery-chip-word">Sound Mix</span></div>
-              <div class="delivery-chip"><span class="delivery-chip-word">Private Link</span></div>
+              <div class="delivery-chip"><span class="delivery-chip-word">Optimized Formats</span></div>
+              <div class="delivery-chip"><span class="delivery-chip-word">Genuine Work</span></div>
 
             </div>
         <!-- Add-ons inside the certificate -->
