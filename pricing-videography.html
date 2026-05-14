@@ -762,16 +762,33 @@
 /* ── LOCATION AUDIO SCENE: NTG5 | audio card | condenser, all in-flow ── */
 #la-section { position: relative; }
 #la-section .la-banner { position: relative; z-index: 2; }
-/* Three-column flex — mics in-flow so they set the section height and can't be clipped */
-.la-mic-scene { display: flex; align-items: flex-start; }
-.la-audio { flex: 1; display: flex; align-items: center; justify-content: center; padding: 40px 4% 60px; }
+/* Three-column grid — equal 1fr gutters keep audio box truly centred in the section */
+.la-mic-scene { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; }
+.la-audio { display: flex; align-items: center; justify-content: center; padding: 40px 4% 60px; }
 .la-ntg5  { flex-shrink: 0; height: clamp(200px, 28vw, 500px); width: auto; pointer-events: none; user-select: none; }
-.la-condensor { flex-shrink: 0; height: clamp(220px, 32vw, 560px); width: auto; pointer-events: none; user-select: none; }
+.la-condensor { flex-shrink: 0; height: clamp(220px, 32vw, 560px); width: auto; pointer-events: none; user-select: none; justify-self: end; }
 @media (max-width: 700px) {
   /* Below 700 px mics would squish the audio card — hide them */
+  .la-mic-scene { display: block; }
   .la-mic-scene .la-ntg5,
   .la-mic-scene .la-condensor { display: none; }
-  .la-audio { padding: 0 6% 60px; }
+  /* Give the audio player breathing room below the banner, tighten the rest */
+  .la-audio { padding: 32px 6% 28px; }
+  /* Add-on card floats over the gradient on mobile */
+  #la-section .sect-addons {
+    background: transparent;
+    position: relative;
+    z-index: 2;
+    padding-top: 28px;
+    padding-bottom: 48px;
+  }
+  #la-section .sect-fade-to-dark {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 300px;
+    z-index: 1;
+    pointer-events: none;
+  }
 }
 
     /* ── COIN SPIN PACKAGE CARDS ── */
