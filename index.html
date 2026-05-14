@@ -1529,7 +1529,7 @@ footer > * { position: relative; z-index: 1; }
 }
 .faq-item.open .faq-arrow { transform: rotate(180deg); }
 .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
-.faq-item.open .faq-a { max-height: 300px; }
+.faq-item.open .faq-a { max-height: 500px; }
 .faq-a p { font-size: 0.92rem; color: #635f51; line-height: 1.75; margin: 0; padding-bottom: 22px; }
 
 /* ===== VINTAGE / FILM SECTION ===== */
@@ -5054,11 +5054,11 @@ footer > * { position: relative; z-index: 1; }
             </div>
             <div class="faq-item">
                 <button class="faq-q">Do you travel outside Boulder / Colorado? <span class="faq-arrow">↓</span></button>
-                <div class="faq-a"><p>Yes. I work throughout the Western US regularly. Travel fees may apply depending on location and duration — we'll sort that out clearly upfront, no surprises.</p></div>
+                <div class="faq-a"><p>Yes. I work throughout the US. Travel fees may apply depending on location and duration — we'll sort that out clearly upfront, no surprises.</p></div>
             </div>
             <div class="faq-item">
                 <button class="faq-q">What formats do you deliver? <span class="faq-arrow">↓</span></button>
-                <div class="faq-a"><p>Video is delivered as H.264 MP4 (web-ready) and ProRes (archive quality) unless you specify otherwise. Photos are delivered as full-resolution JPGs via online gallery. Raw files available upon request.</p></div>
+                <div class="faq-a"><p>Video is delivered as H.264 MP4 (web-ready) unless you specify otherwise. ProRes (archive quality) are kept in the studio vault. Photos are delivered as full-resolution JPGs via online gallery. Raw files (archive quality) are stored in the studio vault.</p></div>
             </div>
             <div class="faq-item">
                 <button class="faq-q">How does the deposit and payment work? <span class="faq-arrow">↓</span></button>
@@ -5636,9 +5636,7 @@ function closeLightbox() {
 /* ===== FAQ ACCORDION ===== */
 document.querySelectorAll('.faq-item').forEach(item => {
     item.querySelector('.faq-q').addEventListener('click', () => {
-        const isOpen = item.classList.contains('open');
-        document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
-        if (!isOpen) item.classList.add('open');
+        item.classList.toggle('open');
     });
 });
 
