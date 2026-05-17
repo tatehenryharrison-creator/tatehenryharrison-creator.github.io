@@ -284,7 +284,10 @@
       overflow: hidden;
     }
 
-    /* Scoped certificate styles (.hm-cert) */
+    /* ── Scoped certificate styles (.hm-cert) ──
+       container-type: inline-size makes .hm-cert a CSS container so all
+       child rules can use cqw units — they scale with the cert's own width,
+       not the viewport, so every element shrinks/grows with the card. */
     .hm-cert, .hm-cert *, .hm-cert *::before, .hm-cert *::after { box-sizing: border-box; }
 
     .hm-cert {
@@ -295,27 +298,24 @@
       --hm-brass:    #C9A84C;
       --hm-slate:    #5C6E82;
       --hm-paper:    #f1ede2;
+      container-type: inline-size;
+      container-name: cert;
       position: relative;
       width: min(900px, 92vw);
-      /* Height grows with content — padding replaces fixed aspect-ratio + absolute inset */
       padding: 8%;
       max-width: none;
       margin: 0 auto;
-      /* Directional paper lighting — bright top-left, warm shadow bottom-right */
       background:
         radial-gradient(ellipse at 20% 10%, rgba(255,255,255,0.72) 0%, transparent 54%),
         radial-gradient(ellipse at 80% 92%, rgba(158,142,114,0.22) 0%, transparent 48%),
         linear-gradient(152deg, #faf8f2 0%, #f1ece0 50%, #e9dfce 100%);
       box-shadow:
-        /* ── Inset bevel: top & left bright, bottom & right recessed ── */
         inset  0  1px 0   rgba(255,255,255,0.9),
         inset  1px  0 0   rgba(255,255,255,0.5),
         inset  0 -2px 6px rgba(28,26,20,0.06),
         inset -2px  0 6px rgba(28,26,20,0.04),
-        /* ── Page stack: two solid-colour layers beneath the cert ── */
         6px 10px 0 0 #e6dfc9,
         12px 20px 0 0 #d9d0b8,
-        /* ── Lift shadows: contact → near → ambient ── */
         0  2px  5px rgba(28,26,20,0.14),
         0  8px 24px rgba(28,26,20,0.20),
         0 24px 54px rgba(28,26,20,0.22),
@@ -342,90 +342,83 @@
       text-align: center;
       padding: 0;
     }
-    .hm-cert .hm-eyebrow { display: flex; align-items: center; gap: 14px; color: var(--hm-stone); margin-bottom: 22px; width: 90%; }
-    .hm-cert .hm-eyebrow .hm-ln { flex: 1; height: 1px; background: linear-gradient(90deg, transparent, rgba(99,95,81,0.5), transparent); min-width: 40px; }
-    .hm-cert .hm-eyebrow span { font-family: system-ui, sans-serif; font-size: 0.8rem; letter-spacing: 6px; text-transform: uppercase; }
-    .hm-cert h1.hm-title { font-family: 'Cinzel', serif; font-weight: 600; font-size: 2.4rem; letter-spacing: 4px; color: var(--hm-charcoal); margin: 0 0 6px; line-height: 1.1; text-transform: uppercase; }
-    .hm-cert .hm-subhead { font-family: 'EB Garamond', serif; font-weight: 400; font-style: italic; font-size: 1.1rem; letter-spacing: 2px; color: var(--hm-slate); margin: 0 0 22px; }
-    .hm-cert .hm-recipient { font-family: 'Cinzel', serif; font-weight: 400; font-size: 2.2rem; letter-spacing: 2px; color: var(--hm-ink); margin: 16px 0 4px; padding-bottom: 6px; border-bottom: 1px solid rgba(99,95,81,0.35); min-width: 60%; }
-    .hm-cert .hm-body { font-family: 'EB Garamond', serif; font-style: italic; font-size: 1.0rem; color: var(--hm-charcoal); margin: 14px auto 0; max-width: 82%; line-height: 1.7; }
+    /* All typographic + spacing values use clamp(min, Xcqw, max) so they
+       contract smoothly as the cert narrows below 900 px. */
+    .hm-cert .hm-eyebrow {
+      display: flex; align-items: center;
+      gap: clamp(6px, 1.6cqw, 14px);
+      color: var(--hm-stone);
+      margin-bottom: clamp(12px, 2.4cqw, 22px);
+      width: 90%;
+    }
+    .hm-cert .hm-eyebrow .hm-ln { flex: 1; height: 1px; background: linear-gradient(90deg, transparent, rgba(99,95,81,0.5), transparent); min-width: 20px; }
+    .hm-cert .hm-eyebrow span { font-family: system-ui, sans-serif; font-size: clamp(0.52rem, 1.4cqw, 0.8rem); letter-spacing: clamp(2px, 0.67cqw, 6px); text-transform: uppercase; }
+    .hm-cert h1.hm-title { font-family: 'Cinzel', serif; font-weight: 600; font-size: clamp(1.3rem, 4.3cqw, 2.4rem); letter-spacing: clamp(1px, 0.44cqw, 4px); color: var(--hm-charcoal); margin: 0 0 6px; line-height: 1.1; text-transform: uppercase; }
+    .hm-cert .hm-subhead { font-family: 'EB Garamond', serif; font-weight: 400; font-style: italic; font-size: clamp(0.72rem, 2cqw, 1.1rem); letter-spacing: clamp(0.5px, 0.22cqw, 2px); color: var(--hm-slate); margin: 0 0 clamp(12px, 2.4cqw, 22px); }
+    .hm-cert .hm-recipient { font-family: 'Cinzel', serif; font-weight: 400; font-size: clamp(1.1rem, 3.9cqw, 2.2rem); letter-spacing: clamp(0.5px, 0.22cqw, 2px); color: var(--hm-ink); margin: clamp(8px, 1.8cqw, 16px) 0 4px; padding-bottom: 6px; border-bottom: 1px solid rgba(99,95,81,0.35); min-width: 60%; }
+    .hm-cert .hm-body { font-family: 'EB Garamond', serif; font-style: italic; font-size: clamp(0.68rem, 1.78cqw, 1rem); color: var(--hm-charcoal); margin: clamp(8px, 1.6cqw, 14px) auto 0; max-width: 88%; line-height: 1.7; }
     .hm-cert .hm-body em { font-style: italic; }
-    .hm-cert .hm-footer { display: flex; gap: 60px; align-items: flex-end; margin-top: 28px; padding-top: 36px; width: 80%; justify-content: space-between; }
+    .hm-cert .hm-footer { display: flex; gap: clamp(14px, 6.7cqw, 60px); align-items: flex-end; margin-top: clamp(12px, 3.1cqw, 28px); padding-top: clamp(16px, 4cqw, 36px); width: 88%; justify-content: space-between; }
     .hm-cert .hm-sigblock { flex: 1; min-width: 0; display: flex; flex-direction: column; align-items: center; }
-    .hm-cert .hm-sig { font-family: 'IM Fell English', serif; font-style: italic; font-size: 1.4rem; color: var(--hm-charcoal); letter-spacing: 1px; margin-bottom: 4px; transform: rotate(-3deg); opacity: 0.85; }
+    .hm-cert .hm-sig { font-family: 'IM Fell English', serif; font-style: italic; font-size: clamp(0.85rem, 2.5cqw, 1.4rem); color: var(--hm-charcoal); letter-spacing: 1px; margin-bottom: 4px; transform: rotate(-3deg); opacity: 0.85; }
     .hm-cert .hm-sig.hm-sig-date { transform: rotate(-1deg); }
     .hm-cert .hm-sig-rule { width: 100%; height: 1px; background: rgba(99,95,81,0.5); margin-bottom: 6px; }
-    .hm-cert .hm-sig-label { font-family: system-ui, sans-serif; font-size: 0.62rem; letter-spacing: 2.5px; text-transform: uppercase; color: var(--hm-stone); }
+    .hm-cert .hm-sig-label { font-family: system-ui, sans-serif; font-size: clamp(0.38rem, 1.1cqw, 0.62rem); letter-spacing: clamp(0.8px, 0.28cqw, 2.5px); text-transform: uppercase; color: var(--hm-stone); }
     .hm-cert .hm-seal { position: absolute; bottom: 12%; right: 10%; width: 17%; aspect-ratio: 1; pointer-events: none; }
     .hm-cert .hm-seal svg { width: 100%; height: 100%; display: block; }
 
     /* Addon cards always single column inside cert */
-    .hm-cert .sect-addons-grid { grid-template-columns: 1fr; }
+    .hm-cert .sect-addons-grid { grid-template-columns: 1fr; gap: 8px; }
 
-    /* ── Delivery chips inside certificate (paper background context) ── */
+    /* ── Delivery chips (paper context) ── */
     .hm-cert .delivery-chips-row {
-      padding: 20px 0 8px;
-      gap: 10px;
+      padding: clamp(12px, 2.2cqw, 20px) 0 clamp(4px, 0.9cqw, 8px);
+      gap: clamp(5px, 1.1cqw, 10px);
       flex-wrap: wrap;
       justify-content: center;
       width: 100%;
     }
     .hm-cert .delivery-chip {
-      min-width: 108px;
-      padding: 22px 26px 20px;
+      min-width: clamp(60px, 12cqw, 108px);
+      padding: clamp(11px, 2.4cqw, 22px) clamp(12px, 2.9cqw, 26px) clamp(9px, 2.2cqw, 20px);
       background: rgba(201,168,76,0.07);
       border-color: rgba(201,168,76,0.40);
       box-shadow: 0 0 14px rgba(201,168,76,0.08), inset 0 1px 0 rgba(201,168,76,0.14);
     }
-    .hm-cert .delivery-chip .delivery-chip-word { font-size: 1.05rem; }
+    .hm-cert .delivery-chip .delivery-chip-word { font-size: clamp(0.6rem, 1.9cqw, 1.05rem); }
     .hm-cert .delivery-chip:hover { background: rgba(201,168,76,0.13); }
 
-    /* ── Add-on cards inside certificate (light / paper context) ── */
-    .hm-cert .sect-addons {
-      padding: 16px 0 0;
-      width: 100%;
-    }
-    .hm-cert .sect-addons-label { color: rgba(99,95,81,0.45); margin-bottom: 12px; }
-    .hm-cert .addon-card {
-      background: rgba(201,168,76,0.04);
-      border-color: rgba(201,168,76,0.22);
-    }
-    .hm-cert .addon-card:hover {
-      background: rgba(201,168,76,0.09);
-      border-color: rgba(201,168,76,0.38);
-      box-shadow: 0 4px 16px rgba(201,168,76,0.07);
-    }
+    /* ── Add-on cards (light / paper context) ── */
+    .hm-cert .sect-addons { padding: clamp(8px, 1.8cqw, 16px) 0 0; width: 100%; }
+    .hm-cert .sect-addons-label { color: rgba(99,95,81,0.45); margin-bottom: clamp(6px, 1.3cqw, 12px); }
+    .hm-cert .addon-card { background: rgba(201,168,76,0.04); border-color: rgba(201,168,76,0.22); }
+    .hm-cert .addon-card:hover { background: rgba(201,168,76,0.09); border-color: rgba(201,168,76,0.38); box-shadow: 0 4px 16px rgba(201,168,76,0.07); }
     .hm-cert .addon-card.is-added { border-color: rgba(201,168,76,0.48); }
     .hm-cert .addon-card-name { color: #2A2220; }
     .hm-cert .addon-card-tagline { color: rgba(99,95,81,0.6); }
     .hm-cert .addon-card-details-btn { color: rgba(99,95,81,0.35); }
     .hm-cert .addon-card-details-btn:hover { color: rgba(201,168,76,0.65); }
     .hm-cert .addon-card-expand-desc { color: rgba(99,95,81,0.65); }
-    .hm-cert .addon-card-expand-tags li {
-      color: rgba(201,168,76,0.85);
-      background: rgba(201,168,76,0.07);
-      border-color: rgba(201,168,76,0.22);
-    }
+    .hm-cert .addon-card-expand-tags li { color: rgba(201,168,76,0.85); background: rgba(201,168,76,0.07); border-color: rgba(201,168,76,0.22); }
     .hm-cert .addon-card-expand-inner { border-top-color: rgba(201,168,76,0.1); }
     .hm-cert .addon-stepper-btn { color: #C9A84C; border-color: rgba(201,168,76,0.3); }
     .hm-cert .addon-stepper-btn:hover { background: rgba(201,168,76,0.1); border-color: rgba(201,168,76,0.5); }
     .hm-cert .addon-stepper-count { color: #2A2220; }
-    .hm-cert .delivery-qty-capsules { border-top-color: rgba(201,168,76,0.1); margin-top: 10px; padding-top: 10px; }
+    .hm-cert .delivery-qty-capsules { border-top-color: rgba(201,168,76,0.1); margin-top: clamp(6px, 1.1cqw, 10px); padding-top: clamp(6px, 1.1cqw, 10px); }
     .hm-cert .delivery-qty-capsule { border-radius: 50px !important; }
     .hm-cert .addon-card.details-open.delivery-qty-capsule { border-radius: 24px !important; }
-    /* ── Compact add-on cards inside cert so expanded details don't push footer ── */
-    .hm-cert .addon-card-main { padding: 10px 12px; gap: 10px; }
-    .hm-cert .addon-card-icon-wrap { width: 34px; height: 34px; border-radius: 9px; flex-shrink: 0; }
-    .hm-cert .addon-card-icon-wrap svg { width: 18px; height: 18px; }
-    .hm-cert .addon-card-name { font-size: 0.78rem; margin-bottom: 2px; }
-    .hm-cert .addon-card-tagline { font-size: 0.72rem; margin-bottom: 3px; }
-    .hm-cert .addon-card-details-btn { font-size: 0.6rem; }
-    .hm-cert .addon-toggle-btn { padding: 5px 13px; font-size: 0.75rem; }
-    .hm-cert .addon-card-expand-inner { padding: 9px 12px 11px calc(34px + 22px); }
-    .hm-cert .addon-card-expand-desc { font-size: 0.77rem; line-height: 1.5; margin-bottom: 7px; }
-    .hm-cert .addon-card-expand-tags { gap: 4px; }
-    .hm-cert .addon-card-expand-tags li { font-size: 0.68rem; padding: 2px 7px; }
-    .hm-cert .sect-addons-grid { gap: 8px; }
+    /* ── Compact add-on cards: fluid sizing tied to cert width ── */
+    .hm-cert .addon-card-main { padding: clamp(7px, 1.1cqw, 10px) clamp(8px, 1.3cqw, 12px); gap: clamp(7px, 1.1cqw, 10px); }
+    .hm-cert .addon-card-icon-wrap { width: clamp(26px, 3.8cqw, 34px); height: clamp(26px, 3.8cqw, 34px); border-radius: 9px; flex-shrink: 0; }
+    .hm-cert .addon-card-icon-wrap svg { width: clamp(14px, 2cqw, 18px); height: clamp(14px, 2cqw, 18px); }
+    .hm-cert .addon-card-name { font-size: clamp(0.55rem, 1.4cqw, 0.78rem); margin-bottom: 2px; }
+    .hm-cert .addon-card-tagline { font-size: clamp(0.5rem, 1.3cqw, 0.72rem); margin-bottom: 3px; }
+    .hm-cert .addon-card-details-btn { font-size: clamp(0.44rem, 1.05cqw, 0.6rem); }
+    .hm-cert .addon-toggle-btn { padding: clamp(4px, 0.56cqw, 5px) clamp(8px, 1.45cqw, 13px); font-size: clamp(0.52rem, 1.35cqw, 0.75rem); }
+    .hm-cert .addon-card-expand-inner { padding: clamp(6px, 1cqw, 9px) clamp(8px, 1.3cqw, 12px) clamp(8px, 1.2cqw, 11px) calc(clamp(26px, 3.8cqw, 34px) + clamp(16px, 2.4cqw, 22px)); }
+    .hm-cert .addon-card-expand-desc { font-size: clamp(0.52rem, 1.4cqw, 0.77rem); line-height: 1.5; margin-bottom: clamp(4px, 0.78cqw, 7px); }
+    .hm-cert .addon-card-expand-tags { gap: clamp(3px, 0.44cqw, 4px); }
+    .hm-cert .addon-card-expand-tags li { font-size: clamp(0.44rem, 1.2cqw, 0.68rem); padding: 2px clamp(5px, 0.78cqw, 7px); }
 
     /* ── FORMAT TILES ── */
     /* ── FORMAT COLUMNS inside the features tile ── */
@@ -675,11 +668,7 @@
       }
       /* Audio extras pitch layout already stacks at 640px */
       .la-addon-layout { padding: 0 5%; }
-      /* ── Certificate: fluid — no fixed width or scale override needed ── */
-      .hm-cert h1.hm-title { font-size: 1.8rem; letter-spacing: 2.5px; }
-      .hm-cert .hm-subhead { font-size: 0.88rem; margin-bottom: 12px; }
-      .hm-cert .hm-eyebrow { margin-bottom: 14px; }
-      .hm-cert .hm-footer { gap: 24px; width: 94%; }
+      /* ── Certificate: cqw handles scaling — seal shrinks a touch more on mobile ── */
       .hm-cert .hm-seal { width: 13%; bottom: 10%; right: 8%; }
     }
 /* ── JOURNEY SECTION ── */
