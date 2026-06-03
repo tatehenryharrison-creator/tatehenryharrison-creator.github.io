@@ -57,6 +57,24 @@ const ADDON_LABELS = {
 // addons is now a plain object: { key: quantity }
 let cart = { package: null, addons: {} };
 
+// ── Cart persistence across page navigation ────────────────────────────────
+const CART_KEY = 'hm_cart';
+function saveCart() {
+  try { localStorage.setItem(CART_KEY, JSON.stringify(cart)); } catch(e) {}
+}
+function loadCart() {
+  try {
+    const raw = localStorage.getItem(CART_KEY);
+    if (raw) {
+      const saved = JSON.parse(raw);
+      if (saved && typeof saved === 'object') {
+        cart.package = saved.package || null;
+        cart.addons  = saved.addons  || {};
+      }
+    }
+  } catch(e) {}
+}
+
 // ── Add-to-cart fly animation ──────────────────────────────────────────────
 let _lastAddonClickEl = null;
 
@@ -225,6 +243,7 @@ function renderBar() {
 
 function selectPackage(tier) {
   cart.package = tier;
+  saveCart();
   renderBar();
 }
 
@@ -233,6 +252,7 @@ function toggleAddon(addonKey) {
   const wasOff = (cart.addons[addonKey] || 0) === 0;
   cart.addons[addonKey] = wasOff ? 1 : 0;
   if (wasOff) flyToCart(_lastAddonClickEl);
+  saveCart();
   renderBar();
 }
 
@@ -250,6 +270,7 @@ function setAddonQty(key, delta) {
   if (foldBtn) foldBtn.classList.toggle('active', next > 0);
   // Update add-btn label if present
   updateAddonQtyBtn(key, next);
+  saveCart();
   renderBar();
 }
 
@@ -333,6 +354,8 @@ function toggleCompare() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+  loadCart();   // restore cart before first renderBar
+  renderBar();  // sync UI to restored state
   initScrollReveal();
   initCollageZoom();
 
