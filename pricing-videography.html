@@ -447,7 +447,7 @@
       padding-top: 22px;
     }
     .ft-format-arrow--vert { display: none; }
-    .ft-format-col { flex: 1; min-width: 0; }
+    .ft-format-col { flex: 1; min-width: 0; text-align: center; }
     .ft-format-num {
       font-family: 'Cinzel', serif;
       font-size: 0.55rem; letter-spacing: 3px;
@@ -460,21 +460,19 @@
     }
     .ft-format-rule {
       width: 20px; height: 1px;
-      background: rgba(201,168,76,0.38); margin-bottom: 12px;
+      background: rgba(201,168,76,0.38); margin: 0 auto 12px;
     }
     .ft-format-list {
       list-style: none; margin: 0; padding: 0;
       display: flex; flex-direction: column; gap: 6px;
+      align-items: center;
     }
     .ft-format-list li {
       font-family: 'EB Garamond', serif;
       font-size: 0.88rem; color: rgba(232,225,212,0.72);
-      padding-left: 13px; position: relative; line-height: 1.4;
+      padding-left: 0; position: static; line-height: 1.4;
     }
-    .ft-format-list li::before {
-      content: '–'; position: absolute; left: 0;
-      color: rgba(201,168,76,0.5);
-    }
+    .ft-format-list li::before { display: none; }
     @media (max-width: 680px) {
       .features-tile-formats {
         display: grid;
