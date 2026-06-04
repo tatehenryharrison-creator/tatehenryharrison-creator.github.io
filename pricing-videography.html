@@ -106,6 +106,9 @@
     .features-tile {
       position: relative;
       margin-bottom: 36px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
     .features-tile-border-svg {
       position: absolute;
@@ -117,8 +120,9 @@
     .features-tile-header {
       position: relative;
       z-index: 1;
-      padding: 48px 60px 20px;
+      padding: 40px 60px 16px;
       text-align: center;
+      width: 100%;
     }
     .features-tile-body {
       position: relative;
@@ -126,6 +130,7 @@
       padding: 0 60px 24px;
       text-align: center;
       min-height: 80px;
+      width: 100%;
     }
     .features-tile-eyebrow {
       font-family: 'EB Garamond', serif;
@@ -302,7 +307,7 @@
       container-name: cert;
       position: relative;
       width: min(900px, 92vw);
-      padding: 5.5%;
+      padding: 12% 14%; /* top/bottom 12% clears the 9.8% SVG frame; left/right 14% clears the 12.7% SVG frame */
       max-width: none;
       margin: 0 auto;
       background:
@@ -348,23 +353,23 @@
       display: flex; align-items: center;
       gap: clamp(5px, 1.4cqw, 12px);
       color: var(--hm-stone);
-      margin-bottom: clamp(8px, 1.6cqw, 14px);
-      width: 90%;
+      margin-bottom: clamp(6px, 1.2cqw, 10px);
+      width: 100%;
     }
     .hm-cert .hm-eyebrow .hm-ln { flex: 1; height: 1px; background: linear-gradient(90deg, transparent, rgba(99,95,81,0.5), transparent); min-width: 20px; }
     .hm-cert .hm-eyebrow span { font-family: system-ui, sans-serif; font-size: clamp(0.48rem, 1.2cqw, 0.72rem); letter-spacing: clamp(2px, 0.6cqw, 5px); text-transform: uppercase; }
-    .hm-cert h1.hm-title { font-family: 'Cinzel', serif; font-weight: 600; font-size: clamp(1.2rem, 3.8cqw, 2.1rem); letter-spacing: clamp(1px, 0.4cqw, 3.5px); color: var(--hm-charcoal); margin: 0 0 4px; line-height: 1.1; text-transform: uppercase; }
-    .hm-cert .hm-subhead { font-family: 'EB Garamond', serif; font-weight: 400; font-style: italic; font-size: clamp(0.68rem, 1.7cqw, 0.98rem); letter-spacing: clamp(0.5px, 0.2cqw, 1.5px); color: var(--hm-slate); margin: 0 0 clamp(8px, 1.6cqw, 14px); }
-    .hm-cert .hm-recipient { font-family: 'Cinzel', serif; font-weight: 400; font-size: clamp(0.95rem, 3.2cqw, 1.8rem); letter-spacing: clamp(0.5px, 0.2cqw, 1.5px); color: var(--hm-ink); margin: clamp(6px, 1.4cqw, 12px) 0 3px; padding-bottom: 5px; border-bottom: 1px solid rgba(99,95,81,0.35); min-width: 60%; }
-    .hm-cert .hm-body { font-family: 'EB Garamond', serif; font-style: italic; font-size: clamp(0.64rem, 1.55cqw, 0.9rem); color: var(--hm-charcoal); margin: clamp(6px, 1.3cqw, 11px) auto 0; max-width: 88%; line-height: 1.6; }
+    .hm-cert h1.hm-title { font-family: 'Cinzel', serif; font-weight: 600; font-size: clamp(1.1rem, 3.5cqw, 2rem); letter-spacing: clamp(1px, 0.4cqw, 3.5px); color: var(--hm-charcoal); margin: 0 0 3px; line-height: 1.1; text-transform: uppercase; }
+    .hm-cert .hm-subhead { font-family: 'EB Garamond', serif; font-weight: 400; font-style: italic; font-size: clamp(0.65rem, 1.6cqw, 0.92rem); letter-spacing: clamp(0.5px, 0.2cqw, 1.5px); color: var(--hm-slate); margin: 0 0 clamp(6px, 1.2cqw, 10px); }
+    .hm-cert .hm-recipient { font-family: 'Cinzel', serif; font-weight: 400; font-size: clamp(0.9rem, 3cqw, 1.7rem); letter-spacing: clamp(0.5px, 0.2cqw, 1.5px); color: var(--hm-ink); margin: clamp(5px, 1.1cqw, 10px) 0 3px; padding-bottom: 4px; border-bottom: 1px solid rgba(99,95,81,0.35); min-width: 60%; }
+    .hm-cert .hm-body { font-family: 'EB Garamond', serif; font-style: italic; font-size: clamp(0.62rem, 1.45cqw, 0.85rem); color: var(--hm-charcoal); margin: clamp(5px, 1.1cqw, 9px) auto 0; max-width: 92%; line-height: 1.55; }
     .hm-cert .hm-body em { font-style: italic; }
-    .hm-cert .hm-footer { display: flex; gap: clamp(12px, 5.5cqw, 50px); align-items: flex-end; margin-top: clamp(10px, 2.2cqw, 20px); padding-top: clamp(12px, 2.8cqw, 26px); width: 88%; justify-content: space-between; border-top: 1px solid rgba(99,95,81,0.18); }
+    .hm-cert .hm-footer { display: flex; gap: clamp(12px, 5.5cqw, 50px); align-items: flex-end; margin-top: clamp(8px, 1.8cqw, 16px); padding-top: clamp(10px, 2.2cqw, 20px); width: 100%; justify-content: space-between; border-top: 1px solid rgba(99,95,81,0.18); }
     .hm-cert .hm-sigblock { flex: 1; min-width: 0; display: flex; flex-direction: column; align-items: center; }
-    .hm-cert .hm-sig { font-family: 'IM Fell English', serif; font-style: italic; font-size: clamp(0.8rem, 2.2cqw, 1.25rem); color: var(--hm-charcoal); letter-spacing: 1px; margin-bottom: 3px; transform: rotate(-3deg); opacity: 0.85; }
+    .hm-cert .hm-sig { font-family: 'IM Fell English', serif; font-style: italic; font-size: clamp(0.75rem, 2cqw, 1.15rem); color: var(--hm-charcoal); letter-spacing: 1px; margin-bottom: 3px; transform: rotate(-3deg); opacity: 0.85; }
     .hm-cert .hm-sig.hm-sig-date { transform: rotate(-1deg); }
-    .hm-cert .hm-sig-rule { width: 100%; height: 1px; background: rgba(99,95,81,0.5); margin-bottom: 5px; }
-    .hm-cert .hm-sig-label { font-family: system-ui, sans-serif; font-size: clamp(0.36rem, 0.95cqw, 0.55rem); letter-spacing: clamp(0.8px, 0.25cqw, 2px); text-transform: uppercase; color: var(--hm-stone); }
-    .hm-cert .hm-seal { position: absolute; bottom: 10%; right: 8%; width: 14%; aspect-ratio: 1; pointer-events: none; }
+    .hm-cert .hm-sig-rule { width: 100%; height: 1px; background: rgba(99,95,81,0.5); margin-bottom: 4px; }
+    .hm-cert .hm-sig-label { font-family: system-ui, sans-serif; font-size: clamp(0.34rem, 0.9cqw, 0.52rem); letter-spacing: clamp(0.8px, 0.25cqw, 2px); text-transform: uppercase; color: var(--hm-stone); }
+    .hm-cert .hm-seal { position: absolute; bottom: 12%; right: 12%; width: 14%; aspect-ratio: 1; pointer-events: none; }
     .hm-cert .hm-seal svg { width: 100%; height: 100%; display: block; }
 
     /* Addon cards always single column inside cert; --1 grid fills full width */
@@ -426,7 +431,8 @@
     .features-tile-divider {
       position: relative; z-index: 1;
       display: flex; align-items: center; gap: 16px;
-      padding: 0 52px 28px;
+      padding: 0 44px 20px;
+      width: 100%;
     }
     .features-tile-divider .ftd-line {
       flex: 1; height: 1px;
@@ -439,13 +445,13 @@
     }
     .features-tile-formats {
       position: relative; z-index: 1;
-      display: flex; align-items: flex-start;
-      padding: 0 40px 52px;
+      display: flex; align-items: center; justify-content: center;
+      padding: 0 44px 40px;
+      width: 100%;
     }
     .ft-format-arrow {
       flex-shrink: 0; width: 36px;
-      display: flex; align-items: flex-start; justify-content: center;
-      padding-top: 22px;
+      display: flex; align-items: center; justify-content: center;
     }
     .ft-format-arrow--vert { display: none; }
     .ft-format-col { flex: 1; min-width: 0; text-align: center; }
