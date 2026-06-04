@@ -106,6 +106,9 @@
     .features-tile {
       position: relative;
       margin-bottom: 36px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
     .features-tile-border-svg {
       position: absolute;
@@ -117,8 +120,9 @@
     .features-tile-header {
       position: relative;
       z-index: 1;
-      padding: 48px 60px 20px;
+      padding: 40px 60px 16px;
       text-align: center;
+      width: 100%;
     }
     .features-tile-body {
       position: relative;
@@ -126,6 +130,7 @@
       padding: 0 60px 24px;
       text-align: center;
       min-height: 80px;
+      width: 100%;
     }
     .features-tile-eyebrow {
       font-family: 'EB Garamond', serif;
@@ -426,7 +431,8 @@
     .features-tile-divider {
       position: relative; z-index: 1;
       display: flex; align-items: center; gap: 16px;
-      padding: 0 52px 28px;
+      padding: 0 44px 20px;
+      width: 100%;
     }
     .features-tile-divider .ftd-line {
       flex: 1; height: 1px;
@@ -439,13 +445,13 @@
     }
     .features-tile-formats {
       position: relative; z-index: 1;
-      display: flex; align-items: flex-start;
-      padding: 0 40px 52px;
+      display: flex; align-items: center; justify-content: center;
+      padding: 0 44px 40px;
+      width: 100%;
     }
     .ft-format-arrow {
       flex-shrink: 0; width: 36px;
-      display: flex; align-items: flex-start; justify-content: center;
-      padding-top: 22px;
+      display: flex; align-items: center; justify-content: center;
     }
     .ft-format-arrow--vert { display: none; }
     .ft-format-col { flex: 1; min-width: 0; text-align: center; }
