@@ -586,6 +586,25 @@ html, body { overflow-x: hidden; }
     font-family: 'EB Garamond', serif; font-size: 0.68rem;
     letter-spacing: 2px; text-transform: uppercase; color: #d0ccc4; margin: 0;
 }
+/* Mini collection tile */
+.portfolio-collection { cursor: default; }
+.collection-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 3px; border-radius: 8px; overflow: hidden;
+}
+.collection-thumb {
+    position: relative; cursor: pointer; overflow: hidden;
+}
+.collection-thumb img {
+    width: 100%; display: block; object-fit: cover;
+    aspect-ratio: 1; transition: transform 0.3s ease;
+}
+.collection-thumb:hover img { transform: scale(1.06); }
+.collection-thumb .portfolio-overlay { border-radius: 0; }
+.collection-thumb:hover .portfolio-overlay { background: rgba(28,26,20,0.45); }
+.collection-thumb:hover .portfolio-meta { opacity: 1; transform: translateY(0); }
+.portfolio-collection:hover .portfolio-img-wrap { transform: none; box-shadow: none; }
+
 /* Caption below image */
 .portfolio-caption {
     padding: 7px 2px 0;
@@ -4876,6 +4895,31 @@ footer > * { position: relative; z-index: 1; }
             </div>
         </div>
 
+        <div class="portfolio-item portfolio-collection" data-category="macro-product">
+            <div class="collection-grid">
+                <div class="collection-thumb" data-lightbox-src="portfolio/Photography/Product Photography/Arm Band White.jpg" data-title="Arm Band — White">
+                    <img src="portfolio/Photography/Product Photography/Arm Band White.jpg" alt="Arm Band White" loading="lazy">
+                    <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Product Photography</p></div></div>
+                </div>
+                <div class="collection-thumb" data-lightbox-src="portfolio/Photography/Product Photography/Arm Band Purple.jpg" data-title="Arm Band — Purple">
+                    <img src="portfolio/Photography/Product Photography/Arm Band Purple.jpg" alt="Arm Band Purple" loading="lazy">
+                    <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Product Photography</p></div></div>
+                </div>
+                <div class="collection-thumb" data-lightbox-src="portfolio/Photography/Product Photography/Arm Band Clear.jpg" data-title="Arm Band — Clear">
+                    <img src="portfolio/Photography/Product Photography/Arm Band Clear.jpg" alt="Arm Band Clear" loading="lazy">
+                    <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Product Photography</p></div></div>
+                </div>
+                <div class="collection-thumb" data-lightbox-src="portfolio/Photography/Product Photography/Arm Band Yellow.jpg" data-title="Arm Band — Yellow">
+                    <img src="portfolio/Photography/Product Photography/Arm Band Yellow.jpg" alt="Arm Band Yellow" loading="lazy">
+                    <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Product Photography</p></div></div>
+                </div>
+            </div>
+            <div class="portfolio-caption">
+                <span class="caption-title">Arm Band Collection</span>
+                <span class="caption-gear">Product Photography</span>
+            </div>
+        </div>
+
         <!-- ── VINTAGE GLASS & ANALOGUE FILM ──────────────────── -->
         <div class="portfolio-item" data-category="vintage" data-lightbox-src="portfolio/Photography/Vintage & Film/Port Police Boats_FilmKodakEktachrome_Jupiter9, 85mm.jpg">
             <div class="portfolio-img-wrap">
@@ -5544,6 +5588,7 @@ const lightboxCaption = document.getElementById('lightbox-caption');
 
 document.querySelectorAll('.portfolio-item').forEach(item => {
     item.addEventListener('click', () => {
+        if (!item.dataset.lightboxSrc && !item.dataset.youtubeId && !item.dataset.videoSrc) return;
         const title = item.querySelector('.caption-title')?.textContent || '';
         const gear  = item.querySelector('.caption-gear')?.textContent || '';
 
@@ -5606,6 +5651,36 @@ document.querySelectorAll('.portfolio-item').forEach(item => {
             ? `<strong style="color:#e8e1d4;">${title}</strong>${gear ? ' <span style="color:#635f51;margin-left:8px;">· ' + gear + '</span>' : ''}`
             : '';
 
+        lightbox.classList.add('open');
+        document.body.style.overflow = 'hidden';
+    });
+});
+
+document.querySelectorAll('.collection-thumb').forEach(thumb => {
+    thumb.addEventListener('click', e => {
+        e.stopPropagation();
+        const src   = thumb.dataset.lightboxSrc;
+        const title = thumb.dataset.title || '';
+        lightboxInner.innerHTML = '<div style="width:60px;height:60px;border:2px solid rgba(232,225,212,0.2);border-top-color:#e8e1d4;border-radius:50%;animation:lb-spin 0.7s linear infinite;margin:auto;"></div>';
+        const img = new Image();
+        img.src = src;
+        img.alt = title;
+        img.style.cssText = 'max-width:90vw;max-height:80vh;object-fit:contain;border-radius:6px;display:block;cursor:zoom-in;transition:transform 0.25s cubic-bezier(0.22,1,0.36,1);';
+        img.onload = () => {
+            lightboxInner.innerHTML = '';
+            let zoomed = false;
+            img.addEventListener('click', ev => {
+                ev.stopPropagation();
+                if (!zoomed) {
+                    const rect = img.getBoundingClientRect();
+                    img.style.transformOrigin = `${((ev.clientX-rect.left)/rect.width*100).toFixed(1)}% ${((ev.clientY-rect.top)/rect.height*100).toFixed(1)}%`;
+                    img.style.transform = 'scale(2.5)'; img.style.cursor = 'zoom-out'; zoomed = true;
+                } else { img.style.transform = 'scale(1)'; img.style.cursor = 'zoom-in'; zoomed = false; }
+            });
+            lightboxInner.appendChild(img);
+        };
+        img.onerror = () => { lightboxInner.innerHTML = '<p style="color:#a8a49c;font-family:\'EB Garamond\',serif;">Image could not be loaded.</p>'; };
+        lightboxCaption.innerHTML = `<strong style="color:#e8e1d4;">${title}</strong> <span style="color:#635f51;margin-left:8px;">· Product Photography</span>`;
         lightbox.classList.add('open');
         document.body.style.overflow = 'hidden';
     });
