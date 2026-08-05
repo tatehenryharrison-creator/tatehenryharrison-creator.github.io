@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta name="description" content="Portrait, product, nature, street, and film photography by Tate Harrison of Harrison Media LLC, based in Boulder, Colorado.">
+<meta name="keywords" content="Boulder photographer, Colorado photography, portrait photography, product photography, nature photography, film photography">
+<meta name="author" content="Tate Harrison">
+
+<meta property="og:title" content="Photography | Harrison Media LLC">
+<meta property="og:description" content="Portrait, product, nature, street, and film photography by Tate Harrison, based in Boulder, Colorado.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.harrisonmediallc.com/photography.html">
+<meta property="og:image" content="https://www.harrisonmediallc.com/Portfolio/Photography/Nature/Rainbow%20Mountain.jpg">
+<meta property="og:site_name" content="Harrison Media LLC">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Photography | Harrison Media LLC">
+<meta name="twitter:description" content="Portrait, product, nature, street, and film photography by Tate Harrison, based in Boulder, Colorado.">
+<meta name="twitter:image" content="https://www.harrisonmediallc.com/Portfolio/Photography/Nature/Rainbow%20Mountain.jpg">
+
+<link rel="canonical" href="https://www.harrisonmediallc.com/photography.html">
+
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Photography | Harrison Media LLC</title>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "Photography | Harrison Media LLC",
+  "url": "https://www.harrisonmediallc.com/photography.html",
+  "description": "Portrait, product, nature, street, and film photography by Tate Harrison, based in Boulder, Colorado.",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "Harrison Media LLC",
+    "url": "https://www.harrisonmediallc.com/"
+  },
+  "about": {
+    "@type": "ProfessionalService",
+    "name": "Harrison Media LLC"
+  }
+}
+</script>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+        html {
+    scroll-behavior: smooth;
+}
+    nav a:hover {
+    opacity: 0.7;
+}
+    .contact-link {
+    color: white;
+    text-decoration: none;
+    position: relative;
+    transition: opacity 0.3s ease;
+}
+
+.contact-link:hover {
+    opacity: 0.7;
+}
+
+.contact-link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    width: 0%;
+    height: 1px;
+    background: white;
+    transition: width 0.3s ease;
+}
+
+.contact-link:hover::after {
+    width: 100%;
+}
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background: #0f0f0f;
+    color: white;
+}
+nav {
+    padding: 20px 10%;
+    display: flex;
+    justify-content: space-between;
+}
+nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+}
+.section {
+    padding: 80px 10%;
+}
+h1 {
+    font-size: 3rem;
+    margin-bottom: 10px;
+}
+p {
+    opacity: 0.7;
+}
+.cta {
+    text-align: center;
+}
+.form-wrapper {
+    max-width: 800px;
+    margin: auto;
+}
+footer {
+    text-align: center;
+    padding: 40px 0;
+    opacity: 0.5;
+}
+    .subtext {
+    padding-left: 12px;
+}
+
+.subtext p {
+    margin: 6px 0;
+    opacity: 0.7;
+}
+
+    .hero {
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-height: 90vh;
+    padding: 0 10%;
+    overflow: hidden;
+}
+
+/* Text Panel */
+.hero-text-panel {
+    position: relative;
+    width: 45%;
+    padding: 50px;
+    border-radius: 20px;
+    background: rgba(0,0,0,0.35);
+    backdrop-filter: blur(10px);
+    z-index: 3;
+
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeUp 1.2s ease forwards;
+}
+
+.hero-title {
+    font-size: 3.8rem;
+    margin-bottom: 20px;
+}
+
+/* Photo side */
+.hero-video {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 65%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.hero-video img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 30%;
+    transform: scale(1.15);
+    animation: slowZoom 25s ease-in-out infinite;
+}
+
+/* Cinematic Fade */
+.hero-video::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 75%;
+    height: 100%;
+    background: linear-gradient(
+        to right,
+        #0a0a0a 0%,
+        rgba(10,10,10,0.9) 35%,
+        rgba(10,10,10,0) 100%
+    );
+}
+
+/* Subtle film grain overlay */
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background-image: url("https://www.transparenttextures.com/patterns/asfalt-light.png");
+    opacity: 0.05;
+    z-index: 2;
+    pointer-events: none;
+}
+
+/* Animations */
+@keyframes slowZoom {
+    0% { transform: scale(1.15); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1.15); }
+}
+
+@keyframes fadeUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ===================== */
+/* Services Section      */
+/* ===================== */
+
+.services-section {
+    background: linear-gradient(to bottom, #0f0f0f 0%, #ffffff 30%);
+    padding: 100px 10%;
+}
+
+.services-inner {
+    display: flex;
+    align-items: center;
+    gap: 60px;
+    max-width: 1100px;
+    margin: auto;
+}
+
+/* Photo */
+.services-photo {
+    flex: 1;
+    min-width: 0;
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: auto;
+    max-height: 540px;
+}
+
+.services-photo img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 2 / 1;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    border-radius: 16px;
+}
+
+/* Content */
+.services-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.services-eyebrow {
+    font-size: 0.75rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #444;
+    margin-bottom: 12px;
+    opacity: 1;
+}
+
+.services-heading {
+    font-size: 2.6rem;
+    font-weight: 600;
+    line-height: 1.15;
+    margin-bottom: 36px;
+    color: #1a1a1a;
+}
+
+.services-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.services-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+}
+
+.bullet-icon {
+    color: #555;
+    font-size: 1rem;
+    margin-top: 3px;
+    flex-shrink: 0;
+}
+
+.services-list strong {
+    display: block;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin-bottom: 4px;
+}
+
+.services-list p {
+    font-size: 0.88rem;
+    color: #555;
+    line-height: 1.6;
+    margin: 0;
+    opacity: 1;
+}
+
+/* Gallery blocks (extend services-section content) */
+.gallery-block {
+    max-width: 1100px;
+    margin: 70px auto 0;
+}
+
+.gallery-heading {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin-bottom: 4px;
+}
+
+.gallery-sub {
+    color: #555;
+    opacity: 1;
+    font-size: 0.9rem;
+    margin-bottom: 24px;
+}
+
+.photo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+}
+
+.photo-grid a {
+    display: block;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.photo-grid img {
+    width: 100%;
+    height: 260px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.photo-grid img:hover {
+    transform: scale(1.02);
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .services-photo {
+        display: none;
+    }
+
+    .services-inner {
+        flex-direction: column;
+        gap: 36px;
+    }
+
+    .services-heading {
+        font-size: 1.9rem;
+    }
+
+    nav {
+        padding: 15px 5%;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    nav div:last-child {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 12px;
+    }
+
+    .hero {
+        position: relative;
+        min-height: 70vh;
+        max-height: 80vh;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        overflow: hidden;
+    }
+
+    .hero-video {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+    }
+
+    .hero-video img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        transform: scale(1.0);
+        animation: none;
+    }
+
+    .hero-video::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+            to bottom,
+            rgba(0,0,0,0.6) 0%,
+            rgba(0,0,0,0.3) 50%,
+            rgba(0,0,0,0.8) 100%
+        );
+    }
+
+    .hero-text-panel {
+        position: relative;
+        width: 90%;
+        padding: 30px 20px;
+        border-radius: 15px;
+        background: rgba(0,0,0,0.3);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        z-index: 2;
+    }
+
+    .hero-title {
+        font-size: 2.2rem;
+        margin-bottom: 12px;
+        letter-spacing: 0.5px;
+        line-height: 1.1;
+    }
+
+    .subtext p {
+        font-size: 0.9rem;
+        opacity: 0.9;
+        line-height: 1.4;
+    }
+
+    .section {
+        padding: 50px 6%;
+    }
+
+    .photo-grid img {
+        height: 220px;
+    }
+}
+</style>
+
+</head>
+
+<body>
+
+<nav>
+    <div><strong>Tate Harrison</strong></div>
+    <div>
+        <a href="index.html">Video &amp; Sound</a>
+        <a href="#contact">Contact</a>
+        <a href="contact.html">Client Waiver</a>
+        <a href="schedule.html">Book Now</a>
+    </div>
+</nav>
+
+<section class="hero">
+
+    <div class="hero-overlay"></div>
+
+    <div class="hero-text-panel">
+        <h1 class="hero-title">Photography</h1>
+
+        <div class="subtext">
+            <p>Portraits • Nature • Product • Street • Film</p>
+            <p class="spacer"></p>
+            <p>Hi, I'm Tate Harrison — a photographer who loves a good story.</p>
+            <p>Shooting across digital and 35mm film.</p>
+            <p class="spacer"></p>
+            <p>Based in Boulder, Colorado</p>
+        </div>
+    </div>
+
+    <div class="hero-video">
+        <img src="Portfolio/Photography/Nature/Rainbow%20Mountain.jpg" alt="Colorado mountain landscape photography by Tate Harrison">
+    </div>
+
+</section>
+
+<!-- SERVICES SECTION -->
+<section class="services-section">
+
+    <div class="services-inner">
+
+        <!-- Left: Photo -->
+        <div class="services-photo">
+            <img src="Portfolio/Photography/Portraits/Atlas_FilmFujicolorSuperia400_PentaxSMCTakumar55mm.jpg" alt="Film portrait photography by Tate Harrison, shot on Fujicolor Superia 400">
+        </div>
+
+        <!-- Right: Bullet Points -->
+        <div class="services-content">
+            <p class="services-eyebrow">What I Shoot</p>
+            <h2 class="services-heading">Photography Across<br>Every Medium</h2>
+
+            <ul class="services-list">
+                <li>
+                    <span class="bullet-icon">▸</span>
+                    <div>
+                        <strong>Portraits</strong>
+                        <p>Natural-light and film portraiture that makes people feel at ease.</p>
+                    </div>
+                </li>
+                <li>
+                    <span class="bullet-icon">▸</span>
+                    <div>
+                        <strong>Product Photography</strong>
+                        <p>Clean, commercial imagery for brands and makers.</p>
+                    </div>
+                </li>
+                <li>
+                    <span class="bullet-icon">▸</span>
+                    <div>
+                        <strong>Nature</strong>
+                        <p>Colorado wildlife, macro, and landscape work.</p>
+                    </div>
+                </li>
+                <li>
+                    <span class="bullet-icon">▸</span>
+                    <div>
+                        <strong>Street & Film</strong>
+                        <p>Candid street photography and work shot on 35mm film.</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+
+    <!-- Portraits -->
+    <div class="gallery-block">
+        <h3 class="gallery-heading">Portraits</h3>
+        <p class="gallery-sub">Natural-light and film portraiture</p>
+        <div class="photo-grid">
+            <a href="Portfolio/Photography/Portraits/Atlas_FilmFujicolorSuperia400_PentaxSMCTakumar55mm.jpg" target="_blank">
+                <img loading="lazy" src="Portfolio/Photography/Portraits/Atlas_FilmFujicolorSuperia400_PentaxSMCTakumar55mm.jpg" alt="Film portrait shot on Fujicolor Superia 400 with a vintage Pentax Takumar 55mm lens">
+            </a>
+            <a href="Portfolio/Photography/Portraits/Cara_SMCTakumar55mm.jpg" target="_blank">
+                <img loading="lazy" src="Portfolio/Photography/Portraits/Cara_SMCTakumar55mm.jpg" alt="Natural light portrait photography shot with a Pentax Takumar 55mm lens">
+            </a>
+            <a href="Portfolio/Photography/Portraits/MikeyJ_Fujifilm%20X-H2_SMCTakumar55mm_2.jpg" target="_blank">
+                <img loading="lazy" src="Portfolio/Photography/Portraits/MikeyJ_Fujifilm%20X-H2_SMCTakumar55mm_2.jpg" alt="Portrait photography shot on a Fujifilm X-H2 with a vintage Takumar 55mm lens">
+            </a>
+            <a href="Portfolio/Photography/Portraits/Sarah_Fujifilm%20X-H2_Jupiter9%2C%2085mm%20P1.jpg" target="_blank">
+                <img loading="lazy" src="Portfolio/Photography/Portraits/Sarah_Fujifilm%20X-H2_Jupiter9%2C%2085mm%20P1.jpg" alt="Portrait photography shot on a Fujifilm X-H2 with a Jupiter 9 85mm lens">
+            </a>
+            <a href="Portfolio/Photography/Portraits/Yanja_CanonEos6D_28-70mm%20f4%20C1.jpg" target="_blank">
+                <img loading="lazy" src="Portfolio/Photography/Portraits/Yanja_CanonEos6D_28-70mm%20f4%20C1.jpg" alt="Portrait photography shot on a Canon EOS 6D with a 28-70mm f4 lens">
+            </a>
+        </div>
+    </div>
+
+    <!-- Product -->
+    <div class="gallery-block">
+        <h3 class="gallery-heading">Product Photography</h3>
+        <p class="gallery-sub">Clean, commercial product and market imagery</p>
+        <div class="photo-grid">
+            <a href="Portfolio/Photography/Product%20Photography/Arm%20Band%20Purple.jpg" target="_blank">
+                <img loading="lazy" src="Portfolio/Photography/Product%20Photography/Arm%20Band%20Purple.jpg" alt="Product photography of a purple arm band on a clean background">
+            </a>
+            <a href="Portfolio/Photography/Product%20Photography/Encyclopedia.jpg" target="_blank">
+                <img loading="lazy" src="Portfolio/Photography/Product%20Photography/Encyclopedia.jpg" alt="Product photography of a vintage encyclopedia set">
+            </a>
+            <a href="Portfolio/Photography/Product%20Photography/Kpanlogo%20Drum%20C1.jpg" target="_blank">
+                <img loading="lazy" src="Portfolio/Photography/Product%20Photography/Kpanlogo%20Drum%20C1.jpg" alt="Product photography of a Kpanlogo drum">
+            </a>
+            <a href="Portfolio/Photography/Product%20Photography/Market%20Booth%20(Shitake%20Mushrooms)%20C1.jpg" target="_blank">
+                <img loading="lazy" src="Portfolio/Photography/Product%20Photography/Market%20Booth%20(Shitake%20Mushrooms)%20C1.jpg" alt="Product photography of shitake mushrooms at a farmers market booth">
+            </a>
+            <a href="Portfolio/Photography/Product%20Photography/Pentax%20K1000%20C1.jpg" target="_blank">
+                <img loading="lazy" src="Portfolio/Photography/Product%20Photography/Pentax%20K1000%20C1.jpg" alt="Product photography of a vintage Pentax K1000 film camera">
+            </a>
+            <a href="Portfolio/Photography/Product%20Photography/Silver%20Necklaces%20on%20Display%20C1.jpg" target="_blank">
+                <img loading="lazy" src="Portfolio/Photography/Product%20Photography/Silver%20Necklaces%20on%20Display%20C1.jpg" alt="Product photography of silver necklaces on display">
+            </a>
+        </div>
+    </div>
+
+    <!-- Nature -->
+    <div class="gallery-block">
+        <h3 class="gallery-heading">Nature</h3>
+        <p class="gallery-sub">Colorado wildlife, macro, and landscape photography</p>
+        <div class="photo-grid">
+            <a href="Portfolio/Photography/Nature/Capitol%20Peak%20Bald%20Eagle.jpg" target="_blank">
+                <img loading="lazy" src="Portfolio/Photography/Nature/Capitol%20Peak%20Bald%20Eagle.jpg" alt="Bald eagle in flight near Capitol Peak, Colorado wildlife photography">
+            </a>
+            <a href="Portfolio/Photography/Nature/Eastern%20Tiger%20Swallowtail.jpg" target="_blank">
+                <img loading="lazy" src="Portfolio/Photography/Nature/Eastern%20Tiger%20Swallowtail.jpg" alt="Macro photography of an Eastern Tiger Swallowtail butterfly">
+            </a>
+            <a href="Portfolio/Photography/Nature/Marmot.jpg" target="_blank">
+                <img loading="lazy" src="Portfolio/Photography/Nature/Marmot.jpg" alt="Marmot in the Colorado high country, wildlife photography">
+            </a>
+            <a href="Portfolio/Photography/Nature/Mountain%20Goat%20Over%20Interstate%2070%20C1.jpg" target="_blank">
+                <img loading="lazy" src="Portfolio/Photography/Nature/Mountain%20Goat%20Over%20Interstate%2070%20C1.jpg" alt="Mountain goat overlooking Interstate 70 in Colorado">
+            </a>
+            <a href="Portfolio/Photography/Nature/Galaxy%20Pond%202.jpg" target="_blank">
+                <img loading="lazy" src="Portfolio/Photography/Nature/Galaxy%20Pond%202.jpg" alt="Macro nature photography of a pond surface">
+            </a>
+        </div>
+    </div>
+
+    <!-- Street -->
+    <div class="gallery-block">
+        <h3 class="gallery-heading">Street</h3>
+        <p class="gallery-sub">Candid street and documentary photography</p>
+        <div class="photo-grid">
+            <a href="Portfolio/Photography/Street/Alleyway%20Landslide%20C1.jpg" target="_blank">
+                <img loading="lazy" src="Portfolio/Photography/Street/Alleyway%20Landslide%20C1.jpg" alt="Street photography of an alleyway scene">
+            </a>
+            <a href="Portfolio/Photography/Street/Blue%20Truck%20at%20Night.jpg" target="_blank">
+                <img loading="lazy" src="Portfolio/Photography/Street/Blue%20Truck%20at%20Night.jpg" alt="Night street photography of a blue truck">
+            </a>
+            <a href="Portfolio/Photography/Street/Iron%20Bridge.jpg" target="_blank">
+                <img loading="lazy" src="Portfolio/Photography/Street/Iron%20Bridge.jpg" alt="Street photography of an iron bridge">
+            </a>
+            <a href="Portfolio/Photography/Street/Long%20Beach%20Paraglider.jpg" target="_blank">
+                <img loading="lazy" src="Portfolio/Photography/Street/Long%20Beach%20Paraglider.jpg" alt="Street photography of a paraglider at Long Beach">
+            </a>
+            <a href="Portfolio/Photography/Street/Pearl%20Street%20Protest.jpg" target="_blank">
+                <img loading="lazy" src="Portfolio/Photography/Street/Pearl%20Street%20Protest.jpg" alt="Documentary street photography of a protest on Pearl Street, Boulder Colorado">
+            </a>
+        </div>
+    </div>
+
+    <!-- Vintage & Film -->
+    <div class="gallery-block">
+        <h3 class="gallery-heading">Vintage &amp; Film</h3>
+        <p class="gallery-sub">Shot on Kodachrome and Ektachrome film</p>
+        <div class="photo-grid">
+            <a href="Portfolio/Photography/Vintage%20%26%20Film/Barrier%20Island_FilmKodachrome%20C1.jpg" target="_blank">
+                <img loading="lazy" src="Portfolio/Photography/Vintage%20%26%20Film/Barrier%20Island_FilmKodachrome%20C1.jpg" alt="Barrier island landscape shot on Kodachrome film">
+            </a>
+            <a href="Portfolio/Photography/Vintage%20%26%20Film/Port%20Police%20Boats_FilmKodachrome_Jupiter9%2C%2085mm.jpg" target="_blank">
+                <img loading="lazy" src="Portfolio/Photography/Vintage%20%26%20Film/Port%20Police%20Boats_FilmKodachrome_Jupiter9%2C%2085mm.jpg" alt="Port police boats shot on Kodachrome film with a Jupiter 9 85mm lens">
+            </a>
+        </div>
+    </div>
+
+</section>
+
+<section id="contact" class="section cta">
+    <h2>Work With Me</h2>
+
+    <p style="margin-bottom: 30px; font-weight: 400; letter-spacing: 0.5px;">
+    <a class="contact-link" href="tel:303-968-8078">303-968-8078</a>
+
+    <span style="margin: 0 15px; opacity: 0.4;">&bull;</span>
+
+    <a class="contact-link" href="mailto:Tate@HarrisonMediaLLC.com">Tate@HarrisonMediaLLC.com</a>
+</p>
+
+    <p>Tell me about your project below.</p>
+
+<div class="form-wrapper">
+    <iframe
+        src="https://docs.google.com/forms/d/e/1FAIpQLScs_qOGhoRX7AXtPyCmCZQyX8UOv5xdeI1uKHaRGzhmnOFAcg/viewform?embedded=true"
+        width="100%"
+        height="1200"
+        frameborder="0"
+        marginheight="0"
+        marginwidth="0">
+        Loading…
+    </iframe>
+</div>
+</section>
+
+<footer>
+    © 2026 Tate Harrison. All rights reserved.
+</footer>
+
+<script>
+const heroText = document.querySelector('.hero-text-panel');
+
+document.addEventListener('mousemove', (e) => {
+    const x = (window.innerWidth / 2 - e.clientX) / 50;
+    const y = (window.innerHeight / 2 - e.clientY) / 50;
+
+    heroText.style.transform = `translate(${x}px, ${y}px)`;
+});
+</script>
+
+</body>
+</html>
