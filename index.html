@@ -586,6 +586,25 @@ html, body { overflow-x: hidden; }
     font-family: 'EB Garamond', serif; font-size: 0.68rem;
     letter-spacing: 2px; text-transform: uppercase; color: #d0ccc4; margin: 0;
 }
+/* Mini collection tile */
+.portfolio-collection { cursor: default; }
+.collection-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 3px; border-radius: 8px; overflow: hidden;
+}
+.collection-thumb {
+    position: relative; cursor: pointer; overflow: hidden;
+}
+.collection-thumb img {
+    width: 100%; display: block; object-fit: cover;
+    aspect-ratio: 1; transition: transform 0.3s ease;
+}
+.collection-thumb:hover img { transform: scale(1.06); }
+.collection-thumb .portfolio-overlay { border-radius: 0; }
+.collection-thumb:hover .portfolio-overlay { background: rgba(28,26,20,0.45); }
+.collection-thumb:hover .portfolio-meta { opacity: 1; transform: translateY(0); }
+.portfolio-collection:hover .portfolio-img-wrap { transform: none; box-shadow: none; }
+
 /* Caption below image */
 .portfolio-caption {
     padding: 7px 2px 0;
@@ -2990,6 +3009,7 @@ footer > * { position: relative; z-index: 1; }
     <div class="nav-right">
         <a href="#about" class="nav-exposed">About Me</a>
         <a href="#pricing" class="nav-exposed">Services</a>
+        <a href="photography.html" class="nav-exposed">Film Photography</a>
         <a href="quote.html" class="nav-exposed nav-exposed--cta">Get a Quote</a>
         <button class="nav-toc-btn" id="navTocBtn" aria-expanded="false">
             <span class="nav-bar"></span>
@@ -3001,6 +3021,7 @@ footer > * { position: relative; z-index: 1; }
             <a href="#about">About Me</a>
             <a href="#pricing">Services</a>
             <a href="#work">Portfolio</a>
+            <a href="photography.html">Film Photography ↗</a>
             <a href="distribution-guide.html">Video Guide</a>
             <a href="schedule.html">Free Consultation</a>
         </div>
@@ -3017,6 +3038,7 @@ footer > * { position: relative; z-index: 1; }
             <a href="#about">About Me</a>
             <a href="#pricing">Services</a>
             <a href="#work">Portfolio</a>
+            <a href="photography.html">Film Photography ↗</a>
             <a href="quote.html">Get a Quote</a>
         </nav>
     </div>
@@ -3034,6 +3056,7 @@ footer > * { position: relative; z-index: 1; }
     <a href="#about">About Me</a>
     <a href="#pricing">Packages</a>
     <a href="#work">Portfolio</a>
+    <a href="photography.html">Film Photography ↗</a>
     <a href="#contact">Contact</a>
     <div class="fmp-divider"></div>
     <a href="schedule.html" class="fmp-cta">Book a Call →</a>
@@ -3095,7 +3118,7 @@ footer > * { position: relative; z-index: 1; }
         <div class="about-content">
             <p class="about-eyebrow anim-fade">Your Documentarian</p>
             <h2 class="about-heading anim-fade">About Me</h2>
-            <p class="about-body anim-fade">I'm Tate Harrison — a Boulder-based photographer and videographer with a background in audio production, narrative film, and human psychology. I believe the best creative work comes from understanding people and the stories they bring.</p>
+            <p class="about-body anim-fade">I'm Tate Harrison, a Colorado-based photographer and videographer with a background in audio production, narrative film, and human psychology. I believe the best creative work comes from understanding people and the stories they bring.</p>
             <p class="about-body anim-fade">I want to launch your story into the online world through the most effective form of artistic communication: video and sound.</p>
             <p class="about-body anim-fade" style="font-style:italic; color:#635f51; font-size:0.92rem; margin-top:4px;">Tate has a B.A. in Psychology, and is a former photography instructor at Boulder Valley School District. Tate is training for his FAA Part 107 Drone Pilot License.</p>
             <a href="schedule.html" class="about-cta anim-fade">Work With Me →</a>
@@ -4312,6 +4335,9 @@ footer > * { position: relative; z-index: 1; }
             <button class="filter-btn filter-btn--sub" data-filter="macro-product">Macro &amp; Product</button>
             <button class="filter-btn filter-btn--sub" data-filter="vintage">Vintage &amp; Film</button>
         </div>
+        <div id="filmPageLink" style="display:none;margin-top:18px;text-align:center;">
+            <a href="photography.html" style="font-family:'EB Garamond',serif;font-size:0.82rem;color:#C9A84C;letter-spacing:0.1em;text-decoration:none;border:1px solid rgba(201,168,76,0.3);border-radius:50px;padding:6px 18px;transition:background 0.2s,border-color 0.2s;" onmouseover="this.style.background='rgba(201,168,76,0.07)';this.style.borderColor='rgba(201,168,76,0.6)'" onmouseout="this.style.background='';this.style.borderColor='rgba(201,168,76,0.3)'">Film Photography — Dedicated Page ↗</a>
+        </div>
     </div>
     <!-- Videography section -->
     <div class="portfolio-empty" id="portfolioEmpty" style="padding:40px 5% 60px;">
@@ -4396,8 +4422,9 @@ footer > * { position: relative; z-index: 1; }
             </div>
         </div>
 
-        <div class="portfolio-item portfolio-item--video" data-category="videography" data-video-src="portfolio/Videography/SFitzMiniDocSelect.mp4" data-video-title="Denver Fashion Week Mini Documentary">
-            <div class="portfolio-img-wrap" style="background:#1a1814;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;">
+        <div class="portfolio-item portfolio-item--video" data-category="videography" data-youtube-id="UsMlJPzZ62o" data-video-title="Denver Fashion Week Mini Documentary">
+            <div class="portfolio-img-wrap">
+                <img class="portfolio-thumb" src="https://img.youtube.com/vi/UsMlJPzZ62o/hqdefault.jpg" alt="Denver Fashion Week Mini Documentary" loading="lazy">
                 <div class="portfolio-overlay">
                     <div class="portfolio-video-play"><svg viewBox="0 0 24 24" fill="#f5f4f0" width="40" height="40"><path d="M8 5v14l11-7z"/></svg></div>
                     <div class="portfolio-meta"><p class="portfolio-meta-cat">Videography</p></div>
@@ -4872,6 +4899,31 @@ footer > * { position: relative; z-index: 1; }
             <div class="portfolio-caption">
                 <span class="caption-title">Ornament</span>
                 <span class="caption-gear">Fujifilm X-H2 · Laowa 65mm Macro</span>
+            </div>
+        </div>
+
+        <div class="portfolio-item portfolio-collection" data-category="macro-product">
+            <div class="collection-grid">
+                <div class="collection-thumb" data-lightbox-src="portfolio/Photography/Product Photography/Arm Band White.jpg" data-title="Arm Band — White">
+                    <img src="portfolio/Photography/Product Photography/Arm Band White.jpg" alt="Arm Band White" loading="lazy">
+                    <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Product Photography</p></div></div>
+                </div>
+                <div class="collection-thumb" data-lightbox-src="portfolio/Photography/Product Photography/Arm Band Purple.jpg" data-title="Arm Band — Purple">
+                    <img src="portfolio/Photography/Product Photography/Arm Band Purple.jpg" alt="Arm Band Purple" loading="lazy">
+                    <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Product Photography</p></div></div>
+                </div>
+                <div class="collection-thumb" data-lightbox-src="portfolio/Photography/Product Photography/Arm Band Clear.jpg" data-title="Arm Band — Clear">
+                    <img src="portfolio/Photography/Product Photography/Arm Band Clear.jpg" alt="Arm Band Clear" loading="lazy">
+                    <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Product Photography</p></div></div>
+                </div>
+                <div class="collection-thumb" data-lightbox-src="portfolio/Photography/Product Photography/Arm Band Yellow.jpg" data-title="Arm Band — Yellow">
+                    <img src="portfolio/Photography/Product Photography/Arm Band Yellow.jpg" alt="Arm Band Yellow" loading="lazy">
+                    <div class="portfolio-overlay"><div class="portfolio-meta"><p class="portfolio-meta-cat">Product Photography</p></div></div>
+                </div>
+            </div>
+            <div class="portfolio-caption">
+                <span class="caption-title">Arm Band Collection</span>
+                <span class="caption-gear">Product Photography</span>
             </div>
         </div>
 
@@ -5458,15 +5510,18 @@ document.querySelectorAll('.pricing-card').forEach(card => {
             btn.classList.add('active');
             const top = btn.dataset.top;
 
+            const filmLink = document.getElementById('filmPageLink');
             if (top === 'all') {
                 subRow.classList.remove('open');
                 grid.style.display = '';
                 empty.style.display = 'none';
+                if (filmLink) filmLink.style.display = 'none';
                 showItems('all');
             } else if (top === 'photography') {
                 subRow.classList.add('open');
                 grid.style.display = '';
                 empty.style.display = 'none';
+                if (filmLink) filmLink.style.display = 'block';
                 /* restore whichever sub-filter was last active */
                 const activeSub = subRow.querySelector('.filter-btn--sub.active');
                 showItems(activeSub ? activeSub.dataset.filter : 'all-photo');
@@ -5474,6 +5529,7 @@ document.querySelectorAll('.pricing-card').forEach(card => {
                 subRow.classList.remove('open');
                 grid.style.display = '';
                 empty.style.display = 'none';
+                if (filmLink) filmLink.style.display = 'none';
                 showItems('videography');
             }
         });
@@ -5543,6 +5599,7 @@ const lightboxCaption = document.getElementById('lightbox-caption');
 
 document.querySelectorAll('.portfolio-item').forEach(item => {
     item.addEventListener('click', () => {
+        if (!item.dataset.lightboxSrc && !item.dataset.youtubeId && !item.dataset.videoSrc) return;
         const title = item.querySelector('.caption-title')?.textContent || '';
         const gear  = item.querySelector('.caption-gear')?.textContent || '';
 
@@ -5605,6 +5662,36 @@ document.querySelectorAll('.portfolio-item').forEach(item => {
             ? `<strong style="color:#e8e1d4;">${title}</strong>${gear ? ' <span style="color:#635f51;margin-left:8px;">· ' + gear + '</span>' : ''}`
             : '';
 
+        lightbox.classList.add('open');
+        document.body.style.overflow = 'hidden';
+    });
+});
+
+document.querySelectorAll('.collection-thumb').forEach(thumb => {
+    thumb.addEventListener('click', e => {
+        e.stopPropagation();
+        const src   = thumb.dataset.lightboxSrc;
+        const title = thumb.dataset.title || '';
+        lightboxInner.innerHTML = '<div style="width:60px;height:60px;border:2px solid rgba(232,225,212,0.2);border-top-color:#e8e1d4;border-radius:50%;animation:lb-spin 0.7s linear infinite;margin:auto;"></div>';
+        const img = new Image();
+        img.src = src;
+        img.alt = title;
+        img.style.cssText = 'max-width:90vw;max-height:80vh;object-fit:contain;border-radius:6px;display:block;cursor:zoom-in;transition:transform 0.25s cubic-bezier(0.22,1,0.36,1);';
+        img.onload = () => {
+            lightboxInner.innerHTML = '';
+            let zoomed = false;
+            img.addEventListener('click', ev => {
+                ev.stopPropagation();
+                if (!zoomed) {
+                    const rect = img.getBoundingClientRect();
+                    img.style.transformOrigin = `${((ev.clientX-rect.left)/rect.width*100).toFixed(1)}% ${((ev.clientY-rect.top)/rect.height*100).toFixed(1)}%`;
+                    img.style.transform = 'scale(2.5)'; img.style.cursor = 'zoom-out'; zoomed = true;
+                } else { img.style.transform = 'scale(1)'; img.style.cursor = 'zoom-in'; zoomed = false; }
+            });
+            lightboxInner.appendChild(img);
+        };
+        img.onerror = () => { lightboxInner.innerHTML = '<p style="color:#a8a49c;font-family:\'EB Garamond\',serif;">Image could not be loaded.</p>'; };
+        lightboxCaption.innerHTML = `<strong style="color:#e8e1d4;">${title}</strong> <span style="color:#635f51;margin-left:8px;">· Product Photography</span>`;
         lightbox.classList.add('open');
         document.body.style.overflow = 'hidden';
     });
