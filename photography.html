@@ -156,38 +156,44 @@ nav.scrolled { box-shadow: 0 2px 16px rgba(28,26,20,0.10); }
 }
 
 /* ===== FILM STRIP DIVIDER ===== */
-.film-strip {
-    display: flex; align-items: center;
-    margin: 0; overflow: hidden;
-    height: 36px;
-    background: #1C1A14;
-    position: relative;
+/* ===== SECTION DIVIDER ===== */
+.section-divider {
+    padding: 4px 7%;
+    display: flex; flex-direction: column;
+    align-items: stretch; gap: 0;
 }
-.film-strip::before,
-.film-strip::after {
-    content: '';
-    display: block; flex-shrink: 0;
-    width: 100%;
-    height: 100%;
-    background-image: repeating-linear-gradient(
+.divider-rule {
+    height: 1px;
+    background: linear-gradient(
         to right,
-        transparent 0px, transparent 10px,
-        #f5f4f0 10px, #f5f4f0 18px,
-        transparent 18px, transparent 30px
+        transparent 0%,
+        rgba(99,95,81,0.22) 12%,
+        rgba(99,95,81,0.22) 88%,
+        transparent 100%
     );
-    background-size: 30px 8px;
-    background-position: 0 4px;
-    background-repeat: repeat-x;
-    position: absolute; left: 0; right: 0;
 }
-.film-strip::before { top: 0; }
-.film-strip::after  { bottom: 0; }
-.film-strip-label {
-    position: relative; z-index: 1;
-    width: 100%; text-align: center;
-    font-family: 'EB Garamond', serif; font-size: 0.72rem;
-    color: rgba(240,236,227,0.4); letter-spacing: 0.22em;
-    text-transform: uppercase; pointer-events: none;
+.divider-rule--inner {
+    height: 1px; margin: 3px 5%;
+    background: linear-gradient(
+        to right,
+        transparent 0%,
+        rgba(201,168,76,0.18) 10%,
+        rgba(201,168,76,0.18) 90%,
+        transparent 100%
+    );
+}
+.divider-center {
+    display: flex; align-items: center;
+    justify-content: center; gap: 16px;
+    padding: 9px 0;
+    font-family: 'EB Garamond', serif;
+    font-size: 0.68rem; letter-spacing: 0.24em;
+    text-transform: uppercase; color: #a8a49c;
+}
+.divider-pip {
+    display: block; width: 5px; height: 5px;
+    border: 1px solid rgba(201,168,76,0.45);
+    transform: rotate(45deg); flex-shrink: 0;
 }
 
 /* ===== SECTION LAYOUT ===== */
@@ -490,11 +496,6 @@ footer a:hover { color: #635f51; }
     </a>
 </section>
 
-<!-- FILM STRIP DIVIDER -->
-<div class="film-strip" aria-hidden="true">
-    <span class="film-strip-label">Harrison Media LLC &nbsp;·&nbsp; Analog Photography</span>
-</div>
-
 <!-- PHILOSOPHY -->
 <section class="section" id="philosophy">
     <div class="philosophy">
@@ -531,9 +532,16 @@ footer a:hover { color: #635f51; }
     </div>
 </section>
 
-<!-- FILM STRIP DIVIDER -->
-<div class="film-strip" aria-hidden="true">
-    <span class="film-strip-label">Process</span>
+<div class="section-divider" aria-hidden="true">
+    <div class="divider-rule"></div>
+    <div class="divider-rule--inner"></div>
+    <div class="divider-center">
+        <span class="divider-pip"></span>
+        <span>Process</span>
+        <span class="divider-pip"></span>
+    </div>
+    <div class="divider-rule--inner"></div>
+    <div class="divider-rule"></div>
 </div>
 
 <!-- PROCESS -->
@@ -564,9 +572,16 @@ footer a:hover { color: #635f51; }
     </div>
 </section>
 
-<!-- FILM STRIP DIVIDER -->
-<div class="film-strip" aria-hidden="true">
-    <span class="film-strip-label">Selected Work</span>
+<div class="section-divider" aria-hidden="true">
+    <div class="divider-rule"></div>
+    <div class="divider-rule--inner"></div>
+    <div class="divider-center">
+        <span class="divider-pip"></span>
+        <span>Selected Work</span>
+        <span class="divider-pip"></span>
+    </div>
+    <div class="divider-rule--inner"></div>
+    <div class="divider-rule"></div>
 </div>
 
 <!-- GALLERY -->
