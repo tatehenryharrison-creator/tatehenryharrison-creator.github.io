@@ -3009,6 +3009,7 @@ footer > * { position: relative; z-index: 1; }
     <div class="nav-right">
         <a href="#about" class="nav-exposed">About Me</a>
         <a href="#pricing" class="nav-exposed">Services</a>
+        <a href="photography.html" class="nav-exposed">Film Photography</a>
         <a href="quote.html" class="nav-exposed nav-exposed--cta">Get a Quote</a>
         <button class="nav-toc-btn" id="navTocBtn" aria-expanded="false">
             <span class="nav-bar"></span>
@@ -3020,6 +3021,7 @@ footer > * { position: relative; z-index: 1; }
             <a href="#about">About Me</a>
             <a href="#pricing">Services</a>
             <a href="#work">Portfolio</a>
+            <a href="photography.html">Film Photography ↗</a>
             <a href="distribution-guide.html">Video Guide</a>
             <a href="schedule.html">Free Consultation</a>
         </div>
@@ -3036,6 +3038,7 @@ footer > * { position: relative; z-index: 1; }
             <a href="#about">About Me</a>
             <a href="#pricing">Services</a>
             <a href="#work">Portfolio</a>
+            <a href="photography.html">Film Photography ↗</a>
             <a href="quote.html">Get a Quote</a>
         </nav>
     </div>
@@ -3053,6 +3056,7 @@ footer > * { position: relative; z-index: 1; }
     <a href="#about">About Me</a>
     <a href="#pricing">Packages</a>
     <a href="#work">Portfolio</a>
+    <a href="photography.html">Film Photography ↗</a>
     <a href="#contact">Contact</a>
     <div class="fmp-divider"></div>
     <a href="schedule.html" class="fmp-cta">Book a Call →</a>
@@ -4331,6 +4335,9 @@ footer > * { position: relative; z-index: 1; }
             <button class="filter-btn filter-btn--sub" data-filter="macro-product">Macro &amp; Product</button>
             <button class="filter-btn filter-btn--sub" data-filter="vintage">Vintage &amp; Film</button>
         </div>
+        <div id="filmPageLink" style="display:none;margin-top:18px;text-align:center;">
+            <a href="photography.html" style="font-family:'EB Garamond',serif;font-size:0.82rem;color:#C9A84C;letter-spacing:0.1em;text-decoration:none;border:1px solid rgba(201,168,76,0.3);border-radius:50px;padding:6px 18px;transition:background 0.2s,border-color 0.2s;" onmouseover="this.style.background='rgba(201,168,76,0.07)';this.style.borderColor='rgba(201,168,76,0.6)'" onmouseout="this.style.background='';this.style.borderColor='rgba(201,168,76,0.3)'">Film Photography — Dedicated Page ↗</a>
+        </div>
     </div>
     <!-- Videography section -->
     <div class="portfolio-empty" id="portfolioEmpty" style="padding:40px 5% 60px;">
@@ -5503,15 +5510,18 @@ document.querySelectorAll('.pricing-card').forEach(card => {
             btn.classList.add('active');
             const top = btn.dataset.top;
 
+            const filmLink = document.getElementById('filmPageLink');
             if (top === 'all') {
                 subRow.classList.remove('open');
                 grid.style.display = '';
                 empty.style.display = 'none';
+                if (filmLink) filmLink.style.display = 'none';
                 showItems('all');
             } else if (top === 'photography') {
                 subRow.classList.add('open');
                 grid.style.display = '';
                 empty.style.display = 'none';
+                if (filmLink) filmLink.style.display = 'block';
                 /* restore whichever sub-filter was last active */
                 const activeSub = subRow.querySelector('.filter-btn--sub.active');
                 showItems(activeSub ? activeSub.dataset.filter : 'all-photo');
@@ -5519,6 +5529,7 @@ document.querySelectorAll('.pricing-card').forEach(card => {
                 subRow.classList.remove('open');
                 grid.style.display = '';
                 empty.style.display = 'none';
+                if (filmLink) filmLink.style.display = 'none';
                 showItems('videography');
             }
         });
